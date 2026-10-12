@@ -1,0 +1,156 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Schedule}
+\begin{frame}{}
+\renewcommand{\arraystretch}{1}
+	\begin{textblock}{14}(0.5,1.75)
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Final}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch05_Electrostatics/ECE343_Ch05_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scalar Potential}
+\begin{frame}{Scalar Potential: Line Charge}
+\begin{textblock}{7}(0.5,4)
+\begin{tikzpicture}[scale=0.7]
+		\def\qonex{0}
+		\def\qoney{3}
+		\def\qtwox{0}
+		\def\qtwoy{-2}
+		\def\qthreex{4}
+		\def\qthreey{0}
+		\begin{axis}[ 
+		domain=-5:5,
+%		samples=200, 
+%		xmin=-1, 
+		xmax=2.5, 
+		ymax=3.5,
+		ymin=-3.5,
+%		title={Single Square Pulse, $\Pi (\frac{t}{\tau})$},
+%		scaled x ticks=base 10:6,
+%		xtick scale label code/.code={},
+%		minor x tick num = 5,
+%		minor y tick num = 5,
+		ytick={-3,3},
+		yticklabels={-a,a},
+		xtick=\empty,
+%		xticklabels={$\rho$},
+		xlabel={$\rho$},
+		ylabel={$z$},
+		axis y line = middle,
+		axis x line = middle,
+		x label style={xshift=0.5cm},
+		x label style={yshift=-0.25cm},
+		y label style ={xshift=-0.75cm},
+		y label style = {yshift =0.5cm},
+		yticklabel shift=0.5cm,
+		clip=false,
+		]
+%		\node[cylinder, shape border rotate=90, draw, minimum height=6.5cm, minimum width=0.5cm] at (0,0) {};
+		\addplot[ultra thick, red] coordinates {(0,-3)(0,3)};
+		\node[red] at (-0.5,0) {$\rho_\ell$};
+		\addplot[blue, dashed, ->] (0,1.5) -- (1.5,0) node[midway, above, blue]{r};
+		
+		\end{axis}
+\end{tikzpicture}
+\end{textblock}
+\begin{textblock}{7}(8,2.25)
+
+	\visible<0|handout:1>{
+	\alert{
+	\begin{small}
+	\eq{
+        	&V = \int \dfrac{dQ}{4\pi\varepsilon r} \\
+        	&dQ = \rho_\ell d\ell = \rho_\ell dz \\
+        	& r = \sqrt{z^2 + \rho^2} \\
+        	&\implies  \int \dfrac{\rho_\ell dz}{4\pi\varepsilon \sqrt{z^2 + \rho^2} } \\
+        	&= \dfrac{\rho_\ell}{4\pi \varepsilon} \int \dfrac{1}{\sqrt{z^2 + \rho^2}} dz \\
+        	&=\dfrac{2\rho_\ell}{4\pi \varepsilon} \lb \text{ln} \lp z + \sqrt{z^2 + \rho^2} \rp \rb\Bigg|_0^a \\
+        	&V=\dfrac{\rho_\ell}{2\pi\varepsilon}\lb \text{ln} \lp \dfrac{a + \sqrt{a^2 + \rho^2}}{\rho} \rp \rb
+	} % end eq
+	\end{small}
+	} %end alert
+	} % end visible
+	
+	
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Scalar Potential: Line Charge}
+\begin{textblock}{7}(0.5,4)
+\begin{tikzpicture}[scale=0.7]
+		\def\qonex{0}
+		\def\qoney{3}
+		\def\qtwox{0}
+		\def\qtwoy{-2}
+		\def\qthreex{4}
+		\def\qthreey{0}
+		\begin{axis}[ 
+		domain=-5:5,
+%		samples=200, 
+%		xmin=-1, 
+		xmax=2.5, 
+		ymax=3.5,
+		ymin=-3.5,
+%		title={Single Square Pulse, $\Pi (\frac{t}{\tau})$},
+%		scaled x ticks=base 10:6,
+%		xtick scale label code/.code={},
+%		minor x tick num = 5,
+%		minor y tick num = 5,
+		ytick={-3,3},
+		yticklabels={-a,a},
+		xtick=\empty,
+%		xticklabels={$\rho$},
+		xlabel={$\rho$},
+		ylabel={$z$},
+		axis y line = middle,
+		axis x line = middle,
+		x label style={xshift=0.5cm},
+		x label style={yshift=-0.25cm},
+		y label style ={xshift=-0.75cm},
+		y label style = {yshift =0.5cm},
+		yticklabel shift=0.5cm,
+		clip=false,
+		]
+%		\node[cylinder, shape border rotate=90, draw, minimum height=6.5cm, minimum width=0.5cm] at (0,0) {};
+		\addplot[ultra thick, red] coordinates {(0,-3)(0,3)};
+		\node[red] at (-0.5,0) {$\rho_L$};
+		\addplot[blue, dashed, ->] (0,1.5) -- (1.5,0) node[midway, above, blue]{r};
+		
+		\end{axis}
+\end{tikzpicture}
+\end{textblock}
+\begin{textblock}{7}(8.5,2.75)
+
+	\visible<0|handout:1>{
+	\alert{
+	\begin{small}
+	\eq{
+        	&V=\dfrac{\rho_\ell}{2\pi\varepsilon}\lb \text{ln} \lp \dfrac{a + \sqrt{a^2 + \rho^2}}{\rho} \rp \rb \\
+        	&\implies\vec{E} = -\nabla V = -\rhohat \partd{V}{\rho} \\
+        	&\text{for } a >> \rho \text{ :} \\
+        	&\implies \vec{E} = -\rhohat \partd{}{\rho}\dfrac{\rho_\ell}{2\pi\varepsilon}\lb \text{ln} \lp \dfrac{2a }{\rho} \rp \rb \\
+        	& = -\rhohat \partd{}{\rho}\dfrac{\rho_\ell}{2\pi\varepsilon}\lb \text{ln} \lp 2a \rp - \text{ln}\lp \rho\rp \rb \\
+        	&\implies \vec{E} = \rhohat \dfrac{\rho_L}{2\pi \varepsilon \rho}     	
+	} % end eq
+	\end{small}
+	} %end alert
+	} % end visible
+	
+\end{textblock}
+\end{frame}
+

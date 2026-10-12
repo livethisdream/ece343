@@ -1,0 +1,786 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+%%%%%%%%%%%%%%%%%%%% LO 3.3%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{comment}
+\section{Schedule}
+\renewcommand{\arraystretch}{1}
+\begin{frame}{}
+	\begin{textblock}{14}(0.5,1.75)
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Prog}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch03_TxLines/ECE343_Ch03_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LO 3.5
+\section{Smith Charts}
+\begin{frame}{Smith Charts: History}
+	\begin{textblock}{14.5}(0.5,3)
+
+	\begin{itemize}
+		\setlength\itemsep{18pt}
+		\item Developed in 1939 by Phillip H. Smith
+		\item Used to solve a variety of tx line and waveguide problems
+		\item  Measure/evaluate complex reflection/transmission on a tx line
+		\item Measure/evaluate VSWR
+		\item Measure/evalute impedance along a tx line
+		\item Evaluate IO transfer functions
+	\end{itemize}
+	
+	\end{textblock}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Smith Chart}
+\begin{textblock}{14.5}(0.5,2)
+\begin{center}
+\begin{tikzpicture}[scale=0.35]
+
+\input{\mygraphicspath/ECE343/smithChartFoundation}
+
+   \begin{smithchart}[
+                      show origin,
+                      width=20cm,
+                     ]
+%   \addplot[mark=none,line width=2]
+%       coordinates{
+%           (1, 0) (1, 0.1) (1,0.2) (1,0.3) (1,0.4) (1,0.5) (1,0.5)
+%       };
+%   \addplot[mark=none,line width=1, red]
+%       coordinates{
+%           %(0,-0.5)(1, 0) (0, 0.5) % pacman angle
+%           (1,0) (0.5,0.5)
+%       };
+%	\addplot+[no marks, domain=0.6:1.8, color={blue}, line width=1] (0.3,x); % an arc of R=0.3 from X = 0.6:1.8
+   \end{smithchart}
+   \end{tikzpicture} 
+   \end{center}
+   \end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Smith Charts: Measurements}
+	\begin{textblock}{14.5}(0.5,3)
+%	\only<1>{
+%		\begin{tikzpicture}[scale=0.4]
+%		    \begin{smithchart}[
+%		        width=20cm,
+%		        samples=200, line cap=round, smooth]
+%		
+%		    \end{smithchart}
+%		
+%		\end{tikzpicture}
+%	} % end only 
+	
+	\begin{tikzpicture}[scale=0.4]
+	    \begin{smithchart}[
+	        width=20cm,
+	        samples=200, line cap=round, smooth]
+	
+		\addplot[color=blue, thick, domain=0:30] (x,-1);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.9);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.8);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.7);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.6);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.5);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.4);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.3);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.2);
+		\addplot[color=blue, thick, domain=0:30] (x,-0.1);
+		\addplot[color=blue, thick, domain=0:30] (x,0.1);
+		\addplot[color=blue, thick, domain=0:30] (x,-1);
+		\addplot[color=blue, thick, domain=0:30] (x,0.9);
+		\addplot[color=blue, thick, domain=0:30] (x,0.8);
+		\addplot[color=blue, thick, domain=0:30] (x,0.7);
+		\addplot[color=blue, thick, domain=0:30] (x,0.6);
+		\addplot[color=blue, thick, domain=0:30] (x,0.5);
+		\addplot[color=blue, thick, domain=0:30] (x,0.4);
+		\addplot[color=blue, thick, domain=0:30] (x,0.3);
+		\addplot[color=blue, thick, domain=0:30] (x,0.2);
+		
+	
+		\addplot[color=red, thick, domain=30:-30, smooth, samples=400] (0.1,x); 	
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.2,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.3,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.4,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.5,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.6,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.7,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.8,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (0.9,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (1,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (1.2,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (1.4,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (2,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (3,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (4,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (5,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (10,x);
+		\addplot[color=red, thick, domain=30:-30, smooth] (20,x);  
+		\draw[ultra thick, red,<-] (0.1,-0.25) -- (0.2,-0.4) node[above, rectangle, fill=white] {\Large{Constant Resistance}};
+		 \draw[ultra thick, blue,<-] (1.8,0.9) -- (1.4,1.6) node[above, rectangle, fill=white] {\Large{Constant Reactance}};
+	
+		\path[draw=green!50!black, ultra thick] (1,0) circle (2cm);
+		 \draw[ultra thick, green!50!black,<-] (0.6,0) -- (0.2,0.2) node[above, rectangle, fill=white] {\Large{Constant VSWR}};
+	
+		\node[rectangle, fill=white] at (0.4,-1) {\Huge{Capacitive}};		
+		\node[rectangle, fill=white] at (0.4,1) {\Huge{Inductive}};
+  	  \end{smithchart}
+
+	\end{tikzpicture}
+
+
+\end{textblock}
+\begin{textblock}{5}(9.5,2.5)
+	\begin{myblock}[0.95]{}
+	
+		\begin{itemize}
+		
+			\setlength\itemsep{12pt}
+			\item Plot complex impedances
+			\item Use circles of constant R \& X
+			\item Measure $\Gamma_{\text{L}}$
+			\item Magnitude and Phase
+			\item 
+		
+		\end{itemize}
+	
+	\end{myblock}
+\end{textblock}
+\end{frame}
+%\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{frame}{Smith Charts: Official}
+%
+%\begin{textblock}{14.5}(0.5,2)
+%
+%\begin{center}
+%	\includegraphics[scale=0.2]{ECE343/smith_chart}
+%\end{center}
+%
+%\end{textblock}
+%\end{frame}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{frame}{Smith Charts: Official}
+%
+%\begin{textblock}{14.5}(0.5,3)
+%
+%\begin{center}
+%	\includegraphics[scale=0.75]{ECE343/color_smithchart}
+%\end{center}
+%
+%\end{textblock}
+%
+%\end{frame}
+
+{
+%\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=1, landscape=false]{\mygraphicspath/ECE343/SmithChart_blank.pdf}
+}
+
+{
+%\setbeamercolor{background canvas}{bg=}
+\includepdf[pages=1, landscape=false]{\mygraphicspath/ECE343/colour_smith_chart.pdf}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Smith Charts: Components }
+
+\begin{textblock}{10}(0.5,3)
+
+		\begin{tikzpicture}[scale=0.4]
+		    \begin{smithchart}[
+		        width=20cm,
+		        samples=50, line cap=round, smooth]
+			%\addplot[ultra thick, red, mark=*, mark color=red] (2,-1.4) node[below, rectangle, fill=white]{\Large{$2-j1.4$}};
+			\addplot[-<, red, ultra thick, domain=0.1:0.6] (0.5, x) node[left, rectangle, fill=white] {L};
+			\addplot[-<, red, ultra thick, domain=-0.1:-0.6] (0.5, x) node[right, rectangle, fill=white] {C};
+		    \end{smithchart}
+		\end{tikzpicture}
+
+\end{textblock}
+\begin{textblock}{4.5}(10.5,3)
+
+\begin{myblock}[0.95]{Series}
+	\begin{itemize}
+		\setlength\itemsep{14pt}
+		\item Series \handoutgap{0.5in}{inductors} move \handoutgap{0.5in}{CW} along lines of constant resistance
+	
+		\item Series \handoutgap{0.5in}{capactiors} move \handoutgap{0.5in}{CCW} along lines of constant resistance
+	\end{itemize}
+
+\end{myblock}
+\end{textblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Smith Charts: Components }
+
+\begin{textblock}{10}(0.5,3)
+
+		\begin{tikzpicture}[scale=0.4]
+		    \begin{smithchart}[
+		        width=20cm,
+		        samples=50, line cap=round, smooth]
+			%\addplot[ultra thick, red, mark=*, mark color=red] (2,-1.4) node[below, rectangle, fill=white]{\Large{$2-j1.4$}};
+			\addplot[-<, red, ultra thick, domain=0.1:0.6, mark=none] (0.5, x) node[left, rectangle, fill=white] {L};
+			\addplot[-<, red, ultra thick, domain=-0.1:-0.6, mark=none] (0.5, x) node[right, rectangle, fill=white] {C};
+		    \end{smithchart}
+		\end{tikzpicture}
+
+\end{textblock}
+\begin{textblock}{4.5}(10.5,3)
+
+\begin{myblock}[0.95]{Parallel}
+	\begin{itemize}
+		\setlength\itemsep{14pt}
+		\item Parallel \handoutgap{0.5in}{inductors} move \handoutgap{0.5in}{CCW} along lines of constant conductance
+	
+		\item Parallel \handoutgap{0.5in}{capactiors} move \handoutgap{0.5in}{CW} along lines of constant conductance
+	\end{itemize}
+
+\end{myblock}
+\end{textblock}
+
+\end{frame}
+
+%{
+%%\setbeamercolor{background canvas}{bg=}
+%\includepdf[pages=1, landscape=false]{ECE343/SmithChart_blank.pdf}
+%}
+
+%
+%{
+%%\setbeamercolor{background canvas}{bg=}
+%\includepdf[pages=1, landscape=false]{ECE343/SmithChart_blank.pdf}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Smith Charts: Plotting Impedances}
+
+\begin{textblock}{10}(0.5,3)
+
+		\begin{tikzpicture}[scale=0.4]
+		    \begin{smithchart}[
+		        width=20cm,
+		        samples=200, line cap=round, smooth]
+			%\addplot[ultra thick, red, mark=*, mark color=red] (2,-1.4) node[below, rectangle, fill=white]{\Large{$2-j1.4$}};
+		    \end{smithchart}
+		\end{tikzpicture}
+
+\end{textblock}
+\begin{textblock}{4.5}(10.5,3)
+
+\begin{myblock}[0.95]{Plot these}
+
+	\begin{itemize}
+		\setlength\itemsep{8pt}
+		\item $\myz{L} = 2-j1.4$ 
+		
+			$\longrightarrow$ (C or L?)
+		
+		\item $\myz{L} = 1.5+j0.5$ 
+		
+				$\longrightarrow$ (C or L?)
+		
+		\item $\myz{L} = 75+j60\ohms$  with \myz{0} = 50\ohms
+		
+		\item Short circuit
+		
+		\item Open circuit 
+	\end{itemize}
+
+\end{myblock}
+\end{textblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LO 3.6
+\begin{frame}{Impedance Matching: General Process}
+
+	\begin{textblock}{14.5}(0.5,3)
+
+	Match the combined load (\myz{L} and TX line) to \myz{s}.
+		
+		\vspace{1in}
+		\scalebox{0.55}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[twoport, t=\myz{s}] ++(1,0)
+				to[tline,o-o] ++(3.5,0)
+				to[short] ++(0.5,0)
+				to[twoport,t=\myz{L}]  ++(0,-3)
+				to[short] ++(-0.5,0)
+				to[tline,o-o] ++(-3.5,0)
+				to[short] ++(-1,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[below] at (0.75,0) {$-\ell$};
+		\node[below] at (4.5,0) {$0$};
+		\draw[->] (1.25,-0.5) --++(0,1) --++ (0.5,0);
+		\node[below] at (1.25,-0.5) {\myz{in}};	
+		\end{circuitikz}
+		} % end scalebox
+	\end{textblock}
+	
+	\begin{textblock}{11}(4.75,2.75)
+	\begin{myblock}[0.95]{Process}
+	
+	\begin{small}
+	\begin{enumerate}
+	
+		\item Normalize impedances to \myz{0}
+		
+		\item Find reflection coefficient ($\Gamma_L$)
+		
+		\item Holding the \handoutgap{0.75in}{magnitude} of $\Gamma_L$ constant, find the input impedance $z_{\text{in}} = \handoutgap{0.5in}{1 + jx}$ 
+		
+		$\implies |\Gamma_L | = \dfrac{| z_{\text{in}} - 1 |}{|z_{\text{in}} + 1|}$
+		
+		\item Determine capacitance or inductance from $X$. 
+		
+		$\implies Z_C = \dfrac{1}{j\omega C} \text{ or } Z_L = j\omega L$
+		
+		\item Find the length of TX line to make:
+		
+		$\implies z_{\text{in}} = 1+jX =  \dfrac{z_L + j\tanp{\beta \ell}}{1+jz_L\tanp{\beta\ell}}$
+		
+
+	\end{enumerate}
+	\end{small}
+	
+	\end{myblock}
+	\end{textblock}
+
+
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Review}
+%\begin{frame}{Impedance Matching: General Process}
+%
+%	\begin{textblock}{14.5}(0.5,3)
+%
+%	Match the combined load (\myz{L} and TX line) to \myz{s}.
+%		
+%		\vspace{1in}
+%		\scalebox{0.55}{
+%		\begin{circuitikz}
+%		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+%				to[twoport, t=\myz{s}] ++(1,0)
+%				to[tline,o-o] ++(3.5,0)
+%				to[short] ++(0.5,0)
+%				to[twoport,t=\myz{L}]  ++(0,-3)
+%				to[short] ++(-0.5,0)
+%				to[tline,o-o] ++(-3.5,0)
+%				to[short] ++(-1,0);
+%	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+%		\node[below] at (2,1.75) {\myz{0}};
+%		\node[below] at (0.75,0) {$-\ell$};
+%		\node[below] at (4.5,0) {$0$};
+%		\draw[->] (1.25,-0.5) --++(0,1) --++ (0.5,0);
+%		\node[below] at (1.25,-0.5) {\myz{in}};	
+%		\end{circuitikz}
+%		} % end scalebox
+%	\end{textblock}
+%	
+%	\begin{textblock}{11}(4.75,2.75)
+%	\begin{myblock}[0.95]{Process}
+%	
+%	\begin{small}
+%	\begin{enumerate}
+%	
+%		\item Normalize impedances to \myz{0}
+%		
+%		\item Find reflection coefficient ($\Gamma_L$)
+%		
+%		\item Holding the \handoutgap{0.75in}{magnitude} of $\Gamma_L$ constant, find the input impedance $z_{\text{in}} = \handoutgap{0.5in}{1 + jx}$ 
+%		
+%		$\implies |\Gamma_L | = \dfrac{z_{\text{in}} - 1}{z_{\text{in}} + 1}$
+%		
+%		\item Determine capacitance or inductance from $X$. 
+%		
+%		$\implies Z_C = \dfrac{1}{j\omega C} \text{ or } Z_L = j\omega L$
+%		
+%		\item Find the length of TX line to make:
+%		
+%		$\implies z_{\text{in}} = 1+jX =  \dfrac{z_L + j\tanp{\beta \ell}}{1+jz_L\tanp{\beta\ell}}$
+%		
+%
+%	\end{enumerate}
+%	\end{small}
+%	
+%	\end{myblock}
+%	\end{textblock}
+%
+%
+%	
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Smith Chart Process}
+
+	\begin{textblock}{14.5}(0.5,3)
+
+	Match the combined load (\myz{L} and TX line) to \myz{s}.
+		
+		\vspace{1in}
+		\scalebox{0.55}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[twoport, t=\myz{s}] ++(1,0)
+				to[tline,o-o] ++(3.5,0)
+				to[short] ++(0.5,0)
+				to[twoport,t=\myz{L}]  ++(0,-3)
+				to[short] ++(-0.5,0)
+				to[tline,o-o] ++(-3.5,0)
+				to[short] ++(-1,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[below] at (0.75,0) {$-\ell$};
+		\node[below] at (4.5,0) {$0$};
+		\draw[->] (1.25,-0.5) --++(0,1) --++ (0.5,0);
+		\node[below] at (1.25,-0.5) {\myz{in}};	
+		\end{circuitikz}
+		} % end scalebox
+	\end{textblock}
+	
+	\begin{textblock}{11}(4.75,2.75)
+	\begin{myblock}[0.95]{Process}
+	
+	\begin{small}
+	\begin{enumerate}
+	
+		\item Normalize impedances to \myz{0}
+		
+		\item Draw \handoutgap{0.5in}{constant $\Gamma_L$ circle}
+		
+		\item Rotate towards \handoutgap{0.5in}{source} on circle until intersection with  \handoutgap{0.5in}{$z_s$ circle}
+		
+		\item Read \handoutgap{0.5in}{$z_{\text{in}}$}
+		
+		\item Determine capacitance or inductance from $X$. 
+		
+		$\implies Z_C = \dfrac{1}{j\omega C} \text{ or } Z_L = j\omega L$
+		
+		\item Measure TX line length ($\ell$) from \handoutgap{0.5in}{outer scale}
+		
+
+	\end{enumerate}
+	\end{small}
+	
+	\end{myblock}
+	\end{textblock}
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matching Example}
+\begin{frame}{Impedance Matching Example}
+\begin{textblock}{9}(0.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\begin{textblock}{5.5}(10, 2.75)
+\begin{myblock}[0.97]{Previous Example}
+\begin{itemize}
+	\setlength{\itemsep}{6pt}
+	\item Match \myz{s}=50\ohms to \myz{L}=33.9+j17.9\ohms
+	\item \myz{0}  = 50\ohms
+	\item \handoutgap{1in}{Plot $z_L$}
+	\item \handoutgap{1in}{Draw $\Gamma_L$ circle}
+	\item \handoutgap{1in}{Rotate towards source}
+	\item \handoutgap{1in}{Force Re$\lb z_{\text{in}}  \rb =z_s$}
+	\item \handoutgap{1in}{Read $x$, unitize, find C/L}
+
+\end{itemize}
+
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+%\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Impedance Matching Example}
+%\begin{textblock}{14.5}(0.5,2.5)
+%\begin{center}
+%\begin{tikzpicture}[scale=0.35]
+%
+%\input{\mygraphicspath/ECE343/smithChartFoundation}
+%
+%   \begin{smithchart}[
+%                      show origin,
+%                      width=20cm,
+%                     ]
+%%		\addplot[mark=*, color=red] coordinates{(0.678,0.358)} node[above]{\myz{L}};
+%%   \addplot[mark=none,line width=2]
+%%       coordinates{
+%%           (1, 0) (1, 0.1) (1,0.2) (1,0.3) (1,0.4) (1,0.5) (1,0.5)
+%%       };
+%%   \addplot[mark=none,line width=1, red]
+%%       coordinates{
+%%           %(0,-0.5)(1, 0) (0, 0.5) % pacman angle
+%%           (1,0) (0.5,0.5)
+%%       };
+%%	\addplot+[no marks, domain=0.6:1.8, color={blue}, line width=1] (0.3,x); % an arc of R=0.3 from X = 0.6:1.8
+%   \end{smithchart}
+%   \end{tikzpicture} 
+%   \end{center}
+%   \end{textblock}
+\begin{textblock}{9}(3.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\end{frame}
+
+%\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matching Practice}
+\begin{frame}{Impedance Matching: Your Turn}
+\begin{textblock}{9}(0.5, 3)
+	%\scalebox{0.35}{
+	%\begin{mysmithchart}
+	%   \addplot[mark=none,line width=2]
+	%       coordinates{
+	%           (1, 0) (1, 0.1) (1,0.2) (1,0.3) (1,0.4) (1,0.5) (1,0.5)
+	%       };
+	%   \addplot[mark=none,line width=0.5]
+	%       coordinates{
+	%           (1, 0) (-0.3, 0)  % this one is not drawn outside!!!
+	%       };
+	%\end{mysmithchart}
+	 %  } % end scalebox
+	% \includesvg[scale=0.5]{ECE343/smithchart}
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\begin{textblock}{5.5}(10, 2.75)
+\begin{myblock}[0.97]{Example 2}
+\begin{itemize}
+	\setlength{\itemsep}{6pt}
+	\item Match \myz{s}=50\ohms to \myz{L}=30-j120\ohms
+	\item \myz{0}  = 75\ohms
+	\item \handoutgap{1in}{Plot $z_L$}
+	\item \handoutgap{1in}{Draw $\Gamma_L$ circle}
+	\item \handoutgap{1in}{Rotate towards source}
+	\item \handoutgap{1in}{Force Re$\lb z_{\text{in}}  \rb =1$}
+	\item \handoutgap{1in}{Read $x$ and find C/L}
+
+\end{itemize}
+
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Your Turn}
+\begin{textblock}{9}(3.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parallel Components}
+\begin{frame}{Impedance Matching: Parallel Component}
+\begin{textblock}{9}(0.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\begin{textblock}{5.5}(10, 2.75)
+\begin{myblock}[0.97]{Previous Example}
+\begin{itemize}
+	\setlength{\itemsep}{6pt}
+	\item Use a parallel component
+	\item \handoutgap{1in}{Plot $z_L$}
+	\item \handoutgap{1in}{$z_L \rightarrow y_L $}
+	\item \handoutgap{1in}{Draw $\Gamma_L$ circle}
+	\item \handoutgap{1in}{Rotate towards source}
+	\item \handoutgap{1in}{Force Re$\lb y_{\text{in}}  \rb =y_s$}
+	\item \handoutgap{1in}{Read $b$, unitize, and find C/L}
+
+\end{itemize}
+
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Parallel Component}
+\begin{textblock}{9}(3.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Stubs}
+\begin{frame}{Impedance Matching: TX Line Stubs}
+\begin{textblock}{14.5}(0.5, 3.5)
+\scalebox{0.65}{
+\begin{circuitikz}
+	\draw (0,0) to[short,o-o] ++ (3,0)
+				to[short,-o] ++(4,0)
+				to[short] ++(0.5,0)
+				to[twoport, t=\myz{L}, a^={\myz{L}\equals 33.9+j17.9\ohms}] ++(0,-2)
+				to[short] ++(-0.5,0)
+				to[short,o-] ++(-4,0)
+				to[short,o-o] ++(-3,0);
+	\draw[<->] (3,0.5) -- node[above] {$d$} ++(4,0); 
+	\draw(1.5,-1) node{\myz{s} = 50\ohms};
+	\draw(5,-1) node{\myz{0,2} = 50\ohms};
+	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	\draw(3,0) to[short] ++(1.75,-2.25) to[open,o-o] ++(0,-2) to[short] ++(-1.75,2.25);
+	\draw(5.5,-3) node{\myz{0,stub} = 100\ohms};
+\end{circuitikz}
+} % end scalebox
+
+\scalebox{0.65}{
+\begin{circuitikz}
+	\draw (0,0) to[short,o-o] ++ (3,0)
+				to[short,-o] ++(4,0)
+				to[short] ++(0.5,0)
+				to[twoport, t=\myz{L}, a^={\myz{L}\equals 33.9+j17.9\ohms}] ++(0,-2)
+				to[short] ++(-0.5,0)
+				to[short,o-] ++(-4,0)
+				to[short,o-o] ++(-3,0);
+	\draw[<->] (3,0.5) -- node[above] {$d$} ++(4,0); 
+	\draw(1.5,-1) node{\myz{s} = 50\ohms};
+	\draw(5,-1) node{\myz{0,2} = 50\ohms};
+	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	\draw(5.5,-3) node[right]{\myz{0,stub} = 50\ohms};
+\end{circuitikz}
+} % end scalebox
+
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Shorted Stub}
+\begin{textblock}{9}(0.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\begin{textblock}{5.5}(10, 2.75)
+\begin{myblock}[0.97]{Previous Example}
+\begin{itemize}
+	\setlength{\itemsep}{6pt}
+	\item Match \myz{s}=50\ohms to \myz{L}=33.9+j17.9\ohms
+	\item \handoutgap{1in}{$z_L \rightarrow y_L$}
+	\item \handoutgap{1in}{Draw $\Gamma_L$ circle}
+	\item \handoutgap{1in}{Rotate towards source}
+	\item \handoutgap{1in}{Force Re$\lb z_{\text{in}}  \rb =1$}
+	\item \handoutgap{1in}{Read $x$, find on outer circle}
+	\item \handoutgap{1in}{Find $\ell$ from $y_{\text{sc}}$ or $y_{\text{sc}}$ to $x$}
+
+\end{itemize}
+
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Shorted Stub}
+\begin{textblock}{9}(3.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Open Stub - Your Turn}
+\begin{textblock}{9}(0.5, 3)
+	%\scalebox{0.35}{
+	%\begin{mysmithchart}
+	%   \addplot[mark=none,line width=2]
+	%       coordinates{
+	%           (1, 0) (1, 0.1) (1,0.2) (1,0.3) (1,0.4) (1,0.5) (1,0.5)
+	%       };
+	%   \addplot[mark=none,line width=0.5]
+	%       coordinates{
+	%           (1, 0) (-0.3, 0)  % this one is not drawn outside!!!
+	%       };
+	%\end{mysmithchart}
+	 %  } % end scalebox
+	% \includesvg[scale=0.5]{ECE343/smithchart}
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\begin{textblock}{5.5}(10, 2.75)
+\begin{myblock}[0.97]{Example 2}
+\begin{itemize}
+	\setlength{\itemsep}{6pt}
+	\item Match \myz{s}=50\ohms to \myz{L}=33.9+j17.9\ohms
+	\item \handoutgap{1in}{$z_L \rightarrow y_L$}
+	\item \handoutgap{1in}{Draw $\Gamma_L$ circle}
+	\item \handoutgap{1in}{Rotate towards source}
+	\item \handoutgap{1in}{Force Re$\lb z_{\text{in}}  \rb =1$}
+	\item \handoutgap{1in}{Read $x$, find on outer circle}
+	\item \handoutgap{1in}{Find $\ell$ from $y_{\text{sc}}$ or $y_{\text{sc}}$ to $x$}
+
+\end{itemize}
+
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Impedance Matching: Open Stub - Your Turn}
+\begin{textblock}{9}(3.5, 3)
+	\includegraphics[scale=0.22]{ECE343/smithchart.eps}
+\end{textblock}
+\end{frame}
+
+%\end{comment}
+

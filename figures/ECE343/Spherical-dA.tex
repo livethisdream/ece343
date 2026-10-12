@@ -1,0 +1,64 @@
+\tdplotsetmaincoords{60}{110}
+
+\pgfmathsetmacro{\rvec}{.8}
+\pgfmathsetmacro{\thetavec}{40}
+\pgfmathsetmacro{\phivec}{45}
+
+\pgfmathsetmacro{\dphivec}{20}
+\pgfmathsetmacro{\dthetavec}{20}
+\pgfmathsetmacro{\drvec}{.2}
+
+\begin{tikzpicture}[scale=6,tdplot_main_coords]
+
+\coordinate (O) at (0,0,0);
+
+\tdplotsetcoord{A}{\rvec}{\thetavec}{\phivec}
+\tdplotsetcoord{B}{\rvec}{\thetavec + \dthetavec}{\phivec}
+\tdplotsetcoord{C}{\rvec}{\thetavec + \dthetavec}{\phivec + \dphivec}
+\tdplotsetcoord{D}{\rvec}{\thetavec}{\phivec + \dphivec}
+
+\draw[thick,->] (0,0,0) -- (0.8,0,0) node[anchor=north east]{$x$};
+\draw[thick,->] (0,0,0) -- (0,0.8,0) node[anchor=north west]{$y$};
+\draw[thick,->] (0,0,0) -- (0,0,0.8) node[anchor=south]{$z$};
+
+
+\draw[-stealth,color=red] (O) -- (A) node[midway, above, xshift=-0.1cm,yshift=-0.15cm, color=red]{$r$};
+\draw[dashed, color=black] (O) -- (B);
+\draw[dashed, color=black] (O) -- (C);
+\draw[dashed, color=black] (O) -- (D);
+
+\draw[dashed, color=red] (O) -- (Axy)  node[midway, left, color=red, yshift=-0.1cm, xshift=0.25cm,pin={[pin distance=0.5cm, pin edge={red,solid}]235:{\small $r\sin{\theta}$}}] {};
+
+\draw[dashed, color=red] (A) -- (Axy);
+\draw[dashed, color=red] (O) -- (Dxy);
+\draw[dashed, color=red] (D) -- (Dxy);
+\tdplotdrawarc[dashed, color=red]{(O)}{0.52}{\phivec}{\phivec + \dphivec}{}{}
+
+
+\node[right = 0cm of D, xshift=0.05cm, yshift=-0.5cm, pin={[pin distance=0.5cm, pin edge={black,solid}]0:{\small $rd\theta$}}] {}; % rdtheta
+
+\node[above = 0cm of D, xshift=-0.5cm, yshift=-0.25cm, pin={[pin distance=0.75cm, pin edge={black,solid}]80:{\small $r\sin{\theta}d\phi$}}] {}; % r sintheta dphi
+
+
+\tdplotdrawarc{(O)}{0.2}{0}{\phivec}{anchor=north}{$\phi $}
+\tdplotdrawarc{(O)}{0.35}{\phivec}{\phivec + \dphivec}{anchor=north, xshift=0.25cm, yshift=0.1cm, pin={[pin distance=0.75cm, pin edge={black,solid}]-15:{\small $d\phi$}}}{}
+
+\tdplotsetthetaplanecoords{\phivec}
+
+\tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}{\thetavec}{anchor=south west}{$\theta$}
+\tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.3}{\thetavec}{\thetavec + \dthetavec}{anchor=south west, yshift=-0.1cm}{$d\theta$}
+
+\tdplotdrawarc[tdplot_rotated_coords]{(O)}{\rvec}{\thetavec}{\dthetavec + \thetavec}{}{}
+
+\tdplotsetthetaplanecoords{\phivec + \dphivec}
+\tdplotdrawarc[tdplot_rotated_coords]{(O)}{\rvec}{\thetavec}{\dthetavec + \thetavec}{}{}
+
+
+\tdplotsetrotatedcoords{55}{-50.4313}{-6.4086}
+\tdplotdrawarc[tdplot_rotated_coords]{(O)}{\rvec}{0}{12.8173}{}{}
+
+
+\tdplotsetrotatedcoords{55}{-30.3813}{-8.6492}
+\tdplotdrawarc[tdplot_rotated_coords]{(O)}{\rvec}{0}{17.2983}{}{}
+
+\end{tikzpicture}

@@ -1,0 +1,35 @@
+# The private faculty repo is cloned in here, per semester:
+#   git clone git@github.com:livethisdream/ece343-faculty.git faculty/ECE343-Spring-2025
+# It holds exams, keys, grades and the answer-bearing sources. Never tracked here.
+/faculty/
+
+# LaTeX build artifacts.
+*.aux
+*.bcf
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.pre
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+
+# Anything matching these must never land in a public repo.
+*_KEY*
+*_answers*
+*_ANSWERS*
+*SOLUTIONS*
+Grades/
+Assessments/
+GR/
+Final/
+PP/
+
+# DLP agent droppings and editor cruft.
+DG1__DS_DIR_HDR
+.idea/
+__pycache__/
+*.pyc

@@ -1,0 +1,184 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+%\def\lessonNum{28}
+
+\begin{frame}{}
+\renewcommand{\arraystretch}{1}
+	\begin{textblock}{14}(0.5,1.75)
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Final}
+	\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch06_CurrentDensity/ECE343_Ch06_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Current Distributions}
+\begin{textblock}{7}(0.5,3)
+\begin{circuitikz}
+	\draw (0,0) to[battery, invert] ++(0,3.25) 
+				to[short] ++(3,0) 
+				to[short] ++ (0,-0.5)
+				to[open] ++(0,-2)
+				to[short] ++( 0,-0.75)
+				to[short] ++(-3,0);
+	\node[cylinder, shape border rotate=90, draw, minimum height=2cm, minimum width=1cm] at (3,1.75) {};
+	\draw[->] (3.25,2.75) --++(0,-0.75) node[below] {$\vec{dS}$}; 
+	\draw[->] (4, 2.5) --++(0,-1.5) node[right] {$\vec{J} = \zhat 8\text{A/m}^2$};
+	\draw (3,2.75) --++(-0.5,0) node[above] {$a$};
+\end{circuitikz}
+\end{textblock}
+\begin{textblock}{7}(8.5,4)
+\only<0|handout:1>{
+\alert{
+\eq{
+	I &= \int_0^{\rho=a} \int_{\phi=0}^{2\pi}  \vec{J}\mycdot \vec{dS} \\
+	&= 8\text{A/m}^2 \int_0^{\rho=a} \int_{\phi=0}^{2\pi} \rho d\rho d\phi \\
+	&= \lp 8\text{A/m}^2 \rp \lp \dfrac{a^2}{2} \rp \lp 2\pi \rp \\
+	&= 226\mu\text{A}
+}
+}% end alert
+} % end handout 
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conductivity}
+\begin{textblock}{14.5}(0.5,2)
+\begin{myblock}[0.9]{Definition}
+\vspace{-16pt}
+	\eq{
+		&\vec{J} = \sigma \vec{E} \\
+		&\implies \sigma \longrightarrow \dfrac{1}{\ohms} = \text{S (Siemens)}
+	}
+\vspace{-18pt}
+\end{myblock}
+\vspace{-18pt}
+\begin{myblock}[0.9]{Types of Conductors}
+	\begin{enumerate}
+		\item ``Good'' conductor $\longrightarrow \sigma > 10^5$ S/m
+		\item Semiconductor $\longrightarrow\ee{-4} < \sigma < 10$ S/m
+		\item Poor insulators $\longrightarrow 10$ S/m
+		\item Good insulators $\longrightarrow \sigma < \ee{-10}$ S/m
+		\item Vacuum $\longrightarrow 0$
+	\end{enumerate}
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conductivity for Common Materials}
+\begin{textblock}{14.5}(0.5,3)
+\begin{center}
+\begin{tabular}{| l | l |}
+		\hline
+		\textbf{Material}  & $\boldmath{\sigma}$ (S/m) \\ \hline\hline
+		Copper	& $5.8\ee{7}$\\ \hline
+		Gold 	& $4.4\ee{7}$ \\ \hline
+		Aluminum & $3.7\ee{7} $\\ \hline
+ 		Iron	& $1.0\ee{7}$ \\ \hline
+		Platinum	& $0.9\ee{7}$ \\ \hline
+		Carbon	& $1.3\ee{5}$ \\ \hline
+		Silicon	& $4.4\ee{-4}$ \\ \hline
+		Free space	& $\approx 0$\\ \hline
+		Distilled water	& $6\ee{-6}$ \\ \hline
+		Tap water	& $5-50\ee{-3}$ \\ \hline
+		Seawater	& $5$\\ \hline
+		Soil			& $1\ee{-4}$  \\ \hline
+\end{tabular}
+\end{center}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Resistance of a Wire}
+\begin{textblock}{7}(0.5,3)
+\begin{circuitikz}
+	\draw (0,0) to[battery, invert] ++(0,3.25) 
+				to[short] ++(3,0) 
+				to[short] ++ (0,-0.5)
+				to[open] ++(0,-2)
+				to[short] ++( 0,-0.75)
+				to[short] ++(-3,0);
+	\node[cylinder, shape border rotate=90, draw, minimum height=2cm, minimum width=1cm] at (3,1.75) {};
+	\draw[->] (3.25,2.75) --++(0,-0.75) node[below] {$\vec{dS}$}; 
+	\draw[->] (4, 2.5) --++(0,-1.5) node[right] {$\vec{J} = \zhat 8\text{A/m}^2$};
+	\draw (3,2.75) --++(-0.5,0) node[above] {$a$};
+\end{circuitikz}
+\end{textblock}
+
+\begin{textblock}{7}(8,3)
+\only<0|handout:1>{
+\alert{
+\eq{
+	V &= -\int \vec{E}\mycdot \vec{d\ell} \\
+	  &= -\int \lp -\zhat E_z \rp\mycdot \zhat dz\\
+	  &= E_z \ell \\
+	  \implies \vec{J} &= \sigma \vec{E} = \zhat \sigma E_z \\
+	  \implies I &= \int_{\rho=0}^{a} \int_{\phi=0}^{2\pi} \zhat \sigma E_z \mycdot \zhat \rho d\rho d\phi\\
+	  &= \sigma E_z \pi a^2 \\
+	  \implies R&= \dfrac{V}{I}  = \dfrac{E_z \ell}{\sigma E_z \pi a^2} = \dfrac{\ell}{\sigma A}
+}
+} % end alert
+} % end handout
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Resistance of a Coaxial Cable}
+\begin{textblock}{7}(0.5,3)
+Find the resistance between the inner and outer conductor of a coaxial cable of length (in $z$-dimension) $\ell$. 
+\scalebox{1}{
+\begin{circuitikz}
+\draw[pattern=north west lines, pattern color=gray!50!white] (0,0) circle (1.5);
+\draw[black,fill=white] (0,0) circle (0.5);
+\fill[black] (0,0) circle (1pt); % origin
+\draw (120:0) -- node[right]{$b$}(120:1.5);
+\draw (200:0) -- node[above]{$a$}(200:0.5);
+%\draw[dashed, -stealth] (90:0) -- (90:2);
+% \draw[red,-stealth] (0,1.75) arc (90:120:1.5) node[above,red]{$\phi$};
+\draw (0:0.5) to[short] ++(2,0)
+			to[battery, , a^=\myv{0}] ++(0,-2)
+			to[short] ++(-2.25,0)
+			to[short] ++(0,0.5);
+\end{circuitikz}
+} % end scalebox
+\only<0|handout:1>{
+\begin{small}
+\alert{
+\eq{
+	\vec{E} &= \rhohat \dfrac{Q}{2\pi\varepsilon_0 \rho L}  
+}
+}
+\end{small}
+} % end handout
+\end{textblock}
+
+\begin{textblock}{7}(8,2)
+\only<0|handout:1>{
+\begin{small}
+\alert{
+\eq{
+	V &= -\int_b^a \dfrac{Q}{2\pi\varepsilon_0 \rho L}  \\
+		&= \dfrac{Q}{2\pi\varepsilon_0 \rho L} \text{ln}\lp \dfrac{b}{a}\rp\\
+	I &= \int \vec{J}\mycdot\vec{dS} = \int \sigma\vec{E}\mycdot\vec{dS}\\
+	&=\int \sigma \rhohat\dfrac{Q}{2\pi\varepsilon_0 \rho L} \mycdot \rhohat \rho d\phi dz \\
+	&= \dfrac{\sigma Q}{2\pi\varepsilon_0 L}  \int_0^{2\pi} d\phi \int_0^L dz = \dfrac{\sigma Q}{\varepsilon_0} \\
+	 R &=  \dfrac{V}{I} =  \lb\dfrac{Q}{2\pi\varepsilon_0 \rho L} \text{ln}\lp \dfrac{b}{a}\rp \rb\lb \dfrac{\varepsilon_0}{\sigma Q} \rb \\
+	&= \dfrac{1}{2\pi \sigma L}  \text{ln}\lp \dfrac{b}{a}\rp \\
+	\implies G^\prime &= \dfrac{G}{L} = \dfrac{1}{RL} = \dfrac{2\pi\sigma }{\text{ln}\lp \frac{b}{a}\rp}
+}
+} % end alert
+\end{small}
+} % end handout
+\end{textblock}
+\end{frame}

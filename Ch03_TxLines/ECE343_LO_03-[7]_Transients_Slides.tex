@@ -1,0 +1,263 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+%%%%%%%%%%%%%%%%%%%% LO 3.3%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Schedule}
+\renewcommand{\arraystretch}{1}
+\begin{frame}{}
+	\begin{textblock}{14}(0.5,1.75)
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Prog}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch03_TxLines/ECE343_Ch03_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Transients}
+
+\begin{frame}{Transients}
+	\begin{textblock}{8}(0,2)
+		\begin{myblock}[0.9]{Method}
+		\begin{scriptsize}
+		\begin{itemize}
+			\item At $t=0$, source voltage is divided between \handoutgap{0.5in}{\myz{S}} and \handoutgap{0.5in}{\myz{0}}
+			
+			\item Wave propagates from \handoutgap{0.5in}{$z=-\ell$} to  \handoutgap{0.5in}{$z=0$} at velocity  \handoutgap{1in}{$u_p$}
+			
+			\item  Wave \handoutgap{0.5in}{reflects} at boundary of \handoutgap{0.5in}{tx line \& load}
+			
+			\item Wave propagates from \handoutgap{0.5in}{$z=0$} to  \handoutgap{1in}{$z=-\ell$} at velocity  \handoutgap{0.5in}{$u_p$} 
+			
+			\item  Wave \handoutgap{0.5in}{reflects} at boundary of \handoutgap{0.5in}{source \& tx line}
+			
+			\item Voltage converges to \handoutgap{0.5in}{steady state} of \handoutgap{0.5in}{$V_0^+ \lp\dfrac{\myz{L}}{\myz{L}+\myz{s}} \rp$}
+		\end{itemize}
+		\end{scriptsize}
+	\end{myblock}
+	\end{textblock}
+		\begin{textblock}{8}(8,4)
+			\scalebox{0.4}{
+				\begin{circuitikz}[scale=1]
+					\draw (1.5,0) to[open, *-*] ++(0,2)
+										to[short, -*] ++(8.5,0);
+					\draw (10,0) to[short,*-] ++(-10,0);
+					\draw (0,0) to[short] ++(-2,0)
+										to[V,a^=\myv{s}, invert] ++(0,2)
+										to[twoport, t=\myz{s}] ++(2,0)
+										to[closing switch] ++(2,0); % source
+					\draw (10,2) to[short] ++(2,0)
+										to[twoport, t=\myz{L}] ++(0,-2)
+										to[short] ++(-2,0); % load
+					\draw[->] (0.5,3) -++ (9.5,0);
+					\node at (5,3.25) {$z$};
+					\draw[fill=gray!50!white, thick] (2,1.75) rectangle ++(7,0.5); % top tx line
+					\draw[fill=gray!50!white, thick] (2,-0.25) rectangle ++(7,0.5); % bottom tx line
+					\draw[->] (1.5,2.25) --++(0,-9) ; % left boundary
+					\node at (1.5,2.5){$-\ell$};
+					\draw[->] (10,2.25) --++(0,-9); % right boundary
+					\node at (10,2.5) {0};
+					
+					\foreach \y in {1,2,3}{
+						\draw[dashed] (-0.5, -2*\y) --++ (10.75,0)  node[right] {\y$t_{\ell}$};
+					}
+					% red lines for bounces
+					\draw[thick, red,->] (1.5,0) --++ (8.5,-2) node[above, midway] {$\myv{0}^+$}; 
+					\draw[thick, red,->] (10,-2) --++ (-8.5,-2) node[above, midway] {$\myv{0}^- = \myv{0}^+\Gamma_L$};
+					\draw[thick, red,->] (1.5,-4) --++ (8.5,-2)  node[above, midway] {$\myv{0}^{-} \Gamma_s = \myv{0}^+\Gamma_L \Gamma_s$};
+				\end{circuitikz}
+				} % end scalebox
+
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Transients}
+	\begin{textblock}{14.5}(0.5,2.5)
+	\begin{myblock}[0.98]{Method}
+		\begin{itemize}
+			\item At $t=0$, source voltage is divided between \handoutgap{1in}{\myz{S}} and \handoutgap{1in}{\myz{0}}
+			
+			\item Wave propagates from \handoutgap{1in}{$z=-\ell$} to  \handoutgap{1in}{$z=0$} at velocity  \handoutgap{1in}{$u_p$}
+			
+			\item  Wave \handoutgap{1in}{reflects} at boundary of \handoutgap{1in}{tx line \& load}
+			
+			\item Wave propagates from \handoutgap{1in}{$z=0$} to  \handoutgap{1in}{$z=-\ell$} at velocity  \handoutgap{1in}{$u_p$} 
+			
+			\item  Wave \handoutgap{1in}{reflects} at boundary of \handoutgap{1in}{source \& tx line}
+			
+			\item Voltage converges to \handoutgap{1in}{steady state} of \handoutgap{1in}{$V_0^+ \lp\dfrac{\myz{L}}{\myz{L}+\myz{s}} \rp$}
+			
+		\end{itemize}
+	\end{myblock}
+	\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Transient Example}
+			\begin{textblock}{14.5}(0.5,2)
+			\begin{center}
+			\begin{circuitikz}[scale=0.75]
+					\draw (1.5,0) to[open, *-*] ++(0,2)
+										to[short, -*] ++(8.5,0);
+					\draw (10,0) to[short,*-] ++(-10,0);
+					\draw (0,0) to[short] ++(-2,0)
+										to[V,a^=10\volts, invert] ++(0,2)
+										to[R=25\ohms] ++(2,0)
+										to[closing switch, a^=\scriptsize{$t\equals 0$}] ++(2,0); % source
+					\draw (10,2) to[short] ++(1,0)
+										to[R=150\ohms] ++(0,-2)
+										to[short] ++(-1,0); % load
+					\draw (1.5,3) --++ (8.5,0) node[above, midway] (5,3.25) {$\ell=400$m};
+					\draw(1.5,2.75) --++ (0,0.5);
+					\draw(10,2.75) --++ (0,0.5);
+					\draw[fill=gray!50!white, thick] (2,1.75) rectangle ++(7,0.5); % top tx line
+					\draw[fill=gray!50!white, thick] (2,-0.25) rectangle ++(7,0.5); % bottom tx line
+					\draw[->] (1.5,2.25) --++(0,-9) ; % left boundary
+					\draw[->] (10,2.25) --++(0,-9); % right boundary
+					\node[align=left] at (5,1) {\myz{0}=50\ohms \\ $u_p = 0.67c$};
+					
+					\foreach \y in {1,2,3}{
+						\draw[dashed] (-0.5, -2*\y) --++ (10.75,0)  node[right] {\y$t_{\ell}$};
+					}
+					% red lines for bounces
+					\draw[thick, red,->] (1.5,0) --++ (8.5,-2);% node[above] {$\myv{0}^+$}; 
+					\draw[thick, red,->] (10,-2) --++ (-8.5,-2);%node[above] {$\myv{0}^- = \myv{0}^+\Gamma_L$};
+					\draw[thick, red,->] (1.5,-4) --++ (8.5,-2);% node[above] {$\myv{0}^{-} \Gamma_s = \myv{0}^+\Gamma_L \Gamma_s$};
+				\end{circuitikz}
+				\end{center}
+			\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Transient Example}
+			\begin{textblock}{8}(0.5,2)
+			\begin{center}
+			\scalebox{0.5}{
+			\begin{circuitikz}[scale=0.75]
+					\draw (1.5,0) to[open, *-*] ++(0,2)
+										to[short, -*] ++(8.5,0);
+					\draw (10,0) to[short,*-] ++(-10,0);
+					\draw (0,0) to[short] ++(-2,0)
+										to[V,a^=10\volts, invert] ++(0,2)
+										to[R=25\ohms] ++(2,0)
+										to[closing switch, a^=\scriptsize{$t\equals 0$}] ++(2,0); % source
+					\draw (10,2) to[short] ++(1,0)
+										to[R=150\ohms] ++(0,-2)
+										to[short] ++(-1,0); % load
+					\draw (1.5,3) --++ (8.5,0) node[above, midway] (5,3.25) {$\ell=400$m};
+					\draw(1.5,2.75) --++ (0,0.5);
+					\draw(10,2.75) --++ (0,0.5);
+					\draw[fill=gray!50!white, thick] (2,1.75) rectangle ++(7,0.5); % top tx line
+					\draw[fill=gray!50!white, thick] (2,-0.25) rectangle ++(7,0.5); % bottom tx line
+					\draw[->] (1.5,2.25) --++(0,-9) ; % left boundary
+					\draw[->] (10,2.25) --++(0,-9); % right boundary
+					\node[align=left] at (5,1) {\myz{0}=50\ohms \\ $u_p = 0.67c$};
+					
+					\foreach \y in {1,2,3}{
+						\draw[dashed] (-0.5, -2*\y) --++ (10.75,0)  node[right] {\y$t_{\ell}$};
+					}
+					% red lines for bounces
+					\draw[thick, red,->] (1.5,0) --++ (8.5,-2);% node[above] {$\myv{0}^+$}; 
+					\draw[thick, red,->] (10,-2) --++ (-8.5,-2);%node[above] {$\myv{0}^- = \myv{0}^+\Gamma_L$};
+					\draw[thick, red,->] (1.5,-4) --++ (8.5,-2);% node[above] {$\myv{0}^{-} \Gamma_s = \myv{0}^+\Gamma_L \Gamma_s$};
+				\end{circuitikz}
+				} % end scalebox
+				\end{center}
+			\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Transient Example: Pulsed Source}
+			\begin{textblock}{14.5}(0.5,2)
+			\begin{center}
+				\begin{circuitikz}[scale=0.75]
+					\draw (1.5,0) to[open, *-*] ++(0,2)
+										to[short, -*] ++(8.5,0);
+					\draw (10,0) to[short,*-] ++(-10,0);
+					\draw (0,0) to[short] ++(-2,0)
+										to[V,a^=10\volts, invert] ++(0,2)
+										to[R=25\ohms] ++(2,0)
+										to[closing switch, a^=\scriptsize{$0 < t < 2\mu $s}] ++(2,0); % source
+					\draw (10,2) to[short] ++(1,0)
+										to[R=150\ohms] ++(0,-2)
+										to[short] ++(-1,0); % load
+					\draw (1.5,3) --++ (8.5,0) node[above, midway] (5,3.25) {$\ell=400$m};
+					\draw(1.5,2.75) --++ (0,0.5);
+					\draw(10,2.75) --++ (0,0.5);
+					\draw[fill=gray!50!white, thick] (2,1.75) rectangle ++(7,0.5); % top tx line
+					\draw[fill=gray!50!white, thick] (2,-0.25) rectangle ++(7,0.5); % bottom tx line
+					\draw[->] (1.5,2.25) --++(0,-9) ; % left boundary
+					\draw[->] (10,2.25) --++(0,-9); % right boundary
+					\node[align=left] at (5,1) {\myz{0}=50\ohms \\ $u_p = 0.67c$};
+					
+					\foreach \y in {1,2,3}{
+						\draw[dashed] (-0.5, -2*\y) --++ (10.75,0)  node[right] {\y$t_{\ell}$};
+					}
+					% red lines for bounces
+					\draw[thick, red,->] (1.5,0) --++ (8.5,-2);% node[above] {$\myv{0}^+$}; 
+					\draw[thick, red,->] (10,-2) --++ (-8.5,-2);%node[above] {$\myv{0}^- = \myv{0}^+\Gamma_L$};
+					\draw[thick, red,->] (1.5,-4) --++ (8.5,-2);% node[above] {$\myv{0}^{-} \Gamma_s = \myv{0}^+\Gamma_L \Gamma_s$};
+				\end{circuitikz}
+				\end{center}
+			\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Transient Example: Pulsed Source}
+			\begin{textblock}{8}(0.5,2)
+			\begin{center}
+			\scalebox{0.5}{
+				\begin{circuitikz}[scale=0.75]
+					\draw (1.5,0) to[open, *-*] ++(0,2)
+										to[short, -*] ++(8.5,0);
+					\draw (10,0) to[short,*-] ++(-10,0);
+					\draw (0,0) to[short] ++(-2,0)
+										to[V,a^=10\volts, invert] ++(0,2)
+										to[R=25\ohms] ++(2,0)
+										to[closing switch, a^=\scriptsize{$0 < t < 2\mu $s}] ++(2,0); % source
+					\draw (10,2) to[short] ++(1,0)
+										to[R=150\ohms] ++(0,-2)
+										to[short] ++(-1,0); % load
+					\draw (1.5,3) --++ (8.5,0) node[above, midway] (5,3.25) {$\ell=400$m};
+					\draw(1.5,2.75) --++ (0,0.5);
+					\draw(10,2.75) --++ (0,0.5);
+					\draw[fill=gray!50!white, thick] (2,1.75) rectangle ++(7,0.5); % top tx line
+					\draw[fill=gray!50!white, thick] (2,-0.25) rectangle ++(7,0.5); % bottom tx line
+					\draw[->] (1.5,2.25) --++(0,-9) ; % left boundary
+					\draw[->] (10,2.25) --++(0,-9); % right boundary
+					\node[align=left] at (5,1) {\myz{0}=50\ohms \\ $u_p = 0.67c$};
+					
+					\foreach \y in {1,2,3}{
+						\draw[dashed] (-0.5, -2*\y) --++ (10.75,0)  node[right] {\y$t_{\ell}$};
+					}
+					% red lines for bounces
+					\draw[thick, red,->] (1.5,0) --++ (8.5,-2);% node[above] {$\myv{0}^+$}; 
+					\draw[thick, red,->] (10,-2) --++ (-8.5,-2);%node[above] {$\myv{0}^- = \myv{0}^+\Gamma_L$};
+					\draw[thick, red,->] (1.5,-4) --++ (8.5,-2);% node[above] {$\myv{0}^{-} \Gamma_s = \myv{0}^+\Gamma_L \Gamma_s$};
+				\end{circuitikz}
+				} % end scalebox
+				\end{center}
+			\end{textblock}
+\end{frame}
+
+
+

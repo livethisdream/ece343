@@ -1,0 +1,281 @@
+\documentclass[11pt]{extarticle} % extarticle: font sizes < 10
+
+% this document is based on the Modern Fortran Reference Card by Michael Goerz
+
+\usepackage[
+      pdftitle={ECE 343 Equation Sheet},
+      pdfauthor={Neil Rogers},
+]{hyperref}
+
+\usepackage{refcards}
+\input{myPackages_gr}
+\input{myShortcuts}
+
+\newcommand\myvphantom{\ensuremath{\vphantom{\dfrac{\dfrac{x}{y}}{\dfrac{x}{y}}}}}
+
+% new \oset macro
+\makeatletter
+\newcommand{\oset}[3][0ex]{%
+  \mathrel{\mathop{#3}\limits^{
+    \vbox to#1{\kern-2\ex@
+    \hbox{$\scriptstyle#2$}\vss}}}}
+\makeatother
+
+\usepackage{vmargin}
+% A4
+\setpapersize[landscape]{A4}
+\setmarginsrb%
+{1.5cm}  % left
+{1.0cm}  % top
+{1.5cm}  % right
+{1.0cm}  % bottom
+{0ex}    % header height
+{0ex}    % header separation
+{0ex}    % footer height
+{0ex}    % footser separation
+\setlength\columnsep{7mm}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+\renewcommand{\arraystretch}{1.9}
+
+% Letter
+%\setpapersize[landscape]{USletter}
+%\setmarginsrb%
+%{1.1cm}  % left
+%{1.1cm}  % top
+%{0.9cm}  % right
+%{0.9cm}  % bottom
+%{0ex}    % header height
+%{0ex}    % header separation
+%{0ex}    % footer height
+%{0ex}    % footser separation
+%\setlength\columnsep{4mm}
+
+\begin{document}
+\raggedright
+
+\title{ECE 343 Equation Sheet - Spring 2025}
+
+{\small
+Department of Electrical and Computer Engineering \\
+United States Air Force Academy}
+
+\begin{multicols*}{3}
+
+\textbf{Transmission Lines}
+\def\linespacing{6pt}
+\eq{
+&R^\prime  = \dfrac{1}{2\pi}\lp \dfrac{1}{a} + \dfrac{1}{b} \rp \sqrt{\dfrac{\pi f\mu}{\sigma_c}} \qquad% \\[\linespacing]
+L^\prime = \dfrac{\mu}{2\pi}\text{ln}\lp \dfrac{b}{a}\rp \\[\linespacing]
+&G^\prime = \dfrac{2\pi \sigma_d}{\text{ln}\lp b/a\rp} \qquad %\\[\linespacing]
+C^\prime = \dfrac{2\pi\epsilon}{\text{ln}\lp b/a\rp} \\[\linespacing]
+&\gamma = \sqrt{\lp R^\prime + j\omega L^\prime \rp\lp G^\prime +j\omega C^\prime\rp } = \alpha + j\beta \\[\linespacing]
+&\beta = \omega\sqrt{\mu \epsilon} = \dfrac{2\pi}{\lambda} \\[\linespacing]
+&Z_0 = \dfrac{V_0^+}{I_0^+} = -\dfrac{V_0^-}{I_0^-} = \sqrt{\dfrac{R^\prime + j\omega L^\prime}{G^\prime + j\omega C^\prime}}\\[\linespacing]
+&\Gamma_L = \dfrac{V_0^-}{V_0^+}  = \dfrac{\myz{L} - \myz{0}}{\myz{L}+\myz{0}} \\[\linespacing]
+&u_p = \dfrac{\omega}{\beta} \\[\linespacing]
+&\text{SWR} = \dfrac{1 + |\Gamma_L|}{1-|\Gamma_L|}\\[\linespacing]
+&\Gamma(z) = \Gamma_L e^{2\gamma z} \\[\linespacing]
+& \widetilde{V}(z) = V_0^{+} \lp e^{-\gamma z} + \Gamma_L e^{\gamma z} \rp \\[\linespacing]
+&\myz{in} = \myz{0} \dfrac{\myz{L} + \myz{0}\text{tanh}\lp \gamma \ell \rp}{\myz{0} + \myz{L}\text{tanh}\lp \gamma \ell \rp} \\[\linespacing]
+&\myz{in} = \myz{0} \dfrac{\myz{L} + j\myz{0}\text{tan}\lp \beta \ell \rp}{\myz{0} + j\myz{L}\text{tan}\lp \beta \ell \rp} \hphantom{\sinp{\omega t - \beta z}}\hphantom{\sinp{\omega t - \beta z}}\hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\columnbreak
+
+\textbf{Statics/BCs/Misc}
+
+\def\linespacing{7pt}
+\eq{
+      & F_{1,2} = \dfrac{Q_1 Q_2}{4\pi \epsilon R_{12}^3}\vec{R}_{12}\qquad
+      F_{1,2} = \int I_2 d\ell_2 \times B_1 \\
+%	&x(t) = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} X(\omega) e^{j\omega t} d\omega \\[\linespacing]
+%	&X(\omega) = \int_{-\infty}^{\infty} x(t)e^{-j\omega t} dt \\[\linespacing]
+	&\vec{E}  = \int\dfrac{dQ}{4\pi \epsilon R^2}\hat{R} \qquad
+	\vec{H} = \int\dfrac{I \vec{d\ell}\times\hat{R}}{4\pi R^2} \\[\linespacing]
+	&\vec{E}_{\text{LC}} = \dfrac{\rho_{L}}{2\pi \varepsilon \rho}\hat{\rho} \qquad
+	\vec{E}_{\text{SC}} = \dfrac{\rho_{S}}{2\varepsilon}\hat{z}\\
+	&\vec{H}_{\text{LC}} = \dfrac{I_{\text{encl}}}{2\pi \rho}\myhat{\phi} \qquad
+	\vec{H}_{\text{SC}} = \dfrac{1}{2}\vec{J}\times\myhat{a}_N \\[\linespacing]
+%	 &V_{\text{ba}} = V_{\text{b}} - V_{\text{a}} = -\int_a^b \vec{E}\mycdot \vec{d\ell} \\[\linespacing]
+	 &V = \int\dfrac{dQ}{4\pi\epsilon r} 	
+	 \qquad\vec{E} = -\nabla V \\[\linespacing] 
+%	 &\myg{dB} =10\text{log}_{10}\lp \myg{linear} \rp \\[\linespacing]
+%	  &\myg{linear} = 10^{\myg{db}/10} \\[\linespacing]
+%	   & A_c \cosp{2\pi f_c t } *  \lb A_m \cosp{2\pi f_m t} + \myv{bias} \rb = \\
+%	  &\qquad \hphantom{+}\frac{1}{2} A_c A_m\cosp{2\pi [f_c - f_m] t} \\[\linespacing]
+%	  &\qquad + \frac{1}{2} A_c A_m\cosp{2\pi [f_c + f_m] t}\\[\linespacing]
+%	  &\qquad + A_c \myv{bias} \cosp{2\pi f_c t}\\[\linespacing]
+	&\vec{d\ell} = \xhat dx + \yhat dy + \zhat dz \\[\linespacing]
+	&\vec{d\ell} = \boldsymbol{\hat{\rho}} d\rho + \boldsymbol{\hat{\phi}}\rho d\phi + \boldsymbol{\hat{z}} dz \\[\linespacing]
+	&\vec{d\ell} = \boldsymbol{\hat{r}} dr + \boldsymbol{\hat{\theta}} rd\theta + \boldsymbol{\hat{\phi}}r\sinp{\theta}d\phi \\[\linespacing]
+	&\vec{E}_{\text{tan,1}} - \vec{E}_{\text{tan,2}} = 0 \quad\text{or}\quad
+	\boldsymbol{\hat{n}}_{2,1}\times \lp \vec{E}_1 - \vec{E}_2 \rp = 0 \\[\linespacing]
+	&\vec{D}_{\text{norm,1}} - \vec{D}_{\text{norm,2}} = \rho_S \quad\text{or}\quad \boldsymbol{\hat{n}}_{2,1} \mycdot \lp\vec{D}_{1} - \vec{D}_{2}\rp = \rho_s \\[\linespacing]
+	&\vec{H}_{\text{tan,1}} - \vec{H}_{\text{tan,2}} = K \quad\text{or}\quad \boldsymbol{\hat{n}}_{2,1}\times\lp\vec{H}_1 - \vec{H}_2 \rp = \vec{K} \\[\linespacing]
+	&  \vec{B}_{\text{norm,1}} - \vec{B}_{\text{norm,2}} = 0 \quad\text{or}\quad \boldsymbol{\hat{n}}_{2,1} \mycdot \lp\vec{B}_{1} - \vec{B}_{2}\rp = 0 \\[\linespacing]
+	&f_{\text{c/o}} = \dfrac{1}{2\sqrt{\mu\epsilon}} \sqrt{\lp \dfrac{m}{a} \rp^2 + \lp \dfrac{n}{b} \rp^2}
+	&\hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+%	& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+%	& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+%	& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+}
+%
+%\vspace{5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\columnbreak
+
+\textbf{Fields}
+
+\def\linespacing{3pt}
+\eq{
+&\nabla^2 \hat{E}_s -\gamma^2\hat{E}_s = 0 \qquad \nabla^2 \hat{H}_s -\gamma^2\hat{H}_s = 0 \\[\linespacing]
+& E,H (z,t) = E,H_{0}^{+}e^{-\alpha z} \cosp{\omega t - \beta z} \\[\linespacing]
+& \qquad\qquad + E,H_{0}^{-}e^{\alpha z} \cosp{\omega t + \beta z} \\[\linespacing]
+%& \vec{H} (z,t) = H_{0}^{+}e^{-\alpha z} \cosp{\omega t - \beta z} \\[\linespacing]
+%&\qquad + H_{0}^{-}e^{\alpha z} \cosp{\omega t - \beta z} \\[\linespacing]
+&\gamma = \sqrt{j\omega\mu \lp \sigma + j\omega\epsilon\rp} = \alpha + j\beta 
+%\\[\linespacing]
+%&
+\quad
+\eta = \dfrac{E_0^+}{H_0^+} = \sqrt{\dfrac{j\omega\mu}{\sigma + j\omega\epsilon}}  \\[\linespacing]
+&\alpha = \omega\sqrt{\dfrac{\mu\epsilon}{2}\lp\sqrt{1+\lp \dfrac{\sigma}{\omega\epsilon}\rp^2} -1 \rp} \\[\linespacing]
+&\beta = \omega\sqrt{\dfrac{\mu\epsilon}{2}\lp\sqrt{1+\lp \dfrac{\sigma}{\omega\epsilon}\rp^2} +1 \rp} \\[\linespacing]
+& \text{P}_{\text{avg}} = \dfrac{1}{2} \text{Re}\lb \hat{E}_s \times \hat{H}_s^* \rb \\[\linespacing]
+&\Gamma_{\text{TE}} = \dfrac{E^r_0}{E_i^0}  = \dfrac{\eta_2\cosp{\theta_i} - \eta_1\cosp{\theta_t}}{\eta_2\cosp{\theta_i} + \eta_1\cosp{\theta_t}}  \\[\linespacing]
+&\text{T}_{\text{TE}} =  \dfrac{E^t_0}{E_i^0} = \dfrac{2\eta_2\cosp{\theta_i}}{\eta_2\cosp{\theta_i} + \eta_1\cosp{\theta_t}} = 1+ \Gamma \\[\linespacing]
+&\Gamma_{\text{TM}} = \dfrac{E^r_0}{E_i^0}  = \dfrac{\eta_2\cosp{\theta_t} - \eta_1\cosp{\theta_i}}{\eta_2\cosp{\theta_t} + \eta_1\cosp{\theta_i}}  \\[\linespacing]
+&\text{T}_{\text{TM}} =  \dfrac{E^t_0}{E_i^0} = \dfrac{2\eta_2\cosp{\theta_i}}{\eta_2\cosp{\theta_t} + \eta_1\cosp{\theta_i}} = 1+ \Gamma \\[\linespacing]
+&\dfrac{\beta_1}{\beta_2} = \dfrac{\sinp{\theta_t}}{\sinp{\theta_i}} \qquad \theta_i = \theta_r\\[\linespacing]
+&\hat{H}_s = \dfrac{1}{\eta} \hat{a}_p \times \hat{E}_s \qquad
+\hat{E}_s = -\eta \hat{a}_p \times \hat{H}_s \\[\linespacing]
+&\rho = \rho_0 e^{-\frac{t \sigma}{\alpha}} \qquad
+\delta = \dfrac{1}{\alpha} = \sqrt{\dfrac{2}{\omega\mu\sigma}}
+}
+
+\newpage
+\def\linespacing{4pt}
+\textbf{Vector Calculus}
+% this is the old one -- explicit for each coordinate system...
+\eq{
+&\nabla V(x,y,z) = \xhat\partd{V}{x} + \yhat\partd{V}{y} + \zhat\partd{V}{z} \\[\linespacing] % cart grad
+&\nabla \mycdot V(x,y,z) = \partd{V_x}{x} + \partd{V_y}{y} + \partd{V_z}{z}\\[\linespacing] % cart div
+&\nabla\times V(x,y,z) = \xhat\lp \partd{V_z}{y} - \partd{V_y}{z} \rp - \yhat\lp\partd{V_z}{x}-\partd{V_x}{z}\rp \\[\linespacing]
+&\qquad\qquad\qquad + \zhat\lp\partd{V_y}{x} - \partd{V_x}{y}\rp\\[\linespacing] % cart curl
+&\nabla V(\rho,\phi,z) = \boldsymbol{\hat{\rho}}\partd{V}{\rho} + \boldsymbol{\hat{\phi}}\dfrac{1}{\rho}\partd{V}{\phi} + \zhat\partd{V}{z} \\[\linespacing] % cyl grad
+&\nabla \mycdot V(\rho,\phi,z) = \dfrac{1}{\rho}\partd{\rho V_{\rho}}{\rho} + \dfrac{1}{\rho}\partd{V_{\phi}}{\phi} + \partd{V_z}{z}\\[\linespacing] % cyl div
+&\nabla V(r,\theta,\phi) = \hat{r}\partd{V}{r} + \hat{\theta}\dfrac{1}{r}\partd{V}{\theta} + \hat{\phi}\dfrac{1}{r\sinp{\theta}}\partd{V}{\phi} \\[\linespacing] % sph grad
+&\nabla \mycdot V(r,\theta,\phi) = \dfrac{1}{r^2}\partd{r^2 V_{r}}{r} + \dfrac{1}{r\sinp{\theta}}\partd{V_{\theta}\sinp{\theta}}{\theta} \\[\linespacing]
+&\qquad\qquad\qquad+ \dfrac{1}{r\sinp{\theta}}\partd{V_\phi}{\phi}\\[\linespacing] 
+&\nabla^2 V(x,y,z) = \partd{^2 V}{x^2} + \partd{^2 V}{y^2} + \partd{^2 V}{z^2} \\[\linespacing]
+&\nabla^2 V(\rho,\phi,z) = \dfrac{1}{\rho}\partd{}{\rho}\lp\rho\partd{V}{\rho}\rp + \dfrac{1}{\rho^2}\partd{^2 V}{\phi^2} + \partd{^2 V}{z^2} \\[\linespacing]
+&\nabla^2 V(r,\theta,\phi) = \dfrac{1}{r^2}\partd{}{r}\lp r^2 \partd{ V}{r}\rp \\[\linespacing]	
+&+ \dfrac{1}{r^2 \sinp{\theta}}\partd{}{\theta}\lp\sinp{\theta}\partd{V}{\theta}\rp + \dfrac{1}{r^2\sinp{\theta}^2}\partd{^2 V}{\phi^2} \\[\linespacing]	
+&\hphantom{\sinp{\theta}} \\[\linespacing]
+&\hphantom{\sinp{\theta}} \\[\linespacing]
+}
+
+%% generalized coord system...
+%\eq{
+%&\vec{A} = \hat{u}_1 A_1 + \hat{u}_2 A_2 + \hat{u}_3 A_3 \\[\linespacing]
+%&\vec{d\ell} = \hat{u}_1 h_1 du_1 + \hat{u}_2 h_2 du_2 + \hat{u}_1 h_3 du_3 \\[\linespacing]
+%&\vec{d\ell} = \xhat \;dx + \yhat \;dy + \zhat \;dz \\[\linespacing]
+%&\vec{d\ell} = \hat{\boldsymbol{\rho}}\; d\rho + \hat{\boldsymbol{\phi}}\;\rho d\phi + \zhat \; dz \\[\linespacing]
+%&\vec{d\ell} = \hat{\mathbf{r}}\; dr + \hat{\boldsymbol{\theta}}\; rd\theta + \hat{\boldsymbol{\phi}}\;r\sinp{\theta}d\phi \\[\linespacing]
+%&\nabla V = \hat{u}_1 \dfrac{1}{h_1}\partd{V}{u_1} + \hat{u}_2 \dfrac{1}{h_2}\partd{V}{u_2} + \hat{u}_3 \dfrac{1}{h_3}\partd{V}{u_3} \\[\linespacing]
+%&\curl V = \text{det}
+%	\begin{vmatrix}
+%	\dfrac{\hat{u_1}}{h_2 h_3}  & \dfrac{\hat{u_2}}{h_1 h_3} & \dfrac{\hat{u_3}}{h_1 h_2} \\[12pt]
+%	\partd{}{u_1} & \partd{}{u_2} & \partd{}{u_3} \\[12pt]
+%	h_1 V_1 & h_2 V_2 & h_3 V_3 
+%	\end{vmatrix} \\[\linespacing]
+%&\nabla\mycdot V = \dfrac{1}{h_1 h_2 h_3} \lb \dfrac{1}{h_1}\partd{h_2 h_3 V_1}{u_1} + \dfrac{1}{h_2}\partd{h_1 h_3 V_2}{u_2} \right. \\[\linespacing]
+%&\qquad\qquad\qquad\qquad \left. + \dfrac{1}{h_3}\partd{h_1 h_2 V_3}{u_3} \rb \\[\linespacing]
+%%&\nabla^2 V(x,y,z) = \partd{^2 V}{x^2} + \partd{^2 V}{y^2} + \partd{^2 V}{z^2} \\[\linespacing]
+%%&\nabla^2 V(\rho,\phi,z) = \dfrac{1}{\rho}\partd{}{\rho}\lp\rho\partd{V}{\rho}\rp + \dfrac{1}{\rho^2}\partd{^2 V}{\phi^2} + \partd{^2 V}{z^2} \\[\linespacing]
+%%&\nabla^2 V(r,\theta,\phi) = \dfrac{1}{r^2}\partd{}{r}\lp r^2 \partd{ V}{r}\rp \\[\linespacing]	
+%%&+ \dfrac{1}{r^2 \sinp{\theta}}\partd{}{\theta}\lp\sinp{\theta}\partd{V}{\theta}\rp + \dfrac{1}{r^2\sinp{\theta}^2}\partd{^2 V}{\phi^2} \\[\linespacing]	
+
+%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\columnbreak
+\def\linespacing{4pt}
+\textbf{Integrals}
+\eq{
+&\int u dv = uv - \int v du  \\[\linespacing]
+&\int \dfrac{1}{x} dx = \text{ln}|x|  \quad %\\[\linespacing]
+\int e^{ax}dx = \dfrac{1}{a}e^{ax}  \\[\linespacing]
+&\int \sinp{ax} dx = -\dfrac{1}{a}\cosp{ax}  \\[\linespacing]
+&\int \cosp{ax} dx = \dfrac{1}{a}\sinp{ax}  \\[\linespacing]
+&\int \dfrac{1}{\sqrt{x^2 + a^2}}dx = \text{ln}\lp x + \sqrt{x^2 + a^2} \rp\\[\linespacing]
+&\int \dfrac{1}{\lp x^2 + a^2 \rp^{3/2}} dx = \dfrac{x}{a^2\sqrt{x^2 + a^2}}\\[\linespacing]
+&\int \dfrac{1}{x^2 + a^2} dx = \dfrac{1}{a}\text{tan}^{-1}\lp \dfrac{x}{a} \rp \\[\linespacing]
+&\int e^{ax}\cosp{bx} dx = \dfrac{e^{ax}}{a^2 + b^2}\lp a\cosp{bx} + b\sinp{bx}\rp\\[\linespacing]
+&\int e^{ax}\cosp{c+ bx} dx \\[\linespacing]
+&\qquad\qquad= \dfrac{e^{ax}}{a^2 + b^2}\lp a\sinp{c+bx} - b\cosp{c+bx}\rp \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+& \hphantom{\sinp{\omega t - \beta z}} \\[\linespacing]
+}
+\vspace{3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\columnbreak
+
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\textbf{Maxwell's Equations}
+
+\vspace{12pt}
+\renewcommand{\arraystretch}{2.5}
+%\begin{tabular}{| p{1in} | p{1in} |}
+\begin{tabular}{| l | l |}
+\hline
+ ${\displaystyle \iint \epsilon\vec{E}\mycdot \vec{dS}} = Q_{\text{enc}} $ 
+ & $\nabla\mycdot\vec{E}  = \dfrac{\rho_v}{\epsilon}$   \\ \hline
+${\displaystyle\oint \vec{H}\mycdot\vec{dS} } = 0 $ 
+& $\nabla\mycdot\vec{H} = 0$ \\ \hline
+$\begin{aligned}
+\displaystyle\oint_C \vec{E}\mycdot d\ell &=-\partd{\Psi_{\text{m}}}{t} \\
+\displaystyle\oint_C \vec{E}\mycdot d\ell &=  -\iint\partd{\vec{B}}{t}\mycdot \vec{dS}
+\end{aligned}$
+&$\begin{aligned}
+\nabla\times\vec{E} &= -\mu\partd{\vec{H}}{t} \\
+\nabla\times\myhat{E}_s &= -j\omega\mu\myhat{H}_s
+\end{aligned}$
+\\ \hline
+$\begin{aligned}
+\displaystyle\oint_C\vec{H}\mycdot d\ell &= I_{\text{encl}} \\ 
+\displaystyle\oint_C\vec{H}\mycdot d\ell &= \int \vec{J}\mycdot\vec{dS} \\[-8pt]
+&\quad + \epsilon\partd{}{t}\iint\vec{E}\mycdot\vec{dS}
+\end{aligned} $
+& $\begin{aligned}
+\nabla\times\vec{H} &= \sigma \vec{E} + \epsilon\partd{\vec{E}}{t} \\ 
+\nabla\times\myhat{H}_s &= \lp \sigma + j\omega \varepsilon \rp \myhat{E}_s
+ \end{aligned}$ \\ \hline
+\end{tabular}
+
+
+\end{center}
+
+\def\linespacing{4pt}
+\eq{
+	&\epsilon_0 = 8.854\ee{-12}\text{F/m} \\[\linespacing]
+	&\mu_0 = 4\pi\ee{-7}\text{H/m}\\[\linespacing]
+}
+\end{multicols*}
+\end{document}

@@ -1,0 +1,418 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+%\begin{comment}
+\section{Schedule}
+\begin{frame}{Schedule}
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Final}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch08_DynamicFields/ECE343_Ch08_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Current Continuity}
+\begin{frame}{Displacement Current}
+\begin{textblock}{8}(0.5,3)
+
+	\begin{circuitikz}[scale=0.75]
+	
+		\draw (0,0) to[V=\myv{dc}, invert] ++ (0,3)
+					to[R=\myr{1}, f=\myi{1}] ++(3,0)
+					to[R=\myr{2}, f=\myi{2}] ++(3,0)
+					to[short] ++(0,-3)
+					to[short] ++(-6,0);
+		\draw (3,3) to[R=\myr{3}, f=\myi{3}] ++(0,-3);
+%		\node[align=left] at (6,1) {KVL$\implies$ \handoutgap{0pt}{$ \myi{1} -\myi{2}-\myi{3} = 0 $}};
+	\end{circuitikz}
+
+
+	\begin{circuitikz}[scale=0.75]
+	
+		\draw (0,0) to[sV,a^=\myv{ac}, invert] ++ (0,3)
+					to[R=\myr{1}] ++(3,0)
+					to[R=\myr{2}] ++(3,0)
+					to[short] ++(0,-3)
+					to[short] ++(-6,0);
+		\draw (3,3) to[R=\myr{3}] ++(0,-3);
+%		\node[align=left] at (6,1) {Now $\implies$ \handoutgap{0pt}{$-\dfrac{dQ}{dt}$}};
+	\end{circuitikz}
+	
+\end{textblock}
+\begin{textblock}{8}(8,4)
+\begin{small}
+\visible<0|handout:1>{
+\eq{
+	&\text{KVL: } \myi{1} -\myi{2}-\myi{3} = 0 \\[44pt]
+	&I = -\partd{Q}{t}  \\
+	&\int\vec{J}\mycdot \vec{dS} = -\partd{}{t} \iiint \rho_v \;dV \\
+	&\iiint \lp \div{\vec{J}} \rp dV = \iiint \lp -\partd{}{t} \rp \rho_v \;dV \\
+	&\implies \div{\vec{J}} = -\partd{\rho_v}{t} 
+}
+} % end visible
+\end{small}
+\end{textblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Relaxation Time}
+\begin{frame}{Insight \#1: Relaxation Time}
+\begin{textblock}{7}(0.5,2.5)
+\visible<0|handout:1>{
+\alert{
+\eq{
+	&\div{\vec{J}}  = -\partd{\rho_v}{t} \\
+	&\text{Ohm's Law } \longrightarrow \vec{J} = \sigma \vec{E} \\
+	&\implies \div{\sigma\vec{E}}  = -\partd{\rho_v}{t} \\
+	&\implies \div{\vec{E}}  = -\dfrac{1}{\sigma} \partd{\rho_v}{t} \\
+	&\text{...but remember Gauss? } \\
+	&\implies \div{\vec{E}} = \dfrac{\rho_v}{\varepsilon} \\
+	&\implies \dfrac{\rho_v}{\varepsilon}  + \dfrac{1}{\sigma} \partd{\rho_v}{t} = 0    \\
+	&\implies \rho_v  = \rho_0 e^{-t/\tau} \\
+	&\implies - \dfrac{1}{\tau} + \dfrac{\sigma}{\varepsilon} = 0 
+	\implies \tau = \dfrac{\varepsilon}{\sigma}
+} % end eq
+} % end alert
+} % end visible
+
+\end{textblock}
+\begin{textblock}{7}(8,3)
+\visible<0|handout:1>{
+\alert{
+\boxeq{
+	\rho_v = \rho_0 e^{-t \frac{\sigma}{\varepsilon}}
+} % end eq
+} % end alert
+} % end visible
+
+\scalebox{0.75}{
+\begin{tikzpicture}
+		\begin{axis}[ 
+		domain=0:4,
+		xmin=0, 
+		xmax=4.5, 
+		ymax=1,
+		ymin=-0,
+%		scaled x ticks=base 10:6,
+%		xtick scale label code/.code={},
+%		minor x tick num = 5,
+%		minor y tick num = 5,
+%		ytick={-1,0,1},
+		ytick={0.37},
+%		xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},;
+		xtick={2},
+%		xticklabels={$-\frac{\tau}{2}$,$\frac{\tau}{2}$},
+		xticklabels={$\tau$},
+		yticklabels={$0.37$},
+		xlabel={$t$},
+		ylabel={$\rho_v$},
+		axis y line = middle,
+		axis x line = middle,
+%		x label style={xshift=-0.5cm},
+		x label style={yshift=-0.5cm},
+%		y label style ={xshift=1cm},
+		y label style ={yshift=0.5cm},
+		clip=false,
+		]
+		\addplot[thick, blue]  {1*exp(-x/2)};
+		\addplot[dashed, blue] coordinates {(0,0.37)(2,0.37)};
+		\addplot[dashed, blue] coordinates {(2,0.37)(2,0)};
+		\end{axis}
+\end{tikzpicture}
+} % end scalebox
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Relaxation Time: Examples}
+\begin{textblock}{7}(0.5,3)
+
+\includegraphics[scale=0.5]{./ECE343/polystyrene}
+
+\vspace{12pt}
+
+\includegraphics[scale=0.5]{./ECE343/copper}
+
+\end{textblock}
+
+\begin{textblock}{8}(8,2)
+\begin{myblock}[0.95]{Polystyrene}
+\vspace{-12pt}
+\eq{
+	&\sigma = 10^{-17} \text{S/m} \text{  and  } \varepsilon = 2.56\varepsilon_0 \\ 
+	& \tau = \handoutgap{0pt}{\dfrac{ 2.56\varepsilon_0\text{ F/m}}{10^{-17}\text{ S/m} } = 2.3\ee{6}\text{s} }\\
+	&\handoutgap{0pt}{\qquad \approx 26\text{ days} }
+}
+\vspace{-12pt}
+\end{myblock}
+
+%\vspace{12pt}
+
+\begin{myblock}[0.95]{Copper}
+\vspace{-12pt}
+\eq{
+	&\sigma = 5.8\ee{7} \text{S/m} \text{  and  } \varepsilon = \varepsilon_0 \\ 
+	&\tau = \handoutgap{0pt}{\dfrac{\varepsilon_0 \text{F/m}}{5.8\ee{7}\text{S/m} } = 1.5\ee{-19}\text{s} }
+}
+\vspace{-12pt}
+\end{myblock}
+
+\end{textblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ampere's Law}
+\begin{frame}{Insight \#2: Ampere's Law}
+\begin{textblock}{7}(0.5,2.5)
+\visible<0|handout:1>{
+\alert{
+\eq{
+	&\div{\vec{J}}  = -\partd{\rho_v}{t} \\
+	&\text{Ampere's Law } \longrightarrow \mycurl{\vec{H}} = \vec{J} \\
+	&\div{\mycurl{\vec{H}}} = \div{\vec{J}} \\
+	&0 = -\partd{\rho_v}{t} \overset{\text{?}}{=} \div{\vec{J}} \\
+	&\text{Maxwell to the rescue!} \\
+	& \implies \vec{J} = \underbrace{\vec{J}_c}_{\text{conduction}}+ \underbrace{\vec{J}_d }_{\text{displacement}	} \\
+	&\implies \div{\vec{J}} = \div{\vec{J}_c} + \div{\vec{J}_d}  = 0  \\
+	&\implies \div{\vec{J}_c}  =- \div{\vec{J}_d}  = -\partd{\rho_v}{t} \\
+	&\implies  \div{\vec{J}_d}  = \partd{\rho_v}{t} 
+} % end eq
+} % end alert
+} % end visible 
+
+\end{textblock}
+\begin{textblock}{7}(8,3.5)
+\visible<0|handout:1>{
+\alert{
+Use Gauss' Law, ($\div{\vec{E}} = \dfrac{\rho_v}{\varepsilon}$)
+\eq{
+	&\div{\vec{J}_d}  = \partd{}{t} \div{\varepsilon\vec{E}}  \\
+	&\qquad \vec{J} = \varepsilon\partd{\vec{E}}{t} 
+}
+We know $\vec{J}_c = \sigma\vec{E}$, so...
+} % end alert
+} % end visible
+\begin{myblock}[0.95]{Ampere's Law}
+\vspace{-12pt}
+\eq{
+	\handoutgap{0pt}{\mycurl{\vec{H}} = \vec{J}_c + \vec{J}_d = \sigma\vec{E} + \varepsilon\partd{\vec{E}}{t} }
+}
+\vspace{-12pt}
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lenz's Law}
+\begin{frame}{Lenz's Law}
+\begin{textblock}{7}(0.5,3.5)
+
+
+% MAGNETIC FIELD through current loop - NS in
+\def\Rx{0.7}
+\def\Ry{1.14}
+\def\h{0.5}
+\def\H{3}
+\def\W{4}
+\def\NB{2}
+\hspace{18pt}\scalebox{0.75}{
+\begin{tikzpicture}
+  
+  % MAGNETIC FIELD bar magnet
+  \draw (0,\Ry) arc (90:270:{\Rx} and {\Ry});
+  \foreach \i [evaluate={\x=(0.3-0.1*\i)*\W; \y=(0.35*\H)*\i^2/\NB; \in=180+12*\i^2; \out=1*\i^2; \f=0.4+0.02*\i;}] in {1,...,\NB}{
+    \draw[BFieldLine=\f,Bcol1] (-1*\H, 0.45*\y/\H) to[out= \out,in= \in,looseness=0.8] (\x, \y);
+    \draw[BFieldLine=\f,Bcol1] (-1*\H,-0.45*\y/\H) to[out=-\out,in=-\in,looseness=0.8] (\x,-\y);
+  }
+  \pic[rotate=-90] (M) at (-0.95*\W,0) {magnet};
+  \node[Bcol1] at (0.15*\W,0.58*\H) {$\vb{B}$};
+  \draw[vector] (-0.74*\W,0) --++ (0.2*\W,0) node[right,scale=0.8] {$\vb{v}$};
+  
+  % INDUCED MAGNETIC FIELD
+  \foreach \i [evaluate={\x=(2.0-0.5*\i)*\Rx; \y=\Ry*(\i-0.5)/(\NB-0.25); \in=-10*\i^2; \out=180-\in; \f=0.57;}] in {1,...,\NB}{
+    \draw[BFieldLine=\f,Bcol2] (\x, \y) to[out= \out,in= \in,looseness=0.8] (-\x, \y);
+    \draw[BFieldLine=\f,Bcol2] (\x,-\y) to[out=-\out,in=-\in,looseness=0.8] (-\x,-\y);
+  }
+  \node[Bcol2] at (1.6*\Rx,-1.0*\Ry) {$\vb{B}_\text{ind}$};
+  
+  % CIRCUIT
+  \draw[white,very thick]
+        (0,\Ry) arc (90:-90:{\Rx} and {\Ry});
+  \draw (0,\Ry) arc (90:-90:{\Rx} and {\Ry});
+  \draw[current]
+    (-110:{1.1*\Rx} and {1.1*\Ry}) arc (-110:-55:{1.1*\Rx} and {1.1*\Ry})
+    node[midway,below right] {$I_\text{ind}$};
+  
+\end{tikzpicture}
+} % end scalebox
+
+\vspace{12pt}
+
+\scalebox{0.75}{
+\begin{tikzpicture}
+  
+  % MAGNETIC FIELD bar magnet
+  \draw (0,\Ry) arc (90:270:{\Rx} and {\Ry});
+  \foreach \i [evaluate={\x=(0.3-0.1*\i)*\W; \y=(0.35*\H)*\i^2/\NB; \in=180+12*\i^2; \out=1*\i^2; \f=0.4+0.02*\i;}] in {1,...,\NB}{
+    \draw[BFieldLine=\f,Bcol1] (-1*\H, 0.45*\y/\H) to[out= \out,in= \in,looseness=0.8] (\x, \y);
+    \draw[BFieldLine=\f,Bcol1] (-1*\H,-0.45*\y/\H) to[out=-\out,in=-\in,looseness=0.8] (\x,-\y);
+  }
+  \pic[rotate=-90] (M) at (-0.95*\W,0) {magnet};
+  \node[Bcol1] at (0.15*\W,0.58*\H) {$\vb{B}$};
+  \draw[vector] (-1.16*\W,0) --++ (-0.2*\W,0) node[left,scale=0.8] {$\vb{v}$};
+  
+  % INDUCED MAGNETIC FIELD
+  \foreach \i [evaluate={\x=(2.0-0.5*\i)*\Rx; \y=\Ry*(\i-0.5)/(\NB-0.25); \in=-10*\i^2; \out=180-\in; \f=0.57;}] in {1,...,\NB}{
+    \draw[BFieldLine=\f,Bcol2] (-\x, \y) to[out= \in,in= \out,looseness=0.8] (\x, \y);
+    \draw[BFieldLine=\f,Bcol2] (-\x,-\y) to[out=-\in,in=-\out,looseness=0.8] (\x,-\y);
+  }
+  \node[Bcol2] at (1.6*\Rx,-1.0*\Ry) {$\vb{B}_\text{ind}$};
+  
+  % CIRCUIT
+  \draw[white,very thick]
+        (0,\Ry) arc (90:-90:{\Rx} and {\Ry});
+  \draw (0,\Ry) arc (90:-90:{\Rx} and {\Ry});
+  \draw[current]
+    (-60:{1.1*\Rx} and {1.1*\Ry}) arc (-60:-120:{1.1*\Rx} and {1.1*\Ry})
+    node[midway,below right] {$I_\text{ind}$};
+  
+\end{tikzpicture}
+} % end scalebox
+\end{textblock}
+
+\begin{textblock}{7.5}(8.5, 4)
+\begin{myblock}[0.9]{Lenz's Law}
+
+	A current is induced by a change in the \handoutgap{0.5in}{impressed} magnetic field. The induced  \handoutgap{0.5in}{current} results from an induced magnetic field opposed to the impressed  \handoutgap{0.5in}{magnetic} field. 
+
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lenz's Law}
+\begin{textblock}{7}(0.5,3)
+
+
+% LOOP ENTERING B FIELD
+\begin{tikzpicture}
+  \def\NBx{3}  % number of B field columns
+  \def\NBy{5}  % number of B field rows
+  \def\Lx{1.8} % B field width
+  \def\Ly{3.9} % B field height
+  \def\lx{2.8} % loop width
+  \def\ly{2.1} % loop height
+  \def\t{0.1}  % loop thickness
+  
+  % LOOP
+  \begin{scope}[shift={(-1.8*\lx,0.18*\Ly)}]
+    \draw[metal,rounded corners=1.5*\t cm,even odd rule]
+      (0,0) rectangle (\lx,\ly)
+      {[rounded corners=0.5*\t cm] (\t,\t) rectangle (\lx-\t,\ly-\t)};
+    \draw[vector] (\lx+1.1*\t,0.6*\ly) --++ (0.3*\lx,0) node[right] {$\vb{v}_0$};
+    \draw[<->] (0,-2.1*\t) --++ (\lx,0) node[midway,fill=white,inner sep=0.8] {$\ell_x$}; %{\contour{white}{$\ell_x$}};
+    \draw[<->] (-2.1*\t,0) --++ (0,\ly) node[midway,fill=white,inner sep=0.8] {$\ell_y$}; %{\contour{white}{$\ell_y$}};
+  \end{scope}
+  
+  % MAGNETIC FIELDLINES
+  \draw[Bcol!30,fill=Bcol!5] (0,0) rectangle (\Lx,\Ly);
+  \foreach \i [evaluate={\y=(\i-0.5)*\Ly/\NBy}] in {1,...,\NBy}{
+    \foreach \j [evaluate={\x=(\j-0.5)*\Lx/\NBx}] in {1,...,\NBx}{
+      \pic[scale=1] at (\x,\y) {Bout};
+    }
+  }
+  \node[Bcol,below right] at (\Lx,\Ly) {$\vb{B}_\text{ext}$};
+  
+  % AXES
+  \draw[<->,thick,shift={(-0.02,-0.02)}]
+    (0,1.1*\Ly) node[left] {$y$} -- (0,0) -- (1.5*\Lx,0) node[below] {$x$};
+  \draw[<->] (0,-2.1*\t) --++ (\Lx,0) node[midway,fill=white,inner sep=0.8] {$L$};
+  
+\end{tikzpicture}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lenz's Law}
+\begin{textblock}{7}(1.5,4)
+
+
+% FLUX-CHANGING LOOP
+\begin{tikzpicture}
+  \def\NBx{5}
+  \def\NBy{4}
+  \def\L{4.0}
+  \def\W{2.4}
+  \def\d{4.0}
+  \def\t{0.1}
+  \def\s{0.64}
+  
+  % MAGNETIC FIELDLINES
+  \foreach \i [evaluate={\y=-0.15*\W+(\i-1)*1.3*\W/(\NBy-1)}] in {1,...,\NBy}{
+    \foreach \j [evaluate={\x=-0.1*\L+(\j-1)*1.2*\L/(\NBx-1)}] in {1,...,\NBx}{
+      \pic[scale=1] at (\x,\y) {Bin};
+    }
+  }
+  \node[Bcol] at (1.2*\L,1.15*\W) {$\vb{B}$};
+  
+  % WIRE
+  \draw[metal] (\L,\t/2) -- (\t,\t/2) arc (-90:-180:\t/2) -- (\t/2,\W-\t) arc (180:90:\t/2)
+                         -- (\L,\W-\t/2) -- (\L,\W+\t/2) -- (\t,\W+\t/2) arc (90:180:1.5*\t)
+                         -- (-\t/2,\t) arc (-180:-90:1.5*\t) -- (\L,-\t/2) -- cycle;
+  \draw[metal] (\s*\L-2.5*\t,-2*\t) rectangle++ (5*\t,\W+4*\t);
+  \draw[vector] (\s*\L+1.5*\t,\W/2) --++ (0.2*\L,0) node[right] {$\vb{v}$};
+  \draw[current] (\s*\L,0.3*\W) --++ (0,0.4*\W) node[above] {$I_\text{ind}$};
+  \draw[current] (2*\t,0.7*\W) --++ (0,-0.4*\W) node[midway,right] {$I_\text{ind}$};
+  \draw[<->] (\t/2,2*\t) -- (\s*\L-2.5*\t,2*\t) node[midway] {\contour{white}{$x$}};
+  \draw[<->] (-2.1*\t,\t/2) -- (-2.1*\t,\W-\t/2) node[midway] {\contour{white}{$\ell$}};
+  
+\end{tikzpicture}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Faraday}
+\begin{frame}{Faraday's Law}
+\begin{textblock}{7}(0.5,3)
+Faraday's Law is the mathematical form of Lenz's Law:
+\eq{
+	V = -\partd{\Psi_m}{t} = -\partd{}{t} \iint \vec{B}\mycdot\vec{dS} 
+} 
+Electric potential comes from the electric field: 
+\visible<0|handout:1>{
+\alert{
+\eq{
+	&V = \int \vec{E}\mycdot\vec{d\ell}  \\
+	& \int \vec{E}\mycdot\vec{d\ell} = -\partd{}{t} \iint \vec{B}\mycdot\vec{dS}  \\
+	&  \iint \lp \mycurl{\vec{E}} \rp \mycdot \vec{dS} =  -\partd{}{t} \iint \vec{B}\mycdot\vec{dS}  
+} % end eq
+} % end alert
+} % end visible 
+\end{textblock}
+
+\begin{textblock}{7}(8.5,7.5)
+\begin{myblock}[0.95]{Faraday's Law}
+
+\eq{
+	\handoutgap{0pt}{\mycurl{\vec{E}} = -\partd{\vec{B}}{t}} \\
+	}
+
+\end{myblock}
+\end{textblock}
+\end{frame}
+

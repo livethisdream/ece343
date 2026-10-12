@@ -1,0 +1,97 @@
+%      \pgfmathsetmacro{\xoffset}{12.5*(1-cos(3))-1.25}  
+%      \pgfmathsetmacro{\yoffset}{sin(3)*12.5+9.2}  
+%      \draw[,thick,->] (+\xoffset,\yoffset) arc [radius=12.5cm,start angle=177,end angle=166];
+%%      \pgfmathsetmacro{\xoffset}{16*(1-cos(18))-1.25}  
+%%      \pgfmathsetmacro{\yoffset}{sin(18)*16+9.2} 
+%%      \draw[,draw=none] (+\xoffset,\yoffset) arc [radius=16cm,start angle=155,end angle=137] node[midway,sloped, font=\tiny]{towards};
+%      \pgfmathsetmacro{\xoffset}{12.5*(1-cos(36))-1.25}  
+%      \pgfmathsetmacro{\yoffset}{sin(36)*12.5+9.2} 
+%      \draw[,draw=none] (+\xoffset,\yoffset) arc [radius=12.5cm,start angle=145,end angle=118] node[midway,sloped, font=\tiny]{towards generator};
+%
+%      \pgfmathsetmacro{\xoffset}{9.95*(1-cos(-3))-0.75}  
+%      \pgfmathsetmacro{\yoffset}{sin(-3)*9.95+9.2} 
+%      \draw[,thick,->] (\xoffset,\yoffset) arc [radius=9.95cm,start angle=183,end angle=193] ;
+%      \pgfmathsetmacro{\xoffset}{9.95*(1-cos(-18))-0.75}  
+%      \pgfmathsetmacro{\yoffset}{sin(-18)*9.95+9.2} 
+%      \draw[,draw=none] (+\xoffset,\yoffset) arc [radius=10.45cm,start angle=198,end angle=216] node[midway,sloped, font=\tiny]{towards};
+%      \pgfmathsetmacro{\xoffset}{9.95*(1-cos(-36))-0.75}  
+%      \pgfmathsetmacro{\yoffset}{sin(-36)*9.95+9.2} 
+%      \draw[,draw=none] (+\xoffset,\yoffset) arc [radius=10.45cm,start angle=216,end angle=234] node[midway,sloped, font=\tiny]{load};
+      \pgfmathsetmacro{\xoffset}{-2}  
+      \pgfmathsetmacro{\yoffset}{10}  
+      \def\myshift#1{\raisebox{2.5ex}}
+      \draw[->, thick,  postaction={decorate,decoration={text along path,text align=center, text={{|\tiny\myshift|towards generator}}}}] (+\xoffset,\yoffset) arc[radius=12.75cm, start angle=175, end angle=150];
+     \pgfmathsetmacro{\xoffset}{-2}  
+     \pgfmathsetmacro{\yoffset}{8.5}  
+      \def\myshift#1{\raisebox{-2.5ex}}
+      \draw[->, thick,  postaction={decorate,decoration={text along path,text align=center, text={{|\tiny\myshift|towards source}}}}] (+\xoffset,\yoffset) arc[radius=13cm, start angle=185, end angle=210];
+
+
+
+    \begin{polaraxis}[
+                      rotate=180,
+                      width=23cm,
+                      xshift=1.5cm, 
+                      yshift=1.5cm,
+                      %xticklabels={$0\lambda$,$0.05\lambda$,$0.1\lambda$,$0.15\lambda$,$0.2\lambda$,$0.25\lambda$},
+                      xticklabel style={
+                          sloped like x axis={%
+                              execute for upside down={\tikzset{anchor=south}},
+                              reset nontranslations=false
+                          },
+                          anchor=north,
+                      },
+                      xticklabel={\small\pgfmathparse{0.5-\tick/720}\pgfmathprintnumber[fixed,precision=3]{\pgfmathresult}$\lambda$},
+                      xtick align=center,
+                      xtick={0,18,...,360},
+                      grid=none,
+                      axis y line = none,
+                      minor x tick num={4},
+                      ymax=1,
+                     ]   
+   \end{polaraxis}
+
+    \begin{polaraxis}[
+                      rotate=180,
+                      width=22cm,
+                      xshift=1cm, 
+                      yshift=1cm,
+                      %xticklabels={$0\lambda$,$0.05\lambda$,$0.1\lambda$,$0.15\lambda$,$0.2\lambda$,$0.25\lambda$},
+                      xticklabel style={
+                          sloped like x axis={%
+                              execute for upside down={\tikzset{anchor=south}},
+                              reset nontranslations=false
+                          },
+                          anchor=north,
+                      },
+                      xticklabel={\small\pgfmathparse{\tick/720}\pgfmathprintnumber[fixed,precision=3]{\pgfmathresult}$\lambda$},
+                      xtick align=center,
+                      xtick={0,18,...,360},
+                      grid=none,
+                      axis y line = none,
+                      minor x tick num={4},
+                      ymax=1,
+                     ]    
+
+    \end{polaraxis}
+
+
+
+    \begin{polaraxis}[
+                      width=21cm,
+                      xshift=-0.5cm, 
+                      yshift=-0.5cm,
+                      %xticklabels={$0\lambda$,$0.05\lambda$,$0.1\lambda$,$0.15\lambda$,$0.2\lambda$,$0.25\lambda$},
+                      xticklabel style={
+                          sloped like x axis={%
+                              execute for upside down={\tikzset{anchor=north}},
+                              reset nontranslations=false
+                          },
+                          anchor=south,
+                      },
+                      xticklabel={\small\pgfmathprintnumber{\tick}\si{\degree}},
+                      xtick align=center,
+                      grid=none,
+                      axis y line = none,
+                     ]    
+   \end{polaraxis}

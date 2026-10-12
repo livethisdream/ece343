@@ -1,0 +1,321 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Schedule}
+\renewcommand{\arraystretch}{1}
+\begin{frame}{}
+	\begin{textblock}{14}(0.5,1.75)
+	\def\myfontsize{footnotesize}
+	\input{Admin/Schedule_Prog}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch03_TxLines/ECE343_Ch03_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Impedances}
+	\begin{textblock}{8.5}(1,2.5)
+	\scalebox{0.75}{
+	\begin{circuitikz}
+	\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+			to[short] ++(0.5,0)
+			to[tline,o-o] ++(3,0)
+			to[short] ++(0.5,0)
+			to[twoport, t=\myz{L}]  ++(0,-3)
+			to[short] ++(-0.5,0)
+			to[tline,o-o] ++(-3,0)
+			to[short] ++(-0.5,0);
+	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+	\node[above] at (0.5,3) {$z=-\ell$};
+	\node[above] at (3.5,3) {$z=0$};
+%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+\end{circuitikz}
+		} % end scalebox
+	\end{textblock}
+	
+	\begin{textblock}{14.5}(0.5,7)
+		\begin{myblock}[0.95]{Impedances}
+		\vspace{-12pt}
+		\eq{
+			\visible<1->{Z_L &= Z (z = 0)  = \dfrac{V(z=0)}{I(z=0)} = \dfrac{V_0^+ e^{-\gamma (0)} + V_0^- e^{\gamma 0}}{I_0^+ e^{-\gamma (0)} + I_0^- e^{\gamma 0}} 
+			= \dfrac{V_0^+ + V_0^-}{I_0^+ + I_0^-} \\}
+			\visible<2->{ &\vdots\\}
+			\visible<3->{\Gamma_L &= \dfrac{V_0^-}{V_0^+} = \dfrac{\myz{L}-\myz{0}}{\myz{L}+\myz{0}}\leftarrow\text{ Reflection Coefficient}}
+			} % end eq
+	\vspace{-12pt}
+		\end{myblock}
+	\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Special Cases for $\Gamma$}
+	\begin{textblock}{14}(0.5,2)
+	\begin{myblock}[0.95]{}
+		\scalebox{0.5}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[short] ++(0.5,0)
+				to[tline,o-o] ++(3,0)
+				to[open] ++(0.5,0)
+				to[open,a^={\myz{L}\equals }]  ++(0,-3)
+				to[open] ++(-0.5,0)
+				to[tline,o-o] ++(-3,0)
+				to[short] ++(-0.5,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[above] at (0.5,3) {$z=-\ell$};
+		\node[above] at (3.5,3) {$z=0$};
+	%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+	%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+	%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+		\end{circuitikz}
+		} % end scalebox
+	\end{myblock}
+	\end{textblock}
+	
+	\begin{textblock}{14}(0.5,6.25)
+	\begin{myblock}[0.95]{}
+	\scalebox{0.5}{
+	\begin{circuitikz}
+	\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+			to[short] ++(0.5,0)
+			to[tline,o-o] ++(3,0)
+			to[open] ++(0.5,0)
+			to[open,a^={\myz{L}\equals }]  ++(0,-3)
+			to[open] ++(-0.5,0)
+			to[tline,o-o] ++(-3,0)
+			to[short] ++(-0.5,0);
+%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+	\node[below] at (2,1.75) {\myz{0}};
+	\node[above] at (0.5,3) {$z=-\ell$};
+	\node[above] at (3.5,3) {$z=0$};
+%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+	\end{circuitikz}
+	} % end scalebox
+	\end{myblock}
+	\end{textblock}
+	
+	\begin{textblock}{14}(0.5,10.5)
+	\begin{myblock}[0.95]{}
+		\scalebox{0.5}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[short] ++(0.5,0)
+				to[tline,o-o] ++(3,0)
+				to[open] ++(0.5,0)
+				to[open,a^={\myz{L}\equals }]  ++(0,-3)
+				to[open] ++(-0.5,0)
+				to[tline,o-o] ++(-3,0)
+				to[short] ++(-0.5,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[above] at (0.5,3) {$z=-\ell$};
+		\node[above] at (3.5,3) {$z=0$};
+	%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+	%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+	%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+		\end{circuitikz}
+		} % end scalebox
+	\end{myblock}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Towards a General Tx Line Equation}
+	\begin{textblock}{8.5}(0.5,3)
+		\scalebox{0.75}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[short] ++(0.5,0)
+				to[tline,o-o] ++(5,0)
+				to[short] ++(0.5,0)
+				to[twoport,a^={\myz{L}}]  ++(0,-3)
+				to[short] ++(-0.5,0)
+				to[tline,o-o] ++(-5,0)
+				to[short] ++(-0.5,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[above] at (0.5,3) {$z=-\ell$};
+		\node[above] at (5.5,3) {$z=0$};
+	%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+	%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+	%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+%		\node at (9,1.5) {$$};
+		\end{circuitikz}
+		} % end scalebox
+
+	\vspace{0.5in}
+	\visible<4->{We can also write:}
+	\eq{
+		\visible<4->{\widetilde{V} &= V_0^+ e^{-\gamma z} + V_0^- e^{\gamma z}\\}
+		\visible<5->{ &= V_0^+ e^{-\gamma z} + V_0^+ \Gamma_L e^{\gamma z}\\}
+		\visible<6->{\widetilde{V} &= \handoutgap{1.5in}{V_0^+ e^{-\gamma z} \lp 1 + \Gamma_L\rp }\\}
+	}
+	\end{textblock}
+	
+	\begin{textblock}{8}(6.5,3)
+	
+	\eq{
+		\visible<1->{\text{Recall} &\longrightarrow \widetilde{V}(z) = V_0^+ e^{-\gamma z} + V_0^- e^{\gamma z} \\}
+		\visible<2->{\Gamma (z) &= \dfrac{V_0^-  e^{-\gamma z}}{V_0^+ e^{-\gamma z}} = \dfrac{V_0^-}{V_0^+} e^{2\gamma z} \\ }
+		\visible<3->{\Gamma (z) &= \handoutgap{1in}{\left| \Gamma_L \right|e^{2\gamma z} }\\}	
+		\visible<4->{\text{Lossless}\longrightarrow \gamma &= \handoutgap{1in}{j\beta}\\}	
+	}
+
+	
+	\end{textblock}	
+	
+	
+	\begin{textblock}{8}(7.75,8.5)
+	\visible<7->{
+	\begin{myblock}[0.9]{Voltage Standing Wave Ratio}
+	\vspace{-12pt}
+	\eq{
+		\text{SWR} &= \dfrac{\myv{max}}{\myv{min}} = \dfrac{1+ | \Gamma_L |}{1 - | \Gamma_L |} \\
+		 |\Gamma | &= \dfrac{\text{SWR} - 1}{\text{SWR} + 1}
+	}
+	\end{myblock}
+	}
+	
+	\end{textblock}	
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Summary}
+	\begin{textblock}{8.5}(0.5,3)
+		\scalebox{0.75}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[short] ++(0.5,0)
+				to[tline,o-o] ++(5,0)
+				to[short] ++(0.5,0)
+				to[twoport,a^={\myz{L}}]  ++(0,-3)
+				to[short] ++(-0.5,0)
+				to[tline,o-o] ++(-5,0)
+				to[short] ++(-0.5,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}};
+		\node[above] at (0.5,3) {$z=-\ell$};
+		\node[above] at (5.5,3) {$z=0$};
+	%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+	%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+	%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+%		\node at (9,1.5) {$$};
+		\end{circuitikz}
+		} % end scalebox
+
+	
+	\end{textblock}
+	
+	\begin{textblock}{8}(8,2.5)
+	\begin{myblock}[0.9]{Wave Equations}
+	\vspace{-12pt}
+	\begin{small}
+	\eq{
+		V(z,t) &= V_0^+ e^{-\gamma z}  + V_0^- e^{\gamma z}\\
+		&=  V_0^+ e^{-\alpha z} \cosp{\omega t - \beta z} \\
+		&\quad + V_0^-  e^{\alpha z} \cosp{\omega t + \beta z} \\
+		v_p &= \dfrac{\omega}{\beta} \quad
+		\lambda  = \dfrac{2\pi}{\beta} 
+	}
+	\end{small}
+	\end{myblock}
+	
+	\end{textblock}	
+	
+	
+	\begin{textblock}{14.5}(0.5,8.5)
+	\begin{myblock}[0.9]{Summary}
+	\vspace{-12pt}
+	\begin{small}
+	\eq{
+		\Gamma_L &= \dfrac{\myz{L} - \myz{0}}{\myz{L} + \myz{0}} \qquad
+		&\Gamma (z)& = | \Gamma_L | e^{2\gamma z} \\
+		\myz{0} &= \sqrt{\dfrac{R^{\prime} + j\omega L^{\prime}}{G^{\prime} + j\omega C^{\prime}} }  \qquad
+		&\text{SWR}& = \dfrac{1 + | \Gamma_L|}{1 - | \Gamma_L|}
+	}
+	\end{small}
+	\end{myblock}	
+	\end{textblock}	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Examples}
+	\begin{textblock}{14.5}(0.5,2)
+	\begin{myblock}[0.9]{Example \#1}
+		A radio transmitter is connected to an antenna by a lossless coaxial cable having a characteristic impedance of 75\ohms. The coaxial cable is perfectly matched to the transmitter. The input impedance of the antenna is 500\ohms. If the peak voltage from the output of the transmitter is 30\volts, what is the peak voltage of the reflected wave at the output of the transmitter. 
+	\end{myblock}
+	\end{textblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Example}
+	\begin{textblock}{8.5}(0.5,3)
+		\scalebox{0.75}{
+		\begin{circuitikz}
+		\draw (0,0) to [sV, a^=\myv{s}] ++(0,3) 
+				to[short] ++(0.5,0)
+				to[tline,o-o] ++(5,0)
+				to[short] ++(0.5,0)
+				to[twoport,a^={\myz{L}\equals 125\ohms}]  ++(0,-3)
+				to[short] ++(-0.5,0)
+				to[tline,o-o] ++(-5,0)
+				to[short] ++(-0.5,0);
+	%	\draw[<->] (0.5,0.25) -- node[above] {$\ell$} ++(3,0); 
+		\node[below] at (2,1.75) {\myz{0}\equals 50\ohms};
+		\node[above] at (0.5,3) {$z=-\ell$};
+		\node[above] at (5.5,3) {$z=0$};
+	%	\draw(1.5,-1) node{\myz{0} = 60\ohms};
+	%	\draw(5,-1) node{\myz{0,2} = 100\ohms};
+	%	\draw[<->] (2.8,-2.2) -- node[label={[label distance=8pt]195:$\ell$}] {} ++(1.5,-2);
+	%	\draw(3,0) to[short] ++(1.75,-2.25) to[short] ++(0,-2) to[short] ++(-1.75,2.25);
+	%	\draw(6,-2.5) node{\myz{0,stub} = 50\ohms};
+%		\node at (9,1.5) {$$};
+		\end{circuitikz}
+		} % end scalebox
+
+	
+	\end{textblock}
+	
+	
+	
+	\begin{textblock}{14.5}(0.5,8.5)
+	\begin{itemize}
+		\setlength\itemsep{24pt}
+		\item Find the reflection coefficient.
+		\item Find the VSWR. 
+	\end{itemize}
+	\end{textblock}	
+	
+\end{frame}
+

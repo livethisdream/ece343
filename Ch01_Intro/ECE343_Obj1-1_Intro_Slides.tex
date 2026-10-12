@@ -1,0 +1,230 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+\begin{frame}{Break}
+	\begin{textblock}{14.5}(0.5,3)
+	\begin{center}
+		\includegraphics[scale=0.25, angle=0]{Personal/no-more-blues}
+	\end{center}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Schedule}
+\renewcommand{\arraystretch}{1}
+\begin{frame}{Nominal Schedule}
+	\begin{textblock}{13}(0.5,2.15)
+	\def\myfontsize{footnotesize}
+	\newcounter{mylnum}
+	\def\lessonNum{1}
+%	\setcounter{mylnum}{1}
+	\input{./Admin/Schedule_Prog}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Ch 1 Learning Objectives}
+	\begin{textblock}{14}(0.5,5)
+		\begin{enumerate}[{1}.1]
+			\setlength{\itemsep}{18pt}
+			\item<alert> I can articulate what I will learn and how I will be assessed in this course.
+			\item I can articulate practical applications of electromagnetics.
+		\end{enumerate}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Why this course?}
+	\hspace{-1.25cm}\begin{tikzpicture}
+	\definecolor{myblue}{RGB}{187,224,227}
+	\draw[fill=blue!10!white, draw=white] (0,0) rectangle ++(6.65,10);
+	\end{tikzpicture}
+	
+	\begin{textblock}{7.5}(0.5,5) % left blue bar space
+	\begin{itemize}[<+- | alert@+>]
+		\setlength\itemsep{14pt}
+		\item Wireless signals are everywhere!
+		\item Why are cell phone towers shaped uniquely?
+		\item Radio
+		\item Twisted pairs
+		\item Microstrip design
+		\item NDI
+	\end{itemize}
+	\end{textblock}
+	\begin{textblock}{8}(8.5,4)
+	
+		\only<1>{\includegraphics[scale=0.5]{ECE343/crfs}
+		
+				\hspace{1cm}\includegraphics[scale=0.4]{ECE343/wifiheatmap}}
+	
+		\only<2>{\hspace{1.75cm}\includegraphics[scale=0.5]{ECE343/cell_ant}}
+		
+		\only<3>{\hspace{1cm}\includegraphics[scale=0.25]{ECE343/handheld_radio}	\includegraphics[scale=0.35]{ECE343/hackrf}
+				}
+		    		
+    		\only<4>{\includegraphics[scale=0.15]{ECE343/twisted_pairs}}
+    		
+		\only<5>{\includegraphics[scale=0.5]{ECE343/microstrip}}
+				
+		\only<6>{\includegraphics[scale=0.05]{ECE343/tFWMT_measure_straight}}
+				
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Important}
+\begin{textblock}{8}(0.5, 3)
+	\begin{myblock}[0.9]{General Rules}
+	
+		\begin{itemize}
+			\item Collaboration generally allowed
+			\item ...but work must be your own!
+			\item Course materials are generally allowed on most assignments 
+			\item ChatGPT included, with documentation
+			\item GR/Final $\longrightarrow$ TBD
+			
+		\end{itemize}
+	
+	\end{myblock}
+\end{textblock}
+\begin{textblock}{8}(8, 2)
+		\includegraphics[scale=0.2]{ECE343/chatGPT}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Course Flow}
+	\begin{textblock}{14.5}(0.5,3.5)
+	\begin{itemize}
+		\setlength\itemsep{15pt}
+		\item Course Director = \sout{Lt Col} Dr. Rogers
+		\item Primary Platform = Teams
+		\item Work submission = Gradescope
+		\item Assessments: binary grading, revisions allowed
+		\item Midterm, Final: spec-based grading
+		\item Engagement: PPs, peer review, EI, Tech Report
+		\item All Learning Objectives (LOs) in syllabus
+	\end{itemize}
+	\end{textblock}
+	\begin{textblock}{7}(11,3)
+		\includegraphics[scale=0.15]{EIQR}
+	\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Grade Weightings}
+	\begin{textblock}{8}(0.5,5)
+
+		\center\textbf{\hspace{0.15in}Prog}
+			
+			\vspace{12pt}
+			
+			\begin{tikzpicture}[scale=0.5]
+				\pie[%/tikz/every pin/.style={align=center, font=\small}, 
+						/tikz/every node/.style={font=\scriptsize},
+						text=legend,
+						%rotate=180, 
+						polar,
+						explode=0.1,
+						color={yellow!10!white, blue!10!white, red!10!white}
+						]
+						 {25/GR, %
+						   50/{Assessments}, %
+						   25/Engagement
+									      }
+			\end{tikzpicture}
+		\end{textblock}%
+		\begin{textblock}{8}(8,5)
+	
+			\center\textbf{\hspace{0.15in}Final}
+		
+			\vspace{12pt}
+		
+			\begin{tikzpicture}[scale=0.5]
+					\pie[%/tikz/every pin/.style={align=center}, 
+						/tikz/every node/.style={font=\scriptsize},
+						text=legend,
+						%rotate=180, 
+						polar,
+						explode=0.1,
+						color={yellow!10!white, blue!10!white, red!10!white, green!10!white}
+						] 
+						 {20/GR , %
+				                40/{Assessments}, %
+				                15/Engagement,
+				                25/Final Exam
+									      }
+			\end{tikzpicture}%
+		\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Instructor Philosophy}
+	\begin{textblock}{14.5}(0.5,3)
+	\begin{myblock}[0.9]{}
+	\vspace{12pt}
+		\begin{center}
+		 I am less concerned about \textbf{grades} than \textbf{learning}
+		 \end{center}
+	\vspace{6pt}
+	\end{myblock}
+	
+	\begin{myblock}[0.9]{}
+		\vspace{12pt}
+		\begin{center}
+			I want you to \textbf{succeed}
+		\end{center}
+	 	\vspace{6pt}
+	\end{myblock}
+	
+	\begin{myblock}[0.9]{}
+		\vspace{12pt}
+		\begin{center}
+		 This will require \textbf{hard work} from you.
+		\end{center}
+		\vspace{6pt}
+	\end{myblock}
+
+	\end{textblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The Story of Energy \& Waves}
+	\begin{textblock}{14.5}(0.5,3)
+	 Read. The. \href{https://usafa0.sharepoint.com/:f:/s/ECE343-Spring2024/Et2Y5hmFiwlEiXtiAGOJz4EBd4ZjSs43FW_9L7Wvh8H4QA?e=EOZfAW}{Book}:
+	\begin{itemize}
+		\setlength\itemsep{12pt}
+			\item Chapter 2 - Fields
+			\item Chapter 3 - Transmission Lines
+			\item Chapter 4 - Vector Analysis
+			\item Chapter 5 - Electrostatics
+			\item Chapter 6 - Current \& Conductivity
+			\item Chapter 7 - Magnetostatics
+			\item Chapter 8 - Dynamic Fields
+			\item Chapter 9 - Plane Waves
+	\end{itemize}
+	\end{textblock}
+	
+	\begin{textblock}{6}(9.5,6)
+	
+	\includegraphics[scale=0.23]{ECE343/officespace}
+	
+	\end{textblock}
+\note{}
+\end{frame}
+

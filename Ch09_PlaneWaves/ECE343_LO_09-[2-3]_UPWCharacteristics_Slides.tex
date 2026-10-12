@@ -1,0 +1,809 @@
+% !TEX root =../ECE343_Slides_Rogers.tex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{comment}
+\section{Schedule}
+\begin{frame}{Schedule}
+	\def\myfontsize{footnotesize}
+	\input{./Admin/Schedule_Final}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Ch09_PlaneWaves/ECE343_Ch09_LearningObjectives}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Types of Waves: By Shape of Wave Front}
+	\hspace{-1.25cm}\begin{tikzpicture}
+	\definecolor{myblue}{RGB}{187,224,227}
+	\draw[fill=blue!10!white, draw=white] (0,0) rectangle ++(6.65,10);
+	\end{tikzpicture}
+	
+	\begin{textblock}{7.5}(0.5,3.5) % left blue bar space
+	Surfaces of constant phase can be:
+	\begin{itemize}
+		\setlength\itemsep{14pt}
+		\item Spherical
+			
+			Appropriate when \handoutgap{0.5in}{source} is  \handoutgap{0.5in}{small} relative to  \handoutgap{0.5in}{domain size}
+			
+		\item Cylindrical
+		
+		Appropriate when \handoutgap{0.5in}{source} is shaped like a \handoutgap{0.5in}{line}.
+		
+		\item Planar
+		
+		Appropriate when \handoutgap{0.5in}{wave} is observed \handoutgap{0.5in}{locally} or when wave is intentionally guided to be \handoutgap{0.5in}{planar}. 
+	\end{itemize}
+	\end{textblock}
+	\begin{textblock}{8}(8.5,3)
+	
+		\hspace{0.5in}\includegraphics[scale=0.15]{./ECE343/spherical_9-1}
+		
+		\hspace{0.5in}\includegraphics[scale=0.15]{./ECE343/cylindrical_9-2}
+		
+		\includegraphics[scale=0.15]{./ECE343/planar_9-3} 		
+	\end{textblock}
+
+	\begin{textblock}{5}(12,12.5)
+		\includegraphics[scale=0.15]{./ECE343/parabolic_reflector}
+	\end{textblock}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Uniform Plane Waves}
+%\begin{textblock}{7.5}(0.5,3.5) 
+%% Point source
+%\begin{tikzpicture}
+%  \fill[myblue] (0,0) circle (\p);
+%  \foreach \i in {1,...,4}{
+%    \draw[myblue,thick] (0,0) circle (\r*\i);
+%  }
+%  \foreach \a in {30,90,...,330}{
+%    \draw[myarr,myblue!80!black] (\a:\r*3.6) --++ (\a:1.2*\r);
+%  }
+%\end{tikzpicture}
+%\end{textblock}
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{frame}{Uniform Plane Waves}
+	\begin{textblock}{7.5}(0.5,3.5) 
+	Assumptions:
+	\begin{itemize}
+		\item Simple Media:
+		\begin{itemize}
+			\setlength\itemsep{8pt}
+			\item \handoutgap{1in}{Linear}
+			\item \handoutgap{1in}{Isotropic}
+			\item \handoutgap{1in}{Homogeneous}
+			\item \handoutgap{1in}{Non-dispersive}
+		\end{itemize}
+		\item Magnitude and phase are constant in a plane perpendicular to direction of propagation (assume $z$)
+		\visible<0|handout:1>{
+		\alert{
+		\eq{
+			\partd{\phasor{E}}{x} = 	\partd{\phasor{E}}{y} = \partd{\phasor{H}}{x} = \partd{\phasor{H}}{y} = 0
+		}  % end eq
+		} % end alert
+		} % end visible
+	\end{itemize}
+	\end{textblock}
+
+\begin{textblock}{7.5}(8.25,2.5)
+Which means:
+
+\visible<0|handout:1>{
+\alert{
+\eq{
+	\partd{}{x}\phasor{E}_x = \partd{}{x}\phasor{E}_y = \partd{}{x}\phasor{E}_z = 0\\
+	\partd{}{x}\phasor{H}_x = \partd{}{x}\phasor{H}_y = \partd{}{x}\phasor{H}_z = 0
+} % end eq
+} % end alert
+} % end visible
+
+Now, the wave equation can be written as: 
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	&\lb \partd{^2}{x^2} + \partd{^2}{y^2} + \partd{^2}{z^2} \rb 
+	\lp \xhat \phasor{E}_x + \yhat \phasor{E}_y  + \zhat \phasor{E}_z \rp  \\
+	&+ \gamma^2 \lp \xhat \phasor{E}_x + \yhat \phasor{E}_y  + \zhat \phasor{E}_z \rp = 0 
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Uniform Plane Waves: Fields}
+\begin{textblock}{7.5}(0.5,3) 
+Each component separately must equal zero, allowing us to write 3 equations:
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	\lb \partd{^2}{x^2} + \partd{^2}{y^2} + \partd{^2}{z^2} \rb \phasor{E}_{x,y,z} + \gamma^2 \phasor{E}_{x,y,z} = 0 
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+So, the UPW conditions reduce these equations to:
+\vspace{-12pt}
+\begin{myblock}[0.9]{}
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\vspace{-12pt}
+\eq{
+	\partd{^2}{z^2}\phasor{E}_{x,y,z} + \gamma^2 \phasor{E}_{x,y,z} \\
+	} % end eq
+	\vspace{-12pt}
+	} % end alert
+	} % end visible
+\end{small}
+\end{myblock}
+\end{textblock}
+
+
+\begin{textblock}{7.5}(8.5,3)
+We can make one more simplification, by considering Ampere's Law:
+%\vspace{-8pt}
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	\curl{\phasor{H}} &= \lp \sigma +  j\omega \varepsilon\rp\phasor{E}\\
+	\zhat \mycdot \lp \curl{\phasor{H}} \rp &= \zhat\mycdot\lb \lp \sigma +  j\omega \varepsilon\rp\phasor{E} \rb \\
+	\partd{\phasor{H}_x}{y} - \partd{\phasor{H}_y}{x}  &= \lp \sigma +  j\omega \varepsilon\rp \phasor{E}_{z} \\
+	0-0 &= \lp \sigma +  j\omega \varepsilon\rp\phasor{E}_{z} \\
+	0 &= \phasor{E}_{z}
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+%\only<1|handout:0>{\vspace{-32pt}}
+\vspace{-24pt}
+\begin{myblock}[0.9]{}
+\begin{small}
+\vspace{-12pt}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	\handoutgap{0pt}{\partd{^2}{z^2}\phasor{E}_{x,y} + \gamma^2 \phasor{E}_{x,y}} 
+}	% end eq
+\vspace{-12pt}
+} % end alert
+} % end visible
+\end{small}
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Uniform Plane Waves: Fields}
+\begin{textblock}{7.5}(0.5,3.5) 
+We know how to find solutions for the 2nd order ODEs (right?!)
+\begin{small}
+\visible<0|handout:1>{
+\vspace{-12pt}
+\alert{
+\eq{
+	&\partd{^2}{z^2}\phasor{E}_{x} + \gamma^2 \phasor{E}_{x}  = 0\\
+	&\;\implies\;
+	\phasor{E}_x (z) = E^{+}_{x0} e^{-j\gamma z}  + E^{-}_{x0} e^{j\gamma z} \\
+	&\partd{^2}{z^2}\phasor{E}_{y} + \gamma^2 \phasor{E}_{y} = 0 \\
+	&\;\implies\;
+	\phasor{E}_y (z) = E^{+}_{y0} e^{-j\gamma z}  + E^{-}_{y0} e^{j\gamma z} \\
+	&\phasor{E} = \xhat \phasor{E}_x + \yhat \phasor{E}_y \\
+	&\phasor{H}_x (z) = H^{+}_{x0} e^{-j\gamma z}  + H^{-}_{x0} e^{j\gamma z} \\
+	&\phasor{H}_y (z) = H^{+}_{y0} e^{-j\gamma z}  + H^{-}_{y0} e^{j\gamma z} \\
+	&\phasor{H} = \xhat \phasor{H}_x + \yhat \phasor{H}_y\\
+	&\gamma = \alpha + j\beta = \sqrt{j\omega\mu\lp\sigma + j\omega\varepsilon\rp } 
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+
+\end{textblock}
+
+
+\begin{textblock}{7.5}(8.5,3.5)
+Now, back to time domain...multiply by \handoutgap{1in}{$e^{j\omega t}$} and \handoutgap{1.5in}{take the real part}.
+
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	E_{x,y} (z,t) &= \text{Re}\left\{ E^{+}_{x0, y0} e^{-j\beta z}e^{j\omega t} \right.\\
+	&\; \left. + E^{-}_{x0,y0} e^{j\beta z}e^{j\omega t}\right\} \\
+	E_{x,y} (z,t) &= E^{+}_{x0,y0} e^{-\alpha z}\cosp{\omega t - \beta z} \\
+	&\; + E^{-}_{x0,y0}e^{\alpha z} \cosp{\omega t + \beta z}
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Uniform Plane Waves: Fields Summary}
+%\begin{textblock}{7.75}(0.5,2.5) 
+%\begin{myblock}[0.95]{General}
+%\begin{small}
+%\eq{
+%	&\vec{E} (z,t) = \xhat E_{x} + \yhat E_{y} (z,t)\\
+%	&E_{x,y} (z,t) = E^{+}_{x0,yo} e^{-\alpha z}\cosp{\omega t - \beta z} \\
+%	&\qquad\qquad + E^{-}_{x0,y0} e^{\alpha z}\cosp{\omega t + \beta z}  \\[12pt]
+%	&\vec{H} (z,t) = \xhat H_{x} + \yhat H_{y} (z,t)\\
+%	&H_{x,y} (z,t) = H^{+}_{x0,yo} e^{-\alpha z}\cosp{\omega t - \beta z} \\
+%	&\qquad\qquad + H^{-}_{x0,y0} e^{\alpha z}\cosp{\omega t + \beta z}  \\
+%}
+%\end{small}
+%\end{myblock}
+%\end{textblock}
+%
+%\begin{textblock}{7.25}(8.25,2.5) 
+%\begin{myblock}[0.95]{Lossless}
+%\begin{small}
+%\visible<0|handout:1>{
+%\eq{
+%	&\vec{E} (z,t) = \xhat E_{x} + \yhat E_{y} (z,t)\\
+%	&E_{x,y} (z,t) = E^{+}_{x0,y0} \cosp{\omega t - \beta z} \\
+%	&\qquad\qquad + E^{-}_{x0,y0} \cosp{\omega t + \beta z}  \\[12pt]
+%	&\vec{H} (z,t) = \xhat H_{x} + \yhat H_{y} (z,t)\\
+%	& H_{x,y} (z,t) = H^{+}_{x0,y0}\cosp{\omega t - \beta z} \\
+%	&\qquad\qquad + H^{-}_{x0,y0} \cosp{\omega t + \beta z}  \\[12pt]
+%} % end eq
+%} % end visible
+%\end{small}
+%\end{myblock}
+%\end{textblock}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{UPW Summary}
+\begin{textblock}{8}(0.5,2)
+\begin{myblock}[0.95]{Maxwell's Equations}
+\vspace{-12pt}
+\eq{
+&\text{Gauss}\longrightarrow\div{\phasor{E}} = \dfrac{\rho_v}{\varepsilon} \\
+&\text{Gauss}\longrightarrow\div{\phasor{H}} = 0 \\
+&\text{Ampere}\longrightarrow\curl{\phasor{H}} = \lp \sigma + j\omega\varepsilon \rp \phasor{E} \\
+&\text{Faraday}\longrightarrow\curl{\phasor{E}} = -j\omega\mu\phasor{H} 
+}
+\vspace{-12pt}
+\end{myblock}
+\end{textblock}
+\begin{textblock}{6}(9,2)
+\begin{myblock}[0.9]{Helmholtz}
+\vspace{-12pt}
+\eq{
+&\nabla^2 \phasor{E} - \gamma^2 \phasor{E} = 0 \\
+&\nabla^2 \phasor{H} - \gamma^2 \phasor{H} = 0 \\
+&\gamma^2 = j\omega\mu\lp\sigma + j\omega\varepsilon\rp \\[-4pt]
+}
+\vspace{-12pt}
+\end{myblock}
+\end{textblock}
+\begin{textblock}{14.5}(0.5,9.75)
+\begin{myblock}[0.99]{Field Solutions}
+\vspace{-18pt}
+\eq{
+&E_{x,y} (z,t) = E^{+}_{x0,y0} e^{-\alpha z}\cosp{\omega t - \beta z} 
++ E^{-}_{x0,y0} e^{\alpha z}\cosp{\omega t + \beta z}  \\
+&H_{x,y} (z,t) = H^{+}_{x0,y0} e^{-\alpha z}\cosp{\omega t - \beta z} 
++ H^{-}_{x0,y0} e^{\alpha z}\cosp{\omega t + \beta z}  
+}
+\vspace{-18pt}
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Uniform Plane Waves: Interpretation}
+\begin{textblock}{14.5}(0.5,2.25)
+
+\begin{myblock}[0.98]{Observations}
+	\begin{itemize}
+		\item For a UPW, the electric and magnetic field \handoutgap{1in}{vectors} are \handoutgap{1in}{perpendicular} to propagation.
+%		\item For a UPW, the wave may \handoutgap{1in}{propagate} only \handoutgap{1in}{perpendicular} to the plane
+		\item The direction of propagation is \handoutgap{1in}{perpendicular} to the \handoutgap{1in}{electric field} and \handoutgap{1in}{magnetic field}
+		\item The \handoutgap{1in}{direction} of the \handoutgap{1in}{electric field} and \handoutgap{1in}{magnetic field} are related
+	\end{itemize}
+
+\end{myblock}
+
+
+\end{textblock}
+
+\begin{textblock}{7.5}(0.5,11.5)
+\scalebox{0.5}{
+% Electromagnetic wave - colored
+\begin{tikzpicture}[x=(-15:0.9), y=(90:0.9), z=(-150:1.1),
+                    line cap=round, line join=round,
+                    axis/.style={black, thick,->},
+                    vector/.style={>=stealth,->}]
+  \large
+  \def\A{1.5}
+  \def\nNodes{5} % use even number
+  \def\nVectorsPerNode{8}
+  \def\N{\nNodes*40}
+  \def\xmax{\nNodes*pi/2*1.01}
+  \pgfmathsetmacro\nVectors{(\nVectorsPerNode+1)*\nNodes}
+  \def\vE{{\color{Ecol}\mathbf{E}}}
+  \def\vB{{\color{Bcol}\mathbf{B}}}
+  
+  \def\drawENode{ % draw E node and vectors with some offset
+    \draw[Ecol,very thick,variable=\t,domain=\iOffset*pi/2:(\iOffset+1)*pi/2*1.01,samples=40]
+      plot (\t,{\A*sin(\t*360/pi)},0);
+    \foreach \k [evaluate={\t=\k*pi/2/(\nVectorsPerNode+1);
+                           \angle=\k*90/(\nVectorsPerNode+1);}]
+                in {1,...,\nVectorsPerNode}{
+      \draw[vector,EVcol]  (\iOffset*pi/2+\t,0,0) -- ++(0,{\A*sin(2*\angle+\iOffset*180)},0);
+    }
+  }
+  \def\drawBNode{ % draw B node and vectors with some offset
+    \draw[Bcol,very thick,variable=\t,domain=\iOffset*pi/2:(\iOffset+1)*pi/2*1.01,samples=40]
+      plot (\t,0,{\A*sin(\t*360/pi)});
+    \foreach \k [evaluate={\t=\k*pi/2/(\nVectorsPerNode+1);
+                           \angle=\k*90/(\nVectorsPerNode+1);}]
+                in {1,...,\nVectorsPerNode}{
+      \draw[vector,Bcol!50]  (\iOffset*pi/2+\t,0,0) -- ++(0,0,{\A*sin(2*\angle+\iOffset*180)});
+    }
+  }
+  
+  % MAIN AXES
+  \draw[axis] (0,0,0) -- ++(\xmax*1.1,0,0) node[right] {$z$};
+  \draw[axis] (0,-\A*1.2,0) -- (0,\A*1.2,0) node[right] {$x$};
+  \draw[axis] (0,0,-\A*1.2) -- (0,0,\A*1.2) node[left] {$y$};
+  
+  % SMALL AXES
+  \def\xOffset{{(\nNodes-2)*pi/2}}
+  \def\yOffset{\A*1.1}
+  \def\zOffset{\A*1.1}
+  \draw[axis,very thick,vcol] (\xOffset,\yOffset,-\zOffset) -- ++(\A*0.6,0,0) node[right,align=center] {$\vb{v}$}; %\\propagation
+  \draw[axis,very thick,Ecol]  (\xOffset,\yOffset,-\zOffset) -- ++(0,\A*0.6,0) node[right] {$\vb{E}$};
+  \draw[axis,very thick,Bcol]   (\xOffset,\yOffset,-\zOffset) -- ++(0,0,\A*0.6) node[left] {$\vb{B}$};
+  
+  % draw (anti-)nodes
+  \foreach \iNode [evaluate={\iOffset=\iNode-1;}] in {1,...,\nNodes}{
+    \ifodd\iNode \drawBNode \drawENode % E overlaps B
+    \else        \drawENode \drawBNode % B overlaps E
+    \fi
+  }
+
+\end{tikzpicture}
+} % end scalebox
+\end{textblock}
+
+\begin{textblock}{7.5}(8,11.5)
+\scalebox{0.75}{
+% Electromagnetic wave SHORT - colored
+\begin{tikzpicture}[x=(-15:0.9), y=(90:0.9), z=(-150:1.1),
+                    line cap=round, line join=round,
+                    axis/.style={black, thick,->},
+                    vector/.style={>=stealth,->}]
+  \large
+  \def\A{1.5}
+  \def\ymax{1.8}
+  \def\nNodes{1} % use even number
+  \def\nVectorsPerNode{8}
+  \def\N{\nNodes*40}
+  \def\xmax{\nNodes*pi/2*1.01}
+  \pgfmathsetmacro\nVectors{(\nVectorsPerNode+1)*\nNodes}
+  
+  % MAIN AXES
+  \draw[axis] (0,0,0) -- ++(\xmax*1.4,0,0) node[right] {$z$};
+  \draw[axis] (0,-\ymax*0.6,0) -- (0,\ymax,0) node[right] {$x$};
+  \draw[axis] (0,0,-\ymax*0.7) -- (0,0,\ymax) node[left] {$y$};
+  
+  \draw[Ecol,very thick,variable=\t,domain=0:pi/2*1.01,samples=40]
+    plot (\t,{\A*sin(\t*360/pi)},0);
+  \foreach \k [evaluate={\t=\k*pi/2/(\nVectorsPerNode+1);
+                         \angle=\k*90/(\nVectorsPerNode+1);}]
+              in {1,...,\nVectorsPerNode}{
+    \draw[vector,EVcol]  (\t,0,0) -- ++(0,{\A*sin(2*\angle)},0);
+  }
+  \draw[Bcol,very thick,variable=\t,domain=0:pi/2*1.01,samples=40]
+    plot (\t,0,{\A*sin(\t*360/pi)});
+  \foreach \k [evaluate={\t=\k*pi/2/(\nVectorsPerNode+1);
+                         \angle=\k*90/(\nVectorsPerNode+1);}]
+              in {1,...,\nVectorsPerNode}{
+    \draw[vector,Bcol!50]  (\t,0,0) -- ++(0,0,{\A*sin(2*\angle)});
+  }
+  
+  % VECTOR
+  \draw[->,very thick,vcol] (\A*1.1,\A*0.8,0) --++ (\A*0.5,0,0) node[right] {$\vb{v}$};
+  
+\end{tikzpicture}
+} % End scalebox
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Interpretation}
+\begin{frame}{Chapter 3: Lesson 5}
+	\begin{textblock}{8}(2.5,3.5)
+		\vspace{-12pt}
+			\eq{
+				V(z,t) &=
+				\underbrace{\alert<2>{V^{+}_0} \alert<3>{e^{-\alpha z}}\alert<4>{\cosp{\omega t - \beta z}}}_{\color{magenta}{\text{Forward Wave}}}
+				+   \underbrace{\alert<2>{V^{-}_0} \alert<3>{e^{\alpha z}}\alert<4>{\cosp{\omega t + \beta z}}}_{\text{\color{green!50!black}{Reverse Wave}}}
+				} % end eq 
+			
+	\end{textblock}
+
+	\begin{textblock}{9}(0.5,6.5)
+		\begin{itemize}
+			\setlength\itemsep{12pt}
+			\item<2-| alert@2> $V^{\pm}_{0} \longrightarrow$ Amplitude coefficients
+			\item<3-| alert@3> $e^{\pm \alpha z} \longrightarrow$ Attenuation term
+			\item<4-| alert@4> $\cosp{\omega t \pm \beta z} \longrightarrow$Time and space-varying wave
+		\end{itemize}
+	\end{textblock}
+	
+	\begin{textblock}{9}(8.5,6.5)
+	\only<5>{
+	\scalebox{0.75}{
+	\begin{tikzpicture}
+		\begin{axis}[domain=0:60e-3, 
+			samples=200, 
+			xmin=0, 
+			xmax=65e-3, 
+			ymax=4,
+			ymin=-4,
+	%		grid=major, 
+			title={Forward Wave},
+			scaled x ticks=base 10:3,
+			xtick scale label code/.code={},
+			minor x tick num = 1,
+			minor y tick num = 1,
+	%		ytick={-400,-300,-200,-100,0,100,200,300,400},
+	%		xtick={-15e-3,-10e-3,-5e-3,0,5e-3,10e-3,15e-3,20e-3},
+			yticklabel={\empty},
+			xticklabel={\empty},
+			xlabel=$z$,
+			ylabel={$V(z,t)$},
+	%		legend entries={$f=60$ Hz, $f=120$ Hz},
+	%		legend pos=outer north east,
+			axis y line = middle,
+			axis x line = middle,
+			x label style={xshift=0.5cm, yshift=-0.5cm},
+			y label style={xshift=-0.5cm, yshift=0.75cm},
+			clip=false,
+			]
+			\addplot [mark=none, orange!50!black, dashed] {cos(360*50*x)} 
+				node[rounded corners,draw=orange!50!black,dashed,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:12e-3,-1.1)}] at (axis cs: 20e-3, -2) {$\cosp{\omega t - \beta z}$};
+			\addplot [dashed, magenta] {2*exp(-50*x)} 
+				node[rounded corners,draw=magenta,dashed,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:28e-3,0.5)}] at (axis cs: 25e-3, 2) {$e^{-\alpha z}$};
+			\addplot[blue] {2*exp(-50*x)*cos(360*50*x)} 
+				node[rounded corners,draw=blue,solid,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:50e-3,-0.1)}] at (axis cs: 50e-3, 1.75) {$e^{-\alpha z}\cosp{\omega t - \beta z}$};
+
+		\end{axis}
+	\end{tikzpicture}
+	} % end scalebox
+	} % end only
+	
+	\only<6>{
+	\scalebox{0.75}{
+	\begin{tikzpicture}
+		\begin{axis}[domain=0:60e-3, 
+			samples=200, 
+			xmin=0, 
+			xmax=65e-3, 
+			ymax=10,
+			ymin=-10,
+	%		grid=major, 
+			title={Reverse Wave},
+			scaled x ticks=base 10:3,
+			xtick scale label code/.code={},
+			minor x tick num = 1,
+			minor y tick num = 1,
+	%		ytick={-400,-300,-200,-100,0,100,200,300,400},
+	%		xtick={-15e-3,-10e-3,-5e-3,0,5e-3,10e-3,15e-3,20e-3},
+			yticklabel={\empty},
+			xticklabel={\empty},
+			xlabel=$z$,
+			ylabel={$V(z,t)$},
+	%		legend entries={$f=60$ Hz, $f=120$ Hz},
+	%		legend pos=outer north east,
+			axis y line = middle,
+			axis x line = middle,
+			x label style={xshift=0.5cm, yshift=-0.5cm},
+			y label style={xshift=-0.5cm, yshift=0.75cm},
+			clip=false,
+			]
+			\addplot [mark=none, yellow!50!black, dashed] {cos(360*50*x)};
+				%node[rounded corners,draw=blue,solid,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:12e-3,-1.1)}] at (axis cs: 20e-3, -2) {$\cosp{\omega t + \beta z}$};
+			\addplot [dashed, magenta] {0.5*exp(50*x)} ;
+%				node[rounded corners,draw=magenta,solid,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:20e-3,1)}] at (axis cs: 25e-3, 2) {$e^{\alpha z}$};
+			\addplot[blue] {0.5*exp(50*x)*cos(360*50*x)} ;
+				%node[rounded corners,draw=orange!50!black,solid,text=black,rectangle callout, fill=none, callout absolute pointer={(axis cs:50e-3,-0.1)}] at (axis cs: 50e-3, 1.75) {$e^{\alpha z}\cosp{\omega t + \beta z}$};
+
+		\end{axis}
+	\end{tikzpicture}
+	} % end scalebox
+	} % end only
+	
+	\end{textblock}
+	
+	% do a graph
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Characteristics}
+\begin{frame}{Uniform Plane Waves: Characteristics}
+\begin{textblock}{7.5}(0.5,3) 
+Assume an $\xhat\;$ Electric field... 
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+	&\phasor{E} (z) = \xhat \phasor{E}_x (z) \\
+	&\curl{\phasor{E}} = -j\omega\mu\phasor{H} \\
+	&\xhat\lp 0 \rp  - \yhat \lp 0 - \partd{\phasor{E}_x}{z} \rp + \zhat \lp 0 - \partd{\phasor{E}_x}{y} \rp \\[8pt]%= -j\omega\mu\phasor{H} \\ 
+	& \implies \yhat\partd{\phasor{E}_x}{z}
+	=  -j\omega\mu\phasor{H}  \\
+	&\partd{\phasor{E}_x}{z} = \partd{}{z} \lp E^{+}_{x0} e^{-\gamma z} \rp + \partd{}{z} \lp E^{-}_{x0} e^{\gamma z} \rp \\
+	&\implies \yhat\lb -\gamma E^{+}_{x0} e^{-\gamma z} + \gamma E^{-}_{x0} e^{\gamma z} \rb =  -j\omega\mu\phasor{H}  \\[8pt]
+	&\implies \phasor{H} = \yhat\lb \dfrac{ E^{+}_{x0}}{j\omega\mu} e^{-\gamma z} -  \dfrac{ E^{-}_{x0}}{j\omega\mu} e^{\gamma z}\rb \\[8pt]
+	&\implies \phasor{H} = \yhat \lb  H^{+}_{y0}e^{-\gamma z} + H^{-}_{y0}e^{\gamma z} \rb\\
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+\end{textblock}
+
+
+\begin{textblock}{0.5}(8.75,3)
+	{\color{Blue4}{\rule{1pt}{2.8in}}}
+\end{textblock}
+
+
+\begin{textblock}{6.5}(9,3)
+Intrinsic impedance is like characteristic impedance...
+\begin{small}
+\visible<0|handout:1>{
+\vspace{-8pt}
+\alert{
+	\eq{
+		\eta &= \dfrac{E^{+}_{x0}}{H^{+}_{y0}} 
+			= \dfrac{E^{+}_{x0}}{\frac{E^{+}_{x0}}{j\omega\mu}} 
+			= \dfrac{j\omega\mu}{\gamma}  \\
+		 &= \dfrac{j\omega\mu}{\sqrt{j\omega\mu\lp\sigma + j\omega\varepsilon\rp}} 
+		  = \sqrt{\dfrac{j\omega\mu}{\sigma + j\omega\varepsilon}}
+	} % end eq
+	} % end alert
+	} % end visible	
+\end{small}
+$\phasor{E}$, $\phasor{H}$, and propagation ($\hat{a}_p$) are \textbf{generally} related:
+\begin{small}
+\visible<0|handout:1>{
+\vspace{-8pt}
+\alert{
+\eq{
+	&\phasor{E}  = -\eta \hat{a}_{p} \times \phasor{H} \\
+	&\phasor{H} = \dfrac{1}{\eta} \hat{a}_{p} \times \phasor{E}
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+\end{textblock}
+\end{frame}
+%\begin{myblock}[0.9]{Electric Field}
+%
+%
+%\end{myblock}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General UPW}
+\begin{frame}{Uniform Plane Waves: General}
+\begin{textblock}{14.5}(0.5,3) 
+\begin{myblock}[0.9]{Summary}
+\vspace{-8pt}
+\eq{
+	&\vec{E}(z,t)  =  \xhat {E}_x (z,t) + \yhat {E}_y (z,t) \\[4pt]
+	&E_{x,y} (z,t) = E^{\pm}_{x0,y0} e^{\mp \alpha z}\cosp{\omega t \mp \beta z} \\[4pt]
+	&\phasor{H}(z,t)  =  \xhat {H}_x (z,t) + \yhat {H}_y (z,t) \\[4pt]
+	&H_{x,y} (z,t) = H^{\pm}_{x0,y0} e^{\mp\alpha z}\cosp{\omega t \mp \beta z} \\[4pt]
+	&\phasor{E}  = -\eta \hat{a}_{p} \times \phasor{H} \qquad
+	\phasor{H} = \dfrac{1}{\eta} \hat{a}_{p} \times \phasor{E}
+	&\eta = \sqrt{\dfrac{j\omega\mu}{\sigma + j\omega\varepsilon}}
+}
+
+\end{myblock}
+\end{textblock}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dielectrics}
+\begin{frame}{Uniform Plane Waves: Dielectrics}
+\begin{textblock}{7.5}(0.5,3.5) 
+For dielectrics $\lp \sigma=0, \varepsilon=\varepsilon_r \varepsilon_0, \mu=\mu_0 \rp$:
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+	\eq{
+		\gamma &= \sqrt{j\omega\mu_0 \lp 0 + j\omega\varepsilon_r\varepsilon_0\rp} \\
+		&= \sqrt{-\omega^2 \mu_0 \varepsilon_r\varepsilon_0} \\
+		&= j\omega\sqrt{\mu_0\varepsilon_r\varepsilon_0} 			
+			= \dfrac{j\omega\sqrt{\varepsilon_r}}{c} \\
+			&= \alpha + j\beta \\
+		\eta &= \dfrac{j\omega\mu_0}{0 + j\omega\varepsilon_r\varepsilon_0} = \sqrt{\dfrac{\mu_0}{\varepsilon_r\varepsilon_0}} \\
+		&= \dfrac{120\pi}{\sqrt{\varepsilon_r}} \\
+		u_p &= \dfrac{\omega}{\beta} = \dfrac{\omega}{\omega\sqrt{\mu_0 \varepsilon_0\varepsilon_r}}  = \dfrac{c}{\sqrt{\varepsilon_r}}
+	} % end eq
+	} % end alert
+} % end visible
+	
+\end{small}
+\end{textblock}
+
+
+\begin{textblock}{7.5}(8.5,2)
+\begin{myblock}[0.95]{Free Space}
+\visible<0|handout:1>{
+\vspace{-12pt}
+\alert{
+\eq{
+	\eta &= \dfrac{120\pi}{\sqrt{1}} = 120\pi = 377\ohms \\
+	u_p &= \dfrac{c}{\sqrt{\varepsilon_r}} = \dfrac{c}{\sqrt{1}} = c
+} % end eq
+} % end alert
+\vspace{-12pt}
+} % end visible
+\end{myblock}
+
+\vspace{-18pt}
+
+\begin{myblock}[0.95]{Silicon, $\varepsilon_r = 11.6$}
+\visible<0|handout:1>{
+\vspace{-12pt}
+\alert{
+\eq{
+	\eta &= \dfrac{120\pi}{\sqrt{11.6}} = 110.7\ohms\\
+	u_p &=  \dfrac{c}{\sqrt{11.6}} =0.3c
+} % end eq
+} % end alert
+\vspace{-12pt}
+} % end visible 
+\end{myblock}
+
+\end{textblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conductors}
+\begin{frame}{Uniform Plane Waves: Conductors}
+\begin{textblock}{7.5}(0.5,3.5) 
+For conductors:
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+	\eq{
+	&\lp \sigma >> \omega\varepsilon \rp \text{ or } \lp \dfrac{\sigma}{\omega\varepsilon} >>1 \rp\\[8pt]
+	\gamma &= \sqrt{j\omega\mu\lp \sigma + j\omega\varepsilon_r\varepsilon_0\rp} \approx \sqrt{j\omega \mu\sigma} \\[8pt]
+	&= e^{j\pi/4}\sqrt{\omega\mu\sigma}\\[8pt]
+	&=\lp\cosp{\dfrac{\pi}{4}} + j\sinp{\dfrac{\pi}{4}}\rp\sqrt{\omega\mu\sigma}  \\[8pt]
+	&\implies \alpha = \beta = \sqrt{\dfrac{\omega\mu\sigma}{2}}
+}% end eq
+} % end alert
+} % end visible
+\end{small}
+\end{textblock}
+
+%% blue vertical separator
+%\begin{textblock}{0.5}(8.75,3)
+%	{\color{Blue4}{\rule{1pt}{2.8in}}}
+%\end{textblock}
+
+\begin{textblock}{7.5}(8.5,3.5)
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\eq{
+\eta &= \dfrac{j\omega\mu}{\sigma + j\omega\varepsilon} = \sqrt{\dfrac{j\omega\mu}{\sigma}} \\[8pt]
+	& = \sqrt{j}\sqrt{\dfrac{\omega\mu}{\sigma}} = \lp e^{j\pi/2} \rp^{1/2} \sqrt{\dfrac{\omega\mu}{\sigma}} \\[8pt]
+	&= e^{j\pi/4} \sqrt{\dfrac{\omega\mu}{\sigma}}
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+\end{textblock}
+
+
+\begin{textblock}{14.5}(0.5,12)
+\begin{myblock}[0.95]{}
+\begin{center}
+%\vspace{12pt}
+	What does this mean?!?!
+%\vspace{12pt}
+\end{center}
+\end{myblock}
+\end{textblock}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Uniform Plane Waves: Conductors}
+\begin{textblock}{7.5}(0.5,2) 
+\begin{myblock}[0.95]{$\phasor{E}\overset{\text{?}}{\leftrightarrow}\phasor{H}$}
+%How does this affect the relationship between the electric and magnetic field?
+\begin{small}
+\visible<0|handout:1>{
+\alert{
+\vspace{-8pt}
+\eq{
+	\eta & = \dfrac{E_0^{+}}{H_0^{+}} 
+		\implies E_0^{+} = \eta H_0^{+} \\
+		\implies& E_0^{+} =  H_0^{+} \underbrace{e^{j\pi/4}}_{\text{phase shift}} \sqrt{\dfrac{\omega\mu}{\sigma}}
+} % end eq
+} % end alert
+} % end visible
+\end{small}
+\end{myblock}
+\end{textblock}
+
+\begin{textblock}{7.5}(8.25,2)
+\begin{myblock}[0.95]{Dispersion}
+	\begin{small}
+%		What does $u_p$ look like?
+		\visible<0|handout:1>{
+		\vspace{12pt}
+		\alert{
+		\eq{
+			u_p &=\dfrac{\omega}{\beta} = \dfrac{\omega}{\sqrt{\frac{\omega\mu\sigma}{2}}} = \sqrt{\dfrac{2\omega}{\mu\sigma}} 
+		} % end eq
+		} % end alert
+		\vspace{12pt}
+		} % end visible 
+	\end{small}
+\end{myblock}
+\end{textblock}
+
+\begin{textblock}{14.5}(0.75,9.5)
+\begin{myblock}[0.99]{Skin Depth $\sim e^{-\alpha z}$}
+	\begin{small}
+		Define $\delta$ as skin depth, where $\phasor{E} (z=\delta) = E_0 e^{-1} $:
+		\visible<0|handout:1>{
+		\vspace{-12pt}
+		\alert{
+		\eq{
+			&\delta = \dfrac{1}{\alpha} = \handoutgap{1in}{\sqrt{\dfrac{2}{\omega\mu\sigma}}}
+		} % end eq
+		} % end alert
+		\vspace{-12pt}
+		} % end visible 
+	\end{small}
+\end{myblock}
+\end{textblock}
+
+\end{frame}

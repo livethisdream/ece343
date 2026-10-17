@@ -15,7 +15,7 @@ frame_view: true
 
 The point form of Gauss' law, and charge density from a known field.
 
-Lesson 21 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 21 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

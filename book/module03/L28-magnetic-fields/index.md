@@ -15,7 +15,7 @@ frame_view: true
 
 The Biot-Savart law, and why magnetic field lines always close.
 
-Lesson 28 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 28 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

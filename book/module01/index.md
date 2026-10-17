@@ -16,7 +16,7 @@ nav: Foundations
 
 Fields, phasors, and the transmission line: the first place a circuit stops behaving like one.
 
-Lessons 1–16 · Intro to Electromagnetics · Dr. Neil Rogers · Maj Ellis
+Lessons 1–16 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes

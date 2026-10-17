@@ -15,7 +15,7 @@ frame_view: true
 
 Input impedance of a terminated line, and the special cases: shorted, open, and quarter-wave lines.
 
-Lesson 7 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 7 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

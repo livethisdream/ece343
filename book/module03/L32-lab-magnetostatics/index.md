@@ -15,7 +15,7 @@ frame_view: true
 
 The Module 3 lab. Packet to be posted.
 
-Lesson 32 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 32 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 Scalar and vector fields, phasors and Euler's identity, and the quantities that describe electric and magnetic fields.
 
-Lesson 2 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 2 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

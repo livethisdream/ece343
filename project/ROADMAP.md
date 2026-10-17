@@ -22,7 +22,8 @@ working rules apply here.
 
 ## Open
 
-- Maj Ellis's full name, office, and email (Neil to provide).
+- Maj Ellis's full name, office, and email (Neil to provide). Maj Ellis is
+  the course director; Neil has no office this term (Neil, 2026-10-17).
 - Spring 2027 meeting periods and calendar dates.
 - Lab packets for the Electrostatics (L26), Magnetostatics (L32), and
   Incidence (L41) labs, and the 2027 Reflection Coefficient packet.

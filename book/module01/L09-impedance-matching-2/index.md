@@ -15,7 +15,7 @@ frame_view: true
 
 Impedance matching, continued.
 
-Lesson 9 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 9 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -9,8 +9,8 @@ Spring 2027
 
 | Instructor | Office | Email |
 | :- | :- | :- |
-| **Dr. Neil Rogers** (Course Director) | 2E38 | <a href="mailto:neil.rogers.1@afacademy.af.edu">neil.rogers.1@afacademy.af.edu</a> |
-| **Maj Ellis** | to follow | to follow |
+| **Maj Ellis** (Course Director) | to follow | to follow |
+| **Dr. Neil Rogers** | — | <a href="mailto:livethisdream@gmail.com">livethisdream@gmail.com</a> |
 
 Office hours are **by appointment**. Book EI with either instructor directly.
 

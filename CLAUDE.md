@@ -1,7 +1,7 @@
 # ECE 343 — working notes for Claude
 
 Course site for **ECE 343, Intro to Electromagnetics** (USAFA, Spring 2027),
-taught by Dr. Neil Rogers (course director) and Maj Ellis. Jupyter Book under
+taught by Maj Ellis (course director) and Dr. Neil Rogers. Jupyter Book under
 `book/`, published to GitHub Pages at `livethisdream.github.io/ece343/` on
 every push to `main`. 4 modules, 41 lessons, as the course ran in Spring 2025
 (Neil, 2026-10-17).

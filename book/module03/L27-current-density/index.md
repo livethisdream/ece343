@@ -15,7 +15,7 @@ frame_view: true
 
 Current through a surface, Ohm's law in point form, and what makes a good conductor.
 
-Lesson 27 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 27 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

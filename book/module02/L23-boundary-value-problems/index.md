@@ -15,7 +15,7 @@ frame_view: true
 
 Laplace's equation for the parallel-plate capacitor and the coaxial line.
 
-Lesson 23 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 23 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

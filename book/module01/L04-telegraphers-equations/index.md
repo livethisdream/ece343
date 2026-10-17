@@ -15,7 +15,7 @@ frame_view: true
 
 The wave equations for voltage and current on a line, and the traveling-wave solution.
 
-Lesson 4 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 4 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

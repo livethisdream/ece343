@@ -15,7 +15,7 @@ frame_view: true
 
 A plane wave meeting a boundary at an angle.
 
-Lesson 39 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 39 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

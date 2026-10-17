@@ -15,7 +15,7 @@ frame_view: true
 
 The electric field of point charges, by superposition.
 
-Lesson 18 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 18 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

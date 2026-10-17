@@ -16,7 +16,7 @@ nav: Electrostatics
 
 Charges at rest, and the vector calculus that describes their fields.
 
-Lessons 17–26 · Intro to Electromagnetics · Dr. Neil Rogers · Maj Ellis
+Lessons 17–26 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes

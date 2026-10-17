@@ -15,7 +15,7 @@ frame_view: true
 
 Propagation, phase, and attenuation constants, and the characteristic impedance of a line.
 
-Lesson 5 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 5 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

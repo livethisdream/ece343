@@ -15,7 +15,7 @@ frame_view: true
 
 Gradient, divergence, curl, and the Laplacian in three coordinate systems; surface and volume integrals; Stokes' and the divergence theorem.
 
-Lesson 17 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 17 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

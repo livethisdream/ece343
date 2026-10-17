@@ -15,7 +15,7 @@ frame_view: true
 
 Characterize an unknown device from its measured reflection and transmission.
 
-Lesson 16 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 16 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

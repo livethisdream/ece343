@@ -15,7 +15,7 @@ frame_view: true
 
 Decoupling Maxwell's equations for time-varying fields.
 
-Lesson 35 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 35 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

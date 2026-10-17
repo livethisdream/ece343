@@ -15,7 +15,7 @@ frame_view: true
 
 Oblique incidence, continued: TE and TM waves.
 
-Lesson 40 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 40 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

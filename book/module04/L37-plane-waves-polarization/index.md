@@ -15,7 +15,7 @@ frame_view: true
 
 The uniform plane wave, the fields that make it up, and its polarization.
 
-Lesson 37 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 37 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

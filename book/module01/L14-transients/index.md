@@ -15,7 +15,7 @@ frame_view: true
 
 A step launched down a line: bounce diagrams and the transient response at the load.
 
-Lesson 14 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 14 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 The field of a charge distribution, by direct integration.
 
-Lesson 19 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 19 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

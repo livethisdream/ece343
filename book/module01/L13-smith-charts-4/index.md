@@ -15,7 +15,7 @@ frame_view: true
 
 Matching with series components, parallel components, and stubs.
 
-Lesson 13 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 13 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

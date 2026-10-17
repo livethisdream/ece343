@@ -15,7 +15,7 @@ frame_view: true
 
 The Smith chart: what it plots and how to read it.
 
-Lesson 10 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 10 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

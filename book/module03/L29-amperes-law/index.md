@@ -15,7 +15,7 @@ frame_view: true
 
 Integral and point forms of Ampere's law, and the field of a line current.
 
-Lesson 29 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 29 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -36,7 +36,7 @@ LEGACY = BOOK / "extras" / "legacy"
 COURSE = "ECE 343"
 COURSE_TITLE = "Intro to Electromagnetics"
 TERM = "Spring 2027"
-INSTRUCTORS = "Dr. Neil Rogers · Maj Ellis"
+INSTRUCTORS = "Maj Ellis · Dr. Neil Rogers"
 
 # ---- Learning objectives, verbatim from the Spring 2025 syllabus ------------
 # Numbered by textbook chapter (Ellingson, Vol. 1), as the slides and the

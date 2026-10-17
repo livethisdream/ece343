@@ -15,7 +15,7 @@ frame_view: true
 
 Working transmission-line problems on the Smith chart.
 
-Lesson 11 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 11 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

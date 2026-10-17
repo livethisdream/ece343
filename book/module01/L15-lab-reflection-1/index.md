@@ -15,7 +15,7 @@ frame_view: true
 
 Calibrate a vector network analyzer, then measure known loads.
 
-Lesson 15 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 15 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

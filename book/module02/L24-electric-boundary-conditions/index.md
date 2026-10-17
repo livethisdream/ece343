@@ -15,7 +15,7 @@ frame_view: true
 
 Conductors, dielectrics, and the field on both sides of a material boundary.
 
-Lesson 24 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 24 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 Capacitance from the field, and boundary conditions put to work.
 
-Lesson 25 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 25 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

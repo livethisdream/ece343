@@ -15,7 +15,7 @@ frame_view: true
 
 Using symmetry and a Gaussian surface to find the field without integrating Coulomb's law.
 
-Lesson 20 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 20 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

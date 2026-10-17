@@ -15,7 +15,7 @@ frame_view: true
 
 The coaxial line, the reflection coefficient at a load, standing waves, and VSWR.
 
-Lesson 6 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 6 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

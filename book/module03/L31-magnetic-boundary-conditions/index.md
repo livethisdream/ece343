@@ -15,7 +15,7 @@ frame_view: true
 
 Magnetic materials, and the field on both sides of a boundary.
 
-Lesson 31 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 31 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

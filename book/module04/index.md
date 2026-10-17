@@ -16,7 +16,7 @@ nav: Dynamic Fields
 
 Let the fields change in time, and they leave as a wave.
 
-Lessons 33–41 · Intro to Electromagnetics · Dr. Neil Rogers · Maj Ellis
+Lessons 33–41 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes

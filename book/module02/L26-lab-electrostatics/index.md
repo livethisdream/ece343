@@ -15,7 +15,7 @@ frame_view: true
 
 The Module 2 lab. Packet to be posted.
 
-Lesson 26 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 26 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

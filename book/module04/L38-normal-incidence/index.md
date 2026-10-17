@@ -15,7 +15,7 @@ frame_view: true
 
 A plane wave striking a boundary head-on: reflection and transmission.
 
-Lesson 38 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 38 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

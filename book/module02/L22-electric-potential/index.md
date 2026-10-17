@@ -15,7 +15,7 @@ frame_view: true
 
 Work, potential, and the electric field as the gradient of the potential.
 
-Lesson 22 · Module 2: Electrostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 22 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 Matching a load to a source with a length of transmission line.
 
-Lesson 8 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 8 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

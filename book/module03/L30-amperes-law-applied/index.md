@@ -15,7 +15,7 @@ frame_view: true
 
 Ampere's law applied to practical current distributions.
 
-Lesson 30 · Module 3: Magnetostatics · Dr. Neil Rogers · Maj Ellis
+Lesson 30 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

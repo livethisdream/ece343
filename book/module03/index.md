@@ -16,7 +16,7 @@ nav: Magnetostatics
 
 Charges in steady motion, and the magnetic fields they make.
 
-Lessons 27–32 · Intro to Electromagnetics · Dr. Neil Rogers · Maj Ellis
+Lessons 27–32 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes

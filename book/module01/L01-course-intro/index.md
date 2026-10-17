@@ -15,7 +15,7 @@ frame_view: true
 
 What you will learn, how you will be assessed, and where electromagnetics shows up in the systems you will operate.
 
-Lesson 1 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 1 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

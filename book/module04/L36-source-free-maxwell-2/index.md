@@ -15,7 +15,7 @@ frame_view: true
 
 The Helmholtz equation and its solutions, continued.
 
-Lesson 36 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 36 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 Designing matching networks on the Smith chart.
 
-Lesson 12 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 12 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

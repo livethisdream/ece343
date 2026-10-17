@@ -15,7 +15,7 @@ frame_view: true
 
 Reflection and transmission at a boundary. Packet to be posted.
 
-Lesson 41 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 41 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

@@ -15,7 +15,7 @@ frame_view: true
 
 Induction, the displacement current that completes Ampere's law, and relaxation time.
 
-Lesson 33 · Module 4: Dynamic Fields · Dr. Neil Rogers · Maj Ellis
+Lesson 33 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

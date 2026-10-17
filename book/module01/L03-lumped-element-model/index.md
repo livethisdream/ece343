@@ -15,7 +15,7 @@ frame_view: true
 
 When a pair of wires stops being a short circuit, and how to model a line as a cascade of tiny circuits.
 
-Lesson 3 · Module 1: Foundations · Dr. Neil Rogers · Maj Ellis
+Lesson 3 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Learning Objectives

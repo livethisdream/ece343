@@ -18,13 +18,16 @@ Where circuits stop being enough.
 Four modules, 41 lessons, from the transmission line to the plane wave.
 
 <div class="hero-pills">
-<div class="hero-cta hero-grid">
-  <a class="cta cta-primary" href="module01/index.html">Module 1</a>
-  <a class="cta cta-primary" href="module02/index.html">Module 2</a>
-  <a class="cta cta-primary" href="module03/index.html">Module 3</a>
-  <a class="cta cta-primary" href="module04/index.html">Module 4</a>
-</div>
-<div class="hero-cta hero-grid hero-links">
+<div class="hero-cta hero-grid" style="--cols: 4; --cols-phone: 2">
+  <div class="pop-anchor">
+    <button class="cta cta-primary cta-menu" id="btnModules" type="button" aria-expanded="false" aria-controls="modpop">Modules</button>
+    <div class="mod-pop" id="modpop" role="group" aria-label="Modules" data-drop hidden>
+      <a class="mod-link" href="module01/index.html"><span class="mod-n">01</span>Foundations</a>
+      <a class="mod-link" href="module02/index.html"><span class="mod-n">02</span>Electrostatics</a>
+      <a class="mod-link" href="module03/index.html"><span class="mod-n">03</span>Magnetostatics</a>
+      <a class="mod-link" href="module04/index.html"><span class="mod-n">04</span>Dynamic Fields</a>
+    </div>
+  </div>
   <a class="cta" href="syllabus.html#course-schedule">Schedule</a>
   <a class="cta" href="syllabus.html">Syllabus</a>
   <a class="cta" href="materials.html">Materials</a>

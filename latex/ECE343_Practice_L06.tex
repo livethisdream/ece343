@@ -1,0 +1,321 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L6 practice set (Coaxial Lines, Reflection Coefficient, and VSWR): coax Z0,
+% the reflection and transmission coefficients, the standing wave, and VSWR.
+
+\fullwidth{\textbf{Learning Objectives 3.2 and 3.3: } I can explain the physical
+meaning of and calculate the following quantities: propagation constant, phase
+constant, attenuation constant, characteristic impedance, VSWR, reflection
+coefficient, and transmission coefficient. I can use the transmission line
+equation to calculate the voltage/current at an arbitrary point on a specified
+transmission line.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). All lines are lossless.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Coaxial line.} For a coaxial line with inner radius $a$, outer
+radius $b$, and a nonmagnetic dielectric of relative permittivity $\epsilon_r$,
+$\myz{0} \approx \dfrac{60}{\sqrt{\epsilon_r}}\ln\dfrac{b}{a}\ \ohms$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A cable has $a = 0.29\ \text{mm}$, $b = 1.85\ \text{mm}$, and a
+		polyethylene dielectric, $\epsilon_r = 2.25$. Find $\myz{0}$.
+		\begin{solution}[1.1in]
+		\eq{
+			\ln\dfrac{b}{a} &= \ln\dfrac{1.85}{0.29} = \ln 6.38 = 1.853 \\
+			\myz{0} &= \dfrac{60}{1.5}\times 1.853 = 74.1\ \ohms
+		}
+		This is a $75\ \ohms$ cable, the kind used for video and cable television.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{0}$ = \ansbox[1.3in]{$74.1\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the phase velocity in this cable.
+		\begin{solution}[0.9in]
+		\eq{ v_p = \dfrac{c}{\sqrt{\epsilon_r}} = \dfrac{3\times10^{8}}{1.5} = 2\times10^{8}\ \text{m/s} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$v_p$ = \ansbox[1.3in]{$2\times10^{8}$ m/s}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Design an air-filled coaxial line, $\epsilon_r = 1$, with
+		$\myz{0} = 50\ \ohms$ and an inner conductor of radius $a = 1\ \text{mm}$.
+		Find the radius $b$ of the outer conductor.
+		\begin{solution}[1.1in]
+		\eq{
+			\ln\dfrac{b}{a} &= \dfrac{50}{60} = 0.833 \\
+			b &= a\,e^{0.833} = 1 \times 2.30 = 2.30\ \text{mm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$b$ = \ansbox[1.3in]{$2.30\ \text{mm}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part We fill the line in part (c) with polyethylene, $\epsilon_r = 2.25$,
+		without changing $a$ or $b$. Find the new $\myz{0}$, and explain in one
+		sentence why it went down.
+		\begin{solution}[1.2in]
+		\eq{ \myz{0} = \dfrac{60}{1.5}\times 0.833 = 33.3\ \ohms }
+		The dielectric raises the capacitance per meter by $\epsilon_r$ and leaves the
+		inductance unchanged, so $\myz{0} = \sqrt{L^{\prime}/C^{\prime}}$ falls by
+		$\sqrt{\epsilon_r} = 1.5$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{0}$ = \ansbox[1.3in]{$33.3\ \ohms$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Reflection coefficient.} Each load below terminates a
+$50\ \ohms$ line.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\myz{L} = 25\ \ohms$. Find $\Gamma$ and the VSWR.
+		\begin{solution}[1.1in]
+		\eq{
+			\Gamma &= \dfrac{25-50}{25+50} = -\dfrac{1}{3} = -0.333 \\
+			\text{VSWR} &= \dfrac{1+0.333}{1-0.333} = 2.0
+		}
+		The load is real and smaller than $\myz{0}$, so $\Gamma$ is real and negative.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$-0.333$}
+
+		\vspace{4pt}
+		VSWR = \ansbox[1.3in]{$2.0$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\myz{L} = 30 - j40\ \ohms$. Find $\Gamma$ in polar form and the VSWR.
+		\begin{solution}[1.5in]
+		\eq{
+			\Gamma &= \dfrac{-20-j40}{80-j40} = \dfrac{(-20-j40)(80+j40)}{80^2+40^2} \\
+			&= \dfrac{-j4000}{8000} = -j0.5 = 0.5\angle -90^\circ \\
+			\text{VSWR} &= \dfrac{1.5}{0.5} = 3.0
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.5\angle -90^\circ$}
+
+		\vspace{4pt}
+		VSWR = \ansbox[1.3in]{$3.0$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part What fraction of the incident power does the load in part (b)
+		reflect, and what fraction does it absorb?
+		\begin{solution}[0.9in]
+		\eq{
+			\vert\Gamma\vert^2 &= 0.5^2 = 0.25 \\
+			1 - \vert\Gamma\vert^2 &= 0.75
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		reflected = \ansbox[1.3in]{$25\%$}
+
+		\vspace{4pt}
+		absorbed = \ansbox[1.3in]{$75\%$}
+	\end{minipage}
+
+	\part A load consists of a capacitor alone. Without computing, state
+	$\vert\Gamma\vert$ and the VSWR, and explain why.
+	\begin{solution}[0.9in]
+	$\vert\Gamma\vert = 1$ and the VSWR is infinite. A capacitor stores energy but
+	cannot dissipate any, so it returns all of the incident power; only the phase
+	of $\Gamma$ depends on its reactance.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Reading a standing wave.} A probe slid along a $50\ \ohms$
+RG-58 line at $300\ \mhz$ measures a largest voltage of $12\ \text{V}$ and a VSWR
+of 3.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\vert\Gamma\vert$.
+		\begin{solution}[0.8in]
+		\eq{ \vert\Gamma\vert = \dfrac{\text{VSWR}-1}{\text{VSWR}+1} = \dfrac{2}{4} = 0.5 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vert\Gamma\vert$ = \ansbox[1.3in]{$0.5$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the smallest voltage on the line and the amplitude of the
+		incident wave, $\vert V_0^+\vert$.
+		\begin{solution}[1in]
+		\eq{
+			V_\text{min} &= \dfrac{V_\text{max}}{\text{VSWR}} = \dfrac{12}{3} = 4\ \text{V} \\
+			\vert V_0^+\vert &= \dfrac{V_\text{max}}{1+\vert\Gamma\vert} = \dfrac{12}{1.5} = 8\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_\text{min}$ = \ansbox[1.3in]{$4\ \text{V}$}
+
+		\vspace{4pt}
+		$\vert V_0^+\vert$ = \ansbox[1.3in]{$8\ \text{V}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance between adjacent voltage minima. Signals travel
+		along RG-58 at $2\times10^{8}$ m/s.
+		\begin{solution}[1in]
+		\eq{
+			\lambda &= \dfrac{2\times10^{8}}{3\times10^{8}} = 0.667\ \m \\
+			\dfrac{\lambda}{2} &= 33.3\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		spacing = \ansbox[1.3in]{$33.3\ \text{cm}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part One voltage minimum falls exactly at the load, and the load is a pure
+		resistance. Is $\myz{L}$ larger or smaller than $\myz{0}$? Find $\myz{L}$.
+		\begin{solution}[1in]
+		A minimum at the load means the reflected wave subtracts there, so
+		$\theta_\Gamma = 180^\circ$ and $\Gamma = -0.5$. The load is smaller than
+		$\myz{0}$:
+		\eq{ \myz{L} = \dfrac{\myz{0}}{\text{VSWR}} = \dfrac{50}{3} = 16.7\ \ohms }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{L}$ = \ansbox[1.3in]{$16.7\ \ohms$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A complex load.} A load $\myz{L} = 100 + j100\ \ohms$
+terminates a $50\ \ohms$ line.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma$ in rectangular and polar form.
+		\begin{solution}[1.5in]
+		\eq{
+			\Gamma &= \dfrac{50+j100}{150+j100} = \dfrac{(50+j100)(150-j100)}{150^2+100^2} \\
+			&= \dfrac{17{,}500 + j10{,}000}{32{,}500} = 0.538 + j0.308 \\
+			&= 0.620\angle 29.7^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.620\angle 29.7^\circ$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the VSWR.
+		\begin{solution}[0.8in]
+		\eq{ \text{VSWR} = \dfrac{1.620}{0.380} = 4.27 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		VSWR = \ansbox[1.3in]{$4.27$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance from the load to the first voltage maximum, in
+		wavelengths.
+		\begin{solution}[0.9in]
+		\eq{ d_\text{max} = \dfrac{\theta_\Gamma}{4\pi}\lambda = \dfrac{29.7^\circ}{720^\circ}\lambda = 0.041\lambda }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d_\text{max}$ = \ansbox[1.3in]{$0.041\lambda$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the transmission coefficient $\tau$ in polar form.
+		\begin{solution}[0.9in]
+		\eq{ \tau = 1 + \Gamma = 1.538 + j0.308 = 1.57\angle 11.3^\circ }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\tau$ = \ansbox[1.3in]{$1.57\angle 11.3^\circ$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Is it worth matching?} A handheld radio feeds a
+$75\ \ohms$ antenna through $50\ \ohms$ coaxial cable.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma$, the VSWR, and the fraction of the incident power the
+		antenna absorbs.
+		\begin{solution}[1.2in]
+		\eq{
+			\Gamma &= \dfrac{75-50}{75+50} = 0.2 \\
+			\text{VSWR} &= \dfrac{1.2}{0.8} = 1.5 \\
+			1 - \vert\Gamma\vert^2 &= 1 - 0.04 = 0.96
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.2$}
+
+		\vspace{4pt}
+		VSWR = \ansbox[1.3in]{$1.5$}
+
+		\vspace{4pt}
+		absorbed = \ansbox[1.3in]{$96\%$}
+	\end{minipage}
+
+	\part A matching network would raise the absorbed power to 100\%, but it adds
+	parts, cost, and a little loss of its own. Using the VSWR rule of thumb from
+	the lesson, would you add one? Justify your answer in one or two sentences.
+	\begin{solution}[1in]
+	No. A VSWR of 1.5 is well below the rule-of-thumb limit of 2, and the mismatch
+	costs only 4\% of the power, about $0.18\ \text{dB}$. A matching network is
+	likely to lose about as much as it recovers.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

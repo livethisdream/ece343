@@ -1,6 +1,6 @@
 # ECE 343 roadmap
 
-Last updated 2026-10-17. Read with ECE 444's `project/ROADMAP.md`, whose
+Last updated 2026-10-18. Read with ECE 444's `project/ROADMAP.md`, whose
 working rules apply here.
 
 ## Settled (Neil, 2026-10-17)
@@ -27,5 +27,24 @@ working rules apply here.
 - Spring 2027 meeting periods and calendar dates.
 - Lab packets for the Electrostatics (L26), Magnetostatics (L32), and
   Incidence (L41) labs, and the 2027 Reflection Coefficient packet.
-- Convert lessons to the 444 format, one at a time.
-- Practice problem sets, through 444's LaTeX harness, once lessons convert.
+- Convert the remaining lessons to the 444 format, one at a time, on the
+  pattern of the L3 and L6 pilots (`CLAUDE.md`, "Converting a lesson").
+
+## Pilot lessons (2026-10-18)
+
+L3 (The Lumped-Element Model) and L6 (Coaxial Lines, Reflection Coefficient,
+and VSWR) are converted as the worked examples for later lesson threads: frame
+page, figures or widget, and a practice set with both PDFs. Decisions from the
+pilot:
+
+- **No reveal.js decks** (Neil, 2026-10-18). Present mode is the slide view.
+- **Practice solutions are public**, as in 444 (Neil, 2026-10-18). Assessments
+  and keys stay in `ece343-faculty`.
+- **RG-58 is the course's reference cable**: $a = 0.405$ mm, $b = 1.475$ mm,
+  $\epsilon_r = 2.25$, giving $Z_0 = 51.7\ \Omega$, $L' = 259$ nH/m,
+  $C' = 96.8$ pF/m, $v_p = 2 \times 10^8$ m/s. L3 and L6 quote these numbers.
+- **The $\lambda/10$ rule of thumb** for when a connection is an ideal wire (L3).
+- The 2025 reflection-coefficient deck wrote $\Gamma(z) = \vert\Gamma_L\vert e^{2\gamma z}$.
+  The magnitude bars drop the phase of $\Gamma_L$; the general form is
+  $\Gamma_L e^{2\gamma z}$, which L6 writes as $\Gamma_L e^{j2\beta z}$ for a
+  lossless line.

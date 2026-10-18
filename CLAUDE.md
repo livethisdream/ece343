@@ -41,12 +41,45 @@ maintained, so change them together with the manifest.
 
 ## Converting a lesson
 
-Lessons move to the 444 format one at a time. A converted lesson replaces its
-generated page (title, objectives, legacy slides, reading) with a real frame
-lesson, following 444's `book/module01/L05-field-regions/` as the worked
-example and 444's budgets and checks. Keep the Spring 2025 slide links until
-the new material covers the same ground. Then set the lesson's decks to `[]`
-in the manifest.
+Lessons move to the 444 format one at a time. **L3 and L6 are the worked
+examples** (pilot, 2026-10-18): L3 for a lesson built on figures and a
+derivation, L6 for one built on calculation and a widget. A converted lesson is
+one bundle:
+
+| What | Path |
+| :-- | :-- |
+| the frame lesson | `book/moduleNN/LNN-<slug>/index.md` (replaces the generated page) |
+| its figures | `book/extras/viz/img/LNN-*.svg`, from `scripts/graphics/lNN_*.py` |
+| a widget, where one earns its place | `book/extras/viz/<name>.html` |
+| its practice set | `latex/ECE343_Practice_LNN.tex` |
+| the built PDFs (committed) | `book/extras/practice/ECE343_LNN_Practice_{blank,SOLUTIONS}.pdf` |
+
+Then set the lesson's decks to `[]` in the manifest and update its row in the
+Spring 2025 slide tables on `book/materials.md`.
+
+There are **no reveal.js decks** in this course: present mode on the frame page
+is the slide view. Read 444's `COURSE_SPEC.md` sections 2, 4, 5, and 8, and
+`VOICE.md`, before writing; the deck section does not apply.
+
+Before the PR, all of these pass for the lesson:
+
+```sh
+scripts/verify/check_density.py LNN       # 20 beats, 40 words a present frame
+jupyter-book build book/ --all            # 0 warnings
+scripts/verify/check_frames.py LNN        # every frame fits one screen
+scripts/verify/check_page.py moduleNN/LNN-<slug>/index.html
+scripts/verify/check_widget.py book/extras/viz/<name>.html   # if any
+TEXINPUTS=<latex-tools>/tex/latex//: bash latex/build_practice.sh NN
+```
+
+Two things that bit the pilot:
+
+- **Figures use plain Unicode labels** (ℓ, λ, Δz, R′), not matplotlib's
+  `$...$` math. With `svg.fonttype: none` the math glyphs come out as the wrong
+  characters in a browser. `l03_figures.py` has a `lab()` helper for a symbol
+  with a subscript.
+- **Write primes as `^{\prime}` in practice sets**, never `'`. A bare `R'` in
+  math inside a `\question` overflows TeX's input stack with the house macros.
 
 ## Build and verify
 

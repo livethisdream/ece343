@@ -1,0 +1,257 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L3 practice set (The Lumped-Element Model): electrical length, the four
+% per-unit-length elements, and Kirchhoff's laws on one section.
+
+\fullwidth{\textbf{Learning Objective 3.1: } I can describe the origin of the
+transmission line equation, understand the method of developing a solution, and
+interpret the solution.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). Unless a problem says otherwise,
+signals travel along RG-58 coaxial cable at $v_p = 2\times10^{8}$ m/s.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Electrical length.} A 3 m length of RG-58 connects a signal
+generator to a load.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the wavelength in the cable at $50\ \khz$ and the electrical
+		length $\ell/\lambda$. Does the cable behave as an ideal wire?
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= \dfrac{v_p}{f} = \dfrac{2\times10^{8}}{5\times10^{4}} = 4000\ \m \\
+			\dfrac{\ell}{\lambda} &= \dfrac{3}{4000} = 7.5\times10^{-4}
+		}
+		The cable is far shorter than $\lambda/10$, so it behaves as an ideal wire.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\lambda$ = \ansbox[1.3in]{$4\ \km$}
+
+		\vspace{4pt}
+		$\ell/\lambda$ = \ansbox[1.3in]{$7.5\times10^{-4}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Repeat part (a) at $150\ \mhz$.
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= \dfrac{2\times10^{8}}{1.5\times10^{8}} = 1.33\ \m \\
+			\dfrac{\ell}{\lambda} &= \dfrac{3}{1.33} = 2.25
+		}
+		The cable is more than two wavelengths long. We must treat it as a
+		transmission line.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\lambda$ = \ansbox[1.3in]{$1.33\ \m$}
+
+		\vspace{4pt}
+		$\ell/\lambda$ = \ansbox[1.3in]{$2.25$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part At $150\ \mhz$, find the phase delay from one end of the cable to the
+		other, in degrees, and the time delay.
+		\begin{solution}[1.1in]
+		\eq{
+			\Delta\phi &= 360^\circ \cdot \dfrac{\ell}{\lambda} = 360^\circ \times 2.25 = 810^\circ \\
+			\tau &= \dfrac{\ell}{v_p} = \dfrac{3}{2\times10^{8}} = 15\ \text{ns}
+		}
+		The time delay does not depend on frequency; at $150\ \mhz$ it spans 2.25
+		periods.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Delta\phi$ = \ansbox[1.3in]{$810^\circ$}
+
+		\vspace{4pt}
+		$\tau$ = \ansbox[1.3in]{$15\ \text{ns}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Using the $\lambda/10$ rule of thumb, find the highest frequency at
+		which this cable still behaves as an ideal wire.
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= 10\ell = 30\ \m \\
+			f &= \dfrac{v_p}{\lambda} = \dfrac{2\times10^{8}}{30} = 6.67\ \mhz
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$f_\text{max}$ = \ansbox[1.3in]{$6.67\ \mhz$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Wire or transmission line?}
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A microstrip trace on a circuit board is $5\ \text{cm}$ long and
+		carries a $1\ \ghz$ clock. Signals on the board travel at
+		$v_p = 1.65\times10^{8}$ m/s. Find $\ell/\lambda$ and decide which model
+		applies.
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= \dfrac{1.65\times10^{8}}{10^{9}} = 16.5\ \text{cm} \\
+			\dfrac{\ell}{\lambda} &= \dfrac{5}{16.5} = 0.30
+		}
+		At $0.30\lambda$ the trace is three times past the rule of thumb, so it is a
+		transmission line.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\ell/\lambda$ = \ansbox[1.3in]{$0.30$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A $10\ \m$ speaker cable carries audio up to $20\ \khz$ at
+		$v_p = 2\times10^{8}$ m/s. Find $\ell/\lambda$ at the highest audio
+		frequency and decide which model applies.
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= \dfrac{2\times10^{8}}{2\times10^{4}} = 10\ \km \\
+			\dfrac{\ell}{\lambda} &= \dfrac{10}{10^{4}} = 10^{-3}
+		}
+		The cable is a thousandth of a wavelength, so it behaves as an ideal wire.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\ell/\lambda$ = \ansbox[1.3in]{$10^{-3}$}
+	\end{minipage}
+
+	\part The speaker cable in part (b) is 200 times longer than the circuit-board
+	trace in part (a). Explain in one or two sentences why the short trace needs the
+	transmission line model and the long cable does not.
+	\begin{solution}[1in]
+	What sets the model is the length measured in wavelengths, not in meters. The
+	$1\ \ghz$ clock has a wavelength of $16.5\ \text{cm}$, so the trace holds a
+	third of a cycle, while the audio signal has a wavelength of $10\ \km$, so the
+	cable holds a thousandth of one.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The four elements.} The lumped-element model places
+$R^{\prime}\Delta z$ and $L^{\prime}\Delta z$ in series and $G^{\prime}\Delta z$ and $C^{\prime}\Delta z$ in
+shunt in each section of the line.
+\begin{parts}
+
+	\part For each of $R^{\prime}$, $L^{\prime}$, $G^{\prime}$, and $C^{\prime}$, give its units and the physical
+	effect in the line that it represents.
+	\begin{solution}[1.6in]
+	$R^{\prime}$ ($\Omega$/m) represents the resistance of the metal conductors. $L^{\prime}$ (H/m)
+	represents the energy stored in the magnetic field around the current. $G^{\prime}$
+	(S/m) represents the leakage current through the imperfect dielectric. $C^{\prime}$
+	(F/m) represents the energy stored in the electric field between the
+	conductors.
+	\end{solution}
+
+	\part Which elements are zero on a lossless line, and why?
+	\begin{solution}[0.8in]
+	$R^{\prime} = 0$ and $G^{\prime} = 0$. Both represent power dissipated in the line, in the
+	conductors and in the dielectric. A lossless line stores energy in $L^{\prime}$ and $C^{\prime}$
+	but dissipates none.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part RG-58 has $L^{\prime} = 259\ \text{nH/m}$ and $C^{\prime} = 96.8\ \text{pF/m}$. Find
+		the total inductance and capacitance of a $1.5\ \m$ length.
+		\begin{solution}[1in]
+		\eq{
+			L &= L^{\prime}\ell = 259 \times 1.5 = 389\ \text{nH} \\
+			C &= C^{\prime}\ell = 96.8 \times 1.5 = 145\ \text{pF}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$L$ = \ansbox[1.3in]{$389\ \text{nH}$}
+
+		\vspace{4pt}
+		$C$ = \ansbox[1.3in]{$145\ \text{pF}$}
+	\end{minipage}
+
+	\part A classmate claims that $G^{\prime} = 1/R^{\prime}$, since conductance is the inverse of
+	resistance. Explain why the claim is wrong.
+	\begin{solution}[0.9in]
+	$R^{\prime}$ and $G^{\prime}$ describe two different materials in two different places. $R^{\prime}$ is
+	the resistance of the metal along the conductors, in series with the current,
+	and $G^{\prime}$ is the conductance of the dielectric between them, in shunt. A good
+	line has small $R^{\prime}$ and small $G^{\prime}$ at the same time, so the two are
+	independent.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Kirchhoff's laws on one section.} Use the section in the
+lesson, with $v(z,t)$ and $i(z,t)$ at the input and $v(z+\Delta z,t)$ and
+$i(z+\Delta z,t)$ at the output, and the shunt elements connected at the output
+side of the series elements.
+\begin{parts}
+
+	\part Write Kirchhoff's voltage law around the loop from the input terminals to
+	the output terminals.
+	\begin{solution}[0.9in]
+	\eq{ v(z,t) - R^{\prime}\Delta z\ i(z,t) - L^{\prime}\Delta z \partd{i(z,t)}{t} - v(z+\Delta z,t) = 0 }
+	\end{solution}
+
+	\part Write Kirchhoff's current law at the node where the shunt elements
+	connect.
+	\begin{solution}[0.9in]
+	\eq{ i(z,t) - G^{\prime}\Delta z\ v(z+\Delta z,t) - C^{\prime}\Delta z \partd{v(z+\Delta z,t)}{t} - i(z+\Delta z,t) = 0 }
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part We choose $\Delta z = \lambda/20$ for a model of RG-58 at
+		$500\ \mhz$. Find $\Delta z$ and the number of sections needed to model a
+		$1\ \m$ cable.
+		\begin{solution}[1.1in]
+		\eq{
+			\lambda &= \dfrac{2\times10^{8}}{5\times10^{8}} = 0.4\ \m \\
+			\Delta z &= \dfrac{0.4}{20} = 2\ \text{cm} \\
+			N &= \dfrac{1}{0.02} = 50
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Delta z$ = \ansbox[1.3in]{$2\ \text{cm}$}
+
+		\vspace{4pt}
+		$N$ = \ansbox[1.3in]{$50$}
+	\end{minipage}
+
+	\part Explain why each section must be much shorter than a wavelength, and what
+	happens to the model in Lesson 4 as $\Delta z \to 0$.
+	\begin{solution}[1in]
+	Kirchhoff's laws assume the voltage and current are the same everywhere along
+	a connection at a given instant, which is true only for a piece much shorter
+	than $\lambda$. As $\Delta z \to 0$ the section becomes exact, and dividing
+	each equation by $\Delta z$ turns the differences into derivatives in $z$,
+	which gives the telegrapher's equations.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

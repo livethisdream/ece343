@@ -36,16 +36,8 @@ BEATS = 20
 # an earlier budget is listed here until it is recut; delete its entry when it
 # is. Keys match the lesson directory name by prefix (e.g. "L18").
 BEAT_EXCEPTIONS = {
-    "L05": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L06": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L07": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L08": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L09": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L11": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L12": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L13": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L14": (30, "cut under the 30-beat rule (2026-09); recut pending"),
-    "L18": (21, "phase-sweep widget frame added after the 20-beat cut (Neil, 2026-10-17)"),
+    # ECE 343 has none yet. (The ECE 444 exceptions this file was copied with
+    # were keyed to 444 lesson numbers and did not apply here.)
 }
 
 

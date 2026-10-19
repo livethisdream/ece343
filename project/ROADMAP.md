@@ -1,6 +1,6 @@
 # ECE 343 roadmap
 
-Last updated 2026-10-18. Read with ECE 444's `project/ROADMAP.md`, whose
+Last updated 2026-10-19. Read with ECE 444's `project/ROADMAP.md`, whose
 working rules apply here.
 
 ## Settled (Neil, 2026-10-17)
@@ -16,6 +16,10 @@ working rules apply here.
   (34 in all), so they still match the slides and the assessments.
 - **Grades and weights are the same as 2025** for now: LO assessments 40%,
   GRs 20%, final exam 25%, engagement 15%.
+- **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
+  `CLAUDE.md`, "Converting a lesson". L3 now derives the telegrapher's
+  equations, so L4 starts from them: phasor form, the wave equation, and its
+  solution.
 - **The old slides are under Materials** as PDFs (slides and fill-in
   handouts), and linked from each lesson page until it is converted. Their
   LaTeX lives in `ece343-faculty`.

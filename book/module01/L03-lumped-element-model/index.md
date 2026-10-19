@@ -32,8 +32,9 @@ been an ideal connection, with the same voltage at both ends at every instant.
 That assumption holds only when the wire is short compared to a wavelength.
 This lesson shows when it fails and replaces it with a model that does not:
 the **lumped-element model**, a chain of tiny circuits that each obey
-Kirchhoff's laws. Lesson 4 turns that chain into the transmission line
-equations, and the rest of Module 1 solves them.
+Kirchhoff's laws. We then shrink each circuit to zero length and derive the
+**telegrapher's equations**, which describe the voltage and current at every
+point on the line, and the rest of Module 1 solves them.
 :::
 ::::
 
@@ -194,7 +195,7 @@ today.
 $$\Delta z \ll \lambda$$
 
 - Each section is short enough for Kirchhoff's laws.
-- Chain them together, and let $\Delta z \to 0$ in Lesson 4.
+- Write Kirchhoff's laws for one section, then let $\Delta z \to 0$.
 :::
 
 Circuit theory fails on the whole line, but it still works on a short enough
@@ -202,7 +203,9 @@ piece of it. That observation is the entire method. We divide the line into
 sections of length $\Delta z$, each one much shorter than a wavelength, so that
 the voltage and current are effectively constant across each section. Within a
 section, Kirchhoff's laws hold. The line is then a long chain of identical
-small circuits, and each one hands its output to the next as its input.
+small circuits, and each one hands its output to the next as its input. We
+write Kirchhoff's laws for one section, then let the section shrink to zero
+length, and the result describes every point on the line.
 
 The question is what goes inside each section. A short piece of any two-conductor
 line stores energy in the magnetic field around its current, stores energy in
@@ -224,7 +227,7 @@ conductors, because they act on the voltage across the line: $G'\Delta z$ and
 $C'\Delta z$. The primes mark **per-unit-length** quantities: $L'$ is
 inductance per meter, so a section of length $\Delta z$ has inductance
 $L'\Delta z$. Doubling the length of the section doubles every element in it,
-which is what lets us take $\Delta z$ as small as we like in Lesson 4.
+which lets us take $\Delta z$ as small as we like.
 ::::
 
 ::::{frame} What Each Element Models
@@ -276,23 +279,7 @@ At 1 kHz those values are negligible: the inductor's reactance is
 $3.3\ \text{m}\Omega$, and the capacitor's is $820\ \text{k}\Omega$. At
 100 MHz they are not. The lumped model does not lump them into one inductor and
 one capacitor, though; it spreads them evenly along the length, and that
-distribution is what produces a traveling wave instead of a resonant circuit.
-::::
-
-::::{frame} The Lossless Line
-:::{present}
-- Set $R' = 0$ and $G' = 0$.
-- Only $L'$ and $C'$ remain, and the line stores energy without dissipating any.
-- Most of Module 1 uses this model; Lesson 5 shows when the losses matter.
-:::
-
-A **lossless line** has perfect conductors and a perfect dielectric, so
-$R' = 0$ and $G' = 0$. Real cables are not lossless, but over the few meters of
-cable in a lab, the loss is small enough to neglect, and the lossless model
-keeps the algebra clean while preserving everything that makes a transmission
-line different from a wire: the wave, the reflections, and the impedance
-transformation. We keep all four elements in the general derivation and drop
-$R'$ and $G'$ when a problem says the line is lossless.
+distribution produces a traveling wave instead of a resonant circuit.
 ::::
 
 ::::{frame} Kirchhoff's Voltage Law on One Section
@@ -302,13 +289,37 @@ Going around the loop from the input terminals to the output terminals:
 $$v(z,t) - R'\Delta z\ i(z,t) - L'\Delta z \frac{\partial i(z,t)}{\partial t} - v(z+\Delta z,t) = 0$$
 :::
 
-Now we apply Kirchhoff's voltage law to the section in the figure. Starting at
-the input, the voltage $v(z,t)$ drops across the series resistance by
-$R'\Delta z\ i(z,t)$ and across the series inductance by
-$L'\Delta z\ \partial i/\partial t$. What remains appears across the output
-terminals as $v(z+\Delta z,t)$. The partial derivative appears because the
-current now depends on both position and time, and the inductor responds only
-to its change in time.
+Now we apply Kirchhoff's voltage law to the section in the figure, keeping all
+four elements so the result holds for a lossy line. Starting at the input, the
+voltage $v(z,t)$ drops across the series resistance by $R'\Delta z\ i(z,t)$
+and across the series inductance by $L'\Delta z\ \partial i/\partial t$. What
+remains appears across the output terminals as $v(z+\Delta z,t)$. The partial
+derivative appears because the current now depends on both position and time,
+and the inductor responds only to its change in time.
+::::
+
+::::{frame} From the Voltage Law to a Derivative
+:::{present}
+$$\begin{aligned} v(z+\Delta z,t) - v(z,t) &= -R'\Delta z\ i(z,t) - L'\Delta z \frac{\partial i(z,t)}{\partial t} \\ \frac{v(z+\Delta z,t) - v(z,t)}{\Delta z} &= -R'\ i(z,t) - L' \frac{\partial i(z,t)}{\partial t} \\ \lim_{\Delta z \to 0} \frac{v(z+\Delta z,t) - v(z,t)}{\Delta z} &= \frac{\partial v(z,t)}{\partial z} \end{aligned}$$
+
+$$-\frac{\partial v(z,t)}{\partial z} = R'\ i(z,t) + L' \frac{\partial i(z,t)}{\partial t}$$
+:::
+
+The equation for one section still depends on the arbitrary length
+$\Delta z$. To remove it, we move the two voltages to the left side, so the
+left side is the change in voltage across the section. Every element in the
+section is proportional to $\Delta z$, so dividing both sides by $\Delta z$
+leaves the per-unit-length parameters alone on the right. The left side is now
+a difference quotient: the change in voltage divided by the distance over which
+it changes.
+
+Now we let the section shrink, $\Delta z \to 0$. The right side does not
+depend on $\Delta z$, so it is unchanged. The left side becomes, by the
+definition of the derivative, the partial derivative of $v$ with respect to
+$z$. Moving the minus sign to the left gives the first equation. It says the
+voltage falls along the line at a rate set by the current through the series
+resistance and the rate of change of that current through the series
+inductance.
 ::::
 
 ::::{frame} Kirchhoff's Current Law on One Section
@@ -325,12 +336,62 @@ capacitance, $C'\Delta z\ \partial v/\partial t$, and the rest continues down
 the line as $i(z+\Delta z,t)$. The shunt elements see the voltage at the
 output terminals, $v(z+\Delta z,t)$, because the figure places them after the
 series elements.
+::::
 
-These two equations describe one section exactly. Lesson 4 divides each one by
-$\Delta z$ and takes the limit as $\Delta z \to 0$, and the differences become
-derivatives in $z$. The result is a pair of coupled partial differential
-equations, the **telegrapher's equations**, which describe the voltage and
-current everywhere on the line.
+::::{frame} From the Current Law to a Derivative
+:::{present}
+$$\begin{aligned} \frac{i(z+\Delta z,t) - i(z,t)}{\Delta z} &= -G'\ v(z+\Delta z,t) - C' \frac{\partial v(z+\Delta z,t)}{\partial t} \\ \lim_{\Delta z \to 0}: \quad v(z+\Delta z,t) &\to v(z,t) \end{aligned}$$
+
+$$-\frac{\partial i(z,t)}{\partial z} = G'\ v(z,t) + C' \frac{\partial v(z,t)}{\partial t}$$
+:::
+
+The current law follows the same three steps. We move the two currents to the
+left side, divide by $\Delta z$, and let $\Delta z \to 0$. The left side
+becomes the partial derivative of $i$ with respect to $z$. The right side has
+one more thing to resolve: the shunt elements see the voltage at
+$z + \Delta z$, not at $z$. As the section shrinks, the two points merge, and
+$v(z+\Delta z,t)$ becomes $v(z,t)$. So the choice of placing the shunt
+elements after the series elements, rather than before them, does not change
+the result in the limit. The second equation says the current falls along the
+line at a rate set by the leakage through the dielectric and the charging of
+the capacitance between the conductors.
+::::
+
+::::{frame} The Telegrapher's Equations
+:::{present}
+$$\begin{aligned} -\frac{\partial v(z,t)}{\partial z} &= R'\ i(z,t) + L' \frac{\partial i(z,t)}{\partial t} \\ -\frac{\partial i(z,t)}{\partial z} &= G'\ v(z,t) + C' \frac{\partial v(z,t)}{\partial t} \end{aligned}$$
+
+- Two coupled partial differential equations in $z$ and $t$.
+- Each one contains both $v$ and $i$.
+:::
+
+Together, the two results are the **telegrapher's equations**, worked out by
+Oliver Heaviside in the late nineteenth century to explain why signals smeared out on long
+telegraph cables. They hold everywhere on any two-conductor line, lossy or
+not, and they replace Kirchhoff's laws for the line as a whole. They are
+**coupled**: the change in voltage along the line depends on the current, and
+the change in current depends on the voltage, so we cannot solve either one by
+itself. Lesson 4 uncouples them.
+::::
+
+::::{frame} The Lossless Line
+:::{present}
+Set $R' = 0$ and $G' = 0$:
+
+$$\begin{aligned} -\frac{\partial v(z,t)}{\partial z} &= L' \frac{\partial i(z,t)}{\partial t} \\ -\frac{\partial i(z,t)}{\partial z} &= C' \frac{\partial v(z,t)}{\partial t} \end{aligned}$$
+:::
+
+A **lossless line** has perfect conductors and a perfect dielectric, so
+$R' = 0$ and $G' = 0$. Real cables are not lossless, but over the few meters of
+cable in a lab, the loss is small enough to neglect, and the lossless model
+keeps the algebra clean while preserving everything that makes a transmission
+line different from a wire: the wave, the reflections, and the impedance
+transformation. With the loss terms gone, the voltage changes along the line
+only because the current changes in time, and the current changes along the
+line only because the voltage changes in time. That exchange between the
+inductance and the capacitance is the wave. We keep all four elements in the
+general results and drop $R'$ and $G'$ when a problem says the line is
+lossless.
 ::::
 
 ::::{frame} Summary
@@ -345,6 +406,7 @@ current everywhere on the line.
 | $R'$, $G'$ | Loss in the conductors and in the dielectric | zero on a lossless line |
 | $L'$, $C'$ | Magnetic and electric energy storage per meter | RG-58: $259\ \text{nH/m}$, $96.8\ \text{pF/m}$ |
 | Velocity in RG-58 | About two-thirds of $c$ | $2 \times 10^8$ m/s |
+| Telegrapher's equations | Kirchhoff's laws on one section, divided by $\Delta z$, as $\Delta z \to 0$ | $-\frac{\partial v}{\partial z} = R'i + L'\frac{\partial i}{\partial t}$, $-\frac{\partial i}{\partial z} = G'v + C'\frac{\partial v}{\partial t}$ |
 ::::
 
 ::::{frame} Practice
@@ -356,14 +418,16 @@ current everywhere on the line.
 
 ::::{frame} Where This Is Going
 :::{present}
-- **Lesson 4**: let $\Delta z \to 0$ to get the telegrapher's equations, then solve them.
+- **Lesson 4**: phasors uncouple the telegrapher's equations into a wave equation, and we solve it.
 - **Lesson 5**: the solution is a wave, with a characteristic impedance $Z_0$ set by $R'$, $L'$, $G'$, and $C'$.
 :::
 
-Today we built the model and wrote Kirchhoff's laws for one section of it.
-Lesson 4 takes the limit, which turns those two equations into the
-telegrapher's equations, and then uses the phasors of Lesson 2 to decouple them
-into a wave equation for the voltage alone. Its solution is a pair of waves, one
+Today we built the model, wrote Kirchhoff's laws for one section of it, and
+took the limit to reach the telegrapher's equations. Lesson 4 uses the phasors
+of Lesson 2 to replace each time derivative with $j\omega$, which turns the
+pair into ordinary differential equations in $z$. Differentiating one and
+substituting the other uncouples them into a wave equation for the voltage
+alone. Its solution is a pair of waves, one
 traveling toward the load and one traveling back toward the source. Lesson 5
 reads the physics out of that solution: how fast the wave moves, how quickly it
 decays, and the characteristic impedance $Z_0$ that relates its voltage to its

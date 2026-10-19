@@ -2,18 +2,18 @@
 frame_view: true
 ---
 
-# L4 - The Telegrapher's Equations
+# L4 - The Wave Equation
 
 ::::{frame}
 :class: title-frame
 
 <div class="course-mark">ECE 343 · Spring 2027</div>
 
-<h1 class="frame-title">The Telegrapher's Equations</h1>
+<h1 class="frame-title">The Wave Equation</h1>
 
 <div class="title-rule"></div>
 
-The wave equations for voltage and current on a line, and the traveling-wave solution.
+The telegrapher's equations in phasor form, the wave equation for voltage and current, and its traveling-wave solution.
 
 Lesson 4 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers
 ::::

@@ -18,8 +18,8 @@ working rules apply here.
   GRs 20%, final exam 25%, engagement 15%.
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
   `CLAUDE.md`, "Converting a lesson". L3 now derives the telegrapher's
-  equations, so L4 starts from them: phasor form, the wave equation, and its
-  solution.
+  equations, so L4, retitled "The Wave Equation" (Neil, 2026-10-19), starts
+  from them: phasor form, the wave equation, and its solution.
 - **The old slides are under Materials** as PDFs (slides and fill-in
   handouts), and linked from each lesson page until it is converted. Their
   LaTeX lives in `ece343-faculty`.

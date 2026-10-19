@@ -83,10 +83,10 @@ What electromagnetics is for, the language of fields and phasors, and the transm
 ::::{frame} Lessons 4-6
 
 <div class="module-toc">
-  <a class="mt-card mt-lesson" href="L04-telegraphers-equations/index.html">
+  <a class="mt-card mt-lesson" href="L04-wave-equation/index.html">
     <span class="mt-kind">Lesson · L4</span>
-    <h4>The Telegrapher's Equations</h4>
-    <p>The wave equations for voltage and current on a line, and the traveling-wave solution. Objective 3.1.</p>
+    <h4>The Wave Equation</h4>
+    <p>The telegrapher's equations in phasor form, the wave equation for voltage and current, and its traveling-wave solution. Objective 3.1.</p>
   </a>
   <a class="mt-card mt-lesson" href="L05-characteristic-impedance/index.html">
     <span class="mt-kind">Lesson · L5</span>

@@ -239,14 +239,69 @@ side of the series elements.
 		$N$ = \ansbox[1.3in]{$50$}
 	\end{minipage}
 
-	\part Explain why each section must be much shorter than a wavelength, and what
-	happens to the model in Lesson 4 as $\Delta z \to 0$.
+	\part Starting from your result in part (a), divide by $\Delta z$ and take the
+	limit as $\Delta z \to 0$ to derive the first telegrapher's equation. Name the
+	step where the derivative in $z$ appears.
+	\begin{solution}[2in]
+	Move the two voltages to one side and divide by $\Delta z$:
+	\eq{
+		\dfrac{v(z+\Delta z,t) - v(z,t)}{\Delta z} &= -R^{\prime}\ i(z,t) - L^{\prime} \partd{i(z,t)}{t}
+	}
+	The right side no longer depends on $\Delta z$. As $\Delta z \to 0$, the left
+	side is the definition of the partial derivative with respect to $z$:
+	\eq{
+		-\partd{v(z,t)}{z} &= R^{\prime}\ i(z,t) + L^{\prime} \partd{i(z,t)}{t}
+	}
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The telegrapher's equations.} The two telegrapher's equations
+for a line with all four elements are
+\eq{
+	-\partd{v(z,t)}{z} &= R^{\prime}\ i(z,t) + L^{\prime} \partd{i(z,t)}{t} \\
+	-\partd{i(z,t)}{z} &= G^{\prime}\ v(z,t) + C^{\prime} \partd{v(z,t)}{t}
+}
+\begin{parts}
+
+	\part In the current law for one section, the shunt elements see
+	$v(z+\Delta z,t)$, not $v(z,t)$. Explain why the second equation contains
+	$v(z,t)$.
 	\begin{solution}[1in]
-	Kirchhoff's laws assume the voltage and current are the same everywhere along
-	a connection at a given instant, which is true only for a piece much shorter
-	than $\lambda$. As $\Delta z \to 0$ the section becomes exact, and dividing
-	each equation by $\Delta z$ turns the differences into derivatives in $z$,
-	which gives the telegrapher's equations.
+	As $\Delta z \to 0$ the points $z$ and $z + \Delta z$ merge, so
+	$v(z+\Delta z,t) \to v(z,t)$. Placing the shunt elements before or after the
+	series elements changes the equation for one finite section, but not the
+	limit.
+	\end{solution}
+
+	\part Write both equations for a lossless line.
+	\begin{solution}[1in]
+	\eq{
+		-\partd{v(z,t)}{z} &= L^{\prime} \partd{i(z,t)}{t} \\
+		-\partd{i(z,t)}{z} &= C^{\prime} \partd{v(z,t)}{t}
+	}
+	\end{solution}
+
+	\part The equations are called \emph{coupled}. Explain what that means, and why
+	we cannot solve the first equation for $v(z,t)$ by itself.
+	\begin{solution}[1in]
+	Each equation contains both $v$ and $i$: the change in voltage along the line
+	depends on the current, and the change in current depends on the voltage. The
+	first equation has two unknown functions, so it cannot determine $v$ without
+	the second. Lesson 4 combines them into one equation for $v$ alone.
+	\end{solution}
+
+	\part On a lossless line carrying a DC voltage and current that do not change
+	in time, what do the equations say about $v$ and $i$ along the line? Explain
+	the result physically.
+	\begin{solution}[1.1in]
+	Every time derivative is zero, so $\partial v/\partial z = 0$ and
+	$\partial i/\partial z = 0$: the voltage and current are the same everywhere
+	on the line. At DC the inductance has no voltage across it and the capacitance
+	draws no current, so a lossless line behaves as an ideal pair of wires, as
+	circuit theory assumes.
 	\end{solution}
 
 \end{parts}

@@ -21,8 +21,8 @@ parts:
         title: "L2 — Fields, Parameters, and Field Quantities"
       - file: module01/L03-lumped-element-model/index
         title: "L3 — The Lumped-Element Model"
-      - file: module01/L04-telegraphers-equations/index
-        title: "L4 — The Telegrapher's Equations"
+      - file: module01/L04-wave-equation/index
+        title: "L4 — The Wave Equation"
       - file: module01/L05-characteristic-impedance/index
         title: "L5 — Characteristic Impedance and Wave Propagation"
       - file: module01/L06-reflection-vswr/index

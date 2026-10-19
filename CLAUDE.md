@@ -57,6 +57,16 @@ one bundle:
 Then set the lesson's decks to `[]` in the manifest and update its row in the
 Spring 2025 slide tables on `book/materials.md`.
 
+**Every derivation is shown in full** (Neil, 2026-10-19). This is where 343
+departs from 444, whose spec keeps derivations short. A result the course
+uses is derived on the page, step by step, as one chain from the general form
+to the specific one (444's `VOICE.md` rule 19): L3 goes from Kirchhoff's laws
+on a lossy section, through the difference quotient and the limit, to the
+telegrapher's equations; L6 derives $\Gamma$ and the standing-wave magnitude.
+Present mode shows the chain; the depth text names each step. The only results
+quoted without derivation are ones that need a later chapter, and the page
+says which lesson derives them (L6's coax $L'$ and $C'$).
+
 There are **no reveal.js decks** in this course: present mode on the frame page
 is the slide view. Read 444's `COURSE_SPEC.md` sections 2, 4, 5, and 8, and
 `VOICE.md`, before writing; the deck section does not apply.

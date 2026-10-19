@@ -312,7 +312,7 @@ marked Vol. 2. Dates will follow the Spring 2027 academic calendar.
 | L1 | [Course Introduction](module01/L01-course-intro/index.md) | Ch. 1 | 1.1, 1.2 |
 | L2 | [Fields, Parameters, and Field Quantities](module01/L02-fields/index.md) | Ch. 2 | 2.1, 2.2 |
 | L3 | [The Lumped-Element Model](module01/L03-lumped-element-model/index.md) | 3.1–3.4 | 3.1 |
-| L4 | [The Telegrapher's Equations](module01/L04-telegraphers-equations/index.md) | 3.5–3.6 | 3.1 |
+| L4 | [The Wave Equation](module01/L04-wave-equation/index.md) | 3.5–3.6 | 3.1 |
 | L5 | [Characteristic Impedance and Wave Propagation](module01/L05-characteristic-impedance/index.md) | 3.7–3.9 | 3.2 |
 | L6 | [Coaxial Lines, Reflection Coefficient, and VSWR](module01/L06-reflection-vswr/index.md) | 3.10, 3.12–3.14 | 3.2, 3.3 |
 | L7 | [Terminated Transmission Lines](module01/L07-terminated-lines/index.md) | 3.15, 3.17–3.19 | 3.3, 3.4 |

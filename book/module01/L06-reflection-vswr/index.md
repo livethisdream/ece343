@@ -66,8 +66,9 @@ $$\begin{aligned} L' &= \frac{\mu}{2\pi} \ln\frac{b}{a} \\ C' &= \frac{2\pi\epsi
 
 Lesson 3 introduced the coaxial line, an inner conductor of radius $a$ inside
 a shield of radius $b$, and quoted its per-unit-length inductance and
-capacitance. The textbook derives both from the fields between the conductors
-in Section 3.10; here we use the results. The inductance comes from the
+capacitance. Deriving them requires the fields between the conductors:
+Lesson 25 derives $C'$ from Gauss's law, and Module 3 derives $L'$ from
+Ampere's law. Here we use the results. The inductance comes from the
 magnetic field that circles the inner conductor, and the capacitance comes from
 the radial electric field between the conductors, so both depend only on the
 ratio $b/a$ and on the material between them.
@@ -118,9 +119,9 @@ These are the RG-58 numbers Lesson 3 used.
 
 ::::{frame} Terminating the Line
 :::{present}
-At the load, $z = 0$, the line's voltage and current must match the load's:
+At the load, $z = 0$, every exponential equals one:
 
-$$Z_L = \frac{\widetilde{V}(0)}{\widetilde{I}(0)} = Z_0 \frac{V_0^+ + V_0^-}{V_0^+ - V_0^-}$$
+$$\begin{aligned} \widetilde{V}(0) &= V_0^+ + V_0^- \\ \widetilde{I}(0) &= \frac{V_0^+ - V_0^-}{Z_0} \\ Z_L = \frac{\widetilde{V}(0)}{\widetilde{I}(0)} &= Z_0 \frac{V_0^+ + V_0^-}{V_0^+ - V_0^-} \end{aligned}$$
 :::
 
 Now we connect a load impedance $Z_L$ at $z = 0$, the convention from Lesson 3.
@@ -135,15 +136,15 @@ must appear to make the ratio come out right.
 
 ::::{frame} The Reflection Coefficient
 :::{present}
-Solve the boundary condition for the ratio of the two amplitudes:
-
-$$\Gamma = \frac{V_0^-}{V_0^+} = \frac{Z_L - Z_0}{Z_L + Z_0}$$
+$$\begin{aligned} Z_L \left(V_0^+ - V_0^-\right) &= Z_0 \left(V_0^+ + V_0^-\right) \\ V_0^+ \left(Z_L - Z_0\right) &= V_0^- \left(Z_L + Z_0\right) \\ \Gamma = \frac{V_0^-}{V_0^+} &= \frac{Z_L - Z_0}{Z_L + Z_0} \end{aligned}$$
 
 - $\Gamma$ is complex: a magnitude $\vert\Gamma\vert$ and a phase $\theta_\Gamma$.
 - For any passive load, $\vert\Gamma\vert \le 1$.
 :::
 
-Rearranging the boundary condition for $V_0^-/V_0^+$ gives the **reflection
+To solve the boundary condition for the ratio of the amplitudes, we multiply
+both sides by $V_0^+ - V_0^-$, collect the $V_0^+$ terms on the left and the
+$V_0^-$ terms on the right, and divide. The result is the **reflection
 coefficient** $\Gamma$, the ratio of the reflected voltage wave to the incident
 one at the load. It depends only on the load and the line, not on the source or
 the length of the line. Because $Z_L$ can be complex, so can $\Gamma$. We write
@@ -238,16 +239,24 @@ opposite, they subtract.
 
 ::::{frame} The Standing Wave
 :::{present}
-$$\begin{aligned} V_\text{max} &= \left\vert V_0^+\right\vert (1 + \vert\Gamma\vert) \\ V_\text{min} &= \left\vert V_0^+\right\vert (1 - \vert\Gamma\vert) \end{aligned}$$
+With $\Gamma = \vert\Gamma\vert e^{j\theta_\Gamma}$:
 
-- Adjacent maxima are $\lambda/2$ apart.
-- Each minimum sits $\lambda/4$ from a maximum.
+$$\begin{aligned} \left\vert 1 + \Gamma e^{j2\beta z} \right\vert^2 &= \left(1 + \Gamma e^{j2\beta z}\right)\left(1 + \Gamma^* e^{-j2\beta z}\right) \\ &= 1 + \vert\Gamma\vert^2 + 2\vert\Gamma\vert\cos\left(\theta_\Gamma + 2\beta z\right) \end{aligned}$$
+
+$$V_\text{max} = \left\vert V_0^+\right\vert (1 + \vert\Gamma\vert), \qquad V_\text{min} = \left\vert V_0^+\right\vert (1 - \vert\Gamma\vert)$$
+
+- Maxima are $\lambda/2$ apart; each minimum is $\lambda/4$ from a maximum.
 :::
 
-The magnitude $\vert 1 + \Gamma e^{j2\beta z}\vert$ swings between
-$1 + \vert\Gamma\vert$, where the two waves are in phase, and
-$1 - \vert\Gamma\vert$, where they are out of phase. The pattern does not move
-along the line, which is why it is called a **standing wave**. The phase
+To find how the magnitude varies, we square it, which turns it into the
+product of the term and its complex conjugate. Multiplying out, the two cross
+terms are complex conjugates of each other, and a number plus its conjugate is
+twice its real part, which gives the cosine. The cosine swings between $+1$ and
+$-1$, so the squared magnitude swings between
+$1 + \vert\Gamma\vert^2 + 2\vert\Gamma\vert = (1 + \vert\Gamma\vert)^2$, where the
+two waves are in phase, and $(1 - \vert\Gamma\vert)^2$, where they are out of
+phase. Taking square roots gives $V_\text{max}$ and $V_\text{min}$. The
+pattern does not move along the line, which is why it is called a **standing wave**. The phase
 $2\beta z$ changes by $2\pi$ over half a wavelength, so the maxima repeat every
 $\lambda/2$, and each minimum sits halfway between two maxima, a quarter
 wavelength from each. On a matched line, $\Gamma = 0$, and the voltage

@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; ECE 343 — Intro to Electromagnetics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/sbt-sidebar-shim.js"></script>
+    <script src="_static/viz-autosize.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/DFEC-logo.png" class="logo__image only-light" alt="ECE 343 — Intro to Electromagnetics - Home"/>
+    <script>document.write(`<img src="_static/DFEC-logo.png" class="logo__image only-dark" alt="ECE 343 — Intro to Electromagnetics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item">
+<h3><a href="intro.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+</div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ 
+</div>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By N. Rogers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2027.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

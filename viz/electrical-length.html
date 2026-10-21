@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electrical length: a 60 Hz power line and a 1 GHz cable</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button { flex:1 1 160px; font:inherit; font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+                    color:var(--navy); background:#fff; border:1px solid var(--edge2); border-radius:6px; padding:7px 10px; cursor:pointer; }
+  .presets button.on { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .presets button:focus-visible { outline:2px solid var(--navy); outline-offset:2px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr auto; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:58px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+  .ro.good { background:rgba(63,125,52,0.12); border-color:rgba(63,125,52,0.30); }
+  .ro.good .v { color:var(--grn); }
+  .ro.warn { background:rgba(138,90,0,0.12); border-color:rgba(138,90,0,0.30); }
+  .ro.warn .v { color:var(--amber); }
+  .ro.bad  { background:rgba(176,30,36,0.10); border-color:rgba(176,30,36,0.28); }
+  .ro.bad  .v { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="presets">
+    <button id="p-power" type="button">60 Hz power line, 100 km</button>
+    <button id="p-coax" type="button">1 GHz coax, 1.1 m</button>
+  </div>
+
+  <canvas id="plot" aria-label="Voltage along the line at one instant, with the phase at the source and at the load"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(f\)</label>
+      <input type="range" id="freq" min="1" max="10" step="0.01" value="1.778">
+      <span class="val" id="f-val">60 Hz</span>
+    </div>
+    <div class="ctl">
+      <label>\(\ell\)</label>
+      <input type="range" id="len" min="-3" max="6.7" step="0.01" value="5">
+      <span class="val" id="l-val">100 km</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="play" checked><span class="sw"></span><span class="t">Animate</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">wavelength \(\lambda\)</span><span class="v" id="r-lam">—</span></div>
+    <div class="ro"><span class="k">\(\ell/\lambda\)</span><span class="v" id="r-ratio">—</span></div>
+    <div class="ro"><span class="k">phase delay</span><span class="v" id="r-phase">—</span></div>
+    <div class="ro" id="ro-model"><span class="k">model</span><span class="v" id="r-model">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// A matched line carries one forward wave: v(z,t) = cos(ωt − βz), with z from
+// 0 at the source to ℓ at the load and β = 2π/λ, λ = v_p/f. The animation runs
+// ωt at a fixed visual rate whatever f is, so a 60 Hz and a 1 GHz signal look
+// the same speed; what differs is how much of a wavelength fits on the line.
+const PRESETS = {
+  power: { f: 60,  len: 1e5, vp: 3e8, medium: 'overhead line, v_p = c' },
+  coax:  { f: 1e9, len: 1.1, vp: 2e8, medium: 'RG-58 coax, v_p = 2c/3' },
+};
+const state = { f: 60, len: 1e5, vp: 3e8, medium: PRESETS.power.medium, phi: 0, playing: true, preset: 'power' };
+
+const fEl = document.getElementById('freq'), lEl = document.getElementById('len');
+const fVal = document.getElementById('f-val'), lVal = document.getElementById('l-val');
+const playEl = document.getElementById('play');
+const bPower = document.getElementById('p-power'), bCoax = document.getElementById('p-coax');
+
+// Three significant figures, no exponent, no trailing zeros after a decimal.
+function sig3(x){
+  const t = Number(x.toPrecision(3));
+  return t >= 1000 ? Math.round(t).toLocaleString('en-US') : String(t);
+}
+function fmtF(f){
+  if (f >= 1e9) return sig3(f/1e9) + ' GHz';
+  if (f >= 1e6) return sig3(f/1e6) + ' MHz';
+  if (f >= 1e3) return sig3(f/1e3) + ' kHz';
+  return sig3(f) + ' Hz';
+}
+function fmtL(m){
+  if (m >= 1e3) return sig3(m/1e3) + ' km';
+  if (m >= 1)   return sig3(m) + ' m';
+  if (m >= 1e-2) return sig3(m*100) + ' cm';
+  return sig3(m*1e3) + ' mm';
+}
+function fmtRatio(r){
+  if (r < 1e-3) return r.toExponential(1).replace('e', '×10^').replace(/\^(-?)\+?0*(\d+)/, (m,s,d)=>toSup(s+d));
+  if (r < 10) return r.toPrecision(2);
+  return r.toFixed(0);
+}
+function toSup(s){ const m={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'}; return s.split('').map(c=>m[c]||c).join(''); }
+
+function syncSliders(){
+  fEl.value = Math.log10(state.f).toFixed(3);
+  lEl.value = Math.log10(state.len).toFixed(3);
+}
+function setPreset(name){
+  const p = PRESETS[name];
+  Object.assign(state, { f: p.f, len: p.len, vp: p.vp, medium: p.medium, preset: name });
+  bPower.classList.toggle('on', name === 'power');
+  bCoax.classList.toggle('on', name === 'coax');
+  syncSliders(); update();
+}
+bPower.addEventListener('click', () => setPreset('power'));
+bCoax.addEventListener('click', () => setPreset('coax'));
+fEl.addEventListener('input', () => { state.f = Math.pow(10, parseFloat(fEl.value)); update(); });
+lEl.addEventListener('input', () => { state.len = Math.pow(10, parseFloat(lEl.value)); update(); });
+playEl.addEventListener('change', () => { state.playing = playEl.checked; if (state.playing) { lastTs = null; requestAnimationFrame(tick); } });
+
+let lastTs = null;
+function tick(ts){
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs)/1000); lastTs = ts;
+  state.phi = (state.phi + dt * 2*Math.PI*0.4) % (2*Math.PI);   // 0.4 displayed cycles per second
+  draw();
+  requestAnimationFrame(tick);
+}
+
+// ---- canvas ----
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W = 360;
+let SCL = 1;
+const SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  let h = Math.max(230, Math.min(w * 0.36, 300));
+  if (SQ_MQ && SQ_MQ.matches) h = Math.round(h * 0.8);
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function dial(cx, cy, r, ang, color, label){
+  ctx.strokeStyle = '#cddce9'; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.stroke();
+  ctx.strokeStyle = color; ctx.lineWidth = 2.4;
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + r*Math.cos(ang), cy - r*Math.sin(ang)); ctx.stroke();
+  ctx.fillStyle = color; ctx.beginPath(); ctx.arc(cx + r*Math.cos(ang), cy - r*Math.sin(ang), 2.6, 0, 2*Math.PI); ctx.fill();
+  stext(ctx, label, cx, cy + r + 10, 11, cssVar('--ink3'), 'center', true);
+}
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const navy = cssVar('--navy'), amber = cssVar('--amber');
+
+  const R = Math.max(14, Math.min(22, h*0.08));
+  const mL = 2*R + 20, mR = 2*R + 20, mT = 30, mB = 30;
+  const pW = w - mL - mR, pH = h - mT - mB, y0 = mT + pH/2;
+  const lam = state.vp / state.f, ratio = state.len / lam;
+  const xFor = u => mL + u*pW;                 // u = z/ℓ, 0 at source, 1 at load
+  const yFor = v => y0 - v*(pH/2)*0.85;
+
+  // the two conductors, drawn faintly behind the wave
+  ctx.strokeStyle = '#e3edf6'; ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.moveTo(mL, mT+4); ctx.lineTo(mL+pW, mT+4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(mL, mT+pH-4); ctx.lineTo(mL+pW, mT+pH-4); ctx.stroke();
+  ctx.strokeStyle = '#c7d2e0'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(mL, y0); ctx.lineTo(mL+pW, y0); ctx.stroke();
+
+  // the voltage along the line at this instant
+  const cycles = ratio;
+  if (cycles <= 60) {
+    const N = Math.max(400, Math.ceil(cycles*40));
+    ctx.strokeStyle = cssVar('--mid'); ctx.lineWidth = 2.6; ctx.beginPath();
+    for (let i=0; i<=N; i++){
+      const u = i/N, v = Math.cos(state.phi - 2*Math.PI*cycles*u);
+      (i===0) ? ctx.moveTo(xFor(u), yFor(v)) : ctx.lineTo(xFor(u), yFor(v));
+    }
+    ctx.stroke();
+  } else {
+    // Too many cycles to draw as a line: shade the band the wave fills.
+    ctx.fillStyle = 'rgba(0,103,185,0.18)';
+    ctx.fillRect(mL, yFor(1), pW, yFor(-1) - yFor(1));
+    stext(ctx, Math.round(cycles).toLocaleString() + ' cycles on the line', mL + pW/2, y0, 12, navy, 'center', true);
+  }
+
+  // source and load voltages, and their phasors
+  const phS = state.phi, phL = state.phi - 2*Math.PI*cycles;
+  const vS = Math.cos(phS), vL = Math.cos(phL);
+  ctx.fillStyle = amber;
+  ctx.beginPath(); ctx.arc(xFor(0), yFor(vS), 4.5, 0, 2*Math.PI); ctx.fill();
+  ctx.beginPath(); ctx.arc(xFor(1), yFor(vL), 4.5, 0, 2*Math.PI); ctx.fill();
+  dial(R + 10, y0 - 6, R, phS, navy, 'source');
+  dial(w - R - 10, y0 - 6, R, phL, navy, 'load');
+
+  stext(ctx, state.medium, mL, 13, 11, cssVar('--ink3'), 'left', false);
+  stext(ctx, 'voltage along the line at one instant', mL + pW, h - 12, 11, cssVar('--ink3'), 'right', false);
+}
+
+function update(){
+  fVal.textContent = fmtF(state.f);
+  lVal.textContent = fmtL(state.len);
+  const lam = state.vp / state.f, ratio = state.len / lam;
+  document.getElementById('r-lam').textContent = fmtL(lam);
+  document.getElementById('r-ratio').textContent = fmtRatio(ratio);
+  const deg = 360*ratio;
+  document.getElementById('r-phase').textContent =
+    deg < 0.1 ? deg.toExponential(1).replace('e', '×10^').replace(/\^(-?)\+?0*(\d+)/, (m,s,d)=>toSup(s+d)) + '°'
+    : (deg < 100 ? deg.toFixed(1) : Math.round(deg).toLocaleString()) + '°';
+  const ro = document.getElementById('ro-model'), rm = document.getElementById('r-model');
+  ro.classList.remove('good','warn','bad');
+  if (ratio < 0.05)      { rm.textContent = 'ideal wire';        ro.classList.add('good'); }
+  else if (ratio < 0.1)  { rm.textContent = 'nearly a wire';     ro.classList.add('warn'); }
+  else                   { rm.textContent = 'transmission line'; ro.classList.add('bad'); }
+  draw();
+}
+
+setPreset('power');
+fit();
+requestAnimationFrame(tick);
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

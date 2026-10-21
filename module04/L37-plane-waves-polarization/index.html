@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L37 - Uniform Plane Waves and Polarization &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=678ed0e39d">
+<link rel="stylesheet" href="../../_static/shell.css?v=28765a3edd">
+<link rel="stylesheet" href="../../_static/frames.css?v=ff7a95dfd9">
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+  </div>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l37-uniform-plane-waves-and-polarization">
+<h1>L37 - Uniform Plane Waves and Polarization<a class="headerlink" href="#l37-uniform-plane-waves-and-polarization" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Uniform Plane Waves and Polarization</h1>
+<div class="title-rule"></div>
+<p>The uniform plane wave, the fields that make it up, and its polarization.</p>
+<p>Lesson 37 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '9'; counter-reset: lo 1">
+  <li>I can articulate what a Uniform Plane Wave (UPW) is and describe key properties that relate the electric and magnetic field.</li>
+  <li>I can calculate the electric and magnetic fields for a UPW.</li>
+  <li>I can articulate the concept of polarization and determine the polarization for various UPWs.</li>
+</ol>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-spring-2025-slides">
+<div class="wrap docutils container">
+<p class="rubric">Spring 2025 Slides</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../legacy/ECE343_D09-2_UPWCharacteristics_Slides.pdf" target="_blank" rel="noopener">Uniform Plane Waves, slides (PDF)</a></p></li>
+<li><p><a class="doc-link" href="../../legacy/ECE343_D09-2_UPWCharacteristics_Handouts.pdf" target="_blank" rel="noopener">Uniform Plane Waves, fill-in handout (PDF)</a></p></li>
+<li><p><a class="doc-link" href="../../legacy/ECE343_D09-3_Polarization_Slides.pdf" target="_blank" rel="noopener">Polarization, slides (PDF)</a></p></li>
+<li><p><a class="doc-link" href="../../legacy/ECE343_D09-3_Polarization_Handouts.pdf" target="_blank" rel="noopener">Polarization, fill-in handout (PDF)</a></p></li>
+</ul>
+<div class="depth docutils container">
+<p>These are last year’s Beamer slides, posted as they were taught while this
+lesson is converted to the new format. The fill-in handout, where there is
+one, is the copy to print and bring to class.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-reading">
+<div class="wrap docutils container">
+<p class="rubric">Reading</p>
+<p>Ellingson, <em>Electromagnetics</em>, Vol. 1, sections 9.4–9.6.</p>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-under-construction">
+<div class="wrap docutils container">
+<p class="rubric">Under Construction</p>
+<p>This lesson is being converted to the new course format. The objectives and
+reading above are current; the notes, slides, and practice problems will
+replace the Spring 2025 material as they are finished.</p>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module04/L37-plane-waves-polarization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=64dbae4009"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

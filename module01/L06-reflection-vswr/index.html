@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L6 - Coaxial Lines, Reflection Coefficient, and VSWR &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=678ed0e39d">
+<link rel="stylesheet" href="../../_static/shell.css?v=28765a3edd">
+<link rel="stylesheet" href="../../_static/frames.css?v=ff7a95dfd9">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+  </div>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l6-coaxial-lines-reflection-coefficient-and-vswr">
+<h1>L6 - Coaxial Lines, Reflection Coefficient, and VSWR<a class="headerlink" href="#l6-coaxial-lines-reflection-coefficient-and-vswr" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Coaxial Lines, Reflection Coefficient, and VSWR</h1>
+<div class="title-rule"></div>
+<p>Today we terminate the line and find out how much of the wave comes back.</p>
+<p>Lesson 6 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 1">
+  <li>I can explain the physical meaning of and calculate the following quantities: propagation constant, phase constant, attenuation constant, characteristic impedance, VSWR, reflection coefficient, and transmission coefficient.</li>
+  <li>I can use the transmission line equation to calculate the voltage/current at an arbitrary point on a specified transmission line.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 5 gave us a wave on an infinitely long line, described by its
+propagation constant and its characteristic impedance. Real lines end, and
+whatever sits at the end decides what happens next. Today we compute the
+characteristic impedance of the most common real line, coaxial cable, and then
+terminate a line in a load. The load sets the <strong>reflection coefficient</strong>, the
+ratio of the wave that comes back to the wave that arrived. The incident and
+reflected waves add along the line to form a <strong>standing wave</strong>, and the ratio of
+its largest voltage to its smallest, the <strong>VSWR</strong>, is the number every
+datasheet and every network analyzer quotes for a match.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lessons 4 and 5: the wave solution</strong> on a lossless line, <span class="math notranslate nohighlight">\(\gamma = j\beta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{V}(z) &amp;= V_0^+ e^{-j\beta z} + V_0^- e^{+j\beta z} \\ \widetilde{I}(z) &amp;= \frac{V_0^+}{Z_0} e^{-j\beta z} - \frac{V_0^-}{Z_0} e^{+j\beta z} \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[Z_0 = \sqrt{\frac{L'}{C'}}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 4 solved the telegrapher’s equations, and Lesson 5 read the physics out
+of the solution. On a lossless line the voltage is the sum of two waves: one
+with amplitude <span class="math notranslate nohighlight">\(V_0^+\)</span> traveling in the <span class="math notranslate nohighlight">\(+z\)</span> direction, toward the load, and
+one with amplitude <span class="math notranslate nohighlight">\(V_0^-\)</span> traveling in the <span class="math notranslate nohighlight">\(-z\)</span> direction, back toward the
+source. Each wave carries a current equal to its voltage divided by the
+<strong>characteristic impedance</strong> <span class="math notranslate nohighlight">\(Z_0\)</span>. The minus sign on the second current term
+appears because the backward wave carries its current in the <span class="math notranslate nohighlight">\(-z\)</span> direction.
+Until today, nothing set the size of <span class="math notranslate nohighlight">\(V_0^-\)</span>. The load does.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-coaxial-line">
+<div class="wrap docutils container">
+<p class="rubric">The Coaxial Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For inner radius <span class="math notranslate nohighlight">\(a\)</span>, outer radius <span class="math notranslate nohighlight">\(b\)</span>, and dielectric permittivity <span class="math notranslate nohighlight">\(\epsilon\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} L' &amp;= \frac{\mu}{2\pi} \ln\frac{b}{a} \\ C' &amp;= \frac{2\pi\epsilon}{\ln(b/a)} \\ Z_0 &amp;= \frac{\eta}{2\pi} \ln\frac{b}{a} \approx \frac{60\ \Omega}{\sqrt{\epsilon_r}} \ln\frac{b}{a} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 3 introduced the coaxial line, an inner conductor of radius <span class="math notranslate nohighlight">\(a\)</span> inside
+a shield of radius <span class="math notranslate nohighlight">\(b\)</span>, and quoted its per-unit-length inductance and
+capacitance. Deriving them requires the fields between the conductors:
+Lesson 25 derives <span class="math notranslate nohighlight">\(C'\)</span> from Gauss’s law, and Module 3 derives <span class="math notranslate nohighlight">\(L'\)</span> from
+Ampere’s law. Here we use the results. The inductance comes from the
+magnetic field that circles the inner conductor, and the capacitance comes from
+the radial electric field between the conductors, so both depend only on the
+ratio <span class="math notranslate nohighlight">\(b/a\)</span> and on the material between them.</p>
+<p>Dividing the two and taking the square root gives the characteristic
+impedance. The <span class="math notranslate nohighlight">\(\eta\)</span> in that result is the wave impedance of the dielectric,
+<span class="math notranslate nohighlight">\(\eta = \eta_0/\sqrt{\epsilon_r}\)</span> with <span class="math notranslate nohighlight">\(\eta_0 \approx 377\ \Omega\)</span>, and for a
+nonmagnetic dielectric the expression simplifies to the <span class="math notranslate nohighlight">\(60\ \Omega\)</span> form.
+Because <span class="math notranslate nohighlight">\(Z_0\)</span> depends on the logarithm of <span class="math notranslate nohighlight">\(b/a\)</span>, it changes slowly with the
+dimensions: doubling <span class="math notranslate nohighlight">\(b/a\)</span> adds only <span class="math notranslate nohighlight">\(41.6\ \Omega/\sqrt{\epsilon_r}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-rg-58">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: RG-58</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quantity</p></th>
+<th class="head text-left"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.405\ \text{mm}\)</span>, <span class="math notranslate nohighlight">\(1.475\ \text{mm}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\epsilon_r\)</span> (polyethylene)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(2.25\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(Z_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(51.7\ \Omega\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(L'\)</span>, <span class="math notranslate nohighlight">\(C'\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(259\ \text{nH/m}\)</span>, <span class="math notranslate nohighlight">\(96.8\ \text{pF/m}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(v_p\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(2.0 \times 10^8\)</span> m/s</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the characteristic impedance of RG-58</p>
+<p>RG-58 has an inner conductor of radius <span class="math notranslate nohighlight">\(a = 0.405\ \text{mm}\)</span> and a solid
+polyethylene dielectric, <span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span>, out to <span class="math notranslate nohighlight">\(b = 1.475\ \text{mm}\)</span>.
+The ratio and its logarithm are</p>
+<div class="math notranslate nohighlight">
+\[\ln\frac{b}{a} = \ln\frac{1.475}{0.405} = \ln 3.64 = 1.293\]</div>
+<p>so the characteristic impedance is</p>
+<div class="math notranslate nohighlight">
+\[Z_0 = \frac{60}{\sqrt{2.25}} \times 1.293 = 40 \times 1.293 = 51.7\ \Omega\]</div>
+<p>which is why the cable is sold as <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line. The per-unit-length values
+are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} L' &amp;= \frac{4\pi \times 10^{-7}}{2\pi} \times 1.293 = 259\ \text{nH/m} \\ C' &amp;= \frac{2\pi \times 2.25 \times 8.854 \times 10^{-12}}{1.293} = 96.8\ \text{pF/m} \end{aligned}\end{split}\]</div>
+<p>and the phase velocity is</p>
+<div class="math notranslate nohighlight">
+\[v_p = \frac{1}{\sqrt{L'C'}} = \frac{c}{\sqrt{\epsilon_r}} = \frac{3 \times 10^8}{1.5} = 2.0 \times 10^8\ \text{m/s}\]</div>
+<p>These are the RG-58 numbers Lesson 3 used.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-terminating-the-line">
+<div class="wrap docutils container">
+<p class="rubric">Terminating the Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At the load, <span class="math notranslate nohighlight">\(z = 0\)</span>, every exponential equals one:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{V}(0) &amp;= V_0^+ + V_0^- \\ \widetilde{I}(0) &amp;= \frac{V_0^+ - V_0^-}{Z_0} \\ Z_L = \frac{\widetilde{V}(0)}{\widetilde{I}(0)} &amp;= Z_0 \frac{V_0^+ + V_0^-}{V_0^+ - V_0^-} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Now we connect a load impedance <span class="math notranslate nohighlight">\(Z_L\)</span> at <span class="math notranslate nohighlight">\(z = 0\)</span>, the convention from Lesson 3.
+The load obeys Ohm’s law: the voltage across it divided by the current through
+it is <span class="math notranslate nohighlight">\(Z_L\)</span>. That voltage and current are the line’s voltage and current at
+<span class="math notranslate nohighlight">\(z = 0\)</span>, where every exponential in the wave solution equals one. So the load
+fixes a relationship between the two wave amplitudes. A single incident wave,
+with <span class="math notranslate nohighlight">\(V_0^- = 0\)</span>, has a voltage-to-current ratio of exactly <span class="math notranslate nohighlight">\(Z_0\)</span>, so it can
+satisfy the load only when <span class="math notranslate nohighlight">\(Z_L = Z_0\)</span>. For any other load, a reflected wave
+must appear to make the ratio come out right.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-reflection-coefficient">
+<div class="wrap docutils container">
+<p class="rubric">The Reflection Coefficient</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} Z_L \left(V_0^+ - V_0^-\right) &amp;= Z_0 \left(V_0^+ + V_0^-\right) \\ V_0^+ \left(Z_L - Z_0\right) &amp;= V_0^- \left(Z_L + Z_0\right) \\ \Gamma = \frac{V_0^-}{V_0^+} &amp;= \frac{Z_L - Z_0}{Z_L + Z_0} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Gamma\)</span> is complex: a magnitude <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> and a phase <span class="math notranslate nohighlight">\(\theta_\Gamma\)</span>.</p></li>
+<li><p>For any passive load, <span class="math notranslate nohighlight">\(\vert\Gamma\vert \le 1\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To solve the boundary condition for the ratio of the amplitudes, we multiply
+both sides by <span class="math notranslate nohighlight">\(V_0^+ - V_0^-\)</span>, collect the <span class="math notranslate nohighlight">\(V_0^+\)</span> terms on the left and the
+<span class="math notranslate nohighlight">\(V_0^-\)</span> terms on the right, and divide. The result is the <strong>reflection
+coefficient</strong> <span class="math notranslate nohighlight">\(\Gamma\)</span>, the ratio of the reflected voltage wave to the incident
+one at the load. It depends only on the load and the line, not on the source or
+the length of the line. Because <span class="math notranslate nohighlight">\(Z_L\)</span> can be complex, so can <span class="math notranslate nohighlight">\(\Gamma\)</span>. We write
+it as a magnitude and a phase, <span class="math notranslate nohighlight">\(\Gamma = \vert\Gamma\vert e^{j\theta_\Gamma}\)</span>,
+where <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> says how much of the wave comes back and
+<span class="math notranslate nohighlight">\(\theta_\Gamma\)</span> says how far the reflected wave is shifted in phase. A passive
+load cannot return more power than it receives, so <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> never
+exceeds one.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-special-loads">
+<div class="wrap docutils container">
+<p class="rubric">Special Loads</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Load</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></th>
+<th class="head text-left"><p>What happens</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Matched, <span class="math notranslate nohighlight">\(Z_L = Z_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td class="text-left"><p>no reflection</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Short, <span class="math notranslate nohighlight">\(Z_L = 0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-1\)</span></p></td>
+<td class="text-left"><p>full reflection, inverted</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Open, <span class="math notranslate nohighlight">\(Z_L \to \infty\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(+1\)</span></p></td>
+<td class="text-left"><p>full reflection, in phase</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Pure reactance, <span class="math notranslate nohighlight">\(Z_L = jX\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span></p></td>
+<td class="text-left"><p>full reflection, phase shifted</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Four loads are worth knowing by heart. A <strong>matched</strong> load absorbs the whole
+incident wave, and nothing reflects. A <strong>short circuit</strong> forces the voltage at
+the load to zero, so the reflected wave must cancel the incident one exactly:
+<span class="math notranslate nohighlight">\(\Gamma = -1\)</span>. An <strong>open circuit</strong> forces the current to zero, so the reflected
+voltage adds to the incident voltage: <span class="math notranslate nohighlight">\(\Gamma = +1\)</span>. A <strong>pure reactance</strong>
+stores energy but cannot dissipate any, so it returns all of it; the magnitude
+is one, and only the phase depends on <span class="math notranslate nohighlight">\(X\)</span>. Every other load falls somewhere
+between these cases.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-two-loads-on-a-50-line">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Two Loads on a 50 Ω Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} Z_L = 125\ \Omega: \quad \Gamma &amp;= \frac{125 - 50}{125 + 50} = 0.429 \\ Z_L = 50 + j50\ \Omega: \quad \Gamma &amp;= \frac{j50}{100 + j50} = 0.2 + j0.4 = 0.447\angle 63.4^\circ \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — a resistive load and a complex load</p>
+<p>A <span class="math notranslate nohighlight">\(125\ \Omega\)</span> resistor terminates a <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line. The reflection
+coefficient is real and positive, because the load is a larger resistance than
+<span class="math notranslate nohighlight">\(Z_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{125 - 50}{125 + 50} = \frac{75}{175} = 0.429\]</div>
+<p>Now replace the resistor with <span class="math notranslate nohighlight">\(Z_L = 50 + j50\ \Omega\)</span>. The numerator is
+<span class="math notranslate nohighlight">\(Z_L - Z_0 = j50\)</span>, and multiplying through by the conjugate of the denominator
+gives</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{j50}{100 + j50} = \frac{j50\ (100 - j50)}{100^2 + 50^2} = \frac{2500 + j5000}{12{,}500} = 0.2 + j0.4\]</div>
+<p>In polar form, <span class="math notranslate nohighlight">\(\vert\Gamma\vert = \sqrt{0.2^2 + 0.4^2} = 0.447\)</span> and
+<span class="math notranslate nohighlight">\(\theta_\Gamma = \tan^{-1}(0.4/0.2) = 63.4^\circ\)</span>. The resistive part of this
+load matches the line, but the reactance alone reflects 20% of the power.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-transmission-coefficient">
+<div class="wrap docutils container">
+<p class="rubric">The Transmission Coefficient</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The voltage that reaches the load is the incident plus the reflected wave:</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{V}(0) = V_0^+(1 + \Gamma) \quad\Longrightarrow\quad \tau = 1 + \Gamma\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(125\ \Omega\)</span> load: <span class="math notranslate nohighlight">\(\tau = 1.429\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>transmission coefficient</strong> <span class="math notranslate nohighlight">\(\tau\)</span> is the ratio of the voltage across the
+load to the incident voltage. At <span class="math notranslate nohighlight">\(z = 0\)</span> the load voltage is the sum of the two
+waves, so <span class="math notranslate nohighlight">\(\tau = 1 + \Gamma\)</span>. For the <span class="math notranslate nohighlight">\(125\ \Omega\)</span> load, <span class="math notranslate nohighlight">\(\tau = 1.429\)</span>: the
+load voltage is 43% larger than the incident voltage. That is not a power gain.
+The load current is smaller than the incident current by a larger factor,
+because the reflected current subtracts, and the power delivered to the load is
+less than the incident power. On a short circuit, <span class="math notranslate nohighlight">\(\tau = 0\)</span>; on an open
+circuit, <span class="math notranslate nohighlight">\(\tau = 2\)</span>, and the voltage at the open end doubles.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-voltage-along-the-line">
+<div class="wrap docutils container">
+<p class="rubric">The Voltage Along the Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Substitute <span class="math notranslate nohighlight">\(V_0^- = \Gamma V_0^+\)</span> into the wave solution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{V}(z) &amp;= V_0^+ \left(e^{-j\beta z} + \Gamma e^{+j\beta z}\right) \\ \left\vert\widetilde{V}(z)\right\vert &amp;= \left\vert V_0^+\right\vert\ \left\vert 1 + \Gamma e^{j2\beta z} \right\vert \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>With <span class="math notranslate nohighlight">\(\Gamma\)</span> known, one amplitude describes the whole line. Factoring
+<span class="math notranslate nohighlight">\(e^{-j\beta z}\)</span> out of the sum, whose magnitude is one, leaves the magnitude of
+the voltage at any point. The term <span class="math notranslate nohighlight">\(\Gamma e^{j2\beta z}\)</span> is the
+<strong>reflection coefficient at position <span class="math notranslate nohighlight">\(z\)</span></strong>: the ratio of the reflected wave to
+the incident wave there, which has the same magnitude as <span class="math notranslate nohighlight">\(\Gamma\)</span> everywhere on
+a lossless line but rotates in phase by <span class="math notranslate nohighlight">\(2\beta z\)</span>, twice the phase delay to the
+load, because the reflected wave travels to the load and back. Where that term
+points in the same direction as one, the two waves add; where it points
+opposite, they subtract.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-standing-wave">
+<div class="wrap docutils container">
+<p class="rubric">The Standing Wave</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>With <span class="math notranslate nohighlight">\(\Gamma = \vert\Gamma\vert e^{j\theta_\Gamma}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \left\vert 1 + \Gamma e^{j2\beta z} \right\vert^2 &amp;= \left(1 + \Gamma e^{j2\beta z}\right)\left(1 + \Gamma^* e^{-j2\beta z}\right) \\ &amp;= 1 + \vert\Gamma\vert^2 + 2\vert\Gamma\vert\cos\left(\theta_\Gamma + 2\beta z\right) \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[V_\text{max} = \left\vert V_0^+\right\vert (1 + \vert\Gamma\vert), \qquad V_\text{min} = \left\vert V_0^+\right\vert (1 - \vert\Gamma\vert)\]</div>
+<ul class="simple">
+<li><p>Maxima are <span class="math notranslate nohighlight">\(\lambda/2\)</span> apart; each minimum is <span class="math notranslate nohighlight">\(\lambda/4\)</span> from a maximum.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To find how the magnitude varies, we square it, which turns it into the
+product of the term and its complex conjugate. Multiplying out, the two cross
+terms are complex conjugates of each other, and a number plus its conjugate is
+twice its real part, which gives the cosine. The cosine swings between <span class="math notranslate nohighlight">\(+1\)</span> and
+<span class="math notranslate nohighlight">\(-1\)</span>, so the squared magnitude swings between
+<span class="math notranslate nohighlight">\(1 + \vert\Gamma\vert^2 + 2\vert\Gamma\vert = (1 + \vert\Gamma\vert)^2\)</span>, where the
+two waves are in phase, and <span class="math notranslate nohighlight">\((1 - \vert\Gamma\vert)^2\)</span>, where they are out of
+phase. Taking square roots gives <span class="math notranslate nohighlight">\(V_\text{max}\)</span> and <span class="math notranslate nohighlight">\(V_\text{min}\)</span>. The
+pattern does not move along the line, which is why it is called a <strong>standing wave</strong>. The phase
+<span class="math notranslate nohighlight">\(2\beta z\)</span> changes by <span class="math notranslate nohighlight">\(2\pi\)</span> over half a wavelength, so the maxima repeat every
+<span class="math notranslate nohighlight">\(\lambda/2\)</span>, and each minimum sits halfway between two maxima, a quarter
+wavelength from each. On a matched line, <span class="math notranslate nohighlight">\(\Gamma = 0\)</span>, and the voltage
+magnitude is the same everywhere. On a short or an open, <span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span>,
+and the minima fall all the way to zero.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-standing-wave-on-a-loaded-line">
+<div class="wrap docutils container">
+<p class="rubric">The Standing Wave on a Loaded Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/load-standing-wave.html"
+        width="100%" height="489"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Standing wave on a 50 ohm line terminated in a load set by its resistance and reactance"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget drives a <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line with a load whose resistance <span class="math notranslate nohighlight">\(R_L\)</span> and
+reactance <span class="math notranslate nohighlight">\(X_L\)</span> you set with the two sliders. The dashed curves are the
+envelope <span class="math notranslate nohighlight">\(\vert\widetilde{V}\vert\)</span>, and the solid curve is the voltage at one
+instant; turn on <strong>Animate</strong> to watch it move inside the envelope, and turn on
+<strong>Forward + reflected</strong> to see the two waves it is made of. Start with the
+<span class="math notranslate nohighlight">\(125\ \Omega\)</span> load and confirm <span class="math notranslate nohighlight">\(\Gamma = 0.43\)</span> and a VSWR of 2.5, with a
+maximum at the load. Then set <span class="math notranslate nohighlight">\(X_L = +50\ \Omega\)</span> and <span class="math notranslate nohighlight">\(R_L = 50\ \Omega\)</span>:
+<span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> and the VSWR change, and the whole pattern slides toward
+the source until the first maximum sits <span class="math notranslate nohighlight">\(0.088\lambda\)</span> from the load. Set
+<span class="math notranslate nohighlight">\(R_L = 0\)</span> and <span class="math notranslate nohighlight">\(X_L = 0\)</span> for a short circuit, and the minima drop to zero, with
+one at the load.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-voltage-standing-wave-ratio">
+<div class="wrap docutils container">
+<p class="rubric">Voltage Standing Wave Ratio</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\text{VSWR} = \frac{V_\text{max}}{V_\text{min}} = \frac{1 + \vert\Gamma\vert}{1 - \vert\Gamma\vert}, \qquad \vert\Gamma\vert = \frac{\text{VSWR} - 1}{\text{VSWR} + 1}\]</div>
+<ul class="simple">
+<li><p>Matched: VSWR <span class="math notranslate nohighlight">\(= 1\)</span>. Short, open, or reactance: VSWR <span class="math notranslate nohighlight">\(\to \infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(125\ \Omega\)</span> on <span class="math notranslate nohighlight">\(50\ \Omega\)</span>: VSWR <span class="math notranslate nohighlight">\(= 2.5\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>voltage standing wave ratio</strong> is the ratio of the largest voltage on the
+line to the smallest. It carries the same information as <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> but
+was historically easier to measure: slide a probe along a slotted line and
+read the maximum and minimum. It runs from one, for a perfect match, to
+infinity, for a load that reflects everything. For the <span class="math notranslate nohighlight">\(125\ \Omega\)</span> load,</p>
+<div class="math notranslate nohighlight">
+\[\text{VSWR} = \frac{1 + 0.429}{1 - 0.429} = \frac{1.429}{0.571} = 2.5\]</div>
+<p>which equals <span class="math notranslate nohighlight">\(125/50\)</span>. For any real load, VSWR is the larger of <span class="math notranslate nohighlight">\(Z_L/Z_0\)</span> and
+<span class="math notranslate nohighlight">\(Z_0/Z_L\)</span>, a quick check worth remembering. VSWR discards the phase of
+<span class="math notranslate nohighlight">\(\Gamma\)</span>, so two different loads can share a VSWR and still behave differently
+along the line.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-the-maximum-falls">
+<div class="wrap docutils container">
+<p class="rubric">Where the Maximum Falls</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The first voltage maximum toward the source is where <span class="math notranslate nohighlight">\(2\beta d = \theta_\Gamma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[d_\text{max} = \frac{\theta_\Gamma}{4\pi}\lambda\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(50 + j50\ \Omega\)</span>: <span class="math notranslate nohighlight">\(d_\text{max} = \frac{63.4^\circ}{720^\circ}\lambda = 0.088\lambda\)</span>.</p></li>
+<li><p>First minimum: <span class="math notranslate nohighlight">\(0.088\lambda + 0.25\lambda = 0.338\lambda\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The phase of <span class="math notranslate nohighlight">\(\Gamma\)</span> sets where the pattern sits. Measure distance from the
+load toward the source as <span class="math notranslate nohighlight">\(d = -z\)</span>. The waves add in phase where the phase of
+<span class="math notranslate nohighlight">\(\Gamma e^{-j2\beta d}\)</span> is zero, so the first maximum sits at
+<span class="math notranslate nohighlight">\(2\beta d_\text{max} = \theta_\Gamma\)</span>, with <span class="math notranslate nohighlight">\(\theta_\Gamma\)</span> taken between <span class="math notranslate nohighlight">\(0\)</span>
+and <span class="math notranslate nohighlight">\(2\pi\)</span>. A real load larger than <span class="math notranslate nohighlight">\(Z_0\)</span> has <span class="math notranslate nohighlight">\(\theta_\Gamma = 0\)</span> and a maximum
+right at the load; a real load smaller than <span class="math notranslate nohighlight">\(Z_0\)</span> has
+<span class="math notranslate nohighlight">\(\theta_\Gamma = 180^\circ\)</span> and a minimum there instead. For the
+<span class="math notranslate nohighlight">\(50 + j50\ \Omega\)</span> load the maximum sits <span class="math notranslate nohighlight">\(0.088\lambda\)</span> from the load. Measuring
+the VSWR and the position of the minimum was the classic way to find an unknown
+load impedance before network analyzers.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-how-much-power-comes-back">
+<div class="wrap docutils container">
+<p class="rubric">How Much Power Comes Back</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Reflected fraction: <span class="math notranslate nohighlight">\(\vert\Gamma\vert^2\)</span>. Delivered fraction: <span class="math notranslate nohighlight">\(1 - \vert\Gamma\vert^2\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>VSWR</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span></p></th>
+<th class="head text-left"><p>Reflected power</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1.5</p></td>
+<td class="text-left"><p>0.20</p></td>
+<td class="text-left"><p>4.0%</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2.0</p></td>
+<td class="text-left"><p>0.33</p></td>
+<td class="text-left"><p>11.1%</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2.5</p></td>
+<td class="text-left"><p>0.43</p></td>
+<td class="text-left"><p>18.4%</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>3.0</p></td>
+<td class="text-left"><p>0.50</p></td>
+<td class="text-left"><p>25.0%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Power goes as voltage squared, so the fraction of the incident power that
+reflects is <span class="math notranslate nohighlight">\(\vert\Gamma\vert^2\)</span>, and the fraction the load absorbs is
+<span class="math notranslate nohighlight">\(1 - \vert\Gamma\vert^2\)</span>. The <span class="math notranslate nohighlight">\(125\ \Omega\)</span> load reflects
+<span class="math notranslate nohighlight">\(0.429^2 = 18.4\%\)</span> of the incident power and absorbs the other 81.6%. The table
+gives a sense of scale. A VSWR of 1.5 reflects only 4% of the power, and most
+equipment specifications treat 2:1 as the edge of acceptable. Beyond that, the
+load wastes the reflected power, and in a transmitter that power returns to the amplifier,
+which may not tolerate it. The <strong>rule of thumb</strong> is that VSWR below 2 is a good
+match for most purposes.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Coaxial <span class="math notranslate nohighlight">\(Z_0\)</span></p></td>
+<td class="text-left"><p>Set by <span class="math notranslate nohighlight">\(\ln(b/a)\)</span> and the dielectric</p></td>
+<td class="text-left"><p>RG-58: <span class="math notranslate nohighlight">\(51.7\ \Omega\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td class="text-left"><p>Reflected over incident voltage at the load</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{Z_L - Z_0}{Z_L + Z_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Special loads</p></td>
+<td class="text-left"><p>Matched, short, open, reactive</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(-1\)</span>, <span class="math notranslate nohighlight">\(+1\)</span>, <span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+<td class="text-left"><p>Load voltage over incident voltage</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1 + \Gamma\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Standing wave</p></td>
+<td class="text-left"><p>Incident plus reflected; maxima <span class="math notranslate nohighlight">\(\lambda/2\)</span> apart</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(V_\text{max}\)</span>, <span class="math notranslate nohighlight">\(V_\text{min} = \vert V_0^+\vert (1 \pm \vert\Gamma\vert)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>VSWR</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(V_\text{max}/V_\text{min}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{1 + \vert\Gamma\vert}{1 - \vert\Gamma\vert}\)</span>; below 2 is good</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>First maximum</p></td>
+<td class="text-left"><p>Set by the phase of <span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(d_\text{max} = \frac{\theta_\Gamma}{4\pi}\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Reflected power</p></td>
+<td class="text-left"><p>Fraction of incident power returned</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert^2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L06_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L06_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 7</strong>: the impedance seen looking into a terminated line, at any distance from the load.</p></li>
+<li><p><strong>Lessons 8 and 9</strong>: choose the line length to transform a load into a match.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today the load set <span class="math notranslate nohighlight">\(\Gamma\)</span>, and <span class="math notranslate nohighlight">\(\Gamma\)</span> set the standing wave. The same
+standing wave means the ratio of voltage to current changes along the line, so
+a source connected at a distance <span class="math notranslate nohighlight">\(\ell\)</span> from the load does not see <span class="math notranslate nohighlight">\(Z_L\)</span>. It
+sees a transformed impedance that depends on <span class="math notranslate nohighlight">\(\ell\)</span>. Lesson 7 derives that
+<strong>input impedance</strong> and works the special cases: the shorted line, the open
+line, and the quarter-wave line. Lessons 8 and 9 turn the transformation into a
+design tool for matching, and Lessons 10 through 13 do the same work
+graphically on the Smith chart, which is a plot of <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
+<p>Before Lesson 7, read sections 3.15 and 3.17 through 3.19 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L06-reflection-vswr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=64dbae4009"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

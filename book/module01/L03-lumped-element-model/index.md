@@ -136,6 +136,35 @@ The same cable can be either. Whether a connection is "just a wire" depends on
 the frequency of the signal it carries, not on the connection itself.
 ::::
 
+::::{frame} A Power Line and a Cable
+:class: viz-frame
+
+:::{present}
+<iframe src="../../viz/electrical-length.html"
+        width="100%" height="471"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Voltage along a 60 Hz power line and a 1 GHz coaxial cable at one instant, with the phase at each end"
+        data-autosize>
+</iframe>
+:::
+
+The widget shows the voltage along a matched line at one instant, and the dials
+show the phase of the voltage at the source and at the load. Start with the
+**60 Hz power line**. At 60 Hz the wavelength on an overhead line is
+$\lambda = c/f = 5000$ km, so a 100 km line is $0.02\lambda$ long, and the load
+lags the source by only $7.2^\circ$. The whole line rises and falls together,
+which is why a power engineer can treat it as a pair of wires. Drag the length
+out to 1000 km, the length of the longest lines in service: the line reaches
+$\lambda/5$ and $72^\circ$, and at that scale power engineers do use the
+transmission line model. Now switch to the **1 GHz coaxial cable**. The
+wavelength in the cable is 20 cm, so 1.1 m of cable holds five and a half
+wavelengths, the load lags the source by $1980^\circ$, and at this instant the
+two ends are $180^\circ$ out of phase. The two systems obey the same physics;
+only the frequency, and so the wavelength, changed. Use the sliders to find the
+frequency at which a 1 m cable crosses $\lambda/10$.
+::::
+
 ::::{frame} Worked Example: 2 m of RG-58
 :::{present}
 | Frequency | $\lambda$ in the cable | $\ell/\lambda$ | Model |

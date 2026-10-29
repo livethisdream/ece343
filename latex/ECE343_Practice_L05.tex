@@ -1,0 +1,193 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L5 practice set (Characteristic Impedance and Wave Propagation): Z0 and the
+% current constants, phase velocity and wavelength, and low-loss attenuation.
+
+\fullwidth{\textbf{Learning Objective 3.2: } I can explain the physical meaning of
+and calculate the following quantities: propagation constant, phase constant,
+attenuation constant, characteristic impedance, VSWR, reflection coefficient, and
+transmission coefficient.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Characteristic impedance.} A lossless line has
+$L^{\prime} = 300\ \text{nH/m}$ and $C^{\prime} = 120\ \text{pF/m}$.
+\begin{parts}
+
+	\part Starting from $-d\widetilde{V}/dz = (R^{\prime} + j\omega L^{\prime})\widetilde{I}$ and
+	$\widetilde{V}(z) = V_0^+ e^{-\gamma z} + V_0^- e^{+\gamma z}$, derive
+	$\myz{0} = \sqrt{\dfrac{R^{\prime} + j\omega L^{\prime}}{G^{\prime} + j\omega C^{\prime}}}$.
+	\begin{solution}[1.8in]
+	\eq{
+		-\dfrac{d\widetilde{V}}{dz} &= \gamma V_0^+ e^{-\gamma z} - \gamma V_0^- e^{+\gamma z}
+		= \left(R^{\prime} + j\omega L^{\prime}\right)\widetilde{I} \\
+		\widetilde{I}(z) &= \dfrac{\gamma}{R^{\prime} + j\omega L^{\prime}}\left(V_0^+ e^{-\gamma z} - V_0^- e^{+\gamma z}\right) \\
+		\myz{0} &= \dfrac{R^{\prime} + j\omega L^{\prime}}{\gamma}
+		= \dfrac{R^{\prime} + j\omega L^{\prime}}{\sqrt{\left(R^{\prime} + j\omega L^{\prime}\right)\left(G^{\prime} + j\omega C^{\prime}\right)}}
+		= \sqrt{\dfrac{R^{\prime} + j\omega L^{\prime}}{G^{\prime} + j\omega C^{\prime}}}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\myz{0}$ and $v_p$ for this line.
+		\begin{solution}[1in]
+		\eq{
+			\myz{0} &= \sqrt{\dfrac{300\times10^{-9}}{120\times10^{-12}}} = 50\ \ohms \\
+			v_p &= \dfrac{1}{\sqrt{300\times10^{-9}\times120\times10^{-12}}} = 1.67\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{0}$ = \ansbox[1.3in]{$50\ \ohms$}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$1.67\times10^{8}$ m/s}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The voltage on the line has $V_0^+ = 10\ \text{V}$ and
+		$V_0^- = 2\ \text{V}$. Find $I_0^+$ and $I_0^-$.
+		\begin{solution}[1in]
+		\eq{
+			I_0^+ &= \dfrac{V_0^+}{\myz{0}} = \dfrac{10}{50} = 0.2\ \text{A} \\
+			I_0^- &= -\dfrac{V_0^-}{\myz{0}} = -\dfrac{2}{50} = -0.04\ \text{A}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$I_0^+$ = \ansbox[1.3in]{$0.2\ \text{A}$}
+
+		\vspace{4pt}
+		$I_0^-$ = \ansbox[1.3in]{$-0.04\ \text{A}$}
+	\end{minipage}
+
+	\part A classmate measures a $1\ \m$ length of this line with an ohmmeter and
+	expects to read $50\ \ohms$. Explain what $\myz{0}$ is, and why the ohmmeter
+	does not read it.
+	\begin{solution}[1.1in]
+	$\myz{0}$ is the ratio of voltage to current in a single traveling wave on the
+	line. It is not a resistance between the conductors: at DC the open line
+	draws no current and the ohmmeter reads an open circuit. The line presents
+	$\myz{0}$ at its input only to a signal that travels away and never returns,
+	as on an infinitely long or matched line.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Phase velocity and wavelength.} A $120\ \mhz$ signal on a lossless
+coaxial line has a phase constant $\beta = 4\ \text{rad/m}$.
+\begin{parts}
+
+	\part Starting from the phase of the incident wave, derive $v_p = \omega/\beta$.
+	\begin{solution}[1.1in]
+	A point of constant phase satisfies $\omega t - \beta z = $ constant.
+	Differentiating with respect to $t$:
+	\eq{ \omega - \beta\dfrac{dz}{dt} = 0 \quad\Longrightarrow\quad v_p = \dfrac{dz}{dt} = \dfrac{\omega}{\beta} }
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $v_p$ and the wavelength.
+		\begin{solution}[1in]
+		\eq{
+			v_p &= \dfrac{2\pi\times1.2\times10^{8}}{4} = 1.88\times10^{8}\ \text{m/s} \\
+			\lambda &= \dfrac{2\pi}{4} = 1.57\ \m
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$v_p$ = \ansbox[1.3in]{$1.88\times10^{8}$ m/s}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$1.57\ \m$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part For a coaxial line, $v_p = c/\sqrt{\epsilon_r}$. Find the relative
+		permittivity of the dielectric.
+		\begin{solution}[0.9in]
+		\eq{ \epsilon_r = \lp\dfrac{c}{v_p}\rp^{2} = \lp\dfrac{3\times10^{8}}{1.885\times10^{8}}\rp^{2} = 2.53 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\epsilon_r$ = \ansbox[1.3in]{$2.53$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Low-loss attenuation.} A $50\ \ohms$ cable at $200\ \mhz$ has
+$R^{\prime} = 2\ \ohms/\text{m}$, $L^{\prime} = 250\ \text{nH/m}$,
+$G^{\prime} = 1\times10^{-5}\ \text{S/m}$, and $C^{\prime} = 100\ \text{pF/m}$.
+\begin{parts}
+
+	\part Check that the low-loss approximation applies.
+	\begin{solution}[1in]
+	\eq{
+		\dfrac{R^{\prime}}{\omega L^{\prime}} &= \dfrac{2}{2\pi\times2\times10^{8}\times250\times10^{-9}} = \dfrac{2}{314} = 0.006 \\
+		\dfrac{G^{\prime}}{\omega C^{\prime}} &= \dfrac{1\times10^{-5}}{0.126} = 8\times10^{-5}
+	}
+	Both are far below one.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\alpha$ in Np/m and in dB/m.
+		\begin{solution}[1.1in]
+		\eq{
+			\alpha &= \dfrac{R^{\prime}}{2\myz{0}} + \dfrac{G^{\prime}\myz{0}}{2} = \dfrac{2}{100} + \dfrac{1\times10^{-5}\times50}{2} \\
+			&= 0.02 + 0.00025 = 0.0203\ \text{Np/m} \\
+			&= 8.686\times0.0203 = 0.176\ \text{dB/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\alpha$ = \ansbox[1.3in]{$0.0203$ Np/m}
+
+		\vspace{4pt}
+		$\alpha$ = \ansbox[1.3in]{$0.176$ dB/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A $25\ \m$ run of this cable feeds an antenna. Find the loss in dB and
+		the fraction of the input power that reaches the antenna.
+		\begin{solution}[1in]
+		\eq{
+			\text{loss} &= 0.176\times25 = 4.4\ \text{dB} \\
+			\dfrac{P_\text{out}}{P_\text{in}} &= 10^{-4.4/10} = 0.36
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		loss = \ansbox[1.3in]{$4.4\ \text{dB}$}
+
+		\vspace{4pt}
+		fraction = \ansbox[1.3in]{$36\%$}
+	\end{minipage}
+
+	\part We use the same cable at $800\ \mhz$. Conductor loss scales as the square
+	root of frequency, and dielectric loss in proportion to it. Estimate the new
+	$\alpha$ in dB/m, and state which mechanism dominates.
+	\begin{solution}[1.1in]
+	Frequency rises by a factor of 4, so the conductor term doubles and the
+	dielectric term quadruples:
+	\eq{ \alpha = 2\times0.02 + 4\times0.00025 = 0.041\ \text{Np/m} = 0.36\ \text{dB/m} }
+	The conductor loss still dominates.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

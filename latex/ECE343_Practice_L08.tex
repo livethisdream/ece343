@@ -1,0 +1,180 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L8 practice set (Impedance Matching I): normalized impedance, the reactance
+% and distance at the matching point, and a series-component match.
+
+\fullwidth{\textbf{Learning Objective 3.4: } I can use the transmission line
+equation to match a load to a source using a length of transmission line.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). All lines are lossless, and $d$
+is the distance from the load toward the source.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The matching point.} At a point on the line, the normalized
+impedance is $z = 1 + jx$.
+\begin{parts}
+
+	\part Starting from $\Gamma = \frac{z - 1}{z + 1}$, show that
+	$z = \frac{1 + \Gamma}{1 - \Gamma}$.
+	\begin{solution}[1.1in]
+	\eq{
+		\Gamma(z + 1) &= z - 1 \\
+		z(1 - \Gamma) &= 1 + \Gamma \\
+		z &= \dfrac{1 + \Gamma}{1 - \Gamma}
+	}
+	\end{solution}
+
+	\part Show that at the point where $z = 1 + jx$,
+	\[ x = \pm\dfrac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}. \]
+	\begin{solution}[1.8in]
+	\eq{
+		\Gamma &= \dfrac{jx}{2 + jx}, \qquad \vert\Gamma\vert^2 = \dfrac{x^2}{4 + x^2} \\
+		\vert\Gamma\vert^2\lp 4 + x^2\rp &= x^2 \\
+		x^2\lp 1 - \vert\Gamma\vert^2\rp &= 4\vert\Gamma\vert^2 \\
+		x &= \pm\dfrac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}
+	}
+	\end{solution}
+
+	\part Explain in one sentence why $\vert\Gamma\vert$ in part (b) is the same
+	as the magnitude of the load's reflection coefficient.
+	\begin{solution}[0.7in]
+	Along a lossless line $\Gamma(d) = \Gamma e^{-j2\beta d}$, which changes only
+	the phase of $\Gamma$, never its magnitude.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A series match.} A $100\ \ohms$ load terminates a
+$50\ \ohms$ line at $2\ \ghz$. Waves travel at $2\times10^{8}$ m/s in the line, so
+$\lambda = 10\ \text{cm}$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $z_L$, $\Gamma$, and the VSWR.
+		\begin{solution}[1in]
+		\eq{
+			z_L &= 2, \qquad \Gamma = \dfrac{2 - 1}{2 + 1} = \dfrac{1}{3}\angle 0^\circ \\
+			\text{VSWR} &= \dfrac{4/3}{2/3} = 2
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.333\angle 0^\circ$}
+
+		\vspace{4pt}
+		VSWR = \ansbox[1.3in]{$2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the two values of $x$ at the matching points, and the phase
+		$\theta_d$ of $\Gamma$ at each.
+		\begin{solution}[1.3in]
+		\eq{
+			x &= \pm\dfrac{2/3}{\sqrt{8/9}} = \pm 0.707 \\
+			\theta_d &= \pm\lp 90^\circ - \tan^{-1}0.354\rp = \pm\lp 90^\circ - 19.5^\circ\rp = \pm 70.5^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$x$ = \ansbox[1.3in]{$\pm 0.707$}
+
+		\vspace{4pt}
+		$\theta_d$ = \ansbox[1.3in]{$\pm 70.5^\circ$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance $d$ to each matching point, in wavelengths and in
+		centimeters.
+		\begin{solution}[1.5in]
+		\eq{
+			x = -0.707: \quad d &= \dfrac{0^\circ - (-70.5^\circ)}{720^\circ}\lambda \\
+			&= 0.098\lambda = 0.98\ \text{cm} \\
+			x = +0.707: \quad d &= \dfrac{0^\circ - 70.5^\circ + 360^\circ}{720^\circ}\lambda \\
+			&= 0.402\lambda = 4.02\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d_1$ = \ansbox[1.3in]{$0.098\lambda$}
+
+		\vspace{4pt}
+		$d_2$ = \ansbox[1.3in]{$0.402\lambda$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the series component that completes each match, and its value.
+		\begin{solution}[1.6in]
+		The reactance to cancel is $0.707 \times 50 = 35.4\ \ohms$.
+		At $d_1$, $z = 1 - j0.707$, so we add a series inductor:
+		\eq{ L = \dfrac{35.4}{2\pi \times 2\times10^{9}} = 2.81\ \text{nH} }
+		At $d_2$, $z = 1 + j0.707$, so we add a series capacitor:
+		\eq{ C = \dfrac{1}{2\pi \times 2\times10^{9} \times 35.4} = 2.25\ \text{pF} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		at $d_1$: \ansbox[1.3in]{$2.81\ \text{nH}$}
+
+		\vspace{4pt}
+		at $d_2$: \ansbox[1.3in]{$2.25\ \text{pF}$}
+	\end{minipage}
+
+	\part Which design would you build? Justify your choice in one or two
+	sentences.
+	\begin{solution}[0.9in]
+	The first: its line is $0.098\lambda$ instead of $0.402\lambda$, so its input
+	impedance changes less with frequency and the match holds over a wider band.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Checking a match.} Use the transmission line equation to
+check the first design from Question 2.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\myz{in}$ of the $100\ \ohms$ load seen through $0.098\lambda$
+		of $50\ \ohms$ line. ($\beta d = 35.3^\circ$ and $\tan\beta d = 0.707$.)
+		\begin{solution}[1.8in]
+		\eq{
+			\myz{in} &= 50\,\dfrac{100 + j35.4}{50 + j70.7} \\
+			&= 50\,\dfrac{(100 + j35.4)(50 - j70.7)}{50^2 + 70.7^2} \\
+			&= 50\,\dfrac{7500 - j5300}{7500} = 50 - j35.4\ \ohms
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{in}$ = \ansbox[1.3in]{$50 - j35.4\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Add the $2.81\ \text{nH}$ series inductor. What impedance does the
+		source side see, and what is $\Gamma$ there?
+		\begin{solution}[0.9in]
+		\eq{
+			\myz{in} + j\omega L &= 50 - j35.4 + j35.4 = 50\ \ohms \\
+			\Gamma &= 0
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$Z$ = \ansbox[1.3in]{$50\ \ohms$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

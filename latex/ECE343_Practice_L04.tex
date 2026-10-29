@@ -1,0 +1,243 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L4 practice set (The Wave Equation): phasor form of the telegrapher's
+% equations, the wave equation and its solution, and reading the solution.
+
+\fullwidth{\textbf{Learning Objective 3.1: } I can describe the origin of the
+transmission line equation, understand the method of developing a solution, and
+interpret the solution.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{From the telegrapher's equations to the wave equation.} Start
+from the telegrapher's equations,
+\eq{
+	-\partd{v(z,t)}{z} &= R^{\prime}\ i(z,t) + L^{\prime} \partd{i(z,t)}{t} \\
+	-\partd{i(z,t)}{z} &= G^{\prime}\ v(z,t) + C^{\prime} \partd{v(z,t)}{t}
+}
+\begin{parts}
+
+	\part With $v(z,t) = \text{Re}\left[\widetilde{V}(z) e^{j\omega t}\right]$,
+	show that the phasor of $\partial v/\partial t$ is $j\omega\widetilde{V}(z)$.
+	\begin{solution}[1.2in]
+	\eq{
+		\partd{v}{t} = \partd{}{t}\text{Re}\left[\widetilde{V}(z) e^{j\omega t}\right]
+		= \text{Re}\left[\widetilde{V}(z) \partd{}{t} e^{j\omega t}\right]
+		= \text{Re}\left[j\omega\widetilde{V}(z) e^{j\omega t}\right]
+	}
+	The derivative passes inside the real part because $t$ is real, and
+	$\widetilde{V}(z)$ does not depend on $t$. The result is the real part of
+	$j\omega\widetilde{V}(z)\,e^{j\omega t}$, so its phasor is $j\omega\widetilde{V}(z)$.
+	\end{solution}
+
+	\part Write both telegrapher's equations in phasor form.
+	\begin{solution}[1in]
+	\eq{
+		-\dfrac{d\widetilde{V}(z)}{dz} &= \left(R^{\prime} + j\omega L^{\prime}\right)\widetilde{I}(z) \\
+		-\dfrac{d\widetilde{I}(z)}{dz} &= \left(G^{\prime} + j\omega C^{\prime}\right)\widetilde{V}(z)
+	}
+	\end{solution}
+
+	\part Uncouple the equations to derive the wave equation for the current,
+	$\widetilde{I}(z)$. Show each step.
+	\begin{solution}[1.6in]
+	Differentiate the second equation with respect to $z$, then substitute the
+	first for $d\widetilde{V}/dz$:
+	\eq{
+		-\dfrac{d^2\widetilde{I}(z)}{dz^2} &= \left(G^{\prime} + j\omega C^{\prime}\right)\dfrac{d\widetilde{V}(z)}{dz} \\
+		&= -\left(G^{\prime} + j\omega C^{\prime}\right)\left(R^{\prime} + j\omega L^{\prime}\right)\widetilde{I}(z) \\
+		\dfrac{d^2\widetilde{I}(z)}{dz^2} - \gamma^2\widetilde{I}(z) &= 0, \qquad
+		\gamma^2 = \left(R^{\prime} + j\omega L^{\prime}\right)\left(G^{\prime} + j\omega C^{\prime}\right)
+	}
+	\end{solution}
+
+	\part Substitute the trial solution $\widetilde{I}(z) = A e^{sz}$ into your
+	result, find the characteristic equation and its roots, and write the general
+	solution.
+	\begin{solution}[1.3in]
+	\eq{
+		s^2 A e^{sz} - \gamma^2 A e^{sz} &= 0 \\
+		s^2 - \gamma^2 &= 0 \quad\Longrightarrow\quad s = \pm\gamma \\
+		\widetilde{I}(z) &= I_0^+ e^{-\gamma z} + I_0^- e^{+\gamma z}
+	}
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The propagation constant of a lossy line.} A line has
+$R^{\prime} = 0.5\ \ohms/\text{m}$, $L^{\prime} = 250\ \text{nH/m}$, $G^{\prime} = 0$, and
+$C^{\prime} = 100\ \text{pF/m}$, and carries a $10\ \mhz$ signal.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the series impedance per meter, $R^{\prime} + j\omega L^{\prime}$, and the
+		shunt admittance per meter, $G^{\prime} + j\omega C^{\prime}$.
+		\begin{solution}[1in]
+		\eq{
+			\omega &= 2\pi\times10^{7} = 6.283\times10^{7}\ \text{rad/s} \\
+			R^{\prime} + j\omega L^{\prime} &= 0.5 + j15.71\ \ohms/\text{m} \\
+			G^{\prime} + j\omega C^{\prime} &= j6.283\times10^{-3}\ \text{S/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$Z^{\prime}$ = \ansbox[1.3in]{$0.5 + j15.71\ \ohms$/m}
+
+		\vspace{4pt}
+		$Y^{\prime}$ = \ansbox[1.3in]{$j6.28\times10^{-3}$ S/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\gamma = \alpha + j\beta$.
+		\begin{solution}[1.6in]
+		\eq{
+			\gamma^2 &= (0.5 + j15.71)(j6.283\times10^{-3}) \\
+			&= -0.0987 + j0.00314 \\
+			&= 0.0987\angle 178.18^\circ \\
+			\gamma &= \sqrt{0.0987}\angle 89.09^\circ = 0.3142\angle 89.09^\circ \\
+			&= 0.0050 + j0.3142\ \text{m}^{-1}
+		}
+		We take the root with $\alpha \ge 0$ and $\beta > 0$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\alpha$ = \ansbox[1.3in]{$0.0050$ Np/m}
+
+		\vspace{4pt}
+		$\beta$ = \ansbox[1.3in]{$0.314$ rad/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the wavelength on the line.
+		\begin{solution}[0.8in]
+		\eq{ \lambda = \dfrac{2\pi}{\beta} = \dfrac{2\pi}{0.3142} = 20.0\ \m }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\lambda$ = \ansbox[1.3in]{$20.0\ \m$}
+	\end{minipage}
+
+	\part Compare $\beta$ with its value on the same line with $R^{\prime} = 0$. What does
+	the comparison say about the effect of a small loss on the phase constant?
+	\begin{solution}[1in]
+	With $R^{\prime} = 0$, $\beta = \omega\sqrt{L^{\prime}C^{\prime}} = 6.283\times10^{7}\sqrt{2.5\times10^{-17}} = 0.3142$
+	rad/m, the same to four figures. A small loss adds attenuation but leaves the
+	phase constant, and so the wavelength, essentially unchanged.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Reading a solution.} The voltage on a line is
+\eq{
+	v(z,t) = 5\,e^{-0.02z}\cosp{2\pi\times10^{8}\,t - 3z + 30^\circ}
+	+ 2\,e^{0.02z}\cosp{2\pi\times10^{8}\,t + 3z}\ \text{V}
+}
+with $z$ in meters.
+\begin{parts}
+
+	\part Which term travels toward $+z$ and which toward $-z$? Explain how you
+	can tell.
+	\begin{solution}[1in]
+	The first term travels toward $+z$: a point of constant phase,
+	$\omega t - 3z = $ constant, moves to larger $z$ as $t$ grows. The second
+	travels toward $-z$, because holding $\omega t + 3z$ constant requires $z$ to
+	decrease as $t$ grows.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\alpha$, $\beta$, and the wavelength.
+		\begin{solution}[0.9in]
+		\eq{
+			\alpha = 0.02\ \text{Np/m}, \quad \beta = 3\ \text{rad/m}, \quad
+			\lambda = \dfrac{2\pi}{3} = 2.09\ \m
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\alpha$ = \ansbox[1.3in]{$0.02$ Np/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$2.09\ \m$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Write the phasor constants $V_0^+$ and $V_0^-$.
+		\begin{solution}[0.8in]
+		\eq{ V_0^+ = 5\angle 30^\circ\ \text{V}, \qquad V_0^- = 2\angle 0^\circ\ \text{V} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_0^+$ = \ansbox[1.3in]{$5\angle 30^\circ$ V}
+
+		\vspace{4pt}
+		$V_0^-$ = \ansbox[1.3in]{$2\angle 0^\circ$ V}
+	\end{minipage}
+
+	\part The second term grows as $e^{0.02z}$. Explain why this does not mean the
+	reflected wave gains energy.
+	\begin{solution}[1in]
+	The reflected wave travels toward $-z$. Following it in its own direction of
+	travel, $z$ decreases, so $e^{0.02z}$ decreases: the wave decays as it
+	travels, just as the incident wave does.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The lossless line.} RG-58 has $L^{\prime} = 259\ \text{nH/m}$ and
+$C^{\prime} = 96.8\ \text{pF/m}$.
+\begin{parts}
+
+	\part Set $R^{\prime} = G^{\prime} = 0$ and show that $\gamma$ is purely imaginary.
+	\begin{solution}[1in]
+	\eq{ \gamma = \sqrt{(j\omega L^{\prime})(j\omega C^{\prime})} = \sqrt{-\omega^2 L^{\prime}C^{\prime}} = j\omega\sqrt{L^{\prime}C^{\prime}} }
+	so $\alpha = 0$ and $\beta = \omega\sqrt{L^{\prime}C^{\prime}}$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\beta$ and the wavelength at $50\ \mhz$.
+		\begin{solution}[1.1in]
+		\eq{
+			\beta &= 2\pi\times5\times10^{7}\sqrt{259\times10^{-9}\times96.8\times10^{-12}} \\
+			&= 1.57\ \text{rad/m} \\
+			\lambda &= \dfrac{2\pi}{1.57} = 4.0\ \m
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\beta$ = \ansbox[1.3in]{$1.57$ rad/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$4.0\ \m$}
+	\end{minipage}
+
+	\part In the time domain, describe what the incident wave on a lossless line
+	looks like to an observer at a fixed position $z$, and to an observer moving
+	along with one of its crests.
+	\begin{solution}[1in]
+	At a fixed $z$, the voltage is a sinusoid in time with constant amplitude
+	$\vert V_0^+\vert$. An observer moving with a crest sees a constant voltage,
+	because the phase $\omega t - \beta z$ does not change, and with $\alpha = 0$
+	the amplitude does not change either.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

@@ -1,0 +1,227 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L14 practice set (Transients): turn-on, reflections at both ends, the bounce
+% diagram, the steady state, and a pulse by superposition.
+
+\fullwidth{\textbf{Learning Objective 3.7: } I can plot the transient response of a
+load connected to a source through a transmission line.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). All lines are lossless, and every
+source switches on at $t = 0$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Turn-on.} A $12\ \text{V}$ step source with internal resistance
+$\myz{s} = 75\ \ohms$ drives a $300\ \m$ line with $\myz{0} = 50\ \ohms$ and
+$v_p = 2\times10^{8}$ m/s. The line ends in $\myz{L} = 25\ \ohms$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the one-way delay $T$.
+		\begin{solution}[0.8in]
+		\eq{ T = \dfrac{\ell}{v_p} = \dfrac{300}{2\times10^{8}} = 1.5\ \mu\text{s} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$T$ = \ansbox[1.3in]{$1.5\ \mu$s}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the voltage $V_1^+$ launched onto the line at turn-on, and explain
+		why the load does not affect it.
+		\begin{solution}[1.2in]
+		\eq{ V_1^+ = V_s\dfrac{\myz{0}}{\myz{s} + \myz{0}} = 12\times\dfrac{50}{125} = 4.8\ \text{V} }
+		Just after turn-on only the incident wave exists, so the line looks like
+		$\myz{0}$ to the source. The load has no effect until the step reaches it at
+		$t = T$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_1^+$ = \ansbox[1.3in]{$4.8\ \text{V}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma_L$ and $\Gamma_s$.
+		\begin{solution}[1in]
+		\eq{
+			\Gamma_L &= \dfrac{25-50}{25+50} = -\dfrac{1}{3} \\
+			\Gamma_s &= \dfrac{75-50}{75+50} = 0.2
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma_L$ = \ansbox[1.3in]{$-0.333$}
+
+		\vspace{4pt}
+		$\Gamma_s$ = \ansbox[1.3in]{$0.2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the final, steady-state voltage at the load.
+		\begin{solution}[0.8in]
+		\eq{ V_L(\infty) = V_s\dfrac{\myz{L}}{\myz{L} + \myz{s}} = 12\times\dfrac{25}{100} = 3.0\ \text{V} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_L(\infty)$ = \ansbox[1.3in]{$3.0\ \text{V}$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The bounce diagram.} Continue with the line in Question 1.
+\begin{parts}
+
+	\part Draw the bounce diagram through $t = 5T$, labeling each wave with its
+	amplitude.
+	\begin{solution}[1.4in]
+	Each wave is the previous one times the reflection coefficient at the end it
+	reached:
+	\eq{ 4.8,\quad -\tfrac{1}{3}(4.8) = -1.6,\quad 0.2(-1.6) = -0.32,\quad -\tfrac{1}{3}(-0.32) = 0.107,\quad 0.2(0.107) = 0.021\ \text{V} }
+	Forward waves leave the source at $0$, $2T$, and $4T$; reflected waves leave
+	the load at $T$ and $3T$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the load voltage on each interval: $T < t < 3T$, $3T < t < 5T$, and
+		$5T < t < 7T$.
+		\begin{solution}[1.3in]
+		\eq{
+			V_L &= 4.8 - 1.6 = 3.20\ \text{V} \\
+			V_L &= 3.20 - 0.32 + 0.107 = 2.99\ \text{V} \\
+			V_L &= 2.99 + 0.021 - 0.007 = 3.00\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_L(2T)$ = \ansbox[1.3in]{$3.20\ \text{V}$}
+
+		\vspace{4pt}
+		$V_L(4T)$ = \ansbox[1.3in]{$2.99\ \text{V}$}
+
+		\vspace{4pt}
+		$V_L(6T)$ = \ansbox[1.3in]{$3.00\ \text{V}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the voltage at the source end of the line on $0 < t < 2T$ and
+		$2T < t < 4T$.
+		\begin{solution}[1in]
+		\eq{
+			V(-\ell) &= 4.8\ \text{V} \\
+			V(-\ell) &= 4.8 - 1.6 - 0.32 = 2.88\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V(T)$ = \ansbox[1.3in]{$4.8\ \text{V}$}
+
+		\vspace{4pt}
+		$V(3T)$ = \ansbox[1.3in]{$2.88\ \text{V}$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The steady state.} The load voltage after many round trips is
+\eq{ V_L(\infty) = V_1^+\lp 1 + \Gamma_L\rp\sum_{n=0}^{\infty}\lp\Gamma_L\Gamma_s\rp^{n} }
+\begin{parts}
+
+	\part Explain why the series converges for any pair of passive resistive
+	terminations other than both ends being shorts or opens.
+	\begin{solution}[0.9in]
+	For a passive resistor, $-1 \le \Gamma \le 1$, with $\vert\Gamma\vert = 1$ only
+	for a short or an open. If either end is a resistor, $\vert\Gamma_L\Gamma_s\vert < 1$,
+	and a geometric series with ratio less than one in magnitude converges.
+	\end{solution}
+
+	\part Sum the series and show that
+	$V_L(\infty) = V_s\dfrac{\myz{L}}{\myz{L} + \myz{s}}$.
+	\begin{solution}[2.2in]
+	\eq{
+		V_L(\infty) &= \dfrac{V_1^+\lp 1 + \Gamma_L\rp}{1 - \Gamma_L\Gamma_s} \\
+		1 + \Gamma_L &= \dfrac{2\myz{L}}{\myz{L} + \myz{0}}, \qquad
+		1 - \Gamma_L\Gamma_s = \dfrac{2\myz{0}\lp\myz{L} + \myz{s}\rp}{\lp\myz{L} + \myz{0}\rp\lp\myz{s} + \myz{0}\rp} \\
+		V_L(\infty) &= V_s\dfrac{\myz{0}}{\myz{s} + \myz{0}}\cdot\dfrac{2\myz{L}}{\myz{L} + \myz{0}}\cdot
+		\dfrac{\lp\myz{L} + \myz{0}\rp\lp\myz{s} + \myz{0}\rp}{2\myz{0}\lp\myz{L} + \myz{s}\rp}
+		= V_s\dfrac{\myz{L}}{\myz{L} + \myz{s}}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Check the result numerically with the values from Question 1.
+		\begin{solution}[0.9in]
+		\eq{ \dfrac{4.8\lp 1 - \tfrac{1}{3}\rp}{1 + \tfrac{1}{3}(0.2)} = \dfrac{3.2}{1.0667} = 3.0\ \text{V} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_L(\infty)$ = \ansbox[1.3in]{$3.0\ \text{V}$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A pulse.} The worked example from the lesson ($V_s = 10\ \text{V}$,
+$\myz{s} = 25\ \ohms$, $\myz{0} = 50\ \ohms$, $\myz{L} = 150\ \ohms$, $T = 2\ \mu$s)
+is driven by a $10\ \text{V}$ pulse that lasts from $t = 0$ to $t = T$ instead of a
+step.
+\begin{parts}
+
+	\part Write the pulse as the sum of two steps, and explain why the load voltage
+	is the step response minus a delayed copy of itself.
+	\begin{solution}[1in]
+	The pulse is a $10\ \text{V}$ step at $t = 0$ plus a $-10\ \text{V}$ step at
+	$t = T$. The line is linear, so its response is the sum of the responses to the
+	two steps: $V_L(t) = s(t) - s(t - T)$, where $s(t)$ is the step response.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The step response at the load is $0$, then $10.00$, $8.33$, and
+		$8.61\ \text{V}$ on successive intervals of $2T$ starting at $T$. Find the
+		pulse response at the load on $T < t < 2T$, $2T < t < 3T$, and $3T < t < 4T$.
+		\begin{solution}[1.2in]
+		\eq{
+			T < t < 2T&: \quad 10.00 - 0 = 10.0\ \text{V} \\
+			2T < t < 3T&: \quad 10.00 - 10.00 = 0\ \text{V} \\
+			3T < t < 4T&: \quad 8.33 - 10.00 = -1.67\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_L(1.5T)$ = \ansbox[1.3in]{$10.0\ \text{V}$}
+
+		\vspace{4pt}
+		$V_L(2.5T)$ = \ansbox[1.3in]{$0\ \text{V}$}
+
+		\vspace{4pt}
+		$V_L(3.5T)$ = \ansbox[1.3in]{$-1.67\ \text{V}$}
+	\end{minipage}
+
+	\part The load is a digital receiver. The pulse should produce one clean pulse
+	at the load, but a second, inverted pulse arrives at $3T$. What single change to
+	the circuit would remove it, and why?
+	\begin{solution}[1in]
+	Make the source resistance equal to $\myz{0} = 50\ \ohms$. The second pulse is the
+	first reflection from the load, re-reflected by the source; with
+	$\Gamma_s = 0$ the source absorbs it. (A $50\ \ohms$ load would also work,
+	by removing the first reflection, but it would halve the received pulse.)
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

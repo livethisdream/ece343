@@ -1,0 +1,106 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L1 practice set (Course Introduction): the spectrum and wavelength, how the
+% course is assessed, and the circuit laws as limits of Maxwell's equations.
+
+\fullwidth{\textbf{Learning Objectives 1.1 and 1.2: } I can articulate what I will
+learn and how I will be assessed in this course. I can articulate practical
+applications of electromagnetics.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). Use $c = 3\times10^{8}$ m/s.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Wavelengths across the spectrum.}
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the free-space wavelength of the $60\ \hz$ power grid, the GPS L1
+		signal at $1575.42\ \mhz$, and an X-band radar at $10\ \ghz$.
+		\begin{solution}[1.3in]
+		\eq{
+			\lambda_{60\ \text{Hz}} &= \dfrac{3\times10^{8}}{60} = 5\times10^{6}\ \m = 5000\ \km \\
+			\lambda_\text{GPS} &= \dfrac{3\times10^{8}}{1.57542\times10^{9}} = 0.190\ \m \\
+			\lambda_\text{X} &= \dfrac{3\times10^{8}}{10^{10}} = 0.03\ \m
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\lambda_{60\ \text{Hz}}$ = \ansbox[1.3in]{$5000\ \km$}
+
+		\vspace{4pt}
+		$\lambda_\text{GPS}$ = \ansbox[1.3in]{$19.0\ \text{cm}$}
+
+		\vspace{4pt}
+		$\lambda_\text{X}$ = \ansbox[1.3in]{$3\ \text{cm}$}
+	\end{minipage}
+
+	\part A $1\ \m$ connection carries each of the three signals. For which of them is
+	the connection a significant fraction of a wavelength? Explain in one or two
+	sentences why that matters.
+	\begin{solution}[1in]
+	At $60\ \hz$ the connection is $2\times10^{-7}$ of a wavelength, so it behaves as
+	an ideal wire. At GPS and X-band frequencies it is about 5 and 33 wavelengths
+	long, so the voltage differs from one end to the other at each instant, and
+	circuit theory no longer describes it; Lesson 3 models it as a transmission
+	line.
+	\end{solution}
+
+	\part Name one Air Force system that uses electromagnetic waves, and state one
+	question about it that this course will help you answer.
+	\begin{solution}[0.9in]
+	Answers vary. Example: an aircraft radar. How much of the transmitter's power
+	reaches the antenna through the feed cable, and how much reflects at a
+	mismatched connection?
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The course, and where circuit theory comes from.}
+\begin{parts}
+
+	\part How is each learning objective assessed, and what can you do if you earn
+	a 0 on an assessment?
+	\begin{solution}[0.9in]
+	Each objective has an assessment scored 1 (mastered) or 0 (not yet mastered).
+	A 0 comes with feedback, and if you made a real attempt on time you may revise
+	your work until you earn the 1.
+	\end{solution}
+
+	\part A transformer steps $120\ \text{V}$ down to $12\ \text{V}$. Which of
+	Maxwell's equations explains how it works? Explain in one sentence.
+	\begin{solution}[0.8in]
+	Faraday's law: the changing magnetic flux in the core, produced by the primary
+	current, induces a voltage around the secondary winding.
+	\end{solution}
+
+	\part Faraday's law in integral form is
+	$\oint_C \vec{E}\cdot d\vec{\ell} = -\dfrac{d}{dt}\int_S \vec{B}\cdot d\vec{s}$.
+	Explain how it reduces to Kirchhoff's voltage law, and under what condition.
+	\begin{solution}[1.1in]
+	Around a circuit loop, the line integral of $\vec{E}$ across each element is the
+	voltage across it, so the left side is the sum of the voltages around the loop.
+	When the magnetic flux through the loop changes negligibly, the right side is
+	zero, and the sum of the voltages around the loop is zero.
+	\end{solution}
+
+	\part Kirchhoff's current law follows from conservation of charge. State the
+	condition under which it holds, and give one situation in this course where it
+	does not.
+	\begin{solution}[1in]
+	It holds when no charge accumulates at the node, so the current in equals the
+	current out. On a transmission line at high frequency, charge builds up and
+	drains along the conductors as the wave passes, so the current varies along the
+	line; the line's capacitance accounts for it.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

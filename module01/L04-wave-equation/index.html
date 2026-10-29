@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L4 - The Wave Equation &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l4-the-wave-equation">
+<h1>L4 - The Wave Equation<a class="headerlink" href="#l4-the-wave-equation" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">The Wave Equation</h1>
+<div class="title-rule"></div>
+<p>Today we turn the telegrapher’s equations into a wave equation and solve it.</p>
+<p>Lesson 4 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'">
+  <li>I can describe the origin of the transmission line equation, understand the method of developing a solution, and interpret the solution.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 3 ended with the telegrapher’s equations: two coupled partial
+differential equations for the voltage and current on a line. Today we solve
+them for a sinusoidal source. Phasors from Lesson 2 replace every time
+derivative with a multiplication by <span class="math notranslate nohighlight">\(j\omega\)</span>, which leaves two ordinary
+differential equations in <span class="math notranslate nohighlight">\(z\)</span>. Differentiating one and substituting the other
+<strong>uncouples</strong> them into a single <strong>wave equation</strong> for the voltage, and another
+for the current. Its solution is a pair of waves, one traveling toward the load
+and one traveling back toward the source, and the rest of Module 1 is built on
+that solution.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 3: the telegrapher’s equations</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{\partial v(z,t)}{\partial z} &amp;= R'\ i(z,t) + L' \frac{\partial i(z,t)}{\partial t} \\ -\frac{\partial i(z,t)}{\partial z} &amp;= G'\ v(z,t) + C' \frac{\partial v(z,t)}{\partial t} \end{aligned}\end{split}\]</div>
+<p><strong>Lesson 2: phasors</strong></p>
+<div class="math notranslate nohighlight">
+\[v(z,t) = \text{Re}\left[\widetilde{V}(z) e^{j\omega t}\right]\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 3 derived the telegrapher’s equations from Kirchhoff’s laws on a short
+section of line. They hold for any signal, but they are coupled, and each one
+contains derivatives in both <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(t\)</span>. Lesson 2 gave us the tool that removes
+the time derivatives. When the source is a sinusoid at frequency <span class="math notranslate nohighlight">\(\omega\)</span>, every
+voltage and current on the line is a sinusoid at the same frequency, so each one
+is the real part of a phasor times <span class="math notranslate nohighlight">\(e^{j\omega t}\)</span>. On a line the phasor depends
+on position, so we write it <span class="math notranslate nohighlight">\(\widetilde{V}(z)\)</span>: its magnitude is the amplitude
+of the sinusoid at <span class="math notranslate nohighlight">\(z\)</span>, and its angle is the phase there.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-time-derivatives-become-j">
+<div class="wrap docutils container">
+<p class="rubric">Time Derivatives Become jω</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \frac{\partial v(z,t)}{\partial t} &amp;= \frac{\partial}{\partial t} \text{Re}\left[\widetilde{V}(z) e^{j\omega t}\right] \\ &amp;= \text{Re}\left[\widetilde{V}(z) \frac{\partial}{\partial t} e^{j\omega t}\right] \\ &amp;= \text{Re}\left[j\omega \widetilde{V}(z) e^{j\omega t}\right] \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>The phasor of <span class="math notranslate nohighlight">\(\partial v/\partial t\)</span> is <span class="math notranslate nohighlight">\(j\omega \widetilde{V}(z)\)</span>.</p></li>
+<li><p>The phasor of <span class="math notranslate nohighlight">\(\partial v/\partial z\)</span> is <span class="math notranslate nohighlight">\(d\widetilde{V}/dz\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We take the derivative of <span class="math notranslate nohighlight">\(v(z,t)\)</span> with respect to time. Taking the real part
+and differentiating with respect to <span class="math notranslate nohighlight">\(t\)</span> commute, because <span class="math notranslate nohighlight">\(t\)</span> is real, so we can
+move the derivative inside. The phasor <span class="math notranslate nohighlight">\(\widetilde{V}(z)\)</span> does not depend on
+time, so the derivative acts only on <span class="math notranslate nohighlight">\(e^{j\omega t}\)</span>, which brings down a factor
+of <span class="math notranslate nohighlight">\(j\omega\)</span>. The result is again the real part of a phasor times
+<span class="math notranslate nohighlight">\(e^{j\omega t}\)</span>, and that phasor is <span class="math notranslate nohighlight">\(j\omega\widetilde{V}(z)\)</span>. Differentiating
+in time is the same as multiplying the phasor by <span class="math notranslate nohighlight">\(j\omega\)</span>.</p>
+<p>The derivative with respect to <span class="math notranslate nohighlight">\(z\)</span> works the other way. Now <span class="math notranslate nohighlight">\(e^{j\omega t}\)</span> does
+not depend on <span class="math notranslate nohighlight">\(z\)</span>, so the derivative acts only on <span class="math notranslate nohighlight">\(\widetilde{V}(z)\)</span>. Because
+the phasor depends on <span class="math notranslate nohighlight">\(z\)</span> alone, its derivative is an ordinary derivative,
+<span class="math notranslate nohighlight">\(d\widetilde{V}/dz\)</span>, not a partial one.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-telegrapher-s-equations-in-phasor-form">
+<div class="wrap docutils container">
+<p class="rubric">The Telegrapher’s Equations in Phasor Form</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{d\widetilde{V}(z)}{dz} &amp;= R'\ \widetilde{I}(z) + j\omega L'\ \widetilde{I}(z) = \left(R' + j\omega L'\right)\widetilde{I}(z) \\ -\frac{d\widetilde{I}(z)}{dz} &amp;= G'\ \widetilde{V}(z) + j\omega C'\ \widetilde{V}(z) = \left(G' + j\omega C'\right)\widetilde{V}(z) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We replace each quantity in the telegrapher’s equations with its phasor: <span class="math notranslate nohighlight">\(v\)</span>
+with <span class="math notranslate nohighlight">\(\widetilde{V}\)</span>, <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(\widetilde{I}\)</span>, each <span class="math notranslate nohighlight">\(\partial/\partial t\)</span> with
+<span class="math notranslate nohighlight">\(j\omega\)</span>, and each <span class="math notranslate nohighlight">\(\partial/\partial z\)</span> with <span class="math notranslate nohighlight">\(d/dz\)</span>. In the first equation the
+two terms on the right both multiply <span class="math notranslate nohighlight">\(\widetilde{I}(z)\)</span>, so we factor it out;
+in the second, both multiply <span class="math notranslate nohighlight">\(\widetilde{V}(z)\)</span>. The factor
+<span class="math notranslate nohighlight">\(R' + j\omega L'\)</span> is the series impedance of the line per meter, and
+<span class="math notranslate nohighlight">\(G' + j\omega C'\)</span> is its shunt admittance per meter. The equations are still
+coupled, but they are now ordinary differential equations in one variable,
+<span class="math notranslate nohighlight">\(z\)</span>, with constant coefficients.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-uncoupling-the-voltage">
+<div class="wrap docutils container">
+<p class="rubric">Uncoupling the Voltage</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{d^2\widetilde{V}(z)}{dz^2} &amp;= \left(R' + j\omega L'\right)\frac{d\widetilde{I}(z)}{dz} \\ &amp;= -\left(R' + j\omega L'\right)\left(G' + j\omega C'\right)\widetilde{V}(z) \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d^2\widetilde{V}(z)}{dz^2} - \gamma^2\ \widetilde{V}(z) = 0, \qquad \gamma^2 = \left(R' + j\omega L'\right)\left(G' + j\omega C'\right)\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To get an equation in <span class="math notranslate nohighlight">\(\widetilde{V}\)</span> alone, we differentiate the first
+phasor equation with respect to <span class="math notranslate nohighlight">\(z\)</span>. The left side becomes the second
+derivative of <span class="math notranslate nohighlight">\(\widetilde{V}\)</span>, and on the right the constant
+<span class="math notranslate nohighlight">\(R' + j\omega L'\)</span> stays outside the derivative, leaving <span class="math notranslate nohighlight">\(d\widetilde{I}/dz\)</span>.
+The second phasor equation says exactly what <span class="math notranslate nohighlight">\(d\widetilde{I}/dz\)</span> is:
+<span class="math notranslate nohighlight">\(-\left(G' + j\omega C'\right)\widetilde{V}(z)\)</span>. Substituting it removes the
+current entirely. Multiplying both sides by <span class="math notranslate nohighlight">\(-1\)</span> and moving everything to the
+left gives the <strong>wave equation</strong> for the voltage. We name the product of the
+series impedance and the shunt admittance <span class="math notranslate nohighlight">\(\gamma^2\)</span>, because the solution
+depends on its square root.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-propagation-constant">
+<div class="wrap docutils container">
+<p class="rubric">The Propagation Constant</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\gamma = \sqrt{\left(R' + j\omega L'\right)\left(G' + j\omega C'\right)} = \alpha + j\beta\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Part</p></th>
+<th class="head text-left"><p>Name</p></th>
+<th class="head text-left"><p>Units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma\)</span></p></td>
+<td class="text-left"><p>propagation constant</p></td>
+<td class="text-left"><p>1/m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td class="text-left"><p>attenuation constant</p></td>
+<td class="text-left"><p>Np/m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\beta\)</span></p></td>
+<td class="text-left"><p>phase constant</p></td>
+<td class="text-left"><p>rad/m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The square root <span class="math notranslate nohighlight">\(\gamma\)</span> is the <strong>propagation constant</strong>. It is complex,
+because the series impedance and the shunt admittance are complex, so we write
+it as a real part <span class="math notranslate nohighlight">\(\alpha\)</span> and an imaginary part <span class="math notranslate nohighlight">\(\beta\)</span>. A square root has two
+values that differ only in sign; we choose the root with <span class="math notranslate nohighlight">\(\alpha \ge 0\)</span> and
+<span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>, and the solution below carries both signs anyway. The units of
+<span class="math notranslate nohighlight">\(\gamma\)</span> are inverse meters, since <span class="math notranslate nohighlight">\(\gamma z\)</span> must be dimensionless. We mark
+the real part in <strong>nepers</strong> per meter and the imaginary part in <strong>radians</strong> per
+meter to keep track of what each one does: the solution will show that <span class="math notranslate nohighlight">\(\alpha\)</span>
+sets how fast the wave decays and <span class="math notranslate nohighlight">\(\beta\)</span> sets how fast its phase changes.
+Lesson 5 computes both for a real cable.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-current-obeys-the-same-equation">
+<div class="wrap docutils container">
+<p class="rubric">The Current Obeys the Same Equation</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{d^2\widetilde{I}(z)}{dz^2} &amp;= \left(G' + j\omega C'\right)\frac{d\widetilde{V}(z)}{dz} \\ &amp;= -\left(G' + j\omega C'\right)\left(R' + j\omega L'\right)\widetilde{I}(z) \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d^2\widetilde{I}(z)}{dz^2} - \gamma^2\ \widetilde{I}(z) = 0\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The same three steps uncouple the current. We differentiate the second phasor
+equation with respect to <span class="math notranslate nohighlight">\(z\)</span>, substitute the first equation for
+<span class="math notranslate nohighlight">\(d\widetilde{V}/dz\)</span>, and rearrange. The product of the two factors is the same
+<span class="math notranslate nohighlight">\(\gamma^2\)</span>, because multiplication does not depend on order, so the current
+obeys exactly the same wave equation as the voltage. The two equations are now
+<strong>uncoupled</strong>: each one contains a single unknown function.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-solving-the-wave-equation">
+<div class="wrap docutils container">
+<p class="rubric">Solving the Wave Equation</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Assume <span class="math notranslate nohighlight">\(\widetilde{V}(z) = A e^{sz}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} s^2 A e^{sz} - \gamma^2 A e^{sz} &amp;= 0 \\ s^2 - \gamma^2 &amp;= 0 \\ s &amp;= \pm\gamma \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The wave equation is a second-order linear differential equation with
+constant coefficients, the same kind of equation that describes an RLC circuit
+in time. We solve it the same way. We assume a solution of the form
+<span class="math notranslate nohighlight">\(A e^{sz}\)</span>, because the derivative of an exponential is the same exponential
+times a constant. Each derivative brings down a factor of <span class="math notranslate nohighlight">\(s\)</span>, so the second
+derivative is <span class="math notranslate nohighlight">\(s^2 A e^{sz}\)</span>. Substituting into the wave equation, the factor
+<span class="math notranslate nohighlight">\(A e^{sz}\)</span> appears in both terms and is never zero, so we can divide it out.
+What remains is the <strong>characteristic equation</strong>, <span class="math notranslate nohighlight">\(s^2 - \gamma^2 = 0\)</span>, and its
+two roots are <span class="math notranslate nohighlight">\(s = +\gamma\)</span> and <span class="math notranslate nohighlight">\(s = -\gamma\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-general-solution">
+<div class="wrap docutils container">
+<p class="rubric">The General Solution</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{V}(z) &amp;= V_0^+ e^{-\gamma z} + V_0^- e^{+\gamma z} \\ \widetilde{I}(z) &amp;= I_0^+ e^{-\gamma z} + I_0^- e^{+\gamma z} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(V_0^\pm\)</span> and <span class="math notranslate nohighlight">\(I_0^\pm\)</span> are complex constants.</p></li>
+<li><p>The source and the load set them; Lesson 5 relates <span class="math notranslate nohighlight">\(I_0^\pm\)</span> to <span class="math notranslate nohighlight">\(V_0^\pm\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each root gives one solution, and because the wave equation is linear, any sum
+of solutions is also a solution. A second-order equation has exactly two
+independent solutions, so the <strong>general solution</strong> is the sum of the two, each
+with its own constant. We name the constants <span class="math notranslate nohighlight">\(V_0^+\)</span> and <span class="math notranslate nohighlight">\(V_0^-\)</span> for reasons the
+next two frames make clear. The current has the same form with its own
+constants, <span class="math notranslate nohighlight">\(I_0^+\)</span> and <span class="math notranslate nohighlight">\(I_0^-\)</span>. The four constants are not independent: the
+current and voltage must still satisfy the first-order phasor equations, and
+Lesson 5 uses that to find <span class="math notranslate nohighlight">\(I_0^\pm\)</span> from <span class="math notranslate nohighlight">\(V_0^\pm\)</span>. The source and load set
+the rest, which is the subject of Lesson 6.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-back-to-the-time-domain">
+<div class="wrap docutils container">
+<p class="rubric">Back to the Time Domain</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>With <span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span> and <span class="math notranslate nohighlight">\(V_0^\pm = \left\vert V_0^\pm\right\vert e^{j\phi^\pm}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} v(z,t) &amp;= \text{Re}\left[\widetilde{V}(z) e^{j\omega t}\right] \\ &amp;= \text{Re}\left[\left\vert V_0^+\right\vert e^{j\phi^+} e^{-\alpha z} e^{-j\beta z} e^{j\omega t} + \left\vert V_0^-\right\vert e^{j\phi^-} e^{\alpha z} e^{j\beta z} e^{j\omega t}\right] \\ &amp;= \left\vert V_0^+\right\vert e^{-\alpha z} \cos\left(\omega t - \beta z + \phi^+\right) + \left\vert V_0^-\right\vert e^{\alpha z} \cos\left(\omega t + \beta z + \phi^-\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To see what the solution looks like on the line, we return to the time domain:
+multiply the phasor by <span class="math notranslate nohighlight">\(e^{j\omega t}\)</span> and take the real part. We write each
+complex constant as a magnitude and a phase, and split each exponential
+<span class="math notranslate nohighlight">\(e^{\mp\gamma z}\)</span> into a real part <span class="math notranslate nohighlight">\(e^{\mp\alpha z}\)</span> and an imaginary part
+<span class="math notranslate nohighlight">\(e^{\mp j\beta z}\)</span>. The real exponentials and the magnitudes are real numbers,
+so they come outside the real part. The remaining imaginary exponentials
+combine into a single <span class="math notranslate nohighlight">\(e^{j(\cdot)}\)</span>, and the real part of <span class="math notranslate nohighlight">\(e^{j\theta}\)</span> is
+<span class="math notranslate nohighlight">\(\cos\theta\)</span>. The result is two sinusoids, each multiplied by an exponential in
+<span class="math notranslate nohighlight">\(z\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-which-way-each-wave-travels">
+<div class="wrap docutils container">
+<p class="rubric">Which Way Each Wave Travels</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Constant <span class="math notranslate nohighlight">\(\omega t - \beta z\)</span>: as <span class="math notranslate nohighlight">\(t\)</span> grows, <span class="math notranslate nohighlight">\(z\)</span> grows. The first term travels toward the load.</p></li>
+<li><p>Constant <span class="math notranslate nohighlight">\(\omega t + \beta z\)</span>: the second term travels toward the source.</p></li>
+<li><p>Each decays in its own direction of travel.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A crest of the first term sits wherever its cosine argument
+<span class="math notranslate nohighlight">\(\omega t - \beta z + \phi^+\)</span> is zero. Solving for its position gives
+<span class="math notranslate nohighlight">\(z = (\omega t + \phi^+)/\beta\)</span>, which grows as <span class="math notranslate nohighlight">\(t\)</span> grows, so the crest moves in
+the <span class="math notranslate nohighlight">\(+z\)</span> direction. Every point of constant phase does the same, so the whole
+first term is a wave traveling toward the load, and its amplitude
+<span class="math notranslate nohighlight">\(\left\vert V_0^+\right\vert e^{-\alpha z}\)</span> shrinks as it goes. That is why we
+named its constant <span class="math notranslate nohighlight">\(V_0^+\)</span>. In the second term the crest sits at
+<span class="math notranslate nohighlight">\(z = -(\omega t + \phi^-)/\beta\)</span>, which moves in the <span class="math notranslate nohighlight">\(-z\)</span> direction, toward the
+source; its amplitude <span class="math notranslate nohighlight">\(\left\vert V_0^-\right\vert e^{\alpha z}\)</span> shrinks as <span class="math notranslate nohighlight">\(z\)</span>
+decreases, so this wave also decays in its own direction of travel. The voltage
+on any line is the sum of an <strong>incident</strong> wave and a <strong>reflected</strong> wave.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-two-waves">
+<div class="wrap docutils container">
+<p class="rubric">The Two Waves</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/traveling-waves.html"
+        width="100%" height="474"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="The forward and backward traveling waves of the general solution, with attenuation, and their sum"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget plots the two terms of the solution over three wavelengths, with
+<span class="math notranslate nohighlight">\(\left\vert V_0^+\right\vert = 1\)</span>. The dots ride one crest of each wave so you
+can see which way it moves. Start with no backward wave and set <span class="math notranslate nohighlight">\(\alpha\lambda\)</span>
+to zero: the forward wave moves to the right at constant amplitude. Raise
+<span class="math notranslate nohighlight">\(\alpha\lambda\)</span>, the attenuation over one wavelength, and the wave shrinks as it
+travels; at <span class="math notranslate nohighlight">\(\alpha\lambda = 0.1\)</span> Np it loses <span class="math notranslate nohighlight">\(0.87\)</span> dB per wavelength and
+reaches <span class="math notranslate nohighlight">\(0.74\)</span> of its starting amplitude after three. Now raise
+<span class="math notranslate nohighlight">\(\left\vert V_0^-\right\vert\)</span>: the backward wave enters from the right and
+shrinks as it travels left. The sum, in blue, no longer looks like a single
+traveling wave. Lesson 6 shows that the sum forms a standing wave, and that the
+load sets the size of the backward wave.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-lossless-line">
+<div class="wrap docutils container">
+<p class="rubric">The Lossless Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Set <span class="math notranslate nohighlight">\(R' = 0\)</span> and <span class="math notranslate nohighlight">\(G' = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma &amp;= \sqrt{\left(j\omega L'\right)\left(j\omega C'\right)} = \sqrt{-\omega^2 L'C'} = j\omega\sqrt{L'C'} \\ \alpha &amp;= 0, \qquad \beta = \omega\sqrt{L'C'} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>RG-58 at 100 MHz: <span class="math notranslate nohighlight">\(\beta = 3.15\)</span> rad/m.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>On a lossless line the product under the square root is <span class="math notranslate nohighlight">\(j^2\omega^2 L'C'\)</span>,
+which is a negative real number. Its square root is purely imaginary, so the
+attenuation constant is zero and the phase constant is <span class="math notranslate nohighlight">\(\omega\sqrt{L'C'}\)</span>.
+Both waves travel without decaying. For RG-58, with <span class="math notranslate nohighlight">\(L' = 259\)</span> nH/m and
+<span class="math notranslate nohighlight">\(C' = 96.8\)</span> pF/m from Lesson 3, at 100 MHz,</p>
+<div class="math notranslate nohighlight">
+\[\beta = 2\pi \times 10^8 \sqrt{259 \times 10^{-9} \times 96.8 \times 10^{-12}} = 2\pi \times 10^8 \times 5.01 \times 10^{-9} = 3.15\ \text{rad/m}\]</div>
+<p>so the phase changes by one full cycle, <span class="math notranslate nohighlight">\(2\pi\)</span> radians, every
+<span class="math notranslate nohighlight">\(2\pi/3.15 = 2.0\)</span> m. That is the 2 m wavelength Lesson 3 found for this cable
+at 100 MHz, now derived from <span class="math notranslate nohighlight">\(L'\)</span> and <span class="math notranslate nohighlight">\(C'\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Phasor rule</p></td>
+<td class="text-left"><p>Time derivative becomes multiplication by <span class="math notranslate nohighlight">\(j\omega\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\partial/\partial t \to j\omega\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Phasor telegrapher’s equations</p></td>
+<td class="text-left"><p>Series impedance and shunt admittance per meter</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(R' + j\omega L'\)</span>, <span class="math notranslate nohighlight">\(G' + j\omega C'\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Wave equation</p></td>
+<td class="text-left"><p>Uncoupled by differentiating one equation and substituting the other</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{d^2\widetilde{V}}{dz^2} - \gamma^2\widetilde{V} = 0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span></p></td>
+<td class="text-left"><p>Propagation constant: attenuation and phase constants</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma^2 = (R' + j\omega L')(G' + j\omega C')\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Characteristic equation</p></td>
+<td class="text-left"><p>From the trial solution <span class="math notranslate nohighlight">\(Ae^{sz}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(s = \pm\gamma\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>General solution</p></td>
+<td class="text-left"><p>Incident plus reflected wave</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(V_0^+ e^{-\gamma z} + V_0^- e^{+\gamma z}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Lossless line</p></td>
+<td class="text-left"><p>No attenuation</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\alpha = 0\)</span>, <span class="math notranslate nohighlight">\(\beta = \omega\sqrt{L'C'}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L04_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L04_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 5</strong>: relate the current to the voltage, which defines <span class="math notranslate nohighlight">\(Z_0\)</span>, and read the speed, wavelength, and loss out of <span class="math notranslate nohighlight">\(\gamma\)</span>.</p></li>
+<li><p><strong>Lesson 6</strong>: the load sets <span class="math notranslate nohighlight">\(V_0^-\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we solved the wave equation and found that the voltage on any line is the
+sum of two traveling waves. Two questions remain before we can use the
+solution. The first is how the current in each wave relates to its voltage; the
+answer is the characteristic impedance <span class="math notranslate nohighlight">\(Z_0\)</span>, which Lesson 5 derives from the
+phasor equations. The second is what the propagation constant means in
+numbers: how fast the wave travels, how long a wavelength is, and how much a
+real cable attenuates it. Lesson 5 answers both, and Lesson 6 then terminates
+the line in a load and finds the reflected wave.</p>
+<p>Before Lesson 5, read sections 3.7 through 3.9 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L04-wave-equation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

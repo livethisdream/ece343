@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L13 - Smith Charts IV &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l13-smith-charts-iv">
+<h1>L13 - Smith Charts IV<a class="headerlink" href="#l13-smith-charts-iv" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Smith Charts IV</h1>
+<div class="title-rule"></div>
+<p>Today we build the matching element out of the line itself.</p>
+<p>Lesson 13 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 5">
+  <li>I can use the Smith Chart to solve transmission line problems.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 12 matched a load with a length of line and one capacitor or inductor.
+At microwave frequencies a lumped element is a poor reactance: a few picofarads
+is hard to buy at the right value, and the leads of any part add inductance of
+their own. A short piece of transmission line ending in a short or an open
+circuit has a purely reactive input impedance that we set by cutting it to
+length. That piece is a <strong>stub</strong>. Today we derive the stub’s reactance, place
+it on the Smith chart, and design a <strong>single-stub tuner</strong>: a line of length <span class="math notranslate nohighlight">\(d\)</span>
+from the load, then a stub of length <span class="math notranslate nohighlight">\(\ell\)</span> in shunt.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-single-stub-tuner">
+<div class="wrap docutils container">
+<p class="rubric">The Single-Stub Tuner</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L13-stub-tuner.svg"
+     alt="A transmission line running from the source on the left to a load on the right. A distance d from the load, a second length of line, the stub, hangs down in shunt; its length is l and its far end is a short or an open"
+     style="max-width: 680px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The tuner has two lengths to choose. The line of length <span class="math notranslate nohighlight">\(d\)</span> rotates the load
+admittance to the <span class="math notranslate nohighlight">\(g = 1\)</span> circle, exactly as in Lesson 12’s shunt procedure.
+The stub of length <span class="math notranslate nohighlight">\(\ell\)</span> supplies the susceptance that cancels what is left.
+It connects in shunt at a T junction, and the next frames find its
+susceptance from its length.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-shorted-stub">
+<div class="wrap docutils container">
+<p class="rubric">The Shorted Stub</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>From Lesson 11, with <span class="math notranslate nohighlight">\(z_L = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} z_{sc} &amp;= \frac{z_L + j\tan\beta\ell}{1 + jz_L\tan\beta\ell}\bigg\vert_{z_L = 0} = j\tan\beta\ell \\ y_{sc} &amp;= \frac{1}{j\tan\beta\ell} = -j\cot\beta\ell \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A stub is a line with a known load, so Lesson 11’s input impedance formula
+applies directly. A short circuit is <span class="math notranslate nohighlight">\(z_L = 0\)</span>, which leaves only
+<span class="math notranslate nohighlight">\(j\tan\beta\ell\)</span>. The result is purely imaginary for every length, so the stub
+is a pure reactance, as a lossless line ending in a lossless load must be. Its
+reciprocal gives the susceptance a shorted stub adds in shunt. As <span class="math notranslate nohighlight">\(\ell\)</span> runs
+from zero to <span class="math notranslate nohighlight">\(\lambda/4\)</span>, the stub’s reactance runs from zero to <span class="math notranslate nohighlight">\(+j\infty\)</span>: a
+short shorted stub looks like an inductor.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-open-stub">
+<div class="wrap docutils container">
+<p class="rubric">The Open Stub</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Divide the top and bottom by <span class="math notranslate nohighlight">\(z_L\)</span>, then let <span class="math notranslate nohighlight">\(z_L \to \infty\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} z_{oc} &amp;= \frac{1 + \left(j/z_L\right)\tan\beta\ell}{1/z_L + j\tan\beta\ell}\bigg\vert_{z_L \to \infty} = \frac{1}{j\tan\beta\ell} = -j\cot\beta\ell \\ y_{oc} &amp;= j\tan\beta\ell \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>An open circuit is <span class="math notranslate nohighlight">\(z_L \to \infty\)</span>, which we cannot substitute directly. We
+divide the numerator and denominator by <span class="math notranslate nohighlight">\(z_L\)</span> first; the terms with <span class="math notranslate nohighlight">\(1/z_L\)</span>
+then vanish in the limit. The open stub’s admittance has the same form as the
+shorted stub’s impedance. A short open stub, less than <span class="math notranslate nohighlight">\(\lambda/4\)</span>, has
+positive susceptance and looks like a capacitor. Every value of <span class="math notranslate nohighlight">\(b\)</span>, positive
+or negative, comes from a stub of each type shorter than <span class="math notranslate nohighlight">\(\lambda/2\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-stubs-on-the-chart">
+<div class="wrap docutils container">
+<p class="rubric">Stubs on the Chart</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Stub admittance lies on the outer circle, <span class="math notranslate nohighlight">\(g = 0\)</span>.</p></li>
+<li><p>Shorted stub starts at <span class="math notranslate nohighlight">\(y = \infty\)</span>: right edge.</p></li>
+<li><p>Open stub starts at <span class="math notranslate nohighlight">\(y = 0\)</span>: left edge.</p></li>
+<li><p>Lengthen the stub: turn clockwise to the <span class="math notranslate nohighlight">\(b\)</span> needed.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A stub is a line, so the chart finds its length the same way it finds any
+length: rotate toward the generator from the load. The stub’s load is a short
+or an open with <span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span>, so its VSWR circle is the outer circle,
+where <span class="math notranslate nohighlight">\(g = 0\)</span>. On the admittance reading, a short is <span class="math notranslate nohighlight">\(y = \infty\)</span> at the right
+edge and an open is <span class="math notranslate nohighlight">\(y = 0\)</span> at the left edge. We turn clockwise from the
+proper edge to the susceptance we need and read the turn on the WTG scale.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-single-stub-procedure">
+<div class="wrap docutils container">
+<p class="rubric">The Single-Stub Procedure</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Plot <span class="math notranslate nohighlight">\(y_L\)</span> at <span class="math notranslate nohighlight">\(-\Gamma_L\)</span>; draw its VSWR circle.</p></li>
+<li><p>Rotate toward the generator to <span class="math notranslate nohighlight">\(g = 1\)</span>: <span class="math notranslate nohighlight">\(y = 1 \pm jb\)</span>; read <span class="math notranslate nohighlight">\(d\)</span>.</p></li>
+<li><p>Need a stub of <span class="math notranslate nohighlight">\(\mp jb\)</span>.</p></li>
+<li><p>Rotate from the short or open edge to <span class="math notranslate nohighlight">\(\mp jb\)</span>; read <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The procedure is Lesson 12’s shunt procedure with the capacitor or inductor
+replaced by a stub. The first two steps fix <span class="math notranslate nohighlight">\(d\)</span> and leave <span class="math notranslate nohighlight">\(y = 1 \pm jb\)</span>. The
+stub must add the opposite susceptance, which puts <span class="math notranslate nohighlight">\(y\)</span> at the center. The
+third step finds the stub length on the outer circle. The algebra of the
+previous frames checks each chart reading.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-single-stub-match">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Single-Stub Match</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L13-stub-match.svg"
+     alt="Two Smith charts read as admittance. Left: the load admittance on its dashed VSWR circle, a green arc of 0.0189 wavelength to 1 - j0.585 on the g = 1 circle, and an amber path up the circle to the center. Right: the stub on the outer circle, a red arc from the short at the right edge clockwise 0.334 wavelength to +j0.585, and a green arc from the open at the left edge 0.084 wavelength to the same point"
+     style="max-width: 680px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — 33.9 + j17.9 Ω with a stub</p>
+<p>Lesson 12’s load has <span class="math notranslate nohighlight">\(\Gamma_L = 0.281\angle 119.9^\circ\)</span>, so <span class="math notranslate nohighlight">\(y_L\)</span> sits at
+<span class="math notranslate nohighlight">\(0.281\angle -60.1^\circ\)</span>. Rotating <span class="math notranslate nohighlight">\(d = 0.0189\lambda\)</span> toward the generator
+reaches <span class="math notranslate nohighlight">\(y = 1 - j0.585\)</span>. The stub must add <span class="math notranslate nohighlight">\(+j0.585\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \text{short: } -\cot\beta\ell &amp;= 0.585, &amp; \beta\ell &amp;= 180^\circ - 59.7^\circ = 120.3^\circ, &amp; \ell &amp;= 0.334\lambda \\ \text{open: } \tan\beta\ell &amp;= 0.585, &amp; \beta\ell &amp;= 30.3^\circ, &amp; \ell &amp;= 0.0842\lambda \end{aligned}\end{split}\]</div>
+<p>On the chart, the <span class="math notranslate nohighlight">\(+j0.585\)</span> point on the outer circle reads <span class="math notranslate nohighlight">\(0.334\lambda\)</span>
+clockwise from the short and <span class="math notranslate nohighlight">\(0.084\lambda\)</span> from the open. At 1 GHz on a cable
+with <span class="math notranslate nohighlight">\(v_p = 2\times10^{8}\ \text{m/s}\)</span>, <span class="math notranslate nohighlight">\(\lambda = 20\ \text{cm}\)</span>: <span class="math notranslate nohighlight">\(d = 3.78\)</span> mm,
+and the stub is <span class="math notranslate nohighlight">\(16.8\)</span> mm open or <span class="math notranslate nohighlight">\(66.8\)</span> mm shorted.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-choosing-short-or-open">
+<div class="wrap docutils container">
+<p class="rubric">Choosing Short or Open</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Shorter stub: less frequency sensitivity, less loss.</p></li>
+<li><p>Coax: shorted. An open end radiates and has fringing capacitance.</p></li>
+<li><p>Microstrip: open. A short needs a via to ground.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Either stub type gives the same susceptance at the design frequency, so the
+choice comes from how the stub is built and how it behaves off frequency. A
+stub’s susceptance changes with frequency faster the longer it is, so the
+shorter option keeps the match over a wider band; here that is the
+<span class="math notranslate nohighlight">\(0.084\lambda\)</span> open stub. Construction can override that. An open end of a
+coaxial line is not a clean open, because fields fringe past the end and some
+power radiates, so coaxial tuners use shorted stubs. On a circuit board an
+open stub is just an etched trace, while a short needs a via through the
+board.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-second-solution">
+<div class="wrap docutils container">
+<p class="rubric">The Second Solution</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Continue to the upper crossing, <span class="math notranslate nohighlight">\(y = 1 + j0.585\)</span>, at <span class="math notranslate nohighlight">\(d = 0.3142\lambda\)</span>:</p>
+<ul class="simple">
+<li><p>Stub must add <span class="math notranslate nohighlight">\(-j0.585\)</span>.</p></li>
+<li><p>Short: <span class="math notranslate nohighlight">\(\cot\beta\ell = 0.585\)</span>, <span class="math notranslate nohighlight">\(\ell = 0.166\lambda\)</span>.</p></li>
+<li><p>Open: <span class="math notranslate nohighlight">\(\tan\beta\ell = -0.585\)</span>, <span class="math notranslate nohighlight">\(\ell = 0.416\lambda\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The VSWR circle crosses <span class="math notranslate nohighlight">\(g = 1\)</span> twice, so the tuner has a second design. The
+second crossing needs a longer line from the load and a stub of negative
+susceptance, which is inductive. A shorted stub less than <span class="math notranslate nohighlight">\(\lambda/4\)</span> long
+supplies it, so the second design pairs a long <span class="math notranslate nohighlight">\(d\)</span> with a short shorted stub.
+Its total length of line is larger than the first design’s open-stub version,
+so it gives the narrower bandwidth of the two. It does have the shortest
+shorted stub, <span class="math notranslate nohighlight">\(0.166\lambda\)</span>, which can suit a coaxial tuner.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-stub-on-the-explorer">
+<div class="wrap docutils container">
+<p class="rubric">The Stub on the Explorer</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/smith-chart.html?R=0&X=0&d=0.334&adm=1"
+        width="100%" height="458"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Smith chart explorer: a shorted stub, rotated to find its input admittance"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A stub is just a line with a short or open load, so the explorer can model it.
+It opens on a short, <span class="math notranslate nohighlight">\(R_L = 0\)</span> and <span class="math notranslate nohighlight">\(X_L = 0\)</span>, rotated <span class="math notranslate nohighlight">\(0.334\lambda\)</span>: the
+admittance readout gives <span class="math notranslate nohighlight">\(y_{in} \approx +j0.58\)</span>, the stub of the worked
+example. Drag <span class="math notranslate nohighlight">\(d\)</span> back to zero and forward again: the amber admittance point
+starts at the right edge and sweeps clockwise around the outer circle through
+every susceptance. Then set <span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> and <span class="math notranslate nohighlight">\(d = 0.0189\lambda\)</span> to
+see the point the stub cancels.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Shorted stub</p></td>
+<td class="text-left"><p>Line ending in a short</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(z = j\tan\beta\ell\)</span>, <span class="math notranslate nohighlight">\(y = -j\cot\beta\ell\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Open stub</p></td>
+<td class="text-left"><p>Line ending in an open</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(z = -j\cot\beta\ell\)</span>, <span class="math notranslate nohighlight">\(y = j\tan\beta\ell\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Stub on the chart</p></td>
+<td class="text-left"><p>Outer circle, <span class="math notranslate nohighlight">\(g = 0\)</span></p></td>
+<td class="text-left"><p>short at the right edge, open at the left (as <span class="math notranslate nohighlight">\(y\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Single-stub tuner</p></td>
+<td class="text-left"><p>Line <span class="math notranslate nohighlight">\(d\)</span>, then shunt stub <span class="math notranslate nohighlight">\(\ell\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(d\)</span> to <span class="math notranslate nohighlight">\(g = 1\)</span>; stub cancels <span class="math notranslate nohighlight">\(b\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Two solutions</p></td>
+<td class="text-left"><p>Two crossings of <span class="math notranslate nohighlight">\(g = 1\)</span></p></td>
+<td class="text-left"><p>the shorter total line has the wider band</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Short or open</p></td>
+<td class="text-left"><p>Built as the medium allows</p></td>
+<td class="text-left"><p>coax shorted, microstrip open</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L13_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L13_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 14</strong>: transients. A pulse on the line, before any steady state exists.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Every lesson since Lesson 6 assumed a single frequency in steady state, which
+is why one complex reflection coefficient could describe a line.
+Lesson 14 drops that assumption. A voltage step launched onto a line bounces
+between the source and the load, and each bounce is set by a reflection
+coefficient at that end. The lab in Lessons 15 and 16 measures both pictures:
+the bounces in time and the reflection coefficient on a network analyzer’s
+Smith chart.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L13-smith-charts-4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

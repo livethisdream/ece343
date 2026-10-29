@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L9 - Impedance Matching II &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l9-impedance-matching-ii">
+<h1>L9 - Impedance Matching II<a class="headerlink" href="#l9-impedance-matching-ii" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Impedance Matching II</h1>
+<div class="title-rule"></div>
+<p>Today we match a load with a parallel component, and then with a stub of line.</p>
+<p>Lesson 9 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 3">
+  <li>I can use the transmission line equation to match a load to a source using a length of transmission line.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 8 matched a complex load with a length of line and one series
+component. A series component has to cut into the line, which is awkward in a
+coaxial cable. Today we put the component across the line instead, in parallel.
+Parallel elements add as admittances, so we redo the Lesson 8 derivation with
+admittance in place of impedance. Then we replace the component with a shorted
+or open stub, so the whole matching network is made of transmission line. We
+keep the same load as Lesson 8, <span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> at 1 GHz, so we can
+compare the two designs directly.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 8: series matching</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} z &amp;= \frac{1 + \Gamma}{1 - \Gamma} \\ x &amp;= \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}} \\ d &amp;= \frac{\theta_\Gamma - \theta_d}{720^\circ}\ \lambda \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 8 moved a distance <span class="math notranslate nohighlight">\(d\)</span> from the load to a point where the normalized
+impedance is <span class="math notranslate nohighlight">\(z = 1 + jx\)</span>, then cancelled <span class="math notranslate nohighlight">\(jx\)</span> with a series capacitor or
+inductor. The reactance <span class="math notranslate nohighlight">\(x\)</span> came from the magnitude of <span class="math notranslate nohighlight">\(\Gamma\)</span>, which does not
+change along a lossless line, and the distance came from how far the phase of
+<span class="math notranslate nohighlight">\(\Gamma\)</span> has to rotate. For the <span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> load, the two answers were
+a <span class="math notranslate nohighlight">\(5.44\)</span> pF capacitor at <span class="math notranslate nohighlight">\(0.064\lambda\)</span> and a <span class="math notranslate nohighlight">\(4.65\)</span> nH inductor at
+<span class="math notranslate nohighlight">\(0.269\lambda\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-admittance">
+<div class="wrap docutils container">
+<p class="rubric">Admittance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[y = \frac{1}{z} = g + jb, \qquad Y = \frac{y}{Z_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{z - 1}{z + 1} = \frac{1/y - 1}{1/y + 1} = \frac{1 - y}{1 + y}\]</div>
+<p>Parallel admittances add: <span class="math notranslate nohighlight">\(y = y_1 + y_2\)</span>.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>normalized admittance</strong> <span class="math notranslate nohighlight">\(y\)</span> is the reciprocal of the normalized impedance.
+Its real part <span class="math notranslate nohighlight">\(g\)</span> is the normalized conductance and its imaginary part <span class="math notranslate nohighlight">\(b\)</span> is
+the normalized susceptance. We substitute <span class="math notranslate nohighlight">\(z = 1/y\)</span> into the reflection
+coefficient and multiply the numerator and denominator by <span class="math notranslate nohighlight">\(y\)</span>, which gives
+<span class="math notranslate nohighlight">\(\Gamma\)</span> in terms of <span class="math notranslate nohighlight">\(y\)</span>. The result has the same form as before with the sign
+of the numerator flipped. Admittances of elements in parallel add, just as
+impedances in series add, and that is why admittance is the natural variable
+for a parallel component. A match is still <span class="math notranslate nohighlight">\(y = 1\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-matching-idea-in-admittance">
+<div class="wrap docutils container">
+<p class="rubric">The Matching Idea in Admittance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L09-stub-match.svg"
+     alt="A shorted stub of length l_s connects across the line at distance d from the load, at the point where the normalized admittance is 1 plus jb"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Move a distance <span class="math notranslate nohighlight">\(d\)</span> along the line until <span class="math notranslate nohighlight">\(y = 1 + jb\)</span>.</p></li>
+<li><p>Cancel <span class="math notranslate nohighlight">\(jb\)</span> with a parallel susceptance <span class="math notranslate nohighlight">\(-jb\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The design follows Lesson 8 step for step. Moving away from the load rotates
+<span class="math notranslate nohighlight">\(\Gamma\)</span>, and the normalized conductance passes through <span class="math notranslate nohighlight">\(g = 1\)</span> twice in every
+half wavelength. At either point the admittance is <span class="math notranslate nohighlight">\(y = 1 + jb\)</span>. A component
+connected across the line at that point adds its own admittance, so a
+susceptance of <span class="math notranslate nohighlight">\(-jb\)</span> leaves <span class="math notranslate nohighlight">\(y = 1\)</span>, and the source sees <span class="math notranslate nohighlight">\(Z_0\)</span>. The figure shows
+that component built as a shorted stub, which we come to after the lumped
+version.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-finding-the-susceptance">
+<div class="wrap docutils container">
+<p class="rubric">Finding the Susceptance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At the matching point, <span class="math notranslate nohighlight">\(y = 1 + jb\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \Gamma &amp;= \frac{1 - (1 + jb)}{1 + (1 + jb)} = \frac{-jb}{2 + jb} \\ \vert\Gamma\vert^2 &amp;= \frac{b^2}{4 + b^2} \\ b &amp;= \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We substitute <span class="math notranslate nohighlight">\(y = 1 + jb\)</span> into the admittance form of the reflection
+coefficient. The magnitude of <span class="math notranslate nohighlight">\(-jb\)</span> is <span class="math notranslate nohighlight">\(\vert b\vert\)</span>, the same as the magnitude
+of <span class="math notranslate nohighlight">\(jx\)</span> in Lesson 8, so the magnitude equation is identical with <span class="math notranslate nohighlight">\(b\)</span> in place of
+<span class="math notranslate nohighlight">\(x\)</span>. Since <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> is fixed along the line, we solve for <span class="math notranslate nohighlight">\(b\)</span> exactly
+as before. For the same load, the susceptance at the parallel matching points
+has the same size as the reactance at the series matching points.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-finding-the-distance">
+<div class="wrap docutils container">
+<p class="rubric">Finding the Distance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \theta_d &amp;= \angle\frac{-jb}{2 + jb} = \mp\left(90^\circ + \tan^{-1}\frac{\vert b\vert}{2}\right) \\ d &amp;= \frac{\theta_\Gamma - \theta_d}{720^\circ}\ \lambda \end{aligned}\end{split}\]</div>
+<p>The upper sign is for <span class="math notranslate nohighlight">\(b &gt; 0\)</span>. Add <span class="math notranslate nohighlight">\(360^\circ\)</span> if <span class="math notranslate nohighlight">\(\theta_\Gamma - \theta_d\)</span> is negative.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The angles differ from Lesson 8 because of the minus sign. For <span class="math notranslate nohighlight">\(b &gt; 0\)</span> the
+numerator <span class="math notranslate nohighlight">\(-jb\)</span> sits at <span class="math notranslate nohighlight">\(-90^\circ\)</span> and the denominator at
+<span class="math notranslate nohighlight">\(\tan^{-1}(b/2)\)</span>, so the angle of the quotient is
+<span class="math notranslate nohighlight">\(-90^\circ - \tan^{-1}(b/2)\)</span>. For <span class="math notranslate nohighlight">\(b &lt; 0\)</span> every angle changes sign. The rest of
+the derivation is unchanged: moving a distance <span class="math notranslate nohighlight">\(d\)</span> rotates the load’s phase by
+<span class="math notranslate nohighlight">\(-2\beta d\)</span>, so we set <span class="math notranslate nohighlight">\(\theta_\Gamma - 2\beta d = \theta_d\)</span> and solve for <span class="math notranslate nohighlight">\(d\)</span>,
+at <span class="math notranslate nohighlight">\(720^\circ\)</span> of rotation per wavelength.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-distance">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Distance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(Z_L = 33.9 + j17.9\ \Omega\)</span>, <span class="math notranslate nohighlight">\(\Gamma = 0.281\angle 119.9^\circ\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solution</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(y\)</span> at the point</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\theta_d\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(2\beta d\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(d\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1 - j0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(+106.3^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(13.6^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.019\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1 + j0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-106.3^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(226.2^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.314\lambda\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The load and its reflection coefficient are the ones from Lesson 8, so
+<span class="math notranslate nohighlight">\(\vert b\vert = 0.585\)</span> and <span class="math notranslate nohighlight">\(\tan^{-1}(0.585/2) = 16.3^\circ\)</span>. For <span class="math notranslate nohighlight">\(b = -0.585\)</span>
+the matching phase is <span class="math notranslate nohighlight">\(+106.3^\circ\)</span>, and the load’s phase must rotate from
+<span class="math notranslate nohighlight">\(119.9^\circ\)</span> down to <span class="math notranslate nohighlight">\(106.3^\circ\)</span>, which takes only <span class="math notranslate nohighlight">\(13.6/720 = 0.019\lambda\)</span>.
+For <span class="math notranslate nohighlight">\(b = +0.585\)</span> the matching phase is <span class="math notranslate nohighlight">\(-106.3^\circ\)</span>, a rotation of
+<span class="math notranslate nohighlight">\(226.2^\circ\)</span>, which takes <span class="math notranslate nohighlight">\(0.314\lambda\)</span>. In RG-58 at 1 GHz these distances are
+0.38 cm and 6.28 cm.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-shunt-components">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Shunt Components</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solution</p></th>
+<th class="head text-left"><p>Cancel</p></th>
+<th class="head text-left"><p>Component at 1 GHz</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j11.7\)</span> mS</p></td>
+<td class="text-left"><p>capacitor, <span class="math notranslate nohighlight">\(1.86\)</span> pF</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(+j11.7\)</span> mS</p></td>
+<td class="text-left"><p>inductor, <span class="math notranslate nohighlight">\(13.6\)</span> nH</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The susceptance to cancel is <span class="math notranslate nohighlight">\(b/Z_0 = 0.585/50 = 11.7\)</span> mS. Solution 1 has
+<span class="math notranslate nohighlight">\(-j11.7\)</span> mS at its matching point, so it needs a parallel element with
+<span class="math notranslate nohighlight">\(+j11.7\)</span> mS. A capacitor has admittance <span class="math notranslate nohighlight">\(j\omega C\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\omega C = 11.7\ \text{mS} \quad\Longrightarrow\quad C = \frac{0.0117}{2\pi \times 10^9} = 1.86\ \text{pF}\]</div>
+<p>Solution 2 has <span class="math notranslate nohighlight">\(+j11.7\)</span> mS, so it needs an inductor, whose admittance is
+<span class="math notranslate nohighlight">\(\frac{1}{j\omega L} = -\frac{j}{\omega L}\)</span>. Setting <span class="math notranslate nohighlight">\(\frac{1}{\omega L} = 11.7\)</span>
+mS gives <span class="math notranslate nohighlight">\(L = 13.6\)</span> nH.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-stub-admittance">
+<div class="wrap docutils container">
+<p class="rubric">Stub Admittance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>From Lesson 7, with <span class="math notranslate nohighlight">\(y = Z_0/Z_\text{in}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \text{shorted:} \quad Z_\text{in} &amp;= jZ_0\tan\beta\ell_s &amp; y &amp;= -j\cot\beta\ell_s \\ \text{open:} \quad Z_\text{in} &amp;= -jZ_0\cot\beta\ell_s &amp; y &amp;= j\tan\beta\ell_s \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 7 showed that a shorted or open stub has a purely reactive input
+impedance, so its admittance is purely susceptive. We take the reciprocal of
+each input impedance and multiply by <span class="math notranslate nohighlight">\(Z_0\)</span> to normalize it, using
+<span class="math notranslate nohighlight">\(\frac{1}{j} = -j\)</span> and <span class="math notranslate nohighlight">\(\frac{1}{\tan} = \cot\)</span>. A stub of the same line, cut to
+the right length <span class="math notranslate nohighlight">\(\ell_s\)</span> and connected across the line at the matching point,
+supplies the cancelling susceptance with no lumped component at all. Every
+susceptance from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(+\infty\)</span> is available from a stub shorter than
+half a wavelength.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-stub-lengths">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Stub Lengths</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solution</p></th>
+<th class="head text-left"><p>Stub must give</p></th>
+<th class="head text-left"><p>Shorted: <span class="math notranslate nohighlight">\(\cot\beta\ell_s = -b_s\)</span></p></th>
+<th class="head text-left"><p>Open: <span class="math notranslate nohighlight">\(\tan\beta\ell_s = b_s\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(b_s = +0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.334\lambda\)</span> (6.68 cm)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.084\lambda\)</span> (1.68 cm)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(b_s = -0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.166\lambda\)</span> (3.32 cm)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.416\lambda\)</span> (8.32 cm)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Solution 1 needs a stub with normalized susceptance <span class="math notranslate nohighlight">\(b_s = +0.585\)</span>. An open stub
+gives it when <span class="math notranslate nohighlight">\(\tan\beta\ell_s = 0.585\)</span>, so <span class="math notranslate nohighlight">\(\beta\ell_s = 30.3^\circ\)</span> and
+<span class="math notranslate nohighlight">\(\ell_s = 30.3/360 = 0.084\lambda\)</span>. A shorted stub gives it when
+<span class="math notranslate nohighlight">\(\cot\beta\ell_s = -0.585\)</span>, which first happens at <span class="math notranslate nohighlight">\(\beta\ell_s = 120.3^\circ\)</span>.
+Solution 2 needs <span class="math notranslate nohighlight">\(b_s = -0.585\)</span>: a shorted stub at <span class="math notranslate nohighlight">\(59.7^\circ\)</span>, or an open
+stub at <span class="math notranslate nohighlight">\(149.7^\circ\)</span>. A stub’s length is a one-way trip, so it is <span class="math notranslate nohighlight">\(360^\circ\)</span>
+per wavelength, not <span class="math notranslate nohighlight">\(720^\circ\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-checking-the-design">
+<div class="wrap docutils container">
+<p class="rubric">Checking the Design</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/input-impedance.html"
+        width="100%" height="497"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Normalized input conductance and susceptance of a terminated 50 ohm line against distance from the load"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Select the <span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> preset and turn on Admittance. The green dots
+now mark where the input conductance equals <span class="math notranslate nohighlight">\(1/Z_0 = 20\)</span> mS, at <span class="math notranslate nohighlight">\(0.019\lambda\)</span>
+and <span class="math notranslate nohighlight">\(0.314\lambda\)</span>. Move the cursor to <span class="math notranslate nohighlight">\(0.019\lambda\)</span>: the input admittance reads
+<span class="math notranslate nohighlight">\(20.0 - j11.7\)</span> mS, which the <span class="math notranslate nohighlight">\(1.86\)</span> pF capacitor or the open stub cancels. Then
+select the Short preset, turn Admittance on, and move the cursor to
+<span class="math notranslate nohighlight">\(0.334\lambda\)</span> to see the shorted stub for solution 1 supply <span class="math notranslate nohighlight">\(+j11.7\)</span> mS.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-shorted-or-open">
+<div class="wrap docutils container">
+<p class="rubric">Shorted or Open</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Choose the shortest line and stub that give the match.</p></li>
+<li><p>Open stubs radiate from their open end at high frequency.</p></li>
+<li><p>Shorted stubs are easy to make in coax and also short DC.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Solution 1 with an open stub is the most compact design here: <span class="math notranslate nohighlight">\(0.38\)</span> cm of line
+and a <span class="math notranslate nohighlight">\(1.68\)</span> cm stub. Shorter lengths usually hold the match over a wider band,
+for the same reason as in Lesson 8. The open end of a stub is not a perfect open
+circuit; it radiates a little and has fringing capacitance, so at high frequency
+a shorted stub is often more predictable. A shorted stub also puts a DC short
+across the line, which is harmless for a signal path but matters when the line
+carries bias current to an amplifier.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-procedure">
+<div class="wrap docutils container">
+<p class="rubric">The Procedure</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Normalize: <span class="math notranslate nohighlight">\(y_L = Z_0/Z_L\)</span>, and find <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(b = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}\)</span> and <span class="math notranslate nohighlight">\(\theta_d\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(d = \frac{\theta_\Gamma - \theta_d}{720^\circ}\lambda\)</span>.</p></li>
+<li><p>Cancel <span class="math notranslate nohighlight">\(jb\)</span> with a parallel component or stub.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>These steps match any load with one parallel element, and they differ from the
+series procedure only in the angle <span class="math notranslate nohighlight">\(\theta_d\)</span> and in what the last step adds.
+The reflection coefficient can be found from either <span class="math notranslate nohighlight">\(z_L\)</span> or <span class="math notranslate nohighlight">\(y_L\)</span>; the two
+forms give the same <span class="math notranslate nohighlight">\(\Gamma\)</span>. Lessons 10 through 13 do this design on the Smith
+chart, where finding <span class="math notranslate nohighlight">\(d\)</span> becomes a rotation on a circle and finding the stub
+length becomes reading a second point off the chart’s edge.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Normalized admittance</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(y = \frac{1}{z} = g + jb\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma = \frac{1 - y}{1 + y}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Susceptance at the matching point</p></td>
+<td class="text-left"><p>From <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span>, two signs</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(b = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Phase at the matching point</p></td>
+<td class="text-left"><p>Angle of <span class="math notranslate nohighlight">\(\frac{-jb}{2 + jb}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\theta_d = \mp\left(90^\circ + \tan^{-1}\frac{\vert b\vert}{2}\right)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Stub admittance</p></td>
+<td class="text-left"><p>Shorted and open stubs of length <span class="math notranslate nohighlight">\(\ell_s\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j\cot\beta\ell_s\)</span> and <span class="math notranslate nohighlight">\(j\tan\beta\ell_s\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Worked example</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> at 1 GHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.019\lambda\)</span> with <span class="math notranslate nohighlight">\(1.86\)</span> pF or a <span class="math notranslate nohighlight">\(0.084\lambda\)</span> open stub</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L09_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L09_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 10</strong>: the Smith chart, a plot of <span class="math notranslate nohighlight">\(\Gamma\)</span> with impedance drawn on it.</p></li>
+<li><p><strong>Lessons 11–13</strong>: these matching designs, worked on the chart.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Every matching design in Lessons 8 and 9 came down to the same move: rotate
+<span class="math notranslate nohighlight">\(\Gamma\)</span> at constant magnitude until the real part of <span class="math notranslate nohighlight">\(z\)</span> or <span class="math notranslate nohighlight">\(y\)</span> equals 1. The
+Smith chart draws the circles of constant <span class="math notranslate nohighlight">\(r\)</span> and constant <span class="math notranslate nohighlight">\(g\)</span> on the plane of
+<span class="math notranslate nohighlight">\(\Gamma\)</span>, so that move becomes a rotation you can see and measure with a
+compass. Lesson 10 builds the chart from <span class="math notranslate nohighlight">\(z = \frac{1 + \Gamma}{1 - \Gamma}\)</span>, the
+relation we derived in Lesson 8.</p>
+<p>Before Lesson 10, print a blank Smith chart from the handouts on the
+<a class="reference internal" href="../../materials.html"><span class="doc std std-doc">Materials</span></a> page and bring it to class.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L09-impedance-matching-2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

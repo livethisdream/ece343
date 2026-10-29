@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L8 - Impedance Matching I &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l8-impedance-matching-i">
+<h1>L8 - Impedance Matching I<a class="headerlink" href="#l8-impedance-matching-i" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Impedance Matching I</h1>
+<div class="title-rule"></div>
+<p>Today we match a complex load with a length of line and one series component.</p>
+<p>Lesson 8 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 3">
+  <li>I can use the transmission line equation to match a load to a source using a length of transmission line.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 7 found the impedance a source sees through a length of line, and the
+quarter-wave transformer showed one way to use it: match a real load with a
+section of different line. Most real loads are complex, though; an antenna, an
+amplifier input, or a mixer port has both resistance and reactance. Today we
+match a complex load with two parts: a length of the same <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line,
+chosen so the input resistance becomes exactly <span class="math notranslate nohighlight">\(Z_0\)</span>, and a single capacitor or
+inductor in series that cancels the reactance left over. Every step follows
+from the reflection coefficient, and we work the example from the Spring 2025
+course end to end.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 7: input impedance and power</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} Z_\text{in} &amp;= Z_0\ \frac{Z_L + jZ_0 \tan\beta d}{Z_0 + jZ_L \tan\beta d} \\ \Gamma(d) &amp;= \Gamma\ e^{-j2\beta d} \\ P &amp;= P_\text{inc}\left(1 - \vert\Gamma\vert^2\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 7 derived the input impedance of a line of length <span class="math notranslate nohighlight">\(d\)</span> terminated in
+<span class="math notranslate nohighlight">\(Z_L\)</span>; we now write the length as <span class="math notranslate nohighlight">\(d\)</span>, the distance from the load toward the
+source, because we will be choosing it. Lesson 6 showed that the reflection
+coefficient at that point is the load’s <span class="math notranslate nohighlight">\(\Gamma\)</span> rotated by <span class="math notranslate nohighlight">\(-2\beta d\)</span>, the
+round-trip phase delay. Its magnitude does not change along a lossless line.
+Lesson 7 also showed that the load absorbs only <span class="math notranslate nohighlight">\(1 - \vert\Gamma\vert^2\)</span> of the
+incident power.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-why-match">
+<div class="wrap docutils container">
+<p class="rubric">Why Match</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>The source sees <span class="math notranslate nohighlight">\(Z_0\)</span>: no reflected wave before the network.</p></li>
+<li><p>The load receives all the incident power.</p></li>
+<li><p>Transmitters are built and tested into <span class="math notranslate nohighlight">\(50\ \Omega\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p><strong>Impedance matching</strong> means adding a lossless network between the line and the
+load so that the source sees <span class="math notranslate nohighlight">\(Z_0\)</span>. With no reflected wave on the line feeding
+the network, the VSWR there is 1, and the network passes all of the incident
+power on to the load, because a lossless network cannot dissipate any of it.
+The power the load does not reflect is power the transmitter does not have to
+absorb back into its own output stage. Matching does not change the load; it
+changes what the line and the source see.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-normalized-impedance">
+<div class="wrap docutils container">
+<p class="rubric">Normalized Impedance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[z = \frac{Z}{Z_0}, \qquad \Gamma = \frac{z - 1}{z + 1}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \Gamma (z + 1) &amp;= z - 1 \\ z (1 - \Gamma) &amp;= 1 + \Gamma \\ z &amp;= \frac{1 + \Gamma}{1 - \Gamma} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Matching problems become simpler if we divide every impedance by <span class="math notranslate nohighlight">\(Z_0\)</span>. The
+<strong>normalized impedance</strong> <span class="math notranslate nohighlight">\(z = r + jx\)</span> is dimensionless, and a match is <span class="math notranslate nohighlight">\(z = 1\)</span>.
+Dividing the numerator and denominator of the reflection coefficient by <span class="math notranslate nohighlight">\(Z_0\)</span>
+gives <span class="math notranslate nohighlight">\(\Gamma\)</span> in terms of <span class="math notranslate nohighlight">\(z\)</span> alone. Solving that relation the other way, by
+multiplying through by <span class="math notranslate nohighlight">\(z + 1\)</span> and collecting the terms in <span class="math notranslate nohighlight">\(z\)</span>, gives <span class="math notranslate nohighlight">\(z\)</span> in
+terms of <span class="math notranslate nohighlight">\(\Gamma\)</span>. The two relations let us move freely between impedance and
+reflection coefficient, which is the move the rest of this lesson depends on.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-matching-idea">
+<div class="wrap docutils container">
+<p class="rubric">The Matching Idea</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L08-series-match.svg"
+     alt="A series reactance minus jX sits at distance d from the load, at the point where the normalized impedance is 1 plus jx; the source side sees z = 1"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Move a distance <span class="math notranslate nohighlight">\(d\)</span> along the line until <span class="math notranslate nohighlight">\(z = 1 + jx\)</span>.</p></li>
+<li><p>Cancel <span class="math notranslate nohighlight">\(jx\)</span> with a series reactance <span class="math notranslate nohighlight">\(-jx\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>As we move away from the load, <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> stays fixed and the phase of
+<span class="math notranslate nohighlight">\(\Gamma\)</span> rotates. The impedance changes with it, and the Lesson 7 widget showed
+that the normalized resistance passes through <span class="math notranslate nohighlight">\(r = 1\)</span> twice in every half
+wavelength. At either of those points the impedance is <span class="math notranslate nohighlight">\(z = 1 + jx\)</span>: the
+resistance is already matched, and only a reactance is left. A capacitor or
+inductor in series with reactance <span class="math notranslate nohighlight">\(-jx\)</span> cancels it, and the source sees
+<span class="math notranslate nohighlight">\(z = 1\)</span>. The design has two unknowns, the distance <span class="math notranslate nohighlight">\(d\)</span> and the reactance <span class="math notranslate nohighlight">\(x\)</span>,
+and the next two frames find them.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-finding-the-reactance">
+<div class="wrap docutils container">
+<p class="rubric">Finding the Reactance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At the matching point, <span class="math notranslate nohighlight">\(z = 1 + jx\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \Gamma &amp;= \frac{(1 + jx) - 1}{(1 + jx) + 1} = \frac{jx}{2 + jx} \\ \vert\Gamma\vert^2 &amp;= \frac{x^2}{4 + x^2} \\ x &amp;= \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We substitute <span class="math notranslate nohighlight">\(z = 1 + jx\)</span> into the reflection coefficient. The magnitude of a
+quotient is the quotient of the magnitudes, so
+<span class="math notranslate nohighlight">\(\vert\Gamma\vert^2 = \frac{x^2}{2^2 + x^2}\)</span>. The magnitude of <span class="math notranslate nohighlight">\(\Gamma\)</span> at the
+matching point is the same as at the load, because it does not change along the
+line, so <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> is known. Multiplying through by <span class="math notranslate nohighlight">\(4 + x^2\)</span> and
+solving for <span class="math notranslate nohighlight">\(x\)</span> gives two values of equal size and opposite sign. Both are
+valid, and each one belongs to a different matching point.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-finding-the-distance">
+<div class="wrap docutils container">
+<p class="rubric">Finding the Distance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \theta_d &amp;= \angle\frac{jx}{2 + jx} = \pm\left(90^\circ - \tan^{-1}\frac{\vert x\vert}{2}\right) \\ \theta_\Gamma - 2\beta d &amp;= \theta_d \\ d &amp;= \frac{\theta_\Gamma - \theta_d}{720^\circ}\ \lambda \end{aligned}\end{split}\]</div>
+<p>Add <span class="math notranslate nohighlight">\(360^\circ\)</span> to <span class="math notranslate nohighlight">\(\theta_\Gamma - \theta_d\)</span> if it is negative.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The phase of the reflection coefficient at the matching point, <span class="math notranslate nohighlight">\(\theta_d\)</span>, is
+the angle of <span class="math notranslate nohighlight">\(\frac{jx}{2 + jx}\)</span>: the numerator sits at <span class="math notranslate nohighlight">\(90^\circ\)</span> for positive
+<span class="math notranslate nohighlight">\(x\)</span>, and the denominator at <span class="math notranslate nohighlight">\(\tan^{-1}(x/2)\)</span>, so their difference is the angle,
+with the sign of <span class="math notranslate nohighlight">\(x\)</span>. Moving a distance <span class="math notranslate nohighlight">\(d\)</span> from the load rotates the load’s
+phase <span class="math notranslate nohighlight">\(\theta_\Gamma\)</span> by <span class="math notranslate nohighlight">\(-2\beta d\)</span>, so we set the rotated phase equal to
+<span class="math notranslate nohighlight">\(\theta_d\)</span> and solve for <span class="math notranslate nohighlight">\(d\)</span>. Since <span class="math notranslate nohighlight">\(\beta = 2\pi/\lambda\)</span>, the rotation
+<span class="math notranslate nohighlight">\(2\beta d\)</span> is <span class="math notranslate nohighlight">\(720^\circ\)</span> for every wavelength of <span class="math notranslate nohighlight">\(d\)</span>, so <span class="math notranslate nohighlight">\(d\)</span> is the needed
+rotation divided by <span class="math notranslate nohighlight">\(720^\circ\)</span>, in wavelengths. A rotation of <span class="math notranslate nohighlight">\(360^\circ\)</span>
+returns <span class="math notranslate nohighlight">\(\Gamma\)</span> to where it started, so adding <span class="math notranslate nohighlight">\(360^\circ\)</span> keeps <span class="math notranslate nohighlight">\(d\)</span>
+positive without changing the answer.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-load">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The Load</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(Z_L = 33.9 + j17.9\ \Omega\)</span> on a <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line at 1 GHz:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} z_L &amp;= 0.678 + j0.358 \\ \Gamma &amp;= \frac{-0.322 + j0.358}{1.678 + j0.358} = -0.140 + j0.243 = 0.281\angle 119.9^\circ \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>This is the matching example from the Spring 2025 course. We normalize the load
+by dividing by <span class="math notranslate nohighlight">\(50\ \Omega\)</span>, then compute the reflection coefficient from
+<span class="math notranslate nohighlight">\(\frac{z_L - 1}{z_L + 1}\)</span>. Multiplying the numerator and denominator by the
+conjugate of the denominator gives the rectangular form, and its magnitude and
+angle give the polar form. The load reflects <span class="math notranslate nohighlight">\(0.281^2 = 7.9\%\)</span> of the incident
+power, a VSWR of 1.78. That is a modest mismatch, and it makes a good first
+example because both matching points are easy to see.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-reactance-and-distance">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Reactance and Distance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[x = \pm\frac{2 \times 0.281}{\sqrt{1 - 0.281^2}} = \pm 0.585, \qquad \theta_d = \pm\left(90^\circ - 16.3^\circ\right) = \pm 73.7^\circ\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solution</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(z\)</span> at the point</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(2\beta d\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(d\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1 + j0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(119.9^\circ - 73.7^\circ = 46.2^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.064\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1 - j0.585\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(119.9^\circ + 73.7^\circ = 193.6^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.269\lambda\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>With <span class="math notranslate nohighlight">\(\vert\Gamma\vert = 0.281\)</span>, the reactance at the matching points is
+<span class="math notranslate nohighlight">\(x = \pm 0.585\)</span>, and <span class="math notranslate nohighlight">\(\tan^{-1}(0.585/2) = 16.3^\circ\)</span>, so the phase at the
+matching points is <span class="math notranslate nohighlight">\(\pm 73.7^\circ\)</span>. For the first solution the load’s phase
+must rotate from <span class="math notranslate nohighlight">\(119.9^\circ\)</span> down to <span class="math notranslate nohighlight">\(73.7^\circ\)</span>, a rotation of <span class="math notranslate nohighlight">\(46.2^\circ\)</span>,
+which takes <span class="math notranslate nohighlight">\(d = 46.2/720 = 0.064\lambda\)</span>. For the second it must rotate down to
+<span class="math notranslate nohighlight">\(-73.7^\circ\)</span>, a rotation of <span class="math notranslate nohighlight">\(193.6^\circ\)</span>, which takes <span class="math notranslate nohighlight">\(d = 0.269\lambda\)</span>.
+Lesson 12 finds the same two points on the Smith chart.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-components">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The Components</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Solution</p></th>
+<th class="head text-left"><p>Cancel</p></th>
+<th class="head text-left"><p>Component at 1 GHz</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(d\)</span> in RG-58</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(+j29.2\ \Omega\)</span></p></td>
+<td class="text-left"><p>capacitor, <span class="math notranslate nohighlight">\(5.44\)</span> pF</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.28\)</span> cm</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j29.2\ \Omega\)</span></p></td>
+<td class="text-left"><p>inductor, <span class="math notranslate nohighlight">\(4.65\)</span> nH</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(5.38\)</span> cm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The reactance to cancel is <span class="math notranslate nohighlight">\(x Z_0 = 0.585 \times 50 = 29.2\ \Omega\)</span>. Solution 1
+has <span class="math notranslate nohighlight">\(+j29.2\ \Omega\)</span> at its matching point, so it needs a series capacitor with
+reactance <span class="math notranslate nohighlight">\(-j29.2\ \Omega\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\omega C} = 29.2\ \Omega \quad\Longrightarrow\quad C = \frac{1}{2\pi \times 10^9 \times 29.24} = 5.44\ \text{pF}\]</div>
+<p>Solution 2 has <span class="math notranslate nohighlight">\(-j29.2\ \Omega\)</span>, so it needs a series inductor with
+<span class="math notranslate nohighlight">\(\omega L = 29.2\ \Omega\)</span>, which gives <span class="math notranslate nohighlight">\(L = 4.65\)</span> nH. In RG-58 at 1 GHz the
+wavelength is 20 cm, so the two distances are 1.28 cm and 5.38 cm.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-checking-the-design">
+<div class="wrap docutils container">
+<p class="rubric">Checking the Design</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/input-impedance.html"
+        width="100%" height="497"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Normalized input resistance and reactance of a terminated 50 ohm line against distance from the load"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Select the <span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> preset. The green dots, where the input
+resistance equals <span class="math notranslate nohighlight">\(Z_0\)</span>, fall at <span class="math notranslate nohighlight">\(0.064\lambda\)</span> and <span class="math notranslate nohighlight">\(0.269\lambda\)</span>, and the
+readout lists both. Move the cursor to <span class="math notranslate nohighlight">\(0.064\lambda\)</span>: the input impedance reads
+about <span class="math notranslate nohighlight">\(50 + j29.2\ \Omega\)</span>, so a series capacitor with <span class="math notranslate nohighlight">\(-j29.2\ \Omega\)</span> leaves
+<span class="math notranslate nohighlight">\(50\ \Omega\)</span>. At <span class="math notranslate nohighlight">\(0.269\lambda\)</span> it reads <span class="math notranslate nohighlight">\(50.0 - j29.2\ \Omega\)</span>, which the
+inductor cancels. Try a load with a larger mismatch and watch the reactance at
+the matching points grow.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-choosing-between-the-solutions">
+<div class="wrap docutils container">
+<p class="rubric">Choosing Between the Solutions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Both solutions match exactly at the design frequency.</p></li>
+<li><p>The shorter line usually holds the match over a wider band, because its impedance changes less with frequency.</p></li>
+<li><p>The component matters too: pick the value you can build.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>At 1 GHz both designs work equally well. Away from 1 GHz, neither does: the line
+length is a different fraction of a wavelength, and the component’s reactance
+changes. A shorter line spans fewer degrees of phase, so its input impedance
+moves less as the frequency changes, and the match usually degrades more slowly.
+That makes solution 1 the usual choice. The component can decide it the other
+way: if the required capacitance is too small to build accurately at the design
+frequency, the inductor and the longer line may be the practical design.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-procedure">
+<div class="wrap docutils container">
+<p class="rubric">The Procedure</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Normalize: <span class="math notranslate nohighlight">\(z_L = Z_L/Z_0\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(\Gamma = \vert\Gamma\vert\angle\theta_\Gamma\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(x = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}\)</span> and <span class="math notranslate nohighlight">\(\theta_d\)</span>.</p></li>
+<li><p>Find <span class="math notranslate nohighlight">\(d = \frac{\theta_\Gamma - \theta_d}{720^\circ}\lambda\)</span>.</p></li>
+<li><p>Cancel <span class="math notranslate nohighlight">\(jx\)</span> with a series component.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>These five steps match any load to a lossless line with one series component,
+and they are the same steps the 2025 slides used. Steps 3 and 4 have two
+solutions, one for each sign of <span class="math notranslate nohighlight">\(x\)</span>. Lesson 9 repeats the procedure with
+admittances, so the component goes in parallel instead of in series, and then
+replaces that component with a stub. Lessons 10 through 13 do the same design
+graphically on the Smith chart, where steps 2 through 4 become a rotation on a
+circle.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Match</p></td>
+<td class="text-left"><p>The source sees <span class="math notranslate nohighlight">\(Z_0\)</span>; no reflected wave before the network</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(z = 1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Normalized impedance</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(z = \frac{Z}{Z_0}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma = \frac{z - 1}{z + 1}\)</span>, <span class="math notranslate nohighlight">\(z = \frac{1 + \Gamma}{1 - \Gamma}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Reactance at the matching point</p></td>
+<td class="text-left"><p>From <span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span>, two signs</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(x = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Distance to the matching point</p></td>
+<td class="text-left"><p>Rotation of <span class="math notranslate nohighlight">\(\Gamma\)</span> divided by <span class="math notranslate nohighlight">\(720^\circ\)</span> per wavelength</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(d = \frac{\theta_\Gamma - \theta_d}{720^\circ}\lambda\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Worked example</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(33.9 + j17.9\ \Omega\)</span> at 1 GHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.064\lambda\)</span> and <span class="math notranslate nohighlight">\(5.44\)</span> pF, or <span class="math notranslate nohighlight">\(0.269\lambda\)</span> and <span class="math notranslate nohighlight">\(4.65\)</span> nH</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L08_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L08_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 9</strong>: the same design in admittance, with a parallel component, then a stub in its place.</p></li>
+<li><p><strong>Lessons 10–13</strong>: the same design on the Smith chart.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A series component has to break the line, which is easy on a circuit board and
+awkward in a coaxial cable. Lesson 9 works the same problem with admittances,
+which add in parallel, so the matching component connects across the line
+instead of in series with it. A parallel component can be another length of
+line, a shorted or open stub from Lesson 7, so the whole matching network can be
+built from transmission line alone.</p>
+<p>Before Lesson 9, review sections 3.21 through 3.23 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1, and the shorted and open stubs from Lesson 7.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L08-impedance-matching-1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

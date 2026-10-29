@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L5 - Characteristic Impedance and Wave Propagation &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l5-characteristic-impedance-and-wave-propagation">
+<h1>L5 - Characteristic Impedance and Wave Propagation<a class="headerlink" href="#l5-characteristic-impedance-and-wave-propagation" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Characteristic Impedance and Wave Propagation</h1>
+<div class="title-rule"></div>
+<p>Today we read the impedance, speed, wavelength, and loss of a line out of the wave solution.</p>
+<p>Lesson 5 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 1">
+  <li>I can explain the physical meaning of and calculate the following quantities: propagation constant, phase constant, attenuation constant, characteristic impedance, VSWR, reflection coefficient, and transmission coefficient.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 4 solved the wave equation and found that the voltage on a line is the
+sum of two traveling waves, but it left two things open: how the current in
+each wave relates to its voltage, and what the propagation constant means in
+numbers. Today we close both. The current-to-voltage ratio of a single wave is
+the line’s <strong>characteristic impedance</strong> <span class="math notranslate nohighlight">\(Z_0\)</span>. The imaginary part of the
+propagation constant gives the wave’s <strong>phase velocity</strong> and <strong>wavelength</strong>, and
+its real part gives the <strong>attenuation</strong>, which we compute for RG-58 to see how
+much a real cable loses. This lesson covers the first four quantities in
+objective 3.2; Lesson 6 covers the rest.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 4: the general solution</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{V}(z) &amp;= V_0^+ e^{-\gamma z} + V_0^- e^{+\gamma z} \\ -\frac{d\widetilde{V}(z)}{dz} &amp;= \left(R' + j\omega L'\right)\widetilde{I}(z) \\ \gamma &amp;= \sqrt{\left(R' + j\omega L'\right)\left(G' + j\omega C'\right)} = \alpha + j\beta \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 4 turned the telegrapher’s equations into phasor form, uncoupled them
+into a wave equation, and solved it. The voltage is an incident wave with
+amplitude <span class="math notranslate nohighlight">\(V_0^+\)</span> traveling toward the load and a reflected wave with amplitude
+<span class="math notranslate nohighlight">\(V_0^-\)</span> traveling toward the source. The current has the same form with its own
+constants, <span class="math notranslate nohighlight">\(I_0^+\)</span> and <span class="math notranslate nohighlight">\(I_0^-\)</span>. Those four constants are not independent,
+because the voltage and current must still satisfy the first-order phasor
+equation shown here. That equation is where we start.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-current-in-each-wave">
+<div class="wrap docutils container">
+<p class="rubric">The Current in Each Wave</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{d\widetilde{V}(z)}{dz} &amp;= \gamma V_0^+ e^{-\gamma z} - \gamma V_0^- e^{+\gamma z} \\ \left(R' + j\omega L'\right)\widetilde{I}(z) &amp;= \gamma V_0^+ e^{-\gamma z} - \gamma V_0^- e^{+\gamma z} \\ \widetilde{I}(z) &amp;= \frac{\gamma}{R' + j\omega L'}\left(V_0^+ e^{-\gamma z} - V_0^- e^{+\gamma z}\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We differentiate the voltage solution with respect to <span class="math notranslate nohighlight">\(z\)</span>. Each exponential
+<span class="math notranslate nohighlight">\(e^{\mp\gamma z}\)</span> brings down a factor of <span class="math notranslate nohighlight">\(\mp\gamma\)</span>, and the minus sign on the
+left side flips both signs. The first-order phasor equation says this same
+quantity equals <span class="math notranslate nohighlight">\(\left(R' + j\omega L'\right)\widetilde{I}(z)\)</span>, so we set the
+two equal and divide by the series impedance. The result gives the current
+everywhere on the line in terms of the voltage constants alone. The two waves
+appear with opposite signs: the reflected wave’s current flows in the <span class="math notranslate nohighlight">\(-z\)</span>
+direction, the direction it travels.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-characteristic-impedance">
+<div class="wrap docutils container">
+<p class="rubric">Characteristic Impedance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} Z_0 &amp;= \frac{R' + j\omega L'}{\gamma} = \frac{R' + j\omega L'}{\sqrt{\left(R' + j\omega L'\right)\left(G' + j\omega C'\right)}} = \sqrt{\frac{R' + j\omega L'}{G' + j\omega C'}} \\ \widetilde{I}(z) &amp;= \frac{V_0^+}{Z_0} e^{-\gamma z} - \frac{V_0^-}{Z_0} e^{+\gamma z} \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[I_0^+ = \frac{V_0^+}{Z_0}, \qquad I_0^- = -\frac{V_0^-}{Z_0}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The factor <span class="math notranslate nohighlight">\(\gamma/(R' + j\omega L')\)</span> has units of inverse ohms, so we define
+its reciprocal as the <strong>characteristic impedance</strong> <span class="math notranslate nohighlight">\(Z_0\)</span>. Writing <span class="math notranslate nohighlight">\(\gamma\)</span> as
+its square root, the series impedance appears once in the numerator and once
+under the root in the denominator, and dividing leaves the square root of the
+series impedance over the shunt admittance. Replacing the factor with <span class="math notranslate nohighlight">\(1/Z_0\)</span>
+in the current solution and comparing with
+<span class="math notranslate nohighlight">\(\widetilde{I}(z) = I_0^+ e^{-\gamma z} + I_0^- e^{+\gamma z}\)</span> term by term
+gives the two current constants. In the incident wave, voltage and current are
+in the ratio <span class="math notranslate nohighlight">\(Z_0\)</span>; in the reflected wave, the ratio is <span class="math notranslate nohighlight">\(-Z_0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-what-z0-means">
+<div class="wrap docutils container">
+<p class="rubric">What Z0 Means</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Voltage over current in <strong>one</strong> traveling wave.</p></li>
+<li><p>Set by geometry and materials, not length.</p></li>
+<li><p>Not a resistor: a lossless <span class="math notranslate nohighlight">\(50\ \Omega\)</span> line dissipates nothing.</p></li>
+<li><p>An infinitely long line looks like <span class="math notranslate nohighlight">\(Z_0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The characteristic impedance is easy to misread as the impedance of the line,
+so it is worth stating what it is. It is the ratio of voltage to current in a
+single traveling wave. It depends only on <span class="math notranslate nohighlight">\(R'\)</span>, <span class="math notranslate nohighlight">\(L'\)</span>, <span class="math notranslate nohighlight">\(G'\)</span>, and <span class="math notranslate nohighlight">\(C'\)</span>, which
+depend only on the cross section and the materials, so every length of RG-58
+has the same <span class="math notranslate nohighlight">\(Z_0\)</span>. It does not dissipate power the way a resistor does; on a
+lossless line, the power carried by the wave simply moves down the line. If the
+line were infinitely long, no wave would ever come back, so a source connected
+to it would see only the incident wave and measure an impedance of exactly
+<span class="math notranslate nohighlight">\(Z_0\)</span>. Once a reflected wave is present, the ratio of total voltage to total
+current changes along the line, and Lesson 7 computes it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-phase-velocity">
+<div class="wrap docutils container">
+<p class="rubric">Phase Velocity</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Follow a point of constant phase on the incident wave:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \omega t - \beta z &amp;= \text{constant} \\ \omega - \beta \frac{dz}{dt} &amp;= 0 \\ v_p = \frac{dz}{dt} &amp;= \frac{\omega}{\beta} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 4 showed that a crest of the incident wave moves in the <span class="math notranslate nohighlight">\(+z\)</span> direction.
+To find how fast, we set its phase, <span class="math notranslate nohighlight">\(\omega t - \beta z\)</span>, equal to a constant,
+which describes the crest’s position as a function of time. Differentiating
+both sides with respect to <span class="math notranslate nohighlight">\(t\)</span> gives <span class="math notranslate nohighlight">\(\omega - \beta\ dz/dt = 0\)</span>, and solving for
+<span class="math notranslate nohighlight">\(dz/dt\)</span> gives the speed of the crest. That speed is the <strong>phase velocity</strong>
+<span class="math notranslate nohighlight">\(v_p\)</span>, the speed at which any point of constant phase moves along the line.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-wavelength">
+<div class="wrap docutils container">
+<p class="rubric">Wavelength</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The phase repeats every <span class="math notranslate nohighlight">\(2\pi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \beta\lambda &amp;= 2\pi \\ \lambda &amp;= \frac{2\pi}{\beta} = \frac{2\pi}{\omega / v_p} = \frac{v_p}{f} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>At a fixed instant, the cosine <span class="math notranslate nohighlight">\(\cos(\omega t - \beta z)\)</span> repeats each time
+<span class="math notranslate nohighlight">\(\beta z\)</span> advances by <span class="math notranslate nohighlight">\(2\pi\)</span>. The distance over which that happens is the
+<strong>wavelength</strong>, so <span class="math notranslate nohighlight">\(\beta\lambda = 2\pi\)</span>. This is the physical meaning of the
+phase constant: <span class="math notranslate nohighlight">\(\beta\)</span> is the phase change per meter, and there are <span class="math notranslate nohighlight">\(2\pi\)</span>
+radians in each wavelength. Substituting <span class="math notranslate nohighlight">\(\beta = \omega/v_p\)</span> and
+<span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> recovers <span class="math notranslate nohighlight">\(\lambda = v_p/f\)</span>, the relation Lesson 3 used to
+decide when a line is electrically long.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-lossless-line">
+<div class="wrap docutils container">
+<p class="rubric">The Lossless Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>With <span class="math notranslate nohighlight">\(R' = 0\)</span> and <span class="math notranslate nohighlight">\(G' = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \beta &amp;= \omega\sqrt{L'C'} \\ v_p &amp;= \frac{\omega}{\beta} = \frac{1}{\sqrt{L'C'}} \\ Z_0 &amp;= \sqrt{\frac{j\omega L'}{j\omega C'}} = \sqrt{\frac{L'}{C'}} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>RG-58: <span class="math notranslate nohighlight">\(v_p = 2.0 \times 10^8\)</span> m/s, <span class="math notranslate nohighlight">\(Z_0 = 51.7\ \Omega\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 4 found <span class="math notranslate nohighlight">\(\alpha = 0\)</span> and <span class="math notranslate nohighlight">\(\beta = \omega\sqrt{L'C'}\)</span> for a lossless line.
+Dividing <span class="math notranslate nohighlight">\(\omega\)</span> by <span class="math notranslate nohighlight">\(\beta\)</span> cancels the frequency, so the phase velocity on a
+lossless line is the same at every frequency. In the characteristic impedance
+the factors of <span class="math notranslate nohighlight">\(j\omega\)</span> cancel too, so <span class="math notranslate nohighlight">\(Z_0\)</span> is a real number, independent of
+frequency. For RG-58, with <span class="math notranslate nohighlight">\(L' = 259\)</span> nH/m and <span class="math notranslate nohighlight">\(C' = 96.8\)</span> pF/m,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} v_p &amp;= \frac{1}{\sqrt{259 \times 10^{-9} \times 96.8 \times 10^{-12}}} = 2.0 \times 10^8\ \text{m/s} \\ Z_0 &amp;= \sqrt{\frac{259 \times 10^{-9}}{96.8 \times 10^{-12}}} = 51.7\ \Omega \end{aligned}\end{split}\]</div>
+<p>These are the velocity Lesson 3 quoted and the impedance Lesson 6 derives from
+the cable’s dimensions.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-low-loss-line">
+<div class="wrap docutils container">
+<p class="rubric">The Low-Loss Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(R' \ll \omega L'\)</span> and <span class="math notranslate nohighlight">\(G' \ll \omega C'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma &amp;= j\omega\sqrt{L'C'} \sqrt{1 + \frac{R'}{j\omega L'}} \sqrt{1 + \frac{G'}{j\omega C'}} \\ &amp;\approx j\omega\sqrt{L'C'} \left(1 + \frac{R'}{2j\omega L'}\right)\left(1 + \frac{G'}{2j\omega C'}\right) \\ &amp;\approx j\omega\sqrt{L'C'} + \frac{R'}{2}\sqrt{\frac{C'}{L'}} + \frac{G'}{2}\sqrt{\frac{L'}{C'}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Real cables have small losses, and we want <span class="math notranslate nohighlight">\(\alpha\)</span> without carrying the full
+square root. We factor <span class="math notranslate nohighlight">\(j\omega L'\)</span> out of the series impedance and
+<span class="math notranslate nohighlight">\(j\omega C'\)</span> out of the shunt admittance, which pulls out the lossless
+<span class="math notranslate nohighlight">\(\gamma\)</span> and leaves two square roots of the form <span class="math notranslate nohighlight">\(\sqrt{1 + x}\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is
+small. For small <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(\sqrt{1 + x} \approx 1 + x/2\)</span>, the first two terms of its
+Taylor series. Multiplying out the two factors produces a term with the product
+of two small quantities, which we drop. Multiplying <span class="math notranslate nohighlight">\(j\omega\sqrt{L'C'}\)</span>
+through the remaining terms, the <span class="math notranslate nohighlight">\(j\omega\)</span> cancels in each correction, and they
+come out real.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-attenuation-on-a-low-loss-line">
+<div class="wrap docutils container">
+<p class="rubric">Attenuation on a Low-Loss Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\alpha \approx \frac{R'}{2Z_0} + \frac{G' Z_0}{2}, \qquad \beta \approx \omega\sqrt{L'C'}, \qquad Z_0 \approx \sqrt{\frac{L'}{C'}}\]</div>
+<p>Amplitude falls as <span class="math notranslate nohighlight">\(e^{-\alpha z}\)</span>, so over a length <span class="math notranslate nohighlight">\(\ell\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{loss} = 20\log_{10} e^{\alpha\ell} = 8.686\ \alpha\ell\ \text{dB}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The real part of <span class="math notranslate nohighlight">\(\gamma\)</span> is the attenuation constant. Recognizing
+<span class="math notranslate nohighlight">\(\sqrt{L'/C'}\)</span> as the lossless <span class="math notranslate nohighlight">\(Z_0\)</span>, the conductor term is <span class="math notranslate nohighlight">\(R'/2Z_0\)</span> and the
+dielectric term is <span class="math notranslate nohighlight">\(G' Z_0/2\)</span>. The imaginary part is unchanged from the lossless
+line, so to first order the losses change how fast the wave decays but not its
+speed or wavelength. The voltage amplitude falls by <span class="math notranslate nohighlight">\(e^{-\alpha\ell}\)</span> over a
+length <span class="math notranslate nohighlight">\(\ell\)</span>. Expressing the ratio in decibels,
+<span class="math notranslate nohighlight">\(20\log_{10} e^{\alpha\ell} = 20\alpha\ell\log_{10} e\)</span>, and
+<span class="math notranslate nohighlight">\(20\log_{10} e = 8.686\)</span>, so one neper is <span class="math notranslate nohighlight">\(8.686\)</span> dB.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-rg-58-at-100-mhz">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: RG-58 at 100 MHz</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quantity</p></th>
+<th class="head text-left"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(R'\)</span>, from the equation sheet</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.31\ \Omega\)</span>/m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(G'\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.22 \times 10^{-5}\)</span> S/m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\alpha = \frac{R'}{2Z_0} + \frac{G' Z_0}{2}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.0130\)</span> Np/m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Loss</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.113\)</span> dB/m, or <span class="math notranslate nohighlight">\(11.3\)</span> dB per 100 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — how much RG-58 loses</p>
+<p>At 100 MHz the copper conductors of RG-58 have <span class="math notranslate nohighlight">\(R' = 1.31\ \Omega\)</span>/m, from the
+coaxial-line formula on the equation sheet, which accounts for the current
+crowding toward the conductor surfaces. The polyethylene dielectric has
+<span class="math notranslate nohighlight">\(G' = 1.22 \times 10^{-5}\)</span> S/m. First we check the low-loss conditions:
+<span class="math notranslate nohighlight">\(R'/\omega L' = 1.31/163 = 0.008\)</span> and <span class="math notranslate nohighlight">\(G'/\omega C' = 0.0002\)</span>, both far below
+one. The two contributions to the attenuation are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \frac{R'}{2Z_0} &amp;= \frac{1.31}{2 \times 51.7} = 0.0127\ \text{Np/m} \\ \frac{G' Z_0}{2} &amp;= \frac{1.22 \times 10^{-5} \times 51.7}{2} = 0.0003\ \text{Np/m} \end{aligned}\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\alpha = 0.0130\)</span> Np/m, and the loss is</p>
+<div class="math notranslate nohighlight">
+\[8.686 \times 0.0130 = 0.113\ \text{dB/m}\]</div>
+<p>or <span class="math notranslate nohighlight">\(11.3\)</span> dB per 100 m. The conductors cause almost all of it. Datasheets for
+RG-58 list more, about 16 dB per 100 m at this frequency, because the braided
+shield and stranded center conductor of real cable have more resistance than
+the smooth, solid conductors the formula assumes.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-loss-grows-with-frequency">
+<div class="wrap docutils container">
+<p class="rubric">Loss Grows With Frequency</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L05-attenuation.svg"
+     alt="Attenuation of RG-58 in dB per 100 m from 1 MHz to 10 GHz: conductor loss rising as the square root of frequency dominates dielectric loss rising in proportion to frequency; the total is 11.3 dB at 100 MHz and 37.5 dB at 1 GHz"
+     style="max-width: 640px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The figure plots the two terms of <span class="math notranslate nohighlight">\(\alpha\)</span> for RG-58 from 1 MHz to 10 GHz. The
+conductor term rises as the square root of frequency, because <span class="math notranslate nohighlight">\(R'\)</span> does: at
+higher frequency the current crowds into a thinner layer at the surface of each
+conductor, and less copper carries it. The dielectric term rises in direct
+proportion to frequency, because <span class="math notranslate nohighlight">\(G' = \omega C' \tan\delta\)</span>, where
+<span class="math notranslate nohighlight">\(\tan\delta = 2 \times 10^{-4}\)</span> is the loss tangent of polyethylene. For this
+cable, the conductors dominate across the whole range. The total goes from
+<span class="math notranslate nohighlight">\(11.3\)</span> dB per 100 m at 100 MHz to <span class="math notranslate nohighlight">\(37.5\)</span> dB per 100 m at 1 GHz.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-when-loss-matters">
+<div class="wrap docutils container">
+<p class="rubric">When Loss Matters</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>2 m lab cable, 100 MHz: <span class="math notranslate nohighlight">\(0.23\)</span> dB. Treat it as lossless.</p></li>
+<li><p>30 m run to a rooftop antenna, 1 GHz: <span class="math notranslate nohighlight">\(11\)</span> dB, over 90% of the power.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The lossless model is a good approximation whenever <span class="math notranslate nohighlight">\(\alpha\ell\)</span> is small. A
+2 m cable on the bench at 100 MHz loses <span class="math notranslate nohighlight">\(0.113 \times 2 = 0.23\)</span> dB, about 5% of
+the power, which is why the labs in this module treat their cables as lossless.
+A 30 m run from a radio to a rooftop antenna at 1 GHz is different: even the
+ideal model gives <span class="math notranslate nohighlight">\(0.375 \times 30 = 11\)</span> dB, so less than a tenth of the
+transmitter’s power reaches the antenna. That is why long runs at high
+frequency use larger, lower-loss cable, and why a link budget always includes
+the cable.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(Z_0\)</span></p></td>
+<td class="text-left"><p>Voltage over current in one traveling wave</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sqrt{\frac{R' + j\omega L'}{G' + j\omega C'}}\)</span>; RG-58: <span class="math notranslate nohighlight">\(51.7\ \Omega\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Current constants</p></td>
+<td class="text-left"><p>Incident and reflected wave currents</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(I_0^+ = \frac{V_0^+}{Z_0}\)</span>, <span class="math notranslate nohighlight">\(I_0^- = -\frac{V_0^-}{Z_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(v_p\)</span></p></td>
+<td class="text-left"><p>Speed of a point of constant phase</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\omega}{\beta}\)</span>; lossless: <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{L'C'}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+<td class="text-left"><p>Distance for <span class="math notranslate nohighlight">\(2\pi\)</span> of phase</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{2\pi}{\beta} = \frac{v_p}{f}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Low-loss <span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td class="text-left"><p>Conductor plus dielectric loss</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{R'}{2Z_0} + \frac{G' Z_0}{2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nepers to decibels</p></td>
+<td class="text-left"><p>Amplitude ratio <span class="math notranslate nohighlight">\(e^{\alpha\ell}\)</span> in dB</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\ \text{Np} = 8.686\ \text{dB}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>RG-58 loss</p></td>
+<td class="text-left"><p>Ideal-conductor model</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(11.3\)</span> dB/100 m at 100 MHz, <span class="math notranslate nohighlight">\(37.5\)</span> at 1 GHz</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L05_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L05_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 6</strong>: terminate the line in a load. The load sets <span class="math notranslate nohighlight">\(V_0^-\)</span> through <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+<li><p><strong>Lesson 7</strong>: the impedance looking into a line of length <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We now have a complete description of waves on an unterminated line: the
+current in each wave, its speed, its wavelength, and its loss. Every one of
+those depends on the line alone. Lesson 6 adds the load. At the load, the ratio
+of total voltage to total current must equal <span class="math notranslate nohighlight">\(Z_L\)</span>, and unless <span class="math notranslate nohighlight">\(Z_L = Z_0\)</span>, a
+single incident wave cannot satisfy that condition. A reflected wave appears,
+and its size relative to the incident wave is the reflection coefficient.</p>
+<p>Before Lesson 6, read sections 3.10 and 3.12 through 3.14 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L05-characteristic-impedance"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

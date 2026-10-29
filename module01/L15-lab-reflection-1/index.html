@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L15 - Reflection and Transmission Coefficient Lab I &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l15-reflection-and-transmission-coefficient-lab-i">
+<h1>L15 - Reflection and Transmission Coefficient Lab I<a class="headerlink" href="#l15-reflection-and-transmission-coefficient-lab-i" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Reflection and Transmission Coefficient Lab I</h1>
+<div class="title-rule"></div>
+<p>Today you calibrate a network analyzer and measure loads whose reflection coefficients you can predict.</p>
+<p>Lesson 15 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 7">
+  <li>I can measure the reflection coefficient across a range of frequencies and interpret the measurement using a network analyzer.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lessons 6 through 14 computed reflection coefficients on paper. This lab
+measures them. A <strong>vector network analyzer</strong> (VNA) sends a wave down a cable,
+measures the wave that comes back, and reports their ratio, <span class="math notranslate nohighlight">\(\Gamma\)</span>, in
+magnitude and phase across a band of frequencies. Today you calibrate the
+instrument, which removes the effect of the cable and connectors, and then
+measure six loads: an open, a short, a capacitor, a matched <span class="math notranslate nohighlight">\(50\ \Omega\)</span>
+resistor, and two mismatches, a <span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span> resistor and a complex
+load. You predict each one first, so every measurement is a check on the theory
+or on your setup. You work in a team of two or three at one station. Lesson 16 uses
+the same instrument to identify a device you cannot see.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 6</strong>: the reflection coefficient and the special loads</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Load</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Matched</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Short</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-1\)</span>, or <span class="math notranslate nohighlight">\(1\angle 180^\circ\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Open</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(+1\)</span>, or <span class="math notranslate nohighlight">\(1\angle 0^\circ\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 6 derived the reflection coefficient from the boundary condition at the
+load, and Lessons 10 through 13 put it on the Smith chart, where the matched
+load is the center, the short is the left edge, and the open is the right
+edge. Every measurement today lands on one of those points or on a curve you
+can predict from them.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-what-a-vna-measures">
+<div class="wrap docutils container">
+<p class="rubric">What a VNA Measures</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S_{11}\)</span>: the wave reflected back into port 1, over the wave sent out. With a load on port 1, <span class="math notranslate nohighlight">\(S_{11} = \Gamma\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S_{21}\)</span>: the wave arriving at port 2, over the wave sent from port 1. This is a transmission coefficient.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A VNA describes a device by its <strong>scattering parameters</strong>, or S-parameters,
+which are ratios of waves rather than of voltages and currents. The subscripts
+name the receiving port and then the sending port, so <span class="math notranslate nohighlight">\(S_{21}\)</span> is the wave
+received at port 2 when port 1 transmits. With a single load connected to
+port 1, the reflected wave over the incident wave is exactly the reflection
+coefficient of Lesson 6, so <span class="math notranslate nohighlight">\(S_{11} = \Gamma\)</span>. Lesson 16 uses <span class="math notranslate nohighlight">\(S_{21}\)</span> as well.
+The NanoVNA displays four traces at once: <span class="math notranslate nohighlight">\(\vert S_{11}\vert\)</span> in dB in yellow,
+<span class="math notranslate nohighlight">\(\vert S_{21}\vert\)</span> in dB in blue, the phase of <span class="math notranslate nohighlight">\(S_{11}\)</span> in magenta, and <span class="math notranslate nohighlight">\(S_{11}\)</span> on a
+Smith chart in green.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-reflection-in-decibels">
+<div class="wrap docutils container">
+<p class="rubric">Reflection in Decibels</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The VNA reports the magnitude as a voltage ratio in dB:</p>
+<div class="math notranslate nohighlight">
+\[\vert\Gamma\vert_\text{dB} = 20\log_{10}\vert\Gamma\vert\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert_\text{dB}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(1\)</span> (open, short)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span> dB</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(0.905\)</span> (<span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span>)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-0.87\)</span> dB</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span> (matched)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-\infty\)</span> dB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The analyzer measures wave amplitudes, which are voltages, so it converts the
+magnitude of <span class="math notranslate nohighlight">\(\Gamma\)</span> to decibels with <span class="math notranslate nohighlight">\(20\log_{10}\)</span>, not <span class="math notranslate nohighlight">\(10\log_{10}\)</span>. A load
+that reflects everything reads <span class="math notranslate nohighlight">\(0\)</span> dB. A perfect match reads <span class="math notranslate nohighlight">\(-\infty\)</span> dB, which
+no real measurement reaches: a good <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor reads somewhere between
+<span class="math notranslate nohighlight">\(-30\)</span> and <span class="math notranslate nohighlight">\(-50\)</span> dB, and the floor is set by how well you calibrated. The
+<span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span> value comes from
+<span class="math notranslate nohighlight">\(\Gamma = \frac{1000 - 50}{1000 + 50} = 0.905\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-why-calibrate">
+<div class="wrap docutils container">
+<p class="rubric">Why Calibrate</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Cables, adapters, and clips add delay and reflections.</p></li>
+<li><p>Three known standards (open, short, <span class="math notranslate nohighlight">\(50\ \Omega\)</span>) let the VNA solve for that error and remove it.</p></li>
+<li><p>Recalibrate after any change of cable or frequency range.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Between the analyzer’s port and the load sit a cable, an SMA-to-BNC adapter,
+and a pair of clip leads. Lesson 7 showed that a length of line transforms the
+impedance at its end, so without correction the VNA would report the load as
+seen through all of that hardware, not the load itself. Calibration fixes this.
+You connect three loads whose reflection coefficients are known exactly, the
+open, the short, and the <span class="math notranslate nohighlight">\(50\ \Omega\)</span> load, at the exact point where the device
+will go. From the three measurements the VNA solves for the error the hardware
+introduces at each frequency, and it removes that error from every later
+measurement. The correction holds only for the hardware and the frequencies you
+calibrated with.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-predicting-a-capacitor">
+<div class="wrap docutils container">
+<p class="rubric">Predicting a Capacitor</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(Z_L = -jX\)</span>, with <span class="math notranslate nohighlight">\(X = \frac{1}{\omega C}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{-jX - Z_0}{-jX + Z_0} = \frac{X - jZ_0}{X + jZ_0} = e^{-j2\phi}, \qquad \phi = \tan^{-1}\frac{Z_0}{X}\]</div>
+<p><span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span> at every frequency; only the phase changes.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A capacitor stores energy and dissipates none, so Lesson 6 predicts
+<span class="math notranslate nohighlight">\(\vert\Gamma\vert = 1\)</span>. To get the phase, we multiply the numerator and
+denominator by <span class="math notranslate nohighlight">\(j\)</span>. The numerator becomes the complex conjugate of the
+denominator, so the ratio has magnitude one and a phase of minus twice the
+denominator’s angle. At low frequency <span class="math notranslate nohighlight">\(X\)</span> is large, <span class="math notranslate nohighlight">\(\phi\)</span> is small, and the
+capacitor looks like an open. As the frequency rises, <span class="math notranslate nohighlight">\(X\)</span> falls and the phase
+grows more negative, so on the Smith chart the measurement traces the outer
+circle clockwise from the open toward the short.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-pre-lab-the-470-pf-capacitor">
+<div class="wrap docutils container">
+<p class="rubric">Pre-Lab: The 470 pF Capacitor</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(f\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(Z_C\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>50 kHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j6773\ \Omega\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\angle -0.8^\circ\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>500 kHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j677\ \Omega\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\angle -8.4^\circ\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2 MHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j169\ \Omega\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\angle -32.9^\circ\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5 MHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-j67.7\ \Omega\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\angle -72.9^\circ\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The packet asks you to fill in the expected impedance of the 470 pF capacitor at
+ten frequencies from 50 kHz to 5 MHz and plot them on the Smith chart before the
+lab. The table shows four of them, worked with the result of the previous frame.
+At 5 MHz, for example,</p>
+<div class="math notranslate nohighlight">
+\[X = \frac{1}{2\pi \times 5 \times 10^6 \times 470 \times 10^{-12}} = 67.7\ \Omega, \qquad \phi = \tan^{-1}\frac{50}{67.7} = 36.4^\circ\]</div>
+<p>so <span class="math notranslate nohighlight">\(\Gamma = 1\angle -72.9^\circ\)</span>. Work the other six the same way. Over the
+band you will measure, the capacitor covers only the upper quarter of the
+Smith chart’s outer circle; its reactance would equal <span class="math notranslate nohighlight">\(50\ \Omega\)</span> at 6.8 MHz,
+just above the top of the sweep.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-pre-lab-the-complex-load">
+<div class="wrap docutils container">
+<p class="rubric">Pre-Lab: The Complex Load</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor and the 470 pF capacitor in series, at 2 MHz:</p>
+<div class="math notranslate nohighlight">
+\[Z_L = 50 - j169\ \Omega\]</div>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{-j169}{100 - j169} = 0.861\angle -30.6^\circ = -1.30\ \text{dB}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The second mismatched load puts a resistor and a capacitor in series, so it has
+both a real and an imaginary part. Its impedance at 2 MHz is the resistor plus
+the capacitor’s reactance from the previous frame. In the numerator the two
+<span class="math notranslate nohighlight">\(50\ \Omega\)</span> terms cancel, which leaves only the reactance. Dividing the
+magnitudes, <span class="math notranslate nohighlight">\(169/196.6 = 0.861\)</span>, and subtracting the angles,
+<span class="math notranslate nohighlight">\(-90^\circ - (-59.4^\circ) = -30.6^\circ\)</span>, gives <span class="math notranslate nohighlight">\(\Gamma\)</span>. The resistance equals
+<span class="math notranslate nohighlight">\(Z_0\)</span> at every frequency, so on the Smith chart the trace rides the <span class="math notranslate nohighlight">\(r = 1\)</span>
+circle, starting near the open at 50 kHz and moving toward the center as the
+reactance shrinks. The packet asks you to work this before the lab and to
+explain the path in the lab.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-equipment-and-safety">
+<div class="wrap docutils container">
+<p class="rubric">Equipment and Safety</p>
+<p>Each team of two or three cadets works at one station, and keeps it for both
+lab periods. The station has a NanoVNA with its SMA cables, a black SMA-to-BNC adapter, a
+BNC-to-grabber-clip cable, a <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor, a <span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span>
+resistor, and a 470 pF capacitor.</p>
+<ul class="simple">
+<li><p>RF connectors are fragile. Tighten them finger tight, and never cross-thread
+one.</p></li>
+<li><p>Pause the sweep before you change any connection.</p></li>
+<li><p>No food or drink at the bench. At least two people must be in the room while
+equipment is in use.</p></li>
+<li><p>Leave the bench as you found it: equipment in its original configuration,
+cables returned, trash removed.</p></li>
+</ul>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-procedure-setup-and-calibration">
+<div class="wrap docutils container">
+<p class="rubric">Procedure: Setup and Calibration</p>
+<ol class="arabic simple">
+<li><p>Turn on the NanoVNA. Tap the screen, choose <strong>Display</strong>, and tap <strong>Flip
+Display</strong> so the ports face away from you. Tap <strong>Pause Sweep</strong>.</p></li>
+<li><p>Connect the SMA-to-BNC adapter to channel 0 (labeled “1” on the board), and
+the grabber-clip cable to the adapter. Connect the blue SMA cable to
+channel 1, and leave its other end free.</p></li>
+<li><p>Choose <strong>Stimulus</strong> and set the range from 50 kHz to 5 MHz with <strong>Start</strong> and
+<strong>Stop</strong>.</p></li>
+<li><p>Choose <strong>Cal</strong>, then <strong>Reset</strong>.</p></li>
+<li><p>Leave the clips apart (an open) and tap <strong>Open</strong>. Wait for the label to turn
+black.</p></li>
+<li><p>Clip the leads together (a short) and tap <strong>Short</strong>.</p></li>
+<li><p>Clip the leads across the <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor and tap <strong>Load</strong>. Do not
+perform a <strong>Thru</strong>.</p></li>
+<li><p>Tap <strong>Done</strong>, save the calibration to slot 0 if you wish, and confirm that
+the analyzer highlights <strong>Correction</strong>.</p></li>
+</ol>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-procedure-measurements">
+<div class="wrap docutils container">
+<p class="rubric">Procedure: Measurements</p>
+<p>Pause the sweep before each change, then restart it to measure. Read values
+from the markers at the top of the screen; move a marker by dragging it with a
+stylus or with <strong>Markers</strong>, <strong>Select Marker</strong>, and the side buttons.</p>
+<ol class="arabic simple">
+<li><p><strong>Open.</strong> Leave the clips apart. Record the magnitude and phase of <span class="math notranslate nohighlight">\(S_{11}\)</span>,
+and where the trace sits on the Smith chart.</p></li>
+<li><p><strong>Short.</strong> Clip the leads together and record the same quantities.</p></li>
+<li><p><strong>Capacitor.</strong> Clip the 470 pF capacitor across the leads. At each frequency
+in the packet’s table, record the measured impedance, and compare the trace
+on the Smith chart with your predicted points.</p></li>
+<li><p><strong>Matched load.</strong> Clip the <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor across the leads. Record
+<span class="math notranslate nohighlight">\(\vert S_{11}\vert\)</span> in dB and the resistance the marker reports.</p></li>
+<li><p><strong>Two mismatches.</strong> Clip the <span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span> resistor across the
+leads, and record the magnitude and phase of <span class="math notranslate nohighlight">\(S_{11}\)</span> and the resistance.
+Then clip the <span class="math notranslate nohighlight">\(50\ \Omega\)</span> resistor and the capacitor in series across the
+leads. Record <span class="math notranslate nohighlight">\(S_{11}\)</span> and the impedance at 2 MHz, and watch the trace as the
+marker sweeps the band.</p></li>
+</ol>
+<p>For each load, write at least one observation comparing your measurement with
+your prediction.</p>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-lab-packet">
+<div class="wrap docutils container">
+<p class="rubric">Lab Packet</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a></p></li>
+<li><p><a class="doc-link" href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">Blank Smith chart (PDF)</a></p></li>
+</ul>
+<div class="depth docutils container">
+<p>The packet is the turn-in document for both lab periods, and each team of two
+or three submits one combined report on Gradescope, with every member’s name on
+it. It holds the predictions table for the capacitor, a blank Smith chart for
+plotting it, and the questions for each measurement. Bring your predictions to the lab already worked.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 16</strong>: recalibrate with SMA standards and identify a filter you cannot see from its <span class="math notranslate nohighlight">\(S_{11}\)</span> and <span class="math notranslate nohighlight">\(S_{21}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today you measured loads you already understood, which tests the instrument and
+your calibration as much as the theory. Lesson 16 reverses the roles. The device
+under test is a filter with its label taped over, and you identify what it is,
+where its cutoff falls, and whether it looks capacitive or inductive in each
+part of its band, using only the analyzer.</p>
+<p>Before Lesson 16, read Measurement 6 of the lab packet.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L15-lab-reflection-1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

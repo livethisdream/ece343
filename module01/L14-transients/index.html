@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L14 - Transients &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss' Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss' Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss' Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Maxwell's Equations in a Lossless, Source-Free Region II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l14-transients">
+<h1>L14 - Transients<a class="headerlink" href="#l14-transients" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Transients</h1>
+<div class="title-rule"></div>
+<p>Today we close a switch and follow the voltage step as it bounces between the ends of the line.</p>
+<p>Lesson 14 · Module 1: Foundations · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '3'; counter-reset: lo 6">
+  <li>I can plot the transient response of a load connected to a source through a transmission line.</li>
+</ol>
+<div class="depth docutils container">
+<p>Every lesson so far assumed a sinusoidal source that had been running long
+enough for the line to settle. Digital signals are not like that: a logic
+gate switches from 0 to 3.3 V in a nanosecond, and the line has to carry that
+step. Today we connect a DC source to a line through a switch and follow what
+happens after it closes. The step travels down the line, reflects from the
+load, travels back, reflects from the source, and keeps bouncing, and each
+reflection changes the voltage at the load by a smaller amount. We draw the
+whole history on a <strong>bounce diagram</strong>, read the load voltage off it, and show
+that the bounces add up to exactly the voltage-divider answer from circuit
+theory.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 5</strong>: on a lossless line, every wave carries current <span class="math notranslate nohighlight">\(\frac{V}{Z_0}\)</span> and travels at</p>
+<div class="math notranslate nohighlight">
+\[v_p = \frac{1}{\sqrt{L'C'}}\]</div>
+<p><strong>Lesson 6</strong>: a load reflects</p>
+<div class="math notranslate nohighlight">
+\[\Gamma_L = \frac{Z_L - Z_0}{Z_L + Z_0}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 5 showed that in a single traveling wave the ratio of voltage to current
+is <span class="math notranslate nohighlight">\(Z_0\)</span>, and that on a lossless line the phase velocity does not depend on
+frequency. Lesson 6 derived the reflection coefficient from the boundary
+condition at a load. Both results came from sinusoidal phasors. Today the
+source is a step, so the first task is to confirm that the same two results
+hold for a step, and then we apply them at both ends of the line.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-step-on-a-lossless-line">
+<div class="wrap docutils container">
+<p class="rubric">A Step on a Lossless Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Try <span class="math notranslate nohighlight">\(v(z,t) = f\left(t - \frac{z}{v_p}\right)\)</span> and <span class="math notranslate nohighlight">\(i(z,t) = \frac{1}{Z_0} f\left(t - \frac{z}{v_p}\right)\)</span> in the first lossless telegrapher’s equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\frac{\partial v}{\partial z} &amp;= \frac{1}{v_p} f' = \sqrt{L'C'}\ f' \\ L'\frac{\partial i}{\partial t} &amp;= \frac{L'}{Z_0} f' = \frac{L'}{\sqrt{L'/C'}}\ f' = \sqrt{L'C'}\ f' \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The lossless telegrapher’s equations from Lesson 3 hold for any waveform, not
+only sinusoids, so we can test a step directly. We guess that the voltage is
+any function <span class="math notranslate nohighlight">\(f\)</span> of the single variable <span class="math notranslate nohighlight">\(t - z/v_p\)</span>, which describes a shape
+moving in the <span class="math notranslate nohighlight">\(+z\)</span> direction at speed <span class="math notranslate nohighlight">\(v_p\)</span>, and that the current is the same
+shape divided by <span class="math notranslate nohighlight">\(Z_0\)</span>. By the chain rule, differentiating with respect to <span class="math notranslate nohighlight">\(z\)</span>
+brings out a factor of <span class="math notranslate nohighlight">\(-1/v_p\)</span>, and differentiating with respect to <span class="math notranslate nohighlight">\(t\)</span> brings
+out a factor of one, where <span class="math notranslate nohighlight">\(f'\)</span> is the derivative of <span class="math notranslate nohighlight">\(f\)</span> with respect to its
+argument. Substituting <span class="math notranslate nohighlight">\(v_p = 1/\sqrt{L'C'}\)</span> and <span class="math notranslate nohighlight">\(Z_0 = \sqrt{L'/C'}\)</span>, the two
+sides are equal. The second equation checks the same way. So on a lossless
+line a step travels at <span class="math notranslate nohighlight">\(v_p\)</span> without changing shape, and its current is its
+voltage over <span class="math notranslate nohighlight">\(Z_0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-closing-the-switch">
+<div class="wrap docutils container">
+<p class="rubric">Closing the Switch</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At <span class="math notranslate nohighlight">\(t = 0^+\)</span> the source sees only <span class="math notranslate nohighlight">\(Z_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_s &amp;= I_1^+ Z_s + V_1^+, \qquad I_1^+ = \frac{V_1^+}{Z_0} \\ V_s &amp;= V_1^+ \left(\frac{Z_s}{Z_0} + 1\right) \\ V_1^+ &amp;= V_s \frac{Z_0}{Z_s + Z_0} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A source with voltage <span class="math notranslate nohighlight">\(V_s\)</span> and internal resistance <span class="math notranslate nohighlight">\(Z_s\)</span> connects to the line
+at <span class="math notranslate nohighlight">\(z = -\ell\)</span> through a switch that closes at <span class="math notranslate nohighlight">\(t = 0\)</span>. Immediately afterward,
+the step has traveled only an infinitesimal distance, and it carries no
+information about the load yet. The only wave on the line is the incident
+wave, whose voltage <span class="math notranslate nohighlight">\(V_1^+\)</span> and current <span class="math notranslate nohighlight">\(I_1^+\)</span> are in the ratio <span class="math notranslate nohighlight">\(Z_0\)</span>, so the
+line looks to the source like a resistor of value <span class="math notranslate nohighlight">\(Z_0\)</span>. Kirchhoff’s voltage
+law around the source and the line’s input gives a voltage divider between
+<span class="math notranslate nohighlight">\(Z_s\)</span> and <span class="math notranslate nohighlight">\(Z_0\)</span>. The load does not appear in the result.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-reflection-at-the-load">
+<div class="wrap docutils container">
+<p class="rubric">Reflection at the Load</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The step reaches the load at <span class="math notranslate nohighlight">\(t = T\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[T = \frac{\ell}{v_p}\]</div>
+<p>and reflects:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_1^- &amp;= \Gamma_L V_1^+, \qquad \Gamma_L = \frac{Z_L - Z_0}{Z_L + Z_0} \\ V(0) &amp;= V_1^+ + V_1^- = V_1^+\left(1 + \Gamma_L\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The step takes a time <span class="math notranslate nohighlight">\(T = \ell/v_p\)</span>, the <strong>one-way delay</strong>, to reach the load.
+Until then the load sees nothing. When the step arrives, the voltage and current
+at the load must satisfy <span class="math notranslate nohighlight">\(V = Z_L I\)</span>, and the derivation of Lesson 6 applies
+without change: a single incident wave satisfies the load only if
+<span class="math notranslate nohighlight">\(Z_L = Z_0\)</span>, so a reflected wave appears with amplitude <span class="math notranslate nohighlight">\(\Gamma_L V_1^+\)</span>. For a
+resistive load, <span class="math notranslate nohighlight">\(\Gamma_L\)</span> is real. The load voltage jumps from zero to
+<span class="math notranslate nohighlight">\(V_1^+(1 + \Gamma_L)\)</span>, the transmission coefficient times the incident step.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-reflection-at-the-source">
+<div class="wrap docutils container">
+<p class="rubric">Reflection at the Source</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At <span class="math notranslate nohighlight">\(t = 2T\)</span> the reflected wave reaches the source. Subtract the <span class="math notranslate nohighlight">\(t = 0^+\)</span> equation from KVL with three waves present:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_s &amp;= Z_s\frac{V_1^+ - V_1^- + V_2^+}{Z_0} + V_1^+ + V_1^- + V_2^+ \\ 0 &amp;= Z_s\frac{V_2^+ - V_1^-}{Z_0} + V_1^- + V_2^+ \\ V_2^+ &amp;= \Gamma_s V_1^-, \qquad \Gamma_s = \frac{Z_s - Z_0}{Z_s + Z_0} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>When the reflected wave arrives back at the source, the source must again
+satisfy Kirchhoff’s voltage law, and a new forward wave <span class="math notranslate nohighlight">\(V_2^+\)</span> appears. The
+total voltage at the source end is now the sum of three waves, and the total
+current is the sum of their currents, with the backward wave’s current
+subtracting. Subtracting the equation the source satisfied at <span class="math notranslate nohighlight">\(t = 0^+\)</span>
+removes <span class="math notranslate nohighlight">\(V_s\)</span> and <span class="math notranslate nohighlight">\(V_1^+\)</span>, which leaves a boundary condition on <span class="math notranslate nohighlight">\(V_1^-\)</span> and
+<span class="math notranslate nohighlight">\(V_2^+\)</span> alone. Collecting terms gives
+<span class="math notranslate nohighlight">\(V_2^+(Z_s + Z_0) = V_1^-(Z_s - Z_0)\)</span>. The returning wave sees the source
+resistance as its load, and the source reflects it with
+<span class="math notranslate nohighlight">\(\Gamma_s\)</span>, the <strong>source reflection coefficient</strong>. The ideal voltage
+source itself does not reflect anything new, because its voltage never changes
+after <span class="math notranslate nohighlight">\(t = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-bounce-diagram">
+<div class="wrap docutils container">
+<p class="rubric">The Bounce Diagram</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L14-bounce.svg"
+     alt="Bounce diagram for a 10 volt step through 25 ohms into a 50 ohm line ending in 150 ohms: waves of plus 6.67, plus 3.33, minus 1.11, minus 0.56, and plus 0.19 volts zigzag between the source and the load, one transit time T apart"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each wave produces the next when it reaches an end, so the amplitudes form a
+sequence: <span class="math notranslate nohighlight">\(V_1^+\)</span>, then <span class="math notranslate nohighlight">\(\Gamma_L V_1^+\)</span>, then <span class="math notranslate nohighlight">\(\Gamma_s\Gamma_L V_1^+\)</span>, and so on,
+each one multiplied by the reflection coefficient at the end it just reached.
+A <strong>bounce diagram</strong> keeps track of them. Position runs across, from the source
+at <span class="math notranslate nohighlight">\(z = -\ell\)</span> to the load at <span class="math notranslate nohighlight">\(z = 0\)</span>, and time runs down. Each wave is a line
+that crosses the diagram in one delay <span class="math notranslate nohighlight">\(T\)</span>, labeled with its amplitude. The
+figure shows the worked example below: a 10 V step through <span class="math notranslate nohighlight">\(25\ \Omega\)</span> into a
+<span class="math notranslate nohighlight">\(50\ \Omega\)</span> line ending in <span class="math notranslate nohighlight">\(150\ \Omega\)</span>, so <span class="math notranslate nohighlight">\(V_1^+ = 6.67\)</span> V,
+<span class="math notranslate nohighlight">\(\Gamma_L = 0.5\)</span>, and <span class="math notranslate nohighlight">\(\Gamma_s = -1/3\)</span>. To find the voltage at any point and
+time, we add every wave that has reached that point by that time.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-voltage-at-the-load">
+<div class="wrap docutils container">
+<p class="rubric">The Voltage at the Load</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_L &amp;= V_1^+(1 + \Gamma_L), &amp; T &lt; t &lt; 3T \\ V_L &amp;= V_1^+(1 + \Gamma_L)\left(1 + \Gamma_L\Gamma_s\right), &amp; 3T &lt; t &lt; 5T \\ V_L &amp;= V_1^+(1 + \Gamma_L)\left[1 + \Gamma_L\Gamma_s + \left(\Gamma_L\Gamma_s\right)^2\right], &amp; 5T &lt; t &lt; 7T \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The load sees two new waves at each odd multiple of <span class="math notranslate nohighlight">\(T\)</span>: one arriving and the one
+it reflects. At <span class="math notranslate nohighlight">\(t = T\)</span> those are <span class="math notranslate nohighlight">\(V_1^+\)</span> and <span class="math notranslate nohighlight">\(\Gamma_L V_1^+\)</span>. The next forward
+wave, <span class="math notranslate nohighlight">\(\Gamma_s\Gamma_L V_1^+\)</span>, arrives at <span class="math notranslate nohighlight">\(t = 3T\)</span>, together with its
+reflection, which multiplies it by <span class="math notranslate nohighlight">\((1 + \Gamma_L)\)</span> again. Factoring out
+<span class="math notranslate nohighlight">\(V_1^+(1 + \Gamma_L)\)</span>, each round trip adds one more power of
+<span class="math notranslate nohighlight">\(\Gamma_L\Gamma_s\)</span>. The load voltage is a staircase with a step every <span class="math notranslate nohighlight">\(2T\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-load-voltage-over-time">
+<div class="wrap docutils container">
+<p class="rubric">The Load Voltage Over Time</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L14-load-voltage.svg"
+     alt="Voltage at the load and at the source against time for the worked example: the load jumps to 10 volts at T, drops to 8.33 at 3T, rises to 8.61 at 5T, and settles toward 8.57 volts; the source starts at 6.67 volts and settles to the same value"
+     style="max-width: 640px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The figure plots the staircase for the worked example, at both ends of the line.
+The load voltage overshoots to 10 V at <span class="math notranslate nohighlight">\(t = T\)</span>, because the load is larger than
+<span class="math notranslate nohighlight">\(Z_0\)</span> and <span class="math notranslate nohighlight">\(\Gamma_L\)</span> is positive. The source reflection is negative, so the next
+correction pulls it back down to 8.33 V, and the corrections alternate in sign
+from then on. The voltage at the source starts at the divider value
+<span class="math notranslate nohighlight">\(V_1^+ = 6.67\)</span> V and changes every <span class="math notranslate nohighlight">\(2T\)</span> as well. Both ends settle to the same
+value, 8.57 V, as the steps shrink by a factor of
+<span class="math notranslate nohighlight">\(\vert\Gamma_L\Gamma_s\vert = 1/6\)</span> each round trip.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-steady-state">
+<div class="wrap docutils container">
+<p class="rubric">The Steady State</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_L(\infty) &amp;= V_1^+(1 + \Gamma_L)\sum_{n=0}^{\infty}\left(\Gamma_L\Gamma_s\right)^n = \frac{V_1^+(1 + \Gamma_L)}{1 - \Gamma_L\Gamma_s} \\ 1 + \Gamma_L &amp;= \frac{2Z_L}{Z_L + Z_0} \\ 1 - \Gamma_L\Gamma_s &amp;= \frac{(Z_L + Z_0)(Z_s + Z_0) - (Z_L - Z_0)(Z_s - Z_0)}{(Z_L + Z_0)(Z_s + Z_0)} = \frac{2Z_0(Z_L + Z_s)}{(Z_L + Z_0)(Z_s + Z_0)} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>After many round trips, the load voltage is the sum of a <strong>geometric series</strong>
+with ratio <span class="math notranslate nohighlight">\(\Gamma_L\Gamma_s\)</span>. For passive resistors each reflection coefficient
+lies between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, and unless both are <span class="math notranslate nohighlight">\(\pm 1\)</span> the magnitude of the
+ratio is less than one, so the series converges to
+<span class="math notranslate nohighlight">\(1/(1 - \Gamma_L\Gamma_s)\)</span>. To simplify the result, we write each factor in
+terms of the impedances. Adding one to <span class="math notranslate nohighlight">\(\Gamma_L\)</span> over a common denominator
+gives <span class="math notranslate nohighlight">\(2Z_L/(Z_L + Z_0)\)</span>. For the denominator, we put both terms over the
+product of the two sums and expand the numerator: the <span class="math notranslate nohighlight">\(Z_L Z_s\)</span> and <span class="math notranslate nohighlight">\(Z_0^2\)</span>
+terms cancel, and the four cross terms leave <span class="math notranslate nohighlight">\(2Z_0Z_L + 2Z_0Z_s\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-steady-state-is-the-dc-divider">
+<div class="wrap docutils container">
+<p class="rubric">The Steady State Is the DC Divider</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_L(\infty) &amp;= V_s\frac{Z_0}{Z_s + Z_0} \cdot \frac{2Z_L}{Z_L + Z_0} \cdot \frac{(Z_L + Z_0)(Z_s + Z_0)}{2Z_0(Z_L + Z_s)} \\ &amp;= V_s\frac{Z_L}{Z_L + Z_s} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>The line drops out. At DC it is a pair of wires.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Substituting <span class="math notranslate nohighlight">\(V_1^+\)</span> from the turn-on divider and the two factors from the
+previous frame, the factors of <span class="math notranslate nohighlight">\(Z_s + Z_0\)</span>, <span class="math notranslate nohighlight">\(Z_L + Z_0\)</span>, and <span class="math notranslate nohighlight">\(2Z_0\)</span> all cancel.
+What remains is the voltage divider between the source resistance and the load,
+the answer circuit theory gives for a source wired directly to a load. The line
+changes how the voltage gets there, not where it ends up. This agrees with
+Lesson 3: at DC the wavelength is infinite, every line is electrically short,
+and the line behaves as an ideal pair of wires. For the worked example,
+<span class="math notranslate nohighlight">\(V_L(\infty) = 10 \times 150/175 = 8.57\)</span> V.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-400-m-line">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A 400 m Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(V_s = 10\)</span> V, <span class="math notranslate nohighlight">\(Z_s = 25\ \Omega\)</span>, <span class="math notranslate nohighlight">\(Z_0 = 50\ \Omega\)</span>, <span class="math notranslate nohighlight">\(Z_L = 150\ \Omega\)</span>, <span class="math notranslate nohighlight">\(\ell = 400\)</span> m, <span class="math notranslate nohighlight">\(v_p = 2 \times 10^8\)</span> m/s:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(t\)</span></p></th>
+<th class="head text-left"><p>New waves at the load</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(V_L\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(T\)</span></p></td>
+<td class="text-left"><p>none</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(T\)</span> to <span class="math notranslate nohighlight">\(3T\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(6.67 + 3.33\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(10.00\)</span> V</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(3T\)</span> to <span class="math notranslate nohighlight">\(5T\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(-1.11 - 0.56\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(8.33\)</span> V</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(5T\)</span> to <span class="math notranslate nohighlight">\(7T\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.19 + 0.09\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(8.61\)</span> V</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the first three steps at the load</p>
+<p>The one-way delay is <span class="math notranslate nohighlight">\(T = \ell/v_p = 400/(2 \times 10^8) = 2\ \mu\)</span>s. At turn-on,</p>
+<div class="math notranslate nohighlight">
+\[V_1^+ = 10 \times \frac{50}{25 + 50} = 6.67\ \text{V}\]</div>
+<p>and the two reflection coefficients are</p>
+<div class="math notranslate nohighlight">
+\[\Gamma_L = \frac{150 - 50}{150 + 50} = 0.5, \qquad \Gamma_s = \frac{25 - 50}{25 + 50} = -\frac{1}{3}\]</div>
+<p>The waves are <span class="math notranslate nohighlight">\(6.67\)</span>, <span class="math notranslate nohighlight">\(0.5 \times 6.67 = 3.33\)</span>,
+<span class="math notranslate nohighlight">\(-\frac{1}{3} \times 3.33 = -1.11\)</span>, <span class="math notranslate nohighlight">\(0.5 \times (-1.11) = -0.56\)</span>, then
+<span class="math notranslate nohighlight">\(0.19\)</span> and <span class="math notranslate nohighlight">\(0.09\)</span> V. Adding the pairs that reach the load gives the table: the
+load sees nothing for <span class="math notranslate nohighlight">\(2\ \mu\)</span>s, jumps to 10 V, and then settles in smaller and
+smaller steps toward <span class="math notranslate nohighlight">\(8.57\)</span> V. After <span class="math notranslate nohighlight">\(7T = 14\ \mu\)</span>s it is within <span class="math notranslate nohighlight">\(0.01\)</span> V of
+the final value.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-watch-the-step-bounce">
+<div class="wrap docutils container">
+<p class="rubric">Watch the Step Bounce</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/line-transient.html"
+        width="100%" height="504"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="A 10 volt step bouncing on a 50 ohm line: the voltage along the line at one instant, and the voltage at the source and load against time"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget runs the worked example. The top panel shows the voltage along the
+line at the time on the slider, and the bottom panel traces the voltage at the
+source and at the load up to that time. Press play and watch the 6.67 V step
+cross the line in one delay <span class="math notranslate nohighlight">\(T\)</span>, then watch each reflection add or subtract a
+smaller step. Now set <span class="math notranslate nohighlight">\(R_L = 50\ \Omega\)</span>: the load is matched, nothing
+reflects, and the line settles at <span class="math notranslate nohighlight">\(T\)</span>. Set <span class="math notranslate nohighlight">\(R_s = 50\ \Omega\)</span> with any load:
+the source absorbs the first reflection, and the line settles at <span class="math notranslate nohighlight">\(2T\)</span>. Set
+<span class="math notranslate nohighlight">\(R_L = 1000\ \Omega\)</span> and <span class="math notranslate nohighlight">\(R_s = 0\)</span> to see a nearly open line driven by a
+near-ideal source ring for a long time.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-special-cases">
+<div class="wrap docutils container">
+<p class="rubric">Special Cases</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Case</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Matched load, <span class="math notranslate nohighlight">\(Z_L = Z_0\)</span></p></td>
+<td class="text-left"><p>Settled everywhere at <span class="math notranslate nohighlight">\(T\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Matched source, <span class="math notranslate nohighlight">\(Z_s = Z_0\)</span></p></td>
+<td class="text-left"><p>Settled everywhere at <span class="math notranslate nohighlight">\(2T\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Open load, <span class="math notranslate nohighlight">\(\Gamma_L = 1\)</span></p></td>
+<td class="text-left"><p>Load jumps to <span class="math notranslate nohighlight">\(2V_1^+\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Shorted load, <span class="math notranslate nohighlight">\(\Gamma_L = -1\)</span></p></td>
+<td class="text-left"><p>Load stays at zero</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Four cases cover most of what you will meet in practice. A <strong>matched load</strong>
+absorbs the first wave completely, so the load voltage rises once and stays,
+which is why high-speed digital lines end in a resistor equal to <span class="math notranslate nohighlight">\(Z_0\)</span>. A
+<strong>matched source</strong> absorbs the first reflection instead, so the load voltage
+steps once at <span class="math notranslate nohighlight">\(T\)</span> and the whole line settles after one round trip; this is the idea behind series termination of a digital
+driver. An <strong>open</strong> end doubles the arriving step, and a <strong>short</strong> cancels it.
+In every case the final value is the DC divider.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Waveform on a lossless line</p></td>
+<td class="text-left"><p>Any shape travels unchanged at <span class="math notranslate nohighlight">\(v_p\)</span>, with current <span class="math notranslate nohighlight">\(\frac{V}{Z_0}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f\left(t - \frac{z}{v_p}\right)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Turn-on</p></td>
+<td class="text-left"><p>The source sees only <span class="math notranslate nohighlight">\(Z_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(V_1^+ = V_s\frac{Z_0}{Z_s + Z_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(T\)</span></p></td>
+<td class="text-left"><p>One-way delay</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\ell}{v_p}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma_L\)</span>, <span class="math notranslate nohighlight">\(\Gamma_s\)</span></p></td>
+<td class="text-left"><p>Reflection at the load and at the source</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{Z_L - Z_0}{Z_L + Z_0}\)</span>, <span class="math notranslate nohighlight">\(\frac{Z_s - Z_0}{Z_s + Z_0}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Bounce diagram</p></td>
+<td class="text-left"><p>Position across, time down, each wave labeled</p></td>
+<td class="text-left"><p>each wave <span class="math notranslate nohighlight">\(\times\)</span> the next end’s <span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Steady state</p></td>
+<td class="text-left"><p>Geometric series in <span class="math notranslate nohighlight">\(\Gamma_L\Gamma_s\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(V_s\frac{Z_L}{Z_L + Z_s}\)</span>, the DC divider</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Matched load or source</p></td>
+<td class="text-left"><p>Settles at <span class="math notranslate nohighlight">\(T\)</span> or <span class="math notranslate nohighlight">\(2T\)</span></p></td>
+<td class="text-left"><p>no ringing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L14_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L14_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lessons 15 and 16</strong>: the reflection coefficient, measured. You calibrate a network analyzer, measure known loads, and identify an unknown device.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today closes the theory of Module 1: a line’s waves, its impedance, its
+reflections, matching, the Smith chart, and now its response to a step. The
+next two periods put a vector network analyzer in your hands. It launches a
+wave down a cable, measures the wave that comes back, and reports <span class="math notranslate nohighlight">\(\Gamma\)</span>
+across a band of frequencies, which is every quantity from Lessons 6 through 13
+on one screen. Lesson 15 calibrates the instrument and measures loads whose
+reflection coefficients you can predict; Lesson 16 uses it to identify a device
+you cannot see.</p>
+<p>Before Lesson 15, read the whole lab packet and the NanoVNA user’s guide, and
+work the predictions the packet asks for.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module01/L14-transients"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

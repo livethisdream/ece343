@@ -1,0 +1,162 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L10 practice set (Smith Charts I): normalized impedance, the mapping between
+% z and Gamma, the constant-r and constant-x circles, and reading the VSWR.
+
+\fullwidth{\textbf{Learning Objective 3.5: } I can identify the various
+quantities represented on the Smith Chart.
+\\[4pt]\normalfont\small Show your work. Check each calculation on a printed
+Smith chart. Write a \textbf{Documentation} line at the end (\textbf{None} if
+you did not collaborate). All lines are lossless with $\myz{0} = 50\ \ohms$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{From impedance to $\Gamma$.} Each load below terminates a
+$50\ \ohms$ line.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\myz{L} = 100 - j50\ \ohms$. Find $z_L$, $\Gamma$ in rectangular and
+		polar form, and the VSWR.
+		\begin{solution}[1.6in]
+		\eq{
+			z_L &= 2 - j1 \\
+			\Gamma &= \dfrac{1 - j1}{3 - j1} = \dfrac{(1 - j1)(3 + j1)}{10} = 0.4 - j0.2 \\
+			&= 0.447\angle -26.6^\circ \\
+			\text{VSWR} &= \dfrac{1.447}{0.553} = 2.62
+		}
+		The load is in the lower half of the chart because it is capacitive.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.447\angle -26.6^\circ$}
+
+		\vspace{4pt}
+		VSWR = \ansbox[1.3in]{$2.62$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\myz{L} = 25 + j25\ \ohms$. Find $\Gamma$ in polar form.
+		\begin{solution}[1.3in]
+		\eq{
+			z_L &= 0.5 + j0.5 \\
+			\Gamma &= \dfrac{-0.5 + j0.5}{1.5 + j0.5} = \dfrac{(-0.5 + j0.5)(1.5 - j0.5)}{2.5} \\
+			&= -0.2 + j0.4 = 0.447\angle 116.6^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$0.447\angle 116.6^\circ$}
+	\end{minipage}
+
+	\part The loads in parts (a) and (b) have the same $\vert\Gamma\vert$. What
+	does that mean on the chart, and what does it say about their VSWRs?
+	\begin{solution}[0.8in]
+	Both lie on the same circle centered on the chart, so they have the same
+	VSWR, 2.62, even though their impedances are very different.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{From $\Gamma$ to impedance.} Use $z = (1 + \Gamma)/(1 - \Gamma)$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\Gamma = 0.5\angle 90^\circ$. Find $\myz{L}$.
+		\begin{solution}[1.3in]
+		\eq{
+			z_L &= \dfrac{1 + j0.5}{1 - j0.5} = \dfrac{(1 + j0.5)^2}{1.25} = \dfrac{0.75 + j1}{1.25} \\
+			&= 0.6 + j0.8 \\
+			\myz{L} &= 30 + j40\ \ohms
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{L}$ = \ansbox[1.3in]{$30 + j40\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part $\Gamma = -0.6$. Find $\myz{L}$, and say where the point is on the chart.
+		\begin{solution}[1in]
+		\eq{ z_L = \dfrac{0.4}{1.6} = 0.25, \qquad \myz{L} = 12.5\ \ohms }
+		On the left half of the real axis, between the short and the center.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{L}$ = \ansbox[1.3in]{$12.5\ \ohms$}
+	\end{minipage}
+
+	\part Without computing, name the load at each point: $\Gamma = -1$,
+	$\Gamma = 0$, $\Gamma = +1$, and $\Gamma = +j$.
+	\begin{solution}[0.8in]
+	A short circuit, a matched $50\ \ohms$ load, an open circuit, and a pure
+	reactance: $z = (1 + j)/(1 - j) = j$, an inductor of $+j50\ \ohms$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The grid circles.}
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the center and radius of the $r = 3$ circle.
+		\begin{solution}[1.2in]
+		\eq{ \left(\dfrac{r}{1 + r}, 0\right) = (0.75, 0), \qquad \dfrac{1}{1 + r} = 0.25 }
+		It touches the real axis at $\Gamma = 0.5$ and $\Gamma = 1$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		center = \ansbox[1.3in]{$(0.75, 0)$}
+
+		\vspace{4pt}
+		radius = \ansbox[1.3in]{$0.25$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the center and radius of the $x = 0.5$ circle.
+		\begin{solution}[1.2in]
+		\eq{ \left(1, \dfrac{1}{x}\right) = (1, 2), \qquad \dfrac{1}{\vert x\vert} = 2 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		center = \ansbox[1.3in]{$(1, 2)$}
+
+		\vspace{4pt}
+		radius = \ansbox[1.3in]{$2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A load has a VSWR of 3. Find $\vert\Gamma\vert$, and the two
+		resistances where its VSWR circle crosses the real axis.
+		\begin{solution}[1.4in]
+		\eq{
+			\vert\Gamma\vert &= \dfrac{\text{VSWR} - 1}{\text{VSWR} + 1} = \dfrac{2}{4} = 0.5 \\
+			r_{\text{right}} &= 3, \qquad r_{\text{left}} = \dfrac{1 - 0.5}{1 + 0.5} = \dfrac{1}{3}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vert\Gamma\vert$ = \ansbox[1.3in]{$0.5$}
+
+		\vspace{4pt}
+		crossings = \ansbox[1.3in]{$r = 3,\ 1/3$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

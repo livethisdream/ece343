@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smith chart: a load, its reflection coefficient, and a length of line</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#1d7a4d; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  .top { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:10px; align-items:start; }
+  @media (max-width:620px) { .top { grid-template-columns:1fr; } }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:58px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; grid-column:1 / -1; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--amber); border-color:var(--amber); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:7px; grid-template-columns:1fr; }
+  @media (max-width:620px) { .readouts { grid-template-columns:repeat(auto-fit, minmax(100px, 1fr)); gap:6px; } .ro .v { font-size:12.5px; } }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 8px 7px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; color:var(--navy); }
+  .ro.in .v { color:var(--grn); }
+  .ro.adm .v { color:var(--amber); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <canvas id="chart" aria-label="Smith chart with the load, its constant reflection coefficient circle, and the impedance at a distance along the line"></canvas>
+    <div class="readouts">
+      <div class="ro"><span class="k">\(z_L\)</span><span class="v" id="r-zl">—</span></div>
+      <div class="ro"><span class="k">\(\Gamma\)</span><span class="v" id="r-g">—</span></div>
+      <div class="ro"><span class="k">VSWR</span><span class="v" id="r-s">—</span></div>
+      <div class="ro in"><span class="k">\(z_\text{in}\) at \(d\)</span><span class="v" id="r-zin">—</span></div>
+      <div class="ro adm"><span class="k">\(y_\text{in}\) at \(d\)</span><span class="v" id="r-yin">—</span></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(R_L\)</label>
+      <input type="range" id="rl" min="0" max="250" step="0.1" value="75">
+      <span class="val" id="rl-val">75 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(X_L\)</label>
+      <input type="range" id="xl" min="-200" max="200" step="0.1" value="60">
+      <span class="val" id="xl-val">+60 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(d/\lambda\)</label>
+      <input type="range" id="dd" min="0" max="0.5" step="0.0005" value="0">
+      <span class="val" id="d-val">0.000</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="adm"><span class="sw"></span><span class="t">Admittance</span></label>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// A load Z_L = R_L + jX_L on a Z0 = 50 Ω line. The chart is the Γ plane:
+// Γ = (z − 1)/(z + 1) with z = Z/Z0. Moving a distance d from the load toward
+// the source multiplies Γ by e^{−j2βd} = e^{−j4π d/λ}: a clockwise rotation
+// on the circle |Γ| = constant, one full turn per half wavelength. The
+// admittance of any point is y = 1/z, which sits at −Γ, the point opposite
+// it through the center, and is read off the same grid (the chart used as
+// an admittance chart). There is deliberately no second, mirrored grid. Query string presets: ?R=33.9&X=17.9&d=0.0642&adm=1
+const Z0 = 50;
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+
+const C = {
+  add:(a,b)=>({re:a.re+b.re, im:a.im+b.im}), sub:(a,b)=>({re:a.re-b.re, im:a.im-b.im}),
+  mul:(a,b)=>({re:a.re*b.re-a.im*b.im, im:a.re*b.im+a.im*b.re}),
+  div:(a,b)=>{ const d=b.re*b.re+b.im*b.im; return {re:(a.re*b.re+a.im*b.im)/d, im:(a.im*b.re-a.re*b.im)/d}; },
+  abs:a=>Math.hypot(a.re,a.im), arg:a=>Math.atan2(a.im,a.re),
+};
+const ONE = {re:1, im:0};
+const gammaOf = z => C.div(C.sub(z, ONE), C.add(z, ONE));
+const zOf = g => C.div(C.add(ONE, g), C.sub(ONE, g));
+
+const q = new URLSearchParams(location.search);
+const state = {
+  R: q.has('R') ? parseFloat(q.get('R')) : 75,
+  X: q.has('X') ? parseFloat(q.get('X')) : 60,
+  d: q.has('d') ? parseFloat(q.get('d')) : 0,
+  adm: q.get('adm') === '1',
+};
+
+const rlEl = document.getElementById('rl'), xlEl = document.getElementById('xl'), dEl = document.getElementById('dd');
+const admEl = document.getElementById('adm');
+rlEl.value = state.R; xlEl.value = state.X; dEl.value = state.d; admEl.checked = state.adm;
+rlEl.addEventListener('input', () => { state.R = parseFloat(rlEl.value); update(); });
+xlEl.addEventListener('input', () => { state.X = parseFloat(xlEl.value); update(); });
+dEl.addEventListener('input', () => { state.d = parseFloat(dEl.value); update(); });
+admEl.addEventListener('change', () => { state.adm = admEl.checked; update(); });
+
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(220, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+let W = 0, H = 0;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  W = cvWidth(canvas);
+  H = Math.round(Math.min(W, W < 450 ? 270 : 360) * 0.94);
+  setSize(canvas, W, H, dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function fmtC(z, digits){
+  const s = z.im < 0 ? ' − j' : ' + j';
+  return z.re.toFixed(digits) + s + Math.abs(z.im).toFixed(digits);
+}
+
+function draw(){
+  if (!W || !H) return;
+  ctx.clearRect(0,0,W,H);
+  const R0 = Math.min(W, H)/2 - 16;
+  const cx = W/2, cy = H/2;
+  const P = g => [cx + g.re*R0, cy - g.im*R0];
+  const navy = cssVar('--navy'), amber = cssVar('--amber'), grn = cssVar('--grn');
+
+  // grid, clipped to the unit circle
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R0, 0, 2*Math.PI); ctx.clip();
+  const grid = (sign, color, width) => {
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    for (const r of [0.2, 0.5, 1, 2, 5]) {        // constant-r: center (r/(1+r), 0), radius 1/(1+r)
+      ctx.beginPath(); ctx.arc(cx + sign*r/(1+r)*R0, cy, R0/(1+r), 0, 2*Math.PI); ctx.stroke();
+    }
+    for (const x of [0.2, 0.5, 1, 2, 5]) {        // constant-x: center (1, ±1/x), radius 1/x
+      for (const s of [1, -1]) {
+        ctx.beginPath(); ctx.arc(cx + sign*R0, cy - s*R0/x, R0/x, 0, 2*Math.PI); ctx.stroke();
+      }
+    }
+  };
+  grid(1, '#cfdbe7', 1);
+  // the r = 1 circle, which matching aims for
+  ctx.strokeStyle = '#9fb6cc'; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(cx + R0/2, cy, R0/2, 0, 2*Math.PI); ctx.stroke();
+  ctx.restore();
+
+  ctx.strokeStyle = '#8fa5bb'; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(cx, cy, R0, 0, 2*Math.PI); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx - R0, cy); ctx.lineTo(cx + R0, cy); ctx.stroke();
+  ctx.fillStyle = cssVar('--ink3'); ctx.font = '10px ' + SANS; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  for (const r of [0.2, 0.5, 1, 2, 5]) ctx.fillText(String(r), cx + (r-1)/(r+1)*R0, cy - 2);
+
+  // the load, its |Γ| circle, the rotation toward the source, and the input
+  const zL = {re: state.R/Z0, im: state.X/Z0};
+  const gL = gammaOf(zL), mag = C.abs(gL);
+  const rot = {re: Math.cos(-4*Math.PI*state.d), im: Math.sin(-4*Math.PI*state.d)};
+  const gIn = C.mul(gL, rot);
+
+  ctx.setLineDash([5,4]); ctx.strokeStyle = navy; ctx.lineWidth = 1.3;
+  ctx.beginPath(); ctx.arc(cx, cy, mag*R0, 0, 2*Math.PI); ctx.stroke(); ctx.setLineDash([]);
+
+  if (state.d > 0 && mag > 1e-3) {
+    const a0 = -C.arg(gL);                       // canvas angles run clockwise
+    ctx.strokeStyle = grn; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(cx, cy, mag*R0, a0, a0 + 4*Math.PI*state.d, false); ctx.stroke();
+  }
+  const dot = (g, color, r) => { const [x,y] = P(g); ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, r, 0, 2*Math.PI); ctx.fill(); };
+  if (state.adm) {
+    const yIn = {re: -gIn.re, im: -gIn.im};
+    const [x1,y1] = P(gIn), [x2,y2] = P(yIn);
+    ctx.setLineDash([2,3]); ctx.strokeStyle = amber; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); ctx.setLineDash([]);
+    dot(yIn, amber, 5);
+  }
+  dot(gL, navy, 5.5);
+  if (state.d > 0) dot(gIn, grn, 5.5);
+  ctx.fillStyle = navy; ctx.beginPath(); ctx.arc(cx, cy, 2, 0, 2*Math.PI); ctx.fill();
+}
+
+function update(){
+  document.getElementById('rl-val').textContent = state.R.toFixed(state.R < 100 ? 1 : 0) + ' Ω';
+  document.getElementById('xl-val').textContent = (state.X < 0 ? '−' : '+') + Math.abs(state.X).toFixed(Math.abs(state.X) < 100 ? 1 : 0) + ' Ω';
+  document.getElementById('d-val').textContent = state.d.toFixed(3) + ' λ';
+  const zL = {re: state.R/Z0, im: state.X/Z0};
+  const gL = gammaOf(zL), mag = C.abs(gL);
+  const rot = {re: Math.cos(-4*Math.PI*state.d), im: Math.sin(-4*Math.PI*state.d)};
+  const gIn = C.mul(gL, rot);
+  document.getElementById('r-zl').textContent = fmtC(zL, 2);
+  document.getElementById('r-g').textContent = mag < 0.0005 ? '0' : mag.toFixed(3) + ' ∠ ' + (C.arg(gL)*180/Math.PI).toFixed(1) + '°';
+  document.getElementById('r-s').textContent = mag > 0.999 ? '∞' : ((1+mag)/(1-mag)).toFixed(2);
+  const open = C.abs(C.sub(ONE, gIn)) < 1e-6, short = C.abs(C.add(ONE, gIn)) < 1e-6;
+  document.getElementById('r-zin').textContent = open ? '∞' : fmtC(zOf(gIn), 3);
+  document.getElementById('r-yin').textContent = short ? '∞' : fmtC(zOf({re:-gIn.re, im:-gIn.im}), 3);
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L13 practice set (Smith Charts IV): shorted and open stubs, and the
+% single-stub shunt tuner.
+
+\fullwidth{\textbf{Learning Objective 3.6: } I can use the Smith Chart to solve
+transmission line problems.
+\\[4pt]\normalfont\small Show your work. Solve each part on a printed Smith
+chart, then check it with the stub formulas. Write a \textbf{Documentation}
+line at the end (\textbf{None} if you did not collaborate). All lines and stubs
+are lossless with $\myz{0} = 50\ \ohms$ and $v_p = 2\times10^{8}\ \text{m/s}$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Stub reactance.}
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the input impedance of a shorted stub $\lambda/8$ long, and the
+		lumped element it acts like.
+		\begin{solution}[1in]
+		\eq{ z_{sc} &= j\tan\beta\ell = j\tan 45^\circ = j1 \\ \myz{sc} &= +j50\ \ohms }
+		It acts like an inductor.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{sc}$ = \ansbox[1.3in]{$+j50\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the input impedance of an open stub $\lambda/8$ long.
+		\begin{solution}[1in]
+		\eq{ z_{oc} &= -j\cot\beta\ell = -j\cot 45^\circ = -j1 \\ \myz{oc} &= -j50\ \ohms }
+		It acts like a capacitor.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{oc}$ = \ansbox[1.3in]{$-j50\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the shortest shorted stub and the shortest open stub that add a
+		normalized susceptance of $+j1$ in shunt.
+		\begin{solution}[1.3in]
+		\eq{
+			\text{short: } -\cot\beta\ell &= 1, & \beta\ell &= 135^\circ, & \ell &= 0.375\lambda \\
+			\text{open: } \tan\beta\ell &= 1, & \beta\ell &= 45^\circ, & \ell &= 0.125\lambda
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		short = \ansbox[1.3in]{$0.375\lambda$}
+
+		\vspace{4pt}
+		open = \ansbox[1.3in]{$0.125\lambda$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Repeat part (c) for a susceptance of $-j1$.
+		\begin{solution}[1.1in]
+		\eq{
+			\text{short: } \cot\beta\ell &= 1, & \ell &= 0.125\lambda \\
+			\text{open: } \tan\beta\ell &= -1, & \ell &= 0.375\lambda
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		short = \ansbox[1.3in]{$0.125\lambda$}
+
+		\vspace{4pt}
+		open = \ansbox[1.3in]{$0.375\lambda$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Single-stub tuner.} The load $\myz{L} = 100 + j50\ \ohms$ from
+the Lesson 12 practice set must be matched at $500\ \mhz$ with a single shunt
+stub. Lesson 12 found that $d = 0.1988\lambda$ puts the admittance at
+$y = 1 + j1$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the wavelength on the line and the distance $d$ in centimeters.
+		\begin{solution}[1in]
+		\eq{
+			\lambda &= \dfrac{v_p}{f} = \dfrac{2\times10^{8}}{5\times10^{8}} = 0.4\ \text{m} \\
+			d &= 0.1988(40\ \text{cm}) = 7.95\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d$ = \ansbox[1.3in]{$7.95\ \text{cm}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The tuner is built in coaxial cable. Choose the stub type and find
+		its length in centimeters.
+		\begin{solution}[1.2in]
+		The stub must add $-j1$. A coaxial stub should be shorted, and part 1(d)
+		gives $0.125\lambda$.
+		\eq{ \ell = 0.125(40\ \text{cm}) = 5.0\ \text{cm} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\ell$ = \ansbox[1.3in]{$5.0\ \text{cm}$, shorted}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the second solution: $d$, $y$ there, and the open-stub length.
+		\begin{solution}[1.4in]
+		Continuing clockwise from the upper crossing at $63.4^\circ$ to the lower one
+		at $-63.4^\circ$ adds $126.9^\circ$, or $0.1762\lambda$.
+		\eq{
+			d &= 0.1988\lambda + 0.1762\lambda = 0.375\lambda, \qquad y = 1 - j1 \\
+			\ell_{oc} &= 0.125\lambda = 5.0\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d$ = \ansbox[1.3in]{$0.375\lambda$}
+
+		\vspace{4pt}
+		$\ell_{oc}$ = \ansbox[1.3in]{$0.125\lambda$}
+	\end{minipage}
+
+	\part Explain in one or two sentences why a tuner is usually a shunt stub
+	rather than a series stub.
+	\begin{solution}[0.9in]
+	A shunt stub connects at a T junction without cutting the main line. A series
+	stub has to be inserted into one conductor of the line, which is hard to
+	build in coax or microstrip.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

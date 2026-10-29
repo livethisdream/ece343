@@ -1,0 +1,159 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L12 practice set (Smith Charts III): matching with a length of line and one
+% series or shunt lumped element.
+
+\fullwidth{\textbf{Learning Objective 3.6: } I can use the Smith Chart to solve
+transmission line problems.
+\\[4pt]\normalfont\small Show your work. Solve each part on a printed Smith
+chart, then check it with the formulas from the lesson. Write a
+\textbf{Documentation} line at the end (\textbf{None} if you did not
+collaborate). All lines are lossless with $\myz{0} = 50\ \ohms$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Element moves.} State which way each element moves the point,
+and along which grid circle.
+\begin{parts}
+
+	\part A series capacitor added to $z = 1 + j1$.
+	\begin{solution}[0.6in]
+	It adds negative reactance, so $z$ moves counterclockwise along the $r = 1$
+	circle toward the lower half of the chart.
+	\end{solution}
+
+	\part A shunt inductor added to $y = 0.5 + j0.5$.
+	\begin{solution}[0.6in]
+	It adds negative susceptance, so $y$ moves down the $g = 0.5$ circle,
+	counterclockwise on the same grid.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A load has $\vert\Gamma\vert = 0.5$. Find the reactance $x$ where its
+		VSWR circle crosses the $r = 1$ circle.
+		\begin{solution}[0.9in]
+		\eq{ x = \pm\dfrac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}} = \pm\dfrac{1}{\sqrt{0.75}} = \pm 1.155 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$x$ = \ansbox[1.3in]{$\pm 1.155$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Series-element match.} A load $\myz{L} = 100 + j50\ \ohms$
+must be matched at $500\ \mhz$ with a length of line and one series element.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma_L$ and the reactance $x$ on the $r = 1$ circle.
+		\begin{solution}[1.3in]
+		\eq{
+			z_L &= 2 + j1, \qquad \Gamma_L = 0.4 + j0.2 = 0.447\angle 26.6^\circ \\
+			x &= \pm\dfrac{2(0.447)}{\sqrt{1 - 0.2}} = \pm 1.0
+		}
+		The crossings are at $\pm\cos^{-1}0.447 = \pm 63.4^\circ$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$x$ = \ansbox[1.3in]{$\pm 1.0$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the shortest line length $d$ and $z$ at that point.
+		\begin{solution}[1.2in]
+		Turning clockwise from $26.6^\circ$, the first crossing is the lower one at
+		$-63.4^\circ$, a turn of $90^\circ$.
+		\eq{ d = \dfrac{90^\circ}{720^\circ}\lambda = 0.125\lambda, \qquad z = 1 - j1 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d$ = \ansbox[1.3in]{$0.125\lambda$}
+
+		\vspace{4pt}
+		$z$ = \ansbox[1.3in]{$1 - j1$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Name the series element and find its value.
+		\begin{solution}[1.1in]
+		It must add $+j1$, or $+j50\ \ohms$: an inductor.
+		\eq{ L = \dfrac{50}{2\pi\left(5\times10^{8}\right)} = 15.9\ \text{nH} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		element = \ansbox[1.3in]{$L = 15.9\ \text{nH}$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Shunt-element match.} Match the same load at $500\ \mhz$ with a
+length of line and one shunt element.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $y_L$ and the angle of its point on the chart.
+		\begin{solution}[1in]
+		\eq{ y_L = 0.4 - j0.2, \qquad -\Gamma_L = 0.447\angle -153.4^\circ }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$y_L$ = \ansbox[1.3in]{$0.4 - j0.2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the shortest $d$ that puts $y$ on the $g = 1$ circle, and $y$
+		there.
+		\begin{solution}[1.4in]
+		Turning clockwise from $-153.4^\circ$ passes the left real axis and
+		reaches the upper crossing at $+63.4^\circ$ first.
+		\eq{
+			\text{turn} &= 26.6^\circ + 116.6^\circ = 143.1^\circ \\
+			d &= \dfrac{143.1^\circ}{720^\circ}\lambda = 0.1988\lambda, \qquad y = 1 + j1
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d$ = \ansbox[1.3in]{$0.1988\lambda$}
+
+		\vspace{4pt}
+		$y$ = \ansbox[1.3in]{$1 + j1$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Name the shunt element and find its value.
+		\begin{solution}[1.1in]
+		It must add $-j1$, a susceptance of $-1/50\ \text{S}$: an inductor.
+		\eq{ \dfrac{1}{\omega L} = \dfrac{1}{50}, \qquad L = \dfrac{50}{2\pi\left(5\times10^{8}\right)} = 15.9\ \text{nH} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		element = \ansbox[1.3in]{$L = 15.9\ \text{nH}$}
+	\end{minipage}
+
+	\part Which of the two designs, series or shunt, would you build? Justify
+	your answer in one or two sentences.
+	\begin{solution}[0.9in]
+	The series design: its line is $0.125\lambda$ instead of $0.1988\lambda$, so
+	it changes less with frequency and gives the wider bandwidth. Both use the
+	same $15.9\ \text{nH}$ inductor, so the line length decides.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

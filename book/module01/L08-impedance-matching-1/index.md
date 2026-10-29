@@ -143,56 +143,56 @@ positive without changing the answer.
 
 ::::{frame} Worked Example: The Load
 :::{present}
-$Z_L = 33.9 + j17.6\ \Omega$ on a $50\ \Omega$ line at 1 GHz:
+$Z_L = 33.9 + j17.9\ \Omega$ on a $50\ \Omega$ line at 1 GHz:
 
-$$\begin{aligned} z_L &= 0.678 + j0.352 \\ \Gamma &= \frac{-0.322 + j0.352}{1.678 + j0.352} = -0.142 + j0.239 = 0.278\angle 120.6^\circ \end{aligned}$$
+$$\begin{aligned} z_L &= 0.678 + j0.358 \\ \Gamma &= \frac{-0.322 + j0.358}{1.678 + j0.358} = -0.140 + j0.243 = 0.281\angle 119.9^\circ \end{aligned}$$
 :::
 
 This is the matching example from the Spring 2025 course. We normalize the load
 by dividing by $50\ \Omega$, then compute the reflection coefficient from
 $\frac{z_L - 1}{z_L + 1}$. Multiplying the numerator and denominator by the
 conjugate of the denominator gives the rectangular form, and its magnitude and
-angle give the polar form. The load reflects $0.278^2 = 7.7\%$ of the incident
-power, a VSWR of 1.77. That is a modest mismatch, and it makes a good first
+angle give the polar form. The load reflects $0.281^2 = 7.9\%$ of the incident
+power, a VSWR of 1.78. That is a modest mismatch, and it makes a good first
 example because both matching points are easy to see.
 ::::
 
 ::::{frame} Worked Example: Reactance and Distance
 :::{present}
-$$x = \pm\frac{2 \times 0.278}{\sqrt{1 - 0.278^2}} = \pm 0.579, \qquad \theta_d = \pm\left(90^\circ - 16.2^\circ\right) = \pm 73.8^\circ$$
+$$x = \pm\frac{2 \times 0.281}{\sqrt{1 - 0.281^2}} = \pm 0.585, \qquad \theta_d = \pm\left(90^\circ - 16.3^\circ\right) = \pm 73.7^\circ$$
 
 | Solution | $z$ at the point | $2\beta d$ | $d$ |
 | :-- | :-- | :-- | :-- |
-| 1 | $1 + j0.579$ | $120.6^\circ - 73.8^\circ = 46.8^\circ$ | $0.065\lambda$ |
-| 2 | $1 - j0.579$ | $120.6^\circ + 73.8^\circ = 194.4^\circ$ | $0.270\lambda$ |
+| 1 | $1 + j0.585$ | $119.9^\circ - 73.7^\circ = 46.2^\circ$ | $0.064\lambda$ |
+| 2 | $1 - j0.585$ | $119.9^\circ + 73.7^\circ = 193.6^\circ$ | $0.269\lambda$ |
 :::
 
-With $\vert\Gamma\vert = 0.278$, the reactance at the matching points is
-$x = \pm 0.579$, and $\tan^{-1}(0.579/2) = 16.2^\circ$, so the phase at the
-matching points is $\pm 73.8^\circ$. For the first solution the load's phase
-must rotate from $120.6^\circ$ down to $73.8^\circ$, a rotation of $46.8^\circ$,
-which takes $d = 46.8/720 = 0.065\lambda$. For the second it must rotate down to
-$-73.8^\circ$, a rotation of $194.4^\circ$, which takes $d = 0.270\lambda$.
-Both answers match the 2025 slides.
+With $\vert\Gamma\vert = 0.281$, the reactance at the matching points is
+$x = \pm 0.585$, and $\tan^{-1}(0.585/2) = 16.3^\circ$, so the phase at the
+matching points is $\pm 73.7^\circ$. For the first solution the load's phase
+must rotate from $119.9^\circ$ down to $73.7^\circ$, a rotation of $46.2^\circ$,
+which takes $d = 46.2/720 = 0.064\lambda$. For the second it must rotate down to
+$-73.7^\circ$, a rotation of $193.6^\circ$, which takes $d = 0.269\lambda$.
+Lesson 12 finds the same two points on the Smith chart.
 ::::
 
 ::::{frame} Worked Example: The Components
 :::{present}
 | Solution | Cancel | Component at 1 GHz | $d$ in RG-58 |
 | :-- | :-- | :-- | :-- |
-| 1 | $+j29.0\ \Omega$ | capacitor, $5.49$ pF | $1.30$ cm |
-| 2 | $-j29.0\ \Omega$ | inductor, $4.61$ nH | $5.40$ cm |
+| 1 | $+j29.2\ \Omega$ | capacitor, $5.44$ pF | $1.28$ cm |
+| 2 | $-j29.2\ \Omega$ | inductor, $4.65$ nH | $5.38$ cm |
 :::
 
-The reactance to cancel is $x Z_0 = 0.579 \times 50 = 29.0\ \Omega$. Solution 1
-has $+j29.0\ \Omega$ at its matching point, so it needs a series capacitor with
-reactance $-j29.0\ \Omega$:
+The reactance to cancel is $x Z_0 = 0.585 \times 50 = 29.2\ \Omega$. Solution 1
+has $+j29.2\ \Omega$ at its matching point, so it needs a series capacitor with
+reactance $-j29.2\ \Omega$:
 
-$$\frac{1}{\omega C} = 29.0\ \Omega \quad\Longrightarrow\quad C = \frac{1}{2\pi \times 10^9 \times 29.0} = 5.49\ \text{pF}$$
+$$\frac{1}{\omega C} = 29.2\ \Omega \quad\Longrightarrow\quad C = \frac{1}{2\pi \times 10^9 \times 29.24} = 5.44\ \text{pF}$$
 
-Solution 2 has $-j29.0\ \Omega$, so it needs a series inductor with
-$\omega L = 29.0\ \Omega$, which gives $L = 4.61$ nH. In RG-58 at 1 GHz the
-wavelength is 20 cm, so the two distances are 1.30 cm and 5.40 cm.
+Solution 2 has $-j29.2\ \Omega$, so it needs a series inductor with
+$\omega L = 29.2\ \Omega$, which gives $L = 4.65$ nH. In RG-58 at 1 GHz the
+wavelength is 20 cm, so the two distances are 1.28 cm and 5.38 cm.
 ::::
 
 ::::{frame} Checking the Design
@@ -208,11 +208,11 @@ wavelength is 20 cm, so the two distances are 1.30 cm and 5.40 cm.
 </iframe>
 :::
 
-Select the $33.9 + j17.6\ \Omega$ preset. The green dots, where the input
-resistance equals $Z_0$, fall at $0.065\lambda$ and $0.270\lambda$, and the
-readout lists both. Move the cursor to $0.065\lambda$: the input impedance reads
-$50.0 + j29.0\ \Omega$, so a series capacitor with $-j29.0\ \Omega$ leaves exactly
-$50\ \Omega$. At $0.270\lambda$ it reads $50.0 - j29.0\ \Omega$, which the
+Select the $33.9 + j17.9\ \Omega$ preset. The green dots, where the input
+resistance equals $Z_0$, fall at $0.064\lambda$ and $0.269\lambda$, and the
+readout lists both. Move the cursor to $0.064\lambda$: the input impedance reads
+about $50 + j29.2\ \Omega$, so a series capacitor with $-j29.2\ \Omega$ leaves
+$50\ \Omega$. At $0.269\lambda$ it reads $50.0 - j29.2\ \Omega$, which the
 inductor cancels. Try a load with a larger mismatch and watch the reactance at
 the matching points grow.
 ::::
@@ -260,7 +260,7 @@ circle.
 | Normalized impedance | $z = \frac{Z}{Z_0}$ | $\Gamma = \frac{z - 1}{z + 1}$, $z = \frac{1 + \Gamma}{1 - \Gamma}$ |
 | Reactance at the matching point | From $\vert\Gamma\vert$, two signs | $x = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}$ |
 | Distance to the matching point | Rotation of $\Gamma$ divided by $720^\circ$ per wavelength | $d = \frac{\theta_\Gamma - \theta_d}{720^\circ}\lambda$ |
-| Worked example | $33.9 + j17.6\ \Omega$ at 1 GHz | $0.065\lambda$ and $5.49$ pF, or $0.270\lambda$ and $4.61$ nH |
+| Worked example | $33.9 + j17.9\ \Omega$ at 1 GHz | $0.064\lambda$ and $5.44$ pF, or $0.269\lambda$ and $4.65$ nH |
 ::::
 
 ::::{frame} Practice

@@ -31,8 +31,15 @@ working rules apply here.
 - Spring 2027 meeting periods and calendar dates.
 - Lab packets for the Electrostatics (L26), Magnetostatics (L32), and
   Incidence (L41) labs, and the 2027 Reflection Coefficient packet.
-- Convert the remaining lessons to the 444 format, one at a time, on the
-  pattern of the L3 and L6 pilots (`CLAUDE.md`, "Converting a lesson").
+- **Module 1 is converted** (L1-L16, 2026-10-29). Modules 2-4 remain, on the
+  same pattern (`CLAUDE.md`, "Converting a lesson").
+- **The 2025 lab packet has errors** (L15-L16): it gives $T_L = 1 - \Gamma_L$
+  (should be $1 + \Gamma_L$), misspells "Impedance", repeats "open circuit" in
+  the short-circuit question, and promises two mismatched loads in
+  Measurement 5 but lists one. A corrected 2027 packet is needed. It is also a
+  team lab with one report, where 444's labs are individual: Neil to decide.
+- **The 2025 example load is $33.9 + j17.9\ \Omega$** (L8, L9, L12, L13). The
+  2025 matching deck's $j17.6$ was a typo.
 
 ## Pilot lessons (2026-10-18)
 

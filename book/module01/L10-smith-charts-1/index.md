@@ -145,12 +145,11 @@ The $x = 0$ case is the real axis itself.
 :::{present}
 <img src="../../viz/img/L10-landmarks.svg"
      alt="Smith chart with the short circuit at the left edge, the open circuit at the right edge, the matched load at the center, the load z = 1.5 + j1.2 in the upper half with its dashed circle of constant reflection coefficient magnitude, and the point where that circle crosses the right half of the real axis at r = 2.77"
-     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
+     style="max-width: 380px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-- Center: $z = 1$, matched, $\Gamma = 0$.
-- Left edge: short, $\Gamma = -1$. Right edge: open, $\Gamma = +1$.
-- Upper half inductive, lower half capacitive.
+- Center: matched. Left: short. Right: open.
+- Upper half inductive, lower capacitive.
 - Outer circle: pure reactance, $\vert\Gamma\vert = 1$.
 :::
 
@@ -200,8 +199,8 @@ $$z = \frac{1 + \vert\Gamma\vert}{1 - \vert\Gamma\vert} = \text{VSWR}$$
 
 Every point on a circle centered on the chart has the same $\vert\Gamma\vert$,
 so it has the same VSWR. That circle is the **constant-$\vert\Gamma\vert$
-circle**, often called the VSWR circle, and it is dashed in the landmarks
-figure. Where it crosses the right half of the real axis, $\Gamma$ is real and
+circle**, often called the VSWR circle, and the landmarks figure draws it
+dashed. Where it crosses the right half of the real axis, $\Gamma$ is real and
 positive, equal to $\vert\Gamma\vert$. Substituting that into the inverse
 mapping gives exactly the formula for VSWR. So the VSWR can be read directly:
 it is the resistance value where the load's circle crosses the right half of

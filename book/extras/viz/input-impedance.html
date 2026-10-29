@@ -51,7 +51,7 @@
     <button type="button" data-p="open">Open</button>
     <button type="button" data-p="match">50 Ω</button>
     <button type="button" data-p="r150">150 Ω</button>
-    <button type="button" data-p="cplx">33.9 + j17.6 Ω</button>
+    <button type="button" data-p="cplx">33.9 + j17.9 Ω</button>
   </div>
 
   <canvas id="plot" aria-label="Normalized input resistance and reactance against distance from the load"></canvas>
@@ -142,7 +142,7 @@ function matchPoints(){
 // ---- controls ----
 const rlEl=document.getElementById('rl'), xlEl=document.getElementById('xl'), dEl=document.getElementById('d'), admEl=document.getElementById('adm');
 const btns=[...document.querySelectorAll('.presets button')];
-const PRESETS = { short:[0,0,false], open:[250,0,true], match:[50,0,false], r150:[150,0,false], cplx:[33.9,17.6,false] };
+const PRESETS = { short:[0,0,false], open:[250,0,true], match:[50,0,false], r150:[150,0,false], cplx:[33.9,17.9,false] };
 function markPreset(name){ btns.forEach(b => b.classList.toggle('on', b.dataset.p === name)); }
 btns.forEach(b => b.addEventListener('click', () => {
   const [r,x,o] = PRESETS[b.dataset.p];

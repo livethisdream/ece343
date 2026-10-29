@@ -42,14 +42,14 @@ page.
 
 | Deck | Lessons | Slides | Fill-in handout |
 | :- | :-: | :- | :- |
-| Course Introduction | L1 | <a class="doc-link" href="legacy/ECE343_D01-1_Intro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Why Electromagnetics | L1 | <a class="doc-link" href="legacy/ECE343_D01-2_Motivation_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Review and Fields | L2 | <a class="doc-link" href="legacy/ECE343_D02_Fields_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D02_Fields_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Course Introduction | — | <a class="doc-link" href="legacy/ECE343_D01-1_Intro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Why Electromagnetics | — | <a class="doc-link" href="legacy/ECE343_D01-2_Motivation_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Review and Fields | — | <a class="doc-link" href="legacy/ECE343_D02_Fields_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D02_Fields_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 | Transmission Line Equations | — | <a class="doc-link" href="legacy/ECE343_D03-1_TxLinesIntro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
 | Reflection and Transmission Coefficients | — | <a class="doc-link" href="legacy/ECE343_D03-2_ReflectionCoefficients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Impedance Matching | L7–L9 | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Smith Charts | L10–L13 | <a class="doc-link" href="legacy/ECE343_D03-4_SmithCharts_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Transients | L14 | <a class="doc-link" href="legacy/ECE343_D03-5_Transients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Impedance Matching | — | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Smith Charts | — | <a class="doc-link" href="legacy/ECE343_D03-4_SmithCharts_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Transients | — | <a class="doc-link" href="legacy/ECE343_D03-5_Transients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
 
 ### Module 2: Electrostatics
 

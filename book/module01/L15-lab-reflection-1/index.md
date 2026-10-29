@@ -190,7 +190,7 @@ resistor, and a 470 pF capacitor.
 7. Clip the leads across the $50\ \Omega$ resistor and tap **Load**. Do not
    perform a **Thru**.
 8. Tap **Done**, save the calibration to slot 0 if you wish, and confirm that
-   **Correction** is highlighted.
+   the analyzer highlights **Correction**.
 ::::
 
 ::::{frame} Procedure: Measurements

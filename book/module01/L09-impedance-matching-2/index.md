@@ -31,8 +31,8 @@ coaxial cable. Today we put the component across the line instead, in parallel.
 Parallel elements add as admittances, so we redo the Lesson 8 derivation with
 admittance in place of impedance. Then we replace the component with a shorted
 or open stub, so the whole matching network is made of transmission line. We
-keep the same load as Lesson 8, $33.9 + j17.6\ \Omega$ at 1 GHz, so the two
-designs can be compared directly.
+keep the same load as Lesson 8, $33.9 + j17.9\ \Omega$ at 1 GHz, so we can
+compare the two designs directly.
 :::
 ::::
 
@@ -47,9 +47,9 @@ Lesson 8 moved a distance $d$ from the load to a point where the normalized
 impedance is $z = 1 + jx$, then cancelled $jx$ with a series capacitor or
 inductor. The reactance $x$ came from the magnitude of $\Gamma$, which does not
 change along a lossless line, and the distance came from how far the phase of
-$\Gamma$ has to rotate. For the $33.9 + j17.6\ \Omega$ load, the two answers were
-a $5.49$ pF capacitor at $0.065\lambda$ and a $4.61$ nH inductor at
-$0.270\lambda$.
+$\Gamma$ has to rotate. For the $33.9 + j17.9\ \Omega$ load, the two answers were
+a $5.44$ pF capacitor at $0.064\lambda$ and a $4.65$ nH inductor at
+$0.269\lambda$.
 ::::
 
 ::::{frame} Admittance
@@ -124,40 +124,40 @@ at $720^\circ$ of rotation per wavelength.
 
 ::::{frame} Worked Example: Distance
 :::{present}
-$Z_L = 33.9 + j17.6\ \Omega$, $\Gamma = 0.278\angle 120.6^\circ$:
+$Z_L = 33.9 + j17.9\ \Omega$, $\Gamma = 0.281\angle 119.9^\circ$:
 
 | Solution | $y$ at the point | $\theta_d$ | $2\beta d$ | $d$ |
 | :-- | :-- | :-- | :-- | :-- |
-| 1 | $1 - j0.579$ | $+106.2^\circ$ | $14.4^\circ$ | $0.020\lambda$ |
-| 2 | $1 + j0.579$ | $-106.2^\circ$ | $226.8^\circ$ | $0.315\lambda$ |
+| 1 | $1 - j0.585$ | $+106.3^\circ$ | $13.6^\circ$ | $0.019\lambda$ |
+| 2 | $1 + j0.585$ | $-106.3^\circ$ | $226.2^\circ$ | $0.314\lambda$ |
 :::
 
 The load and its reflection coefficient are the ones from Lesson 8, so
-$\vert b\vert = 0.579$ and $\tan^{-1}(0.579/2) = 16.2^\circ$. For $b = -0.579$
-the matching phase is $+106.2^\circ$, and the load's phase must rotate from
-$120.6^\circ$ down to $106.2^\circ$, which takes only $14.4/720 = 0.020\lambda$.
-For $b = +0.579$ the matching phase is $-106.2^\circ$, a rotation of
-$226.8^\circ$, which takes $0.315\lambda$. In RG-58 at 1 GHz these distances are
-0.40 cm and 6.30 cm.
+$\vert b\vert = 0.585$ and $\tan^{-1}(0.585/2) = 16.3^\circ$. For $b = -0.585$
+the matching phase is $+106.3^\circ$, and the load's phase must rotate from
+$119.9^\circ$ down to $106.3^\circ$, which takes only $13.6/720 = 0.019\lambda$.
+For $b = +0.585$ the matching phase is $-106.3^\circ$, a rotation of
+$226.2^\circ$, which takes $0.314\lambda$. In RG-58 at 1 GHz these distances are
+0.38 cm and 6.28 cm.
 ::::
 
 ::::{frame} Worked Example: Shunt Components
 :::{present}
 | Solution | Cancel | Component at 1 GHz |
 | :-- | :-- | :-- |
-| 1 | $-j11.6$ mS | capacitor, $1.84$ pF |
-| 2 | $+j11.6$ mS | inductor, $13.7$ nH |
+| 1 | $-j11.7$ mS | capacitor, $1.86$ pF |
+| 2 | $+j11.7$ mS | inductor, $13.6$ nH |
 :::
 
-The susceptance to cancel is $b/Z_0 = 0.579/50 = 11.6$ mS. Solution 1 has
-$-j11.6$ mS at its matching point, so it needs a parallel element with
-$+j11.6$ mS. A capacitor has admittance $j\omega C$:
+The susceptance to cancel is $b/Z_0 = 0.585/50 = 11.7$ mS. Solution 1 has
+$-j11.7$ mS at its matching point, so it needs a parallel element with
+$+j11.7$ mS. A capacitor has admittance $j\omega C$:
 
-$$\omega C = 11.6\ \text{mS} \quad\Longrightarrow\quad C = \frac{0.0116}{2\pi \times 10^9} = 1.84\ \text{pF}$$
+$$\omega C = 11.7\ \text{mS} \quad\Longrightarrow\quad C = \frac{0.0117}{2\pi \times 10^9} = 1.86\ \text{pF}$$
 
-Solution 2 has $+j11.6$ mS, so it needs an inductor, whose admittance is
-$\frac{1}{j\omega L} = -\frac{j}{\omega L}$. Setting $\frac{1}{\omega L} = 11.6$
-mS gives $L = 13.7$ nH.
+Solution 2 has $+j11.7$ mS, so it needs an inductor, whose admittance is
+$\frac{1}{j\omega L} = -\frac{j}{\omega L}$. Setting $\frac{1}{\omega L} = 11.7$
+mS gives $L = 13.6$ nH.
 ::::
 
 ::::{frame} Stub Admittance
@@ -181,16 +181,16 @@ half a wavelength.
 :::{present}
 | Solution | Stub must give | Shorted: $\cot\beta\ell_s = -b_s$ | Open: $\tan\beta\ell_s = b_s$ |
 | :-- | :-- | :-- | :-- |
-| 1 | $b_s = +0.579$ | $0.334\lambda$ (6.67 cm) | $0.084\lambda$ (1.67 cm) |
-| 2 | $b_s = -0.579$ | $0.166\lambda$ (3.33 cm) | $0.416\lambda$ (8.33 cm) |
+| 1 | $b_s = +0.585$ | $0.334\lambda$ (6.68 cm) | $0.084\lambda$ (1.68 cm) |
+| 2 | $b_s = -0.585$ | $0.166\lambda$ (3.32 cm) | $0.416\lambda$ (8.32 cm) |
 :::
 
-Solution 1 needs a stub with normalized susceptance $b_s = +0.579$. An open stub
-gives it when $\tan\beta\ell_s = 0.579$, so $\beta\ell_s = 30.1^\circ$ and
-$\ell_s = 30.1/360 = 0.084\lambda$. A shorted stub gives it when
-$\cot\beta\ell_s = -0.579$, which first happens at $\beta\ell_s = 120.1^\circ$.
-Solution 2 needs $b_s = -0.579$: a shorted stub at $59.9^\circ$, or an open
-stub at $149.9^\circ$. A stub's length is a one-way trip, so it is $360^\circ$
+Solution 1 needs a stub with normalized susceptance $b_s = +0.585$. An open stub
+gives it when $\tan\beta\ell_s = 0.585$, so $\beta\ell_s = 30.3^\circ$ and
+$\ell_s = 30.3/360 = 0.084\lambda$. A shorted stub gives it when
+$\cot\beta\ell_s = -0.585$, which first happens at $\beta\ell_s = 120.3^\circ$.
+Solution 2 needs $b_s = -0.585$: a shorted stub at $59.7^\circ$, or an open
+stub at $149.7^\circ$. A stub's length is a one-way trip, so it is $360^\circ$
 per wavelength, not $720^\circ$.
 ::::
 
@@ -207,12 +207,12 @@ per wavelength, not $720^\circ$.
 </iframe>
 :::
 
-Select the $33.9 + j17.6\ \Omega$ preset and turn on Admittance. The green dots
-now mark where the input conductance equals $1/Z_0 = 20$ mS, at $0.020\lambda$
-and $0.315\lambda$. Move the cursor to $0.020\lambda$: the input admittance reads
-$20.0 - j11.6$ mS, which the $1.84$ pF capacitor or the open stub cancels. Then
+Select the $33.9 + j17.9\ \Omega$ preset and turn on Admittance. The green dots
+now mark where the input conductance equals $1/Z_0 = 20$ mS, at $0.019\lambda$
+and $0.314\lambda$. Move the cursor to $0.019\lambda$: the input admittance reads
+$20.0 - j11.7$ mS, which the $1.86$ pF capacitor or the open stub cancels. Then
 select the Short preset, turn Admittance on, and move the cursor to
-$0.334\lambda$ to see the shorted stub for solution 1 supply about $+j11.6$ mS.
+$0.334\lambda$ to see the shorted stub for solution 1 supply $+j11.7$ mS.
 ::::
 
 ::::{frame} Shorted or Open
@@ -222,8 +222,8 @@ $0.334\lambda$ to see the shorted stub for solution 1 supply about $+j11.6$ mS.
 - Shorted stubs are easy to make in coax and also short DC.
 :::
 
-Solution 1 with an open stub is the most compact design here: $0.40$ cm of line
-and a $1.67$ cm stub. Shorter lengths usually hold the match over a wider band,
+Solution 1 with an open stub is the most compact design here: $0.38$ cm of line
+and a $1.68$ cm stub. Shorter lengths usually hold the match over a wider band,
 for the same reason as in Lesson 8. The open end of a stub is not a perfect open
 circuit; it radiates a little and has fringing capacitance, so at high frequency
 a shorted stub is often more predictable. A shorted stub also puts a DC short
@@ -256,7 +256,7 @@ length becomes reading a second point off the chart's edge.
 | Susceptance at the matching point | From $\vert\Gamma\vert$, two signs | $b = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}$ |
 | Phase at the matching point | Angle of $\frac{-jb}{2 + jb}$ | $\theta_d = \mp\left(90^\circ + \tan^{-1}\frac{\vert b\vert}{2}\right)$ |
 | Stub admittance | Shorted and open stubs of length $\ell_s$ | $-j\cot\beta\ell_s$ and $j\tan\beta\ell_s$ |
-| Worked example | $33.9 + j17.6\ \Omega$ at 1 GHz | $0.020\lambda$ with $1.84$ pF or a $0.084\lambda$ open stub |
+| Worked example | $33.9 + j17.9\ \Omega$ at 1 GHz | $0.019\lambda$ with $1.86$ pF or a $0.084\lambda$ open stub |
 ::::
 
 ::::{frame} Practice

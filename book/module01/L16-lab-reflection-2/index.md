@@ -63,8 +63,8 @@ wave that comes back.
 The DUT sits between the analyzer's two ports. Port 1 launches the incident
 wave, and the analyzer measures two ratios at each frequency: the reflected
 wave over the incident wave, $S_{11}$, and the transmitted wave over the
-incident wave, $S_{21}$. Port 2 is a matched receiver, so the transmitted wave
-is absorbed there and does not bounce back into the DUT. $S_{21}$ is the
+incident wave, $S_{21}$. Port 2 is a matched receiver, so it absorbs the
+transmitted wave, and nothing bounces back into the DUT. $S_{21}$ is the
 transmission coefficient for the whole device, the two-port counterpart of the
 $T = 1 + \Gamma$ of Lesson 6.
 ::::
@@ -179,13 +179,13 @@ calibration from Lesson 15 no longer applies.
    short, and load standards in turn, tapping **Open**, **Short**, and **Load**.
 5. Optionally, connect the channel 0 and channel 1 cables with the SMA coupler
    and tap **Thru**.
-6. Tap **Done** and confirm that **Correction** is highlighted.
+6. Tap **Done** and confirm that the analyzer highlights **Correction**.
 ::::
 
 ::::{frame} Procedure: The Black Box
 :class: read-only
 
-The label on the DUT is taped over. Do not remove the tape.
+Tape covers the label on the DUT. Leave the tape in place.
 
 1. Connect the DUT between the channel 0 and channel 1 cables and restart the
    sweep.

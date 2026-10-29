@@ -25,7 +25,7 @@ place they are all together.
 
 ## Lab packets
 
-- <a class="doc-link" href="labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab (PDF)</a>: L15–L16. The Spring 2025 packet; the Spring 2027 version replaces it before the lab.
+- <a class="doc-link" href="labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab (PDF)</a>: L15–L16. A team lab: two or three cadets to a station, one report per team.
 
 The Electrostatics (L26), Magnetostatics (L32), and Incidence (L41) lab packets
 will be posted here and on their lesson pages.

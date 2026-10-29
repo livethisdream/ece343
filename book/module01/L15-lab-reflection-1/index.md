@@ -30,9 +30,10 @@ measures them. A **vector network analyzer** (VNA) sends a wave down a cable,
 measures the wave that comes back, and reports their ratio, $\Gamma$, in
 magnitude and phase across a band of frequencies. Today you calibrate the
 instrument, which removes the effect of the cable and connectors, and then
-measure five loads: an open, a short, a capacitor, a matched $50\ \Omega$
-resistor, and a $1\ \text{k}\Omega$ resistor. You predict each one first, so
-every measurement is a check on the theory or on your setup. Lesson 16 uses
+measure six loads: an open, a short, a capacitor, a matched $50\ \Omega$
+resistor, and two mismatches, a $1\ \text{k}\Omega$ resistor and a complex
+load. You predict each one first, so every measurement is a check on the theory
+or on your setup. You work in a team of two or three at one station. Lesson 16 uses
 the same instrument to identify a device you cannot see.
 :::
 ::::
@@ -157,10 +158,32 @@ Smith chart's outer circle; its reactance would equal $50\ \Omega$ at 6.8 MHz,
 just above the top of the sweep.
 ::::
 
+::::{frame} Pre-Lab: The Complex Load
+:::{present}
+The $50\ \Omega$ resistor and the 470 pF capacitor in series, at 2 MHz:
+
+$$Z_L = 50 - j169\ \Omega$$
+
+$$\Gamma = \frac{-j169}{100 - j169} = 0.861\angle -30.6^\circ = -1.30\ \text{dB}$$
+:::
+
+The second mismatched load puts a resistor and a capacitor in series, so it has
+both a real and an imaginary part. Its impedance at 2 MHz is the resistor plus
+the capacitor's reactance from the previous frame. In the numerator the two
+$50\ \Omega$ terms cancel, which leaves only the reactance. Dividing the
+magnitudes, $169/196.6 = 0.861$, and subtracting the angles,
+$-90^\circ - (-59.4^\circ) = -30.6^\circ$, gives $\Gamma$. The resistance equals
+$Z_0$ at every frequency, so on the Smith chart the trace rides the $r = 1$
+circle, starting near the open at 50 kHz and moving toward the center as the
+reactance shrinks. The packet asks you to work this before the lab and to
+explain the path in the lab.
+::::
+
 ::::{frame} Equipment and Safety
 :class: read-only
 
-Each team uses a NanoVNA with its SMA cables, a black SMA-to-BNC adapter, a
+Each team of two or three cadets works at one station, and keeps it for both
+lab periods. The station has a NanoVNA with its SMA cables, a black SMA-to-BNC adapter, a
 BNC-to-grabber-clip cable, a $50\ \Omega$ resistor, a $1\ \text{k}\Omega$
 resistor, and a 470 pF capacitor.
 
@@ -208,8 +231,11 @@ stylus or with **Markers**, **Select Marker**, and the side buttons.
    on the Smith chart with your predicted points.
 4. **Matched load.** Clip the $50\ \Omega$ resistor across the leads. Record
    $\vert S_{11}\vert$ in dB and the resistance the marker reports.
-5. **Resistive mismatch.** Clip the $1\ \text{k}\Omega$ resistor across the
-   leads. Record the magnitude and phase of $S_{11}$ and the resistance.
+5. **Two mismatches.** Clip the $1\ \text{k}\Omega$ resistor across the
+   leads, and record the magnitude and phase of $S_{11}$ and the resistance.
+   Then clip the $50\ \Omega$ resistor and the capacitor in series across the
+   leads. Record $S_{11}$ and the impedance at 2 MHz, and watch the trace as the
+   marker sweeps the band.
 
 For each load, write at least one observation comparing your measurement with
 your prediction.
@@ -218,14 +244,14 @@ your prediction.
 ::::{frame} Lab Packet
 :class: read-only doc-links
 
-- <a class="doc-link" href="../../labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
+- <a class="doc-link" href="../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
 - <a class="doc-link" href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">Blank Smith chart (PDF)</a>
 
 :::{depth}
-The packet is the turn-in document for both lab periods, and each team submits
-one combined report on Gradescope. It holds the predictions table for the
-capacitor, a blank Smith chart for plotting it, and the questions for each
-measurement. Bring your predictions to the lab already worked.
+The packet is the turn-in document for both lab periods, and each team of two
+or three submits one combined report on Gradescope, with every member's name on
+it. It holds the predictions table for the capacitor, a blank Smith chart for
+plotting it, and the questions for each measurement. Bring your predictions to the lab already worked.
 :::
 ::::
 
@@ -240,5 +266,5 @@ under test is a filter with its label taped over, and you identify what it is,
 where its cutoff falls, and whether it looks capacitive or inductive in each
 part of its band, using only the analyzer.
 
-Before Lesson 16, read Part 6 of the lab packet.
+Before Lesson 16, read Measurement 6 of the lab packet.
 ::::

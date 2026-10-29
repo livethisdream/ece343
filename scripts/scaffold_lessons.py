@@ -156,7 +156,7 @@ DECKS = {
     "D09-4": ("Plane Waves at a Boundary", ["ECE343_D09-4_UPWBoundaries_Slides.pdf", "ECE343_D09-4_UPWBoundaries_Handouts.pdf"]),
 }
 
-LAB_PACKET = "../../labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf"
+LAB_PACKET = "../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf"
 
 # ---- Lesson manifest: the Spring 2025 course as taught (Neil, 2026-10-17) ---
 # (module, num, slug, title, [lo_ids], reading, [deck keys], synopsis, event)
@@ -250,7 +250,7 @@ def legacy_links(decks, num):
             kind = "fill-in handout" if f.endswith("_Handouts.pdf") else "slides"
             lines.append(f'- <a class="doc-link" href="../../legacy/{f}" target="_blank" rel="noopener">{label}, {kind} (PDF)</a>')
     if num in (15, 16):
-        lines.append(f'- <a class="doc-link" href="{LAB_PACKET}" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet, Spring 2025 (PDF)</a>')
+        lines.append(f'- <a class="doc-link" href="{LAB_PACKET}" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>')
     return "\n".join(lines)
 
 

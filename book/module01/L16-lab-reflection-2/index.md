@@ -42,15 +42,38 @@ recalibrate with SMA standards first.
 | :-- | :-- |
 | Open, short, capacitor | $\approx 0$ dB |
 | $1\ \text{k}\Omega$ | $\approx -0.9$ dB |
+| $50\ \Omega$ + 470 pF, 2 MHz | $\approx -1.3$ dB |
 | $50\ \Omega$ | $-30$ dB or lower |
 :::
 
 Last lesson every load was a single impedance on port 1, so the only quantity
-that mattered was $S_{11}$. The open, the short, and the capacitor dissipate
+that mattered was $S_{11}$. The open, the short, and the capacitor dissipated
 nothing and reflected everything; the $1\ \text{k}\Omega$ resistor reflected
-most of the wave; the matched load reflected almost none of it. A filter has
+most of the wave; the series resistor and capacitor reflected less as the
+frequency rose; the matched load reflected almost none of it. A filter has
 two ports, so today the wave that gets through, $S_{21}$, matters as much as the
 wave that comes back.
+::::
+
+::::{frame} The Two Mismatches on the Chart
+:::{present}
+<img src="../../viz/img/L16-lab-loads.svg"
+     alt="A Smith chart. The 1 kilohm resistor is a single navy point on the real axis near the right edge, with a ray from the center. The 50 ohm resistor and 470 pF capacitor in series trace a green arc along the dashed r = 1 circle, from near the open at 50 kHz, through a marked point at 2 MHz with a ray from the center, to 5 MHz in the lower half"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
+:::
+
+Each point on the chart is a value of $\Gamma$, and the ray from the center to it
+has length $\vert\Gamma\vert$ and angle equal to the phase of $\Gamma$. The
+$1\ \text{k}\Omega$ resistor has $z = 20$, a real impedance, so it sits on the
+real axis at $\Gamma = 0.905\angle 0^\circ$, and it stays there at every
+frequency because a resistor's impedance does not change with frequency. The
+complex load, the $50\ \Omega$ resistor in series with the 470 pF capacitor,
+has $r = 1$ at every frequency, so it moves along the $r = 1$ circle. At 50 kHz
+its reactance is $-j6773\ \Omega$ and it sits near the open. As the frequency
+rises the reactance shrinks, and the point moves down the circle toward the
+center: $0.861\angle -30.6^\circ$ at 2 MHz and $0.561\angle -55.9^\circ$ at
+5 MHz. A series inductor with the opposite reactance would carry it the rest of
+the way to the center, the series match of Lesson 12.
 ::::
 
 ::::{frame} A Two-Port Device
@@ -202,12 +225,13 @@ Tape covers the label on the DUT. Leave the tape in place.
 ::::{frame} Lab Packet
 :class: read-only doc-links
 
-- <a class="doc-link" href="../../labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
+- <a class="doc-link" href="../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
 - <a class="doc-link" href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">Blank Smith chart (PDF)</a>
 
 :::{depth}
-Today's questions are Part 6 of the same packet you started in Lesson 15. Each
-team submits one combined report on Gradescope covering both lab periods.
+Today's questions are Measurement 6 of the same packet you started in Lesson 15.
+Each team of two or three submits one combined report on Gradescope covering
+both lab periods.
 :::
 ::::
 

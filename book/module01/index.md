@@ -117,7 +117,7 @@ What electromagnetics is for, the language of fields and phasors, and the transm
   <a class="mt-card mt-lesson" href="L09-impedance-matching-2/index.html">
     <span class="mt-kind">Lesson · L9</span>
     <h4>Impedance Matching II</h4>
-    <p>Impedance matching, continued. Objective 3.4.</p>
+    <p>Matching with a parallel component or a shorted or open stub. Objective 3.4.</p>
   </a>
 </div>
 ::::

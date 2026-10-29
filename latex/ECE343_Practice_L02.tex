@@ -1,0 +1,226 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L2 practice set (Fields, Parameters, and Field Quantities): Euler's identity,
+% phasors, the sinusoidal wave, and the field quantities and material properties.
+
+\fullwidth{\textbf{Learning Objectives 2.1 and 2.2: } I can recall the definition of
+scalar fields, vector fields, phasors, and Euler's identity. I can explain the
+basic terms and quantities used to describe electromagnetic fields.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Euler's identity.}
+\begin{parts}
+
+	\part Starting from $e^{j\theta} = \cos\theta + j\sin\theta$, derive
+	$\cos\theta = \dfrac{e^{j\theta} + e^{-j\theta}}{2}$.
+	\begin{solution}[1.2in]
+	Replace $\theta$ with $-\theta$, using $\cos(-\theta) = \cos\theta$ and
+	$\sin(-\theta) = -\sin\theta$, then add the two:
+	\eq{
+		e^{-j\theta} &= \cos\theta - j\sin\theta \\
+		e^{j\theta} + e^{-j\theta} &= 2\cos\theta
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Write $e^{j\pi/3}$ in rectangular form, and find its magnitude.
+		\begin{solution}[1in]
+		\eq{
+			e^{j\pi/3} &= \cos 60^\circ + j\sin 60^\circ = 0.5 + j0.866 \\
+			\left\vert e^{j\pi/3}\right\vert &= \sqrt{0.5^2 + 0.866^2} = 1
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$e^{j\pi/3}$ = \ansbox[1.3in]{$0.5 + j0.866$}
+
+		\vspace{4pt}
+		magnitude = \ansbox[1.3in]{$1$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Write $2e^{-j\pi/4}$ in rectangular form.
+		\begin{solution}[0.8in]
+		\eq{ 2e^{-j\pi/4} = 2\cos 45^\circ - j2\sin 45^\circ = 1.414 - j1.414 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$2e^{-j\pi/4}$ = \ansbox[1.3in]{$1.414 - j1.414$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Phasors.} Use the cosine reference,
+$v(t) = \text{Re}\left[\widetilde{V}e^{j\omega t}\right]$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the phasor of $v(t) = 10\cosp{2\pi\times60\,t - 45^\circ}\ \text{V}$.
+		\begin{solution}[0.8in]
+		\eq{ \widetilde{V} = 10e^{-j45^\circ} = 10\angle{-45^\circ}\ \text{V} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\widetilde{V}$ = \ansbox[1.3in]{$10\angle{-45^\circ}$ V}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the phasor of $i(t) = 2\sinp{\omega t + 30^\circ}\ \text{A}$.
+		\begin{solution}[1in]
+		Write the sine as a cosine first:
+		\eq{
+			i(t) &= 2\cosp{\omega t + 30^\circ - 90^\circ} = 2\cosp{\omega t - 60^\circ} \\
+			\widetilde{I} &= 2\angle{-60^\circ}\ \text{A}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\widetilde{I}$ = \ansbox[1.3in]{$2\angle{-60^\circ}$ A}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use phasors to write $3\cos\omega t + 4\sin\omega t$ as a single
+		cosine.
+		\begin{solution}[1.2in]
+		\eq{
+			\widetilde{V} &= 3\angle 0^\circ + 4\angle{-90^\circ} = 3 - j4 = 5\angle{-53.1^\circ} \\
+			v(t) &= 5\cosp{\omega t - 53.1^\circ}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$v(t)$ = \ansbox[1.6in]{$5\cosp{\omega t - 53.1^\circ}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the phasor of $dv/dt$ for the voltage in part (a).
+		\begin{solution}[1.1in]
+		Differentiating in time multiplies the phasor by $j\omega$, and $j = 1\angle 90^\circ$:
+		\eq{
+			j\omega\widetilde{V} &= (2\pi\times60)\angle 90^\circ \times 10\angle{-45^\circ} \\
+			&= 3770\angle 45^\circ\ \text{V/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		phasor = \ansbox[1.3in]{$3770\angle 45^\circ$ V/s}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A sinusoidal wave.} A wave on a line is
+$y(x,t) = 0.5\cosp{2\pi\times10^{8}\,t - 2.094\,x}$, with $x$ in meters.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the frequency, wavelength, and phase velocity.
+		\begin{solution}[1.3in]
+		\eq{
+			f &= \dfrac{\omega}{2\pi} = 10^{8}\ \hz = 100\ \mhz \\
+			\lambda &= \dfrac{2\pi}{\beta} = \dfrac{2\pi}{2.094} = 3.00\ \m \\
+			v_p &= f\lambda = 10^{8}\times3.00 = 3.0\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$f$ = \ansbox[1.3in]{$100\ \mhz$}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$3.00\ \m$}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$3.0\times10^{8}$ m/s}
+	\end{minipage}
+
+	\part In which direction does the wave travel? Show it by writing the argument of
+	the cosine as a function of $x - v_p t$ or $x + v_p t$.
+	\begin{solution}[1in]
+	\eq{ \omega t - \beta x = -\beta\lp x - \dfrac{\omega}{\beta}t\rp = -\beta\lp x - v_p t\rp }
+	The argument is a function of $x - v_p t$, so the wave travels in the $+x$
+	direction.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Field quantities and materials.} Use
+$\epsilon_0 = 8.854\times10^{-12}$ F/m, $\mu_0 = 4\pi\times10^{-7}$ H/m, and
+$e = 1.602\times10^{-19}$ C.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part An electric field of $1\ \text{kV/m}$ exists in polyethylene,
+		$\epsilon_r = 2.25$. Find the electric flux density, and the magnitude of the
+		force on an electron in the field.
+		\begin{solution}[1.2in]
+		\eq{
+			D &= \epsilon_r\epsilon_0 E = 2.25\times8.854\times10^{-12}\times10^{3} \\
+			&= 1.99\times10^{-8}\ \text{C/m}^2 \\
+			F &= eE = 1.602\times10^{-19}\times10^{3} = 1.60\times10^{-16}\ \text{N}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$D$ = \ansbox[1.3in]{$1.99\times10^{-8}$ C/m$^2$}
+
+		\vspace{4pt}
+		$F$ = \ansbox[1.3in]{$1.60\times10^{-16}$ N}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A field of $0.01\ \text{V/m}$ drives current in copper,
+		$\sigma = 5.8\times10^{7}$ S/m. Find the current density.
+		\begin{solution}[0.8in]
+		\eq{ J = \sigma E = 5.8\times10^{7}\times0.01 = 5.8\times10^{5}\ \text{A/m}^2 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$J$ = \ansbox[1.3in]{$5.8\times10^{5}$ A/m$^2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A magnetic field intensity of $100\ \text{A/m}$ exists in air. Find the
+		magnetic flux density.
+		\begin{solution}[0.8in]
+		\eq{ B = \mu_0 H = 4\pi\times10^{-7}\times100 = 1.26\times10^{-4}\ \text{T} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$B$ = \ansbox[1.3in]{$1.26\times10^{-4}$ T}
+	\end{minipage}
+
+	\part Show that $c = 1/\sqrt{\mu_0\epsilon_0}$ gives the speed of light, and
+	explain in one sentence what it says about the relationship between the
+	electric and magnetic properties of free space and light.
+	\begin{solution}[1.1in]
+	\eq{ c = \dfrac{1}{\sqrt{4\pi\times10^{-7}\times8.854\times10^{-12}}} = 3.00\times10^{8}\ \text{m/s} }
+	The speed of light is set entirely by the two constants that describe how
+	free space responds to electric and magnetic fields, because light is an
+	electromagnetic wave.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

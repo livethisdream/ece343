@@ -156,7 +156,7 @@ DECKS = {
     "D09-4": ("Plane Waves at a Boundary", ["ECE343_D09-4_UPWBoundaries_Slides.pdf", "ECE343_D09-4_UPWBoundaries_Handouts.pdf"]),
 }
 
-LAB_PACKET = "../../labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf"
+LAB_PACKET = "../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf"
 
 # ---- Lesson manifest: the Spring 2025 course as taught (Neil, 2026-10-17) ---
 # (module, num, slug, title, [lo_ids], reading, [deck keys], synopsis, event)
@@ -164,20 +164,20 @@ LAB_PACKET = "../../labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf"
 # lesson, so everything after L14 is one lower than in 2025. Readings are
 # Ellingson Vol. 1 sections unless they say otherwise.
 LESSONS = [
-    (1, 1, "L01-course-intro", "Course Introduction", ["1.1", "1.2"], "Ch. 1", ["D01-1", "D01-2"], "What you will learn, how you will be assessed, and where electromagnetics shows up in the systems you will operate.", ""),
-    (1, 2, "L02-fields", "Fields, Parameters, and Field Quantities", ["2.1", "2.2"], "Ch. 2", ["D02"], "Scalar and vector fields, phasors and Euler's identity, and the quantities that describe electric and magnetic fields.", ""),
+    (1, 1, "L01-course-intro", "Course Introduction", ["1.1", "1.2"], "Ch. 1", [], "What you will learn, how you will be assessed, and where electromagnetics shows up in the systems you will operate.", ""),
+    (1, 2, "L02-fields", "Fields, Parameters, and Field Quantities", ["2.1", "2.2"], "Ch. 2", [], "Scalar and vector fields, phasors and Euler's identity, and the quantities that describe electric and magnetic fields.", ""),
     (1, 3, "L03-lumped-element-model", "The Lumped-Element Model", ["3.1"], "3.1–3.4", [], "When a pair of wires stops being a short circuit, and how to model a line as a cascade of tiny circuits.", ""),
     (1, 4, "L04-wave-equation", "The Wave Equation", ["3.1"], "3.5–3.6", [], "The telegrapher's equations in phasor form, the wave equation for voltage and current, and its traveling-wave solution.", ""),
     (1, 5, "L05-characteristic-impedance", "Characteristic Impedance and Wave Propagation", ["3.2"], "3.7–3.9", [], "Propagation, phase, and attenuation constants, and the characteristic impedance of a line.", ""),
     (1, 6, "L06-reflection-vswr", "Coaxial Lines, Reflection Coefficient, and VSWR", ["3.2", "3.3"], "3.10, 3.12–3.14", [], "The coaxial line, the reflection coefficient at a load, standing waves, and VSWR.", ""),
-    (1, 7, "L07-terminated-lines", "Terminated Transmission Lines", ["3.3", "3.4"], "3.15, 3.17–3.19", ["D03-3"], "Input impedance of a terminated line, and the special cases: shorted, open, and quarter-wave lines.", ""),
-    (1, 8, "L08-impedance-matching-1", "Impedance Matching I", ["3.4"], "3.21–3.23", ["D03-3"], "Matching a load to a source with a length of transmission line.", ""),
-    (1, 9, "L09-impedance-matching-2", "Impedance Matching II", ["3.4"], "3.21–3.23", ["D03-3"], "Impedance matching, continued.", ""),
-    (1, 10, "L10-smith-charts-1", "Smith Charts I", ["3.5"], "Supplemental", ["D03-4"], "The Smith chart: what it plots and how to read it.", ""),
-    (1, 11, "L11-smith-charts-2", "Smith Charts II", ["3.5", "3.6"], "Supplemental", ["D03-4"], "Working transmission-line problems on the Smith chart.", ""),
-    (1, 12, "L12-smith-charts-3", "Smith Charts III", ["3.6"], "Supplemental", ["D03-4"], "Designing matching networks on the Smith chart.", ""),
-    (1, 13, "L13-smith-charts-4", "Smith Charts IV", ["3.6"], "Supplemental", ["D03-4"], "Matching with series components, parallel components, and stubs.", ""),
-    (1, 14, "L14-transients", "Transients", ["3.7"], "Supplemental", ["D03-5"], "A step launched down a line: bounce diagrams and the transient response at the load.", ""),
+    (1, 7, "L07-terminated-lines", "Terminated Transmission Lines", ["3.3", "3.4"], "3.15, 3.17–3.19", [], "Input impedance of a terminated line, and the special cases: shorted, open, and quarter-wave lines.", ""),
+    (1, 8, "L08-impedance-matching-1", "Impedance Matching I", ["3.4"], "3.21–3.23", [], "Matching a load to a source with a length of transmission line.", ""),
+    (1, 9, "L09-impedance-matching-2", "Impedance Matching II", ["3.4"], "3.21–3.23", [], "Matching with a parallel component or a shorted or open stub.", ""),
+    (1, 10, "L10-smith-charts-1", "Smith Charts I", ["3.5"], "Supplemental", [], "The Smith chart: what it plots and how to read it.", ""),
+    (1, 11, "L11-smith-charts-2", "Smith Charts II", ["3.5", "3.6"], "Supplemental", [], "Working transmission-line problems on the Smith chart.", ""),
+    (1, 12, "L12-smith-charts-3", "Smith Charts III", ["3.6"], "Supplemental", [], "Designing matching networks on the Smith chart.", ""),
+    (1, 13, "L13-smith-charts-4", "Smith Charts IV", ["3.6"], "Supplemental", [], "Matching with series components, parallel components, and stubs.", ""),
+    (1, 14, "L14-transients", "Transients", ["3.7"], "Supplemental", [], "A step launched down a line: bounce diagrams and the transient response at the load.", ""),
     (1, 15, "L15-lab-reflection-1", "Reflection and Transmission Coefficient Lab I", ["3.8"], "Lab packet", [], "Calibrate a vector network analyzer, then measure known loads.", "lab"),
     (1, 16, "L16-lab-reflection-2", "Reflection and Transmission Coefficient Lab II", ["3.8"], "Lab packet", [], "Characterize an unknown device from its measured reflection and transmission.", "lab"),
 
@@ -250,7 +250,7 @@ def legacy_links(decks, num):
             kind = "fill-in handout" if f.endswith("_Handouts.pdf") else "slides"
             lines.append(f'- <a class="doc-link" href="../../legacy/{f}" target="_blank" rel="noopener">{label}, {kind} (PDF)</a>')
     if num in (15, 16):
-        lines.append(f'- <a class="doc-link" href="{LAB_PACKET}" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet, Spring 2025 (PDF)</a>')
+        lines.append(f'- <a class="doc-link" href="{LAB_PACKET}" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>')
     return "\n".join(lines)
 
 

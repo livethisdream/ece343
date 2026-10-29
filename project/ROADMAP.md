@@ -1,6 +1,6 @@
 # ECE 343 roadmap
 
-Last updated 2026-10-19. Read with ECE 444's `project/ROADMAP.md`, whose
+Last updated 2026-10-29. Read with ECE 444's `project/ROADMAP.md`, whose
 working rules apply here.
 
 ## Settled (Neil, 2026-10-17)
@@ -16,6 +16,17 @@ working rules apply here.
   (34 in all), so they still match the slides and the assessments.
 - **Grades and weights are the same as 2025** for now: LO assessments 40%,
   GRs 20%, final exam 25%, engagement 15%.
+- **The L15-L16 lab is a team lab** (Neil, 2026-10-29): two or three cadets
+  to a station, one report per team for both periods, where 444's labs are
+  individual. The 2027 packet keeps the 2025 procedure and fixes its errors:
+  $T_L = 1 + \Gamma_L$, "Impedance", the short-circuit question, and
+  Measurement 5 now measures both mismatched loads it promised, the
+  $1\ \text{k}\Omega$ resistor and a complex load (the bench's $50\ \Omega$
+  resistor and 470 pF capacitor in series, which rides the $r = 1$ circle).
+  The source, with its key, is `Labs/ECE343_Lab_L15_L16_Reflection.tex` in
+  `ece343-faculty`; its `build_lab.sh` publishes only the blank copy here.
+- **L16's worked marker values stand** (Neil, 2026-10-29: "if the values
+  work, it's fine").
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
   `CLAUDE.md`, "Converting a lesson". L3 now derives the telegrapher's
   equations, so L4, retitled "The Wave Equation" (Neil, 2026-10-19), starts
@@ -30,9 +41,11 @@ working rules apply here.
   the course director; Neil has no office this term (Neil, 2026-10-17).
 - Spring 2027 meeting periods and calendar dates.
 - Lab packets for the Electrostatics (L26), Magnetostatics (L32), and
-  Incidence (L41) labs, and the 2027 Reflection Coefficient packet.
-- Convert the remaining lessons to the 444 format, one at a time, on the
-  pattern of the L3 and L6 pilots (`CLAUDE.md`, "Converting a lesson").
+  Incidence (L41) labs.
+- **Module 1 is converted** (L1-L16, 2026-10-29). Modules 2-4 remain, on the
+  same pattern (`CLAUDE.md`, "Converting a lesson").
+- **The 2025 example load is $33.9 + j17.9\ \Omega$** (L8, L9, L12, L13). The
+  2025 matching deck's $j17.6$ was a typo.
 
 ## Pilot lessons (2026-10-18)
 

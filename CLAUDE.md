@@ -25,7 +25,7 @@ it before any work.
 | `book/moduleNN/index.md` | module landing page, generated |
 | `book/extras/legacy/*.pdf` | the Spring 2025 Beamer slides and fill-in handouts, served at `/legacy/` |
 | `book/extras/handouts/*.pdf` | equation sheet and Smith charts |
-| `book/extras/labs/*.pdf` | lab packets, blank copies only |
+| `book/extras/labs/*.pdf` | lab packets, blank copies only; the sources and keys are in `ece343-faculty/Labs/`, whose `build_lab.sh` publishes the blank here |
 | `scripts/scaffold_lessons.py` | the manifest: lessons, objectives, readings, legacy decks |
 
 ## The manifest
@@ -103,8 +103,10 @@ scripts/verify/check_bar.py
 
 ## Public repo
 
-This repo is **public**. LaTeX sources, assessments, keys, grades, and anything
-answer-bearing live in the private `livethisdream/ece343-faculty`, never here.
+This repo is **public**. The Beamer slide sources, assessments, keys, grades,
+and anything answer-bearing live in the private `livethisdream/ece343-faculty`,
+never here. Practice-set sources in `latex/` are the exception: their worked
+solutions are published anyway, as in 444.
 Only built PDFs a cadet should see are committed. `.gitignore` blocks the usual
 names, but check every PDF before adding it.
 

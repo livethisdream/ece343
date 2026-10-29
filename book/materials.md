@@ -25,7 +25,7 @@ place they are all together.
 
 ## Lab packets
 
-- <a class="doc-link" href="labs/ECE343_Lab_ReflectionCoefficients_Spring2025.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab (PDF)</a>: L15–L16. The Spring 2025 packet; the Spring 2027 version replaces it before the lab.
+- <a class="doc-link" href="labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab (PDF)</a>: L15–L16. A team lab: two or three cadets to a station, one report per team.
 
 The Electrostatics (L26), Magnetostatics (L32), and Incidence (L41) lab packets
 will be posted here and on their lesson pages.
@@ -42,14 +42,14 @@ page.
 
 | Deck | Lessons | Slides | Fill-in handout |
 | :- | :-: | :- | :- |
-| Course Introduction | L1 | <a class="doc-link" href="legacy/ECE343_D01-1_Intro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Why Electromagnetics | L1 | <a class="doc-link" href="legacy/ECE343_D01-2_Motivation_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Review and Fields | L2 | <a class="doc-link" href="legacy/ECE343_D02_Fields_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D02_Fields_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Course Introduction | — | <a class="doc-link" href="legacy/ECE343_D01-1_Intro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Why Electromagnetics | — | <a class="doc-link" href="legacy/ECE343_D01-2_Motivation_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Review and Fields | — | <a class="doc-link" href="legacy/ECE343_D02_Fields_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D02_Fields_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 | Transmission Line Equations | — | <a class="doc-link" href="legacy/ECE343_D03-1_TxLinesIntro_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
 | Reflection and Transmission Coefficients | — | <a class="doc-link" href="legacy/ECE343_D03-2_ReflectionCoefficients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Impedance Matching | L7–L9 | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Smith Charts | L10–L13 | <a class="doc-link" href="legacy/ECE343_D03-4_SmithCharts_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Transients | L14 | <a class="doc-link" href="legacy/ECE343_D03-5_Transients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Impedance Matching | — | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D03-3_ImpedanceMatching_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Smith Charts | — | <a class="doc-link" href="legacy/ECE343_D03-4_SmithCharts_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Transients | — | <a class="doc-link" href="legacy/ECE343_D03-5_Transients_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
 
 ### Module 2: Electrostatics
 

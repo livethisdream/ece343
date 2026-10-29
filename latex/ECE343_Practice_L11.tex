@@ -1,0 +1,196 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L11 practice set (Smith Charts II): rotation toward the generator, the WTG
+% scale, the quarter-wave inversion, admittance, and voltage maxima and minima.
+
+\fullwidth{\textbf{Learning Objectives 3.5 and 3.6: } I can identify the various
+quantities represented on the Smith Chart. I can use the Smith Chart to solve
+transmission line problems.
+\\[4pt]\normalfont\small Show your work. Solve each part on a printed Smith
+chart, then check it with the formula. Write a \textbf{Documentation} line at
+the end (\textbf{None} if you did not collaborate). All lines are lossless with
+$\myz{0} = 50\ \ohms$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Input impedance by rotation.} A load $\myz{L} = 25 - j25\ \ohms$
+terminates a line $0.125\lambda$ long.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $z_L$ and $\Gamma_L$ in polar form.
+		\begin{solution}[1.2in]
+		\eq{
+			z_L &= 0.5 - j0.5 \\
+			\Gamma_L &= \dfrac{-0.5 - j0.5}{1.5 - j0.5} = -0.2 - j0.4 = 0.447\angle -116.6^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma_L$ = \ansbox[1.3in]{$0.447\angle -116.6^\circ$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Through what angle, and in which direction, does the point turn to
+		reach the input? Find $\Gamma_{in}$.
+		\begin{solution}[1.2in]
+		\eq{
+			2\beta d &= 2\left(\dfrac{2\pi}{\lambda}\right)(0.125\lambda) = 90^\circ \text{ clockwise} \\
+			\Gamma_{in} &= 0.447\angle\left(-116.6^\circ - 90^\circ\right) = 0.447\angle 153.4^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma_{in}$ = \ansbox[1.3in]{$0.447\angle 153.4^\circ$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\myz{in}$, and check it with
+		$z_{in} = \dfrac{z_L + j\tan\beta d}{1 + jz_L\tan\beta d}$.
+		\begin{solution}[1.5in]
+		\eq{
+			\tan\beta d &= \tan 45^\circ = 1 \\
+			z_{in} &= \dfrac{0.5 + j0.5}{1.5 + j0.5} = \dfrac{(0.5 + j0.5)(1.5 - j0.5)}{2.5} \\
+			&= 0.4 + j0.2 \\
+			\myz{in} &= 20 + j10\ \ohms
+		}
+		A capacitive load looks inductive an eighth of a wavelength away.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{in}$ = \ansbox[1.3in]{$20 + j10\ \ohms$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Admittance and the quarter wave.} A load $\myz{L} = 100 + j50\ \ohms$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $y_L$ by reflecting $\Gamma_L$ through the center, and check it
+		with $1/z_L$.
+		\begin{solution}[1.5in]
+		\eq{
+			z_L &= 2 + j1, \qquad \Gamma_L = \dfrac{1 + j1}{3 + j1} = 0.4 + j0.2 \\
+			y_L &= \dfrac{1 - \Gamma_L}{1 + \Gamma_L} = \dfrac{0.6 - j0.2}{1.4 + j0.2} = 0.4 - j0.2 \\
+			\dfrac{1}{z_L} &= \dfrac{2 - j1}{5} = 0.4 - j0.2
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$y_L$ = \ansbox[1.3in]{$0.4 - j0.2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The load sits at the end of a quarter-wavelength line. Find $\myz{in}$.
+		\begin{solution}[0.9in]
+		\eq{ z_{in} = \dfrac{1}{z_L} = 0.4 - j0.2, \qquad \myz{in} = 20 - j10\ \ohms }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\myz{in}$ = \ansbox[1.3in]{$20 - j10\ \ohms$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The wavelength scale.} A load has $\Gamma_L = 0.6\angle 60^\circ$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the load's reading on the wavelengths-toward-generator scale.
+		\begin{solution}[0.8in]
+		\eq{ \dfrac{180^\circ - 60^\circ}{720^\circ}\lambda = 0.1667\lambda }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		WTG = \ansbox[1.3in]{$0.1667\lambda$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A point on the line reads $0.3\lambda$ on the same scale. How far is
+		it from the load, and what is the angle of $\Gamma$ there?
+		\begin{solution}[1in]
+		\eq{
+			d &= 0.3\lambda - 0.1667\lambda = 0.1333\lambda \\
+			\theta &= 60^\circ - 720^\circ(0.1333) = -36^\circ
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d$ = \ansbox[1.3in]{$0.1333\lambda$}
+
+		\vspace{4pt}
+		$\theta$ = \ansbox[1.3in]{$-36^\circ$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Voltage maxima and minima.} The load of Question 2,
+$z_L = 2 + j1$, has $\Gamma_L = 0.447\angle 26.6^\circ$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance from the load to the first voltage maximum, and
+		$z$ there.
+		\begin{solution}[1.2in]
+		The first maximum is where the point first reaches the right real axis,
+		after a clockwise turn of $26.6^\circ$.
+		\eq{
+			d_{\max} &= \dfrac{26.6^\circ}{720^\circ}\lambda = 0.0369\lambda \\
+			z &= \text{VSWR} = \dfrac{1.447}{0.553} = 2.62
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d_{\max}$ = \ansbox[1.3in]{$0.0369\lambda$}
+
+		\vspace{4pt}
+		$z$ = \ansbox[1.3in]{$2.62$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance to the first voltage minimum, and $z$ there.
+		\begin{solution}[1in]
+		\eq{
+			d_{\min} &= 0.0369\lambda + 0.25\lambda = 0.2869\lambda \\
+			z &= \dfrac{1}{\text{VSWR}} = 0.382
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$d_{\min}$ = \ansbox[1.3in]{$0.2869\lambda$}
+
+		\vspace{4pt}
+		$z$ = \ansbox[1.3in]{$0.382$}
+	\end{minipage}
+
+	\part A measurement finds a voltage minimum. Explain in one or two sentences
+	why the impedance there is always real and less than one.
+	\begin{solution}[0.9in]
+	At a minimum, $\Gamma(d)$ points along the negative real axis, so
+	$z = (1 - \vert\Gamma\vert)/(1 + \vert\Gamma\vert)$, which is real and less
+	than one for any $\vert\Gamma\vert > 0$.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

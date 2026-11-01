@@ -1,0 +1,229 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L20 practice set (Gauss's Law, Integral Form): flux and enclosed charge, a
+% uniformly charged ball, a coaxial line, and two parallel sheets.
+
+\fullwidth{\textbf{Learning Objective 5.2: } I can apply the integral and
+differential forms of Gauss' Law to calculate the electric field due to charge
+density in various geometries, including rectangular, cylindrical, and
+spherical coordinate systems.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Flux and enclosed charge.} A point charge $Q = 6\ \text{nC}$ sits
+at the center of a closed cubical surface of side $2\ \m$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the net electric flux out of the cube.
+		\begin{solution}[0.7in]
+		By Gauss's law the net flux equals the enclosed charge:
+		\eq{ \oint_S \mathbf{D}\mycdot d\mathbf{s} = Q_\text{encl} = 6\ \text{nC} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Psi$ = \ansbox[1.3in]{$6\ \text{nC}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the flux through one face of the cube. Justify your answer
+		from symmetry.
+		\begin{solution}[0.9in]
+		The charge sits at the center, so the six faces are identical as seen from
+		the charge, and each carries the same flux:
+		\eq{ \Psi_\text{face} = \dfrac{6\ \text{nC}}{6} = 1\ \text{nC} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Psi_\text{face}$ = \ansbox[1.3in]{$1\ \text{nC}$}
+	\end{minipage}
+
+	\part A second charge, $-4\ \text{nC}$, is placed $3\ \m$ from the center,
+	outside the cube. What is the net flux out of the cube now? Does the flux
+	density $\mathbf{D}$ on the cube's surface change? Explain both answers.
+	\begin{solution}[1.1in]
+	The net flux is still $6\ \text{nC}$: the new charge is outside, and every
+	cone of flux from it enters the cube and leaves again. The flux density on
+	the surface does change, since $\mathbf{D}$ is the sum of both charges'
+	fields; the extra flux entering on one side exactly balances the extra
+	flux leaving on the other.
+	\end{solution}
+
+	\part Explain why Gauss's law, true for this cube, does not let us find
+	$\mathbf{D}$ at a point on the cube's surface.
+	\begin{solution}[0.9in]
+	On the cube, $\mathbf{D}$ is neither normal to the faces everywhere nor
+	constant in magnitude: it is strongest at the center of each face and
+	tilted near the edges. We cannot pull $D$ out of the integral, so the law
+	gives only the total flux.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A uniformly charged ball.} A ball of radius $a = 5\ \text{cm}$ in
+free space carries a uniform charge density $\rho_v = 2\ \mu\text{C/m}^3$.
+\begin{parts}
+
+	\part Use symmetry to state the direction of $\mathbf{D}$ and the
+	coordinates it depends on. Then derive $\mathbf{E}$ inside the ball,
+	$r < a$, from Gauss's law.
+	\begin{solution}[2.4in]
+	The ball looks the same from every direction, so $\mathbf{D} = \rhat D_r(r)$.
+	On a sphere of radius $r < a$:
+	\eq{
+		\oint_S \mathbf{D}\mycdot d\mathbf{s} &= D_r r^2 \int_0^{2\pi}\!\!\int_0^\pi \sin\theta\, d\theta\, d\phi = 4\pi r^2 D_r \\
+		Q_\text{encl} &= \int_0^{2\pi}\!\!\int_0^\pi\!\!\int_0^r \rho_v\, r_1^2 \sin\theta\, dr_1\, d\theta\, d\phi = \dfrac{4}{3}\pi r^3 \rho_v \\
+		4\pi r^2 D_r &= \dfrac{4}{3}\pi r^3 \rho_v
+		\quad\Longrightarrow\quad \mathbf{E} = \rhat\, \dfrac{\rho_v r}{3\epsilon_0}
+	}
+	\end{solution}
+
+	\part Derive $\mathbf{E}$ outside the ball, $r > a$, and show that it is
+	the field of a point charge equal to the ball's total charge.
+	\begin{solution}[1.3in]
+	The sphere now encloses the whole ball:
+	\eq{
+		4\pi r^2 D_r &= \dfrac{4}{3}\pi a^3 \rho_v = Q
+		\quad\Longrightarrow\quad \mathbf{E} = \rhat\, \dfrac{\rho_v a^3}{3\epsilon_0 r^2} = \rhat\, \dfrac{Q}{4\pi\epsilon_0 r^2}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $E$ at $r = 2.5\ \text{cm}$, $5\ \text{cm}$, and $10\ \text{cm}$.
+		\begin{solution}[1.2in]
+		\eq{
+			E(a) &= \dfrac{2\ee{-6}\times0.05}{3\times8.854\ee{-12}} = 3.76\ \text{kV/m} \\
+			E(2.5\ \text{cm}) &= \tfrac{1}{2}E(a) = 1.88\ \text{kV/m} \\
+			E(10\ \text{cm}) &= \lp\tfrac{5}{10}\rp^{2} E(a) = 0.941\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E(2.5\text{ cm})$ = \ansbox[1.1in]{$1.88$ kV/m}
+
+		\vspace{4pt}
+		$E(5\text{ cm})$ = \ansbox[1.1in]{$3.76$ kV/m}
+
+		\vspace{4pt}
+		$E(10\text{ cm})$ = \ansbox[1.1in]{$0.941$ kV/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A coaxial line.} A coaxial line has an inner conductor of radius
+$a = 1\ \text{mm}$, a shield of radius $b = 3.5\ \text{mm}$, and a PTFE dielectric
+with $\epsilon_r = 2.1$. The inner conductor carries $\rho_l = 2\ \text{nC/m}$ and
+the shield carries $-\rho_l$.
+\begin{parts}
+
+	\part Derive $\mathbf{E}$ in each of the three regions $\rho < a$,
+	$a < \rho < b$, and $\rho > b$.
+	\begin{solution}[2.2in]
+	By symmetry $\mathbf{D} = \rhohat D_\rho(\rho)$. On a closed cylinder of
+	radius $\rho$ and length $L$, the top and bottom contribute nothing, so
+	\eq{ \oint_S \mathbf{D}\mycdot d\mathbf{s} = \int_0^L\!\!\int_0^{2\pi} D_\rho\, \rho\, d\phi\, dz = 2\pi\rho L D_\rho = Q_\text{encl} }
+	For $\rho < a$, the charge sits on the conductor's surface: $Q_\text{encl} = 0$,
+	so $\mathbf{E} = 0$. For $a < \rho < b$, $Q_\text{encl} = \rho_l L$:
+	\eq{ \mathbf{E} = \rhohat\, \dfrac{\rho_l}{2\pi\epsilon_r\epsilon_0\rho} }
+	For $\rho > b$, $Q_\text{encl} = \rho_l L - \rho_l L = 0$, so $\mathbf{E} = 0$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $E$ at $\rho = a$ and at $\rho = b$.
+		\begin{solution}[1in]
+		\eq{
+			E(a) &= \dfrac{2\ee{-9}}{2\pi\times2.1\times8.854\ee{-12}\times10^{-3}} = 17.1\ \text{kV/m} \\
+			E(b) &= E(a)\,\dfrac{a}{b} = \dfrac{17.1}{3.5} = 4.89\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E(a)$ = \ansbox[1.3in]{$17.1$ kV/m}
+
+		\vspace{4pt}
+		$E(b)$ = \ansbox[1.3in]{$4.89$ kV/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part For safety the field anywhere in the dielectric must stay below
+		$20\ \text{MV/m}$. Find the largest $\rho_l$ the line can carry, and say
+		where the limit is reached first.
+		\begin{solution}[1.1in]
+		The field is largest at $\rho = a$:
+		\eq{
+			\rho_{l,\text{max}} &= 2\pi\epsilon_r\epsilon_0 a E_\text{max} \\
+			&= 2\pi\times2.1\times8.854\ee{-12}\times10^{-3}\times2\ee{7} \\
+			&= 2.34\ \mu\text{C/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\rho_{l,\text{max}}$ = \ansbox[1.3in]{$2.34\ \mu$C/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Two parallel sheets.} In free space, an infinite sheet with
+$\rho_s = +1\ \mu\text{C/m}^2$ lies in the plane $z = 0$, and a second with
+$-\rho_s$ lies in the plane $z = d$.
+\begin{parts}
+
+	\part Derive the field of a single infinite sheet from Gauss's law, using a
+	pillbox.
+	\begin{solution}[1.6in]
+	By symmetry $\mathbf{D}$ points away from a positive sheet on both sides
+	with the same magnitude, $\mathbf{D} = \pm\zhat D_z$. A pillbox with faces
+	of area $A$ on each side gets $D_z A$ from each face and nothing from its
+	sides:
+	\eq{ 2 D_z A = \rho_s A \quad\Longrightarrow\quad \mathbf{E} = \pm\zhat\,\dfrac{\rho_s}{2\epsilon_0} }
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use superposition to find $\mathbf{E}$ between the sheets and
+		outside them.
+		\begin{solution}[1.3in]
+		Between the sheets, the positive sheet's field points in $+\zhat$
+		(away from it) and the negative sheet's also points in $+\zhat$ (toward
+		it), so they add. Outside, they point in opposite directions and cancel:
+		\eq{
+			\mathbf{E} &= \zhat\,\dfrac{\rho_s}{\epsilon_0} = \zhat\,\dfrac{10^{-6}}{8.854\ee{-12}} \\
+			&= \zhat\,113\ \text{kV/m}, \qquad 0 < z < d
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		between = \ansbox[1.3in]{$\zhat\,113$ kV/m}
+
+		\vspace{4pt}
+		outside = \ansbox[1.3in]{$0$}
+	\end{minipage}
+
+	\part This pair of sheets is the model for a parallel-plate capacitor.
+	Explain why the field between them does not depend on $d$.
+	\begin{solution}[0.9in]
+	The field of an infinite sheet is the same at every distance from it, so
+	moving the sheets apart changes neither sheet's field, and their sum in
+	the gap stays $\rho_s/\epsilon_0$.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

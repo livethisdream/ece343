@@ -1,0 +1,144 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L21 practice set (Gauss's Law, Differential Form): the divergence from a
+% small box, charge density in Cartesian, cylindrical, and spherical
+% coordinates, and the two forms checked against each other.
+
+\fullwidth{\textbf{Learning Objective 5.2: } I can apply the integral and
+differential forms of Gauss' Law to calculate the electric field due to charge
+density in various geometries, including rectangular, cylindrical, and
+spherical coordinate systems.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The point form in Cartesian coordinates.}
+\begin{parts}
+
+	\part A small box has edges $\Delta x$, $\Delta y$, and $\Delta z$. Find the
+	net flux of $\mathbf{D}$ out through its two faces normal to $x$, and show
+	that dividing by the volume and letting the box shrink gives
+	$\partial D_x/\partial x$.
+	\begin{solution}[1.6in]
+	The outward normal is $+\xhat$ on the face at $x + \Delta x$ and $-\xhat$
+	on the face at $x$, each of area $\Delta y\,\Delta z$:
+	\eq{
+		\Psi_x &= \lb D_x(x+\Delta x) - D_x(x) \rb \Delta y\, \Delta z \\
+		\dfrac{\Psi_x}{\Delta x\,\Delta y\,\Delta z} &= \dfrac{D_x(x+\Delta x) - D_x(x)}{\Delta x}
+		\;\xrightarrow{\;\Delta x \to 0\;}\; \dfrac{\partial D_x}{\partial x}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The flux density in a region is
+		$\mathbf{D} = \xhat\,2xy + \yhat\,x^{2} + \zhat\,3z^{2}\ \text{nC/m}^2$,
+		with $x$, $y$, $z$ in meters. Find $\rho_v$ at $(1, 2, 3)$.
+		\begin{solution}[1in]
+		\eq{
+			\rho_v = \nabla\mycdot\mathbf{D} &= \dfrac{\partial}{\partial x}(2xy) + \dfrac{\partial}{\partial y}(x^{2}) + \dfrac{\partial}{\partial z}(3z^{2}) \\
+			&= 2y + 0 + 6z = 4 + 18 = 22\ \text{nC/m}^3
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\rho_v$ = \ansbox[1.3in]{$22\ \text{nC/m}^3$}
+	\end{minipage}
+
+	\part $D_y = x^{2}$ is not zero. Explain why it adds nothing to the
+	divergence.
+	\begin{solution}[0.8in]
+	$D_y$ does not change with $y$, so the flux it carries into a small box
+	through one $y$ face leaves through the other. Only a component that
+	changes along its own direction produces net flux.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Cylindrical coordinates.} In the region $\rho \le 2\ \m$, the flux
+density is $\mathbf{D} = \rhohat\,\rho^{3}/4\ \text{nC/m}^2$, with $\rho$ in meters.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\rho_v$.
+		\begin{solution}[1in]
+		Only the radial term of the cylindrical divergence survives:
+		\eq{ \rho_v = \dfrac{1}{\rho}\dfrac{\partial}{\partial\rho}\lp\rho\cdot\dfrac{\rho^{3}}{4}\rp = \dfrac{1}{\rho}\cdot\rho^{3} = \rho^{2}\ \text{nC/m}^3 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\rho_v$ = \ansbox[1.3in]{$\rho^{2}\ \text{nC/m}^3$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the charge per meter of length inside $\rho = 2\ \m$ by
+		integrating $\rho_v$.
+		\begin{solution}[1in]
+		\eq{ \dfrac{Q}{L} = \int_0^{2\pi}\!\!\int_0^{2} \rho^{2}\,\rho\, d\rho\, d\phi = 2\pi\cdot\dfrac{2^{4}}{4} = 8\pi = 25.1\ \text{nC/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$Q/L$ = \ansbox[1.3in]{$8\pi = 25.1$ nC/m}
+	\end{minipage}
+
+	\part Check your answer with the integral form of Gauss's law on a
+	cylinder of radius $2\ \m$ and length $L$.
+	\begin{solution}[1in]
+	At $\rho = 2$, $D_\rho = 2^{3}/4 = 2\ \text{nC/m}^2$, and only the side of the
+	cylinder carries flux:
+	\eq{ \dfrac{1}{L}\oint_S \mathbf{D}\mycdot d\mathbf{s} = D_\rho\cdot 2\pi\rho = 2\times 2\pi\times 2 = 8\pi\ \text{nC/m} }
+	The two forms agree.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Spherical coordinates.}
+\begin{parts}
+
+	\part Show that the flux density of a point charge,
+	$\mathbf{D} = \rhat\,Q/(4\pi r^{2})$, has zero divergence for $r > 0$. Then
+	explain how Gauss's law still gives a flux of $Q$ through a sphere around
+	the charge.
+	\begin{solution}[1.4in]
+	\eq{ \nabla\mycdot\mathbf{D} = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp r^{2}\cdot\dfrac{Q}{4\pi r^{2}}\rp = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp\dfrac{Q}{4\pi}\rp = 0 }
+	There is no charge anywhere except at the origin, where the formula fails.
+	All of the charge sits at that one point, and any sphere around it encloses
+	it, so the flux through the sphere is $Q$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A charge distribution produces $\mathbf{D} = \rhat\,k/r$ for
+		$r > 0$, where $k$ is a constant. Find $\rho_v$.
+		\begin{solution}[1in]
+		\eq{ \rho_v = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp r^{2}\cdot\dfrac{k}{r}\rp = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp kr\rp = \dfrac{k}{r^{2}} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\rho_v$ = \ansbox[1.3in]{$k/r^{2}$}
+	\end{minipage}
+
+	\part Find the charge inside a sphere of radius $R$ two ways: by
+	integrating $\rho_v$, and from the flux of $\mathbf{D}$ through the sphere.
+	\begin{solution}[1.5in]
+	\eq{
+		Q &= \int_0^{2\pi}\!\!\int_0^{\pi}\!\!\int_0^{R} \dfrac{k}{r^{2}}\, r^{2}\sin\theta\, dr\, d\theta\, d\phi = k R\cdot 2\cdot 2\pi = 4\pi k R \\
+		Q &= \oint_S \mathbf{D}\mycdot d\mathbf{s} = \dfrac{k}{R}\cdot 4\pi R^{2} = 4\pi k R
+	}
+	The two counts agree, as the divergence theorem requires.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

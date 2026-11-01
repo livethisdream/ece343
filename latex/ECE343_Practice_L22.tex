@@ -1,0 +1,222 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L22 practice set (Electric Potential): the potential of point charges and
+% work, the field from a potential, the potential of a ring, and a field that
+% is not conservative.
+
+\fullwidth{\textbf{Learning Objective 5.3: } I can calculate the electric field
+from the scalar electric potential in a variety of geometries.
+\\[4pt]\normalfont\small Show your work. Take $\epsilon = \epsilon_0 =
+8.854\times10^{-12}$ F/m unless told otherwise. Write a \textbf{Documentation}
+line at the end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Two point charges.} In free space, $Q_1 = 4\ \text{nC}$ sits at
+the origin and $Q_2 = -2\ \text{nC}$ sits at $(3, 0, 0)$ m.
+\begin{parts}
+
+	\part Starting from $V_B - V_A = -\int_A^B \mathbf{E}\cdot d\mathbf{l}$ and the
+	field of a point charge, derive $V(r) = Q/(4\pi\epsilon r)$ with the reference
+	$V = 0$ at infinity.
+	\begin{solution}[1.6in]
+	Only the radial part of $d\mathbf{l}$ is parallel to $\mathbf{E} = \rhat\, Q/(4\pi\epsilon r^2)$,
+	so $\mathbf{E}\cdot d\mathbf{l} = Q\,dr/(4\pi\epsilon r^2)$. With $A$ at infinity:
+	\eq{
+		V(r) - 0 &= -\int_\infty^{r} \dfrac{Q}{4\pi\epsilon r_1^2}\,dr_1
+		= -\dfrac{Q}{4\pi\epsilon}\left[-\dfrac{1}{r_1}\right]_\infty^{r}
+		= \dfrac{Q}{4\pi\epsilon r}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the potential at $P = (0, 4, 0)$ m.
+		\begin{solution}[1.1in]
+		$R_1 = 4\ \m$ and $R_2 = \sqrt{3^2 + 4^2} = 5\ \m$:
+		\eq{
+			V_P &= 8.988\times10^{9}\left(\dfrac{4\times10^{-9}}{4} - \dfrac{2\times10^{-9}}{5}\right) \\
+			&= 8.988\,(1 - 0.4) = 5.39\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_P$ = \ansbox[1.3in]{$5.39$ V}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the potential at $S = (3, 4, 0)$ m, and the work to carry a
+		$1\ \text{nC}$ charge from $P$ to $S$.
+		\begin{solution}[1.2in]
+		$R_1 = 5\ \m$ and $R_2 = 4\ \m$:
+		\eq{
+			V_S &= 8.988\left(\dfrac{4}{5} - \dfrac{2}{4}\right) = 2.70\ \text{V} \\
+			W &= q\left(V_S - V_P\right) = 10^{-9}\left(2.70 - 5.39\right) = -2.70\ \text{nJ}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_S$ = \ansbox[1.3in]{$2.70$ V}
+
+		\vspace{4pt}
+		$W$ = \ansbox[1.3in]{$-2.70$ nJ}
+	\end{minipage}
+
+	\part A classmate says the work in part (c) depends on whether the charge is
+	carried along a straight line or around a wide arc. Explain why it does not.
+	\begin{solution}[1in]
+	The static field is conservative: the work from $P$ to $S$ equals
+	$q(V_S - V_P)$, which depends only on the endpoints. Around any closed path
+	$\oint \mathbf{E}\cdot d\mathbf{l} = 0$, so two paths between the same points
+	cost the same work.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The field from a potential.}
+\begin{parts}
+
+	\part Starting from $dV = -\mathbf{E}\cdot d\mathbf{l}$ and the definition of the
+	gradient, $dV = \nabla V\cdot d\mathbf{l}$, show that $\mathbf{E} = -\nabla V$.
+	\begin{solution}[0.9in]
+	Both expressions give the same $dV$ for every step $d\mathbf{l}$, so
+	$\left(\mathbf{E} + \nabla V\right)\cdot d\mathbf{l} = 0$ for every direction of
+	$d\mathbf{l}$. A vector with zero component in every direction is zero, so
+	$\mathbf{E} = -\nabla V$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part In rectangular coordinates, $V = 20xy^2 - 5z$ V, with lengths in
+		meters. Find $\mathbf{E}$, and its value and magnitude at $(1, 1, 1)$ m.
+		\begin{solution}[1.3in]
+		\eq{
+			\mathbf{E} &= -\left(\xhat\,\partd{V}{x} + \yhat\,\partd{V}{y} + \zhat\,\partd{V}{z}\right) \\
+			&= -\xhat\,20y^2 - \yhat\,40xy + \zhat\,5 \\
+			\mathbf{E}(1,1,1) &= -\xhat\,20 - \yhat\,40 + \zhat\,5\ \text{V/m} \\
+			\vert\mathbf{E}\vert &= \sqrt{400 + 1600 + 25} = 45.0\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vert\mathbf{E}\vert$ = \ansbox[1.3in]{$45.0$ V/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part In cylindrical coordinates, $V = 10\cos\phi/\rho$ V. Find $\mathbf{E}$,
+		using $\nabla V = \rhohat\,\partial V/\partial\rho + \phihat\,(1/\rho)\,\partial V/\partial\phi
+		+ \zhat\,\partial V/\partial z$, and evaluate it at $\rho = 2\ \m$, $\phi = 0$.
+		\begin{solution}[1.2in]
+		\eq{
+			\mathbf{E} &= -\rhohat\left(-\dfrac{10\cos\phi}{\rho^2}\right) - \phihat\,\dfrac{1}{\rho}\left(-\dfrac{10\sin\phi}{\rho}\right) \\
+			&= \rhohat\,\dfrac{10\cos\phi}{\rho^2} + \phihat\,\dfrac{10\sin\phi}{\rho^2} \\
+			\mathbf{E}(2, 0) &= \rhohat\,2.5\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{E}$ = \ansbox[1.3in]{$\rhohat\,2.5$ V/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A ring of charge.} A thin ring of radius $a$ in the plane
+$z = 0$, centered on the $z$ axis, carries a uniform line charge $\rho_\ell$ in free
+space.
+\begin{parts}
+
+	\part Derive the potential at a point $(0, 0, z)$ on the axis.
+	\begin{solution}[1.3in]
+	Every element $dQ = \rho_\ell\,a\,d\phi$ of the ring is the same distance
+	$R = \sqrt{a^2 + z^2}$ from the point, so $R$ comes out of the integral:
+	\eq{
+		V(z) = \int_0^{2\pi} \dfrac{\rho_\ell\,a\,d\phi}{4\pi\epsilon\sqrt{a^2 + z^2}}
+		= \dfrac{2\pi a\,\rho_\ell}{4\pi\epsilon\sqrt{a^2 + z^2}}
+		= \dfrac{\rho_\ell\,a}{2\epsilon\sqrt{a^2 + z^2}}
+	}
+	\end{solution}
+
+	\part Find $\mathbf{E}$ on the axis from $-\nabla V$.
+	\begin{solution}[1.2in]
+	By symmetry the field on the axis has only a $z$ component:
+	\eq{
+		\mathbf{E} = -\zhat\,\dfrac{dV}{dz} = -\zhat\,\dfrac{\rho_\ell a}{2\epsilon}\left(-\dfrac{1}{2}\right)\dfrac{2z}{\left(a^2 + z^2\right)^{3/2}}
+		= \zhat\,\dfrac{\rho_\ell\,a\,z}{2\epsilon\left(a^2 + z^2\right)^{3/2}}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part For $a = 5\ \text{cm}$ and $\rho_\ell = 10\ \text{nC/m}$, find $V$ and
+		$\vert\mathbf{E}\vert$ at $z = 5\ \text{cm}$.
+		\begin{solution}[1.2in]
+		\eq{
+			V &= \dfrac{10^{-8}\times0.05}{2\times8.854\times10^{-12}\times0.0707} = 399\ \text{V} \\
+			\vert\mathbf{E}\vert &= \dfrac{10^{-8}\times0.05\times0.05}{2\times8.854\times10^{-12}\times\left(0.005\right)^{3/2}} = 3.99\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V$ = \ansbox[1.3in]{$399$ V}
+
+		\vspace{4pt}
+		$\vert\mathbf{E}\vert$ = \ansbox[1.3in]{$3.99$ kV/m}
+	\end{minipage}
+
+	\part Show that for $z \gg a$ the potential becomes that of a point charge
+	equal to the ring's total charge. Then explain why the result of part (a) is
+	not enough to find the field at a point off the axis.
+	\begin{solution}[1.2in]
+	For $z \gg a$, $\sqrt{a^2 + z^2} \approx z$, so
+	$V \approx \rho_\ell a/(2\epsilon z) = (2\pi a\rho_\ell)/(4\pi\epsilon z) = Q/(4\pi\epsilon z)$.
+	The gradient needs how $V$ changes in every direction. Part (a) gives $V$ only
+	along the axis, so it says nothing about $\partial V/\partial\rho$ off the
+	axis. On the axis, symmetry makes that component zero.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A field that is not electrostatic.} A field is given as
+$\mathbf{E} = \yhat\,x$ V/m, with $x$ in meters.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\oint \mathbf{E}\cdot d\mathbf{l}$ counterclockwise around the
+		square with corners $(0,0)$, $(1,0)$, $(1,1)$, and $(0,1)$ m in the plane
+		$z = 0$.
+		\begin{solution}[1.4in]
+		$\mathbf{E}$ has only a $y$ component, so the two sides along $x$ contribute
+		nothing. Up the side at $x = 1$: $\int_0^1 1\,dy = 1$. Down the side at
+		$x = 0$: $\mathbf{E} = 0$ there, so it contributes nothing.
+		\eq{ \oint \mathbf{E}\cdot d\mathbf{l} = 1\ \text{V} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\oint$ = \ansbox[1.3in]{$1$ V}
+	\end{minipage}
+
+	\part Find $\nabla\times\mathbf{E}$, and state whether this field could be
+	produced by static charges. Could it be written as $-\nabla V$?
+	\begin{solution}[1.1in]
+	\eq{ \nabla\times\mathbf{E} = \zhat\left(\partd{E_y}{x} - \partd{E_x}{y}\right) = \zhat\,1\ \text{V/m}^2 }
+	The curl is not zero and the loop integral is not zero, so the field is not
+	conservative. Static charges cannot produce it, and no potential $V$ has it as
+	$-\nabla V$, because the curl of any gradient is zero.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

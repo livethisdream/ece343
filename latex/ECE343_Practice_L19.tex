@@ -1,0 +1,164 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L19 practice set (Surface and Volume Charge): a ring and a half ring, a sheet
+% with a hole in it, and a thick spherical shell, each by direct integration.
+
+\fullwidth{\textbf{Learning Objective 5.1: } I can apply Coulomb's Law to use direct
+integration to calculate the electric field due to charge density in various
+geometries, including rectangular, cylindrical, and spherical coordinate systems.
+\\[4pt]\normalfont\small Show your work. Take $\epsilon = \epsilon_0 = 8.854\ee{-12}$
+F/m. Write a \textbf{Documentation} line at the end (\textbf{None} if you did not
+collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A ring of charge.} A ring of radius $a$ in the $xy$ plane, centered
+on the origin, carries a uniform line charge $\rho_\ell$. From the lesson, its field at
+height $h$ on the axis is
+$\vec{E} = \hat{\mathbf{z}}\,\rho_\ell a h/2\epsilon\lp a^2 + h^2\rp^{3/2}$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $a = 10$ cm and $\rho_\ell = 5$ nC/m, find the field at
+		$h = 10$ cm.
+		\begin{solution}[1.2in]
+		\eq{
+			E_z &= \dfrac{(5\ee{-9})(0.1)(0.1)}{2(8.854\ee{-12})(0.02)^{3/2}} \\
+			&= \dfrac{5\ee{-11}}{5.009\ee{-14}} = 998\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E_z$ = \ansbox[1.3in]{$998$ V/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The field is zero at the center of the ring and falls to zero far
+		away. Find the height at which it is largest.
+		\begin{solution}[1.4in]
+		\eq{
+			\dfrac{d}{dh}\left[\dfrac{h}{\lp a^2 + h^2\rp^{3/2}}\right]
+			&= \dfrac{\lp a^2 + h^2\rp - 3h^2}{\lp a^2 + h^2\rp^{5/2}} = 0 \\
+			h &= \dfrac{a}{\sqrt{2}} = 7.07\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$h$ = \ansbox[1.3in]{$a/\sqrt{2}$}
+	\end{minipage}
+
+	\part Now only the half of the ring with $0 \le \phi^{\prime} \le \pi$ is charged.
+	Derive the field at height $h$ on the axis.
+	\begin{solution}[2in]
+	$dQ = \rho_\ell\,a\,d\phi^{\prime}$ and $\vec{R} = -a\hat{\boldsymbol{\rho}}^{\prime} + h\hat{\mathbf{z}}$, as for the full
+	ring. With $\hat{\boldsymbol{\rho}}^{\prime} = \hat{\mathbf{x}}\cos\phi^{\prime} + \hat{\mathbf{y}}\sin\phi^{\prime}$,
+	\eq{
+		\int_0^{\pi}\hat{\boldsymbol{\rho}}^{\prime}\,d\phi^{\prime} &= \hat{\mathbf{x}}\Big[\sin\phi^{\prime}\Big]_0^{\pi} + \hat{\mathbf{y}}\Big[-\cos\phi^{\prime}\Big]_0^{\pi} = 2\hat{\mathbf{y}} \\
+		\vec{E} &= \dfrac{\rho_\ell\,a}{4\pi\epsilon\lp a^2 + h^2\rp^{3/2}}\lp -2a\hat{\mathbf{y}} + \pi h\hat{\mathbf{z}} \rp
+	}
+	The $x$ components still cancel in pairs across the $y$ axis; the field leans
+	toward $-\hat{\mathbf{y}}$, away from the charged half.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A sheet with a hole.} An annulus in the $xy$ plane, with inner
+radius $b$ and outer radius $a$, carries a uniform surface charge $\rho_s$.
+\begin{parts}
+
+	\part Derive the field at height $h > 0$ on the axis.
+	\begin{solution}[2.2in]
+	$dQ = \rho_s\,\rho^{\prime}\,d\rho^{\prime}\,d\phi^{\prime}$ and
+	$\vec{R} = -\rho^{\prime}\hat{\boldsymbol{\rho}}^{\prime} + h\hat{\mathbf{z}}$. The radial terms integrate to zero over
+	$\phi^{\prime}$, as for the disk, and with $u = \rho^{\prime 2} + h^2$:
+	\eq{
+		E_z = \dfrac{\rho_s h}{4\pi\epsilon}\int_0^{2\pi}d\phi^{\prime}\int_b^a\dfrac{\rho^{\prime}\,d\rho^{\prime}}{\lp\rho^{\prime 2} + h^2\rp^{3/2}}
+		= \dfrac{\rho_s h}{2\epsilon}\left[-\dfrac{1}{\sqrt{\rho^{\prime 2} + h^2}}\right]_b^a
+		= \dfrac{\rho_s h}{2\epsilon}\lp\dfrac{1}{\sqrt{b^2 + h^2}} - \dfrac{1}{\sqrt{a^2 + h^2}}\rp
+	}
+	\end{solution}
+
+	\part Show that $b \to 0$ recovers the disk, and find the field of an infinite
+	sheet with a hole of radius $b$.
+	\begin{solution}[1.2in]
+	With $b = 0$ the first term is $1/h$, and $E_z = (\rho_s/2\epsilon)\lp 1 - h/\sqrt{a^2 + h^2}\rp$,
+	the disk. With $a \to \infty$ the second term vanishes:
+	\eq{ E_z = \dfrac{\rho_s}{2\epsilon}\,\dfrac{h}{\sqrt{b^2 + h^2}} }
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $\rho_s = 1\ \mu$C/m$^2$ and $b = 20$ cm, find the field of the
+		infinite sheet with a hole at $h = 20$ cm, and compare it with a sheet
+		without one.
+		\begin{solution}[1.3in]
+		\eq{
+			\dfrac{\rho_s}{2\epsilon} &= \dfrac{1\ee{-6}}{2(8.854\ee{-12})} = 56.5\ \text{kV/m} \\
+			E_z &= 56.5\times\dfrac{0.2}{\sqrt{0.08}} = 39.9\ \text{kV/m}
+		}
+		The hole removes 29\% of the field at this height.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E_z$ = \ansbox[1.3in]{$39.9$ kV/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A thick spherical shell.} Charge fills the region $b < r < a$ with
+uniform density $\rho_v$; the region $r < b$ is empty.
+\begin{parts}
+
+	\part Using the lesson's result for a thin shell, derive the field in all
+	three regions.
+	\begin{solution}[2.4in]
+	A thin shell of radius $r^{\prime}$ holds $dQ = \rho_v\,4\pi r^{\prime 2}\,dr^{\prime}$, acts as a
+	point charge at the center for $r > r^{\prime}$, and contributes nothing for
+	$r < r^{\prime}$. So only the charge between $b$ and $\min(r, a)$ counts:
+	\eq{
+		r < b: \quad E_r &= 0 \\
+		b < r < a: \quad E_r &= \dfrac{1}{4\pi\epsilon r^2}\int_b^r \rho_v\,4\pi r^{\prime 2}\,dr^{\prime} = \dfrac{\rho_v\lp r^3 - b^3\rp}{3\epsilon r^2} \\
+		r > a: \quad E_r &= \dfrac{1}{4\pi\epsilon r^2}\int_b^a \rho_v\,4\pi r^{\prime 2}\,dr^{\prime} = \dfrac{\rho_v\lp a^3 - b^3\rp}{3\epsilon r^2}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $\rho_v = 1\ \mu$C/m$^3$, $b = 1$ cm, and $a = 2$ cm, find the
+		field at $r = 1.5$ cm and at $r = 4$ cm.
+		\begin{solution}[1.4in]
+		\eq{
+			E_r(1.5\ \text{cm}) &= \dfrac{(1\ee{-6})(2.375\ee{-6})}{3(8.854\ee{-12})(0.015)^2} = 397\ \text{V/m} \\
+			E_r(4\ \text{cm}) &= \dfrac{(1\ee{-6})(7\ee{-6})}{3(8.854\ee{-12})(0.04)^2} = 165\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		at 1.5 cm = \ansbox[1.1in]{$397$ V/m}
+
+		\vspace{4pt}
+		at 4 cm = \ansbox[1.1in]{$165$ V/m}
+	\end{minipage}
+
+	\part Check part (a): what does it give when $b \to 0$, and when $b \to a$ with
+	the total charge held fixed?
+	\begin{solution}[1.2in]
+	With $b = 0$ it is the solid sphere: $\rho_v r/3\epsilon$ inside and
+	$\rho_v a^3/3\epsilon r^2$ outside. As $b \to a$ the charge becomes a thin shell:
+	the middle region vanishes, the field is zero inside, and outside it is
+	$Q/4\pi\epsilon r^2$ with $Q = \tfrac{4}{3}\pi\rho_v\lp a^3 - b^3\rp$.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

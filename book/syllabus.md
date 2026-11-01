@@ -94,7 +94,7 @@ each assessment is scored **Mastered** or **Not Yet Mastered**.
 | :-: | :- |
 | 4.1 | I can recognize and apply common vector calculus operations, such as: gradient, divergence, curl, and Laplacian in the three major coordinate systems. |
 | 4.2 | I can calculate surface and volume integrals in rectangular, cylindrical, and spherical coordinate systems. |
-| 4.3 | I can differentiate between Stoke's Theorem and the Divergence Theorem and apply them to various problems to simplify integrals. |
+| 4.3 | I can differentiate between Stokes' Theorem and the Divergence Theorem and apply them to various problems to simplify integrals. |
 
 **Chapter 5: Electrostatics**
 

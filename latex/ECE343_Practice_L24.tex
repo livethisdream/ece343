@@ -1,0 +1,184 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L24 practice set (Electric Boundary Conditions): the pillbox derivation, the
+% field across a dielectric boundary, a boundary with surface charge, and the
+% field at a conductor.
+
+\fullwidth{\textbf{Learning Objective 5.4: } I can apply the electric field
+boundary conditions to calculate electric fields on both sides of a material
+boundary.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). In every problem, $\hat{\mathbf{n}}$
+points from region 2 into region 1.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Deriving the conditions.} Two dielectrics meet at a flat
+boundary that carries a surface charge density $\rho_s$.
+\begin{parts}
+
+	\part Apply Gauss's law to a pillbox with faces of area $\Delta A$, one in
+	each region, and height $h \to 0$. Derive $D_{n1} - D_{n2} = \rho_s$.
+	\begin{solution}[2in]
+	\eq{
+		\oint \mathbf{D}\mycdot d\mathbf{s} &= \int_\text{top} \mathbf{D}_1\mycdot\hat{\mathbf{n}}\,ds
+		+ \int_\text{bottom} \mathbf{D}_2\mycdot\lp-\hat{\mathbf{n}}\rp ds + \int_\text{side} \mathbf{D}\mycdot d\mathbf{s} \\
+		&= D_{n1}\,\Delta A - D_{n2}\,\Delta A + 0 = Q_\text{enc} = \rho_s\,\Delta A \\
+		D_{n1} - D_{n2} &= \rho_s
+	}
+	The side has area proportional to $h$, so its flux vanishes as $h \to 0$, and so
+	does the contribution $\rho_v\,\Delta A\,h$ of any volume charge. $\Delta A$ is small
+	enough that $\mathbf{D}$ and $\rho_s$ are uniform over it.
+	\end{solution}
+
+	\part With $\rho_s = 0$, let $\theta_1$ and $\theta_2$ be the angles between the
+	field and the normal on each side. Show that
+	$\tan\theta_1/\tan\theta_2 = \epsilon_1/\epsilon_2$.
+	\begin{solution}[1.5in]
+	\eq{
+		\dfrac{\tan\theta_1}{\tan\theta_2} = \dfrac{E_{t1}/E_{n1}}{E_{t2}/E_{n2}}
+		= \dfrac{E_{t1}}{E_{t2}}\mycdot\dfrac{E_{n2}}{E_{n1}}
+	}
+	The tangential condition makes $E_{t1}/E_{t2} = 1$. With $\rho_s = 0$ the normal
+	condition is $\epsilon_1 E_{n1} = \epsilon_2 E_{n2}$, so $E_{n2}/E_{n1} = \epsilon_1/\epsilon_2$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Across a dielectric boundary.} The plane $z = 0$ separates
+region 1, $z > 0$, with $\epsilon_{r1} = 2$, from region 2, $z < 0$, with
+$\epsilon_{r2} = 5$. The boundary carries no free charge. Just above it,
+$\mathbf{E}_1 = \hat{\mathbf{x}} 2 - \hat{\mathbf{y}} 3 + \hat{\mathbf{z}} 5$ V/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{E}_2$ just below the boundary.
+		\begin{solution}[1.3in]
+		The normal is $\hat{\mathbf{z}}$. Tangential: $E_{2x} = 2$, $E_{2y} = -3$. Normal:
+		\eq{ \epsilon_{r1}E_{1z} = \epsilon_{r2}E_{2z} \implies E_{2z} = \dfrac{2\times5}{5} = 2 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{E}_2$ = \ansbox[1.6in]{$\hat{\mathbf{x}} 2 - \hat{\mathbf{y}} 3 + \hat{\mathbf{z}} 2$ V/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{D}_2$.
+		\begin{solution}[0.9in]
+		\eq{ \mathbf{D}_2 = 5\epsilon_0\mathbf{E}_2 = \hat{\mathbf{x}} 88.5 - \hat{\mathbf{y}} 133 + \hat{\mathbf{z}} 88.5\ \text{pC/m}^2 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{D}_2$ = \ansbox[1.6in]{$\epsilon_0\lp\hat{\mathbf{x}} 10 - \hat{\mathbf{y}} 15 + \hat{\mathbf{z}} 10\rp$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the angle each field makes with the normal, and check your
+		answers against part (b) of Question 1.
+		\begin{solution}[1.4in]
+		\eq{
+			|E_t| &= \sqrt{2^2 + 3^2} = 3.61\ \text{V/m} \\
+			\theta_1 &= \tan^{-1}\dfrac{3.61}{5} = 35.8\mydeg \\
+			\theta_2 &= \tan^{-1}\dfrac{3.61}{2} = 61.0\mydeg \\
+			\dfrac{\tan\theta_1}{\tan\theta_2} &= \dfrac{0.721}{1.80} = 0.400 = \dfrac{2}{5}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_1$ = \ansbox[1.3in]{$35.8\mydeg$}
+
+		\vspace{4pt}
+		$\theta_2$ = \ansbox[1.3in]{$61.0\mydeg$}
+	\end{minipage}
+
+	\part In which region is $|\mathbf{E}|$ larger, and why?
+	\begin{solution}[0.8in]
+	Region 1: $|\mathbf{E}_1| = \sqrt{38} = 6.16$ V/m and $|\mathbf{E}_2| = \sqrt{17} = 4.12$ V/m.
+	The tangential parts are equal, and the normal part is smaller in region 2,
+	which has the larger permittivity.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A charged boundary.} The plane $z = 0$ separates air, region 1
+at $z > 0$, from a dielectric with $\epsilon_r = 4$, region 2 at $z < 0$. The
+boundary carries $\rho_s = 88.5\ \text{nC/m}^2$. Just above it,
+$\mathbf{E}_1 = \hat{\mathbf{x}} 10 + \hat{\mathbf{z}} 30$ kV/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{E}_2$.
+		\begin{solution}[1.6in]
+		Tangential: $E_{2x} = 10$ kV/m. Normal, with $\hat{\mathbf{n}} = \hat{\mathbf{z}}$:
+		\eq{
+			D_{2z} &= D_{1z} - \rho_s = \epsilon_0\lp 3\times10^{4}\rp - 8.85\times10^{-8} \\
+			&= 2.66\times10^{-7} - 0.885\times10^{-7} = 1.77\times10^{-7}\ \text{C/m}^2 \\
+			E_{2z} &= \dfrac{D_{2z}}{4\epsilon_0} = \dfrac{1.77\times10^{-7}}{3.54\times10^{-11}} = 5\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{E}_2$ = \ansbox[1.6in]{$\hat{\mathbf{x}} 10 + \hat{\mathbf{z}} 5$ kV/m}
+	\end{minipage}
+
+	\part Without the surface charge, what would $E_{2z}$ be? Explain the
+	difference in one sentence.
+	\begin{solution}[0.9in]
+	\eq{ E_{2z} = \dfrac{\epsilon_0 \times 30}{4\epsilon_0} = 7.5\ \text{kV/m} }
+	The positive surface charge supplies some of the normal flux above the boundary,
+	so less of it has to arrive from below.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{At a conductor.} A conductor fills $z < 0$. Above it is a
+dielectric with $\epsilon_r = 2.5$, and the field just above the surface is
+$\mathbf{E} = \hat{\mathbf{z}} 40$ kV/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the surface charge density on the conductor.
+		\begin{solution}[0.9in]
+		\eq{
+			\rho_s &= D_n = \epsilon_r\epsilon_0 E = 2.5\times8.854\times10^{-12}\times4\times10^{4} \\
+			&= 0.885\ \mu\text{C/m}^2
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\rho_s$ = \ansbox[1.3in]{$0.885\ \mu$C/m$^2$}
+	\end{minipage}
+
+	\part A classmate reports a field of $\hat{\mathbf{x}} 5 + \hat{\mathbf{z}} 40$ kV/m just above
+	the same surface. Explain why the measurement cannot be right.
+	\begin{solution}[1in]
+	The field inside the conductor is zero, so the tangential condition requires
+	the tangential field just outside to be zero too. A $5$ kV/m $x$ component would
+	drive charge along the surface, and the charge would move until it vanished.
+	\end{solution}
+
+	\part What is the volume charge density inside the conductor? Justify your
+	answer with Gauss's law.
+	\begin{solution}[0.9in]
+	Zero. Inside, $\mathbf{D} = 0$, so $\rho_v = \nabla\mycdot\mathbf{D} = 0$; the conductor's
+	charge sits entirely on its surface.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

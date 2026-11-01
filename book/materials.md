@@ -56,7 +56,7 @@ page.
 | Deck | Lessons | Slides | Fill-in handout |
 | :- | :-: | :- | :- |
 | Vector Analysis | — | — | <a class="doc-link" href="legacy/ECE343_D04_VectorAnalysis_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Coulomb's Law | L18–L19 | <a class="doc-link" href="legacy/ECE343_D05-1_Coulomb_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D05-1_Coulomb_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Coulomb's Law | — | <a class="doc-link" href="legacy/ECE343_D05-1_Coulomb_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D05-1_Coulomb_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 | Gauss' Law | — | <a class="doc-link" href="legacy/ECE343_D05-2_Gauss_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D05-2_Gauss_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 | Electric Field from Potential | — | <a class="doc-link" href="legacy/ECE343_D05-3_EfromV_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D05-3_EfromV_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 | Electric Boundary Conditions | — | <a class="doc-link" href="legacy/ECE343_D05-4_EBoundaries_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D05-4_EBoundaries_Handouts.pdf" target="_blank" rel="noopener">handout</a> |

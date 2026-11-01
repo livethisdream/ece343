@@ -182,8 +182,8 @@ LESSONS = [
     (1, 16, "L16-lab-reflection-2", "Reflection and Transmission Coefficient Lab II", ["3.8"], "Lab packet", [], "Characterize an unknown device from its measured reflection and transmission.", "lab"),
 
     (2, 17, "L17-vector-analysis", "Vector and Coordinate System Review", ["4.1", "4.2", "4.3"], "Ch. 4", [], "Gradient, divergence, curl, and the Laplacian in three coordinate systems; surface and volume integrals; Stokes' and the divergence theorem.", "GR 1 due"),
-    (2, 18, "L18-coulombs-law", "Coulomb's Law", ["5.1"], "5.1–5.3", ["D05-1"], "The electric field of point charges, by superposition.", ""),
-    (2, 19, "L19-charge-distributions", "Surface and Volume Charge", ["5.1"], "5.4", ["D05-1"], "The field of a charge distribution, by direct integration.", ""),
+    (2, 18, "L18-coulombs-law", "Coulomb's Law", ["5.1"], "5.1–5.3", [], "The electric field of point charges, by superposition.", ""),
+    (2, 19, "L19-charge-distributions", "Surface and Volume Charge", ["5.1"], "5.4", [], "The field of a charge distribution, by direct integration.", ""),
     (2, 20, "L20-gauss-integral", "Gauss' Law (Integral Form)", ["5.2"], "5.5–5.6", [], "Using symmetry and a Gaussian surface to find the field without integrating Coulomb's law.", ""),
     (2, 21, "L21-gauss-differential", "Gauss' Law (Differential Form)", ["5.2"], "5.7–5.8", [], "The point form of Gauss' law, and charge density from a known field.", ""),
     (2, 22, "L22-electric-potential", "Electric Potential", ["5.3"], "5.9–5.10, 5.15", [], "Work, potential, and the electric field as the gradient of the potential.", ""),

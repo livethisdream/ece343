@@ -28,7 +28,7 @@ The vector calculus the rest of the course runs on, then the electric field of c
 <ol class="lo-list" style="--module: '4'">
   <li>I can recognize and apply common vector calculus operations, such as: gradient, divergence, curl, and Laplacian in the three major coordinate systems.</li>
   <li>I can calculate surface and volume integrals in rectangular, cylindrical, and spherical coordinate systems.</li>
-  <li>I can differentiate between Stoke's Theorem and the Divergence Theorem and apply them to various problems to simplify integrals.</li>
+  <li>I can differentiate between Stokes' Theorem and the Divergence Theorem and apply them to various problems to simplify integrals.</li>
 </ol>
 ::::
 

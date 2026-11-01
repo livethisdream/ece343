@@ -1,0 +1,241 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L23 practice set (Boundary Value Problems): Poisson's and Laplace's
+% equations, parallel plates with and without charge, the coax and its best
+% inner radius, concentric spheres, and solving by averaging.
+
+\fullwidth{\textbf{Learning Objective 5.3: } I can calculate the electric field
+from the scalar electric potential in a variety of geometries.
+\\[4pt]\normalfont\small Show your work. Take $\epsilon = \epsilon_0 =
+8.854\times10^{-12}$ F/m unless told otherwise. Write a \textbf{Documentation}
+line at the end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Poisson's and Laplace's equations.}
+\begin{parts}
+
+	\part Starting from $\nabla\cdot\mathbf{D} = \rho_v$, derive Poisson's equation
+	for a homogeneous material.
+	\begin{solution}[1.2in]
+	\eq{
+		\nabla\cdot\left(\epsilon\mathbf{E}\right) = \rho_v
+		\ \Rightarrow\ \epsilon\,\nabla\cdot\left(-\nabla V\right) = \rho_v
+		\ \Rightarrow\ \nabla^2 V = -\dfrac{\rho_v}{\epsilon}
+	}
+	$\epsilon$ leaves the divergence because it is the same everywhere.
+	\end{solution}
+
+	\part Which of these potentials can exist in a charge-free region? For any
+	that cannot, find $\rho_v$ in free space.
+	\begin{subparts}
+		\subpart $V_1 = 3x^2 - 3y^2 + 2z$
+		\subpart $V_2 = x^2 + y^2 + z^2$
+		\subpart $V_3 = \ln\rho$ (cylindrical, $\rho > 0$)
+		\subpart $V_4 = 1/r$ (spherical, $r > 0$)
+	\end{subparts}
+	\begin{solution}[1.6in]
+	(1) $6 - 6 + 0 = 0$: yes.
+	(2) $2 + 2 + 2 = 6$: no; $\rho_v = -6\epsilon_0 = -5.31\times10^{-11}\ \text{C/m}^3$.
+	(3) $\frac{1}{\rho}\frac{d}{d\rho}\left(\rho\cdot\frac{1}{\rho}\right) = 0$: yes.
+	(4) $\frac{1}{r^2}\frac{d}{dr}\left(r^2\cdot\left(-\frac{1}{r^2}\right)\right) = 0$: yes.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Parallel plates.} Two large plates sit at $z = 0$ and $z = d$
+in air.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The lower plate is grounded and the upper plate is at $12$ V, with
+		$d = 2\ \text{mm}$. Solve Laplace's equation for $V(z)$, and find $V$ at
+		$z = 0.5\ \text{mm}$ and $\mathbf{E}$.
+		\begin{solution}[1.3in]
+		$d^2V/dz^2 = 0$ gives $V = Az + B$; $V(0) = 0$ gives $B = 0$, and $V(d) = 12$
+		gives $A = 12/d$.
+		\eq{
+			V(z) &= 12\,\dfrac{z}{d}, \qquad V(0.5\ \text{mm}) = 3\ \text{V} \\
+			\mathbf{E} &= -\zhat\,\dfrac{12}{2\times10^{-3}} = -\zhat\,6\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V$ = \ansbox[1.3in]{$3$ V}
+
+		\vspace{4pt}
+		$\mathbf{E}$ = \ansbox[1.3in]{$-\zhat\,6$ kV/m}
+	\end{minipage}
+
+	\part Now both plates are grounded and the space between them holds a uniform
+	charge density $\rho_v$. Solve Poisson's equation for $V(z)$ and find $\mathbf{E}$.
+	\begin{solution}[1.6in]
+	\eq{
+		\dfrac{d^2V}{dz^2} &= -\dfrac{\rho_v}{\epsilon} \ \Rightarrow\ V = -\dfrac{\rho_v z^2}{2\epsilon} + Az + B \\
+		V(0) = 0:\ B = 0, &\qquad V(d) = 0:\ A = \dfrac{\rho_v d}{2\epsilon} \\
+		V(z) = \dfrac{\rho_v}{2\epsilon}\,z\,(d - z), &\qquad
+		\mathbf{E} = -\zhat\,\dfrac{dV}{dz} = -\zhat\,\dfrac{\rho_v}{2\epsilon}\,(d - 2z)
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part For $\rho_v = 1\ \mu\text{C/m}^3$ and $d = 1\ \text{cm}$, find the
+		largest potential between the plates and the field at the lower plate.
+		\begin{solution}[1.1in]
+		\eq{
+			V\!\left(\tfrac{d}{2}\right) &= \dfrac{\rho_v d^2}{8\epsilon_0} = \dfrac{10^{-6}\times10^{-4}}{8\times8.854\times10^{-12}} = 1.41\ \text{V} \\
+			\mathbf{E}(0) &= -\zhat\,\dfrac{\rho_v d}{2\epsilon_0} = -\zhat\,565\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V_\text{max}$ = \ansbox[1.3in]{$1.41$ V}
+
+		\vspace{4pt}
+		$\mathbf{E}(0)$ = \ansbox[1.3in]{$-\zhat\,565$ V/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The coaxial line.} An air-filled coax has inner radius $a$ and
+outer radius $b$.
+\begin{parts}
+
+	\part The inner conductor is grounded and the outer conductor is at $V_0$.
+	Solve Laplace's equation for $V(\rho)$ and find $\mathbf{E}$.
+	\begin{solution}[1.5in]
+	$\frac{1}{\rho}\frac{d}{d\rho}\left(\rho\frac{dV}{d\rho}\right) = 0$ gives
+	$V = A\ln\rho + B$. $V(a) = 0$ gives $V = A\ln(\rho/a)$, and $V(b) = V_0$ gives
+	$A = V_0/\ln(b/a)$:
+	\eq{
+		V(\rho) = V_0\,\dfrac{\ln(\rho/a)}{\ln(b/a)}, \qquad
+		\mathbf{E} = -\rhohat\,\dfrac{dV}{d\rho} = -\rhohat\,\dfrac{V_0}{\rho\ln(b/a)}
+	}
+	The field points inward, from the outer conductor at high potential.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part For $a = 1\ \text{mm}$, $b = 4\ \text{mm}$, and $V_0 = 100$ V, find
+		$V$ at $\rho = 2\ \text{mm}$ and $\vert\mathbf{E}\vert$ at $\rho = a$.
+		\begin{solution}[1.1in]
+		\eq{
+			V &= 100\,\dfrac{\ln 2}{\ln 4} = 50\ \text{V} \\
+			\vert\mathbf{E}(a)\vert &= \dfrac{100}{10^{-3}\times1.386} = 72.1\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V$ = \ansbox[1.3in]{$50$ V}
+
+		\vspace{4pt}
+		$\vert\mathbf{E}(a)\vert$ = \ansbox[1.3in]{$72.1$ kV/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part An air coax with $b = 5\ \text{mm}$ must hold $1$ kV between its
+		conductors. Find the inner radius $a$ that makes the largest field,
+		$V_0/(a\ln(b/a))$, as small as possible, and that field. Air breaks down
+		near $3$ MV/m; is the design safe?
+		\begin{solution}[1.7in]
+		Minimize $V_0/f(a)$ by maximizing $f(a) = a\ln(b/a)$:
+		\eq{
+			\dfrac{df}{da} &= \ln\dfrac{b}{a} - 1 = 0 \ \Rightarrow\ a = \dfrac{b}{e} = 1.84\ \text{mm} \\
+			\vert\mathbf{E}\vert_\text{max} &= \dfrac{V_0}{(b/e)\times1} = \dfrac{e\,V_0}{b} = \dfrac{2.718\times1000}{0.005} = 544\ \text{kV/m}
+		}
+		That is well below $3$ MV/m, so the design is safe.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$a$ = \ansbox[1.3in]{$1.84$ mm}
+
+		\vspace{4pt}
+		$\vert\mathbf{E}\vert_\text{max}$ = \ansbox[1.3in]{$544$ kV/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Concentric spheres.} A metal sphere of radius $a = 1\ \text{cm}$
+at $V_0 = 50$ V sits at the center of a grounded spherical shell of radius
+$b = 2\ \text{cm}$, with air between them.
+\begin{parts}
+
+	\part Using $\nabla^2 V = \frac{1}{r^2}\frac{d}{dr}\left(r^2\frac{dV}{dr}\right)$
+	for a potential that depends on $r$ alone, solve Laplace's equation for $V(r)$
+	and find $\mathbf{E}$.
+	\begin{solution}[1.7in]
+	$r^2\,dV/dr = A$, so $dV/dr = A/r^2$ and $V = -A/r + B$.
+	$V(b) = 0$ gives $B = A/b$, so $V = -A\left(1/r - 1/b\right)$. $V(a) = V_0$ fixes $A$:
+	\eq{
+		V(r) = V_0\,\dfrac{1/r - 1/b}{1/a - 1/b}, \qquad
+		\mathbf{E} = -\rhat\,\dfrac{dV}{dr} = \rhat\,\dfrac{V_0}{r^2\left(1/a - 1/b\right)}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $V$ at $r = 1.5\ \text{cm}$ and $\vert\mathbf{E}\vert$ at the surface
+		of the inner sphere.
+		\begin{solution}[1.1in]
+		$1/a - 1/b = 100 - 50 = 50\ \text{m}^{-1}$:
+		\eq{
+			V &= 50\,\dfrac{66.7 - 50}{50} = 16.7\ \text{V} \\
+			\vert\mathbf{E}(a)\vert &= \dfrac{50}{10^{-4}\times50} = 10\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$V$ = \ansbox[1.3in]{$16.7$ V}
+
+		\vspace{4pt}
+		$\vert\mathbf{E}(a)\vert$ = \ansbox[1.3in]{$10$ kV/m}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Solving by averaging.} A long square trough is divided by a grid
+into four interior points, two upper ($T$) and two lower ($B$). The top wall is
+at $100$ V and the other three walls are grounded. Each interior point is the
+average of its four neighbors.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part By symmetry the two upper points are equal, and so are the two lower
+		points. Write the averaging rule for one upper and one lower point, and
+		solve for $T$ and $B$.
+		\begin{solution}[1.4in]
+		An upper point has neighbors $100$, $0$ (side wall), $T$, and $B$; a lower
+		point has $T$, $0$, $B$, and $0$:
+		\eq{
+			4T &= 100 + T + B, \qquad 4B = T + B \\
+			B &= T/3, \qquad 3T = 100 + T/3 \\
+			T &= 37.5\ \text{V}, \qquad B = 12.5\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$T$ = \ansbox[1.3in]{$37.5$ V}
+
+		\vspace{4pt}
+		$B$ = \ansbox[1.3in]{$12.5$ V}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

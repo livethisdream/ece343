@@ -59,9 +59,9 @@ parts:
       - file: module02/L19-charge-distributions/index
         title: "L19 — Surface and Volume Charge"
       - file: module02/L20-gauss-integral/index
-        title: "L20 — Gauss' Law (Integral Form)"
+        title: "L20 — Gauss's Law (Integral Form)"
       - file: module02/L21-gauss-differential/index
-        title: "L21 — Gauss' Law (Differential Form)"
+        title: "L21 — Gauss's Law (Differential Form)"
       - file: module02/L22-electric-potential/index
         title: "L22 — Electric Potential"
       - file: module02/L23-boundary-value-problems/index
@@ -80,7 +80,7 @@ parts:
       - file: module03/L27-current-density/index
         title: "L27 — Current Density, Conductivity, and Resistance"
       - file: module03/L28-magnetic-fields/index
-        title: "L28 — Magnetic Fields and Gauss' Law for Magnetism"
+        title: "L28 — Magnetic Fields and Gauss's Law for Magnetism"
       - file: module03/L29-amperes-law/index
         title: "L29 — Ampere's Law"
       - file: module03/L30-amperes-law-applied/index

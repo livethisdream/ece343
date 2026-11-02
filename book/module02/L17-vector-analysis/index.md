@@ -561,6 +561,6 @@ and the electric field it implies. Lesson 19 spreads the charge along a line,
 over a surface, and through a volume, and adds up the field with the integrals
 from today, watching for unit vectors that turn.
 
-Before Lesson 18, read sections 5.1 through 5.3 of Ellingson,
+Before Lesson 18, read sections 5.1 through 5.4 of Ellingson,
 *Electromagnetics*, Vol. 1.
 ::::

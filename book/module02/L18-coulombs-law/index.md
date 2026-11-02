@@ -435,7 +435,7 @@ integrals take real work, and for the most symmetric shapes, Lesson 20 shows
 a shortcut, Gauss's law, that reaches the same answers with almost no
 integration.
 
-Before Lesson 19, read section 5.4 of Ellingson, *Electromagnetics*, Vol. 1,
+Before Lesson 19, review section 5.4 of Ellingson, *Electromagnetics*, Vol. 1,
 and review the differential elements of area and volume in cylindrical and
 spherical coordinates from Lesson 17.
 ::::

@@ -2,14 +2,14 @@
 frame_view: true
 ---
 
-# L21 - Gauss' Law (Differential Form)
+# L21 - Gauss's Law (Differential Form)
 
 ::::{frame}
 :class: title-frame
 
 <div class="course-mark">ECE 343 · Spring 2027</div>
 
-<h1 class="frame-title">Gauss' Law (Differential Form)</h1>
+<h1 class="frame-title">Gauss's Law (Differential Form)</h1>
 
 <div class="title-rule"></div>
 
@@ -21,7 +21,7 @@ Lesson 21 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 ::::{frame} Learning Objectives
 
 <ol class="lo-list" style="--module: '5'; counter-reset: lo 1">
-  <li>I can apply the integral and differential forms of Gauss' Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
+  <li>I can apply the integral and differential forms of Gauss's Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
 </ol>
 
 :::{depth}

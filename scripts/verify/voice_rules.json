@@ -1,0 +1,4 @@
+{
+  "warn_only": ["third-person"],
+  "why": "ECE 343 is co-taught by Maj Ellis and Dr. Rogers, so 'your instructor' names either of two people, not Neil writing about himself (ECE 444 VOICE.md rule 25). Reported as WARN, not FAIL (Neil, 2026-11-04)."
+}

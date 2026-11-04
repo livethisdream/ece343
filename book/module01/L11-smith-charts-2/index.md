@@ -153,7 +153,7 @@ $z_L = 1.5 + j1.2$ lands on $1/z_L = 0.407 - j0.325$.
 $$y = \frac{Y}{Y_0} = \frac{1}{z} = \frac{1 - \Gamma}{1 + \Gamma} = \frac{1 + \left(-\Gamma\right)}{1 - \left(-\Gamma\right)}$$
 
 - $y = g + jb$ sits at $-\Gamma$, read on the same grid.
-- $z_L = 1.5 + j1.2 \;\Rightarrow\; y_L = 0.407 - j0.325$.
+- $z_L = 1.5 + j1.2 \ \Rightarrow\ y_L = 0.407 - j0.325$.
 :::
 
 Shunt elements add as admittances, so Lessons 12 and 13 need $y$ as often as

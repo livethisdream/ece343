@@ -44,7 +44,7 @@ insulator.
 :::{present}
 **Lesson 24**: just outside a conductor,
 
-$$\mathbf{E} = \hat{\mathbf{n}}\,\frac{\rho_s}{\epsilon}$$
+$$\mathbf{E} = \hat{\mathbf{n}}\ \frac{\rho_s}{\epsilon}$$
 
 **Lesson 22**: the voltage of point $P_2$ relative to point $P_1$ is
 
@@ -124,14 +124,14 @@ treat the field between the plates as uniform.
 :::{present}
 At the positive plate, the outward normal into the gap is $-\hat{\mathbf{z}}$:
 
-$$\begin{aligned} \mathbf{D}\cdot\left(-\hat{\mathbf{z}}\right) &= \rho_s \\ \mathbf{D} &= -\hat{\mathbf{z}}\,\rho_s \\ \mathbf{E} &= -\hat{\mathbf{z}}\,\frac{\rho_s}{\epsilon} \end{aligned}$$
+$$\begin{aligned} \mathbf{D}\cdot\left(-\hat{\mathbf{z}}\right) &= \rho_s \\ \mathbf{D} &= -\hat{\mathbf{z}}\ \rho_s \\ \mathbf{E} &= -\hat{\mathbf{z}}\ \frac{\rho_s}{\epsilon} \end{aligned}$$
 :::
 
 Step 2 uses the conductor boundary condition from Lesson 24 at the inner face
 of the top plate. The conductor is the plate, and the region outside it is the
 gap below, so the outward normal points down, $-\hat{\mathbf{z}}$. The normal
 component of $\mathbf{D}$ along that normal equals the surface charge density
-$+\rho_s$, which makes $\mathbf{D} = -\hat{\mathbf{z}}\,\rho_s$: the field
+$+\rho_s$, which makes $\mathbf{D} = -\hat{\mathbf{z}}\ \rho_s$: the field
 points from the positive plate toward the negative one, as it should. The same
 condition at the bottom plate, where the outward normal is $+\hat{\mathbf{z}}$
 and the charge density is $-\rho_s$, gives the same $\mathbf{D}$, which
@@ -143,7 +143,7 @@ $\mathbf{E}$.
 :::{present}
 Integrate from the negative plate, $z = 0$, to the positive plate, $z = d$:
 
-$$\begin{aligned} V &= -\int_0^d \left(-\hat{\mathbf{z}}\,\frac{\rho_s}{\epsilon}\right)\cdot\hat{\mathbf{z}}\ dz = \frac{\rho_s d}{\epsilon} \\ C &= \frac{Q}{V} = \frac{\rho_s A}{\rho_s d/\epsilon} = \frac{\epsilon A}{d} \end{aligned}$$
+$$\begin{aligned} V &= -\int_0^d \left(-\hat{\mathbf{z}}\ \frac{\rho_s}{\epsilon}\right)\cdot\hat{\mathbf{z}}\ dz = \frac{\rho_s d}{\epsilon} \\ C &= \frac{Q}{V} = \frac{\rho_s A}{\rho_s d/\epsilon} = \frac{\epsilon A}{d} \end{aligned}$$
 :::
 
 Step 3 integrates along a straight path from the bottom plate up to the top
@@ -194,7 +194,7 @@ Now the structure Lesson 3 introduced: an inner conductor of radius $a$
 inside a shield of inner radius $b$, with a dielectric of permittivity
 $\epsilon$ between them. For step 1 we place a line charge density
 $+\rho_\ell$, in C/m, on the inner conductor and $-\rho_\ell$ on the shield,
-over a length $\ell$, so $Q = \rho_\ell\,\ell$. The structure is the same at
+over a length $\ell$, so $Q = \rho_\ell\ \ell$. The structure is the same at
 every angle and every position along its axis, so the field between the
 conductors can point only radially and can depend only on the distance $\rho$
 from the axis. That symmetry is what lets Gauss's law find it.
@@ -204,7 +204,7 @@ from the axis. That symmetry is what lets Gauss's law find it.
 :::{present}
 A Gaussian cylinder of radius $\rho$ and length $\ell$, with $a < \rho < b$:
 
-$$\begin{aligned} \oint \mathbf{D}\cdot d\mathbf{s} &= D_\rho\left(2\pi\rho\ell\right) = \rho_\ell\,\ell \\ \mathbf{D} &= \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell}{2\pi\rho} \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell}{2\pi\epsilon\rho} \end{aligned}$$
+$$\begin{aligned} \oint \mathbf{D}\cdot d\mathbf{s} &= D_\rho\left(2\pi\rho\ell\right) = \rho_\ell\ \ell \\ \mathbf{D} &= \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\rho} \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\rho} \end{aligned}$$
 :::
 
 Step 2 applies Gauss's law, as in Lesson 20, to a closed cylinder of radius
@@ -213,7 +213,7 @@ outward normal is $\hat{\boldsymbol{\rho}}$, the field is radial, and $D_\rho$
 has the same value everywhere, so the flux is $D_\rho$ times the side area
 $2\pi\rho\ell$. On the flat end caps the outward normal is along the axis,
 perpendicular to the radial field, so they carry no flux. The enclosed charge
-is the charge on the length $\ell$ of the inner conductor, $\rho_\ell\,\ell$.
+is the charge on the length $\ell$ of the inner conductor, $\rho_\ell\ \ell$.
 The shield's charge lies outside the cylinder and does not count. Solving for
 $D_\rho$ and dividing by $\epsilon$ gives a field that falls off as $1/\rho$.
 ::::
@@ -222,7 +222,7 @@ $D_\rho$ and dividing by $\epsilon$ gives a field that falls off as $1/\rho$.
 :::{present}
 Integrate from the shield, $\rho = b$, to the inner conductor, $\rho = a$:
 
-$$\begin{aligned} V &= -\int_b^a \frac{\rho_\ell}{2\pi\epsilon\rho}\ d\rho = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{b}{a} \\ C &= \frac{Q}{V} = \frac{\rho_\ell\,\ell}{\frac{\rho_\ell}{2\pi\epsilon}\ln\frac{b}{a}} = \frac{2\pi\epsilon\ell}{\ln(b/a)} \\ C' &= \frac{C}{\ell} = \frac{2\pi\epsilon}{\ln(b/a)} \end{aligned}$$
+$$\begin{aligned} V &= -\int_b^a \frac{\rho_\ell}{2\pi\epsilon\rho}\ d\rho = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{b}{a} \\ C &= \frac{Q}{V} = \frac{\rho_\ell\ \ell}{\frac{\rho_\ell}{2\pi\epsilon}\ln\frac{b}{a}} = \frac{2\pi\epsilon\ell}{\ln(b/a)} \\ C' &= \frac{C}{\ell} = \frac{2\pi\epsilon}{\ln(b/a)} \end{aligned}$$
 :::
 
 Step 3 integrates along a radial path from the negative conductor, the shield
@@ -321,7 +321,7 @@ the $1\ \text{mm}$ of glass, layer 2. The sum in the denominator is
 $$\frac{d_1}{\epsilon_1} + \frac{d_2}{\epsilon_2} = \frac{10^{-4}}{\epsilon_0} + \frac{10^{-3}}{5\epsilon_0} = \frac{3 \times 10^{-4}}{\epsilon_0}$$
 
 so $C = \epsilon_0 A/(3 \times 10^{-4}) = 295$ pF. At $1$ kV the flux density is
-$D = 1000\,\epsilon_0/(3 \times 10^{-4})$, and the fields are
+$D = 1000\ \epsilon_0/(3 \times 10^{-4})$, and the fields are
 
 $$E_1 = \frac{D}{\epsilon_0} = 3.3\ \text{MV/m}, \qquad E_2 = \frac{D}{5\epsilon_0} = 0.67\ \text{MV/m}$$
 

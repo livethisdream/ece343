@@ -59,7 +59,7 @@ superposition, which is the second fact we use today.
 :::{present}
 The **electric flux** through a surface $S$ counts the part of $\mathbf{D}$ normal to it:
 
-$$\Psi = \int_S \mathbf{D} \cdot d\mathbf{s}, \qquad d\mathbf{s} = \hat{\mathbf{n}}\, ds$$
+$$\Psi = \int_S \mathbf{D} \cdot d\mathbf{s}, \qquad d\mathbf{s} = \hat{\mathbf{n}}\  ds$$
 
 - Units: coulombs.
 - On a closed surface, $\hat{\mathbf{n}}$ points outward.
@@ -69,7 +69,7 @@ The **electric flux** $\Psi$ through a surface measures how much of the flux
 density passes through it. We break the surface into small patches of area
 $ds$, each with a unit normal $\hat{\mathbf{n}}$, and add up the component of
 $\mathbf{D}$ along the normal times the area. A field parallel to the surface
-contributes nothing; a field normal to it contributes $D\,ds$. Since
+contributes nothing; a field normal to it contributes $D\ ds$. Since
 $\mathbf{D}$ is in C/m² and $ds$ in m², flux is measured in coulombs. For a
 **closed surface**, one that encloses a volume, we always choose the outward
 normal, so flux leaving the volume counts as positive and flux entering it as
@@ -78,7 +78,7 @@ negative. The circle on the integral sign, $\oint_S$, marks a closed surface.
 
 ::::{frame} The Flux of a Point Charge
 :::{present}
-$$\begin{aligned} d\Psi = \mathbf{D} \cdot d\mathbf{s} &= \frac{Q}{4\pi}\, \frac{\hat{\mathbf{r}} \cdot d\mathbf{s}}{r^2} \\ d\Omega &= \frac{\hat{\mathbf{r}} \cdot d\mathbf{s}}{r^2} \\ d\Psi &= \frac{Q}{4\pi}\, d\Omega \end{aligned}$$
+$$\begin{aligned} d\Psi = \mathbf{D} \cdot d\mathbf{s} &= \frac{Q}{4\pi}\  \frac{\hat{\mathbf{r}} \cdot d\mathbf{s}}{r^2} \\ d\Omega &= \frac{\hat{\mathbf{r}} \cdot d\mathbf{s}}{r^2} \\ d\Psi &= \frac{Q}{4\pi}\  d\Omega \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L20-solid-angle.svg"
@@ -172,7 +172,7 @@ this lesson uses each one.
      style="max-width: 300px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \mathbf{D} = \hat{\mathbf{r}}\, D_r(r), \qquad d\mathbf{s} &= \hat{\mathbf{r}}\, r^2 \sin\theta\, d\theta\, d\phi \\ \oint_S \mathbf{D} \cdot d\mathbf{s} = D_r r^2 \int_0^{2\pi}\!\!\int_0^\pi \sin\theta\, d\theta\, d\phi &= 4\pi r^2 D_r = Q \\ \mathbf{E} &= \hat{\mathbf{r}}\frac{Q}{4\pi\epsilon r^2} \end{aligned}$$
+$$\begin{aligned} \mathbf{D} = \hat{\mathbf{r}}\  D_r(r), \qquad d\mathbf{s} &= \hat{\mathbf{r}}\  r^2 \sin\theta\  d\theta\  d\phi \\ \oint_S \mathbf{D} \cdot d\mathbf{s} = D_r r^2 \int_0^{2\pi}\!\!\int_0^\pi \sin\theta\  d\theta\  d\phi &= 4\pi r^2 D_r = Q \\ \mathbf{E} &= \hat{\mathbf{r}}\frac{Q}{4\pi\epsilon r^2} \end{aligned}$$
 :::
 
 We test the method on the case we already know. A point charge looks the same
@@ -181,7 +181,7 @@ only on the distance $r$. Any other direction would pick out a preferred
 direction in space, and the charge has none. The surface that matches is a
 sphere of radius $r$ centered on the charge. On it, $\mathbf{D}$ is normal and
 constant, and the area element from Lesson 17 is
-$r^2\sin\theta\,d\theta\,d\phi$, pointing along $\hat{\mathbf{r}}$. The
+$r^2\sin\theta\ d\theta\ d\phi$, pointing along $\hat{\mathbf{r}}$. The
 $\theta$ integral gives 2 and the $\phi$ integral gives $2\pi$, so the flux is
 $D_r$ times the area of the sphere, $4\pi r^2$. The sphere encloses $Q$, and
 dividing recovers Coulomb's law from Lesson 18 in three lines.
@@ -194,7 +194,7 @@ dividing recovers Coulomb's law from Lesson 18 in three lines.
      style="max-width: 250px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \mathbf{D} &= \hat{\boldsymbol{\rho}}\, D_\rho(\rho) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_\text{side} + \underbrace{\int_\text{top} + \int_\text{bottom}}_{0} = \int_0^L\!\!\int_0^{2\pi} D_\rho\, \rho\, d\phi\, dz \\ 2\pi\rho L\, D_\rho &= \rho_l L \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\frac{\rho_l}{2\pi\epsilon\rho} \end{aligned}$$
+$$\begin{aligned} \mathbf{D} &= \hat{\boldsymbol{\rho}}\  D_\rho(\rho) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_\text{side} + \underbrace{\int_\text{top} + \int_\text{bottom}}_{0} = \int_0^L\!\!\int_0^{2\pi} D_\rho\  \rho\  d\phi\  dz \\ 2\pi\rho L\  D_\rho &= \rho_l L \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\frac{\rho_l}{2\pi\epsilon\rho} \end{aligned}$$
 :::
 
 An infinite line of charge with $\rho_l$ coulombs per meter lies on the $z$
@@ -203,7 +203,7 @@ $\mathbf{D}$ cannot depend on $z$ or $\phi$. Turning the picture upside down
 also leaves it unchanged, so $\mathbf{D}$ has no $z$ component, and it points
 radially, along $\hat{\boldsymbol{\rho}}$. The matching surface is a closed
 cylinder of radius $\rho$ and length $L$. On the curved side, $\mathbf{D}$ is
-normal and constant, and the area element is $\rho\,d\phi\,dz$. On the flat
+normal and constant, and the area element is $\rho\ d\phi\ dz$. On the flat
 top and bottom, the normal is $\pm\hat{\mathbf{z}}$ and $\mathbf{D}$ is tangent,
 so they contribute nothing. The side's area is $2\pi\rho L$, and the cylinder
 encloses a length $L$ of line, or a charge $\rho_l L$. The length cancels, and
@@ -218,7 +218,7 @@ reached the same result by integrating Coulomb's law along the whole line.
      style="max-width: 360px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \mathbf{D} &= \pm\hat{\mathbf{z}}\, D_z \quad (z \gtrless 0) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \underbrace{D_z A}_\text{top} + \underbrace{D_z A}_\text{bottom} + \underbrace{0}_\text{sides} = \rho_s A \\ \mathbf{E} &= \pm\hat{\mathbf{z}}\frac{\rho_s}{2\epsilon} \end{aligned}$$
+$$\begin{aligned} \mathbf{D} &= \pm\hat{\mathbf{z}}\  D_z \quad (z \gtrless 0) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \underbrace{D_z A}_\text{top} + \underbrace{D_z A}_\text{bottom} + \underbrace{0}_\text{sides} = \rho_s A \\ \mathbf{E} &= \pm\hat{\mathbf{z}}\frac{\rho_s}{2\epsilon} \end{aligned}$$
 :::
 
 An infinite sheet in the plane $z = 0$ carries $\rho_s$ coulombs per square
@@ -241,14 +241,14 @@ an infinite sheet is the same at every distance from it.
      style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\mathbf{E} = \begin{cases} 0, & \rho < a \\ \hat{\boldsymbol{\rho}}\, \dfrac{\rho_l}{2\pi\epsilon\rho}, & a < \rho < b \\ 0, & \rho > b \end{cases}$$
+$$\mathbf{E} = \begin{cases} 0, & \rho < a \\ \hat{\boldsymbol{\rho}}\  \dfrac{\rho_l}{2\pi\epsilon\rho}, & a < \rho < b \\ 0, & \rho > b \end{cases}$$
 :::
 
 A coaxial line carries $+\rho_l$ per meter on the surface of its inner
 conductor, radius $a$, and $-\rho_l$ on the inside of its shield, radius $b$.
 The line has the same cylindrical symmetry as the line charge, so we use the
 same closed cylinder of radius $\rho$ and length $L$, and only its side
-contributes: $2\pi\rho L\,D_\rho = Q_\text{encl}$. All that changes from one
+contributes: $2\pi\rho L\ D_\rho = Q_\text{encl}$. All that changes from one
 region to the next is the charge enclosed.
 
 - **Inside the inner conductor**, $\rho < a$: the charge sits on the
@@ -269,7 +269,7 @@ cable's capacitance $C'$.
 :::{present}
 $\rho_l = 1\ \text{nC/m}$, $a = 0.405$ mm, $b = 1.475$ mm, $\epsilon_r = 2.25$:
 
-$$\begin{aligned} E(a) &= \frac{10^{-9}}{2\pi \times 2.25 \times 8.854\times10^{-12} \times 0.405\times10^{-3}} = 19.7\ \text{kV/m} \\ E(b) &= E(a)\,\frac{a}{b} = 5.42\ \text{kV/m} \end{aligned}$$
+$$\begin{aligned} E(a) &= \frac{10^{-9}}{2\pi \times 2.25 \times 8.854\times10^{-12} \times 0.405\times10^{-3}} = 19.7\ \text{kV/m} \\ E(b) &= E(a)\ \frac{a}{b} = 5.42\ \text{kV/m} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — the field inside RG-58
@@ -279,7 +279,7 @@ of radius $b = 1.475$ mm, and a polyethylene dielectric with
 $\epsilon_r = 2.25$. Suppose the inner conductor carries $\rho_l = 1$ nC per
 meter. Between the conductors,
 
-$$E(\rho) = \frac{\rho_l}{2\pi\epsilon_r\epsilon_0\,\rho}$$
+$$E(\rho) = \frac{\rho_l}{2\pi\epsilon_r\epsilon_0\ \rho}$$
 
 At the surface of the inner conductor, $\rho = a$:
 
@@ -298,7 +298,7 @@ field from $a$ to $b$ to find the voltage between the conductors.
 
 ::::{frame} A Cylinder of Volume Charge
 :::{present}
-$$\begin{aligned} \rho < a:& \quad 2\pi\rho L\, D_\rho = \rho_v \pi\rho^2 L \;\Rightarrow\; \mathbf{E} = \hat{\boldsymbol{\rho}}\frac{\rho_v \rho}{2\epsilon} \\ \rho > a:& \quad 2\pi\rho L\, D_\rho = \rho_v \pi a^2 L \;\Rightarrow\; \mathbf{E} = \hat{\boldsymbol{\rho}}\frac{\rho_v a^2}{2\epsilon\rho} \end{aligned}$$
+$$\begin{aligned} \rho < a:& \quad 2\pi\rho L\  D_\rho = \rho_v \pi\rho^2 L \ \Rightarrow\  \mathbf{E} = \hat{\boldsymbol{\rho}}\frac{\rho_v \rho}{2\epsilon} \\ \rho > a:& \quad 2\pi\rho L\  D_\rho = \rho_v \pi a^2 L \ \Rightarrow\  \mathbf{E} = \hat{\boldsymbol{\rho}}\frac{\rho_v a^2}{2\epsilon\rho} \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L20-rod.svg"
@@ -309,12 +309,12 @@ $$\begin{aligned} \rho < a:& \quad 2\pi\rho L\, D_\rho = \rho_v \pi\rho^2 L \;\R
 Now the charge fills a volume: an infinitely long cylinder of radius $a$
 carries a uniform volume charge density $\rho_v$, in C/m³. The symmetry is
 cylindrical again, so the Gaussian surface is the same closed cylinder and the
-left side is again $2\pi\rho L\,D_\rho$. The charge enclosed is the integral
+left side is again $2\pi\rho L\ D_\rho$. The charge enclosed is the integral
 of $\rho_v$ over the part of the charged region inside the Gaussian cylinder.
 For a Gaussian cylinder inside the charge, $\rho < a$, using $\rho'$ for the
 integration variable,
 
-$$Q_\text{encl} = \int_0^L\!\!\int_0^{2\pi}\!\!\int_0^{\rho} \rho_v\, \rho'\, d\rho'\, d\phi\, dz = \rho_v \cdot \frac{\rho^2}{2} \cdot 2\pi \cdot L = \rho_v \pi \rho^2 L$$
+$$Q_\text{encl} = \int_0^L\!\!\int_0^{2\pi}\!\!\int_0^{\rho} \rho_v\  \rho'\  d\rho'\  d\phi\  dz = \rho_v \cdot \frac{\rho^2}{2} \cdot 2\pi \cdot L = \rho_v \pi \rho^2 L$$
 
 and for one outside the charge, $\rho > a$, the radial integral stops at $a$
 and gives $\rho_v \pi a^2 L$.

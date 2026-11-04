@@ -42,7 +42,7 @@ $\mathbf{E} = -\nabla V$.
 :::{present}
 **Lessons 18 to 20: the field of a point charge and of an infinite line.**
 
-$$\mathbf{E} = \hat{\mathbf{r}}\,\frac{Q}{4\pi\epsilon r^2}, \qquad \mathbf{E} = \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell}{2\pi\epsilon\rho}$$
+$$\mathbf{E} = \hat{\mathbf{r}}\ \frac{Q}{4\pi\epsilon r^2}, \qquad \mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\rho}$$
 
 - A charge $q$ in the field feels $\mathbf{F} = q\mathbf{E}$.
 :::
@@ -61,7 +61,7 @@ ask how much work it takes to move that charge.
 :::{present}
 To move $q$ slowly, we push with $-q\mathbf{E}$. Over a step $d\mathbf{l}$:
 
-$$\begin{aligned} dW &= -q\,\mathbf{E}\cdot d\mathbf{l} \\ W &= -q\int_A^B \mathbf{E}\cdot d\mathbf{l} \end{aligned}$$
+$$\begin{aligned} dW &= -q\ \mathbf{E}\cdot d\mathbf{l} \\ W &= -q\int_A^B \mathbf{E}\cdot d\mathbf{l} \end{aligned}$$
 :::
 
 Suppose we carry the test charge $q$ from point $A$ to point $B$. The field
@@ -101,7 +101,7 @@ means it takes work to bring a positive charge from $A$ to $B$, so $B$ sits
      alt="Two paths from A to B near a point charge Q: a smooth curve and a staircase of radial steps and circular arcs"
      style="max-width: 480px; width: 100%; display: block; margin: 0 auto;">
 
-$$d\mathbf{l} = \hat{\mathbf{r}}\,dr + \hat{\boldsymbol{\theta}}\,r\,d\theta + \hat{\boldsymbol{\phi}}\,r\sin\theta\,d\phi$$
+$$d\mathbf{l} = \hat{\mathbf{r}}\ dr + \hat{\boldsymbol{\theta}}\ r\ d\theta + \hat{\boldsymbol{\phi}}\ r\sin\theta\ d\phi$$
 :::
 
 Now take the field of a point charge and ask whether the path matters. In
@@ -116,7 +116,7 @@ a staircase with infinitely small steps.
 
 ::::{frame} Path Independence
 :::{present}
-$$\begin{aligned} \mathbf{E}\cdot d\mathbf{l} &= \frac{Q}{4\pi\epsilon r^2}\,dr \\ V_B - V_A &= -\frac{Q}{4\pi\epsilon}\int_{r_A}^{r_B} \frac{dr}{r^2} = \frac{Q}{4\pi\epsilon}\left(\frac{1}{r_B} - \frac{1}{r_A}\right) \end{aligned}$$
+$$\begin{aligned} \mathbf{E}\cdot d\mathbf{l} &= \frac{Q}{4\pi\epsilon r^2}\ dr \\ V_B - V_A &= -\frac{Q}{4\pi\epsilon}\int_{r_A}^{r_B} \frac{dr}{r^2} = \frac{Q}{4\pi\epsilon}\left(\frac{1}{r_B} - \frac{1}{r_A}\right) \end{aligned}$$
 
 - Only $r_A$ and $r_B$ appear: **the path does not matter**.
 :::
@@ -159,7 +159,7 @@ $$V(r) = \frac{Q}{4\pi\epsilon r}$$
 
 - Superposition is a **scalar** sum:
 
-$$V(\mathbf{r}) = \sum_n \frac{Q_n}{4\pi\epsilon\,\vert\mathbf{r} - \mathbf{r}_n\vert}$$
+$$V(\mathbf{r}) = \sum_n \frac{Q_n}{4\pi\epsilon\ \vert\mathbf{r} - \mathbf{r}_n\vert}$$
 :::
 
 Only differences in potential have physical meaning, so we are free to pick
@@ -177,7 +177,7 @@ vectors, which is what makes the potential easier to compute than the field.
 :::{present}
 Each element $dQ$ is a point charge:
 
-$$V(\mathbf{r}) = \int \frac{dQ}{4\pi\epsilon R}, \qquad dQ = \rho_\ell\,dl, \ \ \rho_s\,ds, \ \ \text{or}\ \rho_v\,dv$$
+$$V(\mathbf{r}) = \int \frac{dQ}{4\pi\epsilon R}, \qquad dQ = \rho_\ell\ dl, \ \ \rho_s\ ds, \ \ \text{or}\ \rho_v\ dv$$
 
 - One integral, not three.
 :::
@@ -204,7 +204,7 @@ $$V(\rho) = \frac{\rho_\ell}{4\pi\epsilon}\int_{-a}^{a}\frac{dz}{\sqrt{z^2 + \rh
 Take a line of charge density $\rho_\ell$ on the $z$ axis from $z = -a$ to
 $z = a$, and find the potential at a point $P$ in the plane $z = 0$, a
 distance $\rho$ from the line. A short piece $dz$ of the line holds charge
-$dQ = \rho_\ell\,dz$. Its distance to $P$ is the hypotenuse of a right
+$dQ = \rho_\ell\ dz$. Its distance to $P$ is the hypotenuse of a right
 triangle with legs $z$ and $\rho$, so $R = \sqrt{z^2 + \rho^2}$. Adding the
 contributions from every piece of the line gives one integral over $z$.
 ::::
@@ -240,7 +240,7 @@ step is its gradient dotted with the step. Both are true for every step, in
 every direction, so the two vectors must be equal: the electric field is the
 negative gradient of the potential. The minus sign says the field points
 downhill, from high potential toward low. In rectangular coordinates,
-$\mathbf{E} = -\left(\hat{\mathbf{x}}\,\partial V/\partial x + \hat{\mathbf{y}}\,\partial V/\partial y + \hat{\mathbf{z}}\,\partial V/\partial z\right)$,
+$\mathbf{E} = -\left(\hat{\mathbf{x}}\ \partial V/\partial x + \hat{\mathbf{y}}\ \partial V/\partial y + \hat{\mathbf{z}}\ \partial V/\partial z\right)$,
 and Lesson 17 gives the cylindrical and spherical forms.
 ::::
 
@@ -248,14 +248,14 @@ and Lesson 17 gives the cylindrical and spherical forms.
 :::{present}
 With $s = \sqrt{a^2 + \rho^2}$, so $ds/d\rho = \rho/s$:
 
-$$\begin{aligned} \frac{\partial}{\partial\rho}\left[\ln(a + s) - \ln\rho\right] &= \frac{\rho}{s\,(a + s)} - \frac{1}{\rho} = -\frac{a}{\rho\,s} \\ \mathbf{E} = -\hat{\boldsymbol{\rho}}\,\frac{\partial V}{\partial\rho} &= \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell}{2\pi\epsilon\rho}\,\frac{a}{\sqrt{a^2 + \rho^2}} \end{aligned}$$
+$$\begin{aligned} \frac{\partial}{\partial\rho}\left[\ln(a + s) - \ln\rho\right] &= \frac{\rho}{s\ (a + s)} - \frac{1}{\rho} = -\frac{a}{\rho\ s} \\ \mathbf{E} = -\hat{\boldsymbol{\rho}}\ \frac{\partial V}{\partial\rho} &= \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\rho}\ \frac{a}{\sqrt{a^2 + \rho^2}} \end{aligned}$$
 :::
 
 In the plane $z = 0$, symmetry makes the field point straight away from the
 line, so only the $\rho$ derivative of the potential survives. Write the
 logarithm of the ratio as a difference of logarithms and differentiate each.
 The first needs the chain rule through $s$. Putting the two terms over the
-common denominator $\rho\,s\,(a + s)$ gives a numerator of
+common denominator $\rho\ s\ (a + s)$ gives a numerator of
 $\rho^2 - s(a + s) = \rho^2 - as - a^2 - \rho^2 = -a(a + s)$, and the factor
 $a + s$ cancels. The negative gradient then gives the field. For a line much
 longer than the distance to it, $a \gg \rho$, the last factor goes to one and
@@ -267,7 +267,7 @@ infinite line from Lesson 20.
 :::{present}
 As $a \to \infty$, $V \to \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{2a}{\rho} \to \infty$. Reference $V = 0$ at $\rho_0$ instead:
 
-$$V(\rho) = -\int_{\rho_0}^{\rho}\frac{\rho_\ell}{2\pi\epsilon\rho'}\,d\rho' = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{\rho_0}{\rho}$$
+$$V(\rho) = -\int_{\rho_0}^{\rho}\frac{\rho_\ell}{2\pi\epsilon\rho'}\ d\rho' = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{\rho_0}{\rho}$$
 :::
 
 For a long line, $\sqrt{a^2 + \rho^2} \approx a$, and the potential grows
@@ -331,7 +331,7 @@ the field vanishes but the potential does not.
 :::{present}
 In a charge-free region, $V = 10\left(x^2 - y^2\right)$ V, with $x$ and $y$ in meters.
 
-$$\begin{aligned} \mathbf{E} = -\nabla V &= -\hat{\mathbf{x}}\,20x + \hat{\mathbf{y}}\,20y \ \ \text{V/m} \\ \text{At } (1, 2, 0):\ V &= -30\ \text{V}, \quad \mathbf{E} = -\hat{\mathbf{x}}\,20 + \hat{\mathbf{y}}\,40\ \text{V/m} \end{aligned}$$
+$$\begin{aligned} \mathbf{E} = -\nabla V &= -\hat{\mathbf{x}}\ 20x + \hat{\mathbf{y}}\ 20y \ \ \text{V/m} \\ \text{At } (1, 2, 0):\ V &= -30\ \text{V}, \quad \mathbf{E} = -\hat{\mathbf{x}}\ 20 + \hat{\mathbf{y}}\ 40\ \text{V/m} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — the field from a known potential
@@ -342,9 +342,9 @@ The partial derivatives are
 
 $$\frac{\partial V}{\partial x} = 20x, \qquad \frac{\partial V}{\partial y} = -20y$$
 
-so $\mathbf{E} = -\hat{\mathbf{x}}\,20x + \hat{\mathbf{y}}\,20y$ V/m. At the
+so $\mathbf{E} = -\hat{\mathbf{x}}\ 20x + \hat{\mathbf{y}}\ 20y$ V/m. At the
 point $(1, 2, 0)$ m, the potential is $10(1 - 4) = -30$ V and the field is
-$-\hat{\mathbf{x}}\,20 + \hat{\mathbf{y}}\,40$ V/m, with magnitude
+$-\hat{\mathbf{x}}\ 20 + \hat{\mathbf{y}}\ 40$ V/m, with magnitude
 $\sqrt{20^2 + 40^2} = 44.7$ V/m. Carrying a $1$ nC charge from the origin,
 where $V = 0$, to this point takes work
 $W = q(V_B - V_A) = 10^{-9}\times(-30) = -30$ nJ: the field does the work, and

@@ -72,7 +72,7 @@ potential everywhere between them. A problem posed this way is called a
 
 ::::{frame} Poisson's Equation
 :::{present}
-$$\begin{aligned} \nabla\cdot\left(\epsilon\mathbf{E}\right) &= \rho_v \\ \epsilon\,\nabla\cdot\mathbf{E} &= \rho_v \\ \epsilon\,\nabla\cdot\left(-\nabla V\right) &= \rho_v \\ \nabla^2 V &= -\frac{\rho_v}{\epsilon} \end{aligned}$$
+$$\begin{aligned} \nabla\cdot\left(\epsilon\mathbf{E}\right) &= \rho_v \\ \epsilon\ \nabla\cdot\mathbf{E} &= \rho_v \\ \epsilon\ \nabla\cdot\left(-\nabla V\right) &= \rho_v \\ \nabla^2 V &= -\frac{\rho_v}{\epsilon} \end{aligned}$$
 :::
 
 Start from Gauss's law in point form and write $\mathbf{D}$ as
@@ -129,7 +129,7 @@ $\rho_v = -20\epsilon$.
 :::{present}
 Two solutions $V_1$, $V_2$ with the same boundary values. Let $W = V_1 - V_2$:
 
-$$\begin{aligned} \nabla^2 W = 0 \ \text{inside}, \qquad & W = 0 \ \text{on the boundary} \\ \nabla\cdot\left(W\nabla W\right) &= \vert\nabla W\vert^2 + W\nabla^2 W = \vert\nabla W\vert^2 \\ \int_V \vert\nabla W\vert^2\,dv &= \oint_S W\,\nabla W\cdot d\mathbf{s} = 0 \end{aligned}$$
+$$\begin{aligned} \nabla^2 W = 0 \ \text{inside}, \qquad & W = 0 \ \text{on the boundary} \\ \nabla\cdot\left(W\nabla W\right) &= \vert\nabla W\vert^2 + W\nabla^2 W = \vert\nabla W\vert^2 \\ \int_V \vert\nabla W\vert^2\ dv &= \oint_S W\ \nabla W\cdot d\mathbf{s} = 0 \end{aligned}$$
 :::
 
 Suppose two different potentials both satisfy Laplace's equation and both
@@ -167,7 +167,7 @@ and Laplace's equation in rectangular coordinates keeps one term.
 
 ::::{frame} Solving Between the Plates
 :::{present}
-$$\begin{aligned} \frac{d^2 V}{dz^2} = 0 \quad&\Longrightarrow\quad V = Az + B \\ V(0) = 0:\ B = 0, \qquad V(d) &= V_0:\ A = \frac{V_0}{d} \\ V(z) = V_0\,\frac{z}{d}, \qquad \mathbf{E} = -\hat{\mathbf{z}}\,\frac{dV}{dz} &= -\hat{\mathbf{z}}\,\frac{V_0}{d} \end{aligned}$$
+$$\begin{aligned} \frac{d^2 V}{dz^2} = 0 \quad&\Longrightarrow\quad V = Az + B \\ V(0) = 0:\ B = 0, \qquad V(d) &= V_0:\ A = \frac{V_0}{d} \\ V(z) = V_0\ \frac{z}{d}, \qquad \mathbf{E} = -\hat{\mathbf{z}}\ \frac{dV}{dz} &= -\hat{\mathbf{z}}\ \frac{V_0}{d} \end{aligned}$$
 :::
 
 A function whose second derivative is zero has a constant first derivative,
@@ -199,7 +199,7 @@ found around an infinite line of charge.
 
 ::::{frame} Solving Between the Conductors
 :::{present}
-$$\begin{aligned} V(b) = 0:\quad B &= -A\ln b \quad\Longrightarrow\quad V = -A\ln\frac{b}{\rho} \\ V(a) = V_0:\quad A &= -\frac{V_0}{\ln(b/a)} \\ V(\rho) &= V_0\,\frac{\ln(b/\rho)}{\ln(b/a)} \end{aligned}$$
+$$\begin{aligned} V(b) = 0:\quad B &= -A\ln b \quad\Longrightarrow\quad V = -A\ln\frac{b}{\rho} \\ V(a) = V_0:\quad A &= -\frac{V_0}{\ln(b/a)} \\ V(\rho) &= V_0\ \frac{\ln(b/\rho)}{\ln(b/a)} \end{aligned}$$
 :::
 
 The outer boundary value fixes $B$: substituting it back and combining the
@@ -208,7 +208,7 @@ value then fixes $A$. The result starts at $V_0$ on the inner conductor,
 where $\rho = a$, and falls to zero at the outer one, where $\ln(b/b) = 0$.
 It falls along a logarithm, not a straight line: most of the potential drop
 happens close to the inner conductor. Check the result in Laplace's equation:
-$\rho\,dV/d\rho = -V_0/\ln(b/a)$ is a constant, so its derivative is zero.
+$\rho\ dV/d\rho = -V_0/\ln(b/a)$ is a constant, so its derivative is zero.
 ::::
 
 ::::{frame} The Field in the Coax
@@ -217,7 +217,7 @@ $\rho\,dV/d\rho = -V_0/\ln(b/a)$ is a constant, so its derivative is zero.
      alt="A coax cross section with dashed equipotential circles and radial field arrows, beside plots of V and the field magnitude against rho, both largest at the inner radius a"
      style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
 
-$$\mathbf{E} = -\hat{\boldsymbol{\rho}}\,\frac{dV}{d\rho} = \hat{\boldsymbol{\rho}}\,\frac{V_0}{\rho\ln(b/a)}$$
+$$\mathbf{E} = -\hat{\boldsymbol{\rho}}\ \frac{dV}{d\rho} = \hat{\boldsymbol{\rho}}\ \frac{V_0}{\rho\ln(b/a)}$$
 :::
 
 The negative gradient in cylindrical coordinates keeps only its $\rho$ term.
@@ -333,7 +333,7 @@ solvers work on the same principle, with finer grids and smarter sweeps.
 | Uniqueness | One solution fits the boundary values | Any method that fits is right |
 | Parallel plates | Linear potential, uniform field | $V = V_0 z/d$, $\vert\mathbf{E}\vert = V_0/d$ |
 | Coaxial line | Logarithmic potential | $V = V_0\ln(b/\rho)/\ln(b/a)$ |
-| Coax field | Strongest at the inner conductor | $\mathbf{E} = \hat{\boldsymbol{\rho}}\,V_0/(\rho\ln(b/a))$ |
+| Coax field | Strongest at the inner conductor | $\mathbf{E} = \hat{\boldsymbol{\rho}}\ V_0/(\rho\ln(b/a))$ |
 | Charge per volt | Coax, from Gauss and Laplace | $\rho_\ell/V_0 = 2\pi\epsilon/\ln(b/a)$ |
 | Averaging | Discrete Laplace | $V$ is the mean of its neighbors |
 ::::

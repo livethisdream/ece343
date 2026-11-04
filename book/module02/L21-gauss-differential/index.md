@@ -41,7 +41,7 @@ directly from the field there, with no symmetry required.
 :::{present}
 **Lesson 20: Gauss's law**, for any closed surface $S$ around a volume $V$:
 
-$$\oint_S \mathbf{D} \cdot d\mathbf{s} = Q_\text{encl} = \int_V \rho_v\, dv$$
+$$\oint_S \mathbf{D} \cdot d\mathbf{s} = Q_\text{encl} = \int_V \rho_v\  dv$$
 :::
 
 Lesson 20 derived Gauss's law from Coulomb's law: the net electric flux out of
@@ -77,16 +77,16 @@ derivatives we can compute.
      style="max-width: 460px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \Psi_x &= \left[D_x(x+\Delta x) - D_x(x)\right]\Delta y\, \Delta z \\ \frac{\Psi_x}{\Delta v} &= \frac{D_x(x+\Delta x) - D_x(x)}{\Delta x} \;\longrightarrow\; \frac{\partial D_x}{\partial x} \\ \nabla \cdot \mathbf{D} &= \frac{\partial D_x}{\partial x} + \frac{\partial D_y}{\partial y} + \frac{\partial D_z}{\partial z} \end{aligned}$$
+$$\begin{aligned} \Psi_x &= \left[D_x(x+\Delta x) - D_x(x)\right]\Delta y\  \Delta z \\ \frac{\Psi_x}{\Delta v} &= \frac{D_x(x+\Delta x) - D_x(x)}{\Delta x} \ \longrightarrow\  \frac{\partial D_x}{\partial x} \\ \nabla \cdot \mathbf{D} &= \frac{\partial D_x}{\partial x} + \frac{\partial D_y}{\partial y} + \frac{\partial D_z}{\partial z} \end{aligned}$$
 :::
 
 We take the small volume to be a box with edges $\Delta x$, $\Delta y$, and
-$\Delta z$. Its two faces normal to $x$ have area $\Delta y\,\Delta z$. On the
+$\Delta z$. Its two faces normal to $x$ have area $\Delta y\ \Delta z$. On the
 far face the outward normal is $+\hat{\mathbf{x}}$, so the flux out is
-$D_x(x+\Delta x)\,\Delta y\,\Delta z$; on the near face the outward normal is
-$-\hat{\mathbf{x}}$, so the flux out is $-D_x(x)\,\Delta y\,\Delta z$. Their
+$D_x(x+\Delta x)\ \Delta y\ \Delta z$; on the near face the outward normal is
+$-\hat{\mathbf{x}}$, so the flux out is $-D_x(x)\ \Delta y\ \Delta z$. Their
 sum is $\Psi_x$, the first line. Dividing by the volume
-$\Delta v = \Delta x\,\Delta y\,\Delta z$ cancels the face area and leaves a
+$\Delta v = \Delta x\ \Delta y\ \Delta z$ cancels the face area and leaves a
 difference quotient in $x$, and as the box shrinks it becomes the partial
 derivative $\partial D_x/\partial x$, exactly as in Lesson 3. The faces normal
 to $y$ and $z$ give the other two terms in the same way. So in Cartesian
@@ -116,7 +116,7 @@ need.
 
 ::::{frame} Gauss's Law at a Point
 :::{present}
-$$\begin{aligned} \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_V \rho_v\, dv \\ \int_V \left(\nabla \cdot \mathbf{D}\right) dv &= \int_V \rho_v\, dv \\ \int_V \left(\nabla \cdot \mathbf{D} - \rho_v\right) dv &= 0 \quad \text{for every } V \\ \nabla \cdot \mathbf{D} &= \rho_v \end{aligned}$$
+$$\begin{aligned} \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_V \rho_v\  dv \\ \int_V \left(\nabla \cdot \mathbf{D}\right) dv &= \int_V \rho_v\  dv \\ \int_V \left(\nabla \cdot \mathbf{D} - \rho_v\right) dv &= 0 \quad \text{for every } V \\ \nabla \cdot \mathbf{D} &= \rho_v \end{aligned}$$
 :::
 
 Now we derive the point form. The first line is Gauss's law from Lesson 20,
@@ -138,7 +138,7 @@ $\nabla \cdot \mathbf{E} = \rho_v/\epsilon$.
 | :-- | :-- |
 | Cartesian | $\frac{\partial D_x}{\partial x} + \frac{\partial D_y}{\partial y} + \frac{\partial D_z}{\partial z}$ |
 | Cylindrical | $\frac{1}{\rho}\frac{\partial}{\partial\rho}\left(\rho D_\rho\right) + \frac{1}{\rho}\frac{\partial D_\phi}{\partial\phi} + \frac{\partial D_z}{\partial z}$ |
-| Spherical | $\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 D_r\right) + \frac{1}{r\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\, D_\theta\right) + \frac{1}{r\sin\theta}\frac{\partial D_\phi}{\partial\phi}$ |
+| Spherical | $\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 D_r\right) + \frac{1}{r\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\  D_\theta\right) + \frac{1}{r\sin\theta}\frac{\partial D_\phi}{\partial\phi}$ |
 :::
 
 The box derivation used Cartesian coordinates because the faces of a box have
@@ -191,7 +191,7 @@ Lesson 20 still gives a flux of $Q$ through any sphere around it.
 
 ::::{frame} Worked Example: Charge From a Field
 :::{present}
-In free space, $\mathbf{E} = \hat{\mathbf{x}}\,3x^2 + \hat{\mathbf{y}}\,2z + \hat{\mathbf{z}}\,x^2 z$ V/m. Find $\rho_v$ at $(2, -2, 0)$.
+In free space, $\mathbf{E} = \hat{\mathbf{x}}\ 3x^2 + \hat{\mathbf{y}}\ 2z + \hat{\mathbf{z}}\ x^2 z$ V/m. Find $\rho_v$ at $(2, -2, 0)$.
 
 $$\begin{aligned} \rho_v = \epsilon_0 \nabla \cdot \mathbf{E} &= \epsilon_0\left[\frac{\partial}{\partial x}\left(3x^2\right) + \frac{\partial}{\partial y}\left(2z\right) + \frac{\partial}{\partial z}\left(x^2 z\right)\right] \\ &= \epsilon_0\left(6x + 0 + x^2\right) = \epsilon_0\left(12 + 4\right) = 142\ \text{pC/m}^3 \end{aligned}$$
 :::
@@ -239,18 +239,18 @@ charge. The two forms agree.
 
 ::::{frame} Worked Example: Both Forms Give the Same Charge
 :::{present}
-$\mathbf{D} = \hat{\mathbf{r}}\,D_0\, r^2/a^2$ for $r \le a$:
+$\mathbf{D} = \hat{\mathbf{r}}\ D_0\  r^2/a^2$ for $r \le a$:
 
-$$\begin{aligned} \rho_v &= \frac{1}{r^2}\frac{\partial}{\partial r}\left(\frac{D_0 r^4}{a^2}\right) = \frac{4 D_0 r}{a^2} \\ Q &= \int_0^{2\pi}\!\!\int_0^\pi\!\!\int_0^a \frac{4D_0 r}{a^2}\, r^2 \sin\theta\, dr\, d\theta\, d\phi = 4\pi a^2 D_0 \\ Q &= \oint_{r=a} \mathbf{D} \cdot d\mathbf{s} = D_0 \cdot 4\pi a^2 \end{aligned}$$
+$$\begin{aligned} \rho_v &= \frac{1}{r^2}\frac{\partial}{\partial r}\left(\frac{D_0 r^4}{a^2}\right) = \frac{4 D_0 r}{a^2} \\ Q &= \int_0^{2\pi}\!\!\int_0^\pi\!\!\int_0^a \frac{4D_0 r}{a^2}\  r^2 \sin\theta\  dr\  d\theta\  d\phi = 4\pi a^2 D_0 \\ Q &= \oint_{r=a} \mathbf{D} \cdot d\mathbf{s} = D_0 \cdot 4\pi a^2 \end{aligned}$$
 :::
 
 Suppose a ball of radius $a$ has the radial flux density
 $D_r = D_0 r^2/a^2$ inside it. The point form gives the charge density: the
-spherical divergence of $D_r$ is $(1/r^2)\,\partial(D_0 r^4/a^2)/\partial r = 4D_0 r^3/(a^2 r^2)$,
+spherical divergence of $D_r$ is $(1/r^2)\ \partial(D_0 r^4/a^2)/\partial r = 4D_0 r^3/(a^2 r^2)$,
 so $\rho_v = 4D_0 r/a^2$, a density that grows from zero at the center.
 
 We can count the total charge two ways. Integrating the density over the ball,
-with the volume element $r^2\sin\theta\,dr\,d\theta\,d\phi$, the angles give
+with the volume element $r^2\sin\theta\ dr\ d\theta\ d\phi$, the angles give
 $4\pi$ and the radial integral gives $(4D_0/a^2)(a^4/4) = D_0 a^2$, for a total
 of $4\pi a^2 D_0$. Integrating the flux over the surface $r = a$, where
 $D_r = D_0$, gives $D_0$ times the area $4\pi a^2$: the same charge. That
@@ -301,7 +301,7 @@ in opposite directions, and so do the two forms of Gauss's law.
 | :-- | :-- | :-- |
 | Divergence | Net outward flux per unit volume, as the volume shrinks | $\lim_{\Delta v \to 0} \oint_S \mathbf{D}\cdot d\mathbf{s}/\Delta v$ |
 | Cartesian divergence | Each component's rate of change along its own axis | $\frac{\partial D_x}{\partial x} + \frac{\partial D_y}{\partial y} + \frac{\partial D_z}{\partial z}$ |
-| Divergence theorem | Flux out of $S$ equals the divergence summed through $V$ | $\oint_S \mathbf{D}\cdot d\mathbf{s} = \int_V \nabla\cdot\mathbf{D}\, dv$ |
+| Divergence theorem | Flux out of $S$ equals the divergence summed through $V$ | $\oint_S \mathbf{D}\cdot d\mathbf{s} = \int_V \nabla\cdot\mathbf{D}\  dv$ |
 | Point form of Gauss's law | Divergence of $\mathbf{D}$ equals the charge density | $\nabla \cdot \mathbf{D} = \rho_v$ |
 | Charge-free region | No divergence, however the field looks | $\nabla \cdot \mathbf{D} = 0$ |
 | Point charge, $r > 0$ | Field spreads, but its divergence is zero | $\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{Q}{4\pi r^2}\right) = 0$ |

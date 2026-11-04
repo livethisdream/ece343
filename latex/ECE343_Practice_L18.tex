@@ -1,0 +1,187 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L18 practice set (Coulomb's Law): the force from several point charges, a
+% dipole on its axis, and a line charge that is not centered on the field point.
+
+\fullwidth{\textbf{Learning Objective 5.1: } I can apply Coulomb's Law to use direct
+integration to calculate the electric field due to charge density in various
+geometries, including rectangular, cylindrical, and spherical coordinate systems.
+\\[4pt]\normalfont\small Show your work. Take $\epsilon = \epsilon_0$ and
+$1/4\pi\epsilon_0 = 8.988\ee{9}$ N$\cdot$m$^2$/C$^2$. Write a \textbf{Documentation}
+line at the end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Superposition.} In free space, $q_1 = 4$ nC sits at the origin,
+$q_2 = -2$ nC at $(3, 0, 0)$ m, and $q_3 = 1$ nC at $(0, 4, 0)$ m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the force on $q_3$.
+		\begin{solution}[2.2in]
+		\eq{
+			\vec{R}_{31} &= 4\hat{\mathbf{y}}\ \text{m}, \quad |\vec{R}_{31}| = 4\ \text{m} \\
+			\vec{F}_{31} &= \dfrac{(8.988\ee{9})(4\ee{-9})(1\ee{-9})}{4^3}\lp 4\hat{\mathbf{y}} \rp \\
+			&= 2.247\hat{\mathbf{y}}\ \text{nN} \\
+			\vec{R}_{32} &= -3\hat{\mathbf{x}} + 4\hat{\mathbf{y}}\ \text{m}, \quad |\vec{R}_{32}| = 5\ \text{m} \\
+			\vec{F}_{32} &= \dfrac{(8.988\ee{9})(-2\ee{-9})(1\ee{-9})}{5^3} \\
+			&\quad\times\lp -3\hat{\mathbf{x}} + 4\hat{\mathbf{y}} \rp \\
+			&= \lp 0.431\hat{\mathbf{x}} - 0.575\hat{\mathbf{y}} \rp\ \text{nN} \\
+			\vec{F}_3 &= \lp 0.431\hat{\mathbf{x}} + 1.672\hat{\mathbf{y}} \rp\ \text{nN}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vec{F}_3$ = \ansbox[1.6in]{$0.431\hat{\mathbf{x}} + 1.672\hat{\mathbf{y}}$ nN}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Remove $q_3$. Find the electric field at $(0, 4, 0)$ m.
+		\begin{solution}[0.8in]
+		\eq{ \vec{E} = \dfrac{\vec{F}_3}{q_3} = \lp 0.431\hat{\mathbf{x}} + 1.672\hat{\mathbf{y}} \rp\ \text{V/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vec{E}$ = \ansbox[1.6in]{$0.431\hat{\mathbf{x}} + 1.672\hat{\mathbf{y}}$ V/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the point on the $x$ axis, other than at infinity, where the field
+		of $q_1$ and $q_2$ is zero. Explain why it cannot lie between the charges.
+		\begin{solution}[2in]
+		Between the charges both fields point in $+\hat{\mathbf{x}}$, toward $q_2$, so they
+		cannot cancel; to the left of $q_1$ the larger charge is always closer. So
+		the point lies at $x > 3$ m, where the two fields point in opposite
+		directions:
+		\eq{
+			\dfrac{4}{x^2} &= \dfrac{2}{(x - 3)^2} \implies \sqrt{2}\,(x - 3) = x \\
+			x &= \dfrac{3\sqrt{2}}{\sqrt{2} - 1} = 10.24\ \text{m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$x$ = \ansbox[1.3in]{$10.24$ m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A dipole on its axis.} Charge $+q$ sits at $(0, 0, d/2)$ and $-q$
+at $(0, 0, -d/2)$.
+\begin{parts}
+
+	\part Starting from the field of a point charge, derive the field at a point
+	$(0, 0, z)$ on the axis with $z > d/2$.
+	\begin{solution}[1.8in]
+	For $+q$, $\vec{r} - \vec{r}^{\,\prime} = \lp z - \tfrac{d}{2} \rp\hat{\mathbf{z}}$; for $-q$,
+	$\vec{r} - \vec{r}^{\,\prime} = \lp z + \tfrac{d}{2} \rp\hat{\mathbf{z}}$. Both point along $+\hat{\mathbf{z}}$, so
+	\eq{
+		\vec{E} = \hat{\mathbf{z}}\dfrac{q}{4\pi\epsilon}\left[\dfrac{1}{\lp z - \tfrac{d}{2} \rp^2} - \dfrac{1}{\lp z + \tfrac{d}{2} \rp^2}\right]
+		= \hat{\mathbf{z}}\dfrac{q}{4\pi\epsilon}\,\dfrac{2zd}{\lp z^2 - \tfrac{d^2}{4} \rp^2}
+	}
+	since $\lp z + \tfrac{d}{2} \rp^2 - \lp z - \tfrac{d}{2} \rp^2 = 2zd$.
+	\end{solution}
+
+	\part Show that for $z \gg d$ the field becomes $\hat{\mathbf{z}}\,2p/4\pi\epsilon z^3$,
+	with $p = qd$. Compare it with the field at the same distance on the bisector,
+	from the lesson.
+	\begin{solution}[1.3in]
+	For $z \gg d$, $z^2 - d^2/4 \approx z^2$:
+	\eq{ \vec{E} \approx \hat{\mathbf{z}}\dfrac{q}{4\pi\epsilon}\,\dfrac{2zd}{z^4} = \hat{\mathbf{z}}\dfrac{2p}{4\pi\epsilon z^3} }
+	On the bisector the field is $-\hat{\mathbf{y}}\,p/4\pi\epsilon x^3$: half as large, and
+	pointing the opposite way, from $+q$ toward $-q$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $q = 1$ nC and $d = 1$ cm, find the field at $z = 10$ cm from the
+		exact result and from the approximation.
+		\begin{solution}[1.3in]
+		\eq{
+			E_{\text{exact}} &= (8.988\ee{9})(1\ee{-9})\dfrac{2(0.1)(0.01)}{\lp 0.01 - 0.000025 \rp^2} \\
+			&= 180.7\ \text{V/m} \\
+			E_{\text{approx}} &= (8.988\ee{9})\dfrac{2(1\ee{-11})}{(0.1)^3} = 179.8\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		exact = \ansbox[1.3in]{$180.7$ V/m}
+
+		\vspace{4pt}
+		approx. = \ansbox[1.3in]{$179.8$ V/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A line charge seen from one end.} A uniform line charge $\rho_\ell$
+lies on the $z$ axis from $z = 0$ to $z = L$. The field point is $(\rho, \phi, 0)$,
+a distance $\rho$ from the axis in the plane of the line's lower end.
+\begin{parts}
+
+	\part Derive both components of $\vec{E}$. Explain why the $z$ component no
+	longer vanishes.
+	\begin{solution}[3.2in]
+	$dQ = \rho_\ell\,dz^{\prime}$ and $\vec{R} = \rho\hat{\boldsymbol{\rho}} - z^{\prime}\hat{\mathbf{z}}$, with
+	$R = \sqrt{\rho^2 + z^{\prime 2}}$. With $z^{\prime} = \rho\tan\alpha$, as in the lesson,
+	\eq{
+		E_\rho &= \dfrac{\rho_\ell\,\rho}{4\pi\epsilon}\int_0^L \dfrac{dz^{\prime}}{\lp\rho^2 + z^{\prime 2}\rp^{3/2}}
+		= \dfrac{\rho_\ell\,\rho}{4\pi\epsilon}\left[\dfrac{z^{\prime}}{\rho^2\sqrt{\rho^2 + z^{\prime 2}}}\right]_0^L
+		= \dfrac{\rho_\ell}{4\pi\epsilon\rho}\,\dfrac{L}{\sqrt{\rho^2 + L^2}} \\
+		E_z &= -\dfrac{\rho_\ell}{4\pi\epsilon}\int_0^L \dfrac{z^{\prime}\,dz^{\prime}}{\lp\rho^2 + z^{\prime 2}\rp^{3/2}}
+		= -\dfrac{\rho_\ell}{4\pi\epsilon}\left[-\dfrac{1}{\sqrt{\rho^2 + z^{\prime 2}}}\right]_0^L
+		= -\dfrac{\rho_\ell}{4\pi\epsilon}\lp\dfrac{1}{\rho} - \dfrac{1}{\sqrt{\rho^2 + L^2}}\rp
+	}
+	All the charge lies above the field point, so every element pushes it
+	downward, along $-\hat{\mathbf{z}}$; there is no mirror element below to cancel it.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $\rho_\ell = 2$ nC/m, $L = 1$ m, and $\rho = 0.5$ m, evaluate
+		$E_\rho$ and $E_z$.
+		\begin{solution}[1.3in]
+		$\rho_\ell/4\pi\epsilon = (2\ee{-9})(8.988\ee{9}) = 17.98$ V
+		\eq{
+			E_\rho &= \dfrac{17.98}{0.5}\,\dfrac{1}{\sqrt{1.25}} = 32.2\ \text{V/m} \\
+			E_z &= -17.98\lp 2 - 0.894 \rp = -19.9\ \text{V/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E_\rho$ = \ansbox[1.3in]{$32.2$ V/m}
+
+		\vspace{4pt}
+		$E_z$ = \ansbox[1.3in]{$-19.9$ V/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The lesson's centered line of length $L$ has field
+		$\rho_\ell L/4\pi\epsilon\rho\sqrt{\rho^2 + L^2/4}$. How long must it be,
+		as a multiple of $\rho$, for its field to be within 1\% of the infinite
+		line's, $\rho_\ell/2\pi\epsilon\rho$?
+		\begin{solution}[1.3in]
+		The ratio of the two is $(L/2)/\sqrt{\rho^2 + L^2/4} = 0.99$:
+		\eq{
+			\lp\dfrac{L}{2}\rp^2 &= 0.9801\lp\rho^2 + \dfrac{L^2}{4}\rp \\
+			\dfrac{L}{2} &= \rho\sqrt{\dfrac{0.9801}{0.0199}} = 7.02\rho
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$L$ = \ansbox[1.3in]{$14.0\,\rho$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

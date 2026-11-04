@@ -20,7 +20,7 @@ Lessons 27–32 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes
-Steady current and conductivity, then the magnetic field of steady currents: Biot-Savart, Gauss' law for magnetism, Ampere's law, and magnetic boundary conditions.
+Steady current and conductivity, then the magnetic field of steady currents: Biot-Savart, Gauss's law for magnetism, Ampere's law, and magnetic boundary conditions.
 ::::
 
 ::::{frame} Chapter 6: Steady Current and Conductivity
@@ -36,7 +36,7 @@ Steady current and conductivity, then the magnetic field of steady currents: Bio
 
 <ol class="lo-list" style="--module: '7'">
   <li>I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
-  <li>I can articulate the meaning of both the integral form and point form of Gauss' Law for magnetism.</li>
+  <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
   <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
   <li>I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.</li>
 </ol>
@@ -52,7 +52,7 @@ Steady current and conductivity, then the magnetic field of steady currents: Bio
   </a>
   <a class="mt-card mt-lesson" href="L28-magnetic-fields/index.html">
     <span class="mt-kind">Lesson · L28</span>
-    <h4>Magnetic Fields and Gauss' Law for Magnetism</h4>
+    <h4>Magnetic Fields and Gauss's Law for Magnetism</h4>
     <p>The Biot-Savart law, and why magnetic field lines always close. Objectives 7.1, 7.2.</p>
   </a>
   <a class="mt-card mt-lesson" href="L29-amperes-law/index.html">

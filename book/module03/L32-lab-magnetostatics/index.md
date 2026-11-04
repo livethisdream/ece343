@@ -22,7 +22,7 @@ Lesson 32 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 
 <ol class="lo-list" style="--module: '7'">
   <li>I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
-  <li>I can articulate the meaning of both the integral form and point form of Gauss' Law for magnetism.</li>
+  <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
   <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
   <li>I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.</li>
 </ol>

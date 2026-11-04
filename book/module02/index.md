@@ -20,7 +20,7 @@ Lessons 17–26 · Intro to Electromagnetics · Maj Ellis · Dr. Neil Rogers
 ::::
 
 ::::{frame} Where This Module Goes
-The vector calculus the rest of the course runs on, then the electric field of charges at rest: Coulomb's law, Gauss' law, potential, boundary value problems, boundary conditions, and capacitance.
+The vector calculus the rest of the course runs on, then the electric field of charges at rest: Coulomb's law, Gauss's law, potential, boundary value problems, boundary conditions, and capacitance.
 ::::
 
 ::::{frame} Chapter 4: Vector Analysis
@@ -28,7 +28,7 @@ The vector calculus the rest of the course runs on, then the electric field of c
 <ol class="lo-list" style="--module: '4'">
   <li>I can recognize and apply common vector calculus operations, such as: gradient, divergence, curl, and Laplacian in the three major coordinate systems.</li>
   <li>I can calculate surface and volume integrals in rectangular, cylindrical, and spherical coordinate systems.</li>
-  <li>I can differentiate between Stoke's Theorem and the Divergence Theorem and apply them to various problems to simplify integrals.</li>
+  <li>I can differentiate between Stokes' Theorem and the Divergence Theorem and apply them to various problems to simplify integrals.</li>
 </ol>
 ::::
 
@@ -36,7 +36,7 @@ The vector calculus the rest of the course runs on, then the electric field of c
 
 <ol class="lo-list" style="--module: '5'">
   <li>I can apply Coulomb's Law to use direct integration to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
-  <li>I can apply the integral and differential forms of Gauss' Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
+  <li>I can apply the integral and differential forms of Gauss's Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
   <li>I can calculate the electric field from the scalar electric potential in a variety of geometries.</li>
   <li>I can apply the electric field boundary conditions to calculate electric fields on both sides of a material boundary.</li>
 </ol>
@@ -68,13 +68,13 @@ The vector calculus the rest of the course runs on, then the electric field of c
 <div class="module-toc">
   <a class="mt-card mt-lesson" href="L20-gauss-integral/index.html">
     <span class="mt-kind">Lesson · L20</span>
-    <h4>Gauss' Law (Integral Form)</h4>
+    <h4>Gauss's Law (Integral Form)</h4>
     <p>Using symmetry and a Gaussian surface to find the field without integrating Coulomb's law. Objective 5.2.</p>
   </a>
   <a class="mt-card mt-lesson" href="L21-gauss-differential/index.html">
     <span class="mt-kind">Lesson · L21</span>
-    <h4>Gauss' Law (Differential Form)</h4>
-    <p>The point form of Gauss' law, and charge density from a known field. Objective 5.2.</p>
+    <h4>Gauss's Law (Differential Form)</h4>
+    <p>The point form of Gauss's law, and charge density from a known field. Objective 5.2.</p>
   </a>
   <a class="mt-card mt-lesson" href="L22-electric-potential/index.html">
     <span class="mt-kind">Lesson · L22</span>
@@ -111,7 +111,7 @@ The vector calculus the rest of the course runs on, then the electric field of c
   <a class="mt-card mt-lesson" href="L26-lab-electrostatics/index.html">
     <span class="mt-kind">Lab · L26</span>
     <h4>Electrostatics Lab</h4>
-    <p>The Module 2 lab. Packet to be posted. Objectives 5.1, 5.2, 5.3, 5.4.</p>
+    <p>A team lab in Python: fields by superposition, Gauss's law on a grid, and the coax's C′ from Laplace's equation. Objectives 5.1, 5.2, 5.3, 5.4.</p>
   </a>
 </div>
 ::::

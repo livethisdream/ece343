@@ -15,9 +15,14 @@ execute:
 # Practice sets are served as committed PDFs under extras/practice/ (linked from
 # each lesson's Practice section), not as HTML pages. The source .md are kept on
 # disk but excluded from the build so they don't render or appear in the nav.
+#
+# Lab notebooks under extras/labs/ are downloads (served as is through
+# html_extra_path below), not pages: excluding extras/ keeps Sphinx from
+# executing or rendering them.
 exclude_patterns:
   - "**/practice.md"
   - "**/practice-solutions.md"
+  - "extras/**"
 
 parse:
   myst_enable_extensions:

@@ -89,7 +89,7 @@ electrostatics derives from it.
 :::{present}
 The force on $Q_2$ at $\mathbf{r}$ from $Q_1$ at $\mathbf{r}'$ points along $\hat{\mathbf{R}}$:
 
-$$\begin{aligned} \mathbf{F} &= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\,\hat{\mathbf{R}} \\ &= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\,\frac{\mathbf{R}}{R} \\ &= \frac{Q_1 Q_2\,(\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}'|^3} \end{aligned}$$
+$$\begin{aligned} \mathbf{F} &= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\ \hat{\mathbf{R}} \\ &= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\ \frac{\mathbf{R}}{R} \\ &= \frac{Q_1 Q_2\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3} \end{aligned}$$
 :::
 
 A force has a direction, so we need Coulomb's law as a vector equation. The
@@ -108,7 +108,7 @@ it gives every component of the force at once, with no angles to find.
 :::{present}
 The force on $Q$ at $\mathbf{r}$ from $N$ charges $Q_n$ at $\mathbf{r}_n$ is the vector sum of the forces from each one alone:
 
-$$\mathbf{F} = \sum_{n=1}^{N} \frac{Q\,Q_n\,(\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}_n|^3}$$
+$$\mathbf{F} = \sum_{n=1}^{N} \frac{Q\ Q_n\ (\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}_n|^3}$$
 :::
 
 Coulomb's law describes two charges. With more than two, experiment adds a
@@ -130,7 +130,7 @@ this lesson.
      alt="Charges q1 of minus 3 microcoulombs at (0, 3) meters and q2 of 1 microcoulomb at (0, minus 2) meters act on q3 of 2 microcoulombs at (4, 0) meters; the force from q1 pulls q3 up and to the left, the force from q2 pushes it up and to the right, and their sum points up and to the left"
      style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
 
-$$\mathbf{F}_3 = \mathbf{F}_{31} + \mathbf{F}_{32} = \left(-0.922\,\hat{\mathbf{x}} + 1.696\,\hat{\mathbf{y}}\right)\ \text{mN}$$
+$$\mathbf{F}_3 = \mathbf{F}_{31} + \mathbf{F}_{32} = \left(-0.922\ \hat{\mathbf{x}} + 1.696\ \hat{\mathbf{y}}\right)\ \text{mN}$$
 :::
 
 :::{admonition} Worked example — the force on $q_3$
@@ -143,15 +143,15 @@ From $q_1$, the vector to $q_3$ is
 $\mathbf{R}_{31} = (4\hat{\mathbf{x}}) - (3\hat{\mathbf{y}}) = 4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}$ m,
 with magnitude 5 m:
 
-$$\mathbf{F}_{31} = \frac{(2 \times 10^{-6})(-3 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(5)^3}\left(4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}\right) = \left(-1.726\,\hat{\mathbf{x}} + 1.294\,\hat{\mathbf{y}}\right)\ \text{mN}$$
+$$\mathbf{F}_{31} = \frac{(2 \times 10^{-6})(-3 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(5)^3}\left(4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}\right) = \left(-1.726\ \hat{\mathbf{x}} + 1.294\ \hat{\mathbf{y}}\right)\ \text{mN}$$
 
 From $q_2$, $\mathbf{R}_{32} = 4\hat{\mathbf{x}} + 2\hat{\mathbf{y}}$ m, with
 magnitude $\sqrt{20}$ m:
 
-$$\mathbf{F}_{32} = \frac{(2 \times 10^{-6})(1 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(\sqrt{20})^3}\left(4\hat{\mathbf{x}} + 2\hat{\mathbf{y}}\right) = \left(0.804\,\hat{\mathbf{x}} + 0.402\,\hat{\mathbf{y}}\right)\ \text{mN}$$
+$$\mathbf{F}_{32} = \frac{(2 \times 10^{-6})(1 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(\sqrt{20})^3}\left(4\hat{\mathbf{x}} + 2\hat{\mathbf{y}}\right) = \left(0.804\ \hat{\mathbf{x}} + 0.402\ \hat{\mathbf{y}}\right)\ \text{mN}$$
 
 Adding the components gives
-$\mathbf{F}_3 = (-0.922\,\hat{\mathbf{x}} + 1.696\,\hat{\mathbf{y}})$ mN, a
+$\mathbf{F}_3 = (-0.922\ \hat{\mathbf{x}} + 1.696\ \hat{\mathbf{y}})$ mN, a
 force of 1.93 mN. The attraction toward $q_1$ wins in $x$, and both forces
 push $q_3$ up. The negative $q_1$ pulls $q_3$ toward it, along
 $-\mathbf{R}_{31}$, which the negative product of the charges supplies with no
@@ -167,7 +167,7 @@ $$\mathbf{E} = \lim_{q \to 0} \frac{\mathbf{F}}{q}$$
 
 For a point charge $Q$ at $\mathbf{r}'$, in V/m:
 
-$$\mathbf{E}(\mathbf{r}) = \frac{Q\,(\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}'|^3}$$
+$$\mathbf{E}(\mathbf{r}) = \frac{Q\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3}$$
 :::
 
 The force on $q_3$ depended on $q_3$ itself, which makes it a property of the
@@ -186,13 +186,13 @@ placed at $\mathbf{r}$ is $\mathbf{F} = q\mathbf{E}$.
 :::{present}
 Superposition again: the field of $N$ point charges is the sum of their separate fields.
 
-$$\mathbf{E}(\mathbf{r}) = \sum_{n=1}^{N} \frac{Q_n\,(\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}_n|^3}$$
+$$\mathbf{E}(\mathbf{r}) = \sum_{n=1}^{N} \frac{Q_n\ (\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}_n|^3}$$
 :::
 
 The force from many charges was a sum, and the field is the force divided by
 the same test charge, so the field is the same sum with the test charge
 removed. In the worked example, the field at $(4, 0)$ m from $q_1$ and $q_2$
-is $\mathbf{F}_3/q_3 = (-461\,\hat{\mathbf{x}} + 848\,\hat{\mathbf{y}})$ V/m.
+is $\mathbf{F}_3/q_3 = (-461\ \hat{\mathbf{x}} + 848\ \hat{\mathbf{y}})$ V/m.
 That number belongs to the point $(4, 0)$ whether or not a charge sits there.
 ::::
 
@@ -227,7 +227,7 @@ line joining the charges, which the next frame derives.
      alt="Charge plus q at (0, d/2) and minus q at (0, minus d/2); at a point on the x axis the fields of the two charges add to a field pointing in the minus y direction"
      style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
 
-$$\begin{aligned} \mathbf{E} &= \frac{q}{4\pi\epsilon}\left[\frac{x\hat{\mathbf{x}} - \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} - \frac{x\hat{\mathbf{x}} + \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}}\right] = -\hat{\mathbf{y}}\,\frac{q\,d}{4\pi\epsilon\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} \end{aligned}$$
+$$\begin{aligned} \mathbf{E} &= \frac{q}{4\pi\epsilon}\left[\frac{x\hat{\mathbf{x}} - \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} - \frac{x\hat{\mathbf{x}} + \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}}\right] = -\hat{\mathbf{y}}\ \frac{q\ d}{4\pi\epsilon\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} \end{aligned}$$
 :::
 
 An **electric dipole** is a pair of equal and opposite charges, $+q$ at
@@ -241,7 +241,7 @@ $-\tfrac{d}{2}\hat{\mathbf{y}}$, so
 $\mathbf{r} - \mathbf{r}' = x\hat{\mathbf{x}} + \tfrac{d}{2}\hat{\mathbf{y}}$,
 with the same magnitude. The two terms share a denominator, so we subtract the
 numerators: the $x\hat{\mathbf{x}}$ parts cancel, and the
-$\hat{\mathbf{y}}$ parts add to $-d\,\hat{\mathbf{y}}$. On the bisector, the
+$\hat{\mathbf{y}}$ parts add to $-d\ \hat{\mathbf{y}}$. On the bisector, the
 field points from the positive charge toward the negative one, parallel to
 the dipole, and it has no $x$ component at all. Symmetry predicted that:
 the $x$ components of the two fields are equal and opposite.
@@ -251,7 +251,7 @@ the $x$ components of the two fields are equal and opposite.
 :::{present}
 For $x \gg d$, drop $d^2/4$ beside $x^2$:
 
-$$\mathbf{E} \approx -\hat{\mathbf{y}}\,\frac{q\,d}{4\pi\epsilon\,x^3} = -\hat{\mathbf{y}}\,\frac{p}{4\pi\epsilon\,x^3}, \qquad p = q\,d$$
+$$\mathbf{E} \approx -\hat{\mathbf{y}}\ \frac{q\ d}{4\pi\epsilon\ x^3} = -\hat{\mathbf{y}}\ \frac{p}{4\pi\epsilon\ x^3}, \qquad p = q\ d$$
 
 - A dipole's field falls as $1/x^3$, not $1/x^2$.
 :::
@@ -271,9 +271,9 @@ and $d = 2$ m; at $x = 3$ m the exact result gives 1.14 kV/m.
 :::{present}
 | Charge spread along | Density | Units | Charge in an element |
 | :-- | :-- | :-- | :-- |
-| a line | $\rho_\ell$ | C/m | $dQ = \rho_\ell\,d\ell$ |
-| a surface | $\rho_s$ | C/m² | $dQ = \rho_s\,ds$ |
-| a volume | $\rho_v$ | C/m³ | $dQ = \rho_v\,dv$ |
+| a line | $\rho_\ell$ | C/m | $dQ = \rho_\ell\ d\ell$ |
+| a surface | $\rho_s$ | C/m² | $dQ = \rho_s\ ds$ |
+| a volume | $\rho_v$ | C/m³ | $dQ = \rho_v\ dv$ |
 :::
 
 Real charge is made of electrons and nuclei, far too many to sum one at a
@@ -283,15 +283,15 @@ length along a wire, per unit area on a surface, or per unit volume through a
 region. A small element of the distribution, of length $d\ell$, area $ds$, or
 volume $dv$, holds the charge $dQ$ in the last column. Lesson 17's
 differential elements supply $d\ell$, $ds$, and $dv$ in whichever coordinate
-system fits the shape: $ds = \rho'\,d\rho'\,d\phi'$ on a disk, for example, or
-$dv = r'^2 \sin\theta'\,dr'\,d\theta'\,d\phi'$ in a sphere.
+system fits the shape: $ds = \rho'\ d\rho'\ d\phi'$ on a disk, for example, or
+$dv = r'^2 \sin\theta'\ dr'\ d\theta'\ d\phi'$ in a sphere.
 ::::
 
 ::::{frame} From a Sum to an Integral
 :::{present}
 Treat each element $dQ$ as a point charge, and add them all:
 
-$$d\mathbf{E} = \frac{dQ\,(\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}'|^3} \quad\Longrightarrow\quad \mathbf{E}(\mathbf{r}) = \int \frac{(\mathbf{r} - \mathbf{r}')\,dQ}{4\pi\epsilon\,|\mathbf{r} - \mathbf{r}'|^3}$$
+$$d\mathbf{E} = \frac{dQ\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3} \quad\Longrightarrow\quad \mathbf{E}(\mathbf{r}) = \int \frac{(\mathbf{r} - \mathbf{r}')\ dQ}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3}$$
 
 1. Draw the picture and choose coordinates.
 2. Write $dQ$ and $\mathbf{R} = \mathbf{r} - \mathbf{r}'$.
@@ -318,17 +318,17 @@ source coordinates; the field point stays fixed.
      alt="A line of charge along the z axis from minus L/2 to L/2; an element dQ at height z prime and its mirror image at minus z prime both contribute fields at a point a distance rho from the line, and their z components cancel"
      style="max-width: 400px; width: 100%; display: block; margin: 0 auto;">
 
-$$dQ = \rho_\ell\,dz', \qquad \mathbf{R} = \rho\,\hat{\boldsymbol{\rho}} - z'\,\hat{\mathbf{z}}, \qquad R = \sqrt{\rho^2 + z'^2}$$
+$$dQ = \rho_\ell\ dz', \qquad \mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}, \qquad R = \sqrt{\rho^2 + z'^2}$$
 :::
 
 A straight line of uniform charge density $\rho_\ell$ runs along the $z$ axis
 from $-L/2$ to $L/2$. We want the field at a distance $\rho$ from the line,
 in the plane $z = 0$ that bisects it. The shape is a cylinder's, so we use
 cylindrical coordinates. The element at height $z'$ has length $dz'$ and
-charge $dQ = \rho_\ell\,dz'$. The field point is
-$\mathbf{r} = \rho\,\hat{\boldsymbol{\rho}}$ and the element is at
-$\mathbf{r}' = z'\,\hat{\mathbf{z}}$, so the vector from the element to the
-field point is $\mathbf{R} = \rho\,\hat{\boldsymbol{\rho}} - z'\,\hat{\mathbf{z}}$.
+charge $dQ = \rho_\ell\ dz'$. The field point is
+$\mathbf{r} = \rho\ \hat{\boldsymbol{\rho}}$ and the element is at
+$\mathbf{r}' = z'\ \hat{\mathbf{z}}$, so the vector from the element to the
+field point is $\mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}$.
 The figure shows the element at $z'$ and its mirror image at $-z'$. Their
 fields have the same $\rho$ component and opposite $z$ components, which
 predicts the answer before we integrate: the field points straight out from
@@ -337,17 +337,17 @@ the line.
 
 ::::{frame} The Radial Component
 :::{present}
-Substitute $z' = \rho\tan\alpha$, $dz' = \rho\sec^2\alpha\,d\alpha$:
+Substitute $z' = \rho\tan\alpha$, $dz' = \rho\sec^2\alpha\ d\alpha$:
 
-$$\begin{aligned} E_\rho &= \frac{\rho_\ell\,\rho}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{dz'}{\left(\rho^2 + z'^2\right)^{3/2}} \\ &= \frac{\rho_\ell\,\rho}{4\pi\epsilon}\left[\frac{\sin\alpha}{\rho^2}\right] = \frac{\rho_\ell\,\rho}{4\pi\epsilon}\left[\frac{z'}{\rho^2\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} \\ &= \frac{\rho_\ell\,L}{4\pi\epsilon\,\rho\sqrt{\rho^2 + L^2/4}} \end{aligned}$$
+$$\begin{aligned} E_\rho &= \frac{\rho_\ell\ \rho}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{dz'}{\left(\rho^2 + z'^2\right)^{3/2}} \\ &= \frac{\rho_\ell\ \rho}{4\pi\epsilon}\left[\frac{\sin\alpha}{\rho^2}\right] = \frac{\rho_\ell\ \rho}{4\pi\epsilon}\left[\frac{z'}{\rho^2\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} \\ &= \frac{\rho_\ell\ L}{4\pi\epsilon\ \rho\sqrt{\rho^2 + L^2/4}} \end{aligned}$$
 :::
 
 The $\hat{\boldsymbol{\rho}}$ component of $d\mathbf{E}$ is
-$\rho_\ell\,\rho\,dz'/4\pi\epsilon(\rho^2 + z'^2)^{3/2}$. The field point does
+$\rho_\ell\ \rho\ dz'/4\pi\epsilon(\rho^2 + z'^2)^{3/2}$. The field point does
 not move during the integration, so $\hat{\boldsymbol{\rho}}$ is a constant
 vector here and comes outside the integral along with $\rho$. The integral
 yields to the substitution $z' = \rho\tan\alpha$. Then
-$dz' = \rho\sec^2\alpha\,d\alpha$ and
+$dz' = \rho\sec^2\alpha\ d\alpha$ and
 $\rho^2 + z'^2 = \rho^2\sec^2\alpha$, so the integrand becomes
 $\rho\sec^2\alpha / \rho^3\sec^3\alpha = \cos\alpha/\rho^2$, whose integral
 is $\sin\alpha/\rho^2$. The triangle with legs $\rho$ and $z'$ gives
@@ -358,14 +358,14 @@ value, and one factor of $\rho$ cancels.
 
 ::::{frame} The Axial Component and the Result
 :::{present}
-$$E_z = -\frac{\rho_\ell}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{z'\,dz'}{\left(\rho^2 + z'^2\right)^{3/2}} = \frac{\rho_\ell}{4\pi\epsilon}\left[\frac{1}{\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} = 0$$
+$$E_z = -\frac{\rho_\ell}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{z'\ dz'}{\left(\rho^2 + z'^2\right)^{3/2}} = \frac{\rho_\ell}{4\pi\epsilon}\left[\frac{1}{\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} = 0$$
 
-$$\mathbf{E} = \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell\,L}{4\pi\epsilon\,\rho\sqrt{\rho^2 + L^2/4}}$$
+$$\mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell\ L}{4\pi\epsilon\ \rho\sqrt{\rho^2 + L^2/4}}$$
 :::
 
 The $\hat{\mathbf{z}}$ component of $d\mathbf{E}$ carries the
-$-z'\,\hat{\mathbf{z}}$ part of $\mathbf{R}$. Its integrand is odd in $z'$,
-and the substitution $u = \rho^2 + z'^2$, $du = 2z'\,dz'$, gives the
+$-z'\ \hat{\mathbf{z}}$ part of $\mathbf{R}$. Its integrand is odd in $z'$,
+and the substitution $u = \rho^2 + z'^2$, $du = 2z'\ dz'$, gives the
 antiderivative $-1/\sqrt{\rho^2 + z'^2}$. That function takes the same value
 at $z' = L/2$ and at $z' = -L/2$, so the bracket is zero. The integral
 confirms what the mirror-image argument predicted: the field of a symmetric
@@ -381,7 +381,7 @@ this is the field of a point charge $Q$, as it must be from far away.
 :::{present}
 For $L \gg \rho$, $\sqrt{\rho^2 + L^2/4} \approx L/2$:
 
-$$\mathbf{E} = \hat{\boldsymbol{\rho}}\,\frac{\rho_\ell}{2\pi\epsilon\,\rho}$$
+$$\mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\ \rho}$$
 
 - The field of a long line falls as $1/\rho$, not $1/\rho^2$.
 :::
@@ -403,15 +403,15 @@ finds this same field in one line, with Gauss's law.
 | Symbol / idea | What it is | Result |
 | :-- | :-- | :-- |
 | $\mathbf{R} = \mathbf{r} - \mathbf{r}'$ | Vector from the source point to the field point | prime marks the source |
-| Coulomb's law | Force between two point charges | $\mathbf{F} = \dfrac{Q_1 Q_2\,\mathbf{R}}{4\pi\epsilon R^3}$ |
+| Coulomb's law | Force between two point charges | $\mathbf{F} = \dfrac{Q_1 Q_2\ \mathbf{R}}{4\pi\epsilon R^3}$ |
 | $\epsilon_0$ | Permittivity of free space | $8.854 \times 10^{-12}$ F/m; $1/4\pi\epsilon_0 = 8.988 \times 10^9$ |
 | Superposition | Forces and fields from many charges add as vectors | add components, not magnitudes |
-| Electric field | Force per unit test charge, in V/m | $\mathbf{E} = \dfrac{Q\,\mathbf{R}}{4\pi\epsilon R^3}$; $\mathbf{F} = q\mathbf{E}$ |
+| Electric field | Force per unit test charge, in V/m | $\mathbf{E} = \dfrac{Q\ \mathbf{R}}{4\pi\epsilon R^3}$; $\mathbf{F} = q\mathbf{E}$ |
 | Dipole | Charges $\pm q$ a distance $d$ apart; moment $p = qd$ | far field $\propto p/r^3$ |
-| Charge densities | $\rho_\ell$, $\rho_s$, $\rho_v$ | $dQ = \rho_\ell\,d\ell$, $\rho_s\,ds$, $\rho_v\,dv$ |
-| Direct integration | Each $dQ$ is a point charge; integrate | $\mathbf{E} = \displaystyle\int \frac{\mathbf{R}\,dQ}{4\pi\epsilon R^3}$ |
-| Finite line, bisecting plane | Length $L$, distance $\rho$ | $\dfrac{\rho_\ell L}{4\pi\epsilon\rho\sqrt{\rho^2 + L^2/4}}\,\hat{\boldsymbol{\rho}}$ |
-| Infinite line | $L \gg \rho$ | $\dfrac{\rho_\ell}{2\pi\epsilon\rho}\,\hat{\boldsymbol{\rho}}$ |
+| Charge densities | $\rho_\ell$, $\rho_s$, $\rho_v$ | $dQ = \rho_\ell\ d\ell$, $\rho_s\ ds$, $\rho_v\ dv$ |
+| Direct integration | Each $dQ$ is a point charge; integrate | $\mathbf{E} = \displaystyle\int \frac{\mathbf{R}\ dQ}{4\pi\epsilon R^3}$ |
+| Finite line, bisecting plane | Length $L$, distance $\rho$ | $\dfrac{\rho_\ell L}{4\pi\epsilon\rho\sqrt{\rho^2 + L^2/4}}\ \hat{\boldsymbol{\rho}}$ |
+| Infinite line | $L \gg \rho$ | $\dfrac{\rho_\ell}{2\pi\epsilon\rho}\ \hat{\boldsymbol{\rho}}$ |
 ::::
 
 ::::{frame} Practice

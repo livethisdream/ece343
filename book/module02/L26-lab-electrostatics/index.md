@@ -60,7 +60,7 @@ $96.8\ \text{pF/m}$ that Lesson 6 quoted for RG-58.
 
 ::::{frame} Superposition on a Grid
 :::{present}
-$$\mathbf{E}(\mathbf{r}) = \sum_n \frac{q_n}{4\pi\epsilon_0}\,\frac{\mathbf{r} - \mathbf{r}_n}{\vert\mathbf{r} - \mathbf{r}_n\vert^3}$$
+$$\mathbf{E}(\mathbf{r}) = \sum_n \frac{q_n}{4\pi\epsilon_0}\ \frac{\mathbf{r} - \mathbf{r}_n}{\vert\mathbf{r} - \mathbf{r}_n\vert^3}$$
 
 - One call fills the whole grid: NumPy works on arrays, so there is no loop over points.
 - A line of charge is many point charges in a row.
@@ -72,7 +72,7 @@ loop is over the charges, and the grid of forty thousand points costs about as
 much as a single point would in a loop. Every charge sits in the $z = 0$
 plane, and the field is evaluated in that plane, where $E_z = 0$ by symmetry.
 To model a line of charge, the code splits it into short pieces and puts a
-point charge $\rho_\ell\,\Delta x$ at the center of each, which is the sum that
+point charge $\rho_\ell\ \Delta x$ at the center of each, which is the sum that
 Lesson 18's integral is the limit of.
 ::::
 
@@ -115,19 +115,19 @@ the notebook you find the missing term and show that it cancels the rest
 exactly. Earlier versions of this lab fell into the trap without noticing.
 ::::
 
-::::{frame} Line Charges Are Truly 2D
+::::{frame} Line Charges Are 2D Fields
 :::{present}
-$$\mathbf{E} = \frac{\rho_\ell}{2\pi\epsilon_0}\,\frac{\boldsymbol{\rho}}{\vert\boldsymbol{\rho}\vert^2}$$
+$$\mathbf{E} = \frac{\rho_\ell}{2\pi\epsilon_0}\ \frac{\boldsymbol{\rho}}{\vert\boldsymbol{\rho}\vert^2}$$
 
 The same field in every plane, so $\partial/\partial z = 0$, and
 
-$$\oint \epsilon_0\,\mathbf{E}\cdot\hat{\mathbf{n}}\,d\ell = \rho_{\ell,\text{enc}}$$
+$$\oint \epsilon_0\ \mathbf{E}\cdot\hat{\mathbf{n}}\ d\ell = \rho_{\ell,\text{enc}}$$
 :::
 
 An infinite line charge along $z$ has the field Lesson 20 found with a
 cylindrical Gaussian surface, and that field is the same in every plane of
 constant $z$. Nothing changes along $z$, so the two-term divergence is the
-whole divergence, and the grid can test the point form honestly. The integral
+whole divergence, and the grid can test the point form. The integral
 form becomes a statement per meter of length: the flux of
 $\epsilon_0\mathbf{E}$ out through any closed contour in the plane equals the
 line charge inside it. The notebook integrates around squares that enclose
@@ -155,7 +155,7 @@ compare the result with Lesson 23's $V(\rho)$.
 
 ::::{frame} Capacitance by Gauss's Law
 :::{present}
-$$\rho_\ell = \oint \epsilon\,\mathbf{E}\cdot\hat{\mathbf{n}}\,d\ell, \qquad C' = \frac{\rho_\ell}{V_0}$$
+$$\rho_\ell = \oint \epsilon\ \mathbf{E}\cdot\hat{\mathbf{n}}\ d\ell, \qquad C' = \frac{\rho_\ell}{V_0}$$
 
 Compare with Lesson 25: $C' = \dfrac{2\pi\epsilon}{\ln(b/a)} = 96.8\ \text{pF/m}$
 :::

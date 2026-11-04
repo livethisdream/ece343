@@ -136,18 +136,18 @@ the height $h$ toward zero.
 
 ::::{frame} Evaluating the Pillbox
 :::{present}
-$$\begin{aligned} \oint \mathbf{D}\cdot d\mathbf{s} &= \int_\text{top} + \int_\text{bottom} + \int_\text{side} = Q_\text{enc} \\ \int_\text{top} \mathbf{D}_1\cdot\hat{\mathbf{n}}\ ds &= D_{n1}\,\Delta A \\ \int_\text{bottom} \mathbf{D}_2\cdot\left(-\hat{\mathbf{n}}\right) ds &= -D_{n2}\,\Delta A \\ \int_\text{side} &\to 0 \quad \text{as } h \to 0 \\ Q_\text{enc} &= \rho_s\,\Delta A \end{aligned}$$
+$$\begin{aligned} \oint \mathbf{D}\cdot d\mathbf{s} &= \int_\text{top} + \int_\text{bottom} + \int_\text{side} = Q_\text{enc} \\ \int_\text{top} \mathbf{D}_1\cdot\hat{\mathbf{n}}\ ds &= D_{n1}\ \Delta A \\ \int_\text{bottom} \mathbf{D}_2\cdot\left(-\hat{\mathbf{n}}\right) ds &= -D_{n2}\ \Delta A \\ \int_\text{side} &\to 0 \quad \text{as } h \to 0 \\ Q_\text{enc} &= \rho_s\ \Delta A \end{aligned}$$
 :::
 
 The closed surface has three parts. On the top face, in region 1, the outward
 normal is $\hat{\mathbf{n}}$, so $d\mathbf{s} = \hat{\mathbf{n}}\ ds$ and the
 flux is the normal component $D_{n1}$ times the area. On the bottom face, in
 region 2, the outward normal points the other way, $-\hat{\mathbf{n}}$, so the
-flux is $-D_{n2}\,\Delta A$. The curved side has area $2\pi r h$ for a pillbox
+flux is $-D_{n2}\ \Delta A$. The curved side has area $2\pi r h$ for a pillbox
 of radius $r$, which vanishes as $h \to 0$, and so does its flux. The charge
-inside is the surface charge on the enclosed patch, $\rho_s\,\Delta A$. Any
+inside is the surface charge on the enclosed patch, $\rho_s\ \Delta A$. Any
 volume charge density $\rho_v$ near the boundary contributes
-$\rho_v\,\Delta A\,h$, which also vanishes as $h \to 0$; only a true surface
+$\rho_v\ \Delta A\ h$, which also vanishes as $h \to 0$; only a true surface
 charge survives the limit.
 ::::
 
@@ -238,7 +238,7 @@ enters region 2.
 :::{present}
 Region 1, $y < 0$: free space. Region 2, $y > 0$: $\epsilon_r = 2$, with $\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 + \hat{\mathbf{z}}5$ V/m.
 
-$$\begin{aligned} E_{1x} &= 3, \quad E_{1z} = 5 \\ \epsilon_0 E_{1y} &= 2\epsilon_0 \times 4 \;\Rightarrow\; E_{1y} = 8 \\ \mathbf{E}_1 &= \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5\ \text{V/m} \end{aligned}$$
+$$\begin{aligned} E_{1x} &= 3, \quad E_{1z} = 5 \\ \epsilon_0 E_{1y} &= 2\epsilon_0 \times 4 \ \Rightarrow\  E_{1y} = 8 \\ \mathbf{E}_1 &= \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5\ \text{V/m} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — the field on the other side of a boundary
@@ -293,7 +293,7 @@ surface charge density $\rho_s$.
 :::{present}
 Region 2 is the conductor, so $\mathbf{E}_2 = \mathbf{D}_2 = 0$:
 
-$$\begin{aligned} E_{t1} &= E_{t2} = 0 \\ D_{n1} &= \rho_s \\ \mathbf{E}_1 &= \hat{\mathbf{n}}\,\frac{\rho_s}{\epsilon_1} \end{aligned}$$
+$$\begin{aligned} E_{t1} &= E_{t2} = 0 \\ D_{n1} &= \rho_s \\ \mathbf{E}_1 &= \hat{\mathbf{n}}\ \frac{\rho_s}{\epsilon_1} \end{aligned}$$
 
 - The field leaves a conductor along the normal.
 :::
@@ -321,7 +321,7 @@ inside a capacitor.
 | Normal condition | From Gauss's law on a thin pillbox | $D_{n1} - D_{n2} = \rho_s$ |
 | Two dielectrics | No free surface charge | $\epsilon_1 E_{n1} = \epsilon_2 E_{n2}$ |
 | Bending | Angle from the normal | $\frac{\tan\theta_1}{\tan\theta_2} = \frac{\epsilon_1}{\epsilon_2}$ |
-| Conductor | No field inside; charge on the surface | $\mathbf{E} = \hat{\mathbf{n}}\,\rho_s/\epsilon$ outside |
+| Conductor | No field inside; charge on the surface | $\mathbf{E} = \hat{\mathbf{n}}\ \rho_s/\epsilon$ outside |
 ::::
 
 ::::{frame} Practice

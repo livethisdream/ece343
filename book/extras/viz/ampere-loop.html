@@ -73,7 +73,9 @@
 
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const SANS = 'Inter, system-ui, -apple-system, sans-serif';
-function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+// Canvas text keeps its CSS size when the drawing scales down (SCL < 1), so
+// labels stay at or above 10.5 px on a phone.
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+(px/SCL)+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
 
 // Two infinitely long straight currents run perpendicular to the page, along
 // z: +3 A out of the page and 2 A into it. The closed path C lies in the page

@@ -27,7 +27,8 @@ Lesson 29 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 :::{depth}
 Lesson 28 found the magnetic field of a current by adding up the Biot-Savart
 law over every piece of the current. Like Coulomb's law in Module 2, that
-method always works, but it takes real integration even for a straight wire.
+method always works, but even a straight wire requires an integral along its
+length.
 Today we derive **Ampere's law**, which relates the magnetic field around any
 closed path to the current passing through it. It plays the part for magnetic
 fields that Gauss's law played for electric fields in Lesson 20: when the
@@ -52,9 +53,10 @@ $\hat{\boldsymbol{\phi}}$ direction, counterclockwise when the current comes
 toward us, and its magnitude falls off as $1/\rho$. The
 **magnetic flux density** is $\mathbf{B} = \mu\mathbf{H}$, with
 $\mu = \mu_r\mu_0$ from Lesson 2. We write Ampere's law in terms of
-$\mathbf{H}$ because $\mathbf{H}$ depends only on the current, not on the
-material around it, just as $\mathbf{D}$ depended only on the charge in
-Gauss's law. Today we start from this field and ask what happens when we add
+$\mathbf{H}$ because, for currents surrounded by one uniform material,
+$\mathbf{H}$ depends only on the current and not on $\mu$, just as
+$\mathbf{D}$ depended only on the charge in Gauss's law. Lesson 31 shows how a
+boundary between materials changes $\mathbf{H}$. Today we start from this field and ask what happens when we add
 up $\mathbf{H}$ along a closed path around the wire.
 ::::
 
@@ -78,16 +80,19 @@ integral sign marks a closed path, the same notation Lesson 22 used for
 $\oint_C \mathbf{E}\cdot d\mathbf{l} = 0$. The path is the edge of a surface,
 and the **right-hand rule** links the two: curl the fingers of the right hand
 in the direction of travel, and the thumb gives the positive normal of the
-surface. Lesson 17 used the same convention for Stokes' theorem.
+surface. Lesson 17 used the same convention for Stokes' theorem. It is the
+rule of Lesson 28 seen from the other side: with the right thumb along a
+current through the surface, the fingers curl the way $\mathbf{H}$ circles it,
+so a current along the normal gives a positive circulation.
 ::::
 
 ::::{frame} The Circulation Around a Line Current
 :::{present}
-$$\begin{aligned} \mathbf{H}\cdot d\mathbf{l} &= \frac{I}{2\pi\rho}\ \hat{\boldsymbol{\phi}}\cdot d\mathbf{l} = \frac{I}{2\pi\rho}\ \rho\ d\phi = \frac{I}{2\pi}\ d\phi \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &= \frac{I}{2\pi}\oint_C d\phi = \begin{cases} I, & I \text{ inside } C \\ 0, & I \text{ outside } C \end{cases} \end{aligned}$$
+$$\begin{aligned} \mathbf{H}\cdot d\mathbf{l} &= \frac{I}{2\pi\rho}\ \rho\ d\phi = \frac{I}{2\pi}\ d\phi \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &= \frac{I}{2\pi}\oint_C d\phi = \begin{cases} I & \text{in} \\ 0 & \text{out} \end{cases} \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L29-circulation.svg"
-     alt="A line current inside a lumpy closed path, with one step dl and the angle d phi it sweeps; and a line current outside the path, where the angle is swept forward on one side and back on the other"
+     alt="A line current inside a lumpy closed path, with a near step and a far step that sweep the same angle d phi and a shorter H arrow at the far step; and a line current outside the path, where the angle is swept forward on one side and back on the other"
      style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
 :::
 
@@ -97,11 +102,13 @@ $\hat{\boldsymbol{\phi}}$ survives the dot product, and from Lesson 17 that
 part is $\rho\ d\phi$, where $d\phi$ is the angle the step sweeps as seen from
 the wire. The $\rho$ in the step cancels the $1/\rho$ in the field, so each
 step contributes $I/2\pi$ times its angle, however far from the wire it lies
-and however the path tilts there. A step farther out sees a weaker field, but it must
-be longer to sweep the same angle, and the two effects cancel exactly because
-the field falls off as $1/\rho$.
+and however the path tilts there. The left panel of the figure shows a near
+step and a far step that sweep the same angle $d\phi$. The far step sees a
+weaker field, drawn as a shorter arrow, but it is longer, and the two effects
+cancel exactly because the field falls off as $1/\rho$.
 
-Now we go all the way around. If the wire is **inside** $C$, the angle as seen
+Now we go all the way around; "in" and "out" in the equation mean the wire is
+inside or outside $C$. If the wire is **inside** $C$, the angle as seen
 from the wire grows steadily by $2\pi$, and the circulation is exactly $I$. If
 the wire is **outside**, as on the right of the figure, the angle grows along
 one side of the path and shrinks by the same amount along the other, so the
@@ -115,6 +122,11 @@ $$\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl} = \int_S \mathbf{J}\cdot d
 
 $S$ is any surface whose edge is $C$, with its normal set by the right-hand rule.
 :::
+:::{present}
+<img src="../../viz/img/L29-two-caps.svg"
+     alt="A closed path C drawn as an ellipse, a flat surface S1 inside it and a dome S2 above it, each with a normal pointing up, and one current I passing up through both"
+     style="max-width: 320px; width: 100%; display: block; margin: 0 auto;">
+:::
 
 A collection of straight currents is a sum, and the circulation of the sum is
 the sum of the circulations. Currents that pass through the path contribute
@@ -127,14 +139,21 @@ $\mathbf{J}$ in A/m², the current enclosed is the flux of $\mathbf{J}$ through
 a surface $S$ bounded by the path. Nothing about the shape or size of the path
 appears in the result.
 
-We derived the law for straight currents, which covers every case in this
-module. It holds for any steady current: Ellingson states it in section 7.4 as
-an experimental law, and the general proof from the Biot-Savart law uses
-vector identities beyond this course. Module 4 adds a second term for currents
-that change with time.
+Any surface with $C$ as its edge gives the same enclosed current, as the
+figure shows for a flat surface $S_1$ and a dome $S_2$. Together the two
+surfaces close a volume. Lesson 27 showed that a steady current has
+$\oint \mathbf{J}\cdot d\mathbf{s} = 0$ over every closed surface, so the
+current that enters the volume through one surface leaves through the other,
+and the flux of $\mathbf{J}$ is the same through both.
+
+So far the derivation covers straight currents only. The loops of Lesson 28,
+the solenoid and toroid of Lesson 30, and the boundary loop of Lesson 31 are
+not straight, so the last two derivation frames of this lesson prove the law
+for any steady current, starting from the Biot-Savart law. Module 4 adds a
+second term for currents that change with time.
 ::::
 
-::::{frame} Explore: The Path Does Not Matter
+::::{frame} Explore: Path Independence
 :class: viz-frame
 
 :::{present}
@@ -152,7 +171,7 @@ going into it near a closed path traversed counterclockwise. The outline is
 blue where $\mathbf{H}$ runs along the direction of travel and red where it
 runs against it, and it is thicker where the component along the path is
 larger. The middle readout is the line integral, computed numerically in 2000
-steps around the path; it is not looked up from the current. Grow the circle,
+steps around the path. Grow the circle,
 and its length rises while the circulation holds at 3.00 A. Switch to the
 lumpy path, and $\mathbf{H}$ varies along every part of it, but the total does
 not change. Slide the path until it also encloses the $2$ A current, and the
@@ -203,7 +222,8 @@ The matching path is a circle of radius $\rho$ centered on the wire. On it,
 $\mathbf{H}$ is tangent and constant, and the step from Lesson 17 is
 $\rho\ d\phi$ along $\hat{\boldsymbol{\phi}}$. The circulation is $H_\phi$ times
 the circumference $2\pi\rho$, and the circle encloses the whole current $I$.
-Dividing recovers the Biot-Savart result of Lesson 28 in three lines.
+Dividing recovers the Biot-Savart result of Lesson 28 without an integral
+along the wire.
 ::::
 
 ::::{frame} Worked Example: The Field Near a Wire
@@ -278,6 +298,16 @@ integrals differ, so the integrands must be equal everywhere. The result is
 the **point form** of Ampere's law: the curl of $\mathbf{H}$ at a point equals
 the current density at that point. Where there is no current,
 $\nabla\times\mathbf{H} = 0$, even if $\mathbf{H}$ itself is large.
+
+The point form agrees with Lesson 27. The divergence of any curl is zero:
+in Cartesian components, $\nabla\cdot\left(\nabla\times\mathbf{H}\right)$
+is a sum of mixed second derivatives such as
+$\partial^2 H_z/\partial x\ \partial y - \partial^2 H_z/\partial y\ \partial x$,
+which cancel in pairs. Taking the divergence of both sides of
+$\nabla\times\mathbf{H} = \mathbf{J}$ therefore gives
+$\nabla\cdot\mathbf{J} = 0$, the condition Lesson 27 found for a steady
+current. A current that piled charge up somewhere would contradict Ampere's
+law in this form; Module 4 repairs the law for that case.
 ::::
 
 ::::{frame} Checking the Point Form on the Wire
@@ -299,6 +329,73 @@ not by themselves mean a nonzero curl: the curl measures the circulation around
 a small loop at the point, and outside the wire that circulation is zero.
 ::::
 
+::::{frame} The Field as the Curl of a Vector Potential
+:::{present}
+$$\begin{aligned} \mathbf{H}(\mathbf{r}) &= \int \frac{\mathbf{J}(\mathbf{r}')\times\mathbf{R}}{4\pi R^3}\ dv' \\ \frac{\mathbf{R}}{R^3} &= -\nabla\frac{1}{R} \\ \mathbf{J}\times\frac{\mathbf{R}}{R^3} &= \nabla\frac{1}{R}\times\mathbf{J} = \nabla\times\frac{\mathbf{J}}{R} \\ \mathbf{H} &= \nabla\times\mathbf{A} \\ \mathbf{A}(\mathbf{r}) &= \int\frac{\mathbf{J}(\mathbf{r}')}{4\pi R}\ dv' \end{aligned}$$
+:::
+
+Now we prove Ampere's law for any steady current, starting from the
+Biot-Savart law of Lesson 28 for a volume element, $\mathbf{J}\ dv'$ in place
+of $I\ d\mathbf{l}$. The vector $\mathbf{R} = \mathbf{r} - \mathbf{r}'$ runs
+from the source point $\mathbf{r}'$ to the field point $\mathbf{r}$, and
+$\nabla$ acts on the field point only. Lesson 22 used the identity on the second
+line: the gradient of $1/R$ is $-\mathbf{R}/R^3$, which is how the field of a
+point charge came from its potential. Swapping the order of a cross product
+changes its sign, which gives the first step of the third line. For the
+second step, $\mathbf{J}(\mathbf{r}')$ does not depend on $\mathbf{r}$, so it
+acts as a constant vector, and the curl of a scalar $f$ times a constant
+vector $\mathbf{c}$ is $\nabla f\times\mathbf{c}$. The $x$ component shows it:
+$\partial(f c_z)/\partial y - \partial(f c_y)/\partial z = c_z\ \partial f/\partial y - c_y\ \partial f/\partial z$,
+which is $\left(\nabla f\times\mathbf{c}\right)_x$. The curl acts on
+$\mathbf{r}$ and the integral runs over $\mathbf{r}'$, so the curl comes
+outside the integral. The field is the curl of the **vector potential**
+$\mathbf{A}$. We use $\mathbf{A}$ only as a step in this proof; each of its
+components has the same form as the potential $V$ of Lesson 22.
+::::
+
+::::{frame} Ampere's Law for Any Steady Current
+:::{present}
+$$\begin{aligned} \nabla\times\mathbf{H} &= \nabla\times\left(\nabla\times\mathbf{A}\right) \\ &= \nabla\left(\nabla\cdot\mathbf{A}\right) - \nabla^2\mathbf{A} \\ \nabla^2\mathbf{A} &= -\mathbf{J} \quad \text{(Lesson 23)} \\ \nabla\cdot\mathbf{A} &= 0 \quad \text{(Lesson 27)} \\ \nabla\times\mathbf{H} &= \mathbf{J} \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &= I_\text{encl} \end{aligned}$$
+:::
+
+We take the curl of $\mathbf{H} = \nabla\times\mathbf{A}$ and expand the curl
+of a curl. Writing out the $x$ component,
+
+$$\left(\nabla\times\nabla\times\mathbf{A}\right)_x = \frac{\partial}{\partial y}\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) - \frac{\partial}{\partial z}\left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right) = \frac{\partial}{\partial x}\left(\nabla\cdot\mathbf{A}\right) - \nabla^2 A_x$$
+
+after adding and subtracting $\partial^2 A_x/\partial x^2$; the $y$ and $z$
+components follow the same pattern. Two facts finish the proof.
+
+**The Laplacian term.** The component
+$A_x = \int J_x\ dv'/(4\pi R)$ has exactly the form of Lesson 22's potential
+$V = \int \rho_v\ dv'/(4\pi\epsilon R)$, with $J_x$ in place of
+$\rho_v/\epsilon$. That $V$ produces the electric field of the charges, which
+obeys Gauss's law, so it satisfies Lesson 23's Poisson equation,
+$\nabla^2 V = -\rho_v/\epsilon$. The mathematics is the same whatever the
+integrand stands for, so $\nabla^2 A_x = -J_x$, and likewise for $y$ and $z$:
+$-\nabla^2\mathbf{A} = \mathbf{J}$.
+
+**The divergence term.** Because $\mathbf{R} = \mathbf{r} - \mathbf{r}'$, the
+gradient of $1/R$ with respect to the field point is minus its gradient with
+respect to the source point, $\nabla(1/R) = -\nabla'(1/R)$. Then
+
+$$\nabla\cdot\mathbf{A} = \int \frac{\mathbf{J}\cdot\nabla(1/R)}{4\pi}\ dv' = -\int \frac{\mathbf{J}\cdot\nabla'(1/R)}{4\pi}\ dv' = -\int \frac{1}{4\pi}\left[\nabla'\cdot\frac{\mathbf{J}}{R} - \frac{\nabla'\cdot\mathbf{J}}{R}\right]dv'$$
+
+using the product rule for the divergence of a scalar times a vector. A steady
+current has $\nabla'\cdot\mathbf{J} = 0$, the result of Lesson 27, so the
+second term vanishes. The divergence theorem of Lesson 17 turns the first
+term into the flux of $\mathbf{J}/R$ through a surface that encloses all of
+the current, and $\mathbf{J}$ is zero on that surface, so the flux is zero.
+Therefore $\nabla\cdot\mathbf{A} = 0$.
+
+With both terms in hand, $\nabla\times\mathbf{H} = \mathbf{J}$ at every point,
+for any steady current. Stokes' theorem, run in the direction opposite to the
+earlier point-form frame, then gives the integral form for every closed path.
+This is where the steady-current condition of Lesson 27 enters: without
+$\nabla'\cdot\mathbf{J} = 0$, the divergence term would survive and Ampere's
+law would fail.
+::::
+
 ::::{frame} Gauss's Law and Ampere's Law
 :::{present}
 | Feature | Gauss's law (Lessons 20–21) | Ampere's law (today) |
@@ -313,8 +410,8 @@ $\mathbf{D}$ over a closed surface and counts the charge in the volume inside
 it; Ampere's law adds up the circulation of $\mathbf{H}$ around a closed path
 and counts the current through the surface it bounds. Each turns into a point
 form through one of the two theorems of Lesson 17: the divergence theorem for
-Gauss's law and Stokes' theorem for Ampere's law. The difference in the point
-forms carries the physics. Divergence measures field leaving a point, so
+Gauss's law and Stokes' theorem for Ampere's law. The point forms differ in
+which derivative carries the source. Divergence measures field leaving a point, so
 charge appears in the divergence of $\mathbf{D}$; curl measures circulation
 around a point, so current appears in the curl of $\mathbf{H}$.
 ::::
@@ -330,6 +427,7 @@ around a point, so current appears in the curl of $\mathbf{H}$.
 | Line current | Circle; $\mathbf{H}$ along $\hat{\boldsymbol{\phi}}$ | $H = \frac{I}{2\pi\rho}$ |
 | Round wire, radius $a$ | Grows inside, line-current field outside | $\frac{I\rho}{2\pi a^2}$, then $\frac{I}{2\pi\rho}$ |
 | Point form | From Stokes' theorem | $\nabla\times\mathbf{H} = \mathbf{J}$ |
+| Any steady current | Curl of the Biot-Savart field, with $\nabla'\cdot\mathbf{J} = 0$ | $\nabla\times\mathbf{H} = \mathbf{J}$ for every path |
 | 10 A at 1 cm | In air | $159$ A/m, $200\ \mu$T |
 ::::
 
@@ -347,8 +445,8 @@ around a point, so current appears in the curl of $\mathbf{H}$.
 :::
 
 Today Ampere's law came out of the field of a line current and the geometry of
-the angle a path sweeps around it, and symmetry turned it into a quick way to
-find the field. Lesson 30 uses the same method on the shapes that matter in
+the angle a path sweeps around it, and then out of the Biot-Savart law for any
+steady current. Symmetry turned it into a quick way to find the field. Lesson 30 uses the same method on the shapes that matter in
 practice: the coaxial line, a sheet of current, the solenoid, and the toroid.
 It then integrates the coaxial field to find the inductance per meter, $L'$,
 that Lesson 6 quoted for RG-58. With the capacitance per meter $C'$ from

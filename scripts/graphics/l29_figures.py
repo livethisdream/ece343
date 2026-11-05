@@ -2,7 +2,10 @@
 """L29 figures: Ampere's law and the field of a line current.
 
     L29-circulation.svg   a line current inside a closed path and outside it,
-                          with one step dl and the angle dφ it sweeps
+                          with a near and a far step that sweep the same
+                          angle dφ, and H at each
+    L29-two-caps.svg      a path C, a flat surface and a dome that share it as
+                          their edge, and one current through both
     L29-line-current.svg  a circular Amperian path around a line current, with
                           H along φ̂
     L29-solid-wire.svg    H against radius for a round wire carrying a uniform
@@ -92,55 +95,96 @@ def blob(t):
 
 
 def circulation():
-    fig, axs = plt.subplots(1, 2, figsize=(9.6, 4.0))
+    # Sized for the half-width present block (about 480 px), so 16 pt text
+    # lands near 16 px on screen.
+    fig, axs = plt.subplots(1, 2, figsize=(7.4, 3.6))
     t = np.linspace(0, 2 * np.pi, 400)
     r = blob(t)
     wires = [(0.0, 0.0), (-2.75, -0.35)]
     for ax, w in zip(axs, wires):
-        blank(ax, (-3.3, 2.6), (-2.1, 2.1))
+        blank(ax, (-3.3, 2.6), (-2.25, 2.2))
         xs, ys = r * np.cos(t), r * np.sin(t)
-        ax.fill(xs, ys, fc=FILL, ec=NAVY, lw=1.6)
+        ax.fill(xs, ys, fc=FILL, ec=NAVY, lw=1.8)
         path_arrows(ax, xs, ys, [60, 160, 260, 360])
-        wire_out(ax, *w)
-        lab(ax, w[0] - 0.2, w[1] - 0.3, "I", color=RED, ha="right")
-    lab(axs[0], 1.25, -1.45, "C", color=NAVY, italic=True)
-    lab(axs[1], 1.25, -1.45, "C", color=NAVY, italic=True)
+        wire_out(ax, *w, r=0.16)
+        lab(ax, w[0] - 0.24, w[1] - 0.34, "I", size=17, color=RED, ha="right")
+        lab(ax, 1.35, -1.55, "C", size=17, color=NAVY)
 
-    # inside: one step dl, its radial ray, and the angle it sweeps
+    # inside: a near step and a far step that sweep the same angle dφ. The far
+    # step is longer and its H is weaker, in proportion.
     ax = axs[0]
-    th0, dth = 0.75, 0.2
-    for th in (th0 - dth / 2, th0 + dth / 2):
-        rr = blob(th)
-        ax.plot([0, rr * np.cos(th)], [0, rr * np.sin(th)], color=GRAY, lw=1.0, ls="--")
-    tt = np.linspace(th0 - dth / 2, th0 + dth / 2, 30)
-    ax.plot(blob(tt) * np.cos(tt), blob(tt) * np.sin(tt), color=AMBER, lw=4, zorder=4)
-    ax.add_patch(Wedge((0, 0), 0.6, np.degrees(th0 - dth / 2), np.degrees(th0 + dth / 2),
-                       fc=AMBER, ec="none", alpha=0.45))
-    lab(ax, 0.42, 0.62, "dφ", size=13, color=AMBER, ha="left", italic=False)
-    rr = blob(th0 + dth / 2)
-    lab(ax, rr * np.cos(th0 + dth / 2) - 0.1, rr * np.sin(th0 + dth / 2) + 0.22, "dl",
-        size=13, color=AMBER, ha="right", italic=False)
-    ax.text(-0.35, -2.05, "current inside C", ha="center", fontsize=12, color=GRAY)
+    dth = 0.34
+    for th0, name in ((1.51, "near"), (2.78, "far")):
+        t0, t1 = th0 - dth / 2, th0 + dth / 2
+        rr = blob(th0)
+        ax.add_patch(Wedge((0, 0), rr, np.degrees(t0), np.degrees(t1),
+                           fc=AMBER, ec="none", alpha=0.22))
+        tt = np.linspace(t0, t1, 30)
+        ax.plot(blob(tt) * np.cos(tt), blob(tt) * np.sin(tt), color=AMBER, lw=4.5, zorder=4)
+        x, y = rr * np.cos(th0), rr * np.sin(th0)
+        L = 1.0 * 1.15 / rr
+        arrow(ax, x, y, x - L * np.sin(th0), y + L * np.cos(th0), color=BLUE, lw=2.6, ms=17)
+        if name == "near":
+            ax.text(x - 0.55, y + 0.22, "H", fontsize=16, color=BLUE, ha="center")
+            ax.text(0.16, 0.42, "dφ", fontsize=16, color=AMBER, ha="left")
+        else:
+            ax.text(x - 0.55, y - 0.15, "H", fontsize=16, color=BLUE, ha="right")
+            ax.text(-0.95, 0.12, "dφ", fontsize=16, color=AMBER, ha="center")
+    ax.text(-0.35, -2.2, "current inside C", ha="center", fontsize=15, color=GRAY)
 
     # outside: the angle swept forward on the near side and back on the far side
     ax = axs[1]
     qx, qy = wires[1]
-    for ang in (0.13, 0.32):
+    for ang in (0.08, 0.37):
         ax.plot([qx, qx + 4.9 * np.cos(ang)], [qy, qy + 4.9 * np.sin(ang)],
-                color=GRAY, lw=1.0, ls="--")
-    ax.add_patch(Wedge((qx, qy), 0.6, np.degrees(0.13), np.degrees(0.32),
-                       fc=AMBER, ec="none", alpha=0.45))
-    lab(ax, qx + 0.5, qy - 0.32, "dφ", size=13, color=AMBER, ha="left", italic=False)
+                color=GRAY, lw=1.1, ls="--")
+    ax.add_patch(Wedge((qx, qy), 4.9, np.degrees(0.08), np.degrees(0.37),
+                       fc=AMBER, ec="none", alpha=0.18))
+    ax.text(qx + 0.55, qy - 0.5, "dφ", fontsize=16, color=AMBER, ha="left")
     ang = 0.225
     s = np.linspace(0, 5, 4000)
     xs, ys = qx + s * np.cos(ang), qy + s * np.sin(ang)
     inside = np.hypot(xs, ys) < blob(np.arctan2(ys, xs))
     idx = np.nonzero(np.diff(inside.astype(int)))[0]
-    for k, sign in zip(idx[:2], ("−dφ", "+dφ")):
-        ax.plot(xs[k], ys[k], "s", color=AMBER, ms=7, zorder=5)
-        ax.text(xs[k], ys[k] + 0.32, sign, ha="center", fontsize=12, color=AMBER)
-    ax.text(-0.35, -2.05, "current outside C", ha="center", fontsize=12, color=GRAY)
+    for k, sign, dy in zip(idx[:2], ("−dφ", "+dφ"), (0.42, 0.42)):
+        ax.plot(xs[k], ys[k], "s", color=AMBER, ms=8, zorder=5)
+        ax.text(xs[k], ys[k] + dy, sign, ha="center", fontsize=15, color=AMBER)
+    ax.text(-0.35, -2.2, "current outside C", ha="center", fontsize=15, color=GRAY)
     save(fig, "L29-circulation.svg")
+
+
+def two_caps():
+    """A path C, two surfaces with C as their edge, and one current through both."""
+    fig, ax = plt.subplots(figsize=(4.6, 3.8))
+    blank(ax, (-2.3, 2.3), (-1.55, 2.35))
+    a, b = 1.6, 0.42                       # the ellipse that draws C in perspective
+    t = np.linspace(0, 2 * np.pi, 400)
+    # S2: a dome above C, drawn as a half ellipse
+    tt = np.linspace(0, np.pi, 200)
+    ax.fill(np.r_[a * np.cos(tt), a * np.cos(tt[::-1])],
+            np.r_[1.45 * np.sin(tt), -b * np.sin(tt[::-1]) * 0],
+            fc="#f6ead6", ec="none", alpha=0.8)
+    ax.plot(a * np.cos(tt), 1.45 * np.sin(tt), color=AMBER, lw=1.6, ls="--")
+    # S1: the flat disk inside C
+    ax.fill(a * np.cos(t), b * np.sin(t), fc=FILL, ec="none", alpha=0.95, zorder=2)
+    ax.plot(a * np.cos(t), b * np.sin(t), color=NAVY, lw=2.0, zorder=3)
+    for k in (60, 260):
+        arrow(ax, a * np.cos(t[k]), b * np.sin(t[k]), a * np.cos(t[k + 6]), b * np.sin(t[k + 6]),
+              color=NAVY, lw=1.8, ms=15)
+    # the current, piercing both surfaces
+    ax.plot([0.35, 0.35], [-1.45, -0.05], color=RED, lw=2.4, zorder=4)
+    ax.plot([0.35, 0.35], [0.05, 1.32], color=RED, lw=2.4, ls=(0, (4, 3)), zorder=1)
+    arrow(ax, 0.35, 1.32, 0.35, 2.15, color=RED, lw=2.4, ms=16)
+    ax.text(0.5, 1.95, "I", fontsize=17, color=RED, fontstyle="italic")
+    # normals from the right-hand rule
+    arrow(ax, -0.75, 0.0, -0.75, 0.75, color=NAVY, lw=2.0, ms=14)
+    ax.text(-0.95, 0.5, "n̂", fontsize=16, color=NAVY, ha="right")
+    arrow(ax, -0.95, 1.12, -1.25, 1.75, color=AMBER, lw=2.0, ms=14)
+    ax.text(-1.33, 1.6, "n̂", fontsize=16, color=AMBER, ha="right")
+    lab(ax, 1.05, -0.12, "S", "1", size=16, color=NAVY)
+    lab(ax, 1.3, 1.25, "S", "2", size=16, color=AMBER)
+    lab(ax, 1.85, -0.35, "C", size=17, color=NAVY)
+    save(fig, "L29-two-caps.svg")
 
 
 # ---------------------------------------------------------------------------
@@ -190,5 +234,6 @@ def solid_wire():
 
 if __name__ == "__main__":
     circulation()
+    two_caps()
     line_current()
     solid_wire()

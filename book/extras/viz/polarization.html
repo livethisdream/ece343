@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polarization of a uniform plane wave</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34;
+          --ecol:#0067b9;  /* E and its tip */
+          --excol:#1d7a4d; /* x component */
+          --eycol:#b3213a; /* y component */ }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:44px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--on,var(--mid)); border-color:var(--on,var(--mid)); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .tgl input:checked ~ .t { color:var(--on,var(--navy)); }
+  .tgls { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+        gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center;
+           height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3);
+           white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+           text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Path of the tip of the electric field in the transverse plane, and its two components against time"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(E_{x0}\)</label>
+      <input type="range" id="ax" min="0" max="1" step="0.05" value="1">
+      <span class="val" id="ax-val">1.00</span>
+    </div>
+    <div class="ctl">
+      <label>\(E_{y0}\)</label>
+      <input type="range" id="ay" min="0" max="1" step="0.05" value="1">
+      <span class="val" id="ay-val">1.00</span>
+    </div>
+    <div class="ctl">
+      <label>\(\delta\)</label>
+      <input type="range" id="dl" min="-180" max="180" step="5" value="-90">
+      <span class="val" id="dl-val">−90°</span>
+    </div>
+    <div class="tgls">
+      <label class="tgl"><input type="checkbox" id="play"><span class="sw"></span><span class="t">Animate</span></label>
+      <label class="tgl" style="--on:var(--amber)"><input type="checkbox" id="rev"><span class="sw"></span><span class="t">Wave along −z</span></label>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">polarization</span><span class="v" id="r-type">—</span></div>
+    <div class="ro"><span class="k">handedness</span><span class="v" id="r-hand">—</span></div>
+    <div class="ro"><span class="k">axial ratio</span><span class="v" id="r-ar">—</span></div>
+    <div class="ro"><span class="k">major-axis tilt</span><span class="v" id="r-tilt">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS='Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+function mixLabel(ctx,chunks,x,yc,h,color,align,bold){
+  const fpx=h-1, f=(bold?'700 ':'')+fpx+'px '+SANS;
+  let tot=0;
+  for(const c of chunks){ if(c.m) tot+=MJ.width(c.m,color,h); else { ctx.font=f; tot+=ctx.measureText(c.s).width; } }
+  let cx = align==='right'? x-tot : (align==='center'? x-tot/2 : x);
+  for(const c of chunks){
+    if(c.m){ MJ.draw(ctx,c.m,cx,yc,h,color,'left'); cx+=MJ.width(c.m,color,h); }
+    else { stext(ctx,c.s,cx,yc,fpx,color,'left',bold); ctx.font=f; cx+=ctx.measureText(c.s).width; }
+  }
+}
+
+// The field at the plane z = 0, with phi = omega t:
+//   E_x = Ex0 cos(phi),  E_y = Ey0 cos(phi + delta).
+// A wave along +z or along -z gives the same path at z = 0; only the direction
+// of travel, and so the handedness, differs. The rotation sense comes from the
+// z component of E x dE/dt = -omega Ex0 Ey0 sin(delta): positive (right-hand
+// for travel along +z) when sin(delta) < 0.
+const state = { ax: 1, ay: 1, dl: -Math.PI/2, phi: 0, playing: false, rev: false };
+const Ex = p => state.ax*Math.cos(p);
+const Ey = p => state.ay*Math.cos(p + state.dl);
+
+function shape() {
+  // major and minor half-axes and tilt, sampled over one period
+  let rmax=-1, rmin=1e9, tmax=0;
+  for (let i=0;i<720;i++){ const p=i*Math.PI/360; const x=Ex(p), y=Ey(p), r=Math.hypot(x,y);
+    if (r>rmax){ rmax=r; tmax=Math.atan2(y,x); } if (r<rmin) rmin=r; }
+  let tilt = tmax*180/Math.PI; if (tilt > 90) tilt -= 180; if (tilt <= -90) tilt += 180;
+  return { rmax, rmin, tilt };
+}
+
+// ---- controls ----
+const axEl=document.getElementById('ax'), ayEl=document.getElementById('ay'), dlEl=document.getElementById('dl');
+const playBtn=document.getElementById('play'), revEl=document.getElementById('rev');
+function fmtDeg(v){ return (v<0?'−':(v>0?'+':''))+Math.abs(v).toFixed(0)+'°'; }
+function onCtl(){
+  state.ax=parseFloat(axEl.value); state.ay=parseFloat(ayEl.value);
+  const d=parseFloat(dlEl.value); state.dl=d*Math.PI/180; state.rev=revEl.checked;
+  document.getElementById('ax-val').textContent=state.ax.toFixed(2);
+  document.getElementById('ay-val').textContent=state.ay.toFixed(2);
+  document.getElementById('dl-val').textContent=fmtDeg(d);
+  draw();
+}
+for (const el of [axEl,ayEl,dlEl]) el.addEventListener('input', onCtl);
+revEl.addEventListener('change', onCtl);
+playBtn.addEventListener('change', ()=>{ state.playing=playBtn.checked; if(state.playing){ lastTs=null; requestAnimationFrame(tick);} });
+let lastTs=null;
+function tick(ts){
+  if(!state.playing) return;
+  if(lastTs===null) lastTs=ts;
+  const dt=Math.min(0.05,(ts-lastTs)/1000); lastTs=ts;
+  state.phi=(state.phi+dt*1.6)%(2*Math.PI);
+  draw(); requestAnimationFrame(tick);
+}
+
+// ---- canvas ----
+const canvas=document.getElementById('plot'), ctx=canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight;
+  if(bh) cv.style.height=(hCss+bh)+'px';
+}
+/* No SCL scaling: the layout is computed from the real width, so text stays at
+   its CSS size on a phone. Wide: the transverse plane and the time traces sit
+   side by side. Narrow: the time traces go under the plane, at reduced height. */
+let W=600, H=300, NARROW=false;
+function fit(){
+  const dpr=window.devicePixelRatio||1;
+  W=cvWidth(canvas); NARROW = W < 470;
+  H = NARROW ? Math.round(Math.min(W*0.55,215) + 104) : Math.round(Math.max(250, Math.min(W*0.42, 300)));
+  setSize(canvas,W,H,dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function arrowTo(x0,y0,x1,y1,col,lw,head){
+  ctx.strokeStyle=col; ctx.fillStyle=col; ctx.lineWidth=lw;
+  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+  const a=Math.atan2(y1-y0,x1-x0), L=Math.hypot(x1-x0,y1-y0); if (L<2) return;
+  const hl=Math.min(head,L*0.6);
+  ctx.beginPath(); ctx.moveTo(x1,y1);
+  ctx.lineTo(x1-hl*Math.cos(a-0.4), y1-hl*Math.sin(a-0.4));
+  ctx.lineTo(x1-hl*Math.cos(a+0.4), y1-hl*Math.sin(a+0.4)); ctx.closePath(); ctx.fill();
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const ecol=cssVar('--ecol'), xcol=cssVar('--excol'), ycol=cssVar('--eycol');
+  // ---- panel geometry ----
+  let S, cx, cy, tx0, tx1, ty0, ty1;
+  if (NARROW){ S=Math.min(W-24, H-112); cx=W/2; cy=6+S/2; tx0=40; tx1=W-12; ty0=S+16; ty1=H-34; }
+  else { S=H-28; cx=14+S/2; cy=H/2; tx0=S+70; tx1=W-14; ty0=24; ty1=H-38; }
+  const R=S/2-16;           // radius for unit amplitude: |E| ≤ sqrt(2) fits with margin
+  const sc=R/1.45;
+  const X=v=>cx+v*sc, Y=v=>cy-v*sc;
+
+  // ---- transverse plane ----
+  ctx.strokeStyle='#eef3f8'; ctx.lineWidth=1;
+  for (let v=-1; v<=1.001; v+=0.5){ ctx.beginPath(); ctx.moveTo(X(-1.4),Y(v)); ctx.lineTo(X(1.4),Y(v)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(X(v),Y(-1.4)); ctx.lineTo(X(v),Y(1.4)); ctx.stroke(); }
+  arrowTo(X(-1.4),Y(0),X(1.42),Y(0),'#9fb6cc',1,7);
+  arrowTo(X(0),Y(-1.4),X(0),Y(1.42),'#9fb6cc',1,7);
+  mixLabel(ctx,[{m:'x'}],X(1.42)-2,Y(0)+11,13,'#5b6573','right',false);
+  mixLabel(ctx,[{m:'y'}],X(0)-8,Y(1.42)+4,13,'#5b6573','right',false);
+  // propagation marker at the origin: out of the page for +z, into it for -z
+  const kr=7;
+  ctx.strokeStyle=cssVar('--navy'); ctx.lineWidth=1.5; ctx.fillStyle='#fff';
+  ctx.beginPath(); ctx.arc(X(0),Y(0),kr,0,2*Math.PI); ctx.fill(); ctx.stroke();
+  if (!state.rev){ ctx.fillStyle=cssVar('--navy'); ctx.beginPath(); ctx.arc(X(0),Y(0),2.3,0,2*Math.PI); ctx.fill(); }
+  else { const d=kr*0.62; ctx.beginPath(); ctx.moveTo(X(0)-d,Y(0)-d); ctx.lineTo(X(0)+d,Y(0)+d); ctx.moveTo(X(0)-d,Y(0)+d); ctx.lineTo(X(0)+d,Y(0)-d); ctx.stroke(); }
+  stext(ctx, state.rev ? 'wave into page (−z)' : 'wave out of page (+z)', X(-1.42), Y(-1.42)+2, 11.5, cssVar('--navy'), 'left', true);
+
+  // full path of the tip
+  ctx.strokeStyle=ecol; ctx.globalAlpha=0.35; ctx.lineWidth=2;
+  ctx.beginPath();
+  for (let i=0;i<=360;i++){ const p=i*Math.PI/180; const x=X(Ex(p)), y=Y(Ey(p)); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+  ctx.stroke(); ctx.globalAlpha=1;
+  // trail over the last quarter period
+  ctx.lineWidth=3; ctx.strokeStyle=ecol;
+  ctx.beginPath();
+  for (let i=0;i<=40;i++){ const p=state.phi - (40-i)*(Math.PI/2)/40; const x=X(Ex(p)), y=Y(Ey(p)); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+  ctx.stroke();
+  // components and the vector
+  const ex=Ex(state.phi), ey=Ey(state.phi);
+  ctx.setLineDash([3,3]); ctx.lineWidth=1.2;
+  ctx.strokeStyle=xcol; ctx.beginPath(); ctx.moveTo(X(ex),Y(0)); ctx.lineTo(X(ex),Y(ey)); ctx.stroke();
+  ctx.strokeStyle=ycol; ctx.beginPath(); ctx.moveTo(X(0),Y(ey)); ctx.lineTo(X(ex),Y(ey)); ctx.stroke();
+  ctx.setLineDash([]);
+  arrowTo(X(0),Y(0),X(ex),Y(0),xcol,2,7);
+  arrowTo(X(0),Y(0),X(0),Y(ey),ycol,2,7);
+  arrowTo(X(0),Y(0),X(ex),Y(ey),ecol,3,11);
+  mixLabel(ctx,[{m:'\\mathbf{E}'}],X(ex)+(ex>=0?8:-8),Y(ey)-9,15,ecol,ex>=0?'left':'right',true);
+
+  // ---- time traces ----
+  const tW=tx1-tx0, tH=ty1-ty0, tm=ty0+tH/2;
+  const TX=p=>tx0+(p/(2*Math.PI))*tW, TY=v=>tm-(v/1.15)*(tH/2);
+  ctx.strokeStyle='#eef3f8'; ctx.lineWidth=1;
+  for (let k=0;k<=4;k++){ ctx.beginPath(); ctx.moveTo(TX(k*Math.PI/2),ty0); ctx.lineTo(TX(k*Math.PI/2),ty1); ctx.stroke(); }
+  ctx.strokeStyle='#cddce9'; ctx.strokeRect(tx0,ty0,tW,tH);
+  ctx.strokeStyle='#9fb6cc'; ctx.beginPath(); ctx.moveTo(tx0,tm); ctx.lineTo(tx1,tm); ctx.stroke();
+  for (const [fn,col] of [[Ex,xcol],[Ey,ycol]]){
+    ctx.strokeStyle=col; ctx.lineWidth=2.2; ctx.beginPath();
+    for (let px=0; px<=tW; px++){ const p=(px/tW)*2*Math.PI; const y=TY(fn(p)); px?ctx.lineTo(tx0+px,y):ctx.moveTo(tx0+px,y); }
+    ctx.stroke();
+  }
+  const pm=((state.phi%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  ctx.strokeStyle=cssVar('--navy'); ctx.lineWidth=1.2; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(TX(pm),ty0); ctx.lineTo(TX(pm),ty1); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle=xcol; ctx.beginPath(); ctx.arc(TX(pm),TY(Ex(pm)),3.5,0,2*Math.PI); ctx.fill();
+  ctx.fillStyle=ycol; ctx.beginPath(); ctx.arc(TX(pm),TY(Ey(pm)),3.5,0,2*Math.PI); ctx.fill();
+  ctx.fillStyle='#5b6573'; ctx.font='11px '+SANS; ctx.textAlign='center'; ctx.textBaseline='top';
+  const tl=['0','T/4','T/2','3T/4','T'];
+  for (let k=0;k<=4;k++) ctx.fillText(tl[k], TX(k*Math.PI/2), ty1+4);
+  mixLabel(ctx,[{s:'time '},{m:'t'},{s:' at '},{m:'z=0'}],tx1,ty1+22,12.5,'#3b4651','right',false);
+  mixLabel(ctx,[{m:'E_x'}],tx0+6,ty0+11,13,xcol,'left',true);
+  mixLabel(ctx,[{m:'E_y'}],tx0+40,ty0+11,13,ycol,'left',true);
+
+  updateReadout();
+}
+
+function updateReadout(){
+  const { rmax, rmin, tilt } = shape();
+  const s=Math.sin(state.dl), eps=1e-6;
+  let type, hand;
+  if (rmax < eps) { type='no field'; hand='—'; }
+  else if (rmin < 1e-4*rmax) { type='linear'; hand='none'; }
+  else {
+    type = (Math.abs(rmax-rmin) < 1e-4*rmax) ? 'circular' : 'elliptical';
+    const right = state.rev ? (s > 0) : (s < 0);
+    hand = right ? 'right-hand' : 'left-hand';
+  }
+  document.getElementById('r-type').textContent=type;
+  document.getElementById('r-hand').textContent=hand;
+  document.getElementById('r-ar').textContent = (rmax<eps) ? '—' : (rmin < 1e-4*rmax ? '∞' : (rmax/rmin).toFixed(2));
+  document.getElementById('r-tilt').textContent = (rmax<eps || type==='circular') ? '—' : fmtDeg(Math.round(tilt));
+}
+
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

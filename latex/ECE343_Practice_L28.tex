@@ -1,0 +1,234 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L28 practice set (Magnetic Fields and Gauss's Law for Magnetism): a finite
+% wire, a loop on its axis, a square loop, which fields can be magnetic, and
+% the force on a moving charge.
+
+\fullwidth{\textbf{Learning Objectives 7.1 and 7.2: } I can use the Biot-Savart law to
+simple magnetostatic systems to find the magnetic field at an observation point.
+I can articulate the meaning of both the integral form and point form of
+Gauss's Law for magnetism.
+\\[4pt]\normalfont\small Show your work. Take $\mu = \mu_0 = 4\pi\ee{-7}$ H/m. Write a
+\textbf{Documentation} line at the end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A finite wire.} A straight wire on the $z$ axis carries $I = 2$ A in
+the $+z$ direction from $z = -10$ cm to $z = 10$ cm.
+\begin{parts}
+
+	\part Starting from the Biot-Savart law, derive the field at a distance $\rho$
+	from the wire in the plane $z = 0$.
+	\begin{solution}[2.6in]
+	With $d\vec{l} = \hat{\mathbf{z}}\ dz^{\prime}$ and
+	$\vec{R} = \rho\hat{\boldsymbol{\rho}} - z^{\prime}\hat{\mathbf{z}}$,
+	the cross product is
+	$d\vec{l}\times\vec{R} = \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}$, so
+	\eq{
+		\vec{H} &= \int_{-L/2}^{L/2} \dfrac{I\ \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}}{4\pi\lp\rho^2 + z^{\prime 2}\rp^{3/2}}
+		= \hat{\boldsymbol{\phi}}\dfrac{I\rho}{4\pi}\lb \dfrac{z^{\prime}}{\rho^2\sqrt{\rho^2 + z^{\prime 2}}} \rb_{-L/2}^{L/2} \\
+		&= \hat{\boldsymbol{\phi}}\dfrac{I L}{4\pi\rho\sqrt{\rho^2 + L^2/4}}
+	}
+	The integral follows from $z^{\prime} = \rho\tan\alpha$, as in Lesson 18.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\vec{H}$ and $|\vec{B}|$ at the point $(5, 0, 0)$ cm.
+		\begin{solution}[1.3in]
+		\eq{
+			H &= \dfrac{(2)(0.2)}{4\pi(0.05)\sqrt{0.05^2 + 0.1^2}} = 5.69\ \text{A/m} \\
+			\vec{H} &= 5.69\ \hat{\mathbf{y}}\ \text{A/m} \\
+			B &= \mu_0 H = 7.16\ \mu\text{T}
+		}
+		At $(5, 0, 0)$ cm, $\hat{\boldsymbol{\phi}} = \hat{\mathbf{y}}$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vec{H}$ = \ansbox[1.5in]{$5.69\ \hat{\mathbf{y}}$ A/m}
+
+		\vspace{4pt}
+		$|\vec{B}|$ = \ansbox[1.5in]{$7.16\ \mu$T}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Compare your answer with the field of an infinite wire carrying the same
+		current. What fraction of the infinite-wire field does the finite wire give?
+		\begin{solution}[1in]
+		\eq{
+			H_\infty &= \dfrac{I}{2\pi\rho} = \dfrac{2}{2\pi(0.05)} = 6.37\ \text{A/m} \\
+			\dfrac{H}{H_\infty} &= \dfrac{5.69}{6.37} = 0.894
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		fraction = \ansbox[1.3in]{$0.894$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A loop on its axis.} A circular loop of radius $a = 4$ cm lies in the
+plane $z = 0$, centered on the $z$ axis, and carries $I = 0.5$ A counterclockwise
+seen from above.
+\begin{parts}
+
+	\part Starting from the Biot-Savart law, derive the field at height $z$ on the
+	axis. Explain why the radial part of the integral is zero.
+	\begin{solution}[2.6in]
+	With $d\vec{l} = \hat{\boldsymbol{\phi}}^{\prime}\ a\ d\phi^{\prime}$ and
+	$\vec{R} = z\hat{\mathbf{z}} - a\hat{\boldsymbol{\rho}}^{\prime}$,
+	$R = \sqrt{a^2 + z^2}$ for every element and
+	$d\vec{l}\times\vec{R} = a\ d\phi^{\prime}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp$:
+	\eq{
+		\vec{H} &= \dfrac{I a}{4\pi\lp a^2 + z^2\rp^{3/2}}\int_0^{2\pi}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp d\phi^{\prime}
+		= \hat{\mathbf{z}}\dfrac{I a^2}{2\lp a^2 + z^2\rp^{3/2}}
+	}
+	The unit vector $\hat{\boldsymbol{\rho}}^{\prime}$ turns with $\phi^{\prime}$, and its
+	integral around a full circle is zero: the elements on opposite sides of the
+	loop produce equal and opposite radial fields.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $|\vec{H}|$ at the center of the loop and at $z = 3$ cm.
+		\begin{solution}[1.2in]
+		\eq{
+			H(0) &= \dfrac{I}{2a} = \dfrac{0.5}{2(0.04)} = 6.25\ \text{A/m} \\
+			H(3\ \text{cm}) &= \dfrac{(0.5)(0.04)^2}{2\lp 0.04^2 + 0.03^2\rp^{3/2}} = 3.20\ \text{A/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		center = \ansbox[1.3in]{$6.25$ A/m}
+
+		\vspace{4pt}
+		$z = 3$ cm: \ansbox[1.3in]{$3.20$ A/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part At what height on the axis is the field half its value at the center?
+		\begin{solution}[1.2in]
+		\eq{
+			\lp\dfrac{a^2}{a^2 + z^2}\rp^{3/2} &= \dfrac{1}{2} \implies a^2 + z^2 = 2^{2/3}a^2 \\
+			z &= a\sqrt{2^{2/3} - 1} = 0.766\ a = 3.07\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$z$ = \ansbox[1.3in]{$3.07$ cm}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A square loop.} A square loop of side $s = 8$ cm carries $I = 2$ A.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use the finite-wire result to find the field at the center of the loop.
+		\begin{solution}[2in]
+		The center is on the bisecting plane of each side, with $L = s$ and
+		$\rho = s/2$, and all four sides produce fields in the same direction:
+		\eq{
+			H_\text{side} &= \dfrac{I s}{4\pi(s/2)\sqrt{s^2/4 + s^2/4}} = \dfrac{\sqrt{2}\ I}{2\pi s} = 5.63\ \text{A/m} \\
+			H &= 4H_\text{side} = \dfrac{2\sqrt{2}\ I}{\pi s} = 22.5\ \text{A/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H$ = \ansbox[1.3in]{$22.5$ A/m}
+	\end{minipage}
+
+	\part A circular loop of radius $a = s/2$ fits inside the square and carries the
+	same current. Find its field at the center, and explain why it is larger than
+	the square's even though the square has more wire.
+	\begin{solution}[1.3in]
+	\eq{ H = \dfrac{I}{2a} = \dfrac{2}{2(0.04)} = 25.0\ \text{A/m} }
+	Every element of the circle is $4$ cm from the center and broadside to it. The
+	wire near the corners of the square is farther away, up to
+	$s/\sqrt{2} = 5.66$ cm, and sees the center at a smaller $\sin\theta$, so it
+	contributes less.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Gauss's law for magnetism.}
+\begin{parts}
+
+	\part Which of these fields could be a magnetic flux density? Justify each answer.
+	\[ \vec{B}_1 = x\hat{\mathbf{x}} - y\hat{\mathbf{y}}, \qquad \vec{B}_2 = y\hat{\mathbf{x}} + x\hat{\mathbf{y}}, \qquad \vec{B}_3 = x\hat{\mathbf{x}} + y\hat{\mathbf{y}} \]
+	\begin{solution}[1.3in]
+	\eq{
+		\nabla\cdot\vec{B}_1 &= 1 - 1 = 0 \quad \text{possible} \\
+		\nabla\cdot\vec{B}_2 &= 0 + 0 = 0 \quad \text{possible} \\
+		\nabla\cdot\vec{B}_3 &= 1 + 1 = 2 \quad \text{not possible: a magnetic field has } \nabla\cdot\vec{B} = 0
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The Earth's field at a site is $50\ \mu$T, pointing straight down. Find the
+		magnetic flux through a hemispherical dome of radius $1$ m sitting on flat
+		ground. Use Gauss's law to avoid integrating over the dome.
+		\begin{solution}[1.6in]
+		The dome and the flat disk under it form a closed surface, so the flux
+		through the dome equals the flux through the disk:
+		\eq{ \Phi = B\pi R^2 = \lp 50\ee{-6}\rp\pi\lp 1\rp^2 = 157\ \mu\text{Wb} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Phi$ = \ansbox[1.3in]{$157\ \mu$Wb}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The force on a moving charge.} A long straight wire on the $z$ axis
+carries $10$ A in the $+z$ direction. An electron passes the point $(1, 0, 0)$ cm
+moving at $10^6$ m/s in the $+z$ direction.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\vec{B}$ at the electron.
+		\begin{solution}[1in]
+		\eq{ \vec{B} = \hat{\boldsymbol{\phi}}\dfrac{\mu_0 I}{2\pi\rho} = \hat{\mathbf{y}}\dfrac{\lp 4\pi\ee{-7}\rp(10)}{2\pi(0.01)} = 200\ \hat{\mathbf{y}}\ \mu\text{T} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vec{B}$ = \ansbox[1.3in]{$200\ \hat{\mathbf{y}}\ \mu$T}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the force on the electron, and state whether it pulls the electron
+		toward the wire or pushes it away.
+		\begin{solution}[1.4in]
+		\eq{
+			\vec{F} &= q\vec{v}\times\vec{B} = \lp -1.602\ee{-19}\rp\lp 10^6\hat{\mathbf{z}}\rp\times\lp 2\ee{-4}\hat{\mathbf{y}}\rp \\
+			&= \lp -3.20\ee{-17}\rp\lp -\hat{\mathbf{x}}\rp = 3.20\ee{-17}\ \hat{\mathbf{x}}\ \text{N}
+		}
+		The force points away from the wire. The electron's motion is a current
+		opposite to the wire's, and opposite currents repel.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\vec{F}$ = \ansbox[1.5in]{$3.20\ee{-17}\ \hat{\mathbf{x}}$ N}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

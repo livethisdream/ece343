@@ -1,0 +1,187 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L36 practice set (Maxwell's Equations in a Lossless, Source-Free Region II):
+% the 1D solution of the Helmholtz equation, the complex permittivity and the
+% loss tangent, the exact and limiting attenuation constants, and skin depth.
+
+\fullwidth{\textbf{Learning Objective 9.1: } I understand the process of
+decoupling and finding solutions for Maxwell's equations for dynamic fields.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A wave in a lossless dielectric.} A $1\ \ghz$ wave travels in the
+$+z$ direction in a lossless dielectric with $\epsilon_r = 9$ and $\mu_r = 1$. Its
+electric field is along $\hat{\mathbf{x}}$, with amplitude $10$ V/m and phase zero
+at $z = 0$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\beta$, $\lambda$, and $v_p$.
+		\begin{solution}[1.2in]
+		\eq{
+			\beta &= \frac{\omega\sqrt{\epsilon_r}}{c} = \frac{2\pi\times10^{9}\times3}{2.998\times10^{8}} = 62.9\ \text{rad/m} \\
+			\lambda &= \frac{2\pi}{\beta} = 9.99\ \text{cm}, \qquad v_p = \frac{c}{3} = 1.00\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\beta$ = \ansbox[1.3in]{$62.9$ rad/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$9.99$ cm}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$1.00\times10^{8}$ m/s}
+	\end{minipage}
+
+	\part Write the phasor $\widetilde{\mathbf{E}}(z)$ and the time-domain field
+	$\mathbf{E}(z,t)$.
+	\begin{solution}[1in]
+	Only the forward wave is present, so $E_0^- = 0$ and $E_0^+ = 10$ V/m:
+	\eq{
+		\widetilde{\mathbf{E}}(z) &= \hat{\mathbf{x}}\ 10e^{-j62.9z}\ \text{V/m} \\
+		\mathbf{E}(z,t) &= \hat{\mathbf{x}}\ 10\cos\left(2\pi\times10^{9}t - 62.9z\right)\ \text{V/m}
+	}
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The exact attenuation constant.}
+\begin{parts}
+
+	\part Starting from $\gamma^2 = j\omega\mu\left(\sigma + j\omega\epsilon\right)$
+	with $\gamma = \alpha + j\beta$, derive the two equations
+	$\alpha^2 - \beta^2 = -\omega^2\mu\epsilon$ and $2\alpha\beta = \omega\mu\sigma$,
+	and from them the exact expression for $\alpha$.
+	\begin{solution}[2.4in]
+	\eq{
+		\left(\alpha + j\beta\right)^2 = \alpha^2 - \beta^2 + j2\alpha\beta = -\omega^2\mu\epsilon + j\omega\mu\sigma
+	}
+	Matching real and imaginary parts gives the two equations. The second gives
+	$\beta = \omega\mu\sigma/2\alpha$; substituting into the first and multiplying by
+	$\alpha^2$,
+	\eq{
+		\left(\alpha^2\right)^2 + \omega^2\mu\epsilon\ \alpha^2 - \frac{\omega^2\mu^2\sigma^2}{4} &= 0 \\
+		\alpha^2 &= \frac{\omega^2\mu\epsilon}{2}\left[\sqrt{1 + \left(\frac{\sigma}{\omega\epsilon}\right)^2} - 1\right]
+	}
+	We keep the root with $\alpha^2 > 0$, and $\alpha$ is its positive square root.
+	\end{solution}
+
+	\part Wet earth has $\sigma = 0.01$ S/m and $\epsilon_r = 10$. Find
+	$\sigma/\omega\epsilon$ at $1\ \mhz$ and at $1\ \ghz$, and say which limit, if
+	either, applies at each.
+	\begin{solution}[1.1in]
+	\eq{
+		1\ \mhz: \quad \frac{\sigma}{\omega\epsilon} &= \frac{0.01}{2\pi\times10^{6}\times10\times8.854\times10^{-12}} = 18.0 \\
+		1\ \ghz: \quad \frac{\sigma}{\omega\epsilon} &= 0.0180
+	}
+	At $1\ \mhz$ the earth is close to a good conductor; at $1\ \ghz$ it is a
+	low-loss dielectric.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\alpha$ at each frequency from the matching limit, and compare
+		with the exact values, $0.193$ Np/m at $1\ \mhz$ and $0.596$ Np/m at $1\ \ghz$.
+		\begin{solution}[1.4in]
+		At $1\ \mhz$, the good-conductor limit:
+		\eq{
+			\alpha &\approx \sqrt{\pi f\mu\sigma} \\
+			&= \sqrt{\pi\times10^{6}\times4\pi\times10^{-7}\times0.01} = 0.199\ \text{Np/m}
+		}
+		At $1\ \ghz$, the low-loss limit:
+		\eq{ \alpha \approx \frac{\sigma}{2}\sqrt{\frac{\mu_0}{\epsilon}} = 0.005\times\frac{376.7}{\sqrt{10}} = 0.596\ \text{Np/m} }
+		The good-conductor value is $3\%$ high, because a ratio of 18 is not yet far
+		above one; the low-loss value matches the exact one to three figures.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\alpha$, 1 MHz = \ansbox[1.1in]{$0.199$ Np/m}
+
+		\vspace{4pt}
+		$\alpha$, 1 GHz = \ansbox[1.1in]{$0.596$ Np/m}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Skin depth.} Copper has $\sigma = 5.8\times10^{7}$ S/m and aluminum
+$3.7\times10^{7}$ S/m; both have $\mu = \mu_0$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the skin depth of copper at $60$ Hz, $1\ \mhz$, and $10\ \ghz$.
+		\begin{solution}[1.3in]
+		\eq{
+			\delta &= \frac{1}{\sqrt{\pi f\mu_0\sigma}} \\
+			60\ \text{Hz}: \ \delta &= 8.53\ \text{mm} \\
+			1\ \mhz: \ \delta &= 66.1\ \mu\text{m} \\
+			10\ \ghz: \ \delta &= 0.661\ \mu\text{m}
+		}
+		Each factor of 100 in frequency divides $\delta$ by 10.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		60 Hz = \ansbox[1.2in]{$8.53$ mm}
+
+		\vspace{4pt}
+		1 MHz = \ansbox[1.2in]{$66.1\ \mu$m}
+
+		\vspace{4pt}
+		10 GHz = \ansbox[1.2in]{$0.661\ \mu$m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A shield of aluminum foil $16\ \mu$m thick surrounds a circuit. At
+		$100\ \mhz$, what fraction of the field amplitude that enters the foil reaches
+		its far side? Express the reduction in dB.
+		\begin{solution}[1.3in]
+		\eq{
+			\delta &= \frac{1}{\sqrt{\pi\times10^{8}\times4\pi\times10^{-7}\times3.7\times10^{7}}} \\
+			&= 8.27\ \mu\text{m} \\
+			e^{-t/\delta} &= e^{-16/8.27} = e^{-1.93} = 0.145 \\
+			8.686\times1.93 &= 16.8\ \text{dB}
+		}
+		Lesson 38 adds the reflection at the foil's surface, which reduces the field
+		further.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		fraction = \ansbox[1.3in]{$0.145$}
+
+		\vspace{4pt}
+		reduction = \ansbox[1.3in]{$16.8$ dB}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Seawater has $\sigma = 4$ S/m and $\epsilon_r = 81$. At $10$ kHz, where it
+		is a good conductor, find the depth at which the field amplitude falls to $1\%$ of
+		its value at the surface.
+		\begin{solution}[1.2in]
+		\eq{
+			\delta &= \frac{1}{\sqrt{\pi\times10^{4}\times4\pi\times10^{-7}\times4}} = 2.52\ \m \\
+			e^{-d/\delta} &= 0.01 \\
+			d &= \delta\ln 100 = 4.61\times2.52 = 11.6\ \m
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		depth = \ansbox[1.3in]{$11.6\ \m$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

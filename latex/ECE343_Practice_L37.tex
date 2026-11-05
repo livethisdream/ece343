@@ -1,0 +1,196 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L37 practice set (Uniform Plane Waves and Polarization): the fields of a plane
+% wave in a dielectric, H for a wave along y, identifying five polarizations,
+% and the axes of an ellipse.
+
+\fullwidth{\textbf{Learning Objectives 9.2--9.4: } I can articulate what a Uniform
+Plane Wave (UPW) is and describe key properties that relate the electric and
+magnetic field. I can calculate the electric and magnetic fields for a UPW. I can
+articulate the concept of polarization and determine the polarization for various
+UPWs.
+\\[4pt]\normalfont\small Show your work. Use the IEEE convention for handedness.
+Write a \textbf{Documentation} line at the end (\textbf{None} if you did not
+collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A plane wave in a dielectric.} A uniform plane wave travels along
+$+z$ in a lossless dielectric with $\epsilon_r = 4$ and $\mu = \mu_0$. Its electric
+field is
+\[
+	\mathbf{E} = \hat{\mathbf{x}}\ 6\cos\left(2\pi\times10^{8}\ t - \beta z\right)\ \text{V/m}
+\]
+\begin{parts}
+
+	\part Starting from Faraday's law in phasor form,
+	$\nabla\times\widetilde{\mathbf{E}} = -j\omega\mu\widetilde{\mathbf{H}}$,
+	derive $\widetilde{\mathbf{H}}$ for $\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ E_0 e^{-j\beta z}$,
+	and show that $E_0/H_0 = \sqrt{\mu/\epsilon}$.
+	\begin{solution}[1.8in]
+	Only the $\hat{\mathbf{y}}$ term of the curl survives, since $\widetilde{\mathbf{E}}$
+	has only an $x$ component and depends only on $z$:
+	\eq{
+		\nabla\times\widetilde{\mathbf{E}} &= \hat{\mathbf{y}}\ \dfrac{d\widetilde{E}_x}{dz}
+			= -\hat{\mathbf{y}}\ j\beta E_0 e^{-j\beta z} = -j\omega\mu\widetilde{\mathbf{H}} \\
+		\widetilde{\mathbf{H}} &= \hat{\mathbf{y}}\ \dfrac{\beta}{\omega\mu}\ E_0 e^{-j\beta z} \\
+		\dfrac{E_0}{H_0} &= \dfrac{\omega\mu}{\beta} = \dfrac{\omega\mu}{\omega\sqrt{\mu\epsilon}} = \sqrt{\dfrac{\mu}{\epsilon}}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\beta$, $\lambda$, $v_p$, and $\eta$.
+		\begin{solution}[1.3in]
+		\eq{
+			\beta &= \dfrac{\omega\sqrt{\epsilon_r}}{c} = \dfrac{2\pi\times10^{8}\times2}{3.00\times10^{8}} = 4.19\ \text{rad/m} \\
+			\lambda &= \dfrac{2\pi}{\beta} = 1.50\ \text{m}, \qquad v_p = \dfrac{c}{\sqrt{\epsilon_r}} = 1.50\times10^{8}\ \text{m/s} \\
+			\eta &= \dfrac{376.7}{2} = 188\ \Omega
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\beta$ = \ansbox[1.3in]{$4.19$ rad/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$1.50$ m}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$1.50\times10^{8}$ m/s}
+
+		\vspace{4pt}
+		$\eta$ = \ansbox[1.3in]{$188\ \Omega$}
+	\end{minipage}
+
+	\part Write $\mathbf{H}(z,t)$.
+	\begin{solution}[0.9in]
+	$H_0 = 6/188.4 = 31.9$ mA/m, along $\hat{\mathbf{z}}\times\hat{\mathbf{x}} = \hat{\mathbf{y}}$:
+	\eq{ \mathbf{H} = \hat{\mathbf{y}}\ 31.9\cos\left(2\pi\times10^{8}\ t - 4.19z\right)\ \text{mA/m} }
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A wave along $y$.} In free space,
+\[
+	\mathbf{E} = \hat{\mathbf{z}}\ 3\cos\left(2\pi\times10^{9}\ t - \beta y\right)\ \text{V/m}
+\]
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Give the direction of travel and find $\beta$.
+		\begin{solution}[0.9in]
+		The phase $\omega t - \beta y$ is constant when $y$ grows with $t$, so
+		$\hat{\mathbf{k}} = \hat{\mathbf{y}}$.
+		\eq{ \beta = \dfrac{\omega}{c} = \dfrac{2\pi\times10^{9}}{3.00\times10^{8}} = 21.0\ \text{rad/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\hat{\mathbf{k}}$ = \ansbox[1.3in]{$\hat{\mathbf{y}}$}
+
+		\vspace{4pt}
+		$\beta$ = \ansbox[1.3in]{$21.0$ rad/m}
+	\end{minipage}
+
+	\part Find $\mathbf{H}(y,t)$, and check that $\mathbf{E}\times\mathbf{H}$ points along
+	the direction of travel.
+	\begin{solution}[1.2in]
+	\eq{
+		\widetilde{\mathbf{H}} &= \dfrac{1}{\eta_0}\ \hat{\mathbf{k}}\times\widetilde{\mathbf{E}} = \dfrac{3}{376.7}\ \hat{\mathbf{y}}\times\hat{\mathbf{z}}\ e^{-j\beta y} = \hat{\mathbf{x}}\ 7.96\times10^{-3}\ e^{-j\beta y} \\
+		\mathbf{H} &= \hat{\mathbf{x}}\ 7.96\cos\left(2\pi\times10^{9}\ t - 21.0y\right)\ \text{mA/m}
+	}
+	Check: $\hat{\mathbf{z}}\times\hat{\mathbf{x}} = \hat{\mathbf{y}}$, the direction of travel.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Identify the polarization.} For each wave, state whether it is
+linear, circular, or elliptical, give the handedness of a circular or elliptical
+wave, and give the tilt from the $x$ axis of a linear one.
+\begin{parts}
+
+	\part $\widetilde{\mathbf{E}} = \left(\hat{\mathbf{x}}\ 3 + \hat{\mathbf{y}}\ 4\right)e^{-j\beta z}$
+	\begin{solution}[0.6in]
+	$\delta = 0$: linear, tilted at $\arctan(4/3) = 53.1^\circ$ from the $x$ axis.
+	\end{solution}
+
+	\part $\widetilde{\mathbf{E}} = \left(\hat{\mathbf{x}} - \hat{\mathbf{y}}\right)e^{-j\beta z}$
+	\begin{solution}[0.6in]
+	$-1 = e^{j180^\circ}$, so $\delta = 180^\circ$: linear, along the line $y = -x$, at $-45^\circ$.
+	\end{solution}
+
+	\part $\widetilde{\mathbf{E}} = 5\left(\hat{\mathbf{x}} + j\hat{\mathbf{y}}\right)e^{-j\beta z}$
+	\begin{solution}[0.7in]
+	Equal amplitudes and $\delta = +90^\circ$. The wave travels along $+z$ and
+	$\sin\delta > 0$, so it is left-hand circularly polarized.
+	\end{solution}
+
+	\part $\mathbf{E} = \hat{\mathbf{x}}\cos\left(\omega t - \beta z\right) + \hat{\mathbf{y}}\ 2\sin\left(\omega t - \beta z\right)$
+	\begin{solution}[1.1in]
+	$2\sin\theta = 2\cos(\theta - 90^\circ)$, so $E_{x0} = 1$, $E_{y0} = 2$, and
+	$\delta = -90^\circ$. The amplitudes differ, so the wave is elliptical, and
+	$\sin\delta < 0$ along $+z$ makes it right-hand. At $z = 0$ the tip goes from
+	$\hat{\mathbf{x}}$ at $t = 0$ to $\hat{\mathbf{y}}\ 2$ at $T/4$, so the major axis is
+	along $y$ with half-length 2, the minor axis along $x$ with half-length 1, and the
+	axial ratio is 2.
+	\end{solution}
+
+	\part $\widetilde{\mathbf{E}} = \left(j\hat{\mathbf{x}} + \hat{\mathbf{y}}\right)e^{+j\beta z}$
+	\begin{solution}[1.3in]
+	The wave travels along $-z$. The $x$ component has phase $+90^\circ$ and the $y$
+	component $0$, so $\delta = \phi_y - \phi_x = -90^\circ$, with equal amplitudes:
+	circular. At $z = 0$, $E_x = -\sin\omega t$ and $E_y = \cos\omega t$, so the tip goes
+	from $\hat{\mathbf{y}}$ at $t = 0$ to $-\hat{\mathbf{x}}$ at $T/4$, counterclockwise
+	about $+\hat{\mathbf{z}}$. With the right thumb along $-\hat{\mathbf{z}}$ the fingers
+	curl the other way, so the wave is left-hand circularly polarized.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The axes of an ellipse.} A wave along $+z$ has, at $z = 0$,
+\[
+	\mathbf{E} = \hat{\mathbf{x}}\cos\omega t + \hat{\mathbf{y}}\cos\left(\omega t + 60^\circ\right)\ \text{V/m}
+\]
+\begin{parts}
+
+	\part Starting from $E_x^2 - 2E_xE_y\cos\delta + E_y^2 = \sin^2\delta$, find
+	$\vert\mathbf{E}\vert$ where the path crosses the lines $y = x$ and $y = -x$.
+	\begin{solution}[1.6in]
+	On $y = x$, $E_y = E_x$:
+	\eq{ E_x^2\left(2 - 2\cos\delta\right) = \sin^2\delta \quad\Longrightarrow\quad \vert\mathbf{E}\vert^2 = 2E_x^2 = \dfrac{\sin^2\delta}{1 - \cos\delta} = 1 + \cos\delta = 1.5 }
+	so $\vert\mathbf{E}\vert = 1.22$ V/m. On $y = -x$ the same steps give
+	$\vert\mathbf{E}\vert^2 = 1 - \cos\delta = 0.5$, so $\vert\mathbf{E}\vert = 0.707$ V/m.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Give the tilt of the major axis, the axial ratio, and the handedness.
+		\begin{solution}[1.1in]
+		The equation does not change when we swap $E_x$ and $E_y$, so the axes lie on
+		$y = \pm x$. The major axis is on $y = x$, at $+45^\circ$, and the axial ratio
+		is $1.22/0.707 = 1.73$. $\sin 60^\circ > 0$ along $+z$: left-hand elliptical.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		tilt = \ansbox[1.3in]{$+45^\circ$}
+
+		\vspace{4pt}
+		axial ratio = \ansbox[1.3in]{$1.73$}
+
+		\vspace{4pt}
+		hand = \ansbox[1.3in]{left}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

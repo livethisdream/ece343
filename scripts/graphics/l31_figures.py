@@ -5,7 +5,8 @@
                       current crossing it, for the tangential condition
     L31-pillbox.svg   the flat pillbox, for the normal condition on B
     L31-iron.svg      an iron cylinder (mu_r = 1000) in a uniform field: the
-                      lines of B bend to meet the iron almost along the normal
+                      lines of B bend to meet the iron almost along the normal,
+                      with one surface point marked (80 deg inside, 0.32 deg out)
 
 The layout follows L24's figures, so the two lessons read as a pair. Labels
 are minimal and plain Unicode (see CLAUDE.md); the lesson text does the
@@ -126,11 +127,21 @@ def loop():
     ax.annotate("", xy=(x1 + 0.35, h / 2), xytext=(x1 + 0.35, -h / 2),
                 arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.1))
     lab(ax, x1 + 0.52, 0.22, "h", size=14, color=GRAY, ha="left")
-    # the fields on each side: the surface current makes the tangential parts differ
-    arrow(ax, px, 0.0, px + 0.6, 1.05, color=NAVY, lw=2.2)
-    lab(ax, px + 0.7, 1.0, "H", "1", color=NAVY, italic=False, bold=True, ha="left")
-    arrow(ax, px - 0.2, -1.05, px, 0.0, color=BLUE, lw=2.2)
-    lab(ax, px - 0.3, -0.8, "H", "2", color=BLUE, italic=False, bold=True, ha="right")
+    # the fields on each side: the surface current makes the tangential parts
+    # differ, H_t1 > H_t2. Dashed lines resolve each into its tangential and
+    # normal parts, the components the two conditions compare.
+    t1, n1, t2, n2 = 0.75, 1.0, 0.25, 0.7
+    for (x0_, y0_, x1_, y1_) in ((px, n1, px + t1, n1), (px, 0.0, px, n1),
+                                 (px - t2, -n2, px, -n2), (px, -n2, px, 0.0)):
+        ax.plot([x0_, x1_], [y0_, y1_], color=AMBER, lw=1.4, ls=(0, (4, 3)))
+    arrow(ax, px, 0.0, px + t1, n1, color=NAVY, lw=2.2)
+    lab(ax, px + t1 + 0.1, n1 * 0.55, "H", "1", color=NAVY, italic=False, bold=True, ha="left")
+    lab(ax, px + t1 / 2, n1 + 0.2, "H", "t1", size=13, color=AMBER, ha="center")
+    lab(ax, px - 0.2, n1 * 0.5, "H", "n1", size=13, color=AMBER, ha="right")
+    arrow(ax, px - t2, -n2, px, 0.0, color=BLUE, lw=2.2)
+    lab(ax, px - t2 - 0.12, -n2 * 0.45, "H", "2", color=BLUE, italic=False, bold=True, ha="right")
+    lab(ax, px - t2 / 2, -n2 - 0.2, "H", "t2", size=13, color=AMBER, ha="center")
+    lab(ax, px + 0.1, -n2 * 0.45, "H", "n2", size=13, color=AMBER, ha="left")
     save(fig, "L31-loop.svg")
 
 
@@ -191,6 +202,25 @@ def iron():
             bbox=dict(boxstyle="round,pad=0.2", fc=IRON, ec="none"))
     ax.text(2.9, 1.65, "air", fontsize=13, color=GRAY, ha="right", va="center", zorder=3)
     lab(ax, -2.95, 1.62, "B", "", color=NAVY, italic=False, bold=True, ha="left")
+    # direction arrows on the far-left lines, where the applied field is uniform
+    for yy in (-1.5, -0.75, 0.75, 1.5):
+        arrow(ax, -2.75, yy, -2.45, yy, color=NAVY, lw=1.3, head=11)
+    # one surface point at 80 degrees around the cylinder: the field inside is
+    # 80 degrees from the normal, the field just outside 0.32 degrees from it
+    phi = np.radians(80)
+    sx, sy = a * np.cos(phi), a * np.sin(phi)
+    nx, ny = np.cos(phi), np.sin(phi)
+    ax.plot([sx - 0.75 * nx, sx + 0.75 * nx], [sy - 0.75 * ny, sy + 0.75 * ny],
+            color=GRAY, lw=1.1, ls=(0, (3, 3)), zorder=4)
+    arrow(ax, sx - 0.4, sy - 0.04, sx, sy, color=AMBER, lw=2.0, head=11)
+    th_out = np.arctan(np.tan(phi) / mur)
+    ox, oy = np.cos(phi - th_out), np.sin(phi - th_out)
+    arrow(ax, sx, sy, sx + 0.62 * ox, sy + 0.62 * oy, color=AMBER, lw=2.0, head=11)
+    ax.text(sx - 0.3, sy - 0.26, "80°", fontsize=12, color=AMBER, ha="center", va="center", zorder=5,
+            bbox=dict(boxstyle="round,pad=0.12", fc=IRON, ec="none"))
+    ax.text(sx + 0.62 * ox + 0.12, sy + 0.62 * oy, f"{np.degrees(th_out):.2f}° from the normal",
+            fontsize=12, color=AMBER, ha="left", va="center", zorder=5,
+            bbox=dict(boxstyle="round,pad=0.12", fc=FILL1, ec="none"))
     save(fig, "L31-iron.svg")
 
 

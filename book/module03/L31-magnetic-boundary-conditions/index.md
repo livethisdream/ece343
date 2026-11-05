@@ -34,7 +34,7 @@ across it. The results look like Lesson 24's with the permeability in place of
 the permittivity, with one difference: a current that flows in a thin sheet on
 the boundary makes the tangential field jump. With the two conditions we can
 find the field on one side of a boundary from the field on the other, and see
-why iron gathers magnetic field lines into itself.
+why field lines in air meet iron almost along the normal.
 :::
 ::::
 
@@ -42,16 +42,17 @@ why iron gathers magnetic field lines into itself.
 :::{present}
 The two laws of magnetostatics, in integral form:
 
-$$\oint_S \mathbf{B}\cdot d\mathbf{s} = 0, \qquad \oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{enc}, \qquad \mathbf{B} = \mu\mathbf{H}$$
+$$\oint_S \mathbf{B}\cdot d\mathbf{s} = 0, \qquad \oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}, \qquad \mathbf{B} = \mu\mathbf{H}$$
 :::
 
 Lesson 28 introduced **Gauss's law for magnetism**: the flux of the magnetic
 flux density $\mathbf{B}$ out of any closed surface $S$ is zero, because there
-is no magnetic charge for field lines to start or end on. Lesson 29 introduced
-**Ampere's law**: the circulation of the magnetic field intensity $\mathbf{H}$
-around any closed path $C$ equals the current $I_\text{enc}$ that passes
-through a surface bounded by the path, with the right-hand rule setting the
-direction of the current. Inside a material, the **permeability** $\mu$, in
+is no magnetic charge for field lines to start or end on. Lesson 29 derived
+**Ampere's law** for any steady current: the circulation of the magnetic field
+intensity $\mathbf{H}$ around any closed path $C$ equals the current
+$I_\text{encl}$ that passes through a surface bounded by the path, with the
+right-hand rule setting the direction of the current. Today we apply both laws
+to paths and surfaces of any shape, so we need them in that general form. Inside a material, the **permeability** $\mu$, in
 H/m, ties the two fields together. These three statements play the roles that
 Gauss's law, the loop law, and $\mathbf{D} = \epsilon\mathbf{E}$ played in
 Lesson 24.
@@ -72,7 +73,7 @@ We write the permeability as the **relative permeability** $\mu_r$ times the
 permeability of free space $\mu_0$. A magnetic field acts on the electrons in
 every atom, and a material's $\mu_r$ records how the atoms respond. In a
 **diamagnetic** material, such as copper, the field induces atomic moments that
-oppose it, and $\mu_r$ is slightly less than one. In a **paramagnetic**
+oppose it, by the induction that Lesson 33 introduces, and $\mu_r$ is slightly less than one. In a **paramagnetic**
 material, such as aluminum, the atoms' own moments line up weakly with the
 field, and $\mu_r$ is slightly more than one. In both, $\mu_r$ differs from one
 by about $10^{-5}$, so we treat them, along with air and the polyethylene in a
@@ -86,7 +87,7 @@ its field. Today we treat each material as having one fixed $\mu_r$.
 ::::{frame} The Tangential Field: A Thin Loop
 :::{present}
 <img src="../../viz/img/L31-loop.svg"
-     alt="A rectangular loop a, b, c, d of width W and height h straddles the boundary between region 1 with permeability mu 1 above and region 2 with permeability mu 2 below; a surface current J s flows into the page along the boundary, through the loop, and the fields H1 above and H2 below point in different directions"
+     alt="A rectangular loop a, b, c, d of width W and height h straddles the boundary between region 1 with permeability mu 1 above and region 2 with permeability mu 2 below; a surface current J s flows into the page along the boundary, through the loop, and the fields H1 above and H2 below point in different directions, each resolved by dashed lines into a tangential part, H t1 or H t2, and a normal part, H n1 or H n2"
      style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
 
 - A surface current $\mathbf{J}_s$, in A/m, flows on the boundary.
@@ -96,10 +97,10 @@ We set up the geometry exactly as in Lesson 24. The unit normal
 $\hat{\mathbf{n}}$ points from region 2 into region 1, the unit tangent
 $\hat{\mathbf{t}}$ lies along the boundary, and each field splits into a
 tangential component, $H_{t1}$ or $H_{t2}$, and a normal component, $H_{n1}$ or
-$H_{n2}$. The new feature is a **surface current density** $\mathbf{J}_s$: a
-current that flows in a sheet of negligible thickness on the boundary, measured
-in amperes per meter of width across the sheet. The current sheet of Lesson 30
-is one example.
+$H_{n2}$. The boundary can also carry the **surface current density**
+$\mathbf{J}_s$ that Lesson 28 defined: a current that flows in a sheet of
+negligible thickness, measured in amperes per meter of width across the sheet.
+The current sheet of Lesson 30 is one example.
 
 We take the rectangular path $a \to b \to c \to d \to a$, with long sides of
 length $W$ parallel to the boundary, one in each region, and short sides of
@@ -112,7 +113,7 @@ zero.
 
 ::::{frame} Evaluating the Loop
 :::{present}
-$$\begin{aligned} \oint \mathbf{H}\cdot d\mathbf{l} &= \int_a^b + \int_b^c + \int_c^d + \int_d^a = I_\text{enc} \\ \int_a^b \mathbf{H}_1\cdot\hat{\mathbf{t}}\ dl - \int_c^d \mathbf{H}_2\cdot\hat{\mathbf{t}}\ dl &= H_{t1} W - H_{t2} W \\ \int_b^c,\ \int_d^a &\to 0 \quad \text{as } h \to 0 \\ I_\text{enc} &= \mathbf{J}_s\cdot\left(\hat{\mathbf{n}}\times\hat{\mathbf{t}}\right) W \end{aligned}$$
+$$\begin{aligned} \oint \mathbf{H}\cdot d\mathbf{l} &= \int_a^b + \int_b^c + \int_c^d + \int_d^a = I_\text{encl} \\ \int_a^b \mathbf{H}_1\cdot\hat{\mathbf{t}}\ dl - \int_c^d \mathbf{H}_2\cdot\hat{\mathbf{t}}\ dl &= H_{t1} W - H_{t2} W \\ \int_b^c,\ \int_d^a &\to 0 \quad \text{as } h \to 0 \\ I_\text{encl} &= \mathbf{J}_s\cdot\left(\hat{\mathbf{n}}\times\hat{\mathbf{t}}\right) W \end{aligned}$$
 :::
 
 We split the closed path into its four sides. Along side $ab$ the path runs in
@@ -183,8 +184,8 @@ To relate the normal components, we apply Gauss's law for magnetism to the same
 pillbox Lesson 24 used: a short cylinder with two flat faces of area $\Delta A$
 parallel to the boundary, one in each region. We make $\Delta A$ small enough
 that $\mathbf{B}$ is uniform over each face, and then shrink the height $h$
-toward zero. The pillbox needs no surface charge on the boundary, because the
-right-hand side of Gauss's law for magnetism is zero for every closed surface.
+toward zero. Unlike Lesson 24, no surface term appears: the right-hand side of
+Gauss's law for magnetism is zero for every closed surface.
 ::::
 
 ::::{frame} Evaluating the Pillbox
@@ -240,7 +241,7 @@ Measure each angle from the normal, with $\mathbf{J}_s = 0$:
 
 $$\frac{\tan\theta_1}{\tan\theta_2} = \frac{H_{t1}}{H_{t2}} \cdot \frac{H_{n2}}{H_{n1}} = 1 \cdot \frac{\mu_1}{\mu_2}$$
 
-- The field leans further from the normal in the larger $\mu$.
+- The field leans farther from the normal in the larger $\mu$.
 :::
 
 Let $\theta_1$ and $\theta_2$ be the angles between the field and the normal on
@@ -273,34 +274,44 @@ The widget is Lesson 24's, run for the magnetic field. It draws the field
 crossing from region 1, above, into region 2, below, with no surface current on
 the boundary. The relative permeability sliders run on a logarithmic scale from
 $1$ to $1000$. The bold arrows are $\mathbf{H}_1$ and $\mathbf{H}_2$ at one
-point, drawn to scale, and the dashed lines are their components. The default
+point, drawn to scale, and the dashed lines are their components. The thin
+lines are lines of $\mathbf{H}$, spaced so that closer lines mean a stronger
+field: they spread apart in the material, where $\mathbf{H}$ is weaker, and
+some lines of $\mathbf{H}$ end at the boundary. The default
 is air over a material with $\mu_r = 100$, with the field $10^\circ$ from the
 normal in the air. In the material the field leans out to $86.8^\circ$, and
 $\vert\mathbf{H}_2\vert$ drops to $0.174$ of $\vert\mathbf{H}_1\vert$. Turn on
-**Show B** and the normal components match instead, while
-$\vert\mathbf{B}_2\vert$ grows to $17.4$ times $\vert\mathbf{B}_1\vert$. Raise
+**Show B** and the arrows and thin lines switch to $\mathbf{B}$. Now the
+normal components match, every line continues across the boundary, and the
+lines crowd together in the material, where $\vert\mathbf{B}_2\vert$ is
+$17.4$ times $\vert\mathbf{B}_1\vert$. Raise
 $\mu_{r2}$ to $1000$ and the field inside runs almost along the boundary
 unless it arrives exactly along the normal.
 ::::
 
-::::{frame} Iron Gathers the Field
+::::{frame} High-Permeability Cores
 :::{present}
 <img src="../../viz/img/L31-iron.svg"
-     alt="Lines of B from a uniform field bend toward an iron cylinder, meet its surface almost along the normal, and run straight through it, about twice as close together as far away"
+     alt="Lines of B from a uniform field bend toward an iron cylinder, meet its surface almost along the normal, and run straight through it, about twice as close together as far away; at one surface point the field inside is 80 degrees from the normal and the field just outside is 0.32 degrees from it"
      style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
 
 - Outside, at $\mu_r = 1000$: $\tan\theta_\text{air} = \tan\theta_\text{iron}/1000$.
 :::
 
-The figure shows the exact solution for an iron cylinder with $\mu_r = 1000$
-placed in a uniform field. Inside the cylinder the field is uniform and runs
-straight across it, so at a point on the surface the angle from the normal
-inside is the angle around the cylinder. The bending relation turns any angle
-inside into an angle in the air at most a few tenths of a degree from the
-normal: $80^\circ$ inside becomes $0.32^\circ$ outside. The lines of
-$\mathbf{B}$ therefore bend in the air to meet the iron head on, and the
-cylinder pulls in flux from a region wider than itself; the flux density inside
-is $2\mu_r/(\mu_r + 1) = 2.00$ times the applied field. This is the magnetic
+The figure shows an iron cylinder with $\mu_r = 1000$ placed in a uniform
+field. Its field lines come from solving Laplace's equation around the cylinder,
+a calculation this course does not derive; we use only what it shows. Inside
+the cylinder the field is uniform and runs straight across it, so at a point on
+the surface the angle from the normal inside is the angle around the cylinder.
+The bending relation turns any angle inside up to $85^\circ$ into an angle in
+the air under one degree from the normal: at the marked point, $80^\circ$
+inside becomes $0.32^\circ$ outside. Only a field that runs within a degree or
+two of the surface inside leaves at a larger angle; $89^\circ$ gives
+$3.3^\circ$. The lines of $\mathbf{B}$ therefore bend in the air to meet the
+iron almost along the normal, and the cylinder draws in flux from a region
+wider than itself. The same solution gives the flux density inside as
+$2\mu_r/(\mu_r + 1) = 2.00$ times the applied field, which the figure shows as
+lines about twice as close together inside as far away. This is the magnetic
 counterpart of the field at a conductor in Lesson 24, and it is why we wind
 transformers and inductors on iron or ferrite cores: the core guides the field
 along its own path.
@@ -351,7 +362,7 @@ $\hat{\mathbf{x}} + \hat{\mathbf{y}}2$ to $\hat{\mathbf{x}}6 -
 | Symbol / idea | What it is | Result |
 | :-- | :-- | :-- |
 | $\hat{\mathbf{n}}$ | Unit normal, from region 2 into region 1 | |
-| $\mathbf{J}_s$ | Surface current density, in A/m | |
+| $\mathbf{J}_s$ | Surface current density, in A/m (Lesson 28) | |
 | Permeability | $\mu = \mu_r\mu_0$ | $\mu_r \approx 1$ except in ferromagnetic materials |
 | Tangential condition | From Ampere's law on a thin loop | $\hat{\mathbf{n}}\times\left(\mathbf{H}_1 - \mathbf{H}_2\right) = \mathbf{J}_s$ |
 | Normal condition | From Gauss's law for magnetism on a thin pillbox | $B_{n1} = B_{n2}$ |
@@ -370,12 +381,12 @@ $\hat{\mathbf{x}} + \hat{\mathbf{y}}2$ to $\hat{\mathbf{x}}6 -
 ::::{frame} Where This Is Going
 :::{present}
 - **Lesson 32**: the Magnetostatics Lab.
-- **Module 4**: a wave at a boundary meets Lesson 24's conditions and today's together.
+- **Module 4**: a wave at a boundary satisfies Lesson 24's and today's conditions at once, which sets the reflected and transmitted fields.
 :::
 
-Today's two conditions finish the toolkit of magnetostatics: the Biot-Savart
-law and Ampere's law find the field from currents, and the boundary conditions
-carry it across materials. Lesson 32 is the Magnetostatics Lab. In Module 4
+With today's two conditions, we can find the magnetostatic field from its
+currents, with the Biot-Savart law or Ampere's law, and carry it across a
+material boundary. Lesson 32 is the Magnetostatics Lab. In Module 4
 the fields change in time, the electric and magnetic fields drive each other,
 and a wave that reaches a boundary has to satisfy Lesson 24's conditions and
 today's at the same time. Those four conditions decide how much of the wave

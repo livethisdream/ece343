@@ -1,0 +1,200 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L29 practice set (Ampere's Law): circulation and enclosed current, a round
+% copper wire, the point form with a nonuniform current, and two parallel wires.
+
+\fullwidth{\textbf{Learning Objective 7.3: } I can use Ampere's Law to calculate
+the magnetic field at an observation point for simple magnetostatic systems.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Circulation and enclosed current.} Three long straight wires run
+perpendicular to the page. Wire 1 carries $5$ A out of the page, wire 2 carries
+$3$ A into the page, and wire 3 carries $2$ A out of the page. A closed path $C$
+in the page encloses wires 1 and 2 but not wire 3.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\oint_C \mathbf{H}\mycdot d\mathbf{l}$ when we traverse $C$
+		counterclockwise.
+		\begin{solution}[1in]
+		Counterclockwise travel makes out of the page the positive direction by the
+		right-hand rule. Wire 3 is outside and contributes nothing:
+		\eq{ \oint_C \mathbf{H}\mycdot d\mathbf{l} = I_\text{encl} = 5 - 3 = 2\ \text{A} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		circulation = \ansbox[1.3in]{$2$ A}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A second path encloses all three wires and we traverse it clockwise.
+		Find its circulation.
+		\begin{solution}[1in]
+		Clockwise travel makes into the page the positive direction:
+		\eq{ \oint \mathbf{H}\mycdot d\mathbf{l} = -5 + 3 - 2 = -4\ \text{A} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		circulation = \ansbox[1.3in]{$-4$ A}
+	\end{minipage}
+
+	\part Ampere's law gives the circulation around $C$ exactly. Explain why it
+	does not give the field $\mathbf{H}$ at a point on $C$ for this arrangement.
+	\begin{solution}[1in]
+	Ampere's law fixes only the integral of $\mathbf{H}\mycdot d\mathbf{l}$ around
+	the whole path. To find $H$ at a point, $H$ must come out of the integral,
+	which requires a path on which $\mathbf{H}$ is tangent and constant. Three
+	wires at different positions have no such symmetry, so we add the three
+	line-current fields by superposition instead.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A round copper wire.} A long copper wire of radius $a = 1$ mm
+carries a steady $I = 5$ A, spread uniformly over its cross section.
+\begin{parts}
+
+	\part Use Ampere's law to derive $H_\phi(\rho)$ inside the wire.
+	\begin{solution}[1.5in]
+	By symmetry $\mathbf{H} = \hat{\boldsymbol{\phi}}\ H_\phi(\rho)$, and the path is a
+	circle of radius $\rho < a$. The current density is $J = I/(\pi a^2)$:
+	\eq{
+		\oint_C \mathbf{H}\mycdot d\mathbf{l} &= 2\pi\rho\ H_\phi \\
+		I_\text{encl} &= \int_0^{2\pi}\!\!\int_0^{\rho} J\ \rho^{\prime}\ d\rho^{\prime}\ d\phi = J\pi\rho^2 = I\dfrac{\rho^2}{a^2} \\
+		H_\phi &= \dfrac{I\rho}{2\pi a^2}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H_\phi$ at $\rho = 0.5$ mm, $1$ mm, and $2$ mm.
+		\begin{solution}[1.3in]
+		\eq{
+			H(0.5\ \text{mm}) &= \dfrac{5 \times 0.5\times10^{-3}}{2\pi \times (10^{-3})^2} = 398\ \text{A/m} \\
+			H(1\ \text{mm}) &= \dfrac{5}{2\pi \times 10^{-3}} = 796\ \text{A/m} \\
+			H(2\ \text{mm}) &= \dfrac{5}{2\pi \times 2\times10^{-3}} = 398\ \text{A/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$0.5$ mm: \ansbox[1.1in]{$398$ A/m}
+
+		\vspace{4pt}
+		$1$ mm: \ansbox[1.1in]{$796$ A/m}
+
+		\vspace{4pt}
+		$2$ mm: \ansbox[1.1in]{$398$ A/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $B$ at the surface of the wire.
+		\begin{solution}[0.8in]
+		\eq{ B = \mu_0 H = 4\pi\times10^{-7} \times 796 = 1.00\ \text{mT} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$B(a)$ = \ansbox[1.3in]{$1.00$ mT}
+	\end{minipage}
+
+	\part Use the point form $\nabla\times\mathbf{H} = \mathbf{J}$ to recover the
+	current density from your answer to part (a), and check it against $I/(\pi a^2)$.
+	\begin{solution}[1.2in]
+	Only the $z$ component of the curl survives for $\mathbf{H} = \hat{\boldsymbol{\phi}}\ H_\phi(\rho)$:
+	\eq{
+		J_z &= \dfrac{1}{\rho}\dfrac{d}{d\rho}\left(\rho H_\phi\right) = \dfrac{1}{\rho}\dfrac{d}{d\rho}\left(\dfrac{I\rho^2}{2\pi a^2}\right) = \dfrac{I}{\pi a^2} \\
+		&= \dfrac{5}{\pi \times (10^{-3})^2} = 1.59\times10^{6}\ \text{A/m}^2
+	}
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The point form with a nonuniform current.} Inside a long wire of
+radius $a = 2$ mm, the measured field is
+$\mathbf{H} = \hat{\boldsymbol{\phi}}\ H_0\left(\rho/a\right)^2$ with $H_0 = 100$ A/m.
+\begin{parts}
+
+	\part Find the current density $\mathbf{J}(\rho)$ inside the wire.
+	\begin{solution}[1.2in]
+	\eq{
+		J_z = \dfrac{1}{\rho}\dfrac{d}{d\rho}\left(\rho\ \dfrac{H_0\rho^2}{a^2}\right) = \dfrac{1}{\rho}\ \dfrac{3H_0\rho^2}{a^2} = \dfrac{3H_0\rho}{a^2}
+	}
+	The current is densest at the surface and zero on the axis.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the total current in the wire two ways: from Ampere's law on a
+		circle of radius $a$, and by integrating $\mathbf{J}$ over the cross section.
+		\begin{solution}[1.6in]
+		\eq{
+			I &= \oint \mathbf{H}\mycdot d\mathbf{l} = 2\pi a H_0 = 2\pi \times 0.002 \times 100 = 1.26\ \text{A} \\
+			I &= \int_0^{2\pi}\!\!\int_0^a \dfrac{3H_0\rho}{a^2}\ \rho\ d\rho\ d\phi = \dfrac{3H_0}{a^2}\ \dfrac{a^3}{3}\ 2\pi = 2\pi a H_0
+		}
+		The two agree, as Stokes' theorem requires.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$I$ = \ansbox[1.3in]{$1.26$ A}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $J$ at the surface of the wire.
+		\begin{solution}[0.8in]
+		\eq{ J(a) = \dfrac{3H_0}{a} = \dfrac{3 \times 100}{0.002} = 1.5\times10^{5}\ \text{A/m}^2 }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$J(a)$ = \ansbox[1.3in]{$1.5\times10^{5}$ A/m$^2$}
+	\end{minipage}
+
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Two parallel wires.} Two long parallel wires $2$ cm apart carry
+$10$ A in opposite directions, as in a two-wire line.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H$ midway between the wires.
+		\begin{solution}[1in]
+		Each wire gives $I/(2\pi\rho)$ at $\rho = 1$ cm, and between opposite
+		currents the two fields point the same way, so they add:
+		\eq{ H = 2 \times \dfrac{10}{2\pi \times 0.01} = 318\ \text{A/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H$ = \ansbox[1.3in]{$318$ A/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H$ on the line through both wires, $1$ cm outside one of them.
+		\begin{solution}[1in]
+		The point is $1$ cm from the near wire and $3$ cm from the far one, and
+		outside the pair the two fields point in opposite directions:
+		\eq{ H = \dfrac{10}{2\pi \times 0.01} - \dfrac{10}{2\pi \times 0.03} = 159 - 53 = 106\ \text{A/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H$ = \ansbox[1.3in]{$106$ A/m}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

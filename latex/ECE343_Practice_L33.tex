@@ -1,0 +1,253 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L33 practice set (Faraday's Law and Displacement Current): a coil in a
+% changing field, a moving bar with a resistor, the displacement current in a
+% capacitor, conduction against displacement current, and relaxation time.
+
+\fullwidth{\textbf{Learning Objectives 8.1, 8.2: } I can articulate the
+significance of the displacement current and calculate it, given a time-varying
+electric field. I can articulate the meaning of and calculate the relaxation time
+for a variety of materials.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A coil in a changing field.} A flat square coil of $N = 50$ turns,
+$10$ cm on a side, lies in the $xy$ plane in a uniform field
+$\mathbf{B} = \hat{\mathbf{z}}\ B_0\cos\omega t$ with $B_0 = 50$ mT at $60$ Hz. We
+traverse the coil counterclockwise as seen from $+z$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the flux through one turn and the amplitude of the coil's EMF.
+		\begin{solution}[1.3in]
+		The normal is $\hat{\mathbf{z}}$ and the area is $A = 0.1^2 = 0.01\ \text{m}^2$:
+		\eq{
+			\Phi &= B_0 A\cos\omega t = 0.5\cos\omega t\ \ \text{mWb} \\
+			\oint \mathbf{E}\mycdot d\mathbf{l} &= -N\dfrac{d\Phi}{dt} = N\omega B_0 A\sin\omega t \\
+			N\omega B_0 A &= 50 \times 377 \times 0.05 \times 0.01 = 9.42\ \text{V}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Phi$ amplitude = \ansbox[1.2in]{$0.5$ mWb}
+
+		\vspace{4pt}
+		EMF amplitude = \ansbox[1.2in]{$9.42$ V}
+	\end{minipage}
+
+	\part At an instant when $\mathbf{B}$ points along $+\hat{\mathbf{z}}$ and is
+	growing, which way does the induced current circulate, seen from $+z$? Explain with
+	Lenz's law and with the sign of the EMF.
+	\begin{solution}[1.2in]
+	The flux along $+\hat{\mathbf{z}}$ grows, so Lenz's law requires an induced field
+	along $-\hat{\mathbf{z}}$ inside the coil, which a clockwise current produces. The
+	EMF is $-N\ d\Phi/dt < 0$ around the counterclockwise path, so the current runs
+	opposite to the path: clockwise. The two answers agree.
+	\end{solution}
+
+	\part Starting from the integral form of Faraday's law for a path that does not
+	move, derive $\nabla\times\mathbf{E} = -\partial\mathbf{B}/\partial t$.
+	\begin{solution}[1.3in]
+	Stokes' theorem turns the circulation into a surface integral, and for a fixed
+	surface the time derivative acts only on $\mathbf{B}$:
+	\eq{
+		\int_S \left(\nabla\times\mathbf{E}\right)\mycdot d\mathbf{s} = -\dfrac{d}{dt}\int_S \mathbf{B}\mycdot d\mathbf{s} = -\int_S \dfrac{\partial\mathbf{B}}{\partial t}\mycdot d\mathbf{s}
+	}
+	This holds for every surface, however small, so the integrands are equal:
+	$\nabla\times\mathbf{E} = -\partial\mathbf{B}/\partial t$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A moving bar and a resistor.} A bar of length $\ell = 0.3$ m slides
+at $v = 4$ m/s along two rails in a uniform field $B = 0.5$ T into the page. A
+$2\ \ohms$ resistor closes the rails, and the bar and rails have no resistance.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the EMF and the current.
+		\begin{solution}[1in]
+		\eq{
+			\text{EMF} &= vB\ell = 4 \times 0.5 \times 0.3 = 0.6\ \text{V} \\
+			I &= \dfrac{0.6}{2} = 0.3\ \text{A}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		EMF = \ansbox[1.2in]{$0.6$ V}
+
+		\vspace{4pt}
+		$I$ = \ansbox[1.2in]{$0.3$ A}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The current in the bar feels the magnetic force $I\boldsymbol{\ell}\times\mathbf{B}$
+		of Lesson 28. Find its magnitude and say which way it points.
+		\begin{solution}[1in]
+		\eq{ F = I\ell B = 0.3 \times 0.3 \times 0.5 = 0.045\ \text{N} }
+		The force points against the motion, as Lenz's law requires: the induced current
+		resists the change that produces it.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$F$ = \ansbox[1.2in]{$0.045$ N}
+	\end{minipage}
+
+	\part Show that the mechanical power needed to keep the bar moving equals the
+	power the resistor dissipates.
+	\begin{solution}[0.9in]
+	\eq{ Fv = 0.045 \times 4 = 0.18\ \text{W}, \qquad I^2R = 0.3^2 \times 2 = 0.18\ \text{W} }
+	The work done pushing the bar becomes heat in the resistor.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Displacement current in a capacitor.} A parallel-plate capacitor has
+plates of area $A = 2\ \text{cm}^2$ separated by $d = 0.5$ mm of a dielectric with
+$\epsilon_r = 4$. A $100\ \mhz$ source applies $v = 5\cos\omega t$ V. Ignore fringing.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the amplitude of the displacement current density between the plates.
+		\begin{solution}[1.2in]
+		$E = v/d$ has amplitude $E_0 = 5/(5\times10^{-4}) = 10^{4}$ V/m:
+		\eq{
+			J_d = \epsilon\dfrac{\partial E}{\partial t} &= -\omega\epsilon E_0\sin\omega t \\
+			\omega\epsilon E_0 &= 2\pi\times10^{8} \times 4 \times 8.854\times10^{-12} \times 10^{4} \\
+			&= 223\ \text{A/m}^2
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$J_d$ amplitude = \ansbox[1.2in]{$223$ A/m$^2$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the total displacement current between the plates, and compare it
+		with the current $C\ dv/dt$ in the wire.
+		\begin{solution}[1.2in]
+		\eq{
+			i_d &= J_d A = 223 \times 2\times10^{-4} = 44.5\ \text{mA} \\
+			C &= \dfrac{\epsilon A}{d} = 14.2\ \text{pF}, \qquad \omega C V_0 = 44.5\ \text{mA}
+		}
+		The two are equal.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$i_d$ amplitude = \ansbox[1.2in]{$44.5$ mA}
+	\end{minipage}
+
+	\part Explain, using two surfaces that share one path around the wire, why
+	Ampere's law needs the displacement current to give a single answer here.
+	\begin{solution}[1.3in]
+	A flat surface that the wire crosses carries the conduction current $i$. A surface
+	with the same edge that passes between the plates carries no conduction current.
+	Without the displacement current, the circulation of $\mathbf{H}$ around the path
+	would have two values. With it, the second surface carries $d/dt\int\mathbf{D}\mycdot d\mathbf{s} = dQ/dt = i$,
+	and both surfaces give $i$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Conduction or displacement current?} Wet soil has $\sigma = 10^{-2}$ S/m
+and $\epsilon_r = 10$.
+\begin{parts}
+
+	\part For a field $E_0\cos\omega t$, derive the ratio of the amplitudes of the
+	conduction and displacement current densities.
+	\begin{solution}[1in]
+	\eq{
+		J_c = \sigma E_0\cos\omega t, \qquad J_d = \epsilon\dfrac{\partial E}{\partial t} = -\omega\epsilon E_0\sin\omega t, \qquad \dfrac{\sigma E_0}{\omega\epsilon E_0} = \dfrac{\sigma}{\omega\epsilon}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the ratio at $1\ \mhz$ and at $1\ \text{GHz}$, and the frequency at which
+		the two currents are equal.
+		\begin{solution}[1.3in]
+		\eq{
+			\dfrac{\sigma}{\omega\epsilon}\bigg|_{1\ \text{MHz}} &= \dfrac{10^{-2}}{2\pi\times10^{6}\times10\times8.854\times10^{-12}} = 18.0 \\
+			\dfrac{\sigma}{\omega\epsilon}\bigg|_{1\ \text{GHz}} &= 0.0180 \\
+			f &= \dfrac{\sigma}{2\pi\epsilon} = 18.0\ \mhz
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		1 MHz: \ansbox[1.1in]{$18.0$}
+
+		\vspace{4pt}
+		1 GHz: \ansbox[1.1in]{$0.0180$}
+
+		\vspace{4pt}
+		equal at \ansbox[1.1in]{$18.0$ MHz}
+	\end{minipage}
+
+	\part Is the soil a good conductor or a good insulator at each frequency?
+	\begin{solution}[0.8in]
+	At $1\ \mhz$ conduction current dominates by a factor of 18, so the soil behaves as
+	a conductor. At $1$ GHz displacement current dominates by a factor of 56, so the
+	soil behaves as a lossy dielectric.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Relaxation time.} A uniform material has $\sigma = 10^{-4}$ S/m and
+$\epsilon_r = 3$. At $t = 0$ a free charge density $\rho_0$ sits inside it.
+\begin{parts}
+
+	\part Starting from the continuity equation, derive $\rho_v(t)$.
+	\begin{solution}[1.4in]
+	With $\mathbf{J} = \sigma\mathbf{E}$, $\mathbf{D} = \epsilon\mathbf{E}$, and
+	Gauss's law $\nabla\mycdot\mathbf{D} = \rho_v$:
+	\eq{
+		-\dfrac{\partial\rho_v}{\partial t} = \nabla\mycdot\mathbf{J} = \dfrac{\sigma}{\epsilon}\nabla\mycdot\mathbf{D} = \dfrac{\sigma}{\epsilon}\rho_v
+		\quad\Longrightarrow\quad \rho_v = \rho_0\ e^{-t/\tau}, \qquad \tau = \dfrac{\epsilon}{\sigma}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\tau$, and the time for the charge inside to fall to $1\%$ of $\rho_0$.
+		\begin{solution}[1.1in]
+		\eq{
+			\tau &= \dfrac{3 \times 8.854\times10^{-12}}{10^{-4}} = 0.266\ \mu\text{s} \\
+			t_{1\%} &= \tau\ln 100 = 4.61\tau = 1.22\ \mu\text{s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\tau$ = \ansbox[1.2in]{$0.266\ \mu$s}
+
+		\vspace{4pt}
+		$t_{1\%}$ = \ansbox[1.2in]{$1.22\ \mu$s}
+	\end{minipage}
+
+	\part Where does the charge go?
+	\begin{solution}[0.8in]
+	The conduction current carries it to the surface of the material, where it stays.
+	The total charge does not change.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

@@ -62,7 +62,7 @@ same three steps; only the symmetry and the path change.
 ::::{frame} The Coaxial Line
 :::{present}
 <img src="../../viz/img/L30-coax.svg"
-     alt="Cross section of a coaxial line with current out of the page in the inner conductor and into the page in the shield, three dashed Amperian circles, and a plot of H against radius: rising linearly inside a, falling as one over rho between a and b, and zero beyond b"
+     alt="Cross section of a coaxial line with current out of the page in the inner conductor and into the page in the shield, dashed Amperian circles inside the inner conductor, between the conductors, and outside the shield, and a plot of H against radius: rising linearly inside a, falling as one over rho between a and b, and zero beyond b"
      style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
@@ -85,11 +85,12 @@ enclosed changes from one region to the next.
 - **Outside the shield**, $\rho > b$: the circle encloses $I - I = 0$, and the
   field is zero.
 
-The magnetic field, like the electric field of Lesson 20, lives only inside
-the cable. At high frequency the skin effect of Lesson 5 crowds the current
-onto the outer surface of the inner conductor, so the field inside it
-disappears, while the field between the conductors stays the same because the
-circle still encloses $I$.
+The magnetic field, like the electric field of Lesson 20, is nonzero only
+inside the cable. At high frequency the current crowds into a thin layer at
+the outer surface of the inner conductor, the skin effect that Lesson 27
+defined, with a skin depth of $6.6\ \mu$m in copper at 100 MHz. The field
+inside the inner conductor then disappears, while the field between the
+conductors stays the same because the circle still encloses $I$.
 ::::
 
 ::::{frame} Worked Example: The Field in RG-58
@@ -129,28 +130,33 @@ $20\ \mu\text{T}$ at 1 cm, from Lesson 29's example scaled by a tenth.
      style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &= \underbrace{H_y w}_\text{top} + \underbrace{H_y w}_\text{bottom} + \underbrace{0}_\text{sides} = J_s w \\ \mathbf{H} &= \mp\hat{\mathbf{y}}\ \frac{J_s}{2} \quad (z \gtrless 0) \end{aligned}$$
+$$\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &= \underbrace{\vert\mathbf{H}\vert\ w}_\text{top} + \underbrace{\vert\mathbf{H}\vert\ w}_\text{bottom} + \underbrace{0}_\text{sides} = J_s w \\ \mathbf{H} &= \mp\hat{\mathbf{y}}\ \frac{J_s}{2} \quad (z \gtrless 0) \end{aligned}$$
 :::
 
-An infinite sheet in the plane $z = 0$ carries a **surface current density**
-$\mathbf{J}_s = \hat{\mathbf{x}}\ J_s$, in amperes per meter of width. In the
-figure, $x$ points out of the page, $y$ to the right, and $z$ up. Each strip of
-the sheet is a line current along $\hat{\mathbf{x}}$, so by the Biot-Savart law
-$\mathbf{H}$ has no $x$ component. Two strips at $\pm y$ give $z$ components
+An infinite sheet in the plane $z = 0$ carries the surface current density of
+Lesson 28, $\mathbf{J}_s = \hat{\mathbf{x}}\ J_s$, in amperes per meter of
+width. In the figure, $x$ points out of the page, $y$ to the right, and $z$
+up. Each strip of the sheet is a line current along $\hat{\mathbf{x}}$, so by
+the Biot-Savart law $\mathbf{H}$ has no $x$ component, and the strip at the
+origin gives $\hat{\mathbf{x}}\times\hat{\mathbf{z}} = -\hat{\mathbf{y}}$
+at a point above it. Two strips at $\pm y$ give $z$ components
 that cancel, so $\mathbf{H}$ has no $z$ component either. Sliding the sheet in
 $x$ or $y$ leaves it unchanged, so $\mathbf{H}$ depends at most on $z$, and
 reflecting the picture through the sheet shows that $\mathbf{H}$ has the same
 magnitude on both sides and opposite directions.
 
-The matching path is a rectangle of width $w$ that crosses the sheet. Along
-the top and the bottom, $\mathbf{H}$ runs along the direction of travel, and
-each contributes $H_y w$; along the sides, $\mathbf{H}$ is perpendicular and
-contributes nothing. The rectangle encloses a width $w$ of the sheet, or a
+The matching path is a rectangle of width $w$ that crosses the sheet,
+traversed counterclockwise as drawn, so that by the right-hand rule its normal
+points out of the page, along the current. The top runs along
+$-\hat{\mathbf{y}}$, the same direction as $\mathbf{H}$ above the sheet, and
+the bottom runs along $+\hat{\mathbf{y}}$, the same direction as $\mathbf{H}$
+below it, so each contributes $\vert\mathbf{H}\vert\ w$; along the sides,
+$\mathbf{H}$ is perpendicular and contributes nothing. The rectangle encloses a width $w$ of the sheet, or a
 current $J_s w$. The width cancels, and so does the height of the rectangle:
 the field of an infinite sheet of current is the same at every distance from
 it, $J_s/2$, just as the electric field of a sheet of charge in Lesson 20 was
-$\rho_s/(2\epsilon)$. By the right-hand rule, $\mathbf{H}$ points along
-$-\hat{\mathbf{y}}$ above the sheet and $+\hat{\mathbf{y}}$ below it.
+$\rho_s/(2\epsilon)$, pointing along $-\hat{\mathbf{y}}$ above the sheet and
+$+\hat{\mathbf{y}}$ below it.
 ::::
 
 ::::{frame} The Long Solenoid
@@ -166,12 +172,18 @@ $$\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &= H_z \ell' + 0 + 0 + 0 =
 A **solenoid** is a wire wound in a helix of radius $a$, with $N$ turns over a
 length $\ell$, or $n = N/\ell$ turns per meter, carrying a current $I$. For a
 coil much longer than its radius, the turns form a cylinder of current, and
-away from the ends $\mathbf{H}$ points along the axis and does not depend on
-$z$. First we show that the field outside is zero. A rectangle with both long
-sides outside the coil encloses no current, so the field along its two long
-sides must be equal, wherever they sit. The field far from the coil is zero,
-so the field everywhere outside is zero. The same argument with both long
-sides inside shows that the field inside is the same at every radius.
+away from the ends $\mathbf{H}$ does not depend on $z$. It has no radial part:
+a closed cylinder on the axis has the same flux through its two end caps, so
+by Gauss's law for magnetism (Lesson 28) the flux through its side, and with
+it $H_\rho$, is zero. The helix also carries a net current $I$ along the axis,
+one wire's worth, which adds a small $\hat{\boldsymbol{\phi}}$ field that we
+neglect next to $nI$. So $\mathbf{H}$ points along the axis. Next we show that
+the field outside is zero. The lower faint rectangle in the figure has both
+long sides outside the coil and encloses no current, so the field along its
+two long sides must be equal, wherever they sit. The field far from the coil is
+zero, so the field everywhere outside is zero. The faint rectangle inside the
+coil encloses no current either, so the field inside is the same at every
+radius.
 
 Now we take a rectangle with one long side of length $\ell'$ inside the coil
 and one outside, as in the figure. The inside side contributes $H_z\ell'$, the
@@ -185,7 +197,9 @@ points along $\mathbf{H}$.
 
 ::::{frame} A Solenoid of Finite Length
 :::{present}
-Sum the on-axis loop field of Lesson 28 over $n\ dz'$ turns:
+<img src="../../viz/img/L30-finite-solenoid.svg"
+     alt="Side section of a solenoid from minus l over 2 to l over 2, with a shaded slice of thickness dz prime at z prime holding n dz prime turns, a field point z on the axis, and the distance u equals z minus z prime between them"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;">
 
 $$\begin{aligned} H_z(z) &= \int_{-\ell/2}^{\ell/2} \frac{nI a^2\ dz'}{2\left[a^2 + (z - z')^2\right]^{3/2}} \\ &= \frac{nI}{2}\left[\frac{z + \ell/2}{\sqrt{(z + \ell/2)^2 + a^2}} - \frac{z - \ell/2}{\sqrt{(z - \ell/2)^2 + a^2}}\right] \end{aligned}$$
 :::
@@ -195,7 +209,8 @@ ends, and to see how long it must be for $nI$ to hold, we add up loops.
 Lesson 28 found the field on the axis of a single loop of radius $a$ carrying
 $I$, at a distance $u$ from its plane: $H = Ia^2/[2(a^2 + u^2)^{3/2}]$. A slice
 of the solenoid of thickness $dz'$ at position $z'$ holds $n\ dz'$ turns, and
-its distance from the field point is $u = z - z'$. Substituting $u$, so that
+its distance from the field point is $u = z - z'$, as in the figure. Summing
+the loop field over every slice gives the first line. Substituting $u$, so that
 $dz' = -du$, the integral is a standard form,
 
 $$\int \frac{a^2\ du}{(a^2 + u^2)^{3/2}} = \frac{u}{\sqrt{a^2 + u^2}}$$
@@ -225,8 +240,8 @@ long-solenoid value $nI$, with the coil drawn above the plot on the same
 horizontal scale. The dashed line marks $nI$. Start at $\ell/a = 4$: the
 center reaches 0.894 of $nI$, and the end, marked by the second dot, reaches
 0.485. Lengthen the coil, and the plateau widens and rises toward $nI$; at
-$\ell/a = 10$ the center is 0.981, 2% below $nI$. The end stays near one half
-at every length. Shorten the coil to $\ell/a = 1$, and the center falls to
+$\ell/a = 10$ the center is 0.981, 2% below $nI$. Once $\ell/a$ is above about
+4, the end stays near one half; at $\ell/a = 1$ it is 0.354. Shorten the coil to $\ell/a = 1$, and the center falls to
 0.447: a short, wide coil is closer to a single loop than to a solenoid, and
 Ampere's law no longer gives its field.
 ::::
@@ -251,7 +266,7 @@ the finite-solenoid formula:
 
 $$B(0) = 12.6 \times \frac{0.10}{\sqrt{0.10^2 + 4 \times 0.01^2}} = 12.6 \times 0.981 = 12.3\ \text{mT}$$
 
-At either end, the field is close to half the center value, $6.25$ mT. Both
+At either end, the field is $6.25$ mT, about half of $\mu_0 nI$. Both
 numbers are hundreds of times the Earth's field of about $50\ \mu\text{T}$,
 which is why a small coil can align a compass, or a phone's magnetometer, at
 several centimeters.
@@ -274,9 +289,9 @@ so $\mathbf{H}$ depends only on $\rho$ and, by the same argument as for the
 line current, points along $\hat{\boldsymbol{\phi}}$. The Amperian path is a
 circle of radius $\rho$ inside the core. Each turn crosses the flat disk inside
 that circle once, along the inner edge of the core, so the circle encloses a
-current $NI$. A circle in the hole of the toroid encloses no current, and a
-circle outside the whole toroid encloses each turn twice, once going up and
-once coming down, for a net current of zero. The field exists only inside the
+current $NI$. The two dotted circles in the figure enclose no net current: the
+one in the hole encloses no turns, and the one outside the whole toroid
+encloses each turn twice, once going up and once coming down. The field exists only inside the
 core.
 
 The field inside falls off as $1/\rho$ across the core. For $N = 200$ turns
@@ -297,24 +312,34 @@ $$\begin{aligned} \Phi &= \int_S \mathbf{B}\cdot d\mathbf{s} = \int_0^{\ell}\!\!
 :::
 
 The **inductance** of a circuit is the magnetic flux through the circuit per
-unit of current, $L = \Phi/I$, in henries. For a coax, the circuit is the
+unit of current, $L = \Phi/I$, in henries. Lesson 33's Faraday's law turns a
+changing flux into the voltage $d\Phi/dt = L\ dI/dt$ around the circuit, the
+same form as the $L'\ \partial i/\partial t$ term in Lesson 3's telegrapher's
+equations, which is why the flux per amp is the line's inductance. For a coax, the circuit is the
 current path out along the inner conductor and back along the shield, and the
 flux that links it crosses the flat strip between the two conductors, shown
-in the figure for a length $\ell$. Between the conductors
+in the figure for a length $\ell$, with the flux symbols denser where $B$ is
+larger, near the inner conductor. Between the conductors
 $\mathbf{B} = \mu\mathbf{H}$ points along $\hat{\boldsymbol{\phi}}$, normal to
 the strip, with $B = \mu I/(2\pi\rho)$. The area element of the strip is
 $d\rho\ dz$, so the flux is a double integral: the $z$ integral gives $\ell$
 and the $\rho$ integral gives $\ln(b/a)$. Dividing by $I$ and by $\ell$ gives
 the inductance per meter. This is the $L'$ that Lesson 6 quoted.
 
-We left out the flux inside the inner conductor, which adds a small
-**internal inductance** at DC. At the frequencies where we use a coax as a
-transmission line, the skin effect of Lesson 5 confines the current to the
-conductor surfaces, the field inside the inner conductor vanishes, and $L'$
-above is the whole inductance.
+We left out the flux inside the inner conductor, which adds an **internal
+inductance** at DC. There $H = I\rho/(2\pi a^2)$, from the coax frame, and the
+flux through a strip of width $d\rho$ circles only the fraction $\rho^2/a^2$
+of the current, so it counts with that weight:
+
+$$L'_\text{int} = \frac{1}{I}\int_0^a \frac{\mu I\rho}{2\pi a^2}\ \frac{\rho^2}{a^2}\ d\rho = \frac{\mu}{2\pi a^4}\ \frac{a^4}{4} = \frac{\mu}{8\pi} = 50\ \text{nH/m}$$
+
+That is 19% of the 259 nH/m below, and it does not depend on the radius. At
+the frequencies where we use a coax as a transmission line, the skin effect of
+Lesson 27 confines the current to the conductor surfaces, the field inside the
+inner conductor vanishes, and $L'$ above is the whole inductance.
 ::::
 
-::::{frame} RG-58 Completed
+::::{frame} RG-58 Line Constants
 :::{present}
 $$\begin{aligned} L' &= \frac{4\pi\times10^{-7}}{2\pi}\ln\frac{1.475}{0.405} = 2\times10^{-7} \times 1.293 = 259\ \text{nH/m} \\ Z_0 &= \sqrt{\frac{L'}{C'}} = \sqrt{\frac{259\times10^{-9}}{96.8\times10^{-12}}} = 51.7\ \Omega \\ v_p &= \frac{1}{\sqrt{L'C'}} = 2.00\times10^{8}\ \text{m/s} \end{aligned}$$
 :::
@@ -333,9 +358,14 @@ The product of the two formulas is
 $$L'C' = \frac{\mu}{2\pi}\ln\frac{b}{a} \cdot \frac{2\pi\epsilon}{\ln(b/a)} = \mu\epsilon$$
 
 so the geometry cancels from the phase velocity, $v_p = 1/\sqrt{\mu\epsilon} = c/\sqrt{\epsilon_r}$,
-which depends only on the dielectric. The ratio keeps the geometry,
-$Z_0 = (\eta/2\pi)\ln(b/a)$, which is why a cable's impedance is set by the
-ratio of its radii.
+which depends only on the dielectric. The ratio keeps the geometry:
+
+$$Z_0 = \sqrt{\frac{L'}{C'}} = \sqrt{\frac{\mu\ln(b/a)/(2\pi)}{2\pi\epsilon/\ln(b/a)}} = \frac{1}{2\pi}\sqrt{\frac{\mu}{\epsilon}}\ \ln\frac{b}{a} = \frac{\eta}{2\pi}\ln\frac{b}{a}$$
+
+Here $\eta = \sqrt{\mu/\epsilon}$ is the wave impedance of the dielectric that
+Lesson 6 quoted, $377/\sqrt{2.25} = 251\ \Omega$ for polyethylene, and
+$251 \times 1.293/(2\pi) = 51.7\ \Omega$ again. A cable's impedance is set by
+the ratio of its radii and its dielectric.
 ::::
 
 ::::{frame} The Laws of Static Fields
@@ -356,8 +386,8 @@ statics the two halves never mix: charges make the electric field, currents
 make the magnetic field, and neither field appears in the other's equations.
 Module 4 lets the fields change with time. Faraday's law gains a term in
 $\partial\mathbf{B}/\partial t$, Ampere's law gains one in
-$\partial\mathbf{D}/\partial t$, and the two fields become one electromagnetic
-wave.
+$\partial\mathbf{D}/\partial t$, and the two fields, each sustaining the other,
+propagate together as an electromagnetic wave.
 ::::
 
 ::::{frame} Summary
@@ -366,13 +396,14 @@ wave.
 | Symbol / idea | What it is | Result |
 | :-- | :-- | :-- |
 | Coaxial line | $\mathbf{H}$ between the conductors only | $\frac{I}{2\pi\rho}$ for $a < \rho < b$; zero outside |
-| Current sheet | Surface current density $J_s$ in A/m | $H = J_s/2$, at every distance |
+| Current sheet | Surface current density $J_s$ in A/m (Lesson 28) | $H = J_s/2$, at every distance |
 | Long solenoid | $n = N/\ell$ turns per meter | $H = nI$ inside; zero outside |
-| Finite solenoid | Center of a coil of length $\ell$ | $nI\ \ell/\sqrt{\ell^2 + 4a^2}$; half at the ends |
+| Finite solenoid | Center of a coil of length $\ell$ | $nI\ \ell/\sqrt{\ell^2 + 4a^2}$; ends near $nI/2$ once $\ell/a > 4$ |
 | Toroid | Field confined to the core | $H = \frac{NI}{2\pi\rho}$ |
 | Inductance | Flux per unit current | $L = \Phi/I$ |
 | Coax $L'$ | Flux between the conductors | $\frac{\mu}{2\pi}\ln\frac{b}{a}$; RG-58: $259$ nH/m |
-| RG-58 $Z_0$ | $\sqrt{L'/C'}$ | $51.7\ \Omega$, $v_p = 2.00\times10^8$ m/s |
+| Internal $L'$ | Flux inside the inner conductor, DC only | $\mu/(8\pi) = 50$ nH/m |
+| RG-58 $Z_0$ | $\sqrt{L'/C'} = (\eta/2\pi)\ln(b/a)$ | $51.7\ \Omega$, $v_p = 2.00\times10^8$ m/s |
 ::::
 
 ::::{frame} Practice

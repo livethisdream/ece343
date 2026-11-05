@@ -79,7 +79,7 @@ Steady current and conductivity, then the magnetic field of steady currents: Bio
   <a class="mt-card mt-lesson" href="L32-lab-magnetostatics/index.html">
     <span class="mt-kind">Lab · L32</span>
     <h4>Magnetostatics Lab</h4>
-    <p>The Module 3 lab. Packet to be posted. Objectives 7.1, 7.2, 7.3, 7.4.</p>
+    <p>A team lab: Biot-Savart in Python for a wire, a loop, a Helmholtz pair, and a solenoid, then a hand-wound coil measured with a linear Hall sensor. Objectives 7.1, 7.2, 7.3, 7.4.</p>
   </a>
 </div>
 ::::

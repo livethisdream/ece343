@@ -197,7 +197,7 @@ LESSONS = [
     (3, 29, "L29-amperes-law", "Ampere's Law", ["7.3"], "7.4–7.5, 7.9", [], "Integral and point forms of Ampere's law, and the field of a line current.", ""),
     (3, 30, "L30-amperes-law-applied", "Ampere's Law Applied", ["7.3"], "7.6–7.8", [], "Ampere's law applied to practical current distributions.", ""),
     (3, 31, "L31-magnetic-boundary-conditions", "Magnetic Boundary Conditions", ["7.4"], "7.10–7.14", [], "Magnetic materials, and the field on both sides of a boundary.", ""),
-    (3, 32, "L32-lab-magnetostatics", "Magnetostatics Lab", ["7.1", "7.2", "7.3", "7.4"], "Lab packet", [], "The Module 3 lab. Packet to be posted.", "lab"),
+    (3, 32, "L32-lab-magnetostatics", "Magnetostatics Lab", ["7.1", "7.2", "7.3", "7.4"], "Lab notebook", [], "A team lab: Biot-Savart in Python for a wire, a loop, a Helmholtz pair, and a solenoid, then a hand-wound coil measured with a linear Hall sensor.", "lab"),
 
     (4, 33, "L33-displacement-current", "Faraday's Law and Displacement Current", ["8.1", "8.2"], "8.3, 8.8, 8.9", ["D08-1"], "Induction, the displacement current that completes Ampere's law, and relaxation time.", ""),
     (4, 34, "L34-maxwells-equations", "Maxwell's Equations", ["8.3"], "8.3, 8.8, 8.9", ["D08-2"], "The full set of Maxwell's equations for time-varying fields.", ""),

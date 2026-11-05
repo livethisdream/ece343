@@ -192,11 +192,11 @@ LESSONS = [
     (2, 25, "L25-capacitance", "Boundary Conditions and Capacitance", ["5.4"], "5.23–5.24", [], "Capacitance from the field, and boundary conditions put to work.", ""),
     (2, 26, "L26-lab-electrostatics", "Electrostatics Lab", ["5.1", "5.2", "5.3", "5.4"], "Lab notebook", [], "A team lab in Python: fields by superposition, Gauss's law on a grid, and the coax's C′ from Laplace's equation.", "lab"),
 
-    (3, 27, "L27-current-density", "Current Density, Conductivity, and Resistance", ["6.1", "6.2", "6.3"], "Ch. 6", ["D06"], "Current through a surface, Ohm's law in point form, and what makes a good conductor.", ""),
-    (3, 28, "L28-magnetic-fields", "Magnetic Fields and Gauss's Law for Magnetism", ["7.1", "7.2"], "7.1–7.3", ["D07-1", "D07-2"], "The Biot-Savart law, and why magnetic field lines always close.", "GR 2"),
-    (3, 29, "L29-amperes-law", "Ampere's Law", ["7.3"], "7.4–7.5, 7.9", ["D07-3"], "Integral and point forms of Ampere's law, and the field of a line current.", ""),
-    (3, 30, "L30-amperes-law-applied", "Ampere's Law Applied", ["7.3"], "7.6–7.8", ["D07-3"], "Ampere's law applied to practical current distributions.", ""),
-    (3, 31, "L31-magnetic-boundary-conditions", "Magnetic Boundary Conditions", ["7.4"], "7.10–7.14", ["D07-4"], "Magnetic materials, and the field on both sides of a boundary.", ""),
+    (3, 27, "L27-current-density", "Current Density, Conductivity, and Resistance", ["6.1", "6.2", "6.3"], "Ch. 6", [], "Current through a surface, Ohm's law in point form, and what makes a good conductor.", ""),
+    (3, 28, "L28-magnetic-fields", "Magnetic Fields and Gauss's Law for Magnetism", ["7.1", "7.2"], "7.1–7.3", [], "The Biot-Savart law, and why magnetic field lines always close.", "GR 2"),
+    (3, 29, "L29-amperes-law", "Ampere's Law", ["7.3"], "7.4–7.5, 7.9", [], "Integral and point forms of Ampere's law, and the field of a line current.", ""),
+    (3, 30, "L30-amperes-law-applied", "Ampere's Law Applied", ["7.3"], "7.6–7.8", [], "Ampere's law applied to practical current distributions.", ""),
+    (3, 31, "L31-magnetic-boundary-conditions", "Magnetic Boundary Conditions", ["7.4"], "7.10–7.14", [], "Magnetic materials, and the field on both sides of a boundary.", ""),
     (3, 32, "L32-lab-magnetostatics", "Magnetostatics Lab", ["7.1", "7.2", "7.3", "7.4"], "Lab packet", [], "The Module 3 lab. Packet to be posted.", "lab"),
 
     (4, 33, "L33-displacement-current", "Faraday's Law and Displacement Current", ["8.1", "8.2"], "8.3, 8.8, 8.9", ["D08-1"], "Induction, the displacement current that completes Ampere's law, and relaxation time.", ""),

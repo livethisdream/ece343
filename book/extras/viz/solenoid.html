@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The field on the axis of a solenoid as its length grows</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; --fill:#e3edf6; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  .toggles { display:flex; gap:22px; flex-wrap:wrap; }
+  @media (max-width:560px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:52px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A solenoid seen from the side, and below it the magnetic field on its axis against position, compared with the long-solenoid value n I"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>length \(\ell/a\)</label>
+      <input type="range" id="len" min="1" max="20" step="0.1" value="4">
+      <span class="val" id="l-val">4.0</span>
+    </div>
+    <div class="toggles">
+      <label class="tgl"><input type="checkbox" id="ideal" checked><span class="sw"></span><span class="t">Show \(nI\)</span></label>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">center, \(H_z/nI\)</span><span class="v" id="r-c">—</span></div>
+    <div class="ro"><span class="k">end, \(H_z/nI\)</span><span class="v" id="r-e">—</span></div>
+    <div class="ro"><span class="k">center below \(nI\)</span><span class="v" id="r-l">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// A solenoid of radius a and length ℓ, centered at z = 0, with n turns per
+// meter carrying current I. Summing the on-axis field of each loop (Lesson 28)
+// over the length gives, with z and ℓ in units of a,
+//   H_z(z)/(nI) = ½ [ (z + ℓ/2)/√((z + ℓ/2)² + 1) − (z − ℓ/2)/√((z − ℓ/2)² + 1) ].
+// The plot shows that ratio along the axis; the dashed line is the long-
+// solenoid value nI from Ampere's law, which the center approaches as ℓ/a grows.
+const state = { L: 4, ideal: true };
+const lEl = document.getElementById('len'), idEl = document.getElementById('ideal');
+lEl.addEventListener('input', () => { state.L = parseFloat(lEl.value); update(); });
+idEl.addEventListener('change', () => { state.ideal = idEl.checked; update(); });
+
+function h(z){
+  const L = state.L, p = z + L/2, m = z - L/2;
+  return 0.5*(p/Math.sqrt(p*p+1) - m/Math.sqrt(m*m+1));
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+// Laid out at DESIGN_W and scaled down as one piece below it; above it the
+// canvas grows in width only.
+const DESIGN_W = 520, H_LOG = 300;
+let SCL = 1;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  setSize(canvas, wCss, H_LOG * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), hh = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,hh);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), red = cssVar('--red'), ink3 = cssVar('--ink3'), fill = cssVar('--fill'), amber = cssVar('--amber');
+  const L = state.L, zmax = L/2 + 3;
+  const left = 44, right = w - 14, X = z => left + (z + zmax)/(2*zmax)*(right - left);
+
+  // the coil, seen from the side: radius a drawn at a fixed height
+  const cy = 52, ra = 26, x0 = X(-L/2), x1 = X(L/2);
+  ctx.fillStyle = fill; ctx.fillRect(x0, cy - ra, x1 - x0, 2*ra);
+  const nT = Math.max(4, Math.round((x1 - x0)/9));
+  for (let i=0;i<nT;i++){
+    const xc = x0 + (i + 0.5)*(x1 - x0)/nT;
+    for (const [yy, out] of [[cy - ra, true], [cy + ra, false]]){
+      ctx.fillStyle = '#fff'; ctx.strokeStyle = red; ctx.lineWidth = 1.3;
+      ctx.beginPath(); ctx.arc(xc, yy, 3.6, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+      if (out){ ctx.fillStyle = red; ctx.beginPath(); ctx.arc(xc, yy, 1.2, 0, 2*Math.PI); ctx.fill(); }
+      else { ctx.beginPath(); ctx.moveTo(xc-2,yy-2); ctx.lineTo(xc+2,yy+2); ctx.moveTo(xc-2,yy+2); ctx.lineTo(xc+2,yy-2); ctx.stroke(); }
+    }
+  }
+  ctx.strokeStyle = ink3; ctx.setLineDash([4,3]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(left, cy); ctx.lineTo(right, cy); ctx.stroke(); ctx.setLineDash([]);
+  stext(ctx, 'axis', right, cy - 9, 10.5, ink3, 'right', true);
+  stext(ctx, 'radius a', x0 - 8, cy - ra, 11, ink3, 'right', true);
+
+  // the plot of H_z/(nI) against z/a
+  const top = 100, bot = hh - 30, Y = v => bot - v*(bot - top)/1.1;
+  ctx.strokeStyle = '#c7d2e0'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(left, top - 4); ctx.lineTo(left, bot); ctx.lineTo(right, bot); ctx.stroke();
+  for (const v of [0, 0.5, 1]){
+    stext(ctx, v.toFixed(1), left - 6, Y(v), 11, ink3, 'right', false);
+    if (v > 0){ ctx.strokeStyle = '#e3edf6'; ctx.beginPath(); ctx.moveTo(left, Y(v)); ctx.lineTo(right, Y(v)); ctx.stroke(); }
+  }
+  ctx.fillStyle = fill; ctx.globalAlpha = 0.6; ctx.fillRect(x0, top - 4, x1 - x0, bot - top + 4); ctx.globalAlpha = 1;
+  if (state.ideal){
+    ctx.strokeStyle = amber; ctx.setLineDash([6,4]); ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(x0, Y(1)); ctx.lineTo(x1, Y(1)); ctx.stroke(); ctx.setLineDash([]);
+    stext(ctx, 'nI', x1 + 6, Y(1) - 1, 11.5, amber, 'left', true);
+  }
+  ctx.strokeStyle = navy; ctx.lineWidth = 2.4; ctx.beginPath();
+  const N = 400;
+  for (let i=0;i<=N;i++){
+    const z = -zmax + 2*zmax*i/N, px = X(z), py = Y(h(z));
+    if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+  }
+  ctx.stroke();
+  for (const [z, col] of [[0, navy], [L/2, mid]]){
+    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(X(z), Y(h(z)), 4, 0, 2*Math.PI); ctx.fill();
+  }
+  stext(ctx, 'z', right, bot + 16, 12, ink3, 'right', true);
+  stext(ctx, '−ℓ/2', x0, bot + 14, 11, ink3, 'center', false);
+  stext(ctx, 'ℓ/2', x1, bot + 14, 11, ink3, 'center', false);
+  stext(ctx, 'H on the axis, in units of nI', left + 6, top - 10, 11, ink3, 'left', true);
+}
+
+function update(){
+  document.getElementById('l-val').textContent = state.L.toFixed(1);
+  document.getElementById('r-c').textContent = h(0).toFixed(3);
+  document.getElementById('r-e').textContent = h(state.L/2).toFixed(3);
+  document.getElementById('r-l').textContent = (100*(1 - h(0))).toFixed(1) + '%';
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

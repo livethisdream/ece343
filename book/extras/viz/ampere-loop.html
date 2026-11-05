@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The circulation of H around a closed path near two line currents</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; --fill:#e3edf6; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  .toggles { display:flex; gap:22px; flex-wrap:wrap; }
+  @media (max-width:560px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:52px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A closed path near two straight currents perpendicular to the page, with the component of H along the path marked"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>size</label>
+      <input type="range" id="size" min="0.3" max="1.6" step="0.01" value="1.0">
+      <span class="val" id="s-val">1.00 m</span>
+    </div>
+    <div class="ctl">
+      <label>center \(x\)</label>
+      <input type="range" id="cx" min="-2.4" max="2.4" step="0.01" value="-0.5">
+      <span class="val" id="x-val">−0.50 m</span>
+    </div>
+    <div class="toggles">
+      <label class="tgl"><input type="checkbox" id="lumpy"><span class="sw"></span><span class="t">Lumpy path</span></label>
+      <label class="tgl"><input type="checkbox" id="i2" checked><span class="sw"></span><span class="t">Second current</span></label>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">\(I_\text{encl}\)</span><span class="v" id="r-i">—</span></div>
+    <div class="ro"><span class="k">\(\oint_C \mathbf{H}\cdot d\mathbf{l}\)</span><span class="v" id="r-circ">—</span></div>
+    <div class="ro"><span class="k">length of \(C\)</span><span class="v" id="r-len">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// Two infinitely long straight currents run perpendicular to the page, along
+// z: +3 A out of the page and 2 A into it. The closed path C lies in the page
+// and is traversed counterclockwise, so by the right-hand rule a current out
+// of the page counts as positive. Each current gives H = φ̂ I/(2πρ) about its
+// own axis. The circulation readout is the line integral of H·dl around C,
+// summed numerically over 2000 steps; it is not looked up from I_encl. That
+// it lands on I_encl is the point. The outline is drawn blue where H points
+// along the direction of travel and red where it points against it, with
+// width growing with |H·t̂|.
+const CURRENTS = [ { x:-0.5, y:0.0, I: 3 }, { x:1.6, y:0.35, I:-2 } ];   // I in A, position in m
+const state = { size: 1.0, cx: -0.5, lumpy: false, i2: true };
+const sEl = document.getElementById('size'), xEl = document.getElementById('cx');
+const lumpyEl = document.getElementById('lumpy'), i2El = document.getElementById('i2');
+sEl.addEventListener('input', () => { state.size = parseFloat(sEl.value); update(); });
+xEl.addEventListener('input', () => { state.cx = parseFloat(xEl.value); update(); });
+lumpyEl.addEventListener('change', () => { state.lumpy = lumpyEl.checked; update(); });
+i2El.addEventListener('change', () => { state.i2 = i2El.checked; update(); });
+
+function active(){ return state.i2 ? CURRENTS : CURRENTS.slice(0,1); }
+
+// H at (x, y) in A/m, from the active currents.
+function Hat(x,y){
+  let hx=0, hy=0;
+  for (const c of active()){
+    const rx=x-c.x, ry=y-c.y, r2=rx*rx+ry*ry, k=c.I/(2*Math.PI*r2);
+    hx+=-k*ry; hy+=k*rx;
+  }
+  return [hx,hy];
+}
+
+// The path: radius as a function of angle about (cx, 0).
+function rad(t){
+  const s=state.size;
+  return state.lumpy ? s*(1 + 0.28*Math.cos(2*t+0.3) + 0.16*Math.sin(3*t)) : s;
+}
+function pt(t){ const r=rad(t); return [state.cx + r*Math.cos(t), r*Math.sin(t)]; }
+
+// Signed test: is a current inside C? (negative inside)
+function sdist(c){
+  const x=c.x-state.cx, y=c.y, t=Math.atan2(y,x);
+  return Math.hypot(x,y) - rad(t);
+}
+
+function circulation(){
+  const N=2000; let tot=0, len=0;
+  let p0=pt(0);
+  for (let i=1;i<=N;i++){
+    const p1=pt(2*Math.PI*i/N), xm=(p0[0]+p1[0])/2, ym=(p0[1]+p1[1])/2;
+    const dx=p1[0]-p0[0], dy=p1[1]-p0[1], H=Hat(xm,ym);
+    tot+=H[0]*dx+H[1]*dy; len+=Math.hypot(dx,dy); p0=p1;
+  }
+  return [tot,len];
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+// The drawing is laid out at DESIGN_W and scales down as one piece below it.
+// Above it, the canvas grows in width only, and the view shows at least
+// x in [−XHALF, XHALF] and y in [−YHALF, YHALF], in meters.
+const DESIGN_W = 520, H_LOG = 290, XHALF = 3.2, YHALF = 1.75;
+let SCL = 1;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  setSize(canvas, wCss, H_LOG * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), red = cssVar('--red'), ink3 = cssVar('--ink3'), fill = cssVar('--fill');
+  const k = Math.min(w / (2*XHALF), (h - 30) / (2*YHALF));
+  const X = x => w/2 + x*k, Y = y => h/2 + 10 - y*k;
+  const xv = (w/2)/k, yv = (h/2)/k;
+
+  // faint H arrows on a grid
+  ctx.strokeStyle = '#a9c2da'; ctx.fillStyle = '#a9c2da'; ctx.lineWidth = 1;
+  const step = 0.42;
+  for (let gx=-Math.floor(xv/step)*step; gx<=xv; gx+=step){
+    for (let gy=-Math.floor(yv/step)*step; gy<=yv; gy+=step){
+      if (active().some(c => Math.hypot(gx-c.x, gy-c.y) < 0.22)) continue;
+      const H = Hat(gx, gy), m = Math.hypot(H[0], H[1]);
+      if (m < 1e-6) continue;
+      const L = Math.min(0.32, 0.25*Math.sqrt(m)) * k, ux = H[0]/m, uy = H[1]/m;
+      const x0 = X(gx) - ux*L/2, y0 = Y(gy) + uy*L/2, x1 = X(gx) + ux*L/2, y1 = Y(gy) - uy*L/2;
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+      const a = Math.atan2(y1-y0, x1-x0);
+      ctx.beginPath(); ctx.moveTo(x1,y1);
+      ctx.lineTo(x1-5*Math.cos(a-0.45), y1-5*Math.sin(a-0.45));
+      ctx.lineTo(x1-5*Math.cos(a+0.45), y1-5*Math.sin(a+0.45)); ctx.closePath(); ctx.fill();
+    }
+  }
+
+  // the path: fill, then the outline colored by H·t̂, drawn as short segments
+  const NS = 320, P = [];
+  for (let i=0;i<=NS;i++) P.push(pt(2*Math.PI*i/NS));
+  ctx.fillStyle = fill; ctx.globalAlpha = 0.7; ctx.beginPath();
+  ctx.moveTo(X(P[0][0]), Y(P[0][1]));
+  for (let i=1;i<=NS;i++) ctx.lineTo(X(P[i][0]), Y(P[i][1]));
+  ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
+  const HREF = 0.6;
+  ctx.lineCap = 'round';
+  for (let i=0;i<NS;i++){
+    const a=P[i], b=P[i+1], dx=b[0]-a[0], dy=b[1]-a[1], dl=Math.hypot(dx,dy);
+    const H = Hat((a[0]+b[0])/2, (a[1]+b[1])/2), ht = (H[0]*dx + H[1]*dy)/dl;
+    ctx.strokeStyle = ht >= 0 ? mid : red;
+    ctx.lineWidth = 1.2 + 5*Math.sqrt(Math.min(1, Math.abs(ht)/HREF));
+    ctx.beginPath(); ctx.moveTo(X(a[0]), Y(a[1])); ctx.lineTo(X(b[0]), Y(b[1])); ctx.stroke();
+  }
+  ctx.lineCap = 'butt';
+  // direction of travel: one arrowhead at the top of the path
+  { const t=Math.PI/2, p=pt(t), q=pt(t+0.05), a=Math.atan2(-(q[1]-p[1]), q[0]-p[0]);
+    const x1=X(p[0]), y1=Y(p[1]);
+    ctx.fillStyle = navy; ctx.beginPath(); ctx.moveTo(x1+8*Math.cos(a), y1+8*Math.sin(a));
+    ctx.lineTo(x1-6*Math.cos(a-0.6), y1-6*Math.sin(a-0.6));
+    ctx.lineTo(x1-6*Math.cos(a+0.6), y1-6*Math.sin(a+0.6)); ctx.closePath(); ctx.fill(); }
+
+  // currents: a dot for out of the page, a cross for into it
+  for (const c of active()){
+    const col = c.I > 0 ? red : navy, cx = X(c.x), cy = Y(c.y);
+    ctx.fillStyle = '#fff'; ctx.strokeStyle = col; ctx.lineWidth = 1.8;
+    ctx.beginPath(); ctx.arc(cx, cy, 7, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+    if (c.I > 0){ ctx.fillStyle = col; ctx.beginPath(); ctx.arc(cx, cy, 2.4, 0, 2*Math.PI); ctx.fill(); }
+    else { ctx.beginPath(); ctx.moveTo(cx-4,cy-4); ctx.lineTo(cx+4,cy+4); ctx.moveTo(cx-4,cy+4); ctx.lineTo(cx+4,cy-4); ctx.stroke(); }
+    stext(ctx, Math.abs(c.I) + ' A ' + (c.I > 0 ? 'out' : 'in'), cx + 10, cy - 13, 11.5, col, 'left', true);
+  }
+
+  stext(ctx, 'currents along z, path in the page', 10, 12, 11, ink3, 'left', true);
+  stext(ctx, 'along', w - 120, 12, 11, mid, 'right', true);
+  stext(ctx, 'against', w - 34, 12, 11, red, 'right', true);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = mid; ctx.beginPath(); ctx.moveTo(w-114, 12); ctx.lineTo(w-96, 12); ctx.stroke();
+  ctx.strokeStyle = red; ctx.beginPath(); ctx.moveTo(w-28, 12); ctx.lineTo(w-10, 12); ctx.stroke();
+}
+
+const fmtI = v => (Math.abs(v) < 0.005 ? '0.00' : (v < 0 ? '−' : '') + Math.abs(v).toFixed(2)) + ' A';
+function update(){
+  document.getElementById('s-val').textContent = state.size.toFixed(2) + ' m';
+  document.getElementById('x-val').textContent = (state.cx < 0 ? '−' : '') + Math.abs(state.cx).toFixed(2) + ' m';
+  let ienc = 0, onC = false;
+  for (const c of active()){
+    const d = sdist(c);
+    if (Math.abs(d) < 0.04) onC = true;
+    if (d < 0) ienc += c.I;
+  }
+  const [circ, len] = circulation();
+  document.getElementById('r-i').textContent = onC ? 'on the path' : fmtI(ienc);
+  document.getElementById('r-circ').textContent = onC ? '—' : fmtI(circ);
+  document.getElementById('r-len').textContent = len.toFixed(2) + ' m';
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # ECE 343 roadmap
 
-Last updated 2026-10-29. Read with ECE 444's `project/ROADMAP.md`, whose
+Last updated 2026-11-02. Read with ECE 444's `project/ROADMAP.md`, whose
 working rules apply here.
 
 ## Settled (Neil, 2026-10-17)
@@ -25,6 +25,21 @@ working rules apply here.
   resistor and 470 pF capacitor in series, which rides the $r = 1$ circle).
   The source, with its key, is `Labs/ECE343_Lab_L15_L16_Reflection.tex` in
   `ece343-faculty`; its `build_lab.sh` publishes only the blank copy here.
+- **The L26 Electrostatics Lab is the 2025 Python notebook, revised**
+  (Neil, 2026-11-02), a team lab like L15-L16: two or three cadets, one
+  report. Part A keeps the 2025 structure (Coulomb superposition on a grid:
+  point charge, dipole, a line of charges, two opposite lines, a cadet
+  design) and fixes its Gauss's-law test: the 2025 notebook took the 2D
+  divergence of 3D point charges, which misses $\partial E_z/\partial z$ and
+  reads $-Kq/r^3$, not zero. A6 now makes that trap the lesson, and A7 tests
+  both forms of Gauss's law with infinite line charges, which are truly 2D.
+  Part B relaxes Laplace's equation for the RG-58 cross section and gets
+  $C'$ by Gauss's law (94.9 pF/m at $h = b/60$, first-order grid error,
+  96.4 pF/m extrapolated, against 96.8). Part C, optional, measures $C'$ on
+  the NanoVNA from two open-ended cable lengths. The blank notebook is
+  `book/extras/labs/ECE343_Lab_L26_Electrostatics.ipynb` (Colab opens it from
+  `main`); the source of both copies and the executed key are in
+  `ece343-faculty/Labs/` (`build_l26_notebooks.py`, `lab-keys/`).
 - **L16's worked marker values stand** (Neil, 2026-10-29: "if the values
   work, it's fine").
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
@@ -40,8 +55,14 @@ working rules apply here.
 - Maj Ellis's full name, office, and email (Neil to provide). Maj Ellis is
   the course director; Neil has no office this term (Neil, 2026-10-17).
 - Spring 2027 meeting periods and calendar dates.
-- Lab packets for the Electrostatics (L26), Magnetostatics (L32), and
-  Incidence (L41) labs.
+- Lab packets for the Magnetostatics (L32) and Incidence (L41) labs.
+- **A possible FR4 capacitance part for L26** (Neil is considering it; he has
+  copper-clad boards): measure $C$ of double-sided FR4 plates of several
+  sizes, extract FR4's $\epsilon_r$ from $C$ against area, and see fringing
+  raise $C$ on the small plates. It could replace or join the optional
+  NanoVNA Part C. Not built.
+- **Part C needs two RG-58 BNC cables of different length** (about 1 m and
+  2 m) per station; confirm the lab has them before assigning it.
 - **Module 1 is converted** (L1-L16, 2026-10-29). Modules 2-4 remain, on the
   same pattern (`CLAUDE.md`, "Converting a lesson").
 - **The 2025 example load is $33.9 + j17.9\ \Omega$** (L8, L9, L12, L13). The

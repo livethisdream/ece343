@@ -46,7 +46,7 @@ By the end of this course, you will be able to:
 
 ## Prerequisites
 
-- **Physics 215:** Coulomb's, Faraday's, Ampere's, and Gauss' laws.
+- **Physics 215:** Coulomb's, Faraday's, Ampere's, and Gauss's laws.
 - **ECE 346:** divergence, gradient, and curl, including the divergence
   theorem and Stokes' theorem; partial differential equations (specifically
   separation of variables).
@@ -94,14 +94,14 @@ each assessment is scored **Mastered** or **Not Yet Mastered**.
 | :-: | :- |
 | 4.1 | I can recognize and apply common vector calculus operations, such as: gradient, divergence, curl, and Laplacian in the three major coordinate systems. |
 | 4.2 | I can calculate surface and volume integrals in rectangular, cylindrical, and spherical coordinate systems. |
-| 4.3 | I can differentiate between Stoke's Theorem and the Divergence Theorem and apply them to various problems to simplify integrals. |
+| 4.3 | I can differentiate between Stokes' Theorem and the Divergence Theorem and apply them to various problems to simplify integrals. |
 
 **Chapter 5: Electrostatics**
 
 | LO | Description |
 | :-: | :- |
 | 5.1 | I can apply Coulomb's Law to use direct integration to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems. |
-| 5.2 | I can apply the integral and differential forms of Gauss' Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems. |
+| 5.2 | I can apply the integral and differential forms of Gauss's Law to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems. |
 | 5.3 | I can calculate the electric field from the scalar electric potential in a variety of geometries. |
 | 5.4 | I can apply the electric field boundary conditions to calculate electric fields on both sides of a material boundary. |
 
@@ -120,7 +120,7 @@ each assessment is scored **Mastered** or **Not Yet Mastered**.
 | LO | Description |
 | :-: | :- |
 | 7.1 | I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point. |
-| 7.2 | I can articulate the meaning of both the integral form and point form of Gauss' Law for magnetism. |
+| 7.2 | I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism. |
 | 7.3 | I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems. |
 | 7.4 | I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary. |
 
@@ -331,10 +331,10 @@ marked Vol. 2. Dates will follow the Spring 2027 academic calendar.
 | Lesson | Topic | Reading | Objectives |
 | :-: | :- | :- | :- |
 | L17 | [Vector and Coordinate System Review](module02/L17-vector-analysis/index.md) · **GR 1 due** | Ch. 4 | 4.1–4.3 |
-| L18 | [Coulomb's Law](module02/L18-coulombs-law/index.md) | 5.1–5.3 | 5.1 |
+| L18 | [Coulomb's Law](module02/L18-coulombs-law/index.md) | 5.1–5.4 | 5.1 |
 | L19 | [Surface and Volume Charge](module02/L19-charge-distributions/index.md) | 5.4 | 5.1 |
-| L20 | [Gauss' Law (Integral Form)](module02/L20-gauss-integral/index.md) | 5.5–5.6 | 5.2 |
-| L21 | [Gauss' Law (Differential Form)](module02/L21-gauss-differential/index.md) | 5.7–5.8 | 5.2 |
+| L20 | [Gauss's Law (Integral Form)](module02/L20-gauss-integral/index.md) | 5.5–5.6 | 5.2 |
+| L21 | [Gauss's Law (Differential Form)](module02/L21-gauss-differential/index.md) | 5.7–5.8 | 5.2 |
 | L22 | [Electric Potential](module02/L22-electric-potential/index.md) | 5.9–5.10, 5.15 | 5.3 |
 | L23 | [Boundary Value Problems and Electric Potential](module02/L23-boundary-value-problems/index.md) | 5.16 | 5.3 |
 | L24 | [Electric Boundary Conditions](module02/L24-electric-boundary-conditions/index.md) | 5.18–5.22 | 5.4 |
@@ -346,7 +346,7 @@ marked Vol. 2. Dates will follow the Spring 2027 academic calendar.
 | Lesson | Topic | Reading | Objectives |
 | :-: | :- | :- | :- |
 | L27 | [Current Density, Conductivity, and Resistance](module03/L27-current-density/index.md) | Ch. 6 | 6.1–6.3 |
-| L28 | [Magnetic Fields and Gauss' Law for Magnetism](module03/L28-magnetic-fields/index.md) · **GR 2** | 7.1–7.3 | 7.1, 7.2 |
+| L28 | [Magnetic Fields and Gauss's Law for Magnetism](module03/L28-magnetic-fields/index.md) · **GR 2** | 7.1–7.3 | 7.1, 7.2 |
 | L29 | [Ampere's Law](module03/L29-amperes-law/index.md) | 7.4–7.5, 7.9 | 7.3 |
 | L30 | [Ampere's Law Applied](module03/L30-amperes-law-applied/index.md) | 7.6–7.8 | 7.3 |
 | L31 | [Magnetic Boundary Conditions](module03/L31-magnetic-boundary-conditions/index.md) | 7.10–7.14 | 7.4 |

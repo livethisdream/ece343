@@ -2,14 +2,14 @@
 frame_view: true
 ---
 
-# L28 - Magnetic Fields and Gauss' Law for Magnetism
+# L28 - Magnetic Fields and Gauss's Law for Magnetism
 
 ::::{frame}
 :class: title-frame
 
 <div class="course-mark">ECE 343 · Spring 2027</div>
 
-<h1 class="frame-title">Magnetic Fields and Gauss' Law for Magnetism</h1>
+<h1 class="frame-title">Magnetic Fields and Gauss's Law for Magnetism</h1>
 
 <div class="title-rule"></div>
 
@@ -22,7 +22,7 @@ Lesson 28 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 
 <ol class="lo-list" style="--module: '7'">
   <li>I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
-  <li>I can articulate the meaning of both the integral form and point form of Gauss' Law for magnetism.</li>
+  <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
 </ol>
 ::::
 
@@ -31,7 +31,7 @@ Lesson 28 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 
 - <a class="doc-link" href="../../legacy/ECE343_D07-1_BiotSavart_Slides.pdf" target="_blank" rel="noopener">Biot-Savart Law, slides (PDF)</a>
 - <a class="doc-link" href="../../legacy/ECE343_D07-1_BiotSavart_Handouts.pdf" target="_blank" rel="noopener">Biot-Savart Law, fill-in handout (PDF)</a>
-- <a class="doc-link" href="../../legacy/ECE343_D07-2_GaussMagnetism_Slides.pdf" target="_blank" rel="noopener">Gauss' Law for Magnetism, slides (PDF)</a>
+- <a class="doc-link" href="../../legacy/ECE343_D07-2_GaussMagnetism_Slides.pdf" target="_blank" rel="noopener">Gauss's Law for Magnetism, slides (PDF)</a>
 
 :::{depth}
 These are last year's Beamer slides, posted as they were taught while this

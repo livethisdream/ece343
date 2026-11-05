@@ -25,7 +25,7 @@ boundary that carries a surface current density $\mathbf{J}_s$.
 	\eq{
 		\oint \mathbf{H}\mycdot d\mathbf{l} &= \int_a^b \mathbf{H}_1\mycdot\hat{\mathbf{t}}\ dl
 		+ \int_c^d \mathbf{H}_2\mycdot\lp-\hat{\mathbf{t}}\rp dl + \int_b^c + \int_d^a \\
-		&= H_{t1}W - H_{t2}W + 0 = I_\text{enc} = \mathbf{J}_s\mycdot\lp\hat{\mathbf{n}}\times\hat{\mathbf{t}}\rp W
+		&= H_{t1}W - H_{t2}W + 0 = I_\text{encl} = \mathbf{J}_s\mycdot\lp\hat{\mathbf{n}}\times\hat{\mathbf{t}}\rp W
 	}
 	The short sides have length $h$, so their integrals vanish as $h \to 0$, and so does
 	any volume current through the area $Wh$. The loop's normal, by the right-hand
@@ -159,9 +159,10 @@ $\mathbf{H}_2 = \hat{\mathbf{x}} 2 - \hat{\mathbf{y}} + \hat{\mathbf{z}} 6$ A/m.
 	outside, and explain why a high-permeability core guides magnetic field.
 	\begin{solution}[1.4in]
 	\eq{ \tan\theta_\text{air} = \dfrac{\tan 85\mydeg}{2000} = \dfrac{11.4}{2000} = 0.00572 \implies \theta_\text{air} = 0.33\mydeg }
-	Almost any field inside the core leaves it, or enters it, almost along the normal,
-	so the lines of $\mathbf{B}$ outside turn toward the core and the flux runs along
-	the core's own path.
+	Whatever angle the field makes inside the core, short of grazing the surface, the
+	field in the air just outside meets the surface within a fraction of a degree of the
+	normal, so the lines of $\mathbf{B}$ in the air turn toward the core and the flux
+	runs along the core's own path.
 	\end{solution}
 
 \end{parts}

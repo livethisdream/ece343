@@ -97,6 +97,8 @@ function setSize(cv,wCss,hCss,dpr){
 // canvas grows in width only.
 const DESIGN_W = 520, H_LOG = 300;
 let SCL = 1;
+// Canvas text keeps at least 11.5 px on screen when the drawing scales down.
+const fs = n => Math.max(n, 11.5 / SCL);
 function fit(){
   const dpr = window.devicePixelRatio || 1;
   const wCss = cvWidth(canvas);
@@ -118,34 +120,34 @@ function draw(){
   // the coil, seen from the side: radius a drawn at a fixed height
   const cy = 52, ra = 26, x0 = X(-L/2), x1 = X(L/2);
   ctx.fillStyle = fill; ctx.fillRect(x0, cy - ra, x1 - x0, 2*ra);
-  const nT = Math.max(4, Math.round((x1 - x0)/9));
+  const nT = Math.max(4, Math.round((x1 - x0)/16));
   for (let i=0;i<nT;i++){
     const xc = x0 + (i + 0.5)*(x1 - x0)/nT;
     for (const [yy, out] of [[cy - ra, true], [cy + ra, false]]){
       ctx.fillStyle = '#fff'; ctx.strokeStyle = red; ctx.lineWidth = 1.3;
-      ctx.beginPath(); ctx.arc(xc, yy, 3.6, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
-      if (out){ ctx.fillStyle = red; ctx.beginPath(); ctx.arc(xc, yy, 1.2, 0, 2*Math.PI); ctx.fill(); }
-      else { ctx.beginPath(); ctx.moveTo(xc-2,yy-2); ctx.lineTo(xc+2,yy+2); ctx.moveTo(xc-2,yy+2); ctx.lineTo(xc+2,yy-2); ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(xc, yy, 6, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+      if (out){ ctx.fillStyle = red; ctx.beginPath(); ctx.arc(xc, yy, 2.2, 0, 2*Math.PI); ctx.fill(); }
+      else { ctx.beginPath(); ctx.moveTo(xc-3.5,yy-3.5); ctx.lineTo(xc+3.5,yy+3.5); ctx.moveTo(xc-3.5,yy+3.5); ctx.lineTo(xc+3.5,yy-3.5); ctx.stroke(); }
     }
   }
   ctx.strokeStyle = ink3; ctx.setLineDash([4,3]); ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(left, cy); ctx.lineTo(right, cy); ctx.stroke(); ctx.setLineDash([]);
-  stext(ctx, 'axis', right, cy - 9, 10.5, ink3, 'right', true);
-  stext(ctx, 'radius a', x0 - 8, cy - ra, 11, ink3, 'right', true);
+  stext(ctx, 'axis', right, cy - 9, fs(10.5), ink3, 'right', true);
+  stext(ctx, 'radius a', x0 - 8, cy - ra, fs(11), ink3, 'right', true);
 
   // the plot of H_z/(nI) against z/a
-  const top = 100, bot = hh - 30, Y = v => bot - v*(bot - top)/1.1;
+  const top = 110, bot = hh - 30, Y = v => bot - v*(bot - top)/1.1;
   ctx.strokeStyle = '#c7d2e0'; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(left, top - 4); ctx.lineTo(left, bot); ctx.lineTo(right, bot); ctx.stroke();
   for (const v of [0, 0.5, 1]){
-    stext(ctx, v.toFixed(1), left - 6, Y(v), 11, ink3, 'right', false);
+    stext(ctx, v.toFixed(1), left - 6, Y(v), fs(11), ink3, 'right', false);
     if (v > 0){ ctx.strokeStyle = '#e3edf6'; ctx.beginPath(); ctx.moveTo(left, Y(v)); ctx.lineTo(right, Y(v)); ctx.stroke(); }
   }
   ctx.fillStyle = fill; ctx.globalAlpha = 0.6; ctx.fillRect(x0, top - 4, x1 - x0, bot - top + 4); ctx.globalAlpha = 1;
   if (state.ideal){
     ctx.strokeStyle = amber; ctx.setLineDash([6,4]); ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.moveTo(x0, Y(1)); ctx.lineTo(x1, Y(1)); ctx.stroke(); ctx.setLineDash([]);
-    stext(ctx, 'nI', x1 + 6, Y(1) - 1, 11.5, amber, 'left', true);
+    stext(ctx, 'nI', x1 + 6, Y(1) - 1, fs(11.5), amber, 'left', true);
   }
   ctx.strokeStyle = navy; ctx.lineWidth = 2.4; ctx.beginPath();
   const N = 400;
@@ -157,10 +159,10 @@ function draw(){
   for (const [z, col] of [[0, navy], [L/2, mid]]){
     ctx.fillStyle = col; ctx.beginPath(); ctx.arc(X(z), Y(h(z)), 4, 0, 2*Math.PI); ctx.fill();
   }
-  stext(ctx, 'z', right, bot + 16, 12, ink3, 'right', true);
-  stext(ctx, '−ℓ/2', x0, bot + 14, 11, ink3, 'center', false);
-  stext(ctx, 'ℓ/2', x1, bot + 14, 11, ink3, 'center', false);
-  stext(ctx, 'H on the axis, in units of nI', left + 6, top - 10, 11, ink3, 'left', true);
+  stext(ctx, 'z', right, bot + 16, fs(12), ink3, 'right', true);
+  stext(ctx, '−ℓ/2', x0, bot + 14, fs(11), ink3, 'center', false);
+  stext(ctx, 'ℓ/2', x1, bot + 14, fs(11), ink3, 'center', false);
+  stext(ctx, 'H on the axis, in units of nI', left + 6, top - 12, fs(11), ink3, 'left', true);
 }
 
 function update(){

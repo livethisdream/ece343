@@ -29,8 +29,9 @@ place they are all together.
 
 - <a class="doc-link" href="https://colab.research.google.com/github/livethisdream/ece343/blob/main/book/extras/labs/ECE343_Lab_L26_Electrostatics.ipynb" target="_blank" rel="noopener">Electrostatics Lab (Python notebook, opens in Colab)</a>: L26. A team lab: two or three cadets, one report per team. <a class="doc-link" href="labs/ECE343_Lab_L26_Electrostatics.ipynb" download>Download the notebook (.ipynb)</a>.
 
-The Magnetostatics (L32) and Incidence (L41) lab packets will be posted here
-and on their lesson pages.
+- <a class="doc-link" href="https://colab.research.google.com/github/livethisdream/ece343/blob/main/book/extras/labs/ECE343_Lab_L32_Magnetostatics.ipynb" target="_blank" rel="noopener">Magnetostatics Lab (Python notebook, opens in Colab)</a>: L32. A team lab: two or three cadets, one report per team. <a class="doc-link" href="labs/ECE343_Lab_L32_Magnetostatics.ipynb" download>Download the notebook (.ipynb)</a>.
+
+The Incidence (L41) lab packet will be posted here and on its lesson page.
 
 ## Spring 2025 slides
 
@@ -67,11 +68,11 @@ page.
 
 | Deck | Lessons | Slides | Fill-in handout |
 | :- | :-: | :- | :- |
-| Current Density | L27 | <a class="doc-link" href="legacy/ECE343_D06_CurrentDensity_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D06_CurrentDensity_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Biot-Savart Law | L28 | <a class="doc-link" href="legacy/ECE343_D07-1_BiotSavart_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-1_BiotSavart_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Gauss's Law for Magnetism | L28 | <a class="doc-link" href="legacy/ECE343_D07-2_GaussMagnetism_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
-| Ampere's Law | L29–L30 | <a class="doc-link" href="legacy/ECE343_D07-3_Ampere_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-3_Ampere_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
-| Magnetic Boundary Conditions | L31 | <a class="doc-link" href="legacy/ECE343_D07-4_HBoundaries_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-4_HBoundaries_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Current Density | — | <a class="doc-link" href="legacy/ECE343_D06_CurrentDensity_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D06_CurrentDensity_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Biot-Savart Law | — | <a class="doc-link" href="legacy/ECE343_D07-1_BiotSavart_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-1_BiotSavart_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Gauss's Law for Magnetism | — | <a class="doc-link" href="legacy/ECE343_D07-2_GaussMagnetism_Slides.pdf" target="_blank" rel="noopener">slides</a> | — |
+| Ampere's Law | — | <a class="doc-link" href="legacy/ECE343_D07-3_Ampere_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-3_Ampere_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
+| Magnetic Boundary Conditions | — | <a class="doc-link" href="legacy/ECE343_D07-4_HBoundaries_Slides.pdf" target="_blank" rel="noopener">slides</a> | <a class="doc-link" href="legacy/ECE343_D07-4_HBoundaries_Handouts.pdf" target="_blank" rel="noopener">handout</a> |
 
 ### Module 4: Dynamic Fields
 

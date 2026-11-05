@@ -1,0 +1,173 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L31 practice set (Magnetic Boundary Conditions): the loop derivation with a
+% surface current, the field across a boundary into a high-permeability
+% material, a boundary with surface current, and the current sheet check.
+
+\fullwidth{\textbf{Learning Objective 7.4: } I can apply the magnetic field
+boundary conditions to calculate magnetic fields on both sides of a material
+boundary.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). In every problem, $\hat{\mathbf{n}}$
+points from region 2 into region 1.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Deriving the conditions.} Two magnetic materials meet at a flat
+boundary that carries a surface current density $\mathbf{J}_s$.
+\begin{parts}
+
+	\part Apply Ampere's law to a rectangular loop with long sides of length $W$
+	along a tangent $\hat{\mathbf{t}}$, one in each region, and short sides of
+	height $h \to 0$. Show that $H_{t1} - H_{t2} = \mathbf{J}_s\mycdot\lp\hat{\mathbf{n}}\times\hat{\mathbf{t}}\rp$.
+	\begin{solution}[2in]
+	\eq{
+		\oint \mathbf{H}\mycdot d\mathbf{l} &= \int_a^b \mathbf{H}_1\mycdot\hat{\mathbf{t}}\ dl
+		+ \int_c^d \mathbf{H}_2\mycdot\lp-\hat{\mathbf{t}}\rp dl + \int_b^c + \int_d^a \\
+		&= H_{t1}W - H_{t2}W + 0 = I_\text{encl} = \mathbf{J}_s\mycdot\lp\hat{\mathbf{n}}\times\hat{\mathbf{t}}\rp W
+	}
+	The short sides have length $h$, so their integrals vanish as $h \to 0$, and so does
+	any volume current through the area $Wh$. The loop's normal, by the right-hand
+	rule, is $\hat{\mathbf{n}}\times\hat{\mathbf{t}}$, so only the component of
+	$\mathbf{J}_s$ along it crosses the loop. Divide by $W$.
+	\end{solution}
+
+	\part Apply Gauss's law for magnetism to a pillbox with faces of area $\Delta A$
+	and height $h \to 0$. Show that $B_{n1} = B_{n2}$, and explain why no source term
+	appears.
+	\begin{solution}[1.5in]
+	\eq{ \oint \mathbf{B}\mycdot d\mathbf{s} = B_{n1}\Delta A - B_{n2}\Delta A + 0 = 0 }
+	The side's flux vanishes as $h \to 0$. The right-hand side is zero for every
+	closed surface, because there is no magnetic charge to enclose.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Into a magnetic material.} The plane $z = 0$ separates air,
+region 1 at $z > 0$, from a material with $\mu_r = 500$, region 2 at $z < 0$. No
+surface current flows on the boundary. Just above it,
+$\mathbf{H}_1 = \hat{\mathbf{x}} 10 + \hat{\mathbf{z}} 20$ A/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{H}_2$ just below the boundary.
+		\begin{solution}[1.3in]
+		The normal is $\hat{\mathbf{z}}$. Tangential: $H_{2x} = 10$ A/m. Normal:
+		\eq{ \mu_0 H_{1z} = 500\mu_0 H_{2z} \implies H_{2z} = \dfrac{20}{500} = 0.04\ \text{A/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{H}_2$ = \ansbox[1.6in]{$\hat{\mathbf{x}} 10 + \hat{\mathbf{z}} 0.04$ A/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{B}_1$ and $\mathbf{B}_2$.
+		\begin{solution}[1.2in]
+		\eq{
+			\mathbf{B}_1 &= \mu_0\mathbf{H}_1 = \hat{\mathbf{x}} 12.6 + \hat{\mathbf{z}} 25.1\ \mu\text{T} \\
+			\mathbf{B}_2 &= 500\mu_0\mathbf{H}_2 = \hat{\mathbf{x}} 6280 + \hat{\mathbf{z}} 25.1\ \mu\text{T}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$B_{z}$ = \ansbox[1.3in]{$25.1\ \mu$T, both sides}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the angle each field makes with the normal, and check the ratio of
+		their tangents against $\mu_1/\mu_2$.
+		\begin{solution}[1.4in]
+		\eq{
+			\theta_1 &= \tan^{-1}\dfrac{10}{20} = 26.6\mydeg \\
+			\theta_2 &= \tan^{-1}\dfrac{10}{0.04} = 89.8\mydeg \\
+			\dfrac{\tan\theta_1}{\tan\theta_2} &= \dfrac{0.5}{250} = 0.002 = \dfrac{1}{500}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_1$ = \ansbox[1.3in]{$26.6\mydeg$}
+
+		\vspace{4pt}
+		$\theta_2$ = \ansbox[1.3in]{$89.8\mydeg$}
+	\end{minipage}
+
+	\part In which region is $|\mathbf{H}|$ larger, and in which is $|\mathbf{B}|$
+	larger? Explain in one sentence each.
+	\begin{solution}[1in]
+	$|\mathbf{H}_1| = 22.4$ A/m is larger than $|\mathbf{H}_2| = 10.0$ A/m: the
+	tangential parts match, and the normal part of $\mathbf{H}$ is 500 times smaller
+	in the material. $|\mathbf{B}_2| = 6.28$ mT is larger than $|\mathbf{B}_1| = 28.1\ \mu$T:
+	the normal parts match, and the tangential part of $\mathbf{B}$ is 500 times larger
+	in the material.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A boundary that carries current.} The plane $z = 0$ separates
+region 1, $z > 0$, with $\mu = \mu_0$, from region 2, $z < 0$, with $\mu = 3\mu_0$.
+The boundary carries $\mathbf{J}_s = \hat{\mathbf{y}} 4$ A/m. Just below it,
+$\mathbf{H}_2 = \hat{\mathbf{x}} 2 - \hat{\mathbf{y}} + \hat{\mathbf{z}} 6$ A/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\mathbf{H}_1$.
+		\begin{solution}[2in]
+		With $\hat{\mathbf{n}} = \hat{\mathbf{z}}$, the tangential condition gives the
+		tangential part of $\mathbf{H}_1 - \mathbf{H}_2$ as
+		\eq{ \mathbf{J}_s\times\hat{\mathbf{n}} = 4\hat{\mathbf{y}}\times\hat{\mathbf{z}} = \hat{\mathbf{x}} 4 }
+		so $H_{1x} = 2 + 4 = 6$ and $H_{1y} = -1$ A/m. Normal:
+		\eq{ \mu_0 H_{1z} = 3\mu_0 \times 6 \implies H_{1z} = 18\ \text{A/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{H}_1$ = \ansbox[1.6in]{$\hat{\mathbf{x}} 6 - \hat{\mathbf{y}} + \hat{\mathbf{z}} 18$ A/m}
+	\end{minipage}
+
+	\part Check your answer by computing $\hat{\mathbf{n}}\times\lp\mathbf{H}_1 - \mathbf{H}_2\rp$.
+	\begin{solution}[0.9in]
+	\eq{ \hat{\mathbf{z}}\times\lp\hat{\mathbf{x}} 4 + \hat{\mathbf{z}} 12\rp = \hat{\mathbf{y}} 4 = \mathbf{J}_s }
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A current sheet and an iron core.}
+\begin{parts}
+
+	\part A sheet of current $\mathbf{J}_s = \hat{\mathbf{y}} 20$ A/m lies in the plane
+	$x = 0$ in free space. Lesson 30 found that it makes a field of magnitude
+	$J_s/2$ on each side, parallel to the sheet and at right angles to the current.
+	Find $\mathbf{H}$ on each side, and show that the tangential condition holds.
+	\begin{solution}[1.4in]
+	Region 1 is $x > 0$, so $\hat{\mathbf{n}} = \hat{\mathbf{x}}$. The right-hand rule gives
+	$\mathbf{H}_1 = -\hat{\mathbf{z}} 10$ and $\mathbf{H}_2 = \hat{\mathbf{z}} 10$ A/m.
+	\eq{ \hat{\mathbf{x}}\times\lp-\hat{\mathbf{z}} 20\rp = \hat{\mathbf{y}} 20 = \mathbf{J}_s }
+	\end{solution}
+
+	\part Inside a ferrite core with $\mu_r = 2000$, the field meets the core's
+	surface $85\mydeg$ from the normal. Find the angle from the normal in the air just
+	outside, and explain why a high-permeability core guides magnetic field.
+	\begin{solution}[1.4in]
+	\eq{ \tan\theta_\text{air} = \dfrac{\tan 85\mydeg}{2000} = \dfrac{11.4}{2000} = 0.00572 \implies \theta_\text{air} = 0.33\mydeg }
+	Whatever angle the field makes inside the core, short of grazing the surface, the
+	field in the air just outside meets the surface within a fraction of a degree of the
+	normal, so the lines of $\mathbf{B}$ in the air turn toward the core and the flux
+	runs along the core's own path.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

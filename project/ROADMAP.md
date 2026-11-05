@@ -40,6 +40,23 @@ working rules apply here.
   `book/extras/labs/ECE343_Lab_L26_Electrostatics.ipynb` (Colab opens it from
   `main`); the source of both copies and the executed key are in
   `ece343-faculty/Labs/` (`build_l26_notebooks.py`, `lab-keys/`).
+- **Module 3 (L27-L31) was written with `write-lesson`** (Neil, 2026-11-05),
+  then reviewed once with the three lenses across the whole module; Neil
+  picked every finding (A-D). Surface current is **J**_s everywhere, defined
+  in L28. L29 derives Ampere's law for any steady current in full, from the
+  curl of the Biot-Savart law with $\nabla\cdot\mathbf{J} = 0$ (L27). L30
+  derives the coax $L'$ (259 nH/m), which with L25's $C'$ completes L6's
+  $Z_0 = 51.7$ Ω. L27 defines the skin effect and quotes $\delta$ (it needs
+  Module 4).
+- **The L32 Magnetostatics Lab** (Neil, 2026-11-05) is a team lab like L26.
+  Part A finishes the 2025 Python notebook as Biot-Savart summed from
+  segments: wire, loop, Helmholtz pair, solenoid, and a $\nabla\cdot\mathbf{B}$
+  check. Part B: each station winds a 100-turn coil of magnet wire on a
+  4 cm tube (about 13 m of 26 AWG, 1.7 Ω, 3.1 mT at 1 A) and measures the
+  on-axis field with a linear Hall sensor (SS49E or A1324; not the digital
+  A3144). The blank notebook is
+  `book/extras/labs/ECE343_Lab_L32_Magnetostatics.ipynb`; the source and key
+  are in `ece343-faculty/Labs/` (`build_l32_notebooks.py`, `lab-keys/`).
 - **L16's worked marker values stand** (Neil, 2026-10-29: "if the values
   work, it's fine").
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
@@ -55,7 +72,9 @@ working rules apply here.
 - Maj Ellis's full name, office, and email (Neil to provide). Maj Ellis is
   the course director; Neil has no office this term (Neil, 2026-10-17).
 - Spring 2027 meeting periods and calendar dates.
-- Lab packets for the Magnetostatics (L32) and Incidence (L41) labs.
+- The lab packet for the Incidence (L41) lab.
+- **Buy linear Hall sensors for L32** (one SS49E or A1324 per station plus
+  spares; Neil has the magnet wire).
 - **A possible FR4 capacitance part for L26** (Neil is considering it; he has
   copper-clad boards): measure $C$ of double-sided FR4 plates of several
   sizes, extract FR4's $\epsilon_r$ from $C$ against area, and see fringing

@@ -119,7 +119,7 @@ each assessment is scored **Mastered** or **Not Yet Mastered**.
 
 | LO | Description |
 | :-: | :- |
-| 7.1 | I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point. |
+| 7.1 | I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point. |
 | 7.2 | I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism. |
 | 7.3 | I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems. |
 | 7.4 | I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary. |

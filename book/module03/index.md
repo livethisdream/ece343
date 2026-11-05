@@ -35,7 +35,7 @@ Steady current and conductivity, then the magnetic field of steady currents: Bio
 ::::{frame} Chapter 7: Magnetostatics
 
 <ol class="lo-list" style="--module: '7'">
-  <li>I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
+  <li>I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
   <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
   <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
   <li>I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.</li>
@@ -79,7 +79,7 @@ Steady current and conductivity, then the magnetic field of steady currents: Bio
   <a class="mt-card mt-lesson" href="L32-lab-magnetostatics/index.html">
     <span class="mt-kind">Lab · L32</span>
     <h4>Magnetostatics Lab</h4>
-    <p>The Module 3 lab. Packet to be posted. Objectives 7.1, 7.2, 7.3, 7.4.</p>
+    <p>A team lab: Biot-Savart in Python for a wire, a loop, a Helmholtz pair, and a solenoid, then a hand-wound coil measured with a linear Hall sensor. Objectives 7.1, 7.2, 7.3, 7.4.</p>
   </a>
 </div>
 ::::

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The electric field at a dielectric boundary</title>
+<title>The field at a material boundary</title>
 <script src="mjlabel.js"></script>
 <style>
   :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
@@ -55,12 +55,12 @@
 
   <div class="controls">
     <div class="ctl">
-      <label>\(\epsilon_{r1}\)</label>
+      <label id="l-1">\(\epsilon_{r1}\)</label>
       <input type="range" id="e1" min="1" max="10" step="0.1" value="1">
       <span class="val" id="e1-val">1.0</span>
     </div>
     <div class="ctl">
-      <label>\(\epsilon_{r2}\)</label>
+      <label id="l-2">\(\epsilon_{r2}\)</label>
       <input type="range" id="e2" min="1" max="10" step="0.1" value="4">
       <span class="val" id="e2-val">4.0</span>
     </div>
@@ -70,15 +70,15 @@
       <span class="val" id="th-val">30.0°</span>
     </div>
     <div style="display:flex; gap:18px; flex-wrap:wrap;">
-      <label class="tgl"><input type="checkbox" id="show-d"><span class="sw"></span><span class="t">Show D</span></label>
+      <label class="tgl"><input type="checkbox" id="show-d"><span class="sw"></span><span class="t" id="l-d">Show D</span></label>
       <label class="tgl" style="--on:var(--cmp)"><input type="checkbox" id="show-c" checked><span class="sw"></span><span class="t">Components</span></label>
     </div>
   </div>
 
   <div class="readouts">
     <div class="ro"><span class="k">\(\theta_2\)</span><span class="v" id="r-th2">—</span></div>
-    <div class="ro"><span class="k">\(\vert\mathbf{E}_2\vert / \vert\mathbf{E}_1\vert\)</span><span class="v" id="r-e">—</span></div>
-    <div class="ro"><span class="k">\(\vert\mathbf{D}_2\vert / \vert\mathbf{D}_1\vert\)</span><span class="v" id="r-d">—</span></div>
+    <div class="ro"><span class="k" id="k-e">\(\vert\mathbf{E}_2\vert / \vert\mathbf{E}_1\vert\)</span><span class="v" id="r-e">—</span></div>
+    <div class="ro"><span class="k" id="k-d">\(\vert\mathbf{D}_2\vert / \vert\mathbf{D}_1\vert\)</span><span class="v" id="r-d">—</span></div>
     <div class="ro"><span class="k">\(\tan\theta_1 / \tan\theta_2\)</span><span class="v" id="r-tan">—</span></div>
   </div>
 </div>
@@ -96,7 +96,31 @@ function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(
 //   eps2 E_n2 = eps1 E_n1          (normal D continuous)
 // The field crosses from region 1 down into region 2. theta is measured from
 // the normal, so tan(theta) = |E_t| / |E_n|.
-const state = { e1: 1, e2: 4, th1: 30 };
+//
+// ?mode=mag (L31) runs the same geometry for magnetostatics with no surface
+// current: H takes the place of E (tangential H continuous), B the place of D
+// (normal B continuous), and mu_r the place of eps_r. The mu_r sliders are
+// logarithmic, 1 to 1000, so iron fits on them. The variable names stay e1,
+// e2, D for both modes.
+const MAG = new URLSearchParams(location.search).get('mode') === 'mag';
+const SYM = MAG ? { f: 'H', g: 'B', m: '\\mu' } : { f: 'E', g: 'D', m: '\\epsilon' };
+const state = { e1: 1, e2: MAG ? 100 : 4, th1: MAG ? 10 : 30 };
+if (MAG) {
+  document.title = 'The magnetic field at a material boundary';
+  document.getElementById('plot').setAttribute('aria-label', 'Magnetic field lines bending at the boundary between two magnetic materials');
+  document.getElementById('l-1').textContent = '\\(\\mu_{r1}\\)';
+  document.getElementById('l-2').textContent = '\\(\\mu_{r2}\\)';
+  document.getElementById('l-d').textContent = 'Show B';
+  document.getElementById('k-e').textContent = '\\(\\vert\\mathbf{H}_2\\vert / \\vert\\mathbf{H}_1\\vert\\)';
+  document.getElementById('k-d').textContent = '\\(\\vert\\mathbf{B}_2\\vert / \\vert\\mathbf{B}_1\\vert\\)';
+  for (const id of ['e1', 'e2']) {             // slider position = log10(mu_r)
+    const el = document.getElementById(id);
+    el.min = '0'; el.max = '3'; el.step = '0.01';
+    el.value = String(Math.log10(state[id]));
+  }
+}
+const fromSlider = v => MAG ? Math.pow(10, parseFloat(v)) : parseFloat(v);
+const fmtR = v => MAG ? (v < 9.95 ? v.toFixed(1) : v.toFixed(0)) : v.toFixed(1);
 function fields() {
   const t = state.th1 * Math.PI / 180;
   const Et = Math.sin(t), En1 = Math.cos(t);               // |E1| = 1
@@ -110,15 +134,21 @@ function fields() {
 const e1El = document.getElementById('e1'), e2El = document.getElementById('e2'), thEl = document.getElementById('th');
 const dEl = document.getElementById('show-d'), cEl = document.getElementById('show-c');
 function onInput() {
-  state.e1 = parseFloat(e1El.value); state.e2 = parseFloat(e2El.value); state.th1 = parseFloat(thEl.value);
-  document.getElementById('e1-val').textContent = state.e1.toFixed(1);
-  document.getElementById('e2-val').textContent = state.e2.toFixed(1);
+  state.e1 = fromSlider(e1El.value); state.e2 = fromSlider(e2El.value); state.th1 = parseFloat(thEl.value);
+  document.getElementById('e1-val').textContent = fmtR(state.e1);
+  document.getElementById('e2-val').textContent = fmtR(state.e2);
   document.getElementById('th-val').textContent = state.th1.toFixed(1) + '°';
   draw();
 }
 for (const el of [e1El, e2El, thEl]) el.addEventListener('input', onInput);
 dEl.addEventListener('change', draw);
 cEl.addEventListener('change', draw);
+if (MAG) {                        // the readouts beside the sliders start at the mag defaults
+  thEl.value = String(state.th1);
+  document.getElementById('e1-val').textContent = fmtR(state.e1);
+  document.getElementById('e2-val').textContent = fmtR(state.e2);
+  document.getElementById('th-val').textContent = state.th1.toFixed(1) + '°';
+}
 
 // ---- canvas ----
 const canvas = document.getElementById('plot');
@@ -167,9 +197,43 @@ function arrowTo(x0, y0, x1, y1, color, lw, head) {
   ctx.closePath(); ctx.fill();
 }
 function shade(er) {           // a deeper blue for a larger permittivity
-  const k = (er - 1) / 9;
+  const k = MAG ? Math.log10(er) / 3 : (er - 1) / 9;
   const mix = (a, b) => Math.round(a + (b - a) * k);
   return `rgb(${mix(246,190)},${mix(250,214)},${mix(253,236)})`;
+}
+
+/* Mag mode draws lines whose spacing shows the strength of the field the
+   arrows show: lines of H with Show B off, lines of B with it on. The
+   perpendicular spacing is inversely proportional to the field, so
+   p2 = p1 |F1| / |F2|. For B that makes the crossings match along the
+   boundary (normal B continuous); lines of H do not all continue across.
+   Each line runs to the canvas edge, and the spacing is floored at 2.5 px so
+   a near-grazing field in iron fills in rather than taking thousands of lines. */
+function drawMagLines(F, u1, u2, gap0, w, h, cx, cy) {
+  const useB = dEl.checked;
+  const gap = gap0 / 2;    // denser than the electric mode, so the sparse side still shows lines
+  const F1 = useB ? F.D1 : F.E1, F2 = useB ? F.D2 : F.E2;
+  const c1 = Math.max(Math.cos(F.t1), 1e-6), c2 = Math.max(Math.cos(F.th2), 1e-6);
+  const p1 = gap * c1;
+  const p2 = Math.max(2.5, p1 * F1 / F2);
+  const g2 = p2 / c2;
+  const t1 = cy / c1, t2 = (h - cy) / c2;           // lengths to the top and bottom edges
+  ctx.strokeStyle = 'rgba(0,74,133,0.30)';
+  const k1a = Math.floor(-cx / gap), k1b = Math.ceil((w + cy * Math.tan(F.t1) - cx) / gap);
+  for (let k = k1a; k <= k1b; k++) {
+    if (k === 0) continue;                 // the highlighted vectors sit there
+    const x = cx + k * gap;
+    ctx.beginPath(); ctx.moveTo(x - u1[0] * t1, cy - u1[1] * t1); ctx.lineTo(x, cy); ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(0,103,185,0.30)';
+  const xmin = -(h - cy) * Math.min(Math.tan(F.th2), 1e7);
+  const k2a = Math.floor((xmin - cx) / g2) - 1, k2b = Math.ceil((w - cx) / g2);
+  const off = useB ? 0 : 0.5;              // lines of H need not meet lines in region 1
+  for (let k = k2a; k <= k2b; k++) {
+    if (k === 0 && off === 0) continue;
+    const x = cx + (k + off) * g2;
+    ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + u2[0] * t2, cy + u2[1] * t2); ctx.stroke();
+  }
 }
 
 function draw() {
@@ -182,8 +246,8 @@ function draw() {
   // the two regions
   ctx.fillStyle = shade(state.e1); ctx.fillRect(0, 0, w, cy);
   ctx.fillStyle = shade(state.e2); ctx.fillRect(0, cy, w, h - cy);
-  MJ.draw(ctx, '\\epsilon_1', 12, 18, 15, cssVar('--ink'), 'left');
-  MJ.draw(ctx, '\\epsilon_2', 12, h - 18, 15, cssVar('--ink'), 'left');
+  MJ.draw(ctx, SYM.m + '_1', 12, 18, 15, cssVar('--ink'), 'left');
+  MJ.draw(ctx, SYM.m + '_2', 12, h - 18, 15, cssVar('--ink'), 'left');
 
   // field lines: each crosses the boundary at x_i and bends there. Spacing
   // along the boundary is the same on both sides, because the normal flux of
@@ -194,14 +258,18 @@ function draw() {
   const far = 2 * Math.hypot(w, h);
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, w, h); ctx.clip();
   ctx.lineWidth = 1.2;
-  const K = Math.ceil(far / gap);
-  for (let k = -K; k <= K; k++) {
-    if (k === 0) continue;                 // the highlighted vectors sit there
-    const x = cx + k * gap;
-    ctx.strokeStyle = 'rgba(0,74,133,0.30)';
-    ctx.beginPath(); ctx.moveTo(x - u1[0] * far, cy - u1[1] * far); ctx.lineTo(x, cy); ctx.stroke();
-    ctx.strokeStyle = 'rgba(0,103,185,0.30)';
-    ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + u2[0] * far, cy + u2[1] * far); ctx.stroke();
+  if (MAG) {
+    drawMagLines(F, u1, u2, gap, w, h, cx, cy);
+  } else {
+    const K = Math.ceil(far / gap);
+    for (let k = -K; k <= K; k++) {
+      if (k === 0) continue;                 // the highlighted vectors sit there
+      const x = cx + k * gap;
+      ctx.strokeStyle = 'rgba(0,74,133,0.30)';
+      ctx.beginPath(); ctx.moveTo(x - u1[0] * far, cy - u1[1] * far); ctx.lineTo(x, cy); ctx.stroke();
+      ctx.strokeStyle = 'rgba(0,103,185,0.30)';
+      ctx.beginPath(); ctx.moveTo(x, cy); ctx.lineTo(x + u2[0] * far, cy + u2[1] * far); ctx.stroke();
+    }
   }
   ctx.restore();
 
@@ -220,7 +288,7 @@ function draw() {
   const L1 = m1 * s, L2 = m2 * s;
   const p1 = [cx - u1[0] * L1, cy - u1[1] * L1];
   const p2 = [cx + u2[0] * L2, cy + u2[1] * L2];
-  const sym = useD ? 'D' : 'E';
+  const sym = useD ? SYM.g : SYM.f;
 
   if (cEl.checked) {
     // components: tangential (horizontal) and normal (vertical), dashed
@@ -244,6 +312,7 @@ function draw() {
 
   stext(ctx, 'region 1', w - 10, 16, 12, cssVar('--ink3'), 'right', true);
   stext(ctx, 'region 2', w - 10, h - 16, 12, cssVar('--ink3'), 'right', true);
+  if (MAG) stext(ctx, 'thin lines: ' + (useD ? 'B' : 'H'), w - 10, 32, 11, cssVar('--ink3'), 'right', false);
 
   updateReadout(F);
 }

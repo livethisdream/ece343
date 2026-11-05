@@ -1,0 +1,213 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L30 practice set (Ampere's Law Applied): a coax with a thick shield, a finite
+% solenoid, a toroid's flux and inductance, and RG-59's inductance and impedance.
+
+\fullwidth{\textbf{Learning Objective 7.3: } I can use Ampere's Law to calculate
+the magnetic field at an observation point for simple magnetostatic systems.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A coax with a thick shield.} A coaxial line has an inner conductor
+of radius $a = 1$ mm and a shield that fills $b = 4$ mm $< \rho < c = 5$ mm. It
+carries $I = 2$ A at DC, out along the inner conductor and back along the shield,
+with the current uniform over each conductor's cross section.
+\begin{parts}
+
+	\part Use Ampere's law to find $H_\phi$ in all four regions.
+	\begin{solution}[2.4in]
+	The path is a circle of radius $\rho$, so $2\pi\rho\ H_\phi = I_\text{encl}$ in each region.
+	\eq{
+		\rho < a:&\quad I_\text{encl} = I\dfrac{\rho^2}{a^2}, \qquad H_\phi = \dfrac{I\rho}{2\pi a^2} \\
+		a < \rho < b:&\quad I_\text{encl} = I, \qquad H_\phi = \dfrac{I}{2\pi\rho} \\
+		b < \rho < c:&\quad I_\text{encl} = I - I\dfrac{\rho^2 - b^2}{c^2 - b^2} = I\dfrac{c^2 - \rho^2}{c^2 - b^2}, \qquad H_\phi = \dfrac{I}{2\pi\rho}\ \dfrac{c^2 - \rho^2}{c^2 - b^2} \\
+		\rho > c:&\quad I_\text{encl} = 0, \qquad H_\phi = 0
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H_\phi$ at $\rho = 0.5$ mm, $2$ mm, $4.5$ mm, and $6$ mm.
+		\begin{solution}[1.6in]
+		\eq{
+			H(0.5) &= \dfrac{2 \times 0.5\times10^{-3}}{2\pi \times (10^{-3})^2} = 159\ \text{A/m} \\
+			H(2) &= \dfrac{2}{2\pi \times 0.002} = 159\ \text{A/m} \\
+			H(4.5) &= \dfrac{2}{2\pi \times 0.0045} \times \dfrac{25 - 20.25}{25 - 16} = 37.3\ \text{A/m} \\
+			H(6) &= 0
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$0.5$ mm: \ansbox[1.1in]{$159$ A/m}
+
+		\vspace{4pt}
+		$2$ mm: \ansbox[1.1in]{$159$ A/m}
+
+		\vspace{4pt}
+		$4.5$ mm: \ansbox[1.1in]{$37.3$ A/m}
+
+		\vspace{4pt}
+		$6$ mm: \ansbox[1.1in]{$0$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A finite solenoid.} A coil of $N = 1000$ turns is wound over
+$\ell = 20$ cm on a form of radius $a = 2$ cm and carries $I = 0.5$ A, in air.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H$ and $B$ inside, treating the coil as a long solenoid.
+		\begin{solution}[1in]
+		\eq{
+			n &= \dfrac{1000}{0.20} = 5000\ \text{m}^{-1}, \qquad H = nI = 2500\ \text{A/m} \\
+			B &= \mu_0 nI = 4\pi\times10^{-7} \times 2500 = 3.14\ \text{mT}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H$ = \ansbox[1.3in]{$2500$ A/m}
+
+		\vspace{4pt}
+		$B$ = \ansbox[1.3in]{$3.14$ mT}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use the finite-solenoid formula to find $B$ at the center and at one
+		end of the coil.
+		\begin{solution}[1.8in]
+		\eq{
+			B(0) &= \mu_0 nI\ \dfrac{\ell}{\sqrt{\ell^2 + 4a^2}} \\
+			&= 3.14 \times \dfrac{0.20}{\sqrt{0.04 + 0.0016}} = 3.08\ \text{mT} \\
+			B(\ell/2) &= \dfrac{\mu_0 nI}{2}\ \dfrac{\ell}{\sqrt{\ell^2 + a^2}} \\
+			&= 1.57 \times \dfrac{0.20}{\sqrt{0.04 + 0.0004}} = 1.56\ \text{mT}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		center: \ansbox[1.2in]{$3.08$ mT}
+
+		\vspace{4pt}
+		end: \ansbox[1.2in]{$1.56$ mT}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part How long must a coil of radius $2$ cm be for its center field to come
+		within $1\%$ of $nI$?
+		\begin{solution}[1.3in]
+		\eq{
+			\dfrac{\ell}{\sqrt{\ell^2 + 4a^2}} \ge 0.99 \ \Rightarrow\ \ell^2\left(1 - 0.9801\right) \ge 0.9801 \times 4a^2 \\
+			\ell \ge a\sqrt{\dfrac{3.920}{0.0199}} = 14.0\ a = 28\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\ell$ = \ansbox[1.3in]{$28$ cm}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A toroid.} A toroid of $N = 400$ turns has a rectangular cross
+section with inner radius $r_1 = 2$ cm, outer radius $r_2 = 3$ cm, and height
+$h = 1$ cm. It carries $I = 0.25$ A and has an air core.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $H$ at the inner and outer edges of the core.
+		\begin{solution}[1.1in]
+		\eq{
+			H(r_1) &= \dfrac{NI}{2\pi r_1} = \dfrac{100}{2\pi \times 0.02} = 796\ \text{A/m} \\
+			H(r_2) &= \dfrac{100}{2\pi \times 0.03} = 531\ \text{A/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H(r_1)$ = \ansbox[1.2in]{$796$ A/m}
+
+		\vspace{4pt}
+		$H(r_2)$ = \ansbox[1.2in]{$531$ A/m}
+	\end{minipage}
+
+	\part Derive the magnetic flux $\Phi$ through one turn, the rectangle
+	$r_1 < \rho < r_2$, $0 < z < h$, and evaluate it.
+	\begin{solution}[1.3in]
+	\eq{
+		\Phi &= \int_0^{h}\!\!\int_{r_1}^{r_2} \dfrac{\mu_0 NI}{2\pi\rho}\ d\rho\ dz = \dfrac{\mu_0 NI h}{2\pi}\ln\dfrac{r_2}{r_1} \\
+		&= 2\times10^{-7} \times 100 \times 0.01 \times \ln 1.5 = 8.11\times10^{-8}\ \text{Wb}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part The current path passes through the core $N$ times, so the flux it
+		links is $N\Phi$. Find the inductance $L = N\Phi/I$.
+		\begin{solution}[0.9in]
+		\eq{ L = \dfrac{400 \times 8.11\times10^{-8}}{0.25} = 1.30\times10^{-4}\ \text{H} = 130\ \mu\text{H} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$L$ = \ansbox[1.3in]{$130\ \mu$H}
+	\end{minipage}
+
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{RG-59.} RG-59 has $a = 0.29$ mm, $b = 1.85$ mm, and solid
+polyethylene with $\epsilon_r = 2.25$. Lesson 25's practice set found
+$C^{\prime} = 67.5$ pF/m.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $L^{\prime}$, $Z_0$, and $v_p$.
+		\begin{solution}[1.4in]
+		\eq{
+			L^{\prime} &= \dfrac{\mu_0}{2\pi}\ln\dfrac{b}{a} = 2\times10^{-7} \times \ln 6.379 \\
+			&= 2\times10^{-7} \times 1.853 = 371\ \text{nH/m} \\
+			Z_0 &= \sqrt{\dfrac{3.71\times10^{-7}}{6.75\times10^{-11}}} = 74.1\ \ohms \\
+			v_p &= \dfrac{1}{\sqrt{L^{\prime}C^{\prime}}} = \dfrac{c}{\sqrt{2.25}} = 2.00\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$L^{\prime}$ = \ansbox[1.2in]{$371$ nH/m}
+
+		\vspace{4pt}
+		$Z_0$ = \ansbox[1.2in]{$74.1\ \ohms$}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.2in]{$2.00\times10^{8}$ m/s}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part What ratio $b/a$ gives $Z_0 = 50\ \ohms$ with the same dielectric?
+		\begin{solution}[1.2in]
+		\eq{
+			\eta &= \sqrt{\mu/\epsilon} = 377/\sqrt{2.25} = 251\ \ohms \\
+			Z_0 &= \dfrac{\eta}{2\pi}\ln\dfrac{b}{a} = \dfrac{251}{2\pi}\ln\dfrac{b}{a} = 40\ln\dfrac{b}{a} \\
+			\ln\dfrac{b}{a} &= \dfrac{50}{40} = 1.25, \qquad \dfrac{b}{a} = e^{1.25} = 3.49
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$b/a$ = \ansbox[1.3in]{$3.49$}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

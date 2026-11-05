@@ -70,6 +70,7 @@
 
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function htext(ctx,str,x,y,px,color,align,bold){ ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.lineJoin='round'; ctx.strokeStyle='#fff'; ctx.lineWidth=4; ctx.strokeText(str,x,y); ctx.fillStyle=color; ctx.fillText(str,x,y); }
 function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
 
 // The view is the x-z plane, distances in centimeters. Field values in A/m.
@@ -208,10 +209,6 @@ function draw(){
   ctx.strokeStyle = '#c7d2e0';
   ctx.beginPath(); ctx.moveTo(0,sy(0)); ctx.lineTo(W,sy(0)); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(sx(0),0); ctx.lineTo(sx(0),H); ctx.stroke();
-  stext(ctx, 'x (cm)', W-8, sy(0)-10, 11, ink3, 'right', false);
-  stext(ctx, 'z (cm)', sx(0)+6, 11, 11, ink3, 'left', false);
-  for (let g = Math.ceil(wx(30)/10)*10; g <= wx(W-24); g += 10) if (g) stext(ctx, String(g), sx(g), sy(0)+11, 10, ink3, 'center', false);
-  for (const g of [-10, 10]) stext(ctx, String(g), sx(0)-5, sy(g), 10, ink3, 'right', false);
 
   if (state.mode === 'wire'){
     // H points along y: a grid of symbols, sized by |H| on a log scale
@@ -232,7 +229,7 @@ function draw(){
     ctx.beginPath(); ctx.moveTo(sx(0), sy(-state.L/2)); ctx.lineTo(sx(0), sy(state.L/2)); ctx.stroke();
     ctx.lineCap = 'butt';
     arrowHead(sx(0), sy(state.L/2) - 4, -Math.PI/2, 8, red);
-    stext(ctx, 'I', sx(0) + 9, sy(state.L/2) + 6, 13, red, 'left', true);
+    htext(ctx, 'I', sx(0) + 9, sy(state.L/2) + 8, 15, red, 'left', true);
   } else {
     // field lines, seeded across the inside of the loop
     ctx.strokeStyle = '#7fa3c4'; ctx.lineWidth = 1.2;
@@ -251,6 +248,12 @@ function draw(){
     into(sx(a), sy(0), 7, red, 2);
     stext(ctx, 'I', sx(-a) - 11, sy(0) - 11, 13, red, 'right', true);
   }
+
+  // axis labels last, on a white halo, so the field symbols never cover them
+  htext(ctx, 'x (cm)', W-8, sy(0)-10, 11, ink3, 'right', false);
+  htext(ctx, 'z (cm)', sx(0)+6, 11, 11, ink3, 'left', false);
+  for (let g = Math.ceil(wx(30)/10)*10; g <= wx(W-24); g += 10) if (g) htext(ctx, String(g), sx(g), sy(0)+11, 10.5, ink3, 'center', false);
+  for (const g of [-10, 10]) htext(ctx, String(g), sx(0)-5, sy(g), 10.5, ink3, 'right', false);
 
   // the probe
   const [px, pz] = state.probe;

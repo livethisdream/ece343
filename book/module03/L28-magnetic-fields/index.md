@@ -21,7 +21,7 @@ Lesson 28 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers
 ::::{frame} Learning Objectives
 
 <ol class="lo-list" style="--module: '7'">
-  <li>I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
+  <li>I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
   <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
 </ol>
 
@@ -39,23 +39,30 @@ states that fact as an equation, in integral and point forms.
 
 ::::{frame} Magnetic Force on a Moving Charge
 :::{present}
+<img src="../../viz/img/L28-force.svg"
+     alt="A positive charge moving to the right through a uniform field B that points into the page; the force F on it points up, perpendicular to both v and B, and the dashed circle it follows"
+     style="max-width: 300px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
 A charge $q$ moving with velocity $\mathbf{v}$ through a magnetic field feels the force
 
 $$\mathbf{F} = q\ \mathbf{v}\times\mathbf{B}$$
 
 $$\mathbf{B} = \mu\mathbf{H}, \qquad \mu_0 = 4\pi \times 10^{-7}\ \text{H/m}$$
-
-- $\mathbf{B}$ is in teslas (T = Wb/m²); $\mathbf{H}$ is in A/m.
 :::
 
 Lesson 18 defined the electric field by the force on a charge at rest. A charge
 that moves feels a second force, and we use that force to define the
 **magnetic flux density** $\mathbf{B}$. The force is proportional to the charge
 and to its speed, and it points perpendicular to both the velocity and
-$\mathbf{B}$, which is what the cross product says. Because the force is always
-perpendicular to the velocity, it does no work on the charge: it turns the
-charge's path without changing its speed. The **permeability** $\mu$ of the
-material relates the **magnetic field intensity** $\mathbf{H}$ to $\mathbf{B}$,
+$\mathbf{B}$, which is what the cross product says. In the figure,
+$\mathbf{B}$ points into the page and a positive charge moves to the right, so
+$\hat{\mathbf{x}}\times(-\hat{\mathbf{z}}) = \hat{\mathbf{y}}$ and the force
+points up. Because the force is always perpendicular to the velocity, it does
+no work on the charge: it turns the charge's path without changing its speed,
+and in a uniform field the path is the dashed circle. The **permeability** $\mu$ of the
+material relates the **magnetic field intensity** $\mathbf{H}$, in A/m, to
+$\mathbf{B}$, in teslas (T = Wb/m²),
 just as $\mathbf{D} = \epsilon\mathbf{E}$ related the two electric
 fields. In free space, and in nearly every material in this module except
 iron and its relatives, $\mu = \mu_0$. Lesson 31 treats magnetic materials. For
@@ -70,18 +77,17 @@ scale, the Earth's field at the surface is about $50\ \mu$T.
 | Field | $\mathbf{E}$ (V/m) | $\mathbf{H}$ (A/m) |
 | Flux density | $\mathbf{D} = \epsilon\mathbf{E}$ | $\mathbf{B} = \mu\mathbf{H}$ |
 | Field of a source | Coulomb's law | Biot-Savart law |
-| Net flux out of a closed surface | $Q_\text{enc}$ | $0$ |
+| Net flux out of a closed surface | $Q_\text{encl}$ | $0$ |
 :::
 
-The two halves of statics run in parallel, and the table is a map of today's
-lesson. In electrostatics the source is charge, and Coulomb's law gives the
+The two halves of statics run in parallel. In electrostatics the source is charge, and Coulomb's law gives the
 field of each small piece of it. In magnetostatics the source is current, and
 the Biot-Savart law gives the field of each small piece of a current path.
 Each theory has a field and a flux density, linked by a material constant. The
 last row is where they differ. Lesson 20 showed that the flux of $\mathbf{D}$
 out of a closed surface equals the charge inside. The flux of $\mathbf{B}$ out
 of any closed surface is zero, because no magnetic charge exists to put inside
-it. The last third of this lesson explains that row.
+it.
 ::::
 
 ::::{frame} The Biot-Savart Law
@@ -102,8 +108,8 @@ it is an experimental result, and this course does not derive it. The vector
 $\mathbf{R}$ is the one from Lesson 18: it points from the source, the element,
 to the field point, and a prime marks source coordinates. The field falls off
 as $1/R^2$, as the electric field of a point charge does, but its direction
-comes from a cross product. To find it, point your right thumb along the
-current; your fingers curl in the direction of $d\mathbf{H}$. The magnitude of
+comes from a cross product. With the right thumb along the current, the
+fingers curl in the direction of $d\mathbf{H}$. The magnitude of
 the cross product carries a factor $\sin\theta$, where $\theta$ is the angle
 between $d\mathbf{l}$ and $\mathbf{R}$, so an element produces no field along
 its own line and the most field broadside to it.
@@ -114,7 +120,7 @@ its own line and the most field broadside to it.
 | Current flows in | Density | Units | Current element |
 | :-- | :-- | :-- | :-- |
 | a filament | $I$ | A | $I\ d\mathbf{l}$ |
-| a surface | $\mathbf{K}$ | A/m | $\mathbf{K}\ ds$ |
+| a surface | $\mathbf{J}_s$ | A/m | $\mathbf{J}_s\ ds$ |
 | a volume | $\mathbf{J}$ | A/m² | $\mathbf{J}\ dv$ |
 
 $$\mathbf{H} = \oint\frac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}$$
@@ -122,7 +128,7 @@ $$\mathbf{H} = \oint\frac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}$$
 
 Lesson 18 described spread-out charge by densities, and current works the same
 way. Current in a thin wire is a filament with current $I$. We describe current
-that flows in a thin sheet by the **surface current density** $\mathbf{K}$,
+that flows in a thin sheet by the **surface current density** $\mathbf{J}_s$,
 the current per unit width measured across the flow, and current through a
 volume by the volume current density $\mathbf{J}$ of Lesson 27, the current per
 unit area. Each kind gives a current element, and any of the three can replace
@@ -138,8 +144,9 @@ adds its own.
 :::{present}
 <img src="../../viz/img/L28-finite-wire.svg"
      alt="A straight wire on the z axis from minus L/2 to L/2 carrying current I upward; an element dz prime at height z prime and its mirror image at minus z prime, the vectors R from each to a field point at distance rho on the bisecting plane, and the field H there pointing into the page"
-     style="max-width: 340px; width: 100%; display: block; margin: 0 auto;">
-
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
 $$d\mathbf{l}\times\mathbf{R} = \hat{\mathbf{z}}\ dz'\times\left(\rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}\right) = \hat{\boldsymbol{\phi}}\ \rho\ dz'$$
 :::
 
@@ -155,7 +162,8 @@ $\hat{\mathbf{z}}\times\hat{\mathbf{z}} = 0$. Every element therefore produces
 a field along $\hat{\boldsymbol{\phi}}$, circling the wire. For the line
 charge, the $z$ components of the fields from $z'$ and $-z'$ canceled in
 pairs. Here no element produces a $z$ component at all, and the fields from
-$z'$ and $-z'$ add, as the figure shows.
+$z'$ and $-z'$ both point into the page at the field point and add, as the
+figure shows.
 ::::
 
 ::::{frame} The Field of the Finite Wire
@@ -192,8 +200,7 @@ becomes $L/2$, and the length cancels. The field of an **infinite wire**
 circles it, with field lines that are circles centered on the wire, and it
 falls off as $1/\rho$. The function of $L/\rho$ is the same one as for the
 line charge, so the same rule applies: a centered wire 14 times longer than
-$\rho$ gives a field within 1% of this result. The number in the frame sets the
-scale. A $1$ A current makes $20.0\ \mu$T at $1$ cm, comparable to the Earth's
+$\rho$ gives a field within 1% of this result. A $1$ A current makes $20.0\ \mu$T at $1$ cm, comparable to the Earth's
 field, so a compass held a centimeter from the wire turns noticeably. Lesson 29
 finds this same field without an integral, with Ampere's law.
 ::::
@@ -228,8 +235,9 @@ we derive next, and the two agree.
 :::{present}
 <img src="../../viz/img/L28-loop.svg"
      alt="A circular loop of radius a in the xy plane carrying current I counterclockwise; an element dl at angle phi prime and the element opposite it, the vectors R from each to a point at height z on the axis, the two fields dH there, and their sum H along z"
-     style="max-width: 320px; width: 100%; display: block; margin: 0 auto;">
-
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
 $$\begin{aligned} d\mathbf{l}\times\mathbf{R} &= a\ d\phi'\ \hat{\boldsymbol{\phi}}'\times\left(z\ \hat{\mathbf{z}} - a\ \hat{\boldsymbol{\rho}}'\right) \\ &= a\ d\phi'\left(z\ \hat{\boldsymbol{\rho}}' + a\ \hat{\mathbf{z}}\right) \end{aligned}$$
 :::
 
@@ -292,6 +300,11 @@ and the Earth itself, have this same dipole field far away.
 
 ::::{frame} Worked Example: A Square Loop
 :::{present}
+<img src="../../viz/img/L28-square-loop.svg"
+     alt="A square loop of side s carrying current I counterclockwise, with one side highlighted; the distance s/2 from the center to that side, the distance s over root 2 to a corner, the dashed inscribed circle, and the field H at the center pointing out of the page"
+     style="max-width: 270px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
 A square loop of side $s = 10$ cm carries $I = 1$ A. Each side is a finite wire with $L = s$ and $\rho = s/2$:
 
 $$H = 4\ \frac{I s}{4\pi\left(\frac{s}{2}\right)\sqrt{\frac{s^2}{4} + \frac{s^2}{4}}} = \frac{2\sqrt{2}\ I}{\pi s} = 9.00\ \text{A/m}$$
@@ -317,14 +330,17 @@ the center at a smaller $\sin\theta$.
 :::
 ::::
 
-::::{frame} Magnetic Field Lines Close
+::::{frame} Closed Magnetic Field Lines
 :::{present}
 <img src="../../viz/img/L28-field-lines.svg"
      alt="Left, the field lines of an electric dipole, which start on the positive charge and end on the negative charge. Right, the field lines of a current loop in cross section, which pass through the loop and close around the outside"
-     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
+     style="max-width: 480px; width: 100%; display: block; margin: 0 auto;">
 
-- Electric field lines start on positive charge and end on negative charge.
-- Magnetic field lines have no ends: each one closes on itself.
+- Electric lines start and end on charge; magnetic lines close on themselves.
+
+Element on the $z$ axis, $d\mathbf{H} \propto \hat{\mathbf{z}}\times\mathbf{R}/R^3 = (-y,\ x,\ 0)/R^3$:
+
+$$\nabla\cdot d\mathbf{H} \propto \frac{\partial}{\partial x}\left(\frac{-y}{R^3}\right) + \frac{\partial}{\partial y}\left(\frac{x}{R^3}\right) = \frac{3xy}{R^5} - \frac{3xy}{R^5} = 0$$
 :::
 
 The figure draws the field lines of an electric dipole beside those of a small
@@ -332,20 +348,33 @@ current loop. Far away, the two patterns match, since both are dipole fields.
 Near the sources they differ. Every electric field line starts on the positive
 charge and ends on the negative one. Every magnetic field line passes through
 the loop and returns around the outside, closing on itself, and none of them
-ends anywhere. The Biot-Savart law explains why. Each current element produces
-a field that circles the element's own line, as the infinite wire's field
-circles the wire, and a sum of circling fields never points away from a point.
-No experiment has found an isolated magnetic charge, a magnetic monopole, that
+ends anywhere. The Biot-Savart law explains why, and we can show it for one
+element. Choose coordinates with the element at the origin, pointing along
+$\hat{\mathbf{z}}$. With $\mathbf{R} = (x, y, z)$ and
+$R = \sqrt{x^2 + y^2 + z^2}$, the cross product is
+$\hat{\mathbf{z}}\times\mathbf{R} = (-y, x, 0)$, so $d\mathbf{H}$ has no $z$
+component and circles the element's own line. Its divergence has two terms. The
+quotient rule with $\partial R/\partial x = x/R$ gives
+$\partial(-y/R^3)/\partial x = 3xy/R^5$, and with $\partial R/\partial y = y/R$
+it gives $\partial(x/R^3)/\partial y = -3xy/R^5$. The terms cancel at every
+point away from the element. We can place any element on the $z$ axis this
+way, so the field of every element has zero divergence, and so does their sum,
+the field of any current. A field with zero divergence everywhere has no point
+where lines start or end. No experiment has found an isolated magnetic charge, a magnetic monopole, that
 could start or end a line. Cutting a bar magnet in half produces two smaller
 magnets, each with both poles.
 ::::
 
 ::::{frame} Gauss's Law for Magnetism
 :::{present}
+<img src="../../viz/img/L28-gauss-mag.svg"
+     alt="Left, closed field lines crossing a dashed closed surface S, entering on one side and leaving on the other. Right, a closed curve C with a flat cap S1 and a domed cap S2, both crossed by the same vertical field lines"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;">
+
 $$\oint_S \mathbf{B}\cdot d\mathbf{s} = 0$$
 
 - Every field line that enters a closed surface also leaves it.
-- Compare Lesson 20: $\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{enc}$.
+- Compare Lesson 20: $\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}$.
 :::
 
 The **magnetic flux** through a surface is $\int \mathbf{B}\cdot d\mathbf{s}$,
@@ -354,9 +383,11 @@ magnetic field lines close on themselves, a line that enters a closed surface
 has to leave it somewhere, and the net flux out of the surface is zero. That is
 **Gauss's law for magnetism**. Lesson 20's Gauss's law for $\mathbf{D}$ has the
 enclosed charge on the right side. Here the right side is zero for every
-closed surface, because there is no magnetic charge to enclose. One consequence
-matters in Module 4. Take two open surfaces that share the same boundary curve.
-Together they form a closed surface, so the flux that enters through one
+closed surface, because there is no magnetic charge to enclose. In the left
+panel, each line that enters $S$ leaves it again. One consequence matters in
+Module 4. Take two open surfaces that share the same boundary curve, the flat
+cap $S_1$ and the dome $S_2$ on the curve $C$ in the right panel. Together they
+form a closed surface, so the flux that enters through one
 equals the flux that leaves through the other. The flux through a circuit
 therefore depends only on the circuit, not on which surface we draw across it.
 ::::
@@ -392,7 +423,7 @@ each of the three terms of the cylindrical divergence is zero.
 | Magnetic force | Force on a charge moving through $\mathbf{B}$ | $\mathbf{F} = q\ \mathbf{v}\times\mathbf{B}$ |
 | $\mathbf{B}$, $\mathbf{H}$, $\mu$ | Flux density (T), field intensity (A/m), permeability | $\mathbf{B} = \mu\mathbf{H}$; $\mu_0 = 4\pi \times 10^{-7}$ H/m |
 | Biot-Savart law | Field of a current element | $d\mathbf{H} = \dfrac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}$ |
-| Current elements | Filament, sheet, volume | $I\ d\mathbf{l}$, $\mathbf{K}\ ds$, $\mathbf{J}\ dv$ |
+| Current elements | Filament, sheet, volume | $I\ d\mathbf{l}$, $\mathbf{J}_s\ ds$, $\mathbf{J}\ dv$ |
 | Finite wire, bisecting plane | Length $L$, distance $\rho$ | $\dfrac{I L}{4\pi\rho\sqrt{\rho^2 + L^2/4}}\ \hat{\boldsymbol{\phi}}$ |
 | Infinite wire | $L \gg \rho$ | $\dfrac{I}{2\pi\rho}\ \hat{\boldsymbol{\phi}}$ |
 | Loop, on the axis | Radius $a$, height $z$ | $\dfrac{I a^2}{2(a^2 + z^2)^{3/2}}\ \hat{\mathbf{z}}$; $I/2a$ at the center |
@@ -414,10 +445,11 @@ each of the three terms of the cylindrical divergence is zero.
 :::
 
 Today the Biot-Savart law gave the field of a wire and a loop, one current
-element at a time. Some of those integrals take real work, and for the most
-symmetric currents there is a shortcut, as there was in Module 2. Lesson 29
+element at a time. That method always works, but even a straight wire needs an
+integral along its length, and for the most symmetric currents there is a
+shortcut, as there was in Module 2. Lesson 29
 introduces Ampere's law, the magnetic counterpart of Gauss's law, which finds
-the infinite wire's field in one line. Lesson 30 applies it to the coaxial
+the infinite wire's field without an integral. Lesson 30 applies it to the coaxial
 cable, the solenoid, and the toroid, and derives the inductance per unit
 length $L'$ of the coax that Lesson 6 quoted.
 

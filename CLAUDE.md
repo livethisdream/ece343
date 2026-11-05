@@ -41,6 +41,14 @@ maintained, so change them together with the manifest.
 
 ## Converting a lesson
 
+**Write it with the `write-lesson` skill** (Neil, 2026-11-04, from ECE 444:
+"why not just build those rules into the creation of lessons?"). A new or
+rewritten lesson or lab page applies the voice, why, and illustration rules
+while it is written, then runs one review with the three lenses in parallel
+and stops once for Neil's pick; the three sweep skills are for pages written
+before it. `scripts/verify/check_voice.py` holds the mechanical rules and
+runs in CI on every page, so a FAIL blocks the PR.
+
 Lessons move to the 444 format one at a time. **L3 and L6 are the worked
 examples** (pilot, 2026-10-18): L3 for a lesson built on figures and a
 derivation, L6 for one built on calculation and a widget. A converted lesson is

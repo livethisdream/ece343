@@ -1,0 +1,186 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L40 practice set (Oblique Incidence II): the TM coefficients derived and
+% applied, the Brewster angle and polarization by reflection, and the critical
+% angle with total internal reflection and the evanescent field.
+
+\fullwidth{\textbf{Learning Objective 9.5: } I can determine the reflection and
+transmission of UPW at a boundary for Transverse Electric (TE) and Transverse
+Magnetic (TM) waves, using boundary conditions.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). In every problem the boundary is the
+plane $z = 0$, region 1 is $z < 0$, the plane of incidence is the $xz$ plane, both
+materials are lossless and nonmagnetic, and $\eta_0 = 376.7\ \ohms$. Use Lesson 40's
+TM convention: the reflected electric field's tangential reference direction is the
+same as the incident field's.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The TM coefficients.} A $10\ \ghz$ TM wave in air strikes a
+dielectric with $\epsilon_r = 4$ at $\theta_i = 60^\circ$, so $\theta_t = 25.7^\circ$
+(Lesson 39 practice, Question 1).
+\begin{parts}
+
+	\part Starting from
+	$\tilde{\mathbf{H}}^i = \hat{\mathbf{y}}\ (E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i + z\cos\theta_i\rp}$,
+	$\tilde{\mathbf{H}}^r = -\hat{\mathbf{y}}\ (\Gamma_\text{TM}E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i - z\cos\theta_i\rp}$,
+	and $\tilde{\mathbf{H}}^t = \hat{\mathbf{y}}\ (\tau_\text{TM}E_0/\eta_2)\ e^{-j\beta_2\lp x\sin\theta_t + z\cos\theta_t\rp}$,
+	and the electric fields of Lesson 40, apply the tangential boundary conditions
+	and derive $\Gamma_\text{TM}$ and $\tau_\text{TM}$.
+	\begin{solution}[2.4in]
+	Tangential $E_x$ at $z = 0$, and tangential $H_y$:
+	\eq{
+		\cos\theta_i\lp 1 + \Gamma_\text{TM}\rp &= \cos\theta_t\ \tau_\text{TM} \\
+		\dfrac{1}{\eta_1}\lp 1 - \Gamma_\text{TM}\rp &= \dfrac{1}{\eta_2}\tau_\text{TM}
+	}
+	Substitute $\tau_\text{TM} = (\eta_2/\eta_1)(1 - \Gamma_\text{TM})$ into the first:
+	\eq{
+		\eta_1\cos\theta_i\lp 1 + \Gamma_\text{TM}\rp &= \eta_2\cos\theta_t\lp 1 - \Gamma_\text{TM}\rp \\
+		\Gamma_\text{TM} &= \dfrac{\eta_2\cos\theta_t - \eta_1\cos\theta_i}{\eta_2\cos\theta_t + \eta_1\cos\theta_i} \\
+		\tau_\text{TM} &= \dfrac{2\eta_2\cos\theta_i}{\eta_2\cos\theta_t + \eta_1\cos\theta_i}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Evaluate $\Gamma_\text{TM}$ and $\tau_\text{TM}$, and check that
+		$\tau_\text{TM} = \lp 1 + \Gamma_\text{TM}\rp\cos\theta_i/\cos\theta_t$.
+		\begin{solution}[1.7in]
+		\eq{
+			\Gamma_\text{TM} &= \dfrac{188.4\times0.901 - 376.7\times0.500}{188.4\times0.901 + 376.7\times0.500} \\
+			&= \dfrac{169.8 - 188.4}{169.8 + 188.4} = -0.052 \\
+			\tau_\text{TM} &= \dfrac{2\times188.4\times0.500}{358.2} = 0.526 \\
+			\dfrac{0.948\times0.500}{0.901} &= 0.526
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma_\text{TM}$ = \ansbox[1.3in]{$-0.052$}
+
+		\vspace{4pt}
+		$\tau_\text{TM}$ = \ansbox[1.3in]{$0.526$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Compare the reflected power fraction with the TE wave's $32.0\%$ at the
+		same angle, and explain why the TM wave reflects so little here.
+		\begin{solution}[1.3in]
+		$\vert\Gamma_\text{TM}\vert^2 = 0.27\%$. The Brewster angle for this boundary is
+		$\tan^{-1}2 = 63.4^\circ$, only $3.4^\circ$ away, and $\Gamma_\text{TM}$ passes
+		through zero there.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		reflected = \ansbox[1.3in]{$0.27\%$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The Brewster angle.} Sunlight in air reflects from a flat sheet of
+glass with $n = 1.50$.
+\begin{parts}
+
+	\part Show that $\Gamma_\text{TM} = 0$ when $\tan\theta_i = n_2/n_1$, and that at
+	this angle $\theta_t = 90^\circ - \theta_i$.
+	\begin{solution}[2.2in]
+	With $\eta = \eta_0/n$, $\Gamma_\text{TM} = 0$ requires $n_1\cos\theta_t = n_2\cos\theta_i$.
+	Let $r = n_2/n_1$ and $s = \sin^2\theta_i$. Snell's law gives
+	$\cos^2\theta_t = 1 - s/r^2$, so
+	\eq{
+		1 - \dfrac{s}{r^2} = r^2\lp 1 - s\rp \implies s\ \dfrac{\lp 1 - r^2\rp\lp 1 + r^2\rp}{r^2} = 1 - r^2 \implies s = \dfrac{r^2}{1 + r^2}
+	}
+	Then $\cos^2\theta_i = 1/(1 + r^2)$ and $\tan\theta_i = r$. At this angle
+	$\sin\theta_t = \sin\theta_i/r = \cos\theta_i$, so $\theta_t = 90^\circ - \theta_i$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the Brewster angle and the fraction of the TE power that reflects
+		at that angle.
+		\begin{solution}[1.5in]
+		\eq{
+			\theta_B &= \tan^{-1}1.50 = 56.3^\circ, \qquad \theta_t = 33.7^\circ \\
+			\Gamma_\text{TE} &= \dfrac{251.2\times0.555 - 376.7\times0.832}{251.2\times0.555 + 376.7\times0.832} = -0.385 \\
+			\vert\Gamma_\text{TE}\vert^2 &= 14.8\%
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_B$ = \ansbox[1.3in]{$56.3^\circ$}
+
+		\vspace{4pt}
+		TE reflected = \ansbox[1.3in]{$14.8\%$}
+	\end{minipage}
+
+	\part Describe the polarization of the light reflected at $56.3^\circ$, and explain
+	why a polarizing filter can block it.
+	\begin{solution}[1.1in]
+	Only the TE part reflects, so the reflected light is linearly polarized with its
+	electric field perpendicular to the plane of incidence, parallel to the glass.
+	A filter oriented to pass only the perpendicular direction blocks it.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Total internal reflection.} Light at $633\ \text{nm}$ travels in glass,
+$n_1 = 1.50$, toward a flat glass-air boundary.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the critical angle.
+		\begin{solution}[0.8in]
+		\eq{ \theta_c = \sin^{-1}\dfrac{1}{1.50} = 41.8^\circ }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_c$ = \ansbox[1.3in]{$41.8^\circ$}
+	\end{minipage}
+
+	\part At $\theta_i = 60^\circ$, find $\cos\theta_t$, and show that
+	$\vert\Gamma_\text{TE}\vert = 1$. Find the phase of $\Gamma_\text{TE}$.
+	\begin{solution}[1.9in]
+	\eq{
+		\sin\theta_t &= 1.50\sin 60^\circ = 1.299, \qquad \cos\theta_t = -j\sqrt{1.299^2 - 1} = -j0.829 \\
+		\Gamma_\text{TE} &= \dfrac{\eta_2\cos\theta_i + j\eta_1 0.829}{\eta_2\cos\theta_i - j\eta_1 0.829}
+		= \dfrac{188.4 + j208.3}{188.4 - j208.3}
+	}
+	The numerator and denominator are complex conjugates, so
+	$\vert\Gamma_\text{TE}\vert = 1$. The phase is twice the numerator's angle:
+	\eq{ \angle\Gamma_\text{TE} = 2\tan^{-1}\dfrac{208.3}{188.4} = 95.7^\circ }
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance into the air over which the evanescent field falls
+		to $1/e$ of its value at the boundary.
+		\begin{solution}[1.2in]
+		\eq{
+			\alpha &= \beta_2 q = \dfrac{2\pi}{633\ \text{nm}}\times 0.829 \\
+			\dfrac{1}{\alpha} &= \dfrac{633}{2\pi\times0.829} = 122\ \text{nm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$1/\alpha$ = \ansbox[1.3in]{$122$ nm}
+	\end{minipage}
+
+	\part Light in air strikes the glass from outside at any angle. Explain why it
+	never undergoes total internal reflection.
+	\begin{solution}[0.9in]
+	Going into the larger index, $\sin\theta_t = \sin\theta_i/1.50 < 1$ for every
+	$\theta_i$, so Snell's law always has a real transmitted angle.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

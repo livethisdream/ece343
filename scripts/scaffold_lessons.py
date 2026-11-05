@@ -65,7 +65,7 @@ LO_TEXT = {
     "6.1": "I can calculate the total current through a surface area given a current distribution.",
     "6.2": "I can use Ohm's Law for electromagnetics to calculate the relationship between a current distribution and an electric field.",
     "6.3": "I can articulate and identify what makes a material a good conductor and how conductivity relates to resistance.",
-    "7.1": "I can use the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.",
+    "7.1": "I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.",
     "7.2": "I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.",
     "7.3": "I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.",
     "7.4": "I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.",

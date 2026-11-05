@@ -65,33 +65,38 @@ lifts that restriction.
 ::::{frame} Charge Crossing a Small Area
 :::{present}
 <img src="../../viz/img/L27-charge-tube.svg"
-     alt="Positive charges moving to the right with velocity u through a small area delta S; the charges inside a tube of length u delta t behind the area, drawn in red, all cross it in the time delta t"
-     style="max-width: 600px; width: 100%; display: block; margin: 0 auto;">
+     alt="Side view of a small area delta S seen edge-on, with unit normal n-hat pointing right; positive charges move with velocity u tilted upward from the normal; the charges inside a slanted tube of slant length u delta t behind the area, drawn in red, all cross it in the time delta t; the height of the tube measured along n-hat is u dot n-hat delta t"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
 
-- Every charge in the tube crosses $\Delta S$ within the time $\Delta t$.
+- Every charge in the slanted tube crosses $\Delta S$ within the time $\Delta t$.
 :::
 
-To describe current at a point, we picture a small flat area $\Delta S$ inside
-a region where charge of volume density $\rho_v$ moves with velocity
-$\mathbf{u}$. In a short time $\Delta t$, each charge travels a distance
-$u\ \Delta t$. The charges that cross $\Delta S$ in that time are exactly the
-ones that start inside the tube behind it, of cross section $\Delta S$ and
-length $u\ \Delta t$. Charges farther back do not reach the area in time, and
+To describe current at a point, we picture a small flat area $\Delta S$, with
+unit normal $\hat{\mathbf{n}}$, inside a region where charge of volume
+density $\rho_v$ moves with velocity $\mathbf{u}$. The figure shows the area
+edge-on. In a short time $\Delta t$, each charge travels a distance
+$u\ \Delta t$ along $\mathbf{u}$. The charges that cross $\Delta S$ in that
+time are exactly the ones that start inside the tube behind it: its end is
+$\Delta S$, and its sides run parallel to $\mathbf{u}$ for the slant length
+$u\ \Delta t$. Charges farther back do not reach the area in time, and
 charges already past it have crossed. Counting the charge in the tube gives
 the charge that crosses the area, and dividing by $\Delta t$ gives the current.
 ::::
 
 ::::{frame} Current Density
 :::{present}
-With $\hat{\mathbf{n}}$ the unit normal of $\Delta S$:
+<img src="../../viz/img/L27-charge-tube.svg"
+     alt="The slanted tube of charge behind the area delta S, with its height along the normal marked u dot n-hat delta t"
+     style="max-width: 340px; width: 100%; display: block; margin: 0 auto;">
 
 $$\begin{aligned} \Delta Q &= \rho_v\ \left(\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t\right)\ \Delta S \\ \Delta I = \frac{\Delta Q}{\Delta t} &= \left(\rho_v\ \mathbf{u}\right)\cdot\hat{\mathbf{n}}\ \Delta S \\ \mathbf{J} &= \rho_v\ \mathbf{u} \quad \text{(A/m}^2\text{)} \end{aligned}$$
 :::
 
-The tube has volume equal to its cross section times its length. When the
-velocity tilts away from the normal $\hat{\mathbf{n}}$ of the area, only the
-component $\mathbf{u}\cdot\hat{\mathbf{n}}$ carries charge through it, so the
-length of the tube measured along the normal is $\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t$.
+The slanted tube of the previous frame has the same volume as a straight
+tube with the same end $\Delta S$ and the same height, measured along the
+normal. The tilt shortens that height: the slant length is $u\ \Delta t$, and
+its component along $\hat{\mathbf{n}}$ is $\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t$,
+so the volume is $\left(\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t\right)\Delta S$.
 The charge in the tube is the volume density times that volume. Dividing by
 $\Delta t$ gives the current through $\Delta S$, and the factor
 $\rho_v\mathbf{u}$ that multiplies $\hat{\mathbf{n}}\ \Delta S$ is the
@@ -138,20 +143,19 @@ $a = 3$ mm:
 
 $$I = 2\pi J_z \int_0^a \rho\ d\rho = 2\pi J_z \frac{a^2}{2} = \pi a^2 J_z = \pi \times \left(3 \times 10^{-3}\right)^2 \times 8 = 2.26 \times 10^{-4}\ \text{A} = 226\ \mu\text{A}$$
 
-A uniform current density times the area gives the current, as expected. Now
-suppose the current crowds toward the surface, as Lesson 3 described for high
-frequencies, with $J_z = J_0\ \rho/a$. The integral is
+Now suppose the current crowds toward the surface, as Lessons 3 and 5
+described for high frequencies, with $J_z = J_0\ \rho/a$. The integral is
 
 $$I = \frac{2\pi J_0}{a}\int_0^a \rho^2\ d\rho = \frac{2\pi J_0}{a}\frac{a^3}{3} = \frac{2}{3}\pi a^2 J_0$$
 
 With $J_0 = 2\ \text{A/mm}^2 = 2 \times 10^6\ \text{A/m}^2$ and $a = 1$ mm, the
 current is $4.19$ A, two thirds of the $6.28$ A that the same peak density
-would carry if it filled the wire uniformly. Only the integral handles a
-current density that varies across the surface.
+would carry if it filled the wire uniformly, so for a nonuniform $\mathbf{J}$ we
+integrate rather than multiply by the area.
 :::
 ::::
 
-::::{frame} Steady Current Obeys Kirchhoff's Current Law
+::::{frame} Continuity of Steady Current
 :::{present}
 For a closed surface $S$ around a volume $V$:
 
@@ -172,19 +176,25 @@ form, and Lesson 33 removes the steady assumption.
 
 ::::{frame} Why Current Follows the Field
 :::{present}
-Free electrons, density $n$, charge $-e$, drift at $\mathbf{u} = -\mu_e\mathbf{E}$:
+<img src="../../viz/img/L27-drift.svg"
+     alt="A free electron in a lattice of ions: its path is a zigzag of short curved segments, each bending away from the direction of E between collisions with ions, so the electron drifts slowly opposite to E"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;">
 
-$$\begin{aligned} \mathbf{J} = \rho_v\ \mathbf{u} &= \left(-ne\right)\left(-\mu_e\mathbf{E}\right) = ne\mu_e\ \mathbf{E} \\ \mathbf{J} &= \sigma\mathbf{E}, \qquad \sigma = ne\mu_e \quad \text{(S/m)} \end{aligned}$$
+$$\begin{aligned} \mathbf{u} &= -\frac{e\tau}{m}\mathbf{E} = -\mu_e\mathbf{E} \\ \mathbf{J} = \rho_v\ \mathbf{u} &= \left(-ne\right)\left(-\mu_e\mathbf{E}\right) = \sigma\mathbf{E}, \qquad \sigma = ne\mu_e = \frac{ne^2\tau}{m} \end{aligned}$$
 :::
 
 In a metal, each atom releases about one electron that moves freely through
-the crystal. A field pushes each free electron with the force $-e\mathbf{E}$,
-and the electron accelerates until it collides with the vibrating lattice and
-loses its directed motion. The repeated acceleration and collision produce an
-average **drift velocity** proportional to the field and opposite to it,
-$\mathbf{u} = -\mu_e\mathbf{E}$, where the **mobility** $\mu_e$, in
-$\text{m}^2/(\text{V}\cdot\text{s})$, measures how easily the electrons move.
-The charge density of the free electrons is $\rho_v = -ne$. The two minus
+the crystal. A field pushes each free electron, of mass $m$, with the force
+$-e\mathbf{E}$, so between collisions its velocity changes at the rate
+$-e\mathbf{E}/m$. Each collision with the vibrating lattice scatters the
+electron in a random direction, which erases its directed motion. With an
+average time $\tau$ between collisions, the directed velocity the field adds
+averages to $-e\tau\mathbf{E}/m$, while the random parts average to zero. The
+result is a **drift velocity** proportional to the field and opposite to it,
+$\mathbf{u} = -\mu_e\mathbf{E}$, where the **mobility**
+$\mu_e = e\tau/m$, in $\text{m}^2/(\text{V}\cdot\text{s})$, measures how
+easily the electrons move. The charge density of the free electrons is
+$\rho_v = -ne$. The two minus
 signs cancel, so the current density points along $\mathbf{E}$ and is
 proportional to it. This is **Ohm's law in point form**, and the constant of
 proportionality is the **conductivity** $\sigma$, in siemens per meter.
@@ -220,7 +230,9 @@ The electrons drift at $0.073$ mm/s, about a quarter of a meter per hour. A
 signal still crosses a meter of cable in nanoseconds, because the signal is
 the wave of Lesson 4 traveling along the line, not the motion of any one
 electron. The same numbers give copper's mobility,
-$\mu_e = \sigma/(ne) = 4.3 \times 10^{-3}\ \text{m}^2/(\text{V}\cdot\text{s})$.
+$\mu_e = \sigma/(ne) = 4.3 \times 10^{-3}\ \text{m}^2/(\text{V}\cdot\text{s})$,
+and from $\mu_e = e\tau/m$ the average time between collisions is
+$\tau = m\mu_e/e = 2.4 \times 10^{-14}$ s.
 :::
 ::::
 
@@ -240,8 +252,14 @@ resistors. Seawater conducts because its dissolved salt supplies ions that
 carry charge, and tap water conducts less because it carries less salt;
 distilled water, with almost no ions, conducts very little. Pure silicon
 sits below seawater. Good insulators such as glass and polyethylene fall
-below $10^{-10}$ S/m, off the left end of the chart, and free space, with no
-charge to move, has $\sigma = 0$.
+below $10^{-10}$ S/m, left of the dashed insulator line, and free space, with
+no charge to move, has $\sigma = 0$. The two thresholds are conventions, the
+ones Ellingson's Chapter 6 uses, not physical boundaries. Lesson 33 compares
+the conduction current $\sigma E$ with the displacement current
+$\omega\epsilon E$, and the comparison gives the thresholds a meaning: for
+copper at 100 MHz, $\sigma/(\omega\epsilon_0) = 5.8 \times 10^7/(5.6 \times 10^{-3}) = 1.0 \times 10^{10}$,
+so the conduction current dominates completely. The red marker is the RG-58
+dielectric at 100 MHz, which the last frames of this lesson compute.
 ::::
 
 ::::{frame} What Makes a Good Conductor
@@ -283,7 +301,10 @@ current, the same current crosses every cross section, because
 $\nabla\cdot\mathbf{J} = 0$ allows no charge to collect between them; every
 cross section has the same area, so $\mathbf{J}$, and with it $\mathbf{E}$,
 has the same magnitude all along the wire. At DC the current density is also
-uniform across each cross section. The field is therefore a constant
+uniform across each cross section. No current crosses the side surface of the
+wire, and a uniform axial field meets that condition and satisfies the
+Laplace equation of Lesson 23 inside the metal, so by the uniqueness result
+of Lesson 23 it is the field. The field is therefore a constant
 $\hat{\mathbf{z}}\ E$ throughout the metal, and we can find the voltage and the
 current from it.
 ::::
@@ -311,28 +332,37 @@ $a = 0.405$ mm, copper:
 
 $$R' = \frac{R}{\ell} = \frac{1}{\sigma\pi a^2} = \frac{1}{5.8 \times 10^7 \times \pi \times \left(0.405 \times 10^{-3}\right)^2} = 33.5\ \text{m}\Omega/\text{m}$$
 
-- [Lesson 5](../../module01/L05-characteristic-impedance/index.md) at 100 MHz: $R' = 1.31\ \Omega$/m, $39$ times larger.
+- At 100 MHz the center conductor carries its current in a skin depth $\delta = 6.6\ \mu$m: $R' = 1.03\ \Omega$/m, $31$ times larger.
 :::
 
 The center conductor of RG-58 has radius $a = 0.405$ mm, so its cross section
 is $A = 5.15 \times 10^{-7}\ \text{m}^2$, and a meter of it has a DC resistance
-of $33.5$ m$\Omega$. Lesson 5 used $R' = 1.31\ \Omega$/m for the same cable at
-100 MHz, from the coaxial-line formula on the equation sheet. That value is
-$39$ times the DC resistance of the center conductor. At 100 MHz the current
-crowds into a thin layer at the surface of each conductor, as Lesson 3
-described, so it flows through a much smaller area than $\pi a^2$, and
-$\ell/(\sigma A)$ with the smaller area gives the larger resistance. The
-formula still holds; the area that carries the current is what changes with
-frequency.
+of $33.5$ m$\Omega$. At high frequency the current crowds toward the surface
+of each conductor, as Lessons 3 and 5 described. This is the **skin effect**:
+the current density falls off with depth below the surface, and most of the
+current flows within a **skin depth**
+
+$$\delta = \frac{1}{\sqrt{\pi f\mu\sigma}} = \frac{1}{\sqrt{\pi \times 10^8 \times 4\pi \times 10^{-7} \times 5.8 \times 10^7}} = 6.6\ \mu\text{m}$$
+
+for copper at 100 MHz. The course quotes $\delta$ without deriving it: it
+comes from the wave inside a conductor, which needs the time-varying fields of
+Module 4. Treating the current as a layer of thickness $\delta$ around the
+circumference, the area is $2\pi a\delta$ in place of $\pi a^2$, and
+$\ell/(\sigma A)$ gives $R' = 1/(\sigma\ 2\pi a\delta) = 1.03\ \Omega$/m,
+$31$ times the DC value. The shield, of inner radius $b = 1.475$ mm, adds
+$1/(\sigma\ 2\pi b\delta) = 0.28\ \Omega$/m, and the sum, $1.31\ \Omega$/m,
+is the $R'$ that [Lesson 5](../../module01/L05-characteristic-impedance/index.md)
+used from the equation sheet.
 ::::
 
 ::::{frame} Leakage Through a Coax Dielectric
 :::{present}
 <img src="../../viz/img/L27-coax-leak.svg"
-     alt="Cross section of a coaxial line whose dielectric has conductivity sigma and permittivity epsilon; the leakage current density J points radially outward from the inner conductor of radius a to the shield of radius b"
+     alt="Cross section of a coaxial line whose dielectric has conductivity sigma and permittivity epsilon; the inner conductor of radius a is at voltage V and the shield of radius b at zero; the leakage current density J points radially outward, and a dashed circle of radius rho marks a cylinder that the current crosses"
      style="max-width: 360px; width: 100%; display: block; margin: 0 auto;">
 
-- Voltage $V$ between the conductors; the dielectric has a small $\sigma$.
+- Voltage $V$ on the inner conductor, $0$ on the shield; the dielectric has a small $\sigma$.
+- The same current crosses every cylinder of radius $\rho$.
 :::
 
 No real insulator has $\sigma = 0$. When the dielectric of a coaxial line
@@ -368,7 +398,7 @@ cancels. The conductance grows with length, because each meter of cable is
 another leakage path in parallel, so the transmission-line quantity is $G'$.
 ::::
 
-::::{frame} G′ Follows From C′
+::::{frame} G′ and C′
 :::{present}
 $$\frac{G'}{C'} = \frac{2\pi\sigma/\ln(b/a)}{2\pi\epsilon/\ln(b/a)} = \frac{\sigma}{\epsilon}$$
 
@@ -386,9 +416,15 @@ used at 100 MHz corresponds to
 $$\sigma = \frac{\epsilon\ G'}{C'} = \frac{2.25 \times 8.854 \times 10^{-12} \times 1.22 \times 10^{-5}}{96.8 \times 10^{-12}} = 2.5 \times 10^{-6}\ \text{S/m}$$
 
 That effective conductivity comes from the polyethylene's loss at 100 MHz, not
-from a current at DC. Either way, it lies thirteen orders of magnitude below the
-conductivity of the copper around it, which is why the dielectric term in
-Lesson 5's attenuation was so small.
+from a current at DC. Lesson 5 wrote the same loss as
+$G' = \omega C'\tan\delta$, and the ratio $G'/C' = \sigma/\epsilon$ turns it
+into an effective conductivity directly:
+
+$$\sigma_\text{eff} = \omega\epsilon\tan\delta = 2\pi \times 10^8 \times 2.25 \times 8.854 \times 10^{-12} \times 2 \times 10^{-4} = 2.5 \times 10^{-6}\ \text{S/m}$$
+
+the same value. It lies thirteen orders of magnitude below the conductivity
+of the copper around it, which is why the dielectric term in Lesson 5's
+attenuation was so small.
 ::::
 
 ::::{frame} Summary
@@ -402,6 +438,7 @@ Lesson 5's attenuation was so small.
 | Ohm's law, point form | Drift of free carriers in a field | $\mathbf{J} = \sigma\mathbf{E}$ |
 | $\sigma$ | Carrier density times charge times mobility | $\sigma = e(n\mu_n + p\mu_p)$; copper $5.8 \times 10^7$ S/m |
 | Good conductor | Many free carriers | $\sigma > 10^5$ S/m |
+| Skin depth | Depth of the current at high frequency (quoted) | $\delta = 1/\sqrt{\pi f\mu\sigma}$; copper at 100 MHz, $6.6\ \mu$m |
 | Wire | Uniform $\mathbf{E}$ and $\mathbf{J}$ | $R = \ell/(\sigma A)$ |
 | Coax leakage | Radial $\mathbf{J}$ through the dielectric | $G' = \frac{2\pi\sigma}{\ln(b/a)}$, $G'/C' = \sigma/\epsilon$ |
 ::::

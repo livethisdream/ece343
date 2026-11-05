@@ -4,7 +4,7 @@
 % wire, a loop on its axis, a square loop, which fields can be magnetic, and
 % the force on a moving charge.
 
-\fullwidth{\textbf{Learning Objectives 7.1 and 7.2: } I can use the Biot-Savart law to
+\fullwidth{\textbf{Learning Objectives 7.1 and 7.2: } I can apply the Biot-Savart law to
 simple magnetostatic systems to find the magnetic field at an observation point.
 I can articulate the meaning of both the integral form and point form of
 Gauss's Law for magnetism.
@@ -21,12 +21,12 @@ the $+z$ direction from $z = -10$ cm to $z = 10$ cm.
 	\part Starting from the Biot-Savart law, derive the field at a distance $\rho$
 	from the wire in the plane $z = 0$.
 	\begin{solution}[2.6in]
-	With $d\vec{l} = \hat{\mathbf{z}}\ dz^{\prime}$ and
-	$\vec{R} = \rho\hat{\boldsymbol{\rho}} - z^{\prime}\hat{\mathbf{z}}$,
+	With $d\mathbf{l} = \hat{\mathbf{z}}\ dz^{\prime}$ and
+	$\mathbf{R} = \rho\hat{\boldsymbol{\rho}} - z^{\prime}\hat{\mathbf{z}}$,
 	the cross product is
-	$d\vec{l}\times\vec{R} = \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}$, so
+	$d\mathbf{l}\times\mathbf{R} = \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}$, so
 	\eq{
-		\vec{H} &= \int_{-L/2}^{L/2} \dfrac{I\ \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}}{4\pi\lp\rho^2 + z^{\prime 2}\rp^{3/2}}
+		\mathbf{H} &= \int_{-L/2}^{L/2} \dfrac{I\ \hat{\boldsymbol{\phi}}\ \rho\ dz^{\prime}}{4\pi\lp\rho^2 + z^{\prime 2}\rp^{3/2}}
 		= \hat{\boldsymbol{\phi}}\dfrac{I\rho}{4\pi}\lb \dfrac{z^{\prime}}{\rho^2\sqrt{\rho^2 + z^{\prime 2}}} \rb_{-L/2}^{L/2} \\
 		&= \hat{\boldsymbol{\phi}}\dfrac{I L}{4\pi\rho\sqrt{\rho^2 + L^2/4}}
 	}
@@ -34,11 +34,11 @@ the $+z$ direction from $z = -10$ cm to $z = 10$ cm.
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}
-		\part Find $\vec{H}$ and $|\vec{B}|$ at the point $(5, 0, 0)$ cm.
+		\part Find $\mathbf{H}$ and $|\mathbf{B}|$ at the point $(5, 0, 0)$ cm.
 		\begin{solution}[1.3in]
 		\eq{
 			H &= \dfrac{(2)(0.2)}{4\pi(0.05)\sqrt{0.05^2 + 0.1^2}} = 5.69\ \text{A/m} \\
-			\vec{H} &= 5.69\ \hat{\mathbf{y}}\ \text{A/m} \\
+			\mathbf{H} &= 5.69\ \hat{\mathbf{y}}\ \text{A/m} \\
 			B &= \mu_0 H = 7.16\ \mu\text{T}
 		}
 		At $(5, 0, 0)$ cm, $\hat{\boldsymbol{\phi}} = \hat{\mathbf{y}}$.
@@ -46,10 +46,10 @@ the $+z$ direction from $z = -10$ cm to $z = 10$ cm.
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
 		\raggedleft \vspace{12pt}
-		$\vec{H}$ = \ansbox[1.5in]{$5.69\ \hat{\mathbf{y}}$ A/m}
+		$\mathbf{H}$ = \ansbox[1.5in]{$5.69\ \hat{\mathbf{y}}$ A/m}
 
 		\vspace{4pt}
-		$|\vec{B}|$ = \ansbox[1.5in]{$7.16\ \mu$T}
+		$|\mathbf{B}|$ = \ansbox[1.5in]{$7.16\ \mu$T}
 	\end{minipage}
 
 	\begin{minipage}[t]{0.58\linewidth}
@@ -79,12 +79,12 @@ seen from above.
 	\part Starting from the Biot-Savart law, derive the field at height $z$ on the
 	axis. Explain why the radial part of the integral is zero.
 	\begin{solution}[2.6in]
-	With $d\vec{l} = \hat{\boldsymbol{\phi}}^{\prime}\ a\ d\phi^{\prime}$ and
-	$\vec{R} = z\hat{\mathbf{z}} - a\hat{\boldsymbol{\rho}}^{\prime}$,
+	With $d\mathbf{l} = \hat{\boldsymbol{\phi}}^{\prime}\ a\ d\phi^{\prime}$ and
+	$\mathbf{R} = z\hat{\mathbf{z}} - a\hat{\boldsymbol{\rho}}^{\prime}$,
 	$R = \sqrt{a^2 + z^2}$ for every element and
-	$d\vec{l}\times\vec{R} = a\ d\phi^{\prime}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp$:
+	$d\mathbf{l}\times\mathbf{R} = a\ d\phi^{\prime}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp$:
 	\eq{
-		\vec{H} &= \dfrac{I a}{4\pi\lp a^2 + z^2\rp^{3/2}}\int_0^{2\pi}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp d\phi^{\prime}
+		\mathbf{H} &= \dfrac{I a}{4\pi\lp a^2 + z^2\rp^{3/2}}\int_0^{2\pi}\lp z\hat{\boldsymbol{\rho}}^{\prime} + a\hat{\mathbf{z}}\rp d\phi^{\prime}
 		= \hat{\mathbf{z}}\dfrac{I a^2}{2\lp a^2 + z^2\rp^{3/2}}
 	}
 	The unit vector $\hat{\boldsymbol{\rho}}^{\prime}$ turns with $\phi^{\prime}$, and its
@@ -93,7 +93,7 @@ seen from above.
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}
-		\part Find $|\vec{H}|$ at the center of the loop and at $z = 3$ cm.
+		\part Find $|\mathbf{H}|$ at the center of the loop and at $z = 3$ cm.
 		\begin{solution}[1.2in]
 		\eq{
 			H(0) &= \dfrac{I}{2a} = \dfrac{0.5}{2(0.04)} = 6.25\ \text{A/m} \\
@@ -165,12 +165,12 @@ seen from above.
 \begin{parts}
 
 	\part Which of these fields could be a magnetic flux density? Justify each answer.
-	\[ \vec{B}_1 = x\hat{\mathbf{x}} - y\hat{\mathbf{y}}, \qquad \vec{B}_2 = y\hat{\mathbf{x}} + x\hat{\mathbf{y}}, \qquad \vec{B}_3 = x\hat{\mathbf{x}} + y\hat{\mathbf{y}} \]
+	\[ \mathbf{B}_1 = x\hat{\mathbf{x}} - y\hat{\mathbf{y}}, \qquad \mathbf{B}_2 = y\hat{\mathbf{x}} + x\hat{\mathbf{y}}, \qquad \mathbf{B}_3 = x\hat{\mathbf{x}} + y\hat{\mathbf{y}} \]
 	\begin{solution}[1.3in]
 	\eq{
-		\nabla\cdot\vec{B}_1 &= 1 - 1 = 0 \quad \text{possible} \\
-		\nabla\cdot\vec{B}_2 &= 0 + 0 = 0 \quad \text{possible} \\
-		\nabla\cdot\vec{B}_3 &= 1 + 1 = 2 \quad \text{not possible: a magnetic field has } \nabla\cdot\vec{B} = 0
+		\nabla\cdot\mathbf{B}_1 &= 1 - 1 = 0 \quad \text{possible} \\
+		\nabla\cdot\mathbf{B}_2 &= 0 + 0 = 0 \quad \text{possible} \\
+		\nabla\cdot\mathbf{B}_3 &= 1 + 1 = 2 \quad \text{not possible: a magnetic field has } \nabla\cdot\mathbf{B} = 0
 	}
 	\end{solution}
 
@@ -199,14 +199,14 @@ moving at $10^6$ m/s in the $+z$ direction.
 \begin{parts}
 
 	\begin{minipage}[t]{0.58\linewidth}
-		\part Find $\vec{B}$ at the electron.
+		\part Find $\mathbf{B}$ at the electron.
 		\begin{solution}[1in]
-		\eq{ \vec{B} = \hat{\boldsymbol{\phi}}\dfrac{\mu_0 I}{2\pi\rho} = \hat{\mathbf{y}}\dfrac{\lp 4\pi\ee{-7}\rp(10)}{2\pi(0.01)} = 200\ \hat{\mathbf{y}}\ \mu\text{T} }
+		\eq{ \mathbf{B} = \hat{\boldsymbol{\phi}}\dfrac{\mu_0 I}{2\pi\rho} = \hat{\mathbf{y}}\dfrac{\lp 4\pi\ee{-7}\rp(10)}{2\pi(0.01)} = 200\ \hat{\mathbf{y}}\ \mu\text{T} }
 		\end{solution}
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
 		\raggedleft \vspace{12pt}
-		$\vec{B}$ = \ansbox[1.3in]{$200\ \hat{\mathbf{y}}\ \mu$T}
+		$\mathbf{B}$ = \ansbox[1.3in]{$200\ \hat{\mathbf{y}}\ \mu$T}
 	\end{minipage}
 
 	\begin{minipage}[t]{0.58\linewidth}
@@ -214,16 +214,17 @@ moving at $10^6$ m/s in the $+z$ direction.
 		toward the wire or pushes it away.
 		\begin{solution}[1.4in]
 		\eq{
-			\vec{F} &= q\vec{v}\times\vec{B} = \lp -1.602\ee{-19}\rp\lp 10^6\hat{\mathbf{z}}\rp\times\lp 2\ee{-4}\hat{\mathbf{y}}\rp \\
+			\mathbf{F} &= q\mathbf{v}\times\mathbf{B} = \lp -1.602\ee{-19}\rp\lp 10^6\hat{\mathbf{z}}\rp\times\lp 2\ee{-4}\hat{\mathbf{y}}\rp \\
 			&= \lp -3.20\ee{-17}\rp\lp -\hat{\mathbf{x}}\rp = 3.20\ee{-17}\ \hat{\mathbf{x}}\ \text{N}
 		}
-		The force points away from the wire. The electron's motion is a current
-		opposite to the wire's, and opposite currents repel.
+		The force points along $+\hat{\mathbf{x}}$, away from the wire: the cross
+		product gives $-\hat{\mathbf{x}}$, and the electron's negative charge
+		reverses it.
 		\end{solution}
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
 		\raggedleft \vspace{12pt}
-		$\vec{F}$ = \ansbox[1.5in]{$3.20\ee{-17}\ \hat{\mathbf{x}}$ N}
+		$\mathbf{F}$ = \ansbox[1.5in]{$3.20\ee{-17}\ \hat{\mathbf{x}}$ N}
 	\end{minipage}
 
 \end{parts}

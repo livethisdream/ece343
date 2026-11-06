@@ -48,7 +48,7 @@ The two divergence equations are Gauss's law from Lesson 21 and Gauss's law for
 magnetism from Lesson 28. They hold unchanged when the fields vary in time. The
 two curl equations are where time enters. Faraday's law, from Lesson 33, says
 that a changing magnetic flux density produces a circulating electric field.
-The Maxwell-Ampere law, Lesson 29's Ampere's law with Lesson 33's displacement
+The Ampere–Maxwell law, Lesson 29's Ampere's law with Lesson 33's displacement
 current $\partial\mathbf{D}/\partial t$ added, says that a changing electric
 flux density produces a circulating magnetic field just as a current does. In
 a simple medium, $\mathbf{D} = \epsilon\mathbf{E}$, $\mathbf{B} = \mu\mathbf{H}$,
@@ -103,7 +103,7 @@ $$\begin{aligned} \nabla\cdot\widetilde{\mathbf{E}} &= \frac{\widetilde{\rho}_v}
 
 The other three equations convert the same way. The divergence equations
 contain no time derivative, so each simply holds for the phasors. The
-Maxwell-Ampere law has the time derivative of $\mathbf{D}$, which becomes
+Ampere–Maxwell law has the time derivative of $\mathbf{D}$, which becomes
 $j\omega\widetilde{\mathbf{D}}$. We then use the simple medium to write
 everything in terms of $\widetilde{\mathbf{E}}$ and $\widetilde{\mathbf{H}}$:
 $\widetilde{\mathbf{D}} = \epsilon\widetilde{\mathbf{E}}$ and
@@ -162,7 +162,7 @@ $$\nabla\times\left(\nabla\times\mathbf{F}\right) = \nabla\left(\nabla\cdot\math
 Lesson 29 used this identity to derive Ampere's law, and it holds for any
 vector field. Writing out the $x$ component of the left side,
 
-$$\left(\nabla\times\nabla\times\mathbf{F}\right)_x = \frac{\partial}{\partial y}\left(\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\right) - \frac{\partial}{\partial z}\left(\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\right)$$
+$$\begin{aligned} \left(\nabla\times\nabla\times\mathbf{F}\right)_x &= \frac{\partial}{\partial y}\left(\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\right) \\ &\quad - \frac{\partial}{\partial z}\left(\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\right) \end{aligned}$$
 
 We add and subtract $\partial^2 F_x/\partial x^2$. The three terms with a
 derivative of $F_x$ twice in the same variable, all with a minus sign, form
@@ -182,7 +182,7 @@ $$\begin{aligned} \nabla\times\left(\nabla\times\widetilde{\mathbf{E}}\right) &=
 
 We take the curl of both sides of Faraday's law. On the right, $j\omega\mu$ is
 a constant and comes outside the curl, which leaves the curl of
-$\widetilde{\mathbf{H}}$. The Maxwell-Ampere law says exactly what that is,
+$\widetilde{\mathbf{H}}$. The Ampere–Maxwell law says exactly what that is,
 $j\omega\epsilon\widetilde{\mathbf{E}}$, and substituting it removes
 $\widetilde{\mathbf{H}}$ from the equation. On the left, we expand the curl of
 a curl with the identity. The region is source-free, so
@@ -206,18 +206,18 @@ $\omega\sqrt{\mu\epsilon}$ has units of $(1/\text{s})\cdot(\text{s/m})$. In
 free space, $\mu_0 = 4\pi\times10^{-7}$ H/m and
 $\epsilon_0 = 8.854\times10^{-12}$ F/m, so at 1 GHz
 
-$$\beta = 2\pi\times10^{9}\sqrt{4\pi\times10^{-7}\times 8.854\times10^{-12}} = 2\pi\times10^9\times 3.336\times10^{-9} = 20.96\ \text{rad/m}$$
+$$\begin{aligned} \beta &= 2\pi\times10^{9}\sqrt{4\pi\times10^{-7}\times 8.854\times10^{-12}} \\ &= 2\pi\times10^9\times 3.336\times10^{-9} \\ &= 20.96\ \text{rad/m} \end{aligned}$$
 
 The Helmholtz equation is three scalar equations, one for each Cartesian
 component, because the vector Laplacian acts on each component separately.
 ::::
 
-::::{frame} The Magnetic Field Obeys the Same Equation
+::::{frame} The Helmholtz Equation for H
 :::{present}
 $$\begin{aligned} \nabla\times\left(\nabla\times\widetilde{\mathbf{H}}\right) &= j\omega\epsilon\ \nabla\times\widetilde{\mathbf{E}} \\ \nabla\left(\nabla\cdot\widetilde{\mathbf{H}}\right) - \nabla^2\widetilde{\mathbf{H}} &= j\omega\epsilon\left(-j\omega\mu\widetilde{\mathbf{H}}\right) \\ \nabla^2\widetilde{\mathbf{H}} + \beta^2\widetilde{\mathbf{H}} &= 0 \end{aligned}$$
 :::
 
-The same steps, starting from the Maxwell-Ampere law, decouple the magnetic
+The same steps, starting from the Ampere–Maxwell law, decouple the magnetic
 field. We take the curl of both sides, bring $j\omega\epsilon$ outside, and
 substitute Faraday's law for the curl of $\widetilde{\mathbf{E}}$. Gauss's law
 for magnetism gives $\nabla\cdot\widetilde{\mathbf{H}} = 0$, which removes the
@@ -233,7 +233,7 @@ Lesson 37 uses it to find the magnetic field of a plane wave.
 $$\begin{aligned} \nabla^2\mathbf{E} - \mu\epsilon\ \frac{\partial^2\mathbf{E}}{\partial t^2} &= 0 \\ v_p = \frac{1}{\sqrt{\mu\epsilon}}, \qquad \frac{1}{\sqrt{\mu_0\epsilon_0}} &= 2.998\times10^8\ \text{m/s} \end{aligned}$$
 :::
 
-The Helmholtz equation has a time-domain twin. A factor of $j\omega$ in phasor
+The Helmholtz equation has a time-domain form. A factor of $j\omega$ in phasor
 form is a time derivative, so $-\omega^2 = (j\omega)^2$ is a second time
 derivative, and $\nabla^2\widetilde{\mathbf{E}} + \omega^2\mu\epsilon\widetilde{\mathbf{E}} = 0$
 is the phasor form of the **vector wave equation** above. An equation of this
@@ -321,7 +321,7 @@ Today we wrote Maxwell's equations with phasors and decoupled the two curl
 equations into a Helmholtz equation for each field. Lesson 36 solves that
 equation for the simplest field it allows, one that varies only along $z$,
 which turns out to be the same pair of traveling waves Lesson 4 found on the
-line. It then puts conductivity back into the Maxwell-Ampere law, which makes
+line. It then puts conductivity back into the Ampere–Maxwell law, which makes
 the phase constant complex and the wave decay as it travels, and derives the
 skin depth that Lesson 27 quoted.
 

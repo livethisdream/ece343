@@ -1,7 +1,7 @@
 % !TEX root =./ECE343_Practice_main.tex
 %
 % L35 practice set (Maxwell's Equations in a Lossless, Source-Free Region I):
-% vector phasors, the phasor Maxwell-Ampere law, decoupling the magnetic field,
+% vector phasors, the phasor Ampere–Maxwell law, decoupling the magnetic field,
 % the Helmholtz equation and its phase constant, and the line analogy.
 
 \fullwidth{\textbf{Learning Objective 9.1: } I understand the process of
@@ -28,7 +28,7 @@ field is
 	\end{solution}
 
 	\part Starting from $\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t$
-	in the time domain, derive the phasor form of the Maxwell-Ampere law in this
+	in the time domain, derive the phasor form of the Ampere–Maxwell law in this
 	region. State each assumption where you use it.
 	\begin{solution}[2.2in]
 	Substitute $\mathbf{H} = \text{Re}\left[\widetilde{\mathbf{H}}e^{j\omega t}\right]$
@@ -39,8 +39,8 @@ field is
 		\text{Re}\left[\left(\nabla\times\widetilde{\mathbf{H}}\right)e^{j\omega t}\right] &= \text{Re}\left[\left(\widetilde{\mathbf{J}} + j\omega\widetilde{\mathbf{D}}\right)e^{j\omega t}\right] \\
 		\nabla\times\widetilde{\mathbf{H}} &= \widetilde{\mathbf{J}} + j\omega\widetilde{\mathbf{D}}
 	}
-	The equation holds at every instant, so the complex vectors are equal. Lossless,
-	$\sigma = 0$, so $\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}} = 0$ (no
+	The equation holds at every instant, so the complex vectors are equal. The region is lossless,
+	so $\sigma = 0$ and $\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}} = 0$ (no
 	impressed current either, since the region is source-free). A simple medium has
 	$\widetilde{\mathbf{D}} = \epsilon\widetilde{\mathbf{E}}$:
 	\eq{ \nabla\times\widetilde{\mathbf{H}} = j\omega\epsilon\widetilde{\mathbf{E}} }
@@ -53,11 +53,11 @@ field is
 \question \textbf{Decoupling the magnetic field.}
 \begin{parts}
 
-	\part Starting from the Maxwell-Ampere law, in phasor form, in a lossless,
+	\part Starting from the Ampere–Maxwell law, in phasor form, in a lossless,
 	source-free region, derive the Helmholtz equation for the magnetic field. Name
 	each of Maxwell's equations where you use it.
 	\begin{solution}[2.4in]
-	Take the curl of the Maxwell-Ampere law. The constant $j\omega\epsilon$ comes
+	Take the curl of the Ampere–Maxwell law. The constant $j\omega\epsilon$ comes
 	outside the curl:
 	\eq{ \nabla\times\left(\nabla\times\widetilde{\mathbf{H}}\right) = j\omega\epsilon\ \nabla\times\widetilde{\mathbf{E}} }
 	Faraday's law gives $\nabla\times\widetilde{\mathbf{E}} = -j\omega\mu\widetilde{\mathbf{H}}$.

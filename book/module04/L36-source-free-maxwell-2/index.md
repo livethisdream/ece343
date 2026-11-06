@@ -2,14 +2,14 @@
 frame_view: true
 ---
 
-# L36 - Maxwell's Equations in a Lossless, Source-Free Region II
+# L36 - Plane-Wave Solutions and Lossy Media
 
 ::::{frame}
 :class: title-frame
 
 <div class="course-mark">ECE 343 · Spring 2027</div>
 
-<h1 class="frame-title">Maxwell's Equations in a Lossless, Source-Free Region II</h1>
+<h1 class="frame-title">Plane-Wave Solutions and Lossy Media</h1>
 
 <div class="title-rule"></div>
 
@@ -117,41 +117,41 @@ $$\begin{aligned} \nabla\times\widetilde{\mathbf{H}} &= \sigma\widetilde{\mathbf
 
 Now we let the region conduct. It still contains no free charge, because
 Lesson 33 showed that charge placed inside a conductor decays in the
-relaxation time $\epsilon/\sigma$, so
+relaxation time $\tau_r = \epsilon/\sigma$, so
 $\nabla\cdot\widetilde{\mathbf{E}} = 0$ still holds. The electric field now
 drives a conduction current $\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}}$,
-Lesson 27's point form of Ohm's law, and the Maxwell-Ampere law gains that
+Lesson 27's point form of Ohm's law, and the Ampere–Maxwell law gains that
 term. Both terms on the right are proportional to $\widetilde{\mathbf{E}}$, so
 we factor out $j\omega$ and collect the rest into a **complex permittivity**
-$\epsilon_c$. The Maxwell-Ampere law then has exactly its lossless form with
+$\epsilon_c$. The Ampere–Maxwell law then has exactly its lossless form with
 $\epsilon_c$ in place of $\epsilon$, and every step of Lesson 35 still applies.
 ::::
 
 ::::{frame} The Loss Tangent
 :::{present}
-$$\epsilon_c = \epsilon\left(1 - j\frac{\sigma}{\omega\epsilon}\right), \qquad \tan\delta = \frac{\sigma}{\omega\epsilon}$$
+$$\epsilon_c = \epsilon\left(1 - j\frac{\sigma}{\omega\epsilon}\right), \qquad \tan\delta_c = \frac{\sigma}{\omega\epsilon}$$
 
-- Polyethylene, any frequency: $\tan\delta = 2\times10^{-4}$.
-- Copper at 100 MHz: $\sigma/\omega\epsilon_0 = 1.04\times10^{10}$.
+- Polyethylene, any frequency: $\tan\delta_c = 2\times10^{-4}$.
+- Copper at 100 MHz: $\sigma/(\omega\epsilon_0) = 1.0\times10^{10}$ (Lesson 33).
 :::
 
 Factoring $\epsilon$ out of the complex permittivity leaves the ratio
-$\sigma/\omega\epsilon$, the magnitude of the conduction current density
+$\sigma/(\omega\epsilon)$, the magnitude of the conduction current density
 $\sigma E$ divided by the magnitude of the displacement current density
 $\omega\epsilon E$. It is the **loss tangent** that Lesson 5 used for
-polyethylene, written $\tan\delta$ because it is the tangent of the angle by
-which $\epsilon_c$ lies below the real axis. This angle $\delta$ has no connection
-to the skin depth $\delta$ later in this lesson; the two share a letter by
-convention. Datasheets usually give a dielectric's loss as $\tan\delta$, and Lesson 27
-turned that into the equivalent conductivity
-$\sigma = \omega\epsilon\tan\delta$, $2.5\ \mu$S/m for polyethylene at 100 MHz.
-For copper, with $\sigma = 5.8\times10^7$ S/m, conduction current exceeds
-displacement current by ten orders of magnitude.
+polyethylene, the tangent of the angle by which $\epsilon_c$ lies below the
+real axis. Lesson 5 wrote that angle $\delta$; from here on we write it
+$\delta_c$, for the angle of $\epsilon_c$, so that $\delta$ alone means the
+skin depth later in this lesson. Datasheets usually give a dielectric's loss as
+$\tan\delta_c$, and Lesson 27 turned that into the equivalent conductivity
+$\sigma = \omega\epsilon\tan\delta_c$, $2.5\ \mu$S/m for polyethylene at
+100 MHz. Lesson 33 compared the two currents in copper and found conduction
+current larger by ten orders of magnitude.
 ::::
 
 ::::{frame} The Propagation Constant
 :::{present}
-$$\begin{aligned} \nabla^2\widetilde{\mathbf{E}} + \omega^2\mu\epsilon_c\ \widetilde{\mathbf{E}} &= 0 \\ \nabla^2\widetilde{\mathbf{E}} - \gamma^2\widetilde{\mathbf{E}} &= 0, \qquad \gamma^2 = j\omega\mu\left(\sigma + j\omega\epsilon\right) \end{aligned}$$
+$$\begin{aligned} \nabla^2\widetilde{\mathbf{E}} + \omega^2\mu\epsilon_c\ \widetilde{\mathbf{E}} &= 0 \\ \nabla^2\widetilde{\mathbf{E}} - \gamma^2\widetilde{\mathbf{E}} &= 0 \\ \gamma^2 &= j\omega\mu\left(\sigma + j\omega\epsilon\right) \end{aligned}$$
 
 - Line: $\gamma^2 = \left(R' + j\omega L'\right)\left(G' + j\omega C'\right)$.
 :::
@@ -159,7 +159,9 @@ $$\begin{aligned} \nabla^2\widetilde{\mathbf{E}} + \omega^2\mu\epsilon_c\ \widet
 Repeating Lesson 35's decoupling with $\epsilon_c$ in place of $\epsilon$
 gives the Helmholtz equation with $\omega^2\mu\epsilon_c$ in place of
 $\beta^2$. That constant is now complex, so we write it as $-\gamma^2$, with
-$\gamma^2 = -\omega^2\mu\epsilon_c = j\omega\mu\ j\omega\epsilon_c = j\omega\mu\left(\sigma + j\omega\epsilon\right)$.
+
+$$\begin{aligned} \gamma^2 &= -\omega^2\mu\epsilon_c = j\omega\mu\ j\omega\epsilon_c \\ &= j\omega\mu\left(\sigma + j\omega\epsilon\right) \end{aligned}$$
+
 This is the same form as the line's $\gamma^2$ in Lesson 4: $j\omega\mu$ plays
 the series impedance with no series resistance, and $\sigma + j\omega\epsilon$
 plays the shunt admittance, with $\sigma$ in the place of $G'$. Lesson 27
@@ -171,10 +173,9 @@ $\sigma = 0$, $\gamma = j\omega\sqrt{\mu\epsilon}$, the lossless result.
 ::::{frame} A Wave in a Lossy Medium
 :::{present}
 <img src="../../viz/img/L36-decaying-wave.svg"
-     alt="A snapshot of the electric field against depth z for a wave traveling in plus z in a lossy medium: a cosine inside a dashed envelope E zero e to the minus alpha z that falls to 1 over e of its starting value at one skin depth delta"
-     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
-:::
-:::{present}
+     alt="A snapshot of the electric field against depth z for a wave traveling in plus z in a lossy medium: a cosine inside a dashed envelope, the magnitude of E zero plus times e to the minus alpha z, that falls to 1 over e of its starting value at one skin depth delta"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;">
+
 $$E_x(z,t) = \left\vert E_0^+\right\vert e^{-\alpha z}\cos\left(\omega t - \beta z + \phi^+\right)$$
 :::
 
@@ -187,13 +188,15 @@ that shrinks as $e^{-\alpha z}$. The figure is a snapshot at $t = 0$. The
 attenuation constant $\alpha$ sets how fast the envelope falls, and the
 distance $1/\alpha$, where it reaches $1/e$ of its starting value, is the
 skin depth $\delta$. In this example the wave completes two cycles in that
-distance; in a good conductor, the end of this lesson shows, it completes
-less than one.
+distance. In a good conductor the wave completes less than one-sixth of a
+cycle in that distance, as the Skin Depth frame shows.
 ::::
 
 ::::{frame} Solving for α and β
 :::{present}
-$$\begin{aligned} \left(\alpha + j\beta\right)^2 &= \alpha^2 - \beta^2 + j2\alpha\beta \\ &= -\omega^2\mu\epsilon + j\omega\mu\sigma \\ \alpha &= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + \left(\frac{\sigma}{\omega\epsilon}\right)^2} - 1\right]^{1/2} \\ \beta &= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + \left(\frac{\sigma}{\omega\epsilon}\right)^2} + 1\right]^{1/2} \end{aligned}$$
+With $p = \sigma/(\omega\epsilon)$:
+
+$$\begin{aligned} \left(\alpha + j\beta\right)^2 &= \alpha^2 - \beta^2 + j2\alpha\beta \\ &= -\omega^2\mu\epsilon + j\omega\mu\sigma \\ \alpha &= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + p^2} - 1\right]^{1/2} \\ \beta &= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + p^2} + 1\right]^{1/2} \end{aligned}$$
 :::
 
 We expand $\gamma^2$ two ways and match the real and imaginary parts:
@@ -203,18 +206,21 @@ first and multiplying by $\alpha^2$,
 
 $$\left(\alpha^2\right)^2 + \omega^2\mu\epsilon\ \alpha^2 - \frac{\omega^2\mu^2\sigma^2}{4} = 0$$
 
-which is a quadratic in $\alpha^2$. Its roots are
-$\alpha^2 = \left(\omega^2\mu\epsilon/2\right)\left[-1 \pm \sqrt{1 + (\sigma/\omega\epsilon)^2}\right]$,
+which is a quadratic in $\alpha^2$. Writing $p = \sigma/(\omega\epsilon)$
+for the loss tangent, its roots are
+
+$$\alpha^2 = \frac{\omega^2\mu\epsilon}{2}\left[-1 \pm \sqrt{1 + p^2}\right]$$
+
 and $\alpha^2$ must be positive, so we keep the plus sign. Then
 $\beta^2 = \alpha^2 + \omega^2\mu\epsilon$ adds $2$ inside the bracket,
 turning $-1$ into $+1$. Both depend on the material only through $\mu$,
-$\epsilon$, and the loss tangent $\sigma/\omega\epsilon$.
+$\epsilon$, and the loss tangent $p$.
 ::::
 
 ::::{frame} Two Limits
 :::{present}
 <img src="../../viz/img/L36-regimes.svg"
-     alt="Log-log plot of alpha and beta, each divided by omega root mu epsilon, against sigma over omega epsilon from 0.001 to 1000. Beta is flat at one below a ratio of one and rises above it; alpha rises in proportion to the ratio below one, with the low-loss asymptote, and far above one alpha and beta merge on the good-conductor asymptote"
+     alt="Log-log plot of alpha and beta, each divided by omega root mu epsilon, against sigma over omega epsilon from 0.0001 to 100000. Beta is flat at one below a ratio of one and rises above it; alpha rises in proportion to the ratio below one, along the dashed low-loss limit, and far above one alpha and beta merge on the dashed good-conductor limit. Markers show polyethylene at 0.0002, seawater at 1 gigahertz at 0.89, and seawater at 10 kilohertz at 89,000; an arrow at the right edge points toward copper at 100 megahertz"
      style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
 :::
 
@@ -225,48 +231,55 @@ proportion to $\sigma$: the material is a **low-loss dielectric**. Far above a
 ratio of one, $\alpha$ and $\beta$ approach each other and grow as the square
 root of $\sigma$: the material is a **good conductor**. At a ratio of $10$ they
 still differ by 10%, and at $100$ by 1%. Near a ratio of one, only the exact
-formulas apply. The dotted lines are the two
-approximations the next frames derive.
+formulas apply. The dashed lines are the two approximations the next frames
+derive. The markers place three materials on the same axis: polyethylene at
+any frequency, seawater at 1 GHz near a ratio of one, and seawater at 10 kHz
+far into the conductor regime. Copper at 100 MHz, with a ratio of
+$10^{10}$, lies far off the right edge.
 ::::
 
 ::::{frame} The Low-Loss Limit
 :::{present}
-For $\sigma/\omega\epsilon \ll 1$, use $\sqrt{1 + x} \approx 1 + x/2$:
+For $\sigma/(\omega\epsilon) \ll 1$, use $\sqrt{1 + x} \approx 1 + x/2$:
 
 $$\begin{aligned} \gamma &= j\omega\sqrt{\mu\epsilon}\sqrt{1 - j\frac{\sigma}{\omega\epsilon}} \\ &\approx j\omega\sqrt{\mu\epsilon}\left(1 - j\frac{\sigma}{2\omega\epsilon}\right) \\ \alpha &\approx \frac{\sigma}{2}\sqrt{\frac{\mu}{\epsilon}}, \qquad \beta \approx \omega\sqrt{\mu\epsilon} \end{aligned}$$
 :::
 
 We factor the lossless $j\omega\sqrt{\mu\epsilon}$ out of $\gamma$, which
-leaves $\sqrt{1 - j\sigma/\omega\epsilon}$. When the loss tangent is small,
-the first two terms of the binomial expansion are enough. Multiplying out,
-$j\omega\sqrt{\mu\epsilon}\times(-j\sigma/2\omega\epsilon) = (\sigma/2)\sqrt{\mu\epsilon}/\epsilon = (\sigma/2)\sqrt{\mu/\epsilon}$
+leaves $\sqrt{1 - j\sigma/(\omega\epsilon)}$. When the loss tangent is small,
+the first two terms of the binomial expansion are enough. Multiplying out the
+second term,
+
+$$j\omega\sqrt{\mu\epsilon}\left(-j\frac{\sigma}{2\omega\epsilon}\right) = \frac{\sigma}{2}\frac{\sqrt{\mu\epsilon}}{\epsilon} = \frac{\sigma}{2}\sqrt{\frac{\mu}{\epsilon}}$$
+
 is real, so it is $\alpha$, and the imaginary part keeps its lossless value. To first
 order, a little loss makes the wave decay but does not change its speed. The
-factor $\sqrt{\mu/\epsilon}$ has units of ohms; Lesson 37 names it the
-intrinsic impedance $\eta$. The result has the form of Lesson 5's dielectric
+factor $\sqrt{\mu/\epsilon}$ has units of ohms; Lesson 37 derives it as the
+**intrinsic impedance** $\eta$ of the medium. The result has the form of Lesson 5's dielectric
 term on a low-loss line, $G'Z_0/2$, with $\sigma$ for $G'$ and $\eta$ for
 $Z_0$.
 ::::
 
 ::::{frame} Worked Example: Loss in Polyethylene
 :::{present}
-$\epsilon_r = 2.25$, $\tan\delta = 2\times10^{-4}$, $f = 100$ MHz:
+$\epsilon_r = 2.25$, $\tan\delta_c = 2\times10^{-4}$, $f = 100$ MHz:
 
-$$\begin{aligned} \sigma &= \omega\epsilon\tan\delta = 2.50\times10^{-6}\ \text{S/m} \\ \sqrt{\mu_0/\epsilon} &= 251\ \Omega \\ \alpha &= \frac{2.50\times10^{-6}\times251}{2} = 3.14\times10^{-4}\ \text{Np/m} \end{aligned}$$
+$$\begin{aligned} \sigma &= \omega\epsilon\tan\delta_c = 2.50\times10^{-6}\ \text{S/m} \\ \sqrt{\mu_0/\epsilon} &= 251\ \Omega \\ \alpha &= \frac{2.50\times10^{-6}\times251}{2} \\ &= 3.14\times10^{-4}\ \text{Np/m} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — the dielectric loss of RG-58
 :class: tip
-The polyethylene in RG-58 has $\sigma/\omega\epsilon = \tan\delta = 2\times10^{-4}$,
+The polyethylene in RG-58 has $\sigma/(\omega\epsilon) = \tan\delta_c = 2\times10^{-4}$,
 so the low-loss limit applies. Its equivalent conductivity at 100 MHz is
 $\sigma = 2\pi\times10^8\times2.25\times8.854\times10^{-12}\times2\times10^{-4} = 2.50\times10^{-6}$ S/m,
 and $\sqrt{\mu_0/2.25\epsilon_0} = 376.7/1.5 = 251\ \Omega$. The attenuation
 constant is $3.14\times10^{-4}$ Np/m, or
 $8.686\times3.14\times10^{-4}\times1000 = 2.73$ dB per kilometer. Lesson 5
 found the dielectric term of RG-58's attenuation from the line's own
-constants: $G'Z_0/2 = 1.22\times10^{-5}\times51.7/2 = 3.14\times10^{-4}$ Np/m,
-the same number. The dielectric loss of the line is the loss of a wave
-traveling through polyethylene. The exact formula gives
+constants, with $G' = \omega C'\tan\delta_c = 1.217\times10^{-5}$ S/m (Lesson 5
+rounds it to $1.22\times10^{-5}$): $G'Z_0/2 = 1.217\times10^{-5}\times51.7/2 = 3.14\times10^{-4}$ Np/m,
+the same number, because the line's dielectric loss is the loss of the wave
+traveling through its polyethylene. The exact formula gives
 $3.14\times10^{-4}$ Np/m and $\beta = 3.144$ rad/m, the lossless value of
 Lesson 35, to four figures.
 :::
@@ -274,7 +287,7 @@ Lesson 35, to four figures.
 
 ::::{frame} The Good-Conductor Limit
 :::{present}
-For $\sigma/\omega\epsilon \gg 1$, drop $j\omega\epsilon$ beside $\sigma$:
+For $\sigma/(\omega\epsilon) \gg 1$, drop $j\omega\epsilon$ beside $\sigma$:
 
 $$\begin{aligned} \gamma &\approx \sqrt{j\omega\mu\sigma} = \sqrt{\omega\mu\sigma}\ e^{j\pi/4} \\ &= \sqrt{\omega\mu\sigma}\ \frac{1 + j}{\sqrt{2}} \\ \alpha &= \beta \approx \sqrt{\frac{\omega\mu\sigma}{2}} = \sqrt{\pi f\mu\sigma} \end{aligned}$$
 :::
@@ -282,7 +295,10 @@ $$\begin{aligned} \gamma &\approx \sqrt{j\omega\mu\sigma} = \sqrt{\omega\mu\sigm
 In a good conductor the conduction current is much larger than the
 displacement current, so $\sigma + j\omega\epsilon \approx \sigma$ and
 $\gamma^2 \approx j\omega\mu\sigma$. The square root of $j$ is $e^{j\pi/4}$,
-because $j = e^{j\pi/2}$, and $e^{j\pi/4} = \cos 45^\circ + j\sin 45^\circ = (1 + j)/\sqrt{2}$.
+because $j = e^{j\pi/2}$, and
+
+$$e^{j\pi/4} = \cos 45^\circ + j\sin 45^\circ = \frac{1 + j}{\sqrt{2}}$$
+
 The real and imaginary parts of $\gamma$ are therefore equal, and with
 $\omega = 2\pi f$, each is $\sqrt{\pi f\mu\sigma}$. The phase constant is no
 longer $\omega\sqrt{\mu\epsilon}$: it depends on $\sigma$ and grows only as
@@ -304,7 +320,7 @@ $1/\beta = \lambda/2\pi$: the field decays to $1/e$ in less than a sixth of a
 wavelength and is effectively gone after a few skin depths. For copper,
 $\sigma = 5.8\times10^7$ S/m and $\mu = \mu_0$, so at 100 MHz
 
-$$\delta = \frac{1}{\sqrt{\pi\times10^8\times4\pi\times10^{-7}\times5.8\times10^7}} = 6.61\ \mu\text{m}$$
+$$\begin{aligned} \delta &= \frac{1}{\sqrt{\pi\times10^8\times4\pi\times10^{-7}\times5.8\times10^7}} \\ &= 6.61\ \mu\text{m} \end{aligned}$$
 
 This derives the skin depth that Lesson 27 quoted. The current density
 $\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}}$ decays with the field,
@@ -316,7 +332,7 @@ large power conductors gain little from copper deeper than about a centimeter.
 
 ::::{frame} Which Limit Applies
 :::{present}
-| Material | $f$ | $\sigma/\omega\epsilon$ | Behavior |
+| Material | $f$ | $\sigma/(\omega\epsilon)$ | Behavior |
 | :-- | :-- | :-- | :-- |
 | Polyethylene | any | $2\times10^{-4}$ | low-loss |
 | Seawater | 10 kHz | $8.9\times10^{4}$ | conductor, $\delta = 2.52$ m |
@@ -332,7 +348,7 @@ higher frequency cannot reach a useful depth. At 1 GHz the ratio is $0.89$, so
 neither approximation holds, and the exact formula gives
 $\alpha = 77.4$ Np/m, a skin depth of $1.29$ cm. The good-conductor formula
 would give $0.80$ cm there, wrong by a factor of $1.6$. Before using either
-limit, compute $\sigma/\omega\epsilon$.
+limit, compute $\sigma/(\omega\epsilon)$.
 ::::
 
 ::::{frame} Summary
@@ -343,10 +359,10 @@ limit, compute $\sigma/\omega\epsilon$.
 | 1D Helmholtz | $\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ \widetilde{E}_x(z)$ | $\widetilde{E}_x = E_0^+e^{-j\beta z} + E_0^-e^{+j\beta z}$ |
 | Phase velocity, wavelength | Lossless medium | $v_p = 1/\sqrt{\mu\epsilon}$, $\lambda = 2\pi/\beta$ |
 | Complex permittivity | Conduction current folded into $\epsilon$ | $\epsilon_c = \epsilon - j\sigma/\omega$ |
-| Loss tangent | Conduction over displacement current | $\tan\delta = \sigma/\omega\epsilon$ |
+| Loss tangent | Conduction over displacement current | $\tan\delta_c = \sigma/(\omega\epsilon)$ |
 | Propagation constant | $\gamma = \alpha + j\beta$ | $\gamma^2 = j\omega\mu(\sigma + j\omega\epsilon)$ |
-| Low-loss limit | $\sigma/\omega\epsilon \ll 1$ | $\alpha \approx (\sigma/2)\sqrt{\mu/\epsilon}$, $\beta \approx \omega\sqrt{\mu\epsilon}$ |
-| Good-conductor limit | $\sigma/\omega\epsilon \gg 1$ | $\alpha = \beta \approx \sqrt{\pi f\mu\sigma}$ |
+| Low-loss limit | $\sigma/(\omega\epsilon) \ll 1$ | $\alpha \approx (\sigma/2)\sqrt{\mu/\epsilon}$, $\beta \approx \omega\sqrt{\mu\epsilon}$ |
+| Good-conductor limit | $\sigma/(\omega\epsilon) \gg 1$ | $\alpha = \beta \approx \sqrt{\pi f\mu\sigma}$ |
 | Skin depth | $1/\alpha$ | $\delta = 1/\sqrt{\pi f\mu\sigma}$; copper at 100 MHz, $6.61\ \mu$m |
 ::::
 

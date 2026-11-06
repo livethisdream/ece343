@@ -29,8 +29,8 @@ Modules 2 and 3 derived four laws for fields that do not change with time, and
 Lesson 33 added the two terms that a changing field brings: Faraday's
 $\partial\mathbf{B}/\partial t$ and Maxwell's displacement current
 $\partial\mathbf{D}/\partial t$. Today we write the four laws together as
-**Maxwell's equations**, derive the point forms of the two that changed, and
-show that the set conserves charge. We then use the set three ways: to find
+**Maxwell's equations**, in integral and point form, and see what each says.
+We then use the set three ways: to find
 the voltage that a changing magnetic flux induces in a loop, to check that a
 proposed pair of fields obeys all four laws, and to derive the voltage and
 current ratios of an ideal transformer. Lessons 35 through 37 use the same
@@ -44,7 +44,7 @@ equations to show that the fields travel as a wave.
 | :-- | :-- | :-: |
 | Gauss's law | $\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}$ | 20–21 |
 | Gauss's law for magnetism | $\oint_S \mathbf{B}\cdot d\mathbf{s} = 0$ | 28 |
-| Faraday's law | $\oint_C \mathbf{E}\cdot d\mathbf{l} = 0$ | 22 |
+| Circulation of $\mathbf{E}$ | $\oint_C \mathbf{E}\cdot d\mathbf{l} = 0$ | 22 |
 | Ampere's law | $\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}$ | 29 |
 :::
 
@@ -88,75 +88,45 @@ normal of $S$.
 
 ::::{frame} What Each Equation Says
 :::{present}
-| Point form | What it says |
+| Law | Point form |
 | :-- | :-- |
-| $\nabla\cdot\mathbf{D} = \rho_v$ | Charge is the source of $\mathbf{D}$. |
-| $\nabla\cdot\mathbf{B} = 0$ | $\mathbf{B}$ has no source; its lines close. |
-| $\nabla\times\mathbf{E} = -\frac{\partial\mathbf{B}}{\partial t}$ | A changing $\mathbf{B}$ drives a circulating $\mathbf{E}$. |
-| $\nabla\times\mathbf{H} = \mathbf{J} + \frac{\partial\mathbf{D}}{\partial t}$ | Current and a changing $\mathbf{D}$ drive a circulating $\mathbf{H}$. |
+| Gauss's law | $\nabla\cdot\mathbf{D} = \rho_v$ |
+| Gauss for magnetism | $\nabla\cdot\mathbf{B} = 0$ |
+| Faraday's law | $\nabla\times\mathbf{E} = -\frac{\partial\mathbf{B}}{\partial t}$ |
+| Ampere–Maxwell law | $\nabla\times\mathbf{H} = \mathbf{J} + \frac{\partial\mathbf{D}}{\partial t}$ |
+:::
+:::{present}
+<img src="../../viz/img/L34-equations.svg"
+     alt="Four panels. Gauss's law: arrows of D point outward from a positive charge. Gauss's law for magnetism: closed loops of B around two wire cross sections, one carrying current out of the page and one into it. Faraday's law: a field B pointing out of the page and growing, with E circling it clockwise. Ampere–Maxwell law: a current or changing D out of the page, with H circling it counterclockwise"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
 :::
 
-The point forms state each law at a single point, and the next frame derives
-the two that changed. Each equation names a source. Gauss's law says that electric flux begins and
-ends on charge. Gauss's law for magnetism says that there is no magnetic
-charge, so magnetic flux has nowhere to begin or end. The two curl equations
-are where time enters, and they couple the fields: a magnetic field that
-changes with time produces an electric field that circulates around it, and
-an electric field that changes with time produces a magnetic field that
+The point forms state each law at a single point. Lessons 21 and 28 derived
+the two divergence equations, Lesson 33 derived the point form of Faraday's
+law with Stokes' theorem, and Lesson 33 derived the Ampere–Maxwell point form
+from the continuity equation and Gauss's law. Each equation names a source,
+and the figure draws one panel per law. Gauss's law says that electric flux
+begins and ends on charge. Gauss's law for magnetism says that there is no
+magnetic charge, so magnetic flux has nowhere to begin or end. The two curl
+equations are where time enters, and they couple the fields: a magnetic field
+that changes with time produces an electric field that circulates around it,
+and an electric field that changes with time produces a magnetic field that
 circulates around it, just as a conduction current does. The minus sign in
-Faraday's law is Lenz's law from Lesson 33: the induced electric field drives
-a current whose own magnetic flux opposes the change. Because each field's
-change drives the other, the pair can sustain itself in a region with no
-charge and no current at all, which is the electromagnetic wave of Lessons 35
-through 37.
-::::
-
-::::{frame} From Integral Form to Point Form
-:::{present}
-$$\begin{aligned} \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\frac{d}{dt}\int_S \mathbf{B}\cdot d\mathbf{s} \\ \int_S \left(\nabla\times\mathbf{E}\right)\cdot d\mathbf{s} &= -\int_S \frac{\partial\mathbf{B}}{\partial t}\cdot d\mathbf{s} \\ \nabla\times\mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t} \end{aligned}$$
-:::
-
-Lessons 21 and 28 turned the two Gauss's laws into point forms with the
-divergence theorem. The two circulation laws use Stokes' theorem from Lesson
-17 instead, and Lesson 29 used it on Ampere's law. We start from Faraday's
-law for a path $C$ and a surface $S$ that do not move. Stokes' theorem turns
-the circulation on the left into the flux of $\nabla\times\mathbf{E}$ through
-$S$. On the right, we hold the surface still, so the derivative with respect to
-time acts only on $\mathbf{B}$ and moves inside the integral as a partial
-derivative. The two surface integrals are now equal for every surface we
-choose, however small, so the integrands must be equal at every point, which
-is the point form. The same three steps applied to the Ampere–Maxwell law,
-with $I_\text{encl} = \int_S \mathbf{J}\cdot d\mathbf{s}$, give
-$\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t$.
-::::
-
-::::{frame} Conservation of Charge
-:::{present}
-$$\begin{aligned} \nabla\cdot\left(\nabla\times\mathbf{H}\right) &= \nabla\cdot\mathbf{J} + \frac{\partial}{\partial t}\left(\nabla\cdot\mathbf{D}\right) \\ 0 &= \nabla\cdot\mathbf{J} + \frac{\partial\rho_v}{\partial t} \end{aligned}$$
-:::
-
-The set contains a law we did not put in by hand. Lesson 29 showed that the
-divergence of any curl is zero, because the mixed partial derivatives cancel.
-We take the divergence of both sides of the Ampere–Maxwell law. The left side
-is zero. On the right, the divergence and the time derivative act on different
-variables, so they commute, and Gauss's law replaces $\nabla\cdot\mathbf{D}$
-with $\rho_v$. The result is the **continuity equation**,
-$\nabla\cdot\mathbf{J} = -\partial\rho_v/\partial t$. Integrated over a volume
-with the divergence theorem, it says that the net current out of a closed
-surface equals the rate at which the charge inside decreases: charge is
-conserved. For steady current, $\rho_v$ does not change, and the equation
-reduces to Lesson 27's $\nabla\cdot\mathbf{J} = 0$. Without the displacement
-current, the left side would still be zero, and the equations would force
-$\nabla\cdot\mathbf{J} = 0$ even on a charging capacitor plate, where charge
-accumulates. The displacement current is the term that makes Ampere's law
-agree with conservation of charge.
+Faraday's law is Lenz's law from Lesson 33: in the third panel the growing
+flux points out of the page, and the clockwise $\mathbf{E}$ drives a current
+whose own flux points into the page. Taking the divergence of the
+Ampere–Maxwell law gives back Lesson 33's continuity equation,
+$\nabla\cdot\mathbf{J} = -\partial\rho_v/\partial t$, so the set conserves
+charge. Because each field's change drives the other, the pair can sustain
+itself in a region with no charge and no current at all, which is the
+electromagnetic wave of Lessons 35 through 37.
 ::::
 
 ::::{frame} The Static Limit
 :::{present}
 With $\partial/\partial t = 0$:
 
-$$\nabla\times\mathbf{E} = 0, \qquad \nabla\times\mathbf{H} = \mathbf{J}, \qquad \nabla\cdot\mathbf{J} = 0$$
+$$\begin{aligned} \nabla\times\mathbf{E} &= 0 \\ \nabla\times\mathbf{H} &= \mathbf{J} \\ \nabla\cdot\mathbf{J} &= 0 \end{aligned}$$
 
 - The fields decouple into Modules 2 and 3.
 :::
@@ -176,7 +146,7 @@ the loops and the transformer later in this lesson.
 
 ::::{frame} The Material Relations
 :::{present}
-$$\mathbf{D} = \epsilon\mathbf{E}, \qquad \mathbf{B} = \mu\mathbf{H}, \qquad \mathbf{J} = \sigma\mathbf{E}$$
+$$\mathbf{D} = \epsilon\mathbf{E}, \quad \mathbf{B} = \mu\mathbf{H}, \quad \mathbf{J} = \sigma\mathbf{E}$$
 
 $$\nabla\times\mathbf{H} = \sigma\mathbf{E} + \epsilon\frac{\partial\mathbf{E}}{\partial t}$$
 :::
@@ -190,9 +160,8 @@ set in $\mathbf{E}$ and $\mathbf{H}$ alone. The Ampere–Maxwell law then has a
 conduction term and a displacement term side by side. For a field that varies
 as $\cos\omega t$, the conduction term has amplitude $\sigma E$ and the
 displacement term $\omega\epsilon E$, so their ratio is $\sigma/(\omega\epsilon)$,
-the ratio Lesson 27 used to separate good conductors from good insulators.
-Copper at 100 MHz has $\sigma/(\omega\epsilon_0) = 1.0\times10^{10}$, so
-conduction current dominates completely.
+the ratio Lesson 33 computed for copper, seawater, and polyethylene to decide
+which current dominates.
 ::::
 
 ::::{frame} Example 1: A Loop in a Ramping Field
@@ -207,7 +176,7 @@ $$B(t) = \begin{cases} 0 & t < 0 \\ B_0\ t/t_0 & 0 \le t \le t_0 \\ B_0 & t > t_
      style="max-width: 400px; width: 100%; display: block; margin: 0 auto;">
 :::
 
-This example is from the 2025 slides. A wire loop of radius $a = 10$ cm lies
+A wire loop of radius $a = 10$ cm lies
 in the $xy$ plane with a $1\ \text{k}\Omega$ resistor in a small gap. A
 uniform magnetic flux density $\mathbf{B} = \hat{\mathbf{z}}\ B(t)$ fills the
 region. It is zero before $t = 0$, rises linearly to $B_0 = 0.2$ T over
@@ -223,7 +192,7 @@ across the gap.
 
 ::::{frame} Example 1: The Induced Voltage
 :::{present}
-$$\begin{aligned} \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\frac{d}{dt}\left[\pi a^2 B(t)\right] = -\pi a^2\frac{B_0}{t_0} \\ &= -\frac{\pi(0.1)^2(0.2)}{3} = -2.09\ \text{mV} \quad (0 < t < t_0) \end{aligned}$$
+$$\begin{aligned} \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\frac{d}{dt}\left[\pi a^2 B(t)\right] \\ &= -\pi a^2\frac{B_0}{t_0} \\ &= -\frac{\pi(0.1)^2(0.2)}{3} \\ &= -2.09\ \text{mV} \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L34-ramp.svg"
@@ -235,7 +204,7 @@ $\mathbf{B}$ is uniform and along the normal, so the flux through $S$ is the
 field times the area, $\Phi = \pi a^2 B(t)$. Faraday's law gives the
 circulation as the negative rate of change of that flux. During the ramp the
 flux grows at the constant rate $\pi a^2 B_0/t_0$, so the circulation is a
-constant $-2.09$ mV; before the ramp and after it the flux does not change,
+constant $-2.09$ mV for $0 < t < t_0$; before the ramp and after it the flux does not change,
 and the circulation is zero. The minus sign means the electric field drives
 current clockwise as seen from $+z$, opposite to $C$. A clockwise current makes
 a magnetic field along $-\hat{\mathbf{z}}$ inside the loop, which opposes the
@@ -248,7 +217,7 @@ $t = 5$ s the field is at its largest and the voltage is zero.
 
 ::::{frame} Example 2: A Sinusoidal Field
 :::{present}
-$$\begin{aligned} B(t) &= B_0\sin\omega t, \qquad f = 1\ \text{kHz} \\ \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\pi a^2 B_0\ \omega\cos\omega t \\ &= -(39.5\ \text{V})\cos\omega t \end{aligned}$$
+$$\begin{aligned} B(t) &= B_0\sin\omega t \\ \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\pi a^2 B_0\ \omega\cos\omega t \\ &= -(39.5\ \text{V})\cos\omega t \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L34-sine.svg"
@@ -256,8 +225,7 @@ $$\begin{aligned} B(t) &= B_0\sin\omega t, \qquad f = 1\ \text{kHz} \\ \oint_C \
      style="max-width: 440px; width: 100%; display: block; margin: 0 auto;">
 :::
 
-The second example in the 2025 slides keeps the loop and the resistor and
-drives the field sinusoidally at $f = 1$ kHz, with the same amplitude
+Example 2 keeps the loop and the resistor and drives the field sinusoidally at $f = 1$ kHz, with the same amplitude
 $B_0 = 0.2$ T. The flux is $\pi a^2 B_0\sin\omega t$, with
 $\omega = 2\pi f = 6283$ rad/s. Differentiating gives a voltage that follows
 $-\cos\omega t$, with amplitude
@@ -265,8 +233,9 @@ $\pi a^2 B_0\omega = \pi(0.1)^2(0.2)(6283) = 39.5$ V. The resistor current
 has amplitude $39.5\ \text{V}/1\ \text{k}\Omega = 39.5$ mA. The voltage is
 largest when $B$ passes through zero, where the flux changes fastest, and it
 lags $B$ by a quarter period. Compared with Example 1, the same field
-amplitude produces about $19{,}000$ times the voltage, because the flux now
-changes in a quarter of a millisecond instead of three seconds. The induced
+amplitude produces about $19{,}000$ times the voltage. The voltage follows the
+rate of change of $B$: its peak is $B_0\omega$ here and $B_0/t_0$ during the
+ramp, and their ratio is $\omega t_0 = 2\pi(1000)(3) = 18{,}850$. The induced
 voltage grows in proportion to frequency, which is why power transformers and
 the coupled coils of wireless chargers work with alternating current.
 ::::
@@ -275,7 +244,7 @@ the coupled coils of wireless chargers work with alternating current.
 :::{present}
 $\mathbf{E} = \hat{\mathbf{x}}\ E_0\cos(\omega t - \beta z)$, in a uniform lossless region with no charge or current:
 
-$$\begin{aligned} \nabla\times\mathbf{E} &= \hat{\mathbf{y}}\ \frac{\partial E_x}{\partial z} = \hat{\mathbf{y}}\ \beta E_0\sin(\omega t - \beta z) = -\mu\frac{\partial\mathbf{H}}{\partial t} \\ \mathbf{H} &= \hat{\mathbf{y}}\ \frac{\beta E_0}{\mu\omega}\cos(\omega t - \beta z) \end{aligned}$$
+$$\begin{aligned} \nabla\times\mathbf{E} &= \hat{\mathbf{y}}\ \frac{\partial E_x}{\partial z} \\ &= \hat{\mathbf{y}}\ \beta E_0\sin(\omega t - \beta z) \\ &= -\mu\frac{\partial\mathbf{H}}{\partial t} \\ \mathbf{H} &= \hat{\mathbf{y}}\ \frac{\beta E_0}{\mu\omega}\cos(\omega t - \beta z) \end{aligned}$$
 :::
 
 Maxwell's equations also tell us whether a proposed field can exist, and if it
@@ -287,7 +256,7 @@ Cartesian curl from Lesson 17 is the $\hat{\mathbf{y}}$ component
 $\partial E_x/\partial z$. Faraday's law sets that curl equal to
 $-\mu\ \partial\mathbf{H}/\partial t$. Integrating with respect to time, and
 dropping the constant of integration, which would be a static field
-unrelated to this one, gives $\mathbf{H}$ along $\hat{\mathbf{y}}$, in step
+unrelated to this one, gives $\mathbf{H}$ along $\hat{\mathbf{y}}$, in phase
 with $\mathbf{E}$ and perpendicular to it. The two Gauss's laws hold
 automatically: $D_x$ does not depend on $x$ and $B_y$ does not depend on $y$,
 so both divergences are zero.
@@ -295,7 +264,7 @@ so both divergences are zero.
 
 ::::{frame} Checking a Pair of Fields: Ampere–Maxwell
 :::{present}
-$$\begin{aligned} \nabla\times\mathbf{H} &= -\hat{\mathbf{x}}\ \frac{\partial H_y}{\partial z} = -\hat{\mathbf{x}}\ \frac{\beta^2 E_0}{\mu\omega}\sin(\omega t - \beta z) \\ \epsilon\frac{\partial\mathbf{E}}{\partial t} &= -\hat{\mathbf{x}}\ \epsilon\omega E_0\sin(\omega t - \beta z) \\ \beta &= \omega\sqrt{\mu\epsilon}, \qquad \frac{E_0}{H_0} = \sqrt{\frac{\mu}{\epsilon}} = \eta \end{aligned}$$
+$$\begin{aligned} \nabla\times\mathbf{H} &= -\hat{\mathbf{x}}\ \frac{\partial H_y}{\partial z} \\ &= -\hat{\mathbf{x}}\ \frac{\beta^2 E_0}{\mu\omega}\sin(\omega t - \beta z) \\ \epsilon\frac{\partial\mathbf{E}}{\partial t} &= -\hat{\mathbf{x}}\ \epsilon\omega E_0\sin(\omega t - \beta z) \\ \beta &= \omega\sqrt{\mu\epsilon} \\ \frac{E_0}{H_0} &= \sqrt{\frac{\mu}{\epsilon}} = \eta \end{aligned}$$
 :::
 
 The last equation is the test. With no conduction current, the Ampere–Maxwell
@@ -306,8 +275,8 @@ $\sin(\omega t - \beta z)$, so they agree at every point and time only if
 their coefficients match, $\beta^2/(\mu\omega) = \epsilon\omega$. The pair of
 fields therefore satisfies all four of Maxwell's equations only when
 $\beta = \omega\sqrt{\mu\epsilon}$, and the ratio of the amplitudes becomes
-$\mu\omega/\beta = \sqrt{\mu/\epsilon}$, the intrinsic impedance $\eta$ of
-Lesson 6. In free space at 100 MHz, $\beta = 2.10$ rad/m, a wavelength of
+$\mu\omega/\beta = \sqrt{\mu/\epsilon}$, the intrinsic impedance $\eta$ that
+Lessons 6 and 30 quoted and Lesson 37 derives. In free space at 100 MHz, $\beta = 2.10$ rad/m, a wavelength of
 $3.00$ m, and a field of $E_0 = 1$ V/m comes with $H_0 = 2.65$ mA/m. This
 pair is a uniform plane wave, which Lessons 35 through 37 derive directly from
 Maxwell's equations.
@@ -315,7 +284,7 @@ Maxwell's equations.
 
 ::::{frame} The Ideal Transformer: Voltage
 :::{present}
-$$v_1 = N_1\frac{d\Phi}{dt}, \qquad v_2 = N_2\frac{d\Phi}{dt}, \qquad \frac{v_2}{v_1} = \frac{N_2}{N_1}$$
+$$\begin{aligned} v_1 &= N_1\frac{d\Phi}{dt} \\ v_2 &= N_2\frac{d\Phi}{dt} \\ \frac{v_2}{v_1} &= \frac{N_2}{N_1} \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L34-transformer.svg"
@@ -339,7 +308,7 @@ the waveform, as long as the flux changes.
 
 ::::{frame} The Ideal Transformer: Current
 :::{present}
-$$\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} = H\ell_c &= N_1 i_1 - N_2 i_2 \\ N_1 i_1 - N_2 i_2 &= \frac{\Phi\ \ell_c}{\mu A} \to 0 \quad (\mu\to\infty) \\ \frac{i_2}{i_1} = \frac{N_1}{N_2}, &\qquad v_1 i_1 = v_2 i_2 \end{aligned}$$
+$$\begin{aligned} H\ell_c &= N_1 i_1 - N_2 i_2 \\ N_1 i_1 - N_2 i_2 &= \frac{\Phi\ \ell_c}{\mu A} \to 0 \\ \frac{i_2}{i_1} &= \frac{N_1}{N_2} \\ v_1 i_1 &= v_2 i_2 \end{aligned}$$
 :::
 
 The currents come from Ampere's law around the dashed path of length
@@ -351,7 +320,7 @@ positive terminal, $N_2$ times in the opposite sense. If $H$ is uniform along
 the path, the circulation is $H\ell_c$. With $B = \mu H$ and $\Phi = BA$ for
 a core of cross-sectional area $A$, the circulation is
 $\Phi\ell_c/(\mu A)$. A finite flux needs almost no net current when $\mu$ is
-very large, so in the ideal transformer the two terms balance. The current
+very large, so in the ideal transformer, with $\mu \to \infty$, the two terms balance. The current
 ratio is the inverse of the turns ratio, and multiplying the two ratios shows
 that the power into winding 1 equals the power out of winding 2: the ideal
 transformer stores and dissipates nothing.
@@ -361,7 +330,7 @@ transformer stores and dissipates nothing.
 :::{present}
 $N_1 = 600$, $N_2 = 60$, $6\ \Omega$ load, core area $6\ \text{cm}^2$:
 
-$$\begin{aligned} V_2 &= 12\ \text{V}, \quad I_2 = 2\ \text{A}, \quad I_1 = 0.2\ \text{A}, \quad P = 24\ \text{W} \\ \Phi_\text{pk} &= \frac{V_\text{1,pk}}{N_1\omega} = \frac{169.7}{(600)(377)} = 0.750\ \text{mWb} \\ B_\text{pk} &= \Phi_\text{pk}/A = 1.25\ \text{T} \end{aligned}$$
+$$\begin{aligned} V_2 &= 12\ \text{V}, \quad I_2 = 2\ \text{A} \\ I_1 &= 0.2\ \text{A}, \quad P = 24\ \text{W} \\ \Phi_\text{pk} &= \frac{V_\text{1,pk}}{N_1\omega} = \frac{169.7}{(600)(377)} \\ &= 0.750\ \text{mWb} \\ B_\text{pk} &= \Phi_\text{pk}/A = 1.25\ \text{T} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — sizing a power transformer
@@ -378,8 +347,10 @@ $\Phi = (V_\text{1,pk}/N_1\omega)\sin\omega t$, so the peak flux is
 $V_\text{1,pk}/(N_1\omega)$. The peak line voltage is
 $120\sqrt{2} = 169.7$ V and $\omega = 2\pi(60) = 377$ rad/s, so
 $\Phi_\text{pk} = 0.750$ mWb. Through a core of area $6\ \text{cm}^2$, the
-peak flux density is $1.25$ T. Silicon-steel cores saturate near $1.5$ to
-$1.7$ T, above which $\mu$ falls and the ideal model fails. A $4\ \text{cm}^2$
+peak flux density is $1.25$ T. Silicon-steel cores **saturate** near $1.5$
+to $1.7$ T: by then the field has lined up nearly all of the iron's atomic
+magnetic moments (Lesson 31), so more $H$ adds little $B$, $\mu$ falls, and
+the ideal model fails. A $4\ \text{cm}^2$
 core would need $1.88$ T, which is why the design uses the larger core or more
 primary turns. The flux does not depend on the load, because $v_1$ alone sets
 it.
@@ -416,8 +387,8 @@ it.
 - **Lesson 36**: its solutions, including waves in lossy material.
 :::
 
-Today we collected Maxwell's equations, derived the point forms of the two
-that change with time, and showed that the set conserves charge. The field
+Today we collected Maxwell's equations in integral and point form and saw
+that the set conserves charge. The field
 pair we checked was a wave traveling along $z$ at
 $\omega/\beta = 1/\sqrt{\mu\epsilon}$, and we found it by guessing. Lesson 35
 removes the guess: in a region with no charge or current, it writes the

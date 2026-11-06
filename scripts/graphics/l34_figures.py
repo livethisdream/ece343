@@ -9,6 +9,8 @@
                          the loop, which lags B by a quarter period
     L34-transformer.svg  a closed core with two windings, N1 and N2 turns, the
                          core flux Φ, and the terminal voltages and currents
+    L34-equations.svg    four panels, one per law: D leaving a charge, closed
+                         B lines, E circling a growing B, H circling a current
 
 Labels are plain Unicode (see CLAUDE.md); the lesson text does the explaining.
 
@@ -210,8 +212,65 @@ def transformer():
     save(fig, "L34-transformer.svg")
 
 
+def circle_arrows(ax, r, color, ccw=True, n=4, lw=1.8):
+    """A circle of radius r about the origin with n arrowheads along it."""
+    th = np.linspace(0, 2 * np.pi, 300)
+    ax.plot(r * np.cos(th), r * np.sin(th), color=color, lw=lw)
+    for k in range(n):
+        a = 2 * np.pi * k / n + np.pi / 4
+        d = 0.08 if ccw else -0.08
+        arrow(ax, (r * np.cos(a), r * np.sin(a)), (r * np.cos(a + d), r * np.sin(a + d)),
+              color=color, lw=lw, ms=13)
+
+
+def equations():
+    """One panel per law; the page states each equation and says what it means."""
+    fig, axs = plt.subplots(2, 2, figsize=(6.6, 6.0))
+    titles = ["Gauss's law", "Gauss's law for magnetism", "Faraday's law", "Ampere–Maxwell law"]
+    for ax, t in zip(axs.flat, titles):
+        ax.set_xlim(-1.35, 1.35); ax.set_ylim(-1.15, 1.25)
+        ax.set_aspect("equal"); ax.axis("off")
+        ax.set_title(t, fontsize=16, color=INK, pad=4)
+    # 1: D leaves a positive charge
+    a = axs[0, 0]
+    for k in range(8):
+        th = 2 * np.pi * k / 8
+        arrow(a, (0.28 * np.cos(th), 0.28 * np.sin(th)), (1.1 * np.cos(th), 1.1 * np.sin(th)),
+              color=BLUE, lw=1.8, ms=13)
+    a.add_patch(plt.Circle((0, 0), 0.2, color=RED))
+    a.text(0, 0, "+", fontsize=18, color="white", ha="center", va="center", fontweight="bold")
+    a.text(0.75, 1.05, "D", fontsize=17, color=BLUE, fontweight="bold", ha="center")
+    # 2: closed B lines around a current loop seen edge-on: out at left, in at right
+    a = axs[0, 1]
+    th = np.linspace(0, 2 * np.pi, 300)
+    for cx in (-0.6, 0.6):
+        for r in (0.28, 0.55):
+            a.plot(cx + r * np.cos(th), r * 1.25 * np.sin(th), color=BLUE, lw=1.6)
+            xi = cx - np.sign(cx) * r           # the side of each loop facing the center
+            arrow(a, (xi, -0.06), (xi, 0.08), color=BLUE, lw=1.6, ms=12)
+    a.text(-0.6, 0.0, "⊙", fontsize=15, color=AMBER, ha="center", va="center")
+    a.text(0.6, 0.0, "⊗", fontsize=15, color=AMBER, ha="center", va="center")
+    a.text(1.05, 1.0, "B", fontsize=17, color=BLUE, fontweight="bold", ha="center")
+    # 3: E circles a B that points out of the page and grows
+    a = axs[1, 0]
+    for (x, y) in [(0, 0), (0.32, 0.2), (-0.32, 0.2), (0.32, -0.2), (-0.32, -0.2)]:
+        a.text(x, y, "⊙", fontsize=15, color=BLUE, ha="center", va="center")
+    a.text(0, -0.55, "B growing", fontsize=15, color=BLUE, ha="center")
+    circle_arrows(a, 0.95, AMBER, ccw=False)
+    a.text(0.95, 0.95, "E", fontsize=17, color=AMBER, fontweight="bold", ha="center")
+    # 4: H circles a current (or a changing D) out of the page
+    a = axs[1, 1]
+    a.text(0, 0, "⊙", fontsize=22, color=RED, ha="center", va="center")
+    a.text(0, -0.45, "J or ∂D/∂t", fontsize=15, color=RED, ha="center")
+    circle_arrows(a, 0.95, NAVY, ccw=True)
+    a.text(0.95, 0.95, "H", fontsize=17, color=NAVY, fontweight="bold", ha="center")
+    fig.tight_layout()
+    save(fig, "L34-equations.svg")
+
+
 if __name__ == "__main__":
     loop()
     ramp()
     sine()
     transformer()
+    equations()

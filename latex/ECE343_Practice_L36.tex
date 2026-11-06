@@ -1,6 +1,6 @@
 % !TEX root =./ECE343_Practice_main.tex
 %
-% L36 practice set (Maxwell's Equations in a Lossless, Source-Free Region II):
+% L36 practice set (Plane-Wave Solutions and Lossy Media):
 % the 1D solution of the Helmholtz equation, the complex permittivity and the
 % loss tangent, the exact and limiting attenuation constants, and skin depth.
 
@@ -73,16 +73,13 @@ at $z = 0$.
 	We keep the root with $\alpha^2 > 0$, and $\alpha$ is its positive square root.
 	\end{solution}
 
-	\part Wet earth has $\sigma = 0.01$ S/m and $\epsilon_r = 10$. Find
-	$\sigma/\omega\epsilon$ at $1\ \mhz$ and at $1\ \ghz$, and say which limit, if
-	either, applies at each.
-	\begin{solution}[1.1in]
-	\eq{
-		1\ \mhz: \quad \frac{\sigma}{\omega\epsilon} &= \frac{0.01}{2\pi\times10^{6}\times10\times8.854\times10^{-12}} = 18.0 \\
-		1\ \ghz: \quad \frac{\sigma}{\omega\epsilon} &= 0.0180
-	}
-	At $1\ \mhz$ the earth is close to a good conductor; at $1\ \ghz$ it is a
-	low-loss dielectric.
+	\part Lesson 33's practice set found that wet soil, with $\sigma = 0.01$ S/m and
+	$\epsilon_r = 10$, has $\sigma/(\omega\epsilon) = 18.0$ at $1\ \mhz$ and $0.0180$
+	at $1\ \ghz$. Say which limit, if either, applies at each frequency, and why.
+	\begin{solution}[0.9in]
+	At $1\ \mhz$ the ratio is well above one, so the soil is close to a good
+	conductor. At $1\ \ghz$ the ratio is well below one, so the soil is a low-loss
+	dielectric.
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}

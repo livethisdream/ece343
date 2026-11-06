@@ -7,9 +7,14 @@
                          along y, and the direction of travel
     L37-polarization.svg the path the tip of E traces in the transverse plane
                          for a linear, a circular, and an elliptical wave
+    L37-polarization-phone.svg  the same three paths on a smaller canvas with
+                         larger labels, served to phones by a <picture> source
     L37-handedness.svg   right- and left-hand circular polarization for a wave
                          traveling out of the page, with the tip's position at
                          t = 0 and t = T/4
+    L37-ellipse.svg      the elliptical example (unit amplitudes, phase difference
+                         135 degrees): the tip at t = 0, T/4, T/2, 3T/4, the sense of
+                         rotation, and the two semi-axes
 
 Labels are plain Unicode (see CLAUDE.md); the lesson text does the explaining.
 
@@ -183,13 +188,71 @@ def direction_marks(ax, x, y, color, n=(0.32, 0.57)):
                                     shrinkA=0, shrinkB=0), zorder=6)
 
 
+POL_CASES = [("linear", 0.6 * np.sqrt(2), 0.6 * np.sqrt(2), 0.0),     # tilted 45°
+             ("circular", 1.0, 1.0, -np.pi / 2),
+             ("elliptical", 1.0, 1.0, 3 * np.pi / 4)]
+
+
+def polarization_phone():
+    """The three paths on a small canvas, so a 343 px phone column shows the labels large."""
+    fig, axs = plt.subplots(1, 3, figsize=(6.0, 2.45))
+    t = np.linspace(0, 2 * np.pi, 400)
+    for ax, (name, a, b, d) in zip(axs, POL_CASES):
+        blank(ax, (-1.6, 1.6), (-1.75, 1.75))
+        r = 1.35
+        arrow(ax, -r, 0, r, 0, color=GRAY, lw=1.2, ms=11, z=1)
+        arrow(ax, 0, -r, 0, r, color=GRAY, lw=1.2, ms=11, z=1)
+        lab(ax, r + 0.1, -0.25, "x", size=17, color=GRAY)
+        lab(ax, -0.28, r + 0.06, "y", size=17, color=GRAY)
+        out_of_page(ax, 0, 0, r=0.12, color=NAVY)
+        x, y = a * np.cos(t), b * np.cos(t + d)
+        ax.plot(x, y, color=ECOL, lw=3.0, zorder=4)
+        if name != "linear":
+            direction_marks(ax, x, y, ECOL)
+        else:
+            ax.plot([x[0], -x[0]], [y[0], -y[0]], "o", color=ECOL, ms=6)
+        ax.text(0, -1.72, name, ha="center", va="center", fontsize=17, color=INK)
+    save(fig, "L37-polarization-phone.svg")
+
+
+def ellipse():
+    """The elliptical example: E = x cos(wt - 90°) + y cos(wt + 45°)."""
+    fig, ax = plt.subplots(figsize=(4.8, 4.8))
+    blank(ax, (-1.75, 1.75), (-1.75, 1.75))
+    r = 1.55
+    arrow(ax, -r, 0, r, 0, color=GRAY, lw=1.0, ms=9, z=1)
+    arrow(ax, 0, -r, 0, r, color=GRAY, lw=1.0, ms=9, z=1)
+    lab(ax, r + 0.02, -0.17, "E", "x", size=14, color=GRAY)
+    lab(ax, -0.3, r + 0.02, "E", "y", size=14, color=GRAY)
+    out_of_page(ax, 0, 0, r=0.09, color=NAVY)
+    t = np.linspace(0, 2 * np.pi, 400)
+    x, y = np.sin(t), np.cos(t + np.pi / 4)
+    ax.plot(x, y, color=ECOL, lw=2.6, zorder=4)
+    direction_marks(ax, x, y, ECOL, n=(0.15, 0.62))
+    # the semi-axes: major along y = -x (1.31), minor along y = x (0.54)
+    amaj, amin = np.sqrt(1 + np.sqrt(0.5)), np.sqrt(1 - np.sqrt(0.5))
+    c = np.sqrt(0.5)
+    ax.plot([0, -amaj * c], [0, amaj * c], color=AMBER, lw=1.8, ls="--", zorder=3)
+    ax.plot([0, amin * c], [0, amin * c], color=GREEN, lw=1.8, ls="--", zorder=3)
+    ax.text(-amaj * c * 0.55 - 0.12, amaj * c * 0.55 - 0.05, "1.31", color=AMBER, fontsize=13,
+            ha="right", va="center")
+    ax.text(amin * c + 0.14, amin * c + 0.0, "0.54", color=GREEN, fontsize=13,
+            ha="left", va="bottom")
+    # the four table points
+    pts = [(0, "t = 0", "left", (0.1, 0.12)), (np.pi / 2, "T/4", "left", (0.1, -0.1)),
+           (np.pi, "T/2", "right", (-0.1, -0.14)), (3 * np.pi / 2, "3T/4", "right", (-0.1, 0.1))]
+    for tt, txt, ha, (ox, oy) in pts:
+        px, py = np.sin(tt), np.cos(tt + np.pi / 4)
+        ax.plot([px], [py], "o", color=ECOL, ms=8, zorder=7, mec="white", mew=1.2)
+        ax.text(px + ox, py + oy, txt, fontsize=13, color=ECOL, ha=ha, va="center",
+                fontstyle="italic")
+    save(fig, "L37-ellipse.svg")
+
+
 def polarization():
     fig, axs = plt.subplots(1, 3, figsize=(9.6, 3.6))
     t = np.linspace(0, 2 * np.pi, 400)
-    cases = [("linear", 0.6 * np.sqrt(2), 0.6 * np.sqrt(2), 0.0),     # tilted 45°
-             ("circular", 1.0, 1.0, -np.pi / 2),
-             ("elliptical", 1.0, 1.0, 3 * np.pi / 4)]
-    for ax, (name, a, b, d) in zip(axs, cases):
+    for ax, (name, a, b, d) in zip(axs, POL_CASES):
         trace_axes(ax)
         x, y = a * np.cos(t), b * np.cos(t + d)
         ax.plot(x, y, color=ECOL, lw=2.6, zorder=4)
@@ -231,4 +294,6 @@ if __name__ == "__main__":
     wavefronts()
     fields()
     polarization()
+    polarization_phone()
     handedness()
+    ellipse()

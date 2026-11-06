@@ -133,13 +133,13 @@ def drift():
 
 
 # ---------------------------------------------------------------------------
-MATERIALS = [            # S/m, the Spring 2025 table
+MATERIALS = [            # S/m, the Spring 2025 table; seawater at the course value (L2)
     ("copper", 5.8e7),
     ("gold", 4.4e7),
     ("aluminum", 3.7e7),
     ("iron", 1.0e7),
     ("carbon", 1.3e5),
-    ("seawater", 5.0),
+    ("seawater", 4.0),
     ("tap water", 1.0e-2),
     ("distilled water", 6.0e-6),
     ("dry soil", 1.0e-4),

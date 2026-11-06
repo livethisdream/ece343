@@ -62,8 +62,7 @@ the electric field around a loop.
 <img src="../../viz/img/L33-lenz.svg"
      alt="A bar magnet with its north pole facing a ring. Approaching, the magnet's field through the ring grows and the ring's induced current makes a field pointing back toward the magnet. Receding, the induced field points the same way as the magnet's field"
      style="max-width: 640px; width: 100%; display: block; margin: 0 auto;">
-:::
-:::{present}
+
 - A changing flux through a loop drives a current in it.
 - The induced current's field opposes the **change** in flux.
 :::
@@ -146,7 +145,7 @@ $\mathbf{B} = \hat{\mathbf{z}}\ B_0\cos\omega t$ through a loop of area $A$ in t
 
 $$\begin{aligned} \Phi &= B_0 A\cos\omega t \\ \oint_C \mathbf{E}\cdot d\mathbf{l} &= -\frac{d\Phi}{dt} = \omega B_0 A\sin\omega t \end{aligned}$$
 
-$a = 5$ cm, $B_0 = 1$ mT, 60 Hz: $2.96$ mV per turn, $0.296$ V for 100 turns.
+A 5 cm loop in 1 mT at 60 Hz gives $2.96$ mV per turn, and 100 turns give $0.296$ V.
 :::
 
 The simplest case holds the loop still and lets the field change. A uniform
@@ -171,14 +170,17 @@ secondary winding produces its voltage, which Lesson 34 takes up.
      style="max-width: 380px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \mathbf{F} &= q\mathbf{v}\times\mathbf{B} = q\ vB\ \hat{\mathbf{y}} \\ \oint_C \frac{\mathbf{F}}{q}\cdot d\mathbf{l} &= vB\ell = \frac{d}{dt}\left(B\ell x\right) \end{aligned}$$
+$$\begin{aligned} \mathbf{F} &= q\mathbf{v}\times\mathbf{B} \\ &= q\ vB\ \hat{\mathbf{y}} \\ \oint_C \frac{\mathbf{F}}{q}\cdot d\mathbf{l} &= vB\ell \\ &= \frac{d}{dt}\left(B\ell x\right) \end{aligned}$$
 :::
 
 The flux can also change because the loop moves. A conducting bar slides at
 speed $v$ along two rails a distance $\ell$ apart, closed at the left end, in
 a uniform field $\mathbf{B} = -\hat{\mathbf{z}}\ B$ into the page. Each
 charge in the bar moves with it, and Lesson 28's magnetic force on a moving
-charge gives $q\mathbf{v}\times\mathbf{B} = q\ vB\ (\hat{\mathbf{x}}\times(-\hat{\mathbf{z}})) = q\ vB\ \hat{\mathbf{y}}$,
+charge gives
+
+$$\begin{aligned} q\mathbf{v}\times\mathbf{B} &= q\ vB\ \left(\hat{\mathbf{x}}\times(-\hat{\mathbf{z}})\right) \\ &= q\ vB\ \hat{\mathbf{y}}, \end{aligned}$$
+
 up the bar. Only the bar moves, so only the bar contributes, and the integral of the
 force per unit charge around the loop, counterclockwise, is $vB\ell$. That is the EMF,
 and it drives the current counterclockwise, up the bar.
@@ -214,17 +216,21 @@ previous frame.
 
 ::::{frame} The Telegrapher's L′ Term
 :::{present}
-<img src="../../viz/img/L30-coax-flux.svg"
-     alt="A long section of a coaxial line with current one way in the inner conductor and back in the shield, and a rectangle of length l between the conductors that the magnetic flux crosses"
-     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;">
+<img src="../../viz/img/L33-coax-strip.svg"
+     alt="A section of coaxial line in side view: current i to the right in the inner conductor and back in the shield, and a strip of length delta z between them. The path C runs counterclockwise around the strip: along the inner conductor from z to z plus delta z, across to the shield, back along the shield, and across to the inner conductor. The two short sides carry the voltages v of z and v of z plus delta z, and the strip's normal phi-hat points out of the page, along B"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
 $$\begin{aligned} \oint_C \mathbf{E}\cdot d\mathbf{l} &= v(z+\Delta z) - v(z) \\ &= -\frac{\partial}{\partial t}\left(L'\Delta z\ i\right) \\ -\frac{\partial v}{\partial z} &= L'\frac{\partial i}{\partial t} \end{aligned}$$
 :::
 
-Lesson 30 found the inductance per meter $L'$ of a coaxial line from the flux
-between its conductors, and Faraday's law turns that flux into a voltage. We
-take the strip of the figure, of length $\Delta z$, and its edge $C$: out
+Lesson 30 defined inductance as flux per amp, $\Phi = Li$, and Faraday's law
+turns that flux into a voltage. For a lumped inductor, a changing current
+changes $\Phi$, and the EMF it induces appears across the terminals as
+$v = L\ di/dt$, the circuit law; for a coil of $N$ turns, $\Phi$ counts the
+flux linked by all the turns. A strip of coaxial line is the same statement
+per unit length, with the inductance per meter $L'$ of Lesson 30. We take the
+strip of the figure, of length $\Delta z$, and its edge $C$: out
 along the inner conductor from $z$ to $z+\Delta z$, across to the shield,
 back along the shield, and across to the inner conductor. With this direction
 the right-hand rule makes the strip's normal $\hat{\boldsymbol{\phi}}$, the
@@ -252,10 +258,10 @@ surface integral on the left into a volume integral of $\nabla\cdot\mathbf{J}$,
 and with the volume held fixed, the time derivative moves inside the integral
 on the right. The equality holds for every volume, so the integrands are
 equal. This **continuity equation** says that wherever current converges,
-charge piles up, and wherever it diverges, charge drains away.
+charge accumulates, and wherever it diverges, the charge decreases.
 ::::
 
-::::{frame} Ampere's Law Fails for a Charging Capacitor
+::::{frame} Ampere's Law and a Charging Capacitor
 :::{present}
 <img src="../../viz/img/L33-capacitor.svg"
      alt="A wire carrying current i into a parallel-plate capacitor. A closed path C circles the wire. The wire crosses a flat surface S1 inside C; a bag-shaped surface S2 with the same edge passes between the plates, where only the growing field D is present"
@@ -283,16 +289,22 @@ plate inside that volume grows.
 
 ::::{frame} The Displacement Current
 :::{present}
+<img src="../../viz/img/L33-displacement.svg"
+     alt="The charging capacitor again: the conduction current i crosses the flat surface S1 in the wire, and the displacement current, the growing D between the plates, crosses the bag S2. The magnetic field H circles the path C around the wire, and both surfaces carry the same current i"
+     style="max-width: 480px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
 $$\begin{aligned} \nabla\cdot\mathbf{J} &= -\frac{\partial\rho_v}{\partial t} \\ &= -\frac{\partial}{\partial t}\left(\nabla\cdot\mathbf{D}\right) \\ \nabla\cdot\left(\mathbf{J} + \frac{\partial\mathbf{D}}{\partial t}\right) &= 0 \\ \nabla\times\mathbf{H} &= \mathbf{J} + \frac{\partial\mathbf{D}}{\partial t} \end{aligned}$$
 :::
 
-The repair comes from Gauss's law. Lesson 21 gave $\rho_v = \nabla\cdot\mathbf{D}$,
+Gauss's law supplies the missing term. Lesson 21 gave $\rho_v = \nabla\cdot\mathbf{D}$,
 so the continuity equation becomes a statement that the sum of
 $\mathbf{J}$ and $\partial\mathbf{D}/\partial t$ has zero divergence, with
 the time derivative and the divergence taken in either order. That sum can
 be the curl of $\mathbf{H}$ without contradiction. James Clerk Maxwell added
 the term and called $\partial\mathbf{D}/\partial t$ the
-**displacement current density**, in A/m². The divergence argument shows
+**displacement current density**, in A/m², and the curl equation with it is
+the **Ampere–Maxwell law**. The divergence argument shows
 that continuity requires the term, and Lesson 35 shows that, with it, the equations
 predict a wave that travels at the speed of light, which experiments
 confirm. In integral form, through Stokes' theorem,
@@ -302,14 +314,16 @@ $$\oint_C \mathbf{H}\cdot d\mathbf{l} = \int_S \mathbf{J}\cdot d\mathbf{s} + \fr
 for a surface that does not move. For the capacitor, the plates carry charge
 $Q$ on area $A$, and Lesson 25 gave $D = \rho_s = Q/A$ between them, so the
 displacement current through $S_2$ is $A\ d(Q/A)/dt = dQ/dt = i$. Both
-surfaces now give the same circulation.
+surfaces now give the same circulation, as the figure shows: the conduction
+current crosses $S_1$, and the same current, as displacement current,
+crosses $S_2$.
 ::::
 
 ::::{frame} Worked Example: Displacement Current in a Capacitor
 :::{present}
 Air gap, $A = 10\ \text{cm}^2$, $d = 1$ mm, $v = 10\sin(2\pi \times 10^6\ t)$ V:
 
-$$\begin{aligned} J_d &= \epsilon_0\frac{\partial E}{\partial t} = \frac{\epsilon_0\ \omega V_0}{d}\cos\omega t \\ &= 0.556\cos\omega t\ \ \text{A/m}^2 \\ i_d &= J_d A = 0.556\cos\omega t\ \ \text{mA} \end{aligned}$$
+$$\begin{aligned} J_d &= \epsilon_0\frac{\partial E}{\partial t} \\ &= \frac{\epsilon_0\ \omega V_0}{d}\cos\omega t \\ &= 0.556\cos\omega t\ \ \text{A/m}^2 \\ i_d &= J_d A = 0.556\cos\omega t\ \ \text{mA} \end{aligned}$$
 
 The wire carries the same current, $C\ dv/dt$, with $C = 8.85$ pF.
 :::
@@ -322,9 +336,10 @@ $v = 10\sin\omega t$ V. Ignoring fringing, the field between the plates is
 uniform, $E = v/d$, with amplitude $E_0 = 10/10^{-3} = 10^4$ V/m. The
 displacement current density is
 
-$$J_d = \epsilon_0\frac{\partial E}{\partial t} = \frac{\epsilon_0\ \omega V_0}{d}\cos\omega t = \frac{8.854\times10^{-12} \times 2\pi\times10^{6} \times 10}{10^{-3}}\cos\omega t = 0.556\cos\omega t\ \ \text{A/m}^2$$
+$$\begin{aligned} J_d &= \epsilon_0\frac{\partial E}{\partial t} = \epsilon_0\omega E_0\cos\omega t \\ \epsilon_0\omega E_0 &= 8.854\times10^{-12} \cdot 2\pi\times10^{6} \cdot 10^{4} \\ &= 0.556\ \text{A/m}^2 \end{aligned}$$
 
-Over the plate area, the displacement current is $0.556$ mA in amplitude.
+The displacement current density is $0.556\cos\omega t$ A/m², and over the
+plate area the displacement current is $0.556$ mA in amplitude.
 The capacitance from Lesson 25 is $C = \epsilon_0 A/d = 8.85$ pF, and the
 current in the wire is $C\ dv/dt = \omega C V_0\cos\omega t$, with amplitude
 $2\pi \times 10^6 \times 8.85 \times 10^{-12} \times 10 = 0.556$ mA. The
@@ -340,8 +355,8 @@ For $E = E_0\cos\omega t$ in a material with $\sigma$ and $\epsilon$, the amplit
 | Material | Frequency | $\sigma/(\omega\epsilon)$ |
 | :-- | :-- | :-- |
 | Copper | 100 MHz | $1.0\times10^{10}$ |
-| Seawater | 1 MHz | $1.1\times10^{3}$ |
-| Seawater | 1 GHz | $1.1$ |
+| Seawater | 1 MHz | $8.9\times10^{2}$ |
+| Seawater | 1 GHz | $0.89$ |
 | RG-58 polyethylene | 100 MHz | $2\times10^{-4}$ |
 :::
 
@@ -353,9 +368,9 @@ amplitudes compare as $\sigma/(\omega\epsilon)$, the ratio Lesson 27 used to
 give its conductor and insulator thresholds a meaning. In copper at 100 MHz,
 conduction exceeds displacement by ten orders of magnitude, so copper is a
 good conductor at every frequency this course uses. Seawater, with
-$\sigma = 5$ S/m and $\epsilon_r = 81$, is a good conductor at 1 MHz and
+$\sigma = 4$ S/m and $\epsilon_r = 81$, is a good conductor at 1 MHz and
 nearer an equal mix at 1 GHz; the two currents are equal at
-$f = \sigma/(2\pi\epsilon) = 1.1$ GHz. The polyethylene in RG-58 has the
+$f = \sigma/(2\pi\epsilon) = 0.89$ GHz. The polyethylene in RG-58 has the
 effective conductivity $\omega\epsilon\tan\delta$ that Lesson 27 derived from
 its loss, so its ratio is the loss tangent of Lesson 5, $2 \times 10^{-4}$:
 the polyethylene is a good insulator, and almost all of its current is
@@ -364,7 +379,7 @@ displacement current.
 
 ::::{frame} Relaxation Time
 :::{present}
-$$\begin{aligned} -\frac{\partial\rho_v}{\partial t} &= \nabla\cdot\mathbf{J} = \nabla\cdot\left(\sigma\mathbf{E}\right) \\ &= \frac{\sigma}{\epsilon}\nabla\cdot\mathbf{D} = \frac{\sigma}{\epsilon}\rho_v \\ \rho_v(t) &= \rho_0\ e^{-t/\tau}, \qquad \tau = \frac{\epsilon}{\sigma} \end{aligned}$$
+$$\begin{aligned} -\frac{\partial\rho_v}{\partial t} &= \nabla\cdot\mathbf{J} = \nabla\cdot\left(\sigma\mathbf{E}\right) \\ &= \frac{\sigma}{\epsilon}\nabla\cdot\mathbf{D} = \frac{\sigma}{\epsilon}\rho_v \\ \rho_v(t) &= \rho_0\ e^{-t/\tau_r} \\ \tau_r &= \frac{\epsilon}{\sigma} \end{aligned}$$
 :::
 :::{present}
 <img src="../../viz/img/L33-relaxation.svg"
@@ -379,36 +394,38 @@ $\mathbf{D} = \epsilon\mathbf{E}$, so the divergence of $\mathbf{J}$ is
 $\sigma/\epsilon$ times the divergence of $\mathbf{D}$, which Gauss's law
 makes $\rho_v$. The continuity equation then says that the charge density at
 each point decreases at a rate proportional to itself. The solution is an
-exponential decay with time constant $\tau = \epsilon/\sigma$, the
-**relaxation time**: after one $\tau$, 37% of the charge remains, and after
-$4\tau$, 2%. The charge does not vanish; the current carries it to the
+exponential decay with time constant $\tau_r = \epsilon/\sigma$, the
+**relaxation time**: after one $\tau_r$, 37% of the charge remains, and after
+$4\tau_r$, 2%. The subscript keeps it apart from the transmission coefficient
+$\tau$ of Lessons 6 and 38. The charge does not vanish; the current carries it to the
 material's surface, where it stays. This is why Lesson 24 could put the free
 charge of a conductor on its surface. The ratio of the previous frame is
-$\sigma/(\omega\epsilon) = 1/(\omega\tau)$, so a material behaves as a good
+$\sigma/(\omega\epsilon) = 1/(\omega\tau_r)$, so a material behaves as a good
 conductor at frequencies whose period is much longer than its relaxation
 time.
 ::::
 
 ::::{frame} Relaxation Times of Real Materials
 :::{present}
-| Material | $\sigma$ (S/m) | $\epsilon_r$ | $\tau = \epsilon/\sigma$ |
+| Material | $\sigma$ (S/m) | $\epsilon_r$ | $\tau_r = \epsilon/\sigma$ |
 | :-- | :-- | :-- | :-- |
 | Copper | $5.8\times10^{7}$ | 1 | $1.5\times10^{-19}$ s |
-| Seawater | $5$ | 81 | $1.4\times10^{-10}$ s |
+| Seawater | $4$ | 81 | $1.8\times10^{-10}$ s |
 | Distilled water | $6\times10^{-6}$ | 80 | $1.2\times10^{-4}$ s |
 | Polystyrene | $10^{-17}$ | 2.56 | $2.3\times10^{6}$ s |
 :::
 
 The relaxation time spans 25 orders of magnitude across ordinary materials.
-For copper, $\tau = 8.854\times10^{-12}/(5.8\times10^{7}) = 1.5\times10^{-19}$ s.
-That number comes from Ohm's law, which Lesson 27 derived by averaging over
-collisions that occur every $2.4\times10^{-14}$ s, so Ohm's law does not hold
-on a time scale as short as $10^{-19}$ s, and the true time for copper to
-move its charge to the surface is of the order of its collision time. Either
-way the charge reaches the surface far faster than the period of any signal
-in this course. Seawater relaxes in 0.14 ns, which matches the 1.1 GHz
+For copper, $\tau_r = 8.854\times10^{-12}/(5.8\times10^{7}) = 1.5\times10^{-19}$ s.
+That number comes from Ohm's law, and Ohm's law is an average over many
+collisions: Lesson 27 found that an electron in copper collides every
+$2.4\times10^{-14}$ s, so Ohm's law cannot describe a change faster than one
+collision. The true time for copper to move its charge to the surface is
+therefore of the order of the collision time. Either way the charge reaches
+the surface far faster than the period of any signal in this course.
+Seawater relaxes in 0.18 ns, and $1/(2\pi\tau_r) = 0.89$ GHz is the
 crossover of the previous frame. A charge placed inside polystyrene, with
-$\tau = 2.56 \times 8.854\times10^{-12}/10^{-17} = 2.3\times10^{6}$ s, stays
+$\tau_r = 2.56 \times 8.854\times10^{-12}/10^{-17} = 2.3\times10^{6}$ s, stays
 in place for about 26 days, which is why a charged insulator holds its
 charge.
 ::::
@@ -424,9 +441,9 @@ charge.
 | Moving bar | Force $q\mathbf{v}\times\mathbf{B}$ on the charges | EMF $= vB\ell$ |
 | Telegrapher's $L'$ | Faraday's law on a strip of coax | $-\partial v/\partial z = L'\ \partial i/\partial t$ |
 | Continuity | Conservation of charge | $\nabla\cdot\mathbf{J} = -\partial\rho_v/\partial t$ |
-| Displacement current | Required by continuity and Gauss's law | $\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t$ |
+| Ampere–Maxwell law | Displacement current, required by continuity and Gauss's law | $\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t$ |
 | Conduction vs. displacement | Ratio of amplitudes | $\sigma/(\omega\epsilon)$ |
-| Relaxation time | Free charge decays to the surface | $\tau = \epsilon/\sigma$ |
+| Relaxation time | Free charge decays to the surface | $\tau_r = \epsilon/\sigma$ |
 ::::
 
 ::::{frame} Practice
@@ -446,7 +463,7 @@ Today Faraday's law gave the electric field a curl wherever the magnetic
 field changes, and the displacement current gave the magnetic field a curl
 wherever the electric field changes. Lesson 34 collects Gauss's law, Gauss's
 law for magnetism, Faraday's law, and Ampere's law with the displacement
-current into Maxwell's equations, works examples with them, and explains the
+current, the Ampere–Maxwell law, into Maxwell's equations, works examples with them, and explains the
 transformer. With each changing field producing the other, Lesson 35 shows
 that the two can sustain each other far from any source, as a wave.
 

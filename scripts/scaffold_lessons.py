@@ -202,7 +202,7 @@ LESSONS = [
     (4, 33, "L33-displacement-current", "Faraday's Law and Displacement Current", ["8.1", "8.2"], "8.3, 8.8, 8.9", [], "Induction, the displacement current that completes Ampere's law, and relaxation time.", ""),
     (4, 34, "L34-maxwells-equations", "Maxwell's Equations", ["8.3"], "8.3, 8.8, 8.9", [], "The full set of Maxwell's equations for time-varying fields.", ""),
     (4, 35, "L35-source-free-maxwell-1", "Maxwell's Equations in a Lossless, Source-Free Region I", ["9.1"], "9.1–9.2", [], "Decoupling Maxwell's equations for time-varying fields.", ""),
-    (4, 36, "L36-source-free-maxwell-2", "Maxwell's Equations in a Lossless, Source-Free Region II", ["9.1"], "9.1–9.2", [], "The Helmholtz equation and its solutions, continued.", ""),
+    (4, 36, "L36-source-free-maxwell-2", "Plane-Wave Solutions and Lossy Media", ["9.1"], "9.1–9.2", [], "The Helmholtz equation and its solutions, continued.", ""),
     (4, 37, "L37-plane-waves-polarization", "Uniform Plane Waves and Polarization", ["9.2", "9.3", "9.4"], "9.4–9.6", [], "The uniform plane wave, the fields that make it up, and its polarization.", ""),
     (4, 38, "L38-normal-incidence", "Normal Incidence", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave striking a boundary head-on: reflection and transmission.", ""),
     (4, 39, "L39-oblique-incidence-1", "Oblique Incidence I", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave meeting a boundary at an angle.", ""),

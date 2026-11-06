@@ -75,7 +75,7 @@ Faraday's law, displacement current, and the full set of Maxwell's equations, th
 <div class="module-toc">
   <a class="mt-card mt-lesson" href="L36-source-free-maxwell-2/index.html">
     <span class="mt-kind">Lesson · L36</span>
-    <h4>Maxwell's Equations in a Lossless, Source-Free Region II</h4>
+    <h4>Plane-Wave Solutions and Lossy Media</h4>
     <p>The Helmholtz equation and its solutions, continued. Objective 9.1.</p>
   </a>
   <a class="mt-card mt-lesson" href="L37-plane-waves-polarization/index.html">

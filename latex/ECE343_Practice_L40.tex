@@ -9,7 +9,7 @@ transmission of UPW at a boundary for Transverse Electric (TE) and Transverse
 Magnetic (TM) waves, using boundary conditions.
 \\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
 end (\textbf{None} if you did not collaborate). In every problem the boundary is the
-plane $z = 0$, region 1 is $z < 0$, the plane of incidence is the $xz$ plane, both
+plane $z = 0$, medium 1 is $z < 0$, the plane of incidence is the $xz$ plane, both
 materials are lossless and nonmagnetic, and $\eta_0 = 376.7\ \ohms$. Use Lesson 40's
 TM convention: the reflected electric field's tangential reference direction is the
 same as the incident field's.}
@@ -23,9 +23,9 @@ dielectric with $\epsilon_r = 4$ at $\theta_i = 60^\circ$, so $\theta_t = 25.7^\
 \begin{parts}
 
 	\part Starting from
-	$\tilde{\mathbf{H}}^i = \hat{\mathbf{y}}\ (E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i + z\cos\theta_i\rp}$,
-	$\tilde{\mathbf{H}}^r = -\hat{\mathbf{y}}\ (\Gamma_\text{TM}E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i - z\cos\theta_i\rp}$,
-	and $\tilde{\mathbf{H}}^t = \hat{\mathbf{y}}\ (\tau_\text{TM}E_0/\eta_2)\ e^{-j\beta_2\lp x\sin\theta_t + z\cos\theta_t\rp}$,
+	$\widetilde{\mathbf{H}}_i = \hat{\mathbf{y}}\ (E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i + z\cos\theta_i\rp}$,
+	$\widetilde{\mathbf{H}}_r = -\hat{\mathbf{y}}\ (\Gamma_\text{TM}E_0/\eta_1)\ e^{-j\beta_1\lp x\sin\theta_i - z\cos\theta_i\rp}$,
+	and $\widetilde{\mathbf{H}}_t = \hat{\mathbf{y}}\ (\tau_\text{TM}E_0/\eta_2)\ e^{-j\beta_2\lp x\sin\theta_t + z\cos\theta_t\rp}$,
 	and the electric fields of Lesson 40, apply the tangential boundary conditions
 	and derive $\Gamma_\text{TM}$ and $\tau_\text{TM}$.
 	\begin{solution}[2.4in]
@@ -121,7 +121,8 @@ glass with $n = 1.50$.
 	\begin{solution}[1.1in]
 	Only the TE part reflects, so the reflected light is linearly polarized with its
 	electric field perpendicular to the plane of incidence, parallel to the glass.
-	A filter oriented to pass only the perpendicular direction blocks it.
+	A filter that passes only the field in the plane of incidence (vertical, for a horizontal
+	surface) blocks it, because the reflected field has no component in that direction.
 	\end{solution}
 
 \end{parts}

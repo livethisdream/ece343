@@ -14,8 +14,10 @@
     L40-water.svg       the reflected power fraction of each polarization for
                         light in air striking water (n = 1.33), with the
                         Brewster angle marked
+    L40-critical.svg    three rays in acrylic meeting air: below, at, and past
+                        the critical angle
 
-Region 1 is on top, z points down the page, and y points out of it, as in
+Medium 1 is on top, z points down the page, and y points out of it, as in
 L39's figures. Labels are plain Unicode (see CLAUDE.md).
 
     python3 scripts/graphics/l40_figures.py   ->   book/extras/viz/img/L40-*.svg
@@ -128,7 +130,7 @@ def ray(ax, ang_from_down, sign_up, L, color, inward):
 def tm_fields():
     fig, ax = plt.subplots(figsize=(7.8, 5.0))
     xlim, ylim = (-3.2, 3.2), (-2.4, 2.4)
-    regions(ax, xlim, ylim, "region 1:  η₁", "region 2:  η₂")
+    regions(ax, xlim, ylim, "medium 1:  η₁", "medium 2:  η₂")
     thi = 50
     tht = np.degrees(np.arcsin(np.sin(np.radians(thi)) / N_ACRYLIC))
     L = 2.3
@@ -173,12 +175,27 @@ def brewster():
     ray(ax, thB, +1, L, NAVY, inward=True)
     dr = ray(ax, thB, -1, L, AMBER, inward=False)
     dt = ray(ax, tht, +1, L, GREEN, inward=False)
-    # angles
+    # angles: both labels upright, each beside its own arc
     ax.add_patch(Arc((0, 0), 1.5, 1.5, theta1=90, theta2=90 + thB, color=NAVY, lw=1.4))
-    lab(ax, -1.75, 0.3, "θ", "B", size=14, color=NAVY)
-    ax.text(-1.55, 0.3, f"= {thB:.1f}°", fontsize=13, color=NAVY, ha="left", va="center")
+    # between the incident ray and the normal, above the arc
+    lab(ax, -1.02, 1.02, "θ", "B", size=14, color=NAVY, italic=False)
+    ax.text(-0.8, 1.02, f"= {thB:.1f}°", fontsize=13, color=NAVY, ha="left", va="center")
     ax.add_patch(Arc((0, 0), 1.5, 1.5, theta1=270, theta2=270 + tht, color=GREEN, lw=1.4))
-    ax.text(0.95, -1.05, f"θₜ = {tht:.1f}°", fontsize=12, color=GREEN, ha="left")
+    ax.text(-0.1, -0.95, f"θₜ = {tht:.1f}°", fontsize=13, color=GREEN, ha="right",
+            va="center")
+    # Polarization marks. TE: E out of the page (dot). TM: E in the plane,
+    # perpendicular to the ray (short red arrow). The reflected ray has only TE.
+    def tm_tick(p, d):
+        perp = np.array([d[1], -d[0]])
+        arrow(ax, p[0] - 0.22 * perp[0], p[1] - 0.22 * perp[1],
+              p[0] + 0.22 * perp[0], p[1] + 0.22 * perp[1], color=RED, lw=1.8, head=10, z=8)
+    # the marks sit on the rays
+    di = np.array([np.sin(np.radians(thB)), -np.cos(np.radians(thB))])
+    dot(ax, *(-di * 1.95), r=0.11, color=RED)
+    tm_tick(-di * 1.45, di)
+    dot(ax, *(dr * 1.55), r=0.11, color=RED)
+    dot(ax, *(dt * 1.85), r=0.11, color=RED)
+    tm_tick(dt * 1.3, dt)
     # right angle between reflected and transmitted rays, at the origin
     a = np.arctan2(dr[1], dr[0]); b = np.arctan2(dt[1], dt[0])
     ax.add_patch(Arc((0, 0), 1.0, 1.0, theta1=np.degrees(b), theta2=np.degrees(a),
@@ -187,10 +204,14 @@ def brewster():
     ax.text(0.78 * np.cos(m) + 0.22, 0.78 * np.sin(m), "90°", fontsize=13, color=RED,
             ha="left", va="center", fontweight="bold",
             bbox=dict(fc="white", ec="none", pad=1.0, alpha=0.8))
-    ax.text(dr[0] * 2.25 + 0.05, dr[1] * 2.25 + 0.05, "TE only", fontsize=13, color=AMBER,
+    ax.text(dr[0] * 2.25 + 0.05, dr[1] * 2.25 + 0.05, "TE only", fontsize=14, color=AMBER,
             ha="left", va="bottom", fontweight="bold")
-    ax.text(-dr[0] * 2.25 + 0.1, dr[1] * 2.25 + 0.05, "TE + TM", fontsize=13, color=NAVY,
+    ax.text(-dr[0] * 2.25 + 0.1, dr[1] * 2.25 + 0.05, "TE + TM", fontsize=14, color=NAVY,
             ha="right", va="bottom", fontweight="bold")
+    dot(ax, 1.55, -1.45, r=0.1, color=RED)
+    ax.text(1.75, -1.45, "TE: E out of page", fontsize=12, color=RED, ha="left", va="center")
+    arrow(ax, 1.45, -1.85, 1.65, -1.85, color=RED, lw=1.8, head=10)
+    ax.text(1.75, -1.85, "TM: E in page", fontsize=12, color=RED, ha="left", va="center")
     save(fig, "L40-brewster.svg")
 
 
@@ -215,9 +236,10 @@ def tir():
                  + G * np.exp(-1j * k1 * (X * np.sin(th) - Z * np.cos(th))),
                  tau * np.exp(-1j * kx * X) * np.exp(-alpha * np.clip(Z, 0, None)))
     cmap = LinearSegmentedColormap.from_list("rb", [BLUE, "#ffffff", RED])
-    fig, ax = plt.subplots(figsize=(7.8, 4.9))
+    fig, (ax, axp) = plt.subplots(1, 2, figsize=(8.6, 4.3), sharey=True,
+                                  gridspec_kw=dict(width_ratios=[3.3, 1], wspace=0.06))
     ax.imshow(E.real, extent=(x[0], x[-1], -zz[-1], -zz[0]), origin="upper", cmap=cmap,
-              vmin=-2, vmax=2, aspect="equal", interpolation="bilinear")
+              vmin=-2, vmax=2, aspect="auto", interpolation="bilinear")
     # The image's vertical axis is -z, so region 1 (z < 0) is on top.
     ax.plot([x[0], x[-1]], [0, 0], color=INK, lw=1.6)
     d = 1 / alpha
@@ -229,13 +251,33 @@ def tir():
             bbox=dict(fc="white", ec="none", pad=1.5, alpha=0.85))
     ax.text(x[0] + 0.05, -0.75, "air,  n₂ = 1", fontsize=13, ha="left", va="center",
             bbox=dict(fc="white", ec="none", pad=1.5, alpha=0.85))
+    # the evanescent field travels along +x
+    ax.annotate("", (0.9, -0.42), (-0.3, -0.42),
+                arrowprops=dict(arrowstyle="-|>", color=INK, lw=2.0, mutation_scale=16))
+    ax.text(0.3, -0.52, "travels along x", fontsize=13, ha="center", va="top", color=INK,
+            bbox=dict(fc="white", ec="none", pad=1.0, alpha=0.85))
+    # side panel: amplitude against z
+    zc = np.linspace(zz[0], zz[-1], 400)
+    amp = np.where(zc < 0, np.abs(np.exp(-1j * k1 * zc * np.cos(th)) + G * np.exp(1j * k1 * zc * np.cos(th))),
+                   np.abs(tau) * np.exp(-alpha * np.clip(zc, 0, None)))
+    axp.plot(amp, -zc, color=NAVY, lw=2.2)
+    axp.axhline(0, color=INK, lw=1.6)
+    axp.set_xlim(0, 2.2); axp.set_xticks([0, 1, 2])
+    axp.set_xlabel("|E| / E₀", color=GRAY, fontsize=13)
+    axp.tick_params(colors=GRAY, labelsize=13)
+    axp.text(1.1, -0.45, "e⁻ᵅᶻ", fontsize=14, color=NAVY, ha="left", va="center")
+    for sp in axp.spines.values():
+        sp.set_color("#c7d2e0")
+    ax.set_ylim(-zz[-1], -zz[0])
     ax.set_xticks([-1.5, -1, -0.5, 0, 0.5, 1, 1.5])
     ax.set_yticks([-0.5, 0, 0.5, 1])
     ax.set_yticklabels(["0.5", "0", "−0.5", "−1"])
     ax.set_xticklabels(["−1.5", "−1", "−0.5", "0", "0.5", "1", "1.5"])
-    ax.set_xlabel("x / λ₀", color=GRAY, fontsize=12)
-    ax.set_ylabel("z / λ₀", color=GRAY, fontsize=12)
-    ax.tick_params(colors=GRAY, labelsize=11)
+    ax.set_xticks([-1.5, -0.5, 0.5, 1.5])
+    ax.set_xticklabels(["−1.5", "−0.5", "0.5", "1.5"])
+    ax.set_xlabel("x / λ₀", color=GRAY, fontsize=13)
+    ax.set_ylabel("z / λ₀", color=GRAY, fontsize=13)
+    ax.tick_params(colors=GRAY, labelsize=13)
     for s in ax.spines.values():
         s.set_color("#c7d2e0")
     save(fig, "L40-tir.svg")
@@ -254,25 +296,65 @@ def water():
     ax.plot(th, 100 * Gte ** 2, color=RED, lw=2.6)
     ax.plot(th, 100 * Gtm ** 2, color=BLUE, lw=2.6, ls="--")
     ax.axvline(thB, color=GRAY, lw=1.2, ls=":")
-    ax.text(thB - 1.2, 62, f"Brewster angle, {thB:.1f}°", fontsize=12, color=GRAY, ha="right")
+    ax.text(thB - 1.2, 62, f"Brewster angle, {thB:.1f}°", fontsize=14, color=GRAY, ha="right")
     rte = 100 * np.interp(thB, th, Gte ** 2)
     ax.plot([thB], [rte], "o", color=RED, ms=7)
     ax.annotate(f"{rte:.1f}%", (thB, rte), xytext=(-10, 10), textcoords="offset points",
-                fontsize=12, color=RED, ha="right")
-    ax.text(72, 33, "TE", fontsize=14, color=RED, fontweight="bold")
-    ax.text(80, 8, "TM", fontsize=14, color=BLUE, fontweight="bold")
+                fontsize=14, color=RED, ha="right")
+    ax.text(61, 30, "TE", fontsize=16, color=RED, fontweight="bold")
+    ax.text(80, 8, "TM", fontsize=16, color=BLUE, fontweight="bold")
     ax.set_xlim(0, 90); ax.set_ylim(0, 100)
     ax.set_xticks([0, 15, 30, 45, 60, 75, 90])
     ax.set_xticklabels(["0°", "15°", "30°", "45°", "60°", "75°", "90°"])
-    ax.set_xlabel("angle of incidence  θᵢ", color=GRAY, fontsize=12)
-    ax.set_ylabel("reflected power (%)", color=GRAY, fontsize=12)
+    ax.set_xlabel("angle of incidence  θᵢ", color=GRAY, fontsize=14)
+    ax.set_ylabel("reflected power (%)", color=GRAY, fontsize=14)
     ax.grid(True, color="#e3edf6", lw=1.0)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     for s in ("left", "bottom"):
         ax.spines[s].set_color("#c7d2e0")
-    ax.tick_params(colors=GRAY, labelsize=11)
+    ax.tick_params(colors=GRAY, labelsize=13)
     save(fig, "L40-water.svg")
+
+
+def critical():
+    """Acrylic (top) meeting air (bottom) at 30°, the critical angle, and 50°."""
+    fig, ax = plt.subplots(figsize=(6.4, 4.8))
+    xlim, ylim = (-3.0, 3.0), (-2.2, 2.7)
+    regions(ax, xlim, ylim, "acrylic,  n₁ = 1.49", "air,  n₂ = 1")
+    thc = np.degrees(np.arcsin(1 / N_ACRYLIC))
+    L = 1.95
+    cases = [(30.0, NAVY), (thc, AMBER), (50.0, RED)]
+    for th, col in cases:
+        ray(ax, th, +1, L, col, inward=True)
+        st = N_ACRYLIC * np.sin(np.radians(th))
+        if st < 1 - 1e-9:
+            ray(ax, np.degrees(np.arcsin(st)), +1, L * 0.95, col, inward=False)
+        elif st <= 1 + 1e-9:
+            ax.plot([0, 2.7], [-0.04, -0.04], color=col, lw=2.6)
+            arrow(ax, 0, -0.04, 1.9, -0.04, color=col, lw=2.6, head=15)
+        else:
+            ray(ax, th, -1, L * 0.95, col, inward=False)
+    # angle labels at the start of each incident ray
+    for th, col in cases:
+        a = np.radians(th)
+        p = np.array([-np.sin(a), np.cos(a)]) * (L + 0.05)
+        txt = f"θc = {thc:.1f}°" if col == AMBER else f"{th:.0f}°"
+        if col == NAVY:     # right of its ray, clear of the other two labels
+            ax.text(p[0] + 0.12, p[1], txt, fontsize=14, color=col, ha="left", va="center",
+                    fontweight="bold")
+        elif col == AMBER:
+            ax.text(p[0] - 0.08, p[1] + 0.05, txt, fontsize=14, color=col, ha="right",
+                    va="center", fontweight="bold")
+        else:
+            ax.text(p[0] - 0.08, p[1] - 0.12, txt, fontsize=14, color=col, ha="right",
+                    va="top", fontweight="bold")
+    tt = np.degrees(np.arcsin(N_ACRYLIC * 0.5))
+    ax.text(1.05, -1.9, f"{tt:.1f}°", fontsize=14, color=NAVY, ha="left", va="center", fontweight="bold")
+    ax.text(2.0, 0.22, "along the boundary", fontsize=12, color=AMBER, ha="center", va="bottom")
+    ax.text(1.75, 1.55, "reflected", fontsize=13, color=RED, ha="left", va="center")
+    assert abs(tt - 48.2) < 0.05
+    save(fig, "L40-critical.svg")
 
 
 if __name__ == "__main__":
@@ -280,3 +362,4 @@ if __name__ == "__main__":
     brewster()
     tir()
     water()
+    critical()

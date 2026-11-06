@@ -76,7 +76,7 @@
       <span class="val" id="th-val">45.0°</span>
     </div>
     <label class="tgl"><input type="checkbox" id="phase"><span class="sw"></span><span class="t">Show phase</span></label>
-    <label class="tgl" style="--on:var(--amber)"><input type="checkbox" id="swap"><span class="sw"></span><span class="t">Swap regions</span></label>
+    <label class="tgl" style="--on:var(--amber)"><input type="checkbox" id="swap"><span class="sw"></span><span class="t">Swap media</span></label>
   </div>
 
   <div class="readouts">
@@ -174,7 +174,7 @@ function fit() {
 window.addEventListener('resize', fit);
 
 function drawRays(x0, y0, w, h, m, c) {
-  // panel background: region 1 above, region 2 below
+  // panel background: medium 1 above, medium 2 below
   const cy = y0 + h/2, cx = x0 + w/2;
   ctx.fillStyle = '#f2f7fb'; ctx.fillRect(x0, y0, w, h/2);
   ctx.fillStyle = '#d6e5f2'; ctx.fillRect(x0, cy, w, h/2);
@@ -209,6 +209,9 @@ function drawRays(x0, y0, w, h, m, c) {
   const nx = Math.cos(ti), ny = Math.sin(ti);   // perpendicular to the reflected ray
   line(cx - off*nx, cy - off*ny, rx - off*nx, ry - off*ny, cssVar('--te'), 0.8 + 6*Rte);
   line(cx + off*nx, cy + off*ny, rx + off*nx, ry + off*ny, cssVar('--tm'), 0.8 + 6*Rtm);
+  // tag each reflected stroke at its far end: TE on the upper side, TM on the lower
+  stext(ctx, 'TE', rx - off*nx - 6*nx, ry - off*ny - 6*ny - 4, 11.5, cssVar('--te'), 'right', true);
+  stext(ctx, 'TM', rx + off*nx + 8*nx + 2, ry + off*ny + 8*ny + 2, 11.5, cssVar('--tm'), 'left', true);
   // transmitted, or the evanescent field along the boundary past the critical angle
   if (!c.tir) {
     const tt = c.tt*Math.PI/180;
@@ -227,7 +230,8 @@ function drawRays(x0, y0, w, h, m, c) {
 
 function drawPlot(x0, y0, w, h, m) {
   const showPhase = el('phase').checked;
-  const mL = 44, mR = 10, mT = 14, mB = 34;
+  // room for the tick labels and the rotated axis label, which fs() enlarges on a phone
+  const mL = SCL < 0.9 ? 82 : 58, mR = 10, mT = 14, mB = 34;
   const pX = x0 + mL, pY = y0 + mT, pW = w - mL - mR, pH = h - mT - mB;
   const xFor = t => pX + (t/90)*pW;
   const yMin = showPhase ? -180 : 0, yMax = showPhase ? 180 : 1;
@@ -243,6 +247,10 @@ function drawPlot(x0, y0, w, h, m) {
   ctx.textAlign = 'center'; ctx.textBaseline = 'top';
   for (let t = 30; t <= 90; t += 30) ctx.fillText(t + '°', xFor(t), pY + pH + 4);
   stext(ctx, 'angle of incidence', pX + pW, y0 + h - 8, 11.5, '#3b4651', 'right', false);
+  // vertical axis label: the quantity changes with Show phase
+  ctx.save(); ctx.translate(x0 + 9, pY + pH/2); ctx.rotate(-Math.PI/2);
+  stext(ctx, showPhase ? 'phase of Γ' : '|Γ|', 0, 0, 12, '#3b4651', 'center', true);
+  ctx.restore();
 
   // Brewster and critical angles
   const thB = Math.atan(m.n2/m.n1)*180/Math.PI;
@@ -272,6 +280,12 @@ function drawPlot(x0, y0, w, h, m) {
       prev = v;
     }
     ctx.stroke(); ctx.setLineDash([]);
+  }
+  // curve labels at 70 degrees: TE above its curve, TM below its curve
+  for (const [key, col, dy] of [['te', cssVar('--te'), -10], ['tm', cssVar('--tm'), 12]]) {
+    const g = coeffs(m.n1, m.n2, 70)[key];
+    const v = showPhase ? C.arg(g)*180/Math.PI : C.abs(g);
+    stext(ctx, key.toUpperCase(), xFor(70), Math.min(pY + pH - 8, Math.max(pY + 8, yFor(v) + dy)), 12, col, 'center', true);
   }
   // the current angle
   const c = coeffs(m.n1, m.n2, state.th);

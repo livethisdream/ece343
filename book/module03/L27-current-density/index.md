@@ -239,7 +239,7 @@ $\tau = m\mu_e/e = 2.4 \times 10^{-14}$ s.
 ::::{frame} Conductivity of Common Materials
 :::{present}
 <img src="../../viz/img/L27-conductivity.svg"
-     alt="Horizontal bar chart of conductivity on a logarithmic axis: copper 5.8 times 10 to the 7, gold 4.4 times 10 to the 7, aluminum 3.7 times 10 to the 7, iron 1.0 times 10 to the 7, and carbon 1.3 times 10 to the 5 lie above the good-conductor line at 10 to the 5 siemens per meter; seawater 5, tap water 10 to the minus 2, silicon 4.4 times 10 to the minus 4, dry soil 10 to the minus 4, and distilled water 6 times 10 to the minus 6 lie below it"
+     alt="Horizontal bar chart of conductivity on a logarithmic axis: copper 5.8 times 10 to the 7, gold 4.4 times 10 to the 7, aluminum 3.7 times 10 to the 7, iron 1.0 times 10 to the 7, and carbon 1.3 times 10 to the 5 lie above the good-conductor line at 10 to the 5 siemens per meter; seawater 4, tap water 10 to the minus 2, silicon 4.4 times 10 to the minus 4, dry soil 10 to the minus 4, and distilled water 6 times 10 to the minus 6 lie below it"
      style="max-width: 640px; width: 100%; display: block; margin: 0 auto;">
 
 - A **good conductor** has $\sigma > 10^5$ S/m; a good insulator, $\sigma < 10^{-10}$ S/m.
@@ -344,8 +344,8 @@ current flows within a **skin depth**
 
 $$\delta = \frac{1}{\sqrt{\pi f\mu\sigma}} = \frac{1}{\sqrt{\pi \times 10^8 \times 4\pi \times 10^{-7} \times 5.8 \times 10^7}} = 6.6\ \mu\text{m}$$
 
-for copper at 100 MHz. The course quotes $\delta$ without deriving it: it
-comes from the wave inside a conductor, which needs the time-varying fields of
+for copper at 100 MHz. This lesson quotes $\delta$: it comes from the wave
+inside a conductor, which Lesson 36 derives from the time-varying fields of
 Module 4. Treating the current as a layer of thickness $\delta$ around the
 circumference, the area is $2\pi a\delta$ in place of $\pi a^2$, and
 $\ell/(\sigma A)$ gives $R' = 1/(\sigma\ 2\pi a\delta) = 1.03\ \Omega$/m,

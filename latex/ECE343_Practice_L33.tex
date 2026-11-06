@@ -88,8 +88,8 @@ $2\ \ohms$ resistor closes the rails, and the bar and rails have no resistance.
 	\end{minipage}
 
 	\begin{minipage}[t]{0.58\linewidth}
-		\part The current in the bar feels the magnetic force $I\boldsymbol{\ell}\times\mathbf{B}$
-		of Lesson 28. Find its magnitude and say which way it points.
+		\part The magnetic force $I\boldsymbol{\ell}\times\mathbf{B}$ of Lesson 28 acts on the
+		current in the bar. Find its magnitude and say which way it points.
 		\begin{solution}[1in]
 		\eq{ F = I\ell B = 0.3 \times 0.3 \times 0.5 = 0.045\ \text{N} }
 		The force points against the motion, as Lenz's law requires: the induced current
@@ -218,22 +218,22 @@ $\epsilon_r = 3$. At $t = 0$ a free charge density $\rho_0$ sits inside it.
 	Gauss's law $\nabla\mycdot\mathbf{D} = \rho_v$:
 	\eq{
 		-\dfrac{\partial\rho_v}{\partial t} = \nabla\mycdot\mathbf{J} = \dfrac{\sigma}{\epsilon}\nabla\mycdot\mathbf{D} = \dfrac{\sigma}{\epsilon}\rho_v
-		\quad\Longrightarrow\quad \rho_v = \rho_0\ e^{-t/\tau}, \qquad \tau = \dfrac{\epsilon}{\sigma}
+		\quad\Longrightarrow\quad \rho_v = \rho_0\ e^{-t/\tau_r}, \qquad \tau_r = \dfrac{\epsilon}{\sigma}
 	}
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}
-		\part Find $\tau$, and the time for the charge inside to fall to $1\%$ of $\rho_0$.
+		\part Find the relaxation time $\tau_r$, and the time for the charge inside to fall to $1\%$ of $\rho_0$.
 		\begin{solution}[1.1in]
 		\eq{
-			\tau &= \dfrac{3 \times 8.854\times10^{-12}}{10^{-4}} = 0.266\ \mu\text{s} \\
-			t_{1\%} &= \tau\ln 100 = 4.61\tau = 1.22\ \mu\text{s}
+			\tau_r &= \dfrac{3 \times 8.854\times10^{-12}}{10^{-4}} = 0.266\ \mu\text{s} \\
+			t_{1\%} &= \tau_r\ln 100 = 4.61\tau_r = 1.22\ \mu\text{s}
 		}
 		\end{solution}
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
 		\raggedleft \vspace{12pt}
-		$\tau$ = \ansbox[1.2in]{$0.266\ \mu$s}
+		$\tau_r$ = \ansbox[1.2in]{$0.266\ \mu$s}
 
 		\vspace{4pt}
 		$t_{1\%}$ = \ansbox[1.2in]{$1.22\ \mu$s}

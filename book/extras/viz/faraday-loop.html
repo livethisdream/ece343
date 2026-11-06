@@ -138,7 +138,8 @@ function draw(){
   }
   stext(ctx, 'B out of the page', X(0), top - 8, fs(11), mid, 'left', true);
 
-  const s = state.s, lh = HL*pxPerM*0.9, x0 = X(s - W), x1 = X(s);
+  // the loop stays inside the field band, so its current arrows clear the label above
+  const s = state.s, lh = Math.min(HL*pxPerM*0.9, sceneH*0.78), x0 = X(s - W), x1 = X(s);
   ctx.strokeStyle = ink; ctx.lineWidth = 3;
   ctx.strokeRect(x0, ym - lh/2, x1 - x0, lh);
   // the velocity arrow

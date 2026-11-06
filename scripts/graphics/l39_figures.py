@@ -7,13 +7,19 @@
     L39-phase-match.svg   wavefronts of the incident and transmitted waves
                           meeting the boundary with the same spacing along it,
                           which is phase matching and Snell's law
+    L39-phase-drift.svg   the two sides of the tangential-E condition along the
+                          boundary: equal at x = 0 but drifting apart when the
+                          rates differ, equal everywhere when they match
     L39-te-tm.svg         the TE wave (E out of the page) beside the TM wave
-                          (H out of the page)
+                          (H out of the page); L39-te-tm-phone.svg stacks them
+    L39-te-fields.svg     E and H of the incident, reflected, and transmitted
+                          TE waves, the twin of L40-tm-fields.svg
     L39-gamma-te.svg      Gamma_TE and tau_TE against the angle of incidence,
                           air into acrylic (n = 1.49)
 
-Region 1 is drawn on top and region 2 below, so z points down the page and y,
-by the right-hand rule, points out of it. Labels are plain Unicode (see
+Medium 1 is drawn on top and medium 2 below, so z points down the page and y,
+by the right-hand rule, points out of it. Figures are sized so their labels
+stay at 10.5 px or more on a 390 px phone. Labels are plain Unicode (see
 CLAUDE.md); the lesson text does the explaining.
 
     python3 scripts/graphics/l39_figures.py   ->   book/extras/viz/img/L39-*.svg
@@ -86,8 +92,10 @@ def two_regions(ax, xlim, ylim, top="ε₁, μ₁", bot="ε₂, μ₂"):
     ax.add_patch(Rectangle((xlim[0], 0), xlim[1] - xlim[0], ylim[1], fc=FILL1, ec="none"))
     ax.add_patch(Rectangle((xlim[0], ylim[0]), xlim[1] - xlim[0], -ylim[0], fc=FILL2, ec="none"))
     ax.plot(xlim, [0, 0], color=INK, lw=1.6)
-    ax.text(xlim[0] + 0.15, ylim[1] - 0.28, "region 1:  " + top, fontsize=13, ha="left", va="center")
-    ax.text(xlim[0] + 0.15, ylim[0] + 0.28, "region 2:  " + bot, fontsize=13, ha="left", va="center")
+    ax.text(xlim[0] + 0.15, ylim[1] - 0.3, "medium 1:  " + top, fontsize=15, ha="left", va="center",
+            zorder=9, bbox=dict(fc=FILL1, ec="none", pad=1.5))
+    ax.text(xlim[0] + 0.15, ylim[0] + 0.3, "medium 2:  " + bot, fontsize=15, ha="left", va="center",
+            zorder=9, bbox=dict(fc=FILL2, ec="none", pad=1.5))
 
 
 def out_of_page(ax, x, y, r=0.1, color=RED):
@@ -100,10 +108,10 @@ def axes_key(ax, ox, oy, s=0.5):
     """x to the right, z down the page, y out of the page."""
     arrow(ax, ox, oy, ox + s, oy, color=GRAY, lw=1.4, head=10)
     arrow(ax, ox, oy, ox, oy - s, color=GRAY, lw=1.4, head=10)
-    lab(ax, ox + s + 0.13, oy, "x", size=13, color=GRAY, ha="left")
-    lab(ax, ox, oy - s - 0.16, "z", size=13, color=GRAY)
+    lab(ax, ox + s + 0.13, oy, "x", size=15, color=GRAY, ha="left")
+    lab(ax, ox, oy - s - 0.18, "z", size=15, color=GRAY)
     out_of_page(ax, ox - 0.28, oy + 0.2, r=0.08, color=GRAY)
-    lab(ax, ox - 0.44, oy + 0.2, "y", size=13, color=GRAY, ha="right")
+    lab(ax, ox - 0.44, oy + 0.2, "y", size=15, color=GRAY, ha="right")
 
 
 def angle_arc(ax, center, r, start_deg, end_deg, label, sub, color, lr=None, label_deg=None,
@@ -133,7 +141,7 @@ def rays(ax, thi, tht, L=2.3, Lt=2.1):
 
 
 def geometry():
-    fig, ax = plt.subplots(figsize=(7.6, 5.0))
+    fig, ax = plt.subplots(figsize=(6.2, 4.1))
     xlim, ylim = (-3.3, 3.3), (-2.35, 2.35)
     two_regions(ax, xlim, ylim)
     ax.plot([0, 0], [-2.2, 2.2], color=GRAY, lw=1.1, ls="--")
@@ -141,9 +149,9 @@ def geometry():
     tht = np.degrees(np.arcsin(np.sin(np.radians(thi)) / N_ACRYLIC))
     rays(ax, thi, tht)
     ti, tt = np.radians(thi), np.radians(tht)
-    lab(ax, -1.45 * np.sin(ti) - 0.32, 1.45 * np.cos(ti) + 0.12, "k̂", "i", size=16,
+    lab(ax, -1.45 * np.sin(ti) - 0.5, 1.45 * np.cos(ti) - 0.12, "k̂", "i", size=16,
         color=NAVY, italic=False, bold=True)
-    lab(ax, 1.45 * np.sin(ti) + 0.34, 1.45 * np.cos(ti) + 0.1, "k̂", "r", size=16,
+    lab(ax, 1.45 * np.sin(ti) + 0.52, 1.45 * np.cos(ti) - 0.12, "k̂", "r", size=16,
         color=AMBER, italic=False, bold=True)
     lab(ax, 1.25 * np.sin(tt) + 0.34, -1.25 * np.cos(tt) - 0.05, "k̂", "t", size=16,
         color=GREEN, italic=False, bold=True)
@@ -157,7 +165,7 @@ def geometry():
 def phase_match():
     """Wavefronts: lines of constant phase, one wavelength apart along each ray,
     meet the boundary at the same points from both sides."""
-    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    fig, ax = plt.subplots(figsize=(6.2, 3.95))
     xlim, ylim = (-3.3, 3.3), (-2.2, 2.2)
     two_regions(ax, xlim, ylim, top="n₁ = 1", bot="n₂ = 1.49")
     thi = 50
@@ -192,15 +200,19 @@ def phase_match():
     x0, x1 = xs[3], xs[4]
     ax.annotate("", (x0, 0.2), (x1, 0.2),
                 arrowprops=dict(arrowstyle="<->", color=RED, lw=1.3, shrinkA=0, shrinkB=0))
-    ax.text((x0 + x1) / 2, 0.45, "λ₁ / sin θᵢ  =  λ₂ / sin θₜ", fontsize=13, color=RED,
+    ax.text((x0 + x1) / 2, 0.45, "same spacing along the boundary", fontsize=14, color=RED,
             ha="center", va="center", zorder=8,
             bbox=dict(fc=FILL1, ec="none", pad=2.0))
     save(fig, "L39-phase-match.svg")
 
 
-def te_tm():
-    fig, axs = plt.subplots(1, 2, figsize=(10.4, 4.3))
-    xlim, ylim = (-2.6, 2.6), (-2.0, 2.0)
+def te_tm(phone=False):
+    if phone:
+        fig, axs = plt.subplots(2, 1, figsize=(4.6, 7.0))
+        xlim, ylim = (-2.3, 2.3), (-1.75, 1.95)
+    else:
+        fig, axs = plt.subplots(1, 2, figsize=(10.4, 4.3))
+        xlim, ylim = (-2.6, 2.6), (-2.0, 2.0)
     thi = 50
     tht = np.degrees(np.arcsin(np.sin(np.radians(thi)) / N_ACRYLIC))
     ti, tt = np.radians(thi), np.radians(tht)
@@ -210,7 +222,7 @@ def te_tm():
         ax.add_patch(Rectangle((xlim[0], 0), xlim[1] - xlim[0], ylim[1], fc=FILL1, ec="none"))
         ax.add_patch(Rectangle((xlim[0], ylim[0]), xlim[1] - xlim[0], -ylim[0], fc=FILL2, ec="none"))
         ax.plot(xlim, [0, 0], color=INK, lw=1.6)
-        ax.plot([0, 0], [-1.9, 1.9], color=GRAY, lw=1.0, ls="--")
+        ax.plot([0, 0], [ylim[0] + 0.1, ylim[1] - 0.1], color=GRAY, lw=1.0, ls="--")
         L = 1.9
         p0 = (-L * np.sin(ti), L * np.cos(ti))
         ax.plot([p0[0], 0], [p0[1], 0], color=NAVY, lw=2.0)
@@ -237,7 +249,7 @@ def te_tm():
         ax.text(0, ylim[1] + 0.18, mode + (": E out of the page" if mode == "TE"
                                            else ": H out of the page"),
                 fontsize=15, ha="center", va="bottom", fontweight="bold", color=INK)
-    save(fig, "L39-te-tm.svg")
+    save(fig, "L39-te-tm-phone.svg" if phone else "L39-te-tm.svg")
 
 
 def gamma_te():
@@ -248,31 +260,99 @@ def gamma_te():
     ct = np.sqrt(1 - (n1 * np.sin(t) / n2) ** 2)
     G = (e2 * np.cos(t) - e1 * ct) / (e2 * np.cos(t) + e1 * ct)
     tau = 1 + G
-    fig, ax = plt.subplots(figsize=(7.6, 4.0))
+    fig, ax = plt.subplots(figsize=(5.4, 3.4))
     ax.axhline(0, color="#9fb6cc", lw=1.0)
     ax.plot(th, G, color=RED, lw=2.6)
     ax.plot(th, tau, color=GREEN, lw=2.2, ls="--")
-    lab(ax, 70, -0.33, "Γ", "TE", size=15, color=RED)
-    lab(ax, 70, 0.66, "τ", "TE", size=15, color=GREEN)
+    lab(ax, 68, -0.30, "Γ", "TE", size=17, color=RED)
+    lab(ax, 68, 0.62, "τ", "TE", size=17, color=GREEN)
     g45 = np.interp(45, th, G)
     ax.plot([45], [g45], "o", color=RED, ms=7, zorder=5)
     ax.annotate(f"{g45:.3f} at 45°".replace("-", "−"), (45, g45), xytext=(-12, -18), textcoords="offset points",
-                ha="right", fontsize=12, color=RED)
+                ha="right", fontsize=14, color=RED)
     ax.set_xlim(0, 90); ax.set_ylim(-1.05, 1.05)
-    ax.set_xticks([0, 15, 30, 45, 60, 75, 90])
-    ax.set_xticklabels(["0°", "15°", "30°", "45°", "60°", "75°", "90°"])
-    ax.set_xlabel("angle of incidence  θᵢ", color=GRAY, fontsize=12)
+    ax.set_xticks([0, 30, 60, 90])
+    ax.set_xticklabels(["0°", "30°", "60°", "90°"])
+    ax.set_yticks([-1, -0.5, 0, 0.5, 1])
+    ax.set_yticklabels(["−1", "−0.5", "0", "0.5", "1"])
+    ax.set_xlabel("angle of incidence  θᵢ", color=GRAY, fontsize=14)
     ax.grid(True, color="#e3edf6", lw=1.0)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     for s in ("left", "bottom"):
         ax.spines[s].set_color("#c7d2e0")
-    ax.tick_params(colors=GRAY, labelsize=11)
+    ax.tick_params(colors=GRAY, labelsize=14)
     save(fig, "L39-gamma-te.svg")
+
+
+def mark_dot(ax, x, y, r=0.13, color=RED):
+    """Out of the page."""
+    out_of_page(ax, x, y, r=r, color=color)
+
+
+def te_fields():
+    """E (out of the page, +y) and H = k x E / eta for each TE wave, drawn for
+    Gamma, tau > 0. On the page +x is right and +z is down, so a vector
+    a x + b z is drawn as (a, -b)."""
+    fig, ax = plt.subplots(figsize=(6.2, 4.3))
+    xlim, ylim = (-3.2, 3.2), (-2.4, 2.4)
+    two_regions(ax, xlim, ylim, top="η₁", bot="η₂")
+    ax.plot([0, 0], [-2.25, 2.25], color=GRAY, lw=1.1, ls="--")
+    thi = 50
+    tht = np.degrees(np.arcsin(np.sin(np.radians(thi)) / N_ACRYLIC))
+    rays(ax, thi, tht)
+    ti, tt = np.radians(thi), np.radians(tht)
+    Hi = np.array([-np.cos(ti), -np.sin(ti)])      # -x cos + z sin
+    Hr = np.array([np.cos(ti), -np.sin(ti)])       #  x cos + z sin
+    Ht = np.array([-np.cos(tt), -np.sin(tt)])      # -x cos_t + z sin_t
+    pts = [(np.array([-1.45 * np.sin(ti), 1.45 * np.cos(ti)]), Hi, "i", (0.36, 0.34)),
+           (np.array([1.5 * np.sin(ti), 1.5 * np.cos(ti)]), Hr, "r", (0.36, 0.24)),
+           (np.array([1.35 * np.sin(tt), -1.35 * np.cos(tt)]), Ht, "t", (0.42, 0.05))]
+    for p, h, sub, eoff in pts:
+        mark_dot(ax, p[0], p[1])
+        arrow(ax, p[0], p[1], p[0] + 0.72 * h[0], p[1] + 0.72 * h[1], color=BLUE, lw=2.4, head=15, z=8)
+        lab(ax, p[0] + 0.98 * h[0], p[1] + 0.98 * h[1] - 0.05, "H", sub, size=16, color=BLUE,
+            italic=False, bold=True)
+        lab(ax, p[0] + eoff[0], p[1] + eoff[1], "E", sub, size=16, color=RED,
+            italic=False, bold=True)
+    axes_key(ax, 2.35, 1.95)
+    save(fig, "L39-te-fields.svg")
+
+
+def phase_drift():
+    """Re of each side of the TE tangential-E condition along z = 0, in units
+    of the incident wave's spacing along the boundary, d = lambda_1 / sin(theta_i).
+    Top: the transmitted rate is 1.3 times the incident rate. Bottom: matched."""
+    x = np.linspace(0, 3.0, 600)
+    k1 = 2 * np.pi                      # one cycle per d
+    left = np.cos(k1 * x)               # incident + reflected, (1 + Gamma) normalized to 1
+    fig, axs = plt.subplots(2, 1, figsize=(5.8, 4.6), sharex=True, gridspec_kw=dict(height_ratios=[1.45, 1]))
+    for ax, ratio, title in ((axs[0], 1.3, "rates differ"), (axs[1], 1.0, "rates match")):
+        right = np.cos(ratio * k1 * x)
+        ax.fill_between(x, left, right, color="#f4d7d8" if ratio != 1 else "none", lw=0)
+        ax.plot(x, left, color=NAVY, lw=2.4)
+        ax.plot(x, right, color=GREEN, lw=2.2, ls="--")
+        ax.axhline(0, color="#9fb6cc", lw=0.9)
+        top = 2.75 if ratio != 1 else 1.6
+        ax.set_ylim(-1.25, top); ax.set_yticks([])
+        ax.text(0.02, top - 0.32, title, fontsize=17, fontweight="bold", color=INK, ha="left", va="center")
+        for sp in ("top", "right", "left"):
+            ax.spines[sp].set_visible(False)
+        ax.spines["bottom"].set_color("#c7d2e0")
+        ax.tick_params(colors=GRAY, labelsize=16)
+    axs[0].text(2.98, 1.92, "medium 1: incident + reflected", fontsize=15, color=NAVY, ha="right", va="center")
+    axs[0].text(2.98, 1.42, "medium 2: transmitted", fontsize=15, color=GREEN, ha="right", va="center")
+    axs[1].set_xticks([0, 1, 2, 3])
+    axs[1].set_xlabel("distance along the boundary,  x / d", color=GRAY, fontsize=16)
+    fig.tight_layout(h_pad=0.6)
+    save(fig, "L39-phase-drift.svg")
 
 
 if __name__ == "__main__":
     geometry()
     phase_match()
+    phase_drift()
     te_tm()
+    te_tm(phone=True)
+    te_fields()
     gamma_te()

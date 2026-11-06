@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L37 - Uniform Plane Waves and Polarization &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l37-uniform-plane-waves-and-polarization">
+<h1>L37 - Uniform Plane Waves and Polarization<a class="headerlink" href="#l37-uniform-plane-waves-and-polarization" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Uniform Plane Waves and Polarization</h1>
+<div class="title-rule"></div>
+<p>Today we find the fields of a uniform plane wave and the path its electric field traces.</p>
+<p>Lesson 37 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '9'; counter-reset: lo 1">
+  <li>I can articulate what a Uniform Plane Wave (UPW) is and describe key properties that relate the electric and magnetic field.</li>
+  <li>I can calculate the electric and magnetic fields for a UPW.</li>
+  <li>I can articulate the concept of polarization and determine the polarization for various UPWs.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lessons 35 and 36 reduced Maxwell’s equations in a source-free region to the
+wave equation for the electric field and solved it. Today we take the simplest
+solution, the <strong>uniform plane wave</strong>, and work out everything about it: which
+way its fields point, how the magnetic field follows from the electric field,
+and the ratio of their magnitudes, the <strong>intrinsic impedance</strong> <span class="math notranslate nohighlight">\(\eta\)</span>. The
+second half of the lesson follows the tip of the electric field vector through
+one period at a fixed point. The path it traces, a line, a circle, or an
+ellipse, is the wave’s <strong>polarization</strong>, and an antenna receives a wave well
+only when its own polarization matches.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 35</strong>, a lossless, source-free region:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\widetilde{\mathbf{E}} &amp;= -j\omega\mu\ \widetilde{\mathbf{H}} \\ \nabla\times\widetilde{\mathbf{H}} &amp;= j\omega\epsilon\ \widetilde{\mathbf{E}} \\ \nabla^2\widetilde{\mathbf{E}} + \beta^2\widetilde{\mathbf{E}} &amp;= 0 \\ \beta &amp;= \omega\sqrt{\mu\epsilon} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 35 wrote Faraday’s law and the Ampere–Maxwell law in phasor form for a region with
+no charge, no current, and no loss, and combined them into the vector wave
+equation, the Helmholtz equation for <span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}}\)</span>. The same steps
+give the same equation for <span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}}\)</span>. Lesson 36 solved it and
+extended the solution to a lossy medium, where <span class="math notranslate nohighlight">\(j\beta\)</span> becomes
+<span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span> and the wave decays. Today we stay in a lossless
+medium, with real <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span>, and the phasor convention of Lesson 2:
+a field <span class="math notranslate nohighlight">\(\mathbf{E}(t) = \text{Re}\left[\widetilde{\mathbf{E}}\ e^{j\omega t}\right]\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-plane-wavefronts">
+<div class="wrap docutils container">
+<p class="rubric">Plane Wavefronts</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L37-wavefronts.svg"
+     alt="Circular wavefronts spreading from a small source, with a small square far from the source; an enlarged view of the square shows the fronts there are nearly straight and parallel, with the direction of travel k-hat perpendicular to them"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<ul class="simple">
+<li><p>Far from any source, a small patch of the wavefront is nearly flat.</p></li>
+<li><p>A <strong>plane wave</strong> has flat wavefronts; a <strong>uniform</strong> one has the same field everywhere on each front.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>wavefront</strong> is a surface on which the field has the same phase. A small
+source radiates <strong>spherical</strong> wavefronts, and a long line source radiates
+<strong>cylindrical</strong> ones. Far from the source, the radius of a spherical front is
+so large that over the region we care about, the size of an antenna or a
+window, the front is nearly flat, as the enlarged square in the figure shows.
+A wave with flat fronts is a <strong>plane wave</strong>. If, in addition, the magnitude
+and phase of the field are the same at every point of each front, the wave is
+a <strong>uniform plane wave</strong>. The direction of travel, the unit vector
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span>, is perpendicular to the fronts. A real wave is never
+exactly uniform, but the uniform plane wave describes the field near any
+receiver that is many wavelengths from the transmitter, and it is the wave
+Lessons 38 through 40 send into a boundary.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-uniform-plane-wave">
+<div class="wrap docutils container">
+<p class="rubric">The Uniform Plane Wave</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Wave along <span class="math notranslate nohighlight">\(z\)</span>: nothing varies with <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \hat{\mathbf{z}}\cdot\left(\nabla\times\widetilde{\mathbf{H}}\right) &amp;= \frac{\partial\widetilde{H}_y}{\partial x} - \frac{\partial\widetilde{H}_x}{\partial y} \\ &amp;= j\omega\epsilon\ \widetilde{E}_z \\ 0 &amp;= j\omega\epsilon\ \widetilde{E}_z \\ \widetilde{E}_z &amp;= 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We point <span class="math notranslate nohighlight">\(z\)</span> along the direction of travel, so the wavefronts are planes of
+constant <span class="math notranslate nohighlight">\(z\)</span> and every derivative with respect to <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span> is zero. The <span class="math notranslate nohighlight">\(z\)</span>
+component of the Ampere–Maxwell law contains only <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> derivatives of
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}}\)</span>, so its left side vanishes and <span class="math notranslate nohighlight">\(\widetilde{E}_z = 0\)</span>.
+The <span class="math notranslate nohighlight">\(z\)</span> component of Faraday’s law gives <span class="math notranslate nohighlight">\(\widetilde{H}_z = 0\)</span> in the same
+way. Both fields lie in the plane of the wavefront: a uniform plane wave is
+<strong>transverse</strong>. What remains is the one-dimensional problem Lesson 36 solved,</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{E}_x(z) = E_0^+\ e^{-j\beta z} + E_0^-\ e^{+j\beta z}\]</div>
+<p>a forward and a backward wave with <span class="math notranslate nohighlight">\(v_p = \omega/\beta = 1/\sqrt{\mu\epsilon}\)</span>
+and <span class="math notranslate nohighlight">\(\lambda = 2\pi/\beta\)</span>. Today we keep both waves and find the magnetic
+field that goes with each.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-magnetic-field-from-faraday-s-law">
+<div class="wrap docutils container">
+<p class="rubric">The Magnetic Field from Faraday’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ \widetilde{E}_x(z)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\widetilde{\mathbf{E}} &amp;= \hat{\mathbf{y}}\ \frac{d\widetilde{E}_x}{dz} \\ &amp;= -\hat{\mathbf{y}}\ j\beta E_0^+ e^{-j\beta z} \\ &amp;\quad + \hat{\mathbf{y}}\ j\beta E_0^- e^{+j\beta z} \\ &amp;= -j\omega\mu\ \widetilde{\mathbf{H}} \\ \widetilde{\mathbf{H}} &amp;= \hat{\mathbf{y}}\ \frac{\beta}{\omega\mu}\ E_0^+ e^{-j\beta z} \\ &amp;\quad - \hat{\mathbf{y}}\ \frac{\beta}{\omega\mu}\ E_0^- e^{+j\beta z} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We take the electric field along <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>; a <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>
+component behaves the same way and adds by superposition. The curl in
+rectangular coordinates (Lesson 17) is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\widetilde{\mathbf{E}} = {} &amp; \hat{\mathbf{x}}\left(\frac{\partial\widetilde{E}_z}{\partial y} - \frac{\partial\widetilde{E}_y}{\partial z}\right) \\ &amp; + \hat{\mathbf{y}}\left(\frac{\partial\widetilde{E}_x}{\partial z} - \frac{\partial\widetilde{E}_z}{\partial x}\right) \\ &amp; + \hat{\mathbf{z}}\left(\frac{\partial\widetilde{E}_y}{\partial x} - \frac{\partial\widetilde{E}_x}{\partial y}\right) \end{aligned}\end{split}\]</div>
+<p>With only <span class="math notranslate nohighlight">\(\widetilde{E}_x\)</span>, and no variation with <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span>, only the
+<span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> term survives. Differentiating the two waves brings down
+<span class="math notranslate nohighlight">\(-j\beta\)</span> and <span class="math notranslate nohighlight">\(+j\beta\)</span>, and dividing Faraday’s law by <span class="math notranslate nohighlight">\(-j\omega\mu\)</span> gives the
+magnetic field. It points along <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>, perpendicular to both
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}}\)</span> and the direction of travel, and the backward wave
+enters with a minus sign, as the backward current did on the line in
+Lesson 5.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-intrinsic-impedance">
+<div class="wrap docutils container">
+<p class="rubric">Intrinsic Impedance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \eta = \frac{E_0^+}{H_0^+} &amp;= \frac{\omega\mu}{\beta} = \frac{\omega\mu}{\omega\sqrt{\mu\epsilon}} \\ &amp;= \sqrt{\frac{\mu}{\epsilon}} \\ \eta_0 &amp;= \sqrt{\frac{\mu_0}{\epsilon_0}} = 376.7\ \Omega \\ \eta &amp;= \frac{\eta_0}{\sqrt{\epsilon_r}} \quad (\mu = \mu_0) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The ratio of the electric to the magnetic field in the forward wave is the
+<strong>intrinsic impedance</strong> of the medium, in ohms. This derives the wave
+impedance Lesson 6 quoted and Lesson 30 used. It plays the role <span class="math notranslate nohighlight">\(Z_0\)</span> plays on
+a line: the magnetic field and the line current</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{\mathbf{H}} &amp;= \hat{\mathbf{y}}\ \frac{E_0^+e^{-j\beta z} - E_0^-e^{+j\beta z}}{\eta} \\ \widetilde{I} &amp;= \frac{V_0^+e^{-j\beta z} - V_0^-e^{+j\beta z}}{Z_0} \end{aligned}\end{split}\]</div>
+<p>match term for term, the second from Lesson 5. In free space
+<span class="math notranslate nohighlight">\(\eta_0 = 376.7\ \Omega\)</span>, often rounded to <span class="math notranslate nohighlight">\(377\ \Omega\)</span> or written
+<span class="math notranslate nohighlight">\(120\pi\ \Omega\)</span>. In polyethylene, with <span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span>,
+<span class="math notranslate nohighlight">\(\eta = 251\ \Omega\)</span>, the <span class="math notranslate nohighlight">\(\eta\)</span> in Lesson 30’s
+<span class="math notranslate nohighlight">\(Z_0 = (\eta/2\pi)\ln(b/a)\)</span> for RG-58.</p>
+<p>In a lossy medium the same steps run with <span class="math notranslate nohighlight">\(e^{-\gamma z}\)</span> in place of
+<span class="math notranslate nohighlight">\(e^{-j\beta z}\)</span>. The derivative brings down <span class="math notranslate nohighlight">\(-\gamma\)</span>, Faraday’s law gives
+<span class="math notranslate nohighlight">\(\widetilde{H}_y = \gamma E_0^+ e^{-\gamma z}/(j\omega\mu)\)</span>, and with Lesson 36’s
+<span class="math notranslate nohighlight">\(\gamma^2 = j\omega\mu(\sigma + j\omega\epsilon)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\eta = \frac{j\omega\mu}{\gamma} = \sqrt{\frac{j\omega\mu}{\sigma + j\omega\epsilon}}\]</div>
+<p>which is complex: the magnetic field lags the electric field. With
+<span class="math notranslate nohighlight">\(\sigma = 0\)</span> it reduces to <span class="math notranslate nohighlight">\(\sqrt{\mu/\epsilon}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-e-h-and-the-direction-of-travel">
+<div class="wrap docutils container">
+<p class="rubric">E, H, and the Direction of Travel</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L37-fields.svg"
+     alt="A snapshot of a plane wave traveling along z: the electric field E oscillates along x, the magnetic field H oscillates along y in phase with it, and the arrow k-hat points along z, with one wavelength marked"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{\mathbf{H}} &amp;= \frac{1}{\eta}\ \hat{\mathbf{k}}\times\widetilde{\mathbf{E}} \\ \widetilde{\mathbf{E}} &amp;= -\eta\ \hat{\mathbf{k}}\times\widetilde{\mathbf{H}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The forward wave has <span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}}\)</span> along <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>,
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}}\)</span> along <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}} = \hat{\mathbf{z}}\)</span>, and <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\times\hat{\mathbf{x}} = \hat{\mathbf{y}}\)</span>,
+so <span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}} = (1/\eta)\ \hat{\mathbf{k}}\times\widetilde{\mathbf{E}}\)</span>.
+The backward wave checks the rule: with <span class="math notranslate nohighlight">\(\hat{\mathbf{k}} = -\hat{\mathbf{z}}\)</span>,
+<span class="math notranslate nohighlight">\((1/\eta)(-\hat{\mathbf{z}}\times\hat{\mathbf{x}})\ E_0^- = -\hat{\mathbf{y}}\ E_0^-/\eta\)</span>,
+the minus sign of the previous frame. The rule holds for any direction of
+travel, because we could have chosen any axis as <span class="math notranslate nohighlight">\(z\)</span>. Crossing both sides with
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span> and using the identity</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{k}}\times\left(\hat{\mathbf{k}}\times\widetilde{\mathbf{E}}\right) = \hat{\mathbf{k}}\left(\hat{\mathbf{k}}\cdot\widetilde{\mathbf{E}}\right) - \widetilde{\mathbf{E}}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\cdot\widetilde{\mathbf{E}} = 0\)</span> for a transverse wave,
+gives the second form. Three facts follow: <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span> are mutually perpendicular; <span class="math notranslate nohighlight">\(\mathbf{E}\times\mathbf{H}\)</span>
+points along <span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span>; and in a lossless medium <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> are in phase, so they reach their peaks at the same points, as
+the figure shows. Lesson 38 derives <span class="math notranslate nohighlight">\(\mathbf{E}\times\mathbf{H}\)</span> as the power
+per unit area the wave carries.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-wave-in-polyethylene">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Wave in Polyethylene</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\ 10\cos\left(2\pi\times10^9\ t - \beta z\right)\)</span> V/m, <span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \beta &amp;= \frac{2\pi\times10^9\times1.5}{3.00\times10^8} \\ &amp;= 31.4\ \text{rad/m} \\ \lambda &amp;= 0.200\ \text{m} \\ \mathbf{H} &amp;= \hat{\mathbf{y}}\ \frac{10}{251}\cos\left(2\pi\times10^9\ t - \beta z\right) \\ &amp;= \hat{\mathbf{y}}\ 39.8\cos(\cdot)\ \text{mA/m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the fields of a 1 GHz wave in polyethylene</p>
+<p>A 1 GHz uniform plane wave travels along <span class="math notranslate nohighlight">\(+z\)</span> in polyethylene, the dielectric
+of RG-58, with <span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span> and <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>. Its electric field is
+<span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\ 10\cos(2\pi\times10^9\ t - \beta z)\)</span> V/m. The
+phase constant is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \beta &amp;= \omega\sqrt{\mu_0\epsilon_0\epsilon_r} = \frac{\omega\sqrt{\epsilon_r}}{c} \\ &amp;= \frac{2\pi\times10^9\times1.5}{3.00\times10^8} = 31.4\ \text{rad/m} \end{aligned}\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\lambda = 2\pi/\beta = 0.200\)</span> m and <span class="math notranslate nohighlight">\(v_p = \omega/\beta = 2.00\times10^8\)</span> m/s,
+two-thirds of the free-space values. The intrinsic impedance is
+<span class="math notranslate nohighlight">\(\eta = 376.7/1.5 = 251\ \Omega\)</span>. With
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}} = \hat{\mathbf{z}}\)</span>, the magnetic field is
+<span class="math notranslate nohighlight">\((1/\eta)\ \hat{\mathbf{z}}\times\hat{\mathbf{x}}\ 10 = \hat{\mathbf{y}}\ 10/251\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} = \hat{\mathbf{y}}\ 39.8\cos\left(2\pi\times10^9\ t - 31.4z\right)\]</div>
+<p>in milliamperes per meter.</p>
+<p>The magnetic field is small in amperes per meter because <span class="math notranslate nohighlight">\(\eta\)</span> is large: a
+10 V/m field, which is strong for a received signal, comes with only 40 mA/m.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-wave-traveling-along-z">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Wave Traveling Along −z</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{y}}\ 5\cos\left(6\pi\times10^8\ t + \beta z\right)\)</span> V/m in free space:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \hat{\mathbf{k}} &amp;= -\hat{\mathbf{z}} \\ \beta &amp;= \frac{6\pi\times10^8}{3.00\times10^8} \\ &amp;= 6.28\ \text{rad/m} \\ \mathbf{H} &amp;= \frac{1}{\eta_0}\left(-\hat{\mathbf{z}}\times\hat{\mathbf{y}}\right)5\cos(\cdot) \\ &amp;= \hat{\mathbf{x}}\ 13.3\cos(\cdot)\ \text{mA/m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the magnetic field of a backward wave</p>
+<p>The phase <span class="math notranslate nohighlight">\(\omega t + \beta z\)</span> stays constant when <span class="math notranslate nohighlight">\(z\)</span> decreases as <span class="math notranslate nohighlight">\(t\)</span>
+increases, so this 300 MHz wave travels along <span class="math notranslate nohighlight">\(-z\)</span> and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{k}} = -\hat{\mathbf{z}}\)</span>. In free space
+<span class="math notranslate nohighlight">\(\beta = \omega/c = 6.28\)</span> rad/m and <span class="math notranslate nohighlight">\(\lambda = 1.00\)</span> m. The cross product is
+<span class="math notranslate nohighlight">\(-\hat{\mathbf{z}}\times\hat{\mathbf{y}} = \hat{\mathbf{x}}\)</span>, and
+<span class="math notranslate nohighlight">\(5/376.7 = 13.3\)</span> mA/m, so</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} = \hat{\mathbf{x}}\ 13.3\cos\left(6\pi\times10^8\ t + 6.28z\right)\]</div>
+<p>in milliamperes per meter.</p>
+<p>As a check, <span class="math notranslate nohighlight">\(\mathbf{E}\times\mathbf{H}\)</span> points along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\times\hat{\mathbf{x}} = -\hat{\mathbf{z}}\)</span>, the direction of
+travel. Taking <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> along <span class="math notranslate nohighlight">\(-\hat{\mathbf{x}}\)</span>, the answer for a wave
+along <span class="math notranslate nohighlight">\(+z\)</span>, is the most common error in this kind of problem.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-polarization">
+<div class="wrap docutils container">
+<p class="rubric">Polarization</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>A wave along <span class="math notranslate nohighlight">\(+z\)</span>, with <span class="math notranslate nohighlight">\(E_{x0}, E_{y0} \ge 0\)</span> and <span class="math notranslate nohighlight">\(\Delta\phi = \phi_y - \phi_x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{\mathbf{E}} &amp;= \hat{\mathbf{x}}\ E_{x0}\ e^{-j\beta z} \\ &amp;\quad + \hat{\mathbf{y}}\ E_{y0}\ e^{j\Delta\phi}\ e^{-j\beta z} \\ \mathbf{E}(0,t) &amp;= \hat{\mathbf{x}}\ E_{x0}\cos\omega t \\ &amp;\quad + \hat{\mathbf{y}}\ E_{y0}\cos\left(\omega t + \Delta\phi\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A uniform plane wave along <span class="math notranslate nohighlight">\(+z\)</span> can have both an <span class="math notranslate nohighlight">\(x\)</span> and a <span class="math notranslate nohighlight">\(y\)</span> component, each
+with its own amplitude and phase. Only the difference of the two phases
+matters, because a common phase only shifts the origin of time, so we factor
+out the phase <span class="math notranslate nohighlight">\(\phi_x\)</span> of the <span class="math notranslate nohighlight">\(x\)</span> component and keep the phase difference
+<span class="math notranslate nohighlight">\(\Delta\phi = \phi_y - \phi_x\)</span>. We write it <span class="math notranslate nohighlight">\(\Delta\phi\)</span> because Lesson 36
+used <span class="math notranslate nohighlight">\(\delta\)</span> for the skin depth. The <strong>polarization</strong> of the wave is the path the
+tip of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> traces at one fixed point as time passes, viewed in the
+plane of the wavefront. Every point on the <span class="math notranslate nohighlight">\(z\)</span> axis traces the same path,
+shifted in time, so we watch the plane <span class="math notranslate nohighlight">\(z = 0\)</span>.</p>
+<p>Polarization matters in practice because a receiving antenna responds only to
+the part of the incoming field that matches its own polarization. If
+<span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_w\)</span> is the unit polarization vector of the wave, the phasor
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}}\)</span> divided by its length, and <span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_a\)</span> is
+that of the antenna, the received voltage is proportional to</p>
+<div class="math notranslate nohighlight">
+\[\left\vert \hat{\mathbf{e}}_a^{*}\cdot\hat{\mathbf{e}}_w \right\vert\]</div>
+<p>An antenna along <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> receives nothing from a wave along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>, because <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\cdot\hat{\mathbf{x}} = 0\)</span>.
+ECE 444 develops this match for real antennas.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-path-of-the-tip">
+<div class="wrap docutils container">
+<p class="rubric">The Path of the Tip</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<picture>
+<source media="(max-width: 600px)" srcset="../../viz/img/L37-polarization-phone.svg">
+<img src="../../viz/img/L37-polarization.svg"
+     alt="Three paths of the tip of E in the x-y plane, with the wave coming out of the page: a straight line through the origin at 45 degrees, a circle, and an ellipse tilted at minus 45 degrees, with arrowheads showing the sense of rotation on the circle and the ellipse"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
+</picture>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\left(\frac{E_x}{E_{x0}}\right)^2 - 2\ \frac{E_x}{E_{x0}}\ \frac{E_y}{E_{y0}}\cos\Delta\phi \\ &amp;\quad + \left(\frac{E_y}{E_{y0}}\right)^2 = \sin^2\Delta\phi \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To find the path, we eliminate time. From the <span class="math notranslate nohighlight">\(x\)</span> component,
+<span class="math notranslate nohighlight">\(\cos\omega t = E_x/E_{x0}\)</span>. Expanding the <span class="math notranslate nohighlight">\(y\)</span> component,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \frac{E_y}{E_{y0}} &amp;= \cos\omega t\cos\Delta\phi \\ &amp;\quad - \sin\omega t\sin\Delta\phi \\ \frac{E_y}{E_{y0}} - \frac{E_x}{E_{x0}}\cos\Delta\phi &amp;= -\sin\omega t\sin\Delta\phi \end{aligned}\end{split}\]</div>
+<p>Squaring, and replacing <span class="math notranslate nohighlight">\(\sin^2\omega t\)</span> by <span class="math notranslate nohighlight">\(1 - (E_x/E_{x0})^2\)</span>, gives the
+equation in the frame, which is an <strong>ellipse</strong>. Two special cases follow from
+it directly:</p>
+<ul class="simple">
+<li><p><strong>Linear</strong> polarization, when <span class="math notranslate nohighlight">\(\sin\Delta\phi = 0\)</span> (<span class="math notranslate nohighlight">\(\Delta\phi = 0\)</span> or <span class="math notranslate nohighlight">\(180°\)</span>):
+the right side is zero, the equation factors into
+<span class="math notranslate nohighlight">\(\left(E_x/E_{x0} \mp E_y/E_{y0}\right)^2 = 0\)</span>, and the tip moves back and
+forth along a line tilted at <span class="math notranslate nohighlight">\(\pm\arctan(E_{y0}/E_{x0})\)</span> from the <span class="math notranslate nohighlight">\(x\)</span> axis.
+The wave <span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\ E_{x0}\cos(\omega t - \beta z)\)</span>
+(along <span class="math notranslate nohighlight">\(x\)</span>) and a wave with equal components and <span class="math notranslate nohighlight">\(\Delta\phi = 0\)</span> (at <span class="math notranslate nohighlight">\(45°\)</span>)
+are both linear. A wave with only one component is always linear.</p></li>
+<li><p><strong>Circular</strong> polarization, when <span class="math notranslate nohighlight">\(E_{x0} = E_{y0} = E_0\)</span> and
+<span class="math notranslate nohighlight">\(\cos\Delta\phi = 0\)</span> (<span class="math notranslate nohighlight">\(\Delta\phi = \pm 90°\)</span>): the equation becomes
+<span class="math notranslate nohighlight">\(E_x^2 + E_y^2 = E_0^2\)</span>, a circle of radius <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
+</ul>
+<p>Every other case is <strong>elliptical</strong>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-which-way-the-tip-turns">
+<div class="wrap docutils container">
+<p class="rubric">Which Way the Tip Turns</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L37-handedness.svg"
+     alt="Two circles in the x-y plane with the wave coming out of the page. On the right-hand circle the tip starts on the x axis at t equals 0 and is on the positive y axis at t equals T over 4, turning counterclockwise. On the left-hand circle it is on the negative y axis at T over 4, turning clockwise"
+     style="max-width: 480px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\hat{\mathbf{z}}\cdot\left(\mathbf{E}\times\frac{d\mathbf{E}}{dt}\right) \\ &amp;\quad = -\omega E_{x0}E_{y0}\sin\Delta\phi \end{aligned}\end{split}\]</div>
+<p>Along <span class="math notranslate nohighlight">\(+z\)</span>, <span class="math notranslate nohighlight">\(\sin\Delta\phi &lt; 0\)</span> is right-hand and <span class="math notranslate nohighlight">\(\sin\Delta\phi &gt; 0\)</span> is left-hand.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The tip can trace a circle or an ellipse in either direction, and the
+direction is the wave’s <strong>handedness</strong>. This course uses the IEEE convention: point the
+right thumb along the direction of travel <span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span>; if the fingers
+curl the way <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> turns in time at a fixed point, the wave is
+<strong>right-hand</strong> polarized, and otherwise it is <strong>left-hand</strong> polarized. For a
+wave coming out of the page, toward the viewer, right-hand means
+counterclockwise as the viewer sees it. The cross product of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> with
+its rate of change points along the axis the tip turns about. With
+<span class="math notranslate nohighlight">\(E_x = E_{x0}\cos\omega t\)</span> and <span class="math notranslate nohighlight">\(E_y = E_{y0}\cos(\omega t + \Delta\phi)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\hat{\mathbf{z}}\cdot\left(\mathbf{E}\times\frac{d\mathbf{E}}{dt}\right) \\ &amp;= E_x\frac{dE_y}{dt} - E_y\frac{dE_x}{dt} \\ &amp;= -\omega E_{x0}E_{y0}\left[\sin(\omega t + \Delta\phi)\cos\omega t \right. \\ &amp;\qquad \left. - \cos(\omega t + \Delta\phi)\sin\omega t\right] \\ &amp;= -\omega E_{x0}E_{y0}\sin\Delta\phi \end{aligned}\end{split}\]</div>
+<p>The result does not depend on time, so the tip turns the same way all period.
+When it is positive, the tip turns counterclockwise about <span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>,
+and a wave along <span class="math notranslate nohighlight">\(+z\)</span> is right-hand. For a wave along <span class="math notranslate nohighlight">\(-z\)</span> the thumb reverses,
+and the same rotation is left-hand. Some optics texts use the opposite
+convention, so always state which one you use.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-circular-polarization">
+<div class="wrap docutils container">
+<p class="rubric">Circular Polarization</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For a wave along <span class="math notranslate nohighlight">\(+z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \widetilde{\mathbf{E}}_R &amp;= E_0\left(\hat{\mathbf{x}} - j\hat{\mathbf{y}}\right)e^{-j\beta z} \\ \widetilde{\mathbf{E}}_L &amp;= E_0\left(\hat{\mathbf{x}} + j\hat{\mathbf{y}}\right)e^{-j\beta z} \end{aligned}\end{split}\]</div>
+<p>Right-hand (<span class="math notranslate nohighlight">\(R\)</span>) has <span class="math notranslate nohighlight">\(\Delta\phi = -90°\)</span>, and left-hand (<span class="math notranslate nohighlight">\(L\)</span>) has <span class="math notranslate nohighlight">\(\Delta\phi = +90°\)</span>.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>With <span class="math notranslate nohighlight">\(E_{x0} = E_{y0} = E_0\)</span> and <span class="math notranslate nohighlight">\(\Delta\phi = -90°\)</span>, the field at <span class="math notranslate nohighlight">\(z = 0\)</span> is
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\ E_0\cos\omega t + \hat{\mathbf{y}}\ E_0\sin\omega t\)</span>. At
+<span class="math notranslate nohighlight">\(t = 0\)</span> the tip is on the <span class="math notranslate nohighlight">\(x\)</span> axis, and a quarter period later it is on the
+<span class="math notranslate nohighlight">\(+y\)</span> axis: it turns from <span class="math notranslate nohighlight">\(x\)</span> toward <span class="math notranslate nohighlight">\(y\)</span>, counterclockwise about <span class="math notranslate nohighlight">\(+z\)</span>, and the
+wave is right-hand circularly polarized. The phasor factor <span class="math notranslate nohighlight">\(e^{-j90°} = -j\)</span>
+gives the compact form <span class="math notranslate nohighlight">\(\hat{\mathbf{x}} - j\hat{\mathbf{y}}\)</span>. The two waves</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{E}_3 &amp;= \hat{\mathbf{x}}\ E_0\cos(\omega t - \beta z) \\ &amp;\quad + \hat{\mathbf{y}}\ E_0\cos(\omega t - \beta z + 90°) \\ \mathbf{E}_4 &amp;= \hat{\mathbf{x}}\ E_0\cos(\omega t - \beta z - 90°) \\ &amp;\quad + \hat{\mathbf{y}}\ E_0\cos(\omega t - \beta z) \end{aligned}\end{split}\]</div>
+<p>both have <span class="math notranslate nohighlight">\(\Delta\phi = +90°\)</span>, so both are left-hand. At <span class="math notranslate nohighlight">\(z = 0\)</span>, <span class="math notranslate nohighlight">\(\mathbf{E}_3\)</span>
+goes from <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\ E_0\)</span> at <span class="math notranslate nohighlight">\(t = 0\)</span> to <span class="math notranslate nohighlight">\(-\hat{\mathbf{y}}\ E_0\)</span> at
+<span class="math notranslate nohighlight">\(T/4\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{E}_4\)</span> from <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\ E_0\)</span> to
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\ E_0\)</span>: both turn clockwise about <span class="math notranslate nohighlight">\(+z\)</span>.</p>
+<p>Satellite navigation signals, including GPS, are right-hand circularly
+polarized, and the match from the Polarization frame shows how much of that
+signal a receiver of each handedness collects. With
+<span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_R = (\hat{\mathbf{x}} - j\hat{\mathbf{y}})/\sqrt{2}\)</span> and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_L = (\hat{\mathbf{x}} + j\hat{\mathbf{y}})/\sqrt{2}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \hat{\mathbf{e}}_R^{*}\cdot\hat{\mathbf{e}}_R &amp;= \frac{(\hat{\mathbf{x}} + j\hat{\mathbf{y}})\cdot(\hat{\mathbf{x}} - j\hat{\mathbf{y}})}{2} = 1 \\ \hat{\mathbf{e}}_L^{*}\cdot\hat{\mathbf{e}}_R &amp;= \frac{(\hat{\mathbf{x}} - j\hat{\mathbf{y}})\cdot(\hat{\mathbf{x}} - j\hat{\mathbf{y}})}{2} = 0 \\ \hat{\mathbf{x}}\cdot\hat{\mathbf{e}}_R &amp;= \frac{1}{\sqrt{2}} \end{aligned}\end{split}\]</div>
+<p>A right-hand antenna receives the whole signal, an ideal left-hand antenna
+receives none of it, and a linear antenna receives <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span> of the
+voltage, half the power, from either handedness.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-elliptical-polarization">
+<div class="wrap docutils container">
+<p class="rubric">Elliptical Polarization</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\cos\left(\omega t - \beta z - 90°\right) + \hat{\mathbf{y}}\cos\left(\omega t - \beta z + 45°\right)\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(t\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(0\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(T/4\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(T/2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(3T/4\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\((E_x, E_y)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\((0, 0.71)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\((1, -0.71)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\((0, -0.71)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\((-1, 0.71)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With <span class="math notranslate nohighlight">\(\Delta\phi = 135°\)</span>, the wave is left-hand elliptical.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Both amplitudes are 1. The phase difference is
+<span class="math notranslate nohighlight">\(\Delta\phi = 45° - (-90°) = 135°\)</span>. Since <span class="math notranslate nohighlight">\(\sin\Delta\phi \neq 0\)</span> and
+<span class="math notranslate nohighlight">\(\cos\Delta\phi \neq 0\)</span>, the path is an ellipse, and <span class="math notranslate nohighlight">\(\sin 135° &gt; 0\)</span> makes the
+wave left-hand for travel along <span class="math notranslate nohighlight">\(+z\)</span>: the table shows the tip moving clockwise
+about <span class="math notranslate nohighlight">\(+z\)</span>. With equal amplitudes the ellipse equation,</p>
+<div class="math notranslate nohighlight">
+\[E_x^2 - 2E_xE_y\cos\Delta\phi + E_y^2 = \sin^2\Delta\phi\]</div>
+<p>does not change when we swap <span class="math notranslate nohighlight">\(E_x\)</span> and <span class="math notranslate nohighlight">\(E_y\)</span>, so the axes of the ellipse lie
+along the lines <span class="math notranslate nohighlight">\(y = x\)</span> and <span class="math notranslate nohighlight">\(y = -x\)</span>. On the line <span class="math notranslate nohighlight">\(y = -x\)</span>, with <span class="math notranslate nohighlight">\(E_y = -E_x\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_x^2\left(2 + 2\cos\Delta\phi\right) &amp;= \sin^2\Delta\phi \\ \vert\mathbf{E}\vert^2 = 2E_x^2 &amp;= \frac{\sin^2\Delta\phi}{1 + \cos\Delta\phi} \\ &amp;= 1 - \cos\Delta\phi = 1.71 \end{aligned}\end{split}\]</div>
+<p>and on <span class="math notranslate nohighlight">\(y = x\)</span> the same steps give <span class="math notranslate nohighlight">\(\vert\mathbf{E}\vert^2 = 1 + \cos\Delta\phi = 0.29\)</span>.
+The major axis is along <span class="math notranslate nohighlight">\(y = -x\)</span>, at <span class="math notranslate nohighlight">\(-45°\)</span>, with half-length <span class="math notranslate nohighlight">\(1.31\)</span>; the
+minor half-length is <span class="math notranslate nohighlight">\(0.54\)</span>; and the <strong>axial ratio</strong>, major over minor, is
+<span class="math notranslate nohighlight">\(1.31/0.54 = 2.41\)</span>. A circle has an axial ratio of 1 and a line an infinite
+one. The figure plots the four points of the table, the sense of rotation,
+and the two semi-axes.</p>
+<p><img src="../../viz/img/L37-ellipse.svg"
+     alt="The ellipse traced by the tip of E for the example, with its long axis along the line y equals minus x. Points mark t equals 0 at (0, 0.71), T/4 at (1, minus 0.71), T/2 at (0, minus 0.71), and 3T/4 at (minus 1, 0.71). Arrows show the tip moving clockwise. Dashed lines mark the semi-major axis, 1.31, along y equals minus x, and the semi-minor axis, 0.54, along y equals x"
+     style="max-width: 360px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-explore-polarization">
+<div class="wrap docutils container">
+<p class="rubric">Explore: Polarization</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/polarization.html"
+        width="100%" height="485"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Path of the tip of the electric field of a plane wave, set by the two amplitudes and their phase difference"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget plots the field at <span class="math notranslate nohighlight">\(z = 0\)</span> for the amplitudes <span class="math notranslate nohighlight">\(E_{x0}\)</span> and <span class="math notranslate nohighlight">\(E_{y0}\)</span>
+and the phase difference <span class="math notranslate nohighlight">\(\Delta\phi\)</span> you set. The left panel shows
+<span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, its two components, the full path of its tip, and the part of
+the path traced in the last quarter period; the right panel shows <span class="math notranslate nohighlight">\(E_x\)</span> and
+<span class="math notranslate nohighlight">\(E_y\)</span> against time over one period. The readouts give the polarization, the
+handedness by the IEEE convention, the axial ratio, and the tilt of the major
+axis from the <span class="math notranslate nohighlight">\(x\)</span> axis. It opens on right-hand circular polarization. Set
+<span class="math notranslate nohighlight">\(\Delta\phi = 135°\)</span> to see the elliptical example, and then slide <span class="math notranslate nohighlight">\(\Delta\phi\)</span> through
+zero: the ellipse collapses to a line and reopens with the opposite
+handedness. The <strong>Wave along −z</strong> switch reverses the direction of travel and
+the handedness, with the same path.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-circular-wave-along-z">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Circular Wave Along −z</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\ 2\cos\left(\omega t + \beta z\right) + \hat{\mathbf{y}}\ 2\sin\left(\omega t + \beta z\right)\)</span> V/m:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \sin\theta &amp;= \cos(\theta - 90°) \\ \Delta\phi &amp;= -90°, \quad E_{x0} = E_{y0} \\ \hat{\mathbf{k}} &amp;= -\hat{\mathbf{z}} \\ &amp;\Longrightarrow \text{left-hand circular} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the handedness of a backward wave</p>
+<p>The phase <span class="math notranslate nohighlight">\(\omega t + \beta z\)</span> tells us the wave travels along <span class="math notranslate nohighlight">\(-z\)</span>. Writing
+the sine as a cosine, <span class="math notranslate nohighlight">\(2\sin(\omega t + \beta z) = 2\cos(\omega t + \beta z - 90°)\)</span>,
+so the amplitudes are equal and <span class="math notranslate nohighlight">\(\Delta\phi = -90°\)</span>: the polarization is circular.
+At <span class="math notranslate nohighlight">\(z = 0\)</span> the field is <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\ 2\)</span> at <span class="math notranslate nohighlight">\(t = 0\)</span> and <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\ 2\)</span>
+at <span class="math notranslate nohighlight">\(T/4\)</span>, so the tip turns from <span class="math notranslate nohighlight">\(x\)</span> toward <span class="math notranslate nohighlight">\(y\)</span>, counterclockwise about
+<span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>. The wave travels along <span class="math notranslate nohighlight">\(-\hat{\mathbf{z}}\)</span>, so the right
+thumb points along <span class="math notranslate nohighlight">\(-z\)</span>, and the right-hand fingers curl clockwise about
+<span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>, opposite to the tip. The wave is <strong>left-hand circularly
+polarized</strong>. Its phasor is
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}} = 2\left(\hat{\mathbf{x}} - j\hat{\mathbf{y}}\right)e^{+j\beta z}\)</span>:
+the factor <span class="math notranslate nohighlight">\(\hat{\mathbf{x}} - j\hat{\mathbf{y}}\)</span> that means right-hand for a
+wave along <span class="math notranslate nohighlight">\(+z\)</span> means left-hand here, so the direction of travel must always
+be read first.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Uniform plane wave</p></td>
+<td class="text-left"><p>Same field over each flat wavefront</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\widetilde{E}_z = \widetilde{H}_z = 0\)</span>: transverse</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Forward wave</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ E_0^+ e^{-j\beta z}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\beta = \omega\sqrt{\mu\epsilon}\)</span>, <span class="math notranslate nohighlight">\(v_p = 1/\sqrt{\mu\epsilon}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Intrinsic impedance</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E_0^+/H_0^+\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\eta = \sqrt{\mu/\epsilon}\)</span>; <span class="math notranslate nohighlight">\(\eta_0 = 376.7\ \Omega\)</span>; lossy: <span class="math notranslate nohighlight">\(j\omega\mu/\gamma\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Field directions</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E} \perp \mathbf{H} \perp \hat{\mathbf{k}}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}} = (1/\eta)\ \hat{\mathbf{k}}\times\widetilde{\mathbf{E}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Polarization</p></td>
+<td class="text-left"><p>Path of the tip of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> at a fixed point</p></td>
+<td class="text-left"><p>Ellipse, set by <span class="math notranslate nohighlight">\(E_{x0}\)</span>, <span class="math notranslate nohighlight">\(E_{y0}\)</span>, <span class="math notranslate nohighlight">\(\Delta\phi = \phi_y - \phi_x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Linear</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sin\Delta\phi = 0\)</span></p></td>
+<td class="text-left"><p>Tilt <span class="math notranslate nohighlight">\(\pm\arctan(E_{y0}/E_{x0})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Circular</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E_{x0} = E_{y0}\)</span>, <span class="math notranslate nohighlight">\(\Delta\phi = \pm 90°\)</span></p></td>
+<td class="text-left"><p>Along <span class="math notranslate nohighlight">\(+z\)</span>: <span class="math notranslate nohighlight">\(\hat{\mathbf{x}} - j\hat{\mathbf{y}}\)</span> right-hand, <span class="math notranslate nohighlight">\(\hat{\mathbf{x}} + j\hat{\mathbf{y}}\)</span> left-hand</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Handedness (IEEE)</p></td>
+<td class="text-left"><p>Right thumb along <span class="math notranslate nohighlight">\(\hat{\mathbf{k}}\)</span>, fingers with the rotation</p></td>
+<td class="text-left"><p>Along <span class="math notranslate nohighlight">\(+z\)</span>: <span class="math notranslate nohighlight">\(\sin\Delta\phi &lt; 0\)</span> right-hand; reversed along <span class="math notranslate nohighlight">\(-z\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Axial ratio</p></td>
+<td class="text-left"><p>Major over minor axis</p></td>
+<td class="text-left"><p>1 for circular, infinite for linear</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Polarization match</p></td>
+<td class="text-left"><p>Received voltage <span class="math notranslate nohighlight">\(\propto \vert\hat{\mathbf{e}}_a^{*}\cdot\hat{\mathbf{e}}_w\vert\)</span></p></td>
+<td class="text-left"><p>Cross-polarized: 0; linear antenna, circular wave: <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L37_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L37_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 38</strong>: a plane wave meets a boundary head-on, and <span class="math notranslate nohighlight">\(\eta_1\)</span> and <span class="math notranslate nohighlight">\(\eta_2\)</span> set the reflected and transmitted waves.</p></li>
+<li><p><strong>Lessons 39–40</strong>: the same boundary at an angle, where polarization decides the result.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we found that a uniform plane wave carries perpendicular electric and
+magnetic fields, in the ratio <span class="math notranslate nohighlight">\(\eta\)</span>, along a direction perpendicular to
+both, and that the path of its electric field sets its polarization. Lesson 38
+sends this wave into a boundary between two media at normal incidence. The
+boundary conditions of Lessons 24 and 31 then give a reflection coefficient
+built from <span class="math notranslate nohighlight">\(\eta_1\)</span> and <span class="math notranslate nohighlight">\(\eta_2\)</span> the way Lesson 6 built <span class="math notranslate nohighlight">\(\Gamma\)</span> from <span class="math notranslate nohighlight">\(Z_0\)</span>
+and <span class="math notranslate nohighlight">\(Z_L\)</span>. Lessons 39 and 40 tilt the wave, and there the two linear
+polarizations, with <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> in the plane of incidence or perpendicular
+to it, reflect differently.</p>
+<p>Before Lesson 38, read sections 5.6 and 5.7 of Ellingson, <em>Electromagnetics</em>,
+Vol. 2.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module04/L37-plane-waves-polarization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

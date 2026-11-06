@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Input impedance along a terminated line</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .presets { display:flex; gap:6px; flex-wrap:wrap; }
+  .presets button { flex:1 1 90px; font:inherit; font-size:11.5px; font-weight:700; letter-spacing:0.03em;
+                    color:var(--navy); background:#fff; border:1px solid var(--edge2); border-radius:6px; padding:6px 8px; cursor:pointer; white-space:nowrap; }
+  .presets button.on { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .presets button:focus-visible { outline:2px solid var(--navy); outline-offset:2px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:54px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="presets">
+    <button type="button" data-p="short">Short</button>
+    <button type="button" data-p="open">Open</button>
+    <button type="button" data-p="match">50 Ω</button>
+    <button type="button" data-p="r150">150 Ω</button>
+    <button type="button" data-p="cplx">33.9 + j17.9 Ω</button>
+  </div>
+
+  <canvas id="plot" aria-label="Normalized input resistance and reactance against distance from the load"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(R_L\)</label>
+      <input type="range" id="rl" min="0" max="250" step="0.1" value="150">
+      <span class="val" id="rl-val">150 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(X_L\)</label>
+      <input type="range" id="xl" min="-150" max="150" step="0.1" value="0">
+      <span class="val" id="xl-val">0 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(d\)</label>
+      <input type="range" id="d" min="0" max="0.5" step="0.001" value="0.125">
+      <span class="val" id="d-val">0.125 λ</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="adm"><span class="sw"></span><span class="t">Admittance</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k" id="k-in">\(Z_\text{in}\) at \(d\)</span><span class="v" id="r-in">—</span></div>
+    <div class="ro"><span class="k">\(\Gamma\) at \(d\)</span><span class="v" id="r-g">—</span></div>
+    <div class="ro"><span class="k" id="k-mt">real part = 1 at</span><span class="v" id="r-mt">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// Lossless line, Z0 = 50 Ω, d = distance from the load toward the source (d = −z).
+// Γ(d) = Γ_L e^{−j2βd} = Γ_L e^{−j4πd} with d in wavelengths, and
+// z_in(d) = (1 + Γ(d)) / (1 − Γ(d)), y_in = 1/z_in, both normalized to Z0.
+// This is the same as Z_in = Z0 (Z_L + jZ0 tan βd)/(Z0 + jZ_L tan βd), and it
+// handles the open circuit (Γ_L = 1) without an infinite load.
+const Z0 = 50;
+const C = {
+  add:(a,b)=>[a[0]+b[0],a[1]+b[1]], sub:(a,b)=>[a[0]-b[0],a[1]-b[1]],
+  mul:(a,b)=>[a[0]*b[0]-a[1]*b[1], a[0]*b[1]+a[1]*b[0]],
+  div:(a,b)=>{ const m=b[0]*b[0]+b[1]*b[1]; return [(a[0]*b[0]+a[1]*b[1])/m, (a[1]*b[0]-a[0]*b[1])/m]; },
+  abs:a=>Math.hypot(a[0],a[1]), arg:a=>Math.atan2(a[1],a[0]), exp:t=>[Math.cos(t),Math.sin(t)],
+};
+const state = { rl: 150, xl: 0, open: false, d: 0.125, adm: false, gl: [0.5, 0] };
+
+function setGamma(){
+  if (state.open) { state.gl = [1, 0]; return; }
+  const zl = [state.rl/Z0, state.xl/Z0];
+  state.gl = C.div(C.sub(zl,[1,0]), C.add(zl,[1,0]));
+}
+const gAt = d => C.mul(state.gl, C.exp(-4*Math.PI*d));
+function zAt(d){
+  const g = gAt(d), den = C.sub([1,0], g);
+  if (C.abs(den) < 1e-9) return [Infinity, Infinity];
+  return C.div(C.add([1,0], g), den);
+}
+function yAt(d){
+  const g = gAt(d), den = C.add([1,0], g);
+  if (C.abs(den) < 1e-9) return [Infinity, Infinity];
+  return C.div(C.sub([1,0], g), den);
+}
+const valAt = d => state.adm ? yAt(d) : zAt(d);
+
+// Positions in [0, λ/2) where the real part is 1 (bisection on sign changes).
+function matchPoints(){
+  const m = C.abs(state.gl);
+  if (m < 1e-4 || m > 0.9999) return [];
+  const f = d => valAt(d)[0] - 1, N = 2000, pts = [];
+  let prev = f(0);
+  for (let i=1; i<=N; i++){
+    const d = 0.5*i/N, cur = f(d);
+    if (isFinite(prev) && isFinite(cur) && Math.sign(cur) !== Math.sign(prev)) {
+      let a = 0.5*(i-1)/N, b = d, fa = prev;
+      for (let k=0; k<50; k++){ const mid=(a+b)/2, fm=f(mid); if (Math.sign(fm)===Math.sign(fa)) { a=mid; fa=fm; } else b=mid; }
+      pts.push((a+b)/2);
+    }
+    prev = cur;
+  }
+  return pts.filter(p => p < 0.4999);
+}
+
+// ---- controls ----
+const rlEl=document.getElementById('rl'), xlEl=document.getElementById('xl'), dEl=document.getElementById('d'), admEl=document.getElementById('adm');
+const btns=[...document.querySelectorAll('.presets button')];
+const PRESETS = { short:[0,0,false], open:[250,0,true], match:[50,0,false], r150:[150,0,false], cplx:[33.9,17.9,false] };
+function markPreset(name){ btns.forEach(b => b.classList.toggle('on', b.dataset.p === name)); }
+btns.forEach(b => b.addEventListener('click', () => {
+  const [r,x,o] = PRESETS[b.dataset.p];
+  state.rl=r; state.xl=x; state.open=o; rlEl.value=r; xlEl.value=x; markPreset(b.dataset.p); update();
+}));
+rlEl.addEventListener('input', () => { state.rl=parseFloat(rlEl.value); state.open=false; markPreset(''); update(); });
+xlEl.addEventListener('input', () => { state.xl=parseFloat(xlEl.value); state.open=false; markPreset(''); update(); });
+dEl.addEventListener('input', () => { state.d=parseFloat(dEl.value); update(); });
+admEl.addEventListener('change', () => { state.adm=admEl.checked; update(); });
+
+// ---- canvas ----
+const canvas=document.getElementById('plot'), ctx=canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W=360; let SCL=1;
+const SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function fit(){
+  const dpr=window.devicePixelRatio||1, wCss=cvWidth(canvas);
+  SCL=Math.min(1, wCss/DESIGN_W);
+  const w=wCss/SCL;
+  let h=Math.max(230, Math.min(w*0.36, 290));
+  if (SQ_MQ && SQ_MQ.matches) h=Math.round(h*0.78);
+  setSize(canvas, wCss, h*SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+const YMAX = 3;
+function draw(){
+  const dpr=window.devicePixelRatio||1, w=canvas.width/(dpr*SCL), h=canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const mL=34, mR=14, mT=22, mB=32, pW=w-mL-mR, pH=h-mT-mB;
+  const xFor=d=>mL+d/0.5*pW, yFor=v=>mT+pH/2 - v/YMAX*(pH/2);
+  const navy=cssVar('--navy'), amber=cssVar('--amber'), ink3=cssVar('--ink3'), grn=cssVar('--grn');
+
+  ctx.strokeStyle='#eef3f8'; ctx.lineWidth=1;
+  for (let d=0; d<=0.5+1e-9; d+=0.0625){ ctx.beginPath(); ctx.moveTo(xFor(d),mT); ctx.lineTo(xFor(d),mT+pH); ctx.stroke(); }
+  for (let v=-YMAX; v<=YMAX; v+=1){ ctx.beginPath(); ctx.moveTo(mL,yFor(v)); ctx.lineTo(mL+pW,yFor(v)); ctx.stroke(); }
+  ctx.strokeStyle='#9fb6cc'; ctx.beginPath(); ctx.moveTo(mL,yFor(0)); ctx.lineTo(mL+pW,yFor(0)); ctx.stroke();
+  ctx.strokeStyle=grn; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.moveTo(mL,yFor(1)); ctx.lineTo(mL+pW,yFor(1)); ctx.stroke(); ctx.setLineDash([]);
+
+  // the two curves, broken where they run far off the plot, clipped to the box
+  ctx.save(); ctx.beginPath(); ctx.rect(mL,mT,pW,pH); ctx.clip();
+  for (const [k,col,wd] of [[0,navy,2.6],[1,amber,2.2]]){
+    ctx.strokeStyle=col; ctx.lineWidth=wd; ctx.beginPath(); let pen=false;
+    for (let px=0; px<=pW; px++){
+      const d=px/pW*0.5, v=valAt(d)[k];
+      if (!isFinite(v) || Math.abs(v) > YMAX*1.6){ pen=false; continue; }
+      const y=yFor(Math.max(-YMAX*1.05, Math.min(YMAX*1.05, v)));
+      if (pen) ctx.lineTo(mL+px,y); else { ctx.moveTo(mL+px,y); pen=true; }
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // match points
+  ctx.fillStyle=grn;
+  for (const p of matchPoints()){
+    ctx.beginPath(); ctx.arc(xFor(p), yFor(1), 4.2, 0, 2*Math.PI); ctx.fill();
+  }
+  // cursor
+  ctx.strokeStyle=ink3; ctx.lineWidth=1.2; ctx.setLineDash([2,3]);
+  ctx.beginPath(); ctx.moveTo(xFor(state.d),mT); ctx.lineTo(xFor(state.d),mT+pH); ctx.stroke(); ctx.setLineDash([]);
+
+  // labels
+  const rn = state.adm ? 'g' : 'r', xn = state.adm ? 'b' : 'x';
+  stext(ctx, (state.adm ? 'conductance ' : 'resistance ') + rn, mL+4, 11, 11.5, navy, 'left', true);
+  stext(ctx, (state.adm ? 'susceptance ' : 'reactance ') + xn, mL+pW/2, 11, 11.5, amber, 'left', true);
+  ctx.fillStyle=ink3; ctx.font='10.5px '+SANS; ctx.textAlign='right'; ctx.textBaseline='middle';
+  for (let v=-YMAX; v<=YMAX; v+=1) ctx.fillText(String(v), mL-5, yFor(v));
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  for (const [d,t] of [[0,'0'],[0.125,'λ/8'],[0.25,'λ/4'],[0.375,'3λ/8'],[0.5,'λ/2']]) ctx.fillText(t, xFor(d), mT+pH+5);
+  stext(ctx, 'distance from the load, d', mL+pW, h-8, 11, ink3, 'right', false);
+}
+
+function fmtZ(c, unit, scale){
+  if (!isFinite(c[0]) || !isFinite(c[1]) || Math.abs(c[1]) > 1e5) return '∞';
+  const z0 = v => (Math.abs(v) < 0.05 ? 0 : v);
+  const re=z0(c[0]*scale), im=z0(c[1]*scale), p = v => (Math.abs(v) >= 100 ? v.toFixed(0) : v.toFixed(1));
+  return `${p(re)} ${im<0?'−':'+'} j${p(Math.abs(im))} ${unit}`;
+}
+function update(){
+  setGamma();
+  document.getElementById('rl-val').textContent = state.open ? '∞' : state.rl.toFixed(1).replace(/\.0$/,'') + ' Ω';
+  document.getElementById('xl-val').textContent = (state.xl<0?'−':(state.xl>0?'+':'')) + Math.abs(state.xl).toFixed(1).replace(/\.0$/,'') + ' Ω';
+  document.getElementById('d-val').textContent = state.d.toFixed(3) + ' λ';
+  const g=gAt(state.d), m=C.abs(g), a=C.arg(g)*180/Math.PI;
+  document.getElementById('r-g').textContent = m < 1e-3 ? '0' : `${m.toFixed(3)} ∠ ${a.toFixed(1).replace("-", "−")}°`;
+  document.getElementById('r-in').textContent = state.adm ? fmtZ(yAt(state.d), 'mS', 1000/Z0) : fmtZ(zAt(state.d), 'Ω', Z0);
+  document.getElementById('k-in').textContent = state.adm ? 'Y_in at d' : 'Z_in at d';
+  document.getElementById('k-mt').textContent = state.adm ? 'g = 1 at' : 'r = 1 at';
+  const mp = matchPoints();
+  document.getElementById('r-mt').textContent =
+    C.abs(state.gl) < 1e-4 ? 'every d' : (mp.length ? mp.map(p => p.toFixed(3)+'λ').join(', ') : 'none');
+  draw();
+}
+
+markPreset('r150');
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

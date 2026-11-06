@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The two traveling waves in the solution of the wave equation</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34;
+          --fwd:#1d7a4d; --ref:#b3213a; --tot:#0067b9; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:46px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--on,var(--mid)); border-color:var(--on,var(--mid)); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .tgl input:checked ~ .t { color:var(--on,var(--navy)); }
+  .toggles { display:flex; gap:18px; flex-wrap:wrap; grid-column:1 / -1; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Forward and backward traveling waves on a line, and their sum"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(\alpha\lambda\)</label>
+      <input type="range" id="alpha" min="0" max="0.4" step="0.005" value="0.1">
+      <span class="val" id="a-val">0.10 Np</span>
+    </div>
+    <div class="ctl">
+      <label>\(\lvert V_0^-\rvert\)</label>
+      <input type="range" id="back" min="0" max="1" step="0.01" value="0">
+      <span class="val" id="b-val">0.00</span>
+    </div>
+    <div class="toggles">
+      <label class="tgl" style="--on:var(--fwd)"><input type="checkbox" id="show-f" checked><span class="sw"></span><span class="t">Forward</span></label>
+      <label class="tgl" style="--on:var(--ref)"><input type="checkbox" id="show-b" checked><span class="sw"></span><span class="t">Backward</span></label>
+      <label class="tgl"><input type="checkbox" id="show-t" checked><span class="sw"></span><span class="t">Sum</span></label>
+      <label class="tgl"><input type="checkbox" id="play" checked><span class="sw"></span><span class="t">Animate</span></label>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">forward loss per \(\lambda\)</span><span class="v" id="r-db">—</span></div>
+    <div class="ro"><span class="k">forward amplitude at \(3\lambda\)</span><span class="v" id="r-end">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// The general solution, in time, with V0+ = 1 at z = 0 and both phases zero:
+//   v(z,t) = e^{−αz} cos(ωt − βz) + r e^{−α(L−z)} cos(ωt + βz)
+// z is in wavelengths (βz = 2πz, αz = (αλ)z), L = 3λ is the far end of the plot, and the
+// backward wave's amplitude r is set where it starts, at z = L, so that it
+// decays in its own direction of travel just as the forward wave does. This
+// is Ellingson's V0− e^{+αz} with V0− = r e^{−αL}.
+const ZMAX = 3;
+const state = { a: 0.1, r: 0, phi: 0, playing: true };
+
+const aEl = document.getElementById('alpha'), bEl = document.getElementById('back');
+const aVal = document.getElementById('a-val'), bVal = document.getElementById('b-val');
+const sF = document.getElementById('show-f'), sB = document.getElementById('show-b'), sT = document.getElementById('show-t');
+const playEl = document.getElementById('play');
+
+aEl.addEventListener('input', () => { state.a = parseFloat(aEl.value); update(); });
+bEl.addEventListener('input', () => { state.r = parseFloat(bEl.value); update(); });
+for (const el of [sF, sB, sT]) el.addEventListener('change', draw);
+playEl.addEventListener('change', () => { state.playing = playEl.checked; if (state.playing) { lastTs = null; requestAnimationFrame(tick); } });
+
+let lastTs = null;
+function tick(ts){
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs)/1000); lastTs = ts;
+  state.phi = (state.phi + dt * 2*Math.PI*0.35) % (2*Math.PI);
+  draw();
+  requestAnimationFrame(tick);
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W = 360;
+let SCL = 1;
+const SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  let h = Math.max(240, Math.min(w * 0.38, 310));
+  if (SQ_MQ && SQ_MQ.matches) h = Math.round(h * 0.75);
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+const fwd = z => Math.exp(-state.a*z) * Math.cos(state.phi - 2*Math.PI*z);
+const bwd = z => state.r * Math.exp(-state.a*(ZMAX - z)) * Math.cos(state.phi + 2*Math.PI*z);
+
+function curve(fn, color, width, alpha, xFor, yFor, pW){
+  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.globalAlpha = alpha; ctx.beginPath();
+  for (let px=0; px<=pW; px++){ const z = px/pW*ZMAX; const y = yFor(fn(z)); (px===0) ? ctx.moveTo(xFor(z), y) : ctx.lineTo(xFor(z), y); }
+  ctx.stroke(); ctx.globalAlpha = 1;
+}
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const mL = 18, mR = 18, mT = 26, mB = 34;
+  const pW = w - mL - mR, pH = h - mT - mB, y0 = mT + pH/2;
+  const AMP = 2.05;
+  const xFor = z => mL + z/ZMAX*pW;
+  const yFor = v => y0 - v/AMP*(pH/2);
+  const k = state.a;              // αλ: nepers per wavelength, and z is in wavelengths
+
+  ctx.strokeStyle = '#eef3f8'; ctx.lineWidth = 1;
+  for (let z=0; z<=ZMAX+1e-9; z+=0.5){ ctx.beginPath(); ctx.moveTo(xFor(z), mT); ctx.lineTo(xFor(z), mT+pH); ctx.stroke(); }
+  ctx.strokeStyle = '#c7d2e0'; ctx.beginPath(); ctx.moveTo(mL, y0); ctx.lineTo(mL+pW, y0); ctx.stroke();
+
+  // envelopes of each wave, dashed
+  ctx.setLineDash([5,4]); ctx.lineWidth = 1.2;
+  if (sF.checked) {
+    for (const s of [1,-1]) curve(z => s*Math.exp(-k*z), cssVar('--fwd'), 1.2, 0.7, xFor, yFor, pW);
+  }
+  if (sB.checked && state.r > 0) {
+    for (const s of [1,-1]) curve(z => s*state.r*Math.exp(-k*(ZMAX - z)), cssVar('--ref'), 1.2, 0.7, xFor, yFor, pW);
+  }
+  ctx.setLineDash([]);
+
+  if (sF.checked) curve(fwd, cssVar('--fwd'), 1.8, 0.75, xFor, yFor, pW);
+  if (sB.checked && state.r > 0) curve(bwd, cssVar('--ref'), 1.8, 0.75, xFor, yFor, pW);
+  if (sT.checked) curve(z => fwd(z) + bwd(z), cssVar('--tot'), 2.8, 1, xFor, yFor, pW);
+
+  // a marker riding one crest of each wave shows its direction of travel
+  if (sF.checked) {
+    let zc = (state.phi/(2*Math.PI)) % 1;                 // crest: φ − 2πz = 0
+    for (; zc <= ZMAX; zc += 1) {
+      ctx.fillStyle = cssVar('--fwd'); ctx.beginPath(); ctx.arc(xFor(zc), yFor(fwd(zc)), 3.6, 0, 2*Math.PI); ctx.fill();
+    }
+  }
+  if (sB.checked && state.r > 0.02) {
+    let zc = 1 - (state.phi/(2*Math.PI)) % 1;             // crest: φ + 2πz = 2π n
+    for (; zc <= ZMAX; zc += 1) {
+      ctx.fillStyle = cssVar('--ref'); ctx.beginPath(); ctx.arc(xFor(zc), yFor(bwd(zc)), 3.6, 0, 2*Math.PI); ctx.fill();
+    }
+  }
+
+  stext(ctx, '→ +z', mL + 2, 12, 11.5, cssVar('--fwd'), 'left', true);
+  if (state.r > 0) stext(ctx, '−z ←', mL + pW - 2, 12, 11.5, cssVar('--ref'), 'right', true);
+  ctx.fillStyle = cssVar('--ink3'); ctx.font = '10.5px ' + SANS; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (let z=0; z<=ZMAX+1e-9; z+=1) ctx.fillText(z === 0 ? '0' : z + 'λ', xFor(z), mT + pH + 6);
+  stext(ctx, 'position z', mL + pW, h - 9, 11, cssVar('--ink3'), 'right', false);
+}
+
+function update(){
+  aVal.textContent = state.a.toFixed(2) + ' Np';
+  bVal.textContent = state.r.toFixed(2);
+  // αλ is the attenuation over one wavelength in nepers; 1 Np = 8.686 dB.
+  document.getElementById('r-db').textContent = (8.686*state.a).toFixed(2) + ' dB';
+  document.getElementById('r-end').textContent = Math.exp(-state.a*ZMAX).toFixed(2);
+  draw();
+}
+
+update();
+fit();
+requestAnimationFrame(tick);
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

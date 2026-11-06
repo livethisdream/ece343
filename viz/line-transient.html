@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A voltage step bouncing on a transmission line</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:52px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:7ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Voltage along the line at the current time, and the voltage at the source and load against time"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(R_s\)</label>
+      <input type="range" id="rs" min="0" max="200" step="1" value="25">
+      <span class="val" id="rs-val">25 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(R_L\)</label>
+      <input type="range" id="rl" min="0" max="1000" step="5" value="150">
+      <span class="val" id="rl-val">150 Ω</span>
+    </div>
+    <div class="ctl">
+      <label>\(t\)</label>
+      <input type="range" id="time" min="0" max="12" step="0.01" value="0">
+      <span class="val" id="t-val">0.00 T</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="play" checked><span class="sw"></span><span class="t">Animate</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">\(V_1^+\)</span><span class="v" id="r-v1">—</span></div>
+    <div class="ro"><span class="k">\(\Gamma_L\)</span><span class="v" id="r-gl">—</span></div>
+    <div class="ro"><span class="k">\(\Gamma_s\)</span><span class="v" id="r-gs">—</span></div>
+    <div class="ro"><span class="k">DC value</span><span class="v" id="r-dc">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// A 10 V step source with resistance Rs drives a lossless 50 ohm line through a
+// switch that closes at t = 0; the line ends in a resistor RL. Time is in units
+// of the one-way delay T, and position x runs from 0 at the source (z = -l) to
+// 1 at the load (z = 0). Wave k has amplitude a_k: a_0 = V1+ = Vs Z0/(Rs + Z0),
+// and each reflection multiplies by Gamma_L (at the load) or Gamma_s (at the
+// source). Even k travel toward the load and odd k toward the source; wave k
+// leaves its end at t = kT, so it occupies x <= t - k (even) or x >= 1 - (t - k)
+// (odd). The voltage anywhere is the sum of the waves that have reached it.
+const VS = 10, Z0 = 50, TMAX = 12, NW = 30;
+const state = { rs: 25, rl: 150, t: 0, playing: true };
+
+const rsEl = document.getElementById('rs'), rlEl = document.getElementById('rl'), tEl = document.getElementById('time');
+const playEl = document.getElementById('play');
+
+function params(){
+  const v1 = VS*Z0/(state.rs + Z0);
+  const gl = (state.rl - Z0)/(state.rl + Z0);
+  const gs = (state.rs - Z0)/(state.rs + Z0);
+  const a = [v1];
+  for (let k=1; k<NW; k++) a.push(a[k-1]*(k%2 ? gl : gs));
+  const dc = VS*state.rl/(state.rl + state.rs);
+  return { v1, gl, gs, a, dc };
+}
+function vAt(x, t, a){
+  let v = 0;
+  for (let k=0; k<a.length; k++){
+    const dt = t - k;
+    if (dt <= 0) break;
+    if (k%2 === 0 ? x <= dt : x >= 1 - dt) v += a[k];
+  }
+  return v;
+}
+
+rsEl.addEventListener('input', () => { state.rs = parseFloat(rsEl.value); update(); });
+rlEl.addEventListener('input', () => { state.rl = parseFloat(rlEl.value); update(); });
+tEl.addEventListener('input', () => { state.t = parseFloat(tEl.value); playEl.checked = false; state.playing = false; draw(); });
+playEl.addEventListener('change', () => { state.playing = playEl.checked; if (state.playing) { if (state.t >= TMAX) state.t = 0; lastTs = null; requestAnimationFrame(tick); } });
+
+let lastTs = null;
+function tick(ts){
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs)/1000); lastTs = ts;
+  state.t += dt * 1.0;                          // one delay T per second
+  if (state.t > TMAX + 1.5) state.t = 0;        // hold the settled picture, then restart
+  tEl.value = Math.min(state.t, TMAX);
+  draw();
+  requestAnimationFrame(tick);
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W = 360;
+let SCL = 1;
+const SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  let h = Math.max(280, Math.min(w * 0.42, 330));
+  if (SQ_MQ && SQ_MQ.matches) h = Math.round(h * 0.82);
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function axesBox(x, y, w, h){
+  ctx.strokeStyle = '#cddce9'; ctx.lineWidth = 1; ctx.strokeRect(x, y, w, h);
+}
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const p = params();
+  const t = Math.min(state.t, TMAX);
+  document.getElementById('t-val').textContent = t.toFixed(2) + ' T';
+
+  const vmax = Math.max(VS, ...[0,1,2,3,4,5,6,7].map(k => vAt(1, k+1.001, p.a)), ...[0,1,2,3,4,5,6,7].map(k => vAt(0, k+0.001, p.a)));
+  const vmin = Math.min(0, ...[0,1,2,3,4,5,6,7].map(k => vAt(1, k+1.001, p.a)), ...[0,1,2,3,4,5,6,7].map(k => vAt(0, k+0.001, p.a)));
+  const span = (vmax - vmin) * 1.12 || 1;
+  const top = vmax + (span - (vmax - vmin))/2, bot = top - span;
+
+  const mL = 40, mR = 14, gap = 40;
+  const h1 = Math.round((h - 22 - gap - 26) * 0.46), h2 = h - 22 - gap - 26 - h1;
+  const y1 = 20, y2 = y1 + h1 + gap;
+  const pW = w - mL - mR;
+  const yv = (v, y0, hh) => y0 + (top - v)/(top - bot)*hh;
+
+  // ---- top: voltage along the line at time t ----
+  axesBox(mL, y1, pW, h1);
+  ctx.strokeStyle = '#e3edf6';
+  ctx.beginPath(); ctx.moveTo(mL, yv(0, y1, h1)); ctx.lineTo(mL+pW, yv(0, y1, h1)); ctx.stroke();
+  ctx.strokeStyle = cssVar('--navy'); ctx.lineWidth = 2.6; ctx.beginPath();
+  const N = 500;
+  for (let i=0; i<=N; i++){
+    const x = i/N, v = vAt(x, t, p.a), X = mL + x*pW, Y = yv(v, y1, h1);
+    if (i === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+  }
+  ctx.stroke();
+  stext(ctx, 'voltage along the line', mL + 4, y1 - 9, 11, cssVar('--ink3'), 'left', true);
+  stext(ctx, 'source', mL, y1 + h1 + 10, 10.5, cssVar('--ink3'), 'left', false);
+  stext(ctx, 'load', mL + pW, y1 + h1 + 10, 10.5, cssVar('--ink3'), 'right', false);
+
+  // ---- bottom: voltage at the source and at the load against time ----
+  axesBox(mL, y2, pW, h2);
+  const tx = tt => mL + tt/TMAX*pW;
+  ctx.setLineDash([5,4]); ctx.strokeStyle = cssVar('--ink3'); ctx.lineWidth = 1.1;
+  ctx.beginPath(); ctx.moveTo(mL, yv(p.dc, y2, h2)); ctx.lineTo(mL+pW, yv(p.dc, y2, h2)); ctx.stroke();
+  ctx.setLineDash([]);
+  for (const [x, col, lw] of [[0, cssVar('--amber'), 1.8], [1, cssVar('--navy'), 2.6]]){
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
+    const M = 1200;
+    for (let i=0; i<=M; i++){
+      const tt = i/M*t, X = tx(tt), Y = yv(vAt(x, tt, p.a), y2, h2);
+      if (i === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+    }
+    ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(0,103,185,0.35)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(tx(t), y2); ctx.lineTo(tx(t), y2 + h2); ctx.stroke();
+  ctx.fillStyle = cssVar('--ink3'); ctx.font = '10.5px ' + SANS; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (let k=0; k<=TMAX; k+=2) ctx.fillText(k === 0 ? '0' : k + 'T', tx(k), y2 + h2 + 4);
+  stext(ctx, 'at the load', mL + 4, y2 - 9, 11, cssVar('--navy'), 'left', true);
+  stext(ctx, 'at the source', mL + 90, y2 - 9, 11, cssVar('--amber'), 'left', true);
+
+  // voltage ticks on both panels
+  const step = span > 20 ? 10 : (span > 8 ? 5 : 2);
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ctx.fillStyle = cssVar('--ink3');
+  for (let v = Math.ceil(bot/step)*step; v <= top; v += step){
+    ctx.fillText(v + ' V', mL - 4, yv(v, y1, h1));
+    ctx.fillText(v + ' V', mL - 4, yv(v, y2, h2));
+  }
+}
+
+function fmtG(g){ return (g < 0 ? '−' : '') + Math.abs(g).toFixed(2); }
+function update(){
+  document.getElementById('rs-val').textContent = state.rs.toFixed(0) + ' Ω';
+  document.getElementById('rl-val').textContent = state.rl.toFixed(0) + ' Ω';
+  const p = params();
+  document.getElementById('r-v1').textContent = p.v1.toFixed(2) + ' V';
+  document.getElementById('r-gl').textContent = fmtG(p.gl);
+  document.getElementById('r-gs').textContent = fmtG(p.gs);
+  document.getElementById('r-dc').textContent = p.dc.toFixed(2) + ' V';
+  draw();
+}
+
+update();
+fit();
+requestAnimationFrame(tick);
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

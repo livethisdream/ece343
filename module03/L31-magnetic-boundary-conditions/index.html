@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L31 - Magnetic Boundary Conditions &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l31-magnetic-boundary-conditions">
+<h1>L31 - Magnetic Boundary Conditions<a class="headerlink" href="#l31-magnetic-boundary-conditions" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Magnetic Boundary Conditions</h1>
+<div class="title-rule"></div>
+<p>Today we find what the magnetic field must do where one material meets another.</p>
+<p>Lesson 31 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '7'; counter-reset: lo 3">
+  <li>I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 24 found the two conditions the electric field obeys at a material
+boundary by applying the laws of electrostatics to a thin loop and a thin box.
+Today we repeat that work for the magnetic field. The two laws of
+magnetostatics, Ampere’s law and Gauss’s law for magnetism, give one condition
+on the component of the field along the boundary and one on the component
+across it. The results look like Lesson 24’s with the permeability in place of
+the permittivity, with one difference: a current that flows in a thin sheet on
+the boundary makes the tangential field jump. With the two conditions we can
+find the field on one side of a boundary from the field on the other, and see
+why field lines in air meet iron almost along the normal.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The two laws of magnetostatics, in integral form:</p>
+<div class="math notranslate nohighlight">
+\[\oint_S \mathbf{B}\cdot d\mathbf{s} = 0, \qquad \oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}, \qquad \mathbf{B} = \mu\mathbf{H}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 28 introduced <strong>Gauss’s law for magnetism</strong>: the flux of the magnetic
+flux density <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> out of any closed surface <span class="math notranslate nohighlight">\(S\)</span> is zero, because there
+is no magnetic charge for field lines to start or end on. Lesson 29 derived
+<strong>Ampere’s law</strong> for any steady current: the circulation of the magnetic field
+intensity <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> around any closed path <span class="math notranslate nohighlight">\(C\)</span> equals the current
+<span class="math notranslate nohighlight">\(I_\text{encl}\)</span> that passes through a surface bounded by the path, with the
+right-hand rule setting the direction of the current. Today we apply both laws
+to paths and surfaces of any shape, so we need them in that general form. Inside a material, the <strong>permeability</strong> <span class="math notranslate nohighlight">\(\mu\)</span>, in
+H/m, ties the two fields together. These three statements play the roles that
+Gauss’s law, the loop law, and <span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span> played in
+Lesson 24.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-magnetic-materials">
+<div class="wrap docutils container">
+<p class="rubric">Magnetic Materials</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mu = \mu_r\mu_0\)</span>, with <span class="math notranslate nohighlight">\(\mu_0 = 4\pi\times10^{-7}\)</span> H/m</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>Example</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\mu_r\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Diamagnetic</p></td>
+<td class="text-left"><p>Copper</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.99999\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Paramagnetic</p></td>
+<td class="text-left"><p>Aluminum</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.00002\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ferromagnetic</p></td>
+<td class="text-left"><p>Iron</p></td>
+<td class="text-left"><p>Hundreds to thousands</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We write the permeability as the <strong>relative permeability</strong> <span class="math notranslate nohighlight">\(\mu_r\)</span> times the
+permeability of free space <span class="math notranslate nohighlight">\(\mu_0\)</span>. A magnetic field acts on the electrons in
+every atom, and a material’s <span class="math notranslate nohighlight">\(\mu_r\)</span> records how the atoms respond. In a
+<strong>diamagnetic</strong> material, such as copper, the field induces atomic moments that
+oppose it, by the induction that Lesson 33 introduces, and <span class="math notranslate nohighlight">\(\mu_r\)</span> is slightly less than one. In a <strong>paramagnetic</strong>
+material, such as aluminum, the atoms’ own moments line up weakly with the
+field, and <span class="math notranslate nohighlight">\(\mu_r\)</span> is slightly more than one. In both, <span class="math notranslate nohighlight">\(\mu_r\)</span> differs from one
+by about <span class="math notranslate nohighlight">\(10^{-5}\)</span>, so we treat them, along with air and the polyethylene in a
+coaxial cable, as having <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>. In a <strong>ferromagnetic</strong> material, such
+as iron, nickel, or a ferrite, the atomic moments line up strongly in groups,
+and <span class="math notranslate nohighlight">\(\mu_r\)</span> runs from hundreds to thousands. Its value depends on the field
+strength and on the material’s history, which is how a permanent magnet keeps
+its field. Today we treat each material as having one fixed <span class="math notranslate nohighlight">\(\mu_r\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-tangential-field-a-thin-loop">
+<div class="wrap docutils container">
+<p class="rubric">The Tangential Field: A Thin Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L31-loop.svg"
+     alt="A rectangular loop a, b, c, d of width W and height h straddles the boundary between region 1 with permeability mu 1 above and region 2 with permeability mu 2 below; a surface current J s flows into the page along the boundary, through the loop, and the fields H1 above and H2 below point in different directions, each resolved by dashed lines into a tangential part, H t1 or H t2, and a normal part, H n1 or H n2"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>A surface current <span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span>, in A/m, flows on the boundary.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We set up the geometry exactly as in Lesson 24. The unit normal
+<span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> points from region 2 into region 1, the unit tangent
+<span class="math notranslate nohighlight">\(\hat{\mathbf{t}}\)</span> lies along the boundary, and each field splits into a
+tangential component, <span class="math notranslate nohighlight">\(H_{t1}\)</span> or <span class="math notranslate nohighlight">\(H_{t2}\)</span>, and a normal component, <span class="math notranslate nohighlight">\(H_{n1}\)</span> or
+<span class="math notranslate nohighlight">\(H_{n2}\)</span>. The boundary can also carry the <strong>surface current density</strong>
+<span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span> that Lesson 28 defined: a current that flows in a sheet of
+negligible thickness, measured in amperes per meter of width across the sheet.
+The current sheet of Lesson 30 is one example.</p>
+<p>We take the rectangular path <span class="math notranslate nohighlight">\(a \to b \to c \to d \to a\)</span>, with long sides of
+length <span class="math notranslate nohighlight">\(W\)</span> parallel to the boundary, one in each region, and short sides of
+height <span class="math notranslate nohighlight">\(h\)</span> crossing it. The path circulates so that, by the right-hand rule,
+the current it encloses is the current flowing along <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\times
+\hat{\mathbf{t}}\)</span>, into the page in the figure. We make <span class="math notranslate nohighlight">\(W\)</span> small enough that
+the fields and the surface current are uniform along it, then shrink <span class="math notranslate nohighlight">\(h\)</span> toward
+zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-evaluating-the-loop">
+<div class="wrap docutils container">
+<p class="rubric">Evaluating the Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint \mathbf{H}\cdot d\mathbf{l} &amp;= \int_a^b + \int_b^c + \int_c^d + \int_d^a = I_\text{encl} \\ \int_a^b \mathbf{H}_1\cdot\hat{\mathbf{t}}\ dl - \int_c^d \mathbf{H}_2\cdot\hat{\mathbf{t}}\ dl &amp;= H_{t1} W - H_{t2} W \\ \int_b^c,\ \int_d^a &amp;\to 0 \quad \text{as } h \to 0 \\ I_\text{encl} &amp;= \mathbf{J}_s\cdot\left(\hat{\mathbf{n}}\times\hat{\mathbf{t}}\right) W \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We split the closed path into its four sides. Along side <span class="math notranslate nohighlight">\(ab\)</span> the path runs in
+the <span class="math notranslate nohighlight">\(+\hat{\mathbf{t}}\)</span> direction through region 1, so the dot product picks
+out <span class="math notranslate nohighlight">\(H_{t1}\)</span>, and the integral is <span class="math notranslate nohighlight">\(H_{t1}\)</span> times the length <span class="math notranslate nohighlight">\(W\)</span>. Along side
+<span class="math notranslate nohighlight">\(cd\)</span> the path runs back in the <span class="math notranslate nohighlight">\(-\hat{\mathbf{t}}\)</span> direction through region 2,
+which gives <span class="math notranslate nohighlight">\(-H_{t2} W\)</span>. The two short sides have length <span class="math notranslate nohighlight">\(h\)</span> and finite fields
+on them, so their integrals vanish as <span class="math notranslate nohighlight">\(h \to 0\)</span>. This is where the magnetic
+case departs from the electric one: the right-hand side of Ampere’s law is the
+current through the loop, not zero. As <span class="math notranslate nohighlight">\(h \to 0\)</span>, any current spread through
+the volume of either material passes through an area <span class="math notranslate nohighlight">\(W h\)</span> that vanishes. Only
+a surface current survives the limit. The part of <span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span> that crosses
+the loop is its component along the loop’s normal, <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\times
+\hat{\mathbf{t}}\)</span>, and the current through the loop is that component times
+the width <span class="math notranslate nohighlight">\(W\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-tangential-condition">
+<div class="wrap docutils container">
+<p class="rubric">The Tangential Condition</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H_{t1} - H_{t2} &amp;= \mathbf{J}_s\cdot\left(\hat{\mathbf{n}}\times\hat{\mathbf{t}}\right) \\ \hat{\mathbf{n}}\times\left(\mathbf{H}_1 - \mathbf{H}_2\right) &amp;= \mathbf{J}_s \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>With no surface current, tangential <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is continuous.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Dividing by <span class="math notranslate nohighlight">\(W\)</span> gives the first line: the tangential component of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>
+jumps by the surface current that flows at right angles to it. The second line
+says the same thing for every tangent direction at once. The scalar triple
+product rewrites the first line as
+<span class="math notranslate nohighlight">\(\hat{\mathbf{t}}\cdot\left(\mathbf{H}_1 - \mathbf{H}_2\right) =
+\hat{\mathbf{t}}\cdot\left(\mathbf{J}_s\times\hat{\mathbf{n}}\right)\)</span>. That
+holds for every <span class="math notranslate nohighlight">\(\hat{\mathbf{t}}\)</span> in the boundary, so the tangential part of
+<span class="math notranslate nohighlight">\(\mathbf{H}_1 - \mathbf{H}_2\)</span> equals <span class="math notranslate nohighlight">\(\mathbf{J}_s\times\hat{\mathbf{n}}\)</span>.
+Crossing <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> into both sides removes the normal part on the left
+and, since <span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span> lies in the boundary, returns <span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span> on the
+right. Between two ordinary materials no current flows in a sheet on the
+boundary, <span class="math notranslate nohighlight">\(\mathbf{J}_s = 0\)</span>, and the tangential component of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is
+the same on both sides, just as tangential <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> was in Lesson 24.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-check-the-current-sheet">
+<div class="wrap docutils container">
+<p class="rubric">Check: The Current Sheet</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Sheet <span class="math notranslate nohighlight">\(\mathbf{J}_s = \hat{\mathbf{x}} J_s\)</span> in the plane <span class="math notranslate nohighlight">\(z = 0\)</span>, free space on both sides, <span class="math notranslate nohighlight">\(\hat{\mathbf{n}} = \hat{\mathbf{z}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H}_1 &amp;= -\hat{\mathbf{y}}\ \tfrac{J_s}{2}, \qquad \mathbf{H}_2 = +\hat{\mathbf{y}}\ \tfrac{J_s}{2} \\ \hat{\mathbf{n}}\times\left(\mathbf{H}_1 - \mathbf{H}_2\right) &amp;= \hat{\mathbf{z}}\times\left(-\hat{\mathbf{y}} J_s\right) = \hat{\mathbf{x}} J_s \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 30 used Ampere’s law to find the field of an infinite current sheet: a
+uniform field of magnitude <span class="math notranslate nohighlight">\(J_s/2\)</span> on each side, parallel to the sheet and at
+right angles to the current, pointing in opposite directions on the two sides.
+For a sheet carrying current in the <span class="math notranslate nohighlight">\(+\hat{\mathbf{x}}\)</span> direction, the
+right-hand rule gives <span class="math notranslate nohighlight">\(-\hat{\mathbf{y}}\)</span> above and <span class="math notranslate nohighlight">\(+\hat{\mathbf{y}}\)</span> below.
+The tangential field jumps by <span class="math notranslate nohighlight">\(J_s\)</span> from one side to the other, and the
+tangential condition returns the sheet’s current exactly. The condition is the
+same Ampere’s law applied to a smaller loop, so we expect them to agree; the
+agreement checks the signs and the direction of <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-normal-field-a-thin-pillbox">
+<div class="wrap docutils container">
+<p class="rubric">The Normal Field: A Thin Pillbox</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L31-pillbox.svg"
+     alt="A short cylinder with flat faces of area delta A, one in each region, straddles the boundary between regions with permeabilities mu 1 and mu 2; the outward normal of the top face is n hat and of the bottom face is minus n hat, and the flux densities B1 and B2 cross the faces"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Shrink the height: <span class="math notranslate nohighlight">\(h \to 0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To relate the normal components, we apply Gauss’s law for magnetism to the same
+pillbox Lesson 24 used: a short cylinder with two flat faces of area <span class="math notranslate nohighlight">\(\Delta A\)</span>
+parallel to the boundary, one in each region. We make <span class="math notranslate nohighlight">\(\Delta A\)</span> small enough
+that <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is uniform over each face, and then shrink the height <span class="math notranslate nohighlight">\(h\)</span>
+toward zero. Unlike Lesson 24, no surface term appears: the right-hand side of
+Gauss’s law for magnetism is zero for every closed surface.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-evaluating-the-pillbox">
+<div class="wrap docutils container">
+<p class="rubric">Evaluating the Pillbox</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint \mathbf{B}\cdot d\mathbf{s} &amp;= \int_\text{top} + \int_\text{bottom} + \int_\text{side} = 0 \\ \int_\text{top} \mathbf{B}_1\cdot\hat{\mathbf{n}}\ ds &amp;= B_{n1}\ \Delta A \\ \int_\text{bottom} \mathbf{B}_2\cdot\left(-\hat{\mathbf{n}}\right) ds &amp;= -B_{n2}\ \Delta A \\ \int_\text{side} &amp;\to 0 \quad \text{as } h \to 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The closed surface has three parts. On the top face, in region 1, the outward
+normal is <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>, so the flux is the normal component <span class="math notranslate nohighlight">\(B_{n1}\)</span>
+times the area. On the bottom face, in region 2, the outward normal is
+<span class="math notranslate nohighlight">\(-\hat{\mathbf{n}}\)</span>, so the flux is <span class="math notranslate nohighlight">\(-B_{n2}\ \Delta A\)</span>. The curved side has an
+area proportional to <span class="math notranslate nohighlight">\(h\)</span>, and its flux vanishes as <span class="math notranslate nohighlight">\(h \to 0\)</span>. The three fluxes
+sum to zero, as they do for every closed surface.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-normal-condition">
+<div class="wrap docutils container">
+<p class="rubric">The Normal Condition</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[B_{n1} = B_{n2} \qquad\Longleftrightarrow\qquad \hat{\mathbf{n}}\cdot\left(\mathbf{B}_1 - \mathbf{B}_2\right) = 0\]</div>
+<ul class="simple">
+<li><p>Then <span class="math notranslate nohighlight">\(\mu_1 H_{n1} = \mu_2 H_{n2}\)</span>: normal <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> jumps.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Dividing by <span class="math notranslate nohighlight">\(\Delta A\)</span> gives the <strong>normal boundary condition</strong>: the normal
+component of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is the same on both sides of every boundary. Lesson
+24’s normal condition had the surface charge on its right-hand side; this one
+has zero, because no magnetic charge exists to sit on a surface. Writing
+<span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span> on each side shows that the normal component of
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is discontinuous: it is smaller in the material with the larger
+permeability, by the ratio <span class="math notranslate nohighlight">\(\mu_1/\mu_2\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-electric-and-magnetic-conditions">
+<div class="wrap docutils container">
+<p class="rubric">Electric and Magnetic Conditions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Tangential</p></th>
+<th class="head text-left"><p>Normal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Electric</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E_{t1} = E_{t2}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(D_{n1} - D_{n2} = \rho_s\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Magnetic</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\times\left(\mathbf{H}_1 - \mathbf{H}_2\right) = \mathbf{J}_s\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(B_{n1} = B_{n2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The table sets today’s two conditions beside Lesson 24’s. In each row the
+tangential condition comes from a loop law and the normal condition from a
+Gauss’s law. <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> takes the place of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> the
+place of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>, and <span class="math notranslate nohighlight">\(\mu\)</span> the place of <span class="math notranslate nohighlight">\(\epsilon\)</span>. The sources trade
+places: in electrostatics a surface charge makes the normal field jump, and in
+magnetostatics a surface current makes the tangential field jump. At a boundary
+between two materials with no surface charge and no surface current, the two
+sets of conditions have the same form, and so the fields bend in the same way.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-how-the-field-bends">
+<div class="wrap docutils container">
+<p class="rubric">How the Field Bends</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Measure each angle from the normal, with <span class="math notranslate nohighlight">\(\mathbf{J}_s = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\tan\theta_1}{\tan\theta_2} = \frac{H_{t1}}{H_{t2}} \cdot \frac{H_{n2}}{H_{n1}} = 1 \cdot \frac{\mu_1}{\mu_2}\]</div>
+<ul class="simple">
+<li><p>The field leans farther from the normal in the larger <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Let <span class="math notranslate nohighlight">\(\theta_1\)</span> and <span class="math notranslate nohighlight">\(\theta_2\)</span> be the angles between the field and the normal on
+each side. In a material with one fixed <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>
+point the same way, so each angle describes both fields. The tangent of each
+angle is the tangential component over the normal component. In the ratio of
+the two tangents, the tangential components cancel, because they are equal
+when no surface current flows. The normal components leave
+<span class="math notranslate nohighlight">\(H_{n2}/H_{n1}\)</span>, which the normal condition sets to <span class="math notranslate nohighlight">\(\mu_1/\mu_2\)</span>. The result
+is Lesson 24’s with <span class="math notranslate nohighlight">\(\mu\)</span> in place of <span class="math notranslate nohighlight">\(\epsilon\)</span>. What differs is the size of
+the ratio: the permittivities in Lesson 24 differed by factors of two to ten,
+but a ferromagnetic material can have a permeability a thousand times that of
+air.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-field-at-a-magnetic-boundary">
+<div class="wrap docutils container">
+<p class="rubric">The Field at a Magnetic Boundary</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/dielectric-boundary.html?mode=mag"
+        width="100%" height="489"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Magnetic field lines bending at the boundary between two magnetic materials, with relative permeabilities and the angle in region 1 set by sliders"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget is Lesson 24’s, run for the magnetic field. It draws the field
+crossing from region 1, above, into region 2, below, with no surface current on
+the boundary. The relative permeability sliders run on a logarithmic scale from
+<span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(1000\)</span>. The bold arrows are <span class="math notranslate nohighlight">\(\mathbf{H}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{H}_2\)</span> at one
+point, drawn to scale, and the dashed lines are their components. The thin
+lines are lines of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, spaced so that closer lines mean a stronger
+field: they spread apart in the material, where <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is weaker, and
+some lines of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> end at the boundary. The default
+is air over a material with <span class="math notranslate nohighlight">\(\mu_r = 100\)</span>, with the field <span class="math notranslate nohighlight">\(10^\circ\)</span> from the
+normal in the air. In the material the field leans out to <span class="math notranslate nohighlight">\(86.8^\circ\)</span>, and
+<span class="math notranslate nohighlight">\(\vert\mathbf{H}_2\vert\)</span> drops to <span class="math notranslate nohighlight">\(0.174\)</span> of <span class="math notranslate nohighlight">\(\vert\mathbf{H}_1\vert\)</span>. Turn on
+<strong>Show B</strong> and the arrows and thin lines switch to <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>. Now the
+normal components match, every line continues across the boundary, and the
+lines crowd together in the material, where <span class="math notranslate nohighlight">\(\vert\mathbf{B}_2\vert\)</span> is
+<span class="math notranslate nohighlight">\(17.4\)</span> times <span class="math notranslate nohighlight">\(\vert\mathbf{B}_1\vert\)</span>. Raise
+<span class="math notranslate nohighlight">\(\mu_{r2}\)</span> to <span class="math notranslate nohighlight">\(1000\)</span> and the field inside runs almost along the boundary
+unless it arrives exactly along the normal.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-high-permeability-cores">
+<div class="wrap docutils container">
+<p class="rubric">High-Permeability Cores</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L31-iron.svg"
+     alt="Lines of B from a uniform field bend toward an iron cylinder, meet its surface almost along the normal, and run straight through it, about twice as close together as far away; at one surface point the field inside is 80 degrees from the normal and the field just outside is 0.32 degrees from it"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Outside, at <span class="math notranslate nohighlight">\(\mu_r = 1000\)</span>: <span class="math notranslate nohighlight">\(\tan\theta_\text{air} = \tan\theta_\text{iron}/1000\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The figure shows an iron cylinder with <span class="math notranslate nohighlight">\(\mu_r = 1000\)</span> placed in a uniform
+field. Its field lines come from solving Laplace’s equation around the cylinder,
+a calculation this course does not derive; we use only what it shows. Inside
+the cylinder the field is uniform and runs straight across it, so at a point on
+the surface the angle from the normal inside is the angle around the cylinder.
+The bending relation turns any angle inside up to <span class="math notranslate nohighlight">\(85^\circ\)</span> into an angle in
+the air under one degree from the normal: at the marked point, <span class="math notranslate nohighlight">\(80^\circ\)</span>
+inside becomes <span class="math notranslate nohighlight">\(0.32^\circ\)</span> outside. Only a field that runs within a degree or
+two of the surface inside leaves at a larger angle; <span class="math notranslate nohighlight">\(89^\circ\)</span> gives
+<span class="math notranslate nohighlight">\(3.3^\circ\)</span>. The lines of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> therefore bend in the air to meet the
+iron almost along the normal, and the cylinder draws in flux from a region
+wider than itself. The same solution gives the flux density inside as
+<span class="math notranslate nohighlight">\(2\mu_r/(\mu_r + 1) = 2.00\)</span> times the applied field, which the figure shows as
+lines about twice as close together inside as far away. This is the magnetic
+counterpart of the field at a conductor in Lesson 24, and it is why we wind
+transformers and inductors on iron or ferrite cores: the core guides the field
+along its own path.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-boundary-with-surface-current">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Boundary with Surface Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Region 1, <span class="math notranslate nohighlight">\(z &lt; 0\)</span>: <span class="math notranslate nohighlight">\(\mu_0\)</span>, <span class="math notranslate nohighlight">\(\mathbf{H}_1 = \hat{\mathbf{x}} + \hat{\mathbf{y}}2 + \hat{\mathbf{z}}3\)</span> A/m. Region 2, <span class="math notranslate nohighlight">\(z &gt; 0\)</span>: <span class="math notranslate nohighlight">\(4\mu_0\)</span>. <span class="math notranslate nohighlight">\(\mathbf{J}_s = \hat{\mathbf{x}}4 + \hat{\mathbf{y}}5\)</span> A/m.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}_2 = \hat{\mathbf{x}}6 - \hat{\mathbf{y}}2 + \hat{\mathbf{z}}0.75\ \text{A/m}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the field across a boundary that carries current</p>
+<p>The plane <span class="math notranslate nohighlight">\(z = 0\)</span> separates region 1, <span class="math notranslate nohighlight">\(z &lt; 0\)</span>, with <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>, from
+region 2, <span class="math notranslate nohighlight">\(z &gt; 0\)</span>, with <span class="math notranslate nohighlight">\(\mu = 4\mu_0\)</span>. The boundary carries a surface current
+<span class="math notranslate nohighlight">\(\mathbf{J}_s = \hat{\mathbf{x}}4 + \hat{\mathbf{y}}5\)</span> A/m, and next to it in
+region 1, <span class="math notranslate nohighlight">\(\mathbf{H}_1 = \hat{\mathbf{x}} + \hat{\mathbf{y}}2 +
+\hat{\mathbf{z}}3\)</span> A/m. Find <span class="math notranslate nohighlight">\(\mathbf{H}_2\)</span>.</p>
+<p>The normal points from region 2 into region 1, so <span class="math notranslate nohighlight">\(\hat{\mathbf{n}} =
+-\hat{\mathbf{z}}\)</span>. The <span class="math notranslate nohighlight">\(z\)</span> components are the normal components, and the <span class="math notranslate nohighlight">\(x\)</span>
+and <span class="math notranslate nohighlight">\(y\)</span> components are the tangential ones. For the tangential condition we
+write <span class="math notranslate nohighlight">\(\mathbf{H}_1 - \mathbf{H}_2\)</span> with unknown components and cross
+<span class="math notranslate nohighlight">\(-\hat{\mathbf{z}}\)</span> into it:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} -\hat{\mathbf{z}}\times\left[\hat{\mathbf{x}}\left(1 - H_{2x}\right) + \hat{\mathbf{y}}\left(2 - H_{2y}\right)\right] &amp;= \hat{\mathbf{x}}\left(2 - H_{2y}\right) - \hat{\mathbf{y}}\left(1 - H_{2x}\right) \\ &amp;= \hat{\mathbf{x}}4 + \hat{\mathbf{y}}5 \end{aligned}\end{split}\]</div>
+<p>The <span class="math notranslate nohighlight">\(z\)</span> part of <span class="math notranslate nohighlight">\(\mathbf{H}_1 - \mathbf{H}_2\)</span> drops out, because
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\times\hat{\mathbf{z}} = 0\)</span>. Matching components gives
+<span class="math notranslate nohighlight">\(2 - H_{2y} = 4\)</span>, so <span class="math notranslate nohighlight">\(H_{2y} = -2\)</span> A/m, and <span class="math notranslate nohighlight">\(-(1 - H_{2x}) = 5\)</span>, so
+<span class="math notranslate nohighlight">\(H_{2x} = 6\)</span> A/m. The normal condition equates the normal components of
+<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_0 \times 3 = 4\mu_0 H_{2z} \quad\Rightarrow\quad H_{2z} = 0.75\ \text{A/m}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\mathbf{H}_2 = \hat{\mathbf{x}}6 - \hat{\mathbf{y}}2 + \hat{\mathbf{z}}0.75\)</span>
+A/m. As a check, the normal flux density is <span class="math notranslate nohighlight">\(\mu_0 \times 3 = 3.77\ \mu\)</span>T on
+both sides. The surface current changed the tangential field from
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}} + \hat{\mathbf{y}}2\)</span> to <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}6 -
+\hat{\mathbf{y}}2\)</span>; without it, the tangential components would match.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span></p></td>
+<td class="text-left"><p>Unit normal, from region 2 into region 1</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span></p></td>
+<td class="text-left"><p>Surface current density, in A/m (Lesson 28)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Permeability</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mu = \mu_r\mu_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mu_r \approx 1\)</span> except in ferromagnetic materials</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Tangential condition</p></td>
+<td class="text-left"><p>From Ampere’s law on a thin loop</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\times\left(\mathbf{H}_1 - \mathbf{H}_2\right) = \mathbf{J}_s\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Normal condition</p></td>
+<td class="text-left"><p>From Gauss’s law for magnetism on a thin pillbox</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(B_{n1} = B_{n2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>No surface current</p></td>
+<td class="text-left"><p>Two ordinary materials</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H_{t1} = H_{t2}\)</span>, <span class="math notranslate nohighlight">\(\mu_1 H_{n1} = \mu_2 H_{n2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Bending</p></td>
+<td class="text-left"><p>Angle from the normal</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\tan\theta_1}{\tan\theta_2} = \frac{\mu_1}{\mu_2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Iron</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mu_r\)</span> in the hundreds to thousands</p></td>
+<td class="text-left"><p>Field lines meet it almost along the normal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L31_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L31_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 32</strong>: the Magnetostatics Lab.</p></li>
+<li><p><strong>Module 4</strong>: a wave at a boundary satisfies Lesson 24’s and today’s conditions at once, which sets the reflected and transmitted fields.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>With today’s two conditions, we can find the magnetostatic field from its
+currents, with the Biot-Savart law or Ampere’s law, and carry it across a
+material boundary. Lesson 32 is the Magnetostatics Lab. In Module 4
+the fields change in time, the electric and magnetic fields drive each other,
+and a wave that reaches a boundary has to satisfy Lesson 24’s conditions and
+today’s at the same time. Those four conditions decide how much of the wave
+reflects and how much passes through.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L31-magnetic-boundary-conditions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L34 - Maxwell’s Equations &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l34-maxwell-s-equations">
+<h1>L34 - Maxwell’s Equations<a class="headerlink" href="#l34-maxwell-s-equations" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Maxwell's Equations</h1>
+<div class="title-rule"></div>
+<p>Today we collect the four laws of electromagnetics for fields that change with time.</p>
+<p>Lesson 34 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '8'; counter-reset: lo 2">
+  <li>I know the forms of Maxwell's equations for time-varying fields and use them to calculate electric and magnetic fields for a variety of physical systems.</li>
+</ol>
+<div class="depth docutils container">
+<p>Modules 2 and 3 derived four laws for fields that do not change with time, and
+Lesson 33 added the two terms that a changing field brings: Faraday’s
+<span class="math notranslate nohighlight">\(\partial\mathbf{B}/\partial t\)</span> and Maxwell’s displacement current
+<span class="math notranslate nohighlight">\(\partial\mathbf{D}/\partial t\)</span>. Today we write the four laws together as
+<strong>Maxwell’s equations</strong>, in integral and point form, and see what each says.
+We then use the set three ways: to find
+the voltage that a changing magnetic flux induces in a loop, to check that a
+proposed pair of fields obeys all four laws, and to derive the voltage and
+current ratios of an ideal transformer. Lessons 35 through 37 use the same
+equations to show that the fields travel as a wave.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Law</p></th>
+<th class="head text-left"><p>Static form</p></th>
+<th class="head text-center"><p>Lesson</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}\)</span></p></td>
+<td class="text-center"><p>20–21</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gauss’s law for magnetism</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{B}\cdot d\mathbf{s} = 0\)</span></p></td>
+<td class="text-center"><p>28</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Circulation of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{E}\cdot d\mathbf{l} = 0\)</span></p></td>
+<td class="text-center"><p>22</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span></p></td>
+<td class="text-center"><p>29</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 30 closed Module 3 with this table of the laws of static fields. Two
+laws describe the electric field and two the magnetic field, and in statics
+the two halves never mix: charges make the electric field, currents make the
+magnetic field, and neither field appears in the other’s equations. Lesson 33
+showed that this separation fails once the fields change. A changing magnetic
+flux through a closed path drives a circulation of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> around it, so
+the static Faraday’s law gains a term. A charging capacitor carries a current
+into one plate with no conduction current across the gap, so Ampere’s law
+gains a term in the changing electric flux. Today we write the four laws with
+those two terms in place.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-maxwell-s-equations">
+<div class="wrap docutils container">
+<p class="rubric">Maxwell’s Equations</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Law</p></th>
+<th class="head text-left"><p>Integral form</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gauss’s law for magnetism</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{B}\cdot d\mathbf{s} = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Faraday’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{E}\cdot d\mathbf{l} = -\frac{d}{dt}\int_S \mathbf{B}\cdot d\mathbf{s}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere–Maxwell law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl} + \frac{d}{dt}\int_S \mathbf{D}\cdot d\mathbf{s}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Together with the material relations later in this lesson, these four
+equations describe every classical electromagnetic field. The two
+Gauss’s laws keep their static form: Lesson 20 derived Gauss’s law from
+Coulomb’s law and Lesson 21 its point form, and Lesson 28 showed that magnetic
+field lines close, so the net magnetic flux out of any closed surface is zero.
+Neither law contains a time derivative, so each holds at every instant even
+when the fields change. Faraday’s law is Lesson 33’s: the circulation of
+<span class="math notranslate nohighlight">\(\mathbf{E}\)</span> around a closed path <span class="math notranslate nohighlight">\(C\)</span> equals the negative rate of change of the
+magnetic flux through a surface <span class="math notranslate nohighlight">\(S\)</span> bounded by <span class="math notranslate nohighlight">\(C\)</span>. The <strong>Ampere–Maxwell law</strong>
+is Lesson 29’s Ampere’s law with Lesson 33’s displacement current added: the
+circulation of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> equals the conduction current through <span class="math notranslate nohighlight">\(S\)</span> plus the
+rate of change of the electric flux through it. In both circulation laws, the
+right-hand rule of Lesson 29 ties the direction of travel around <span class="math notranslate nohighlight">\(C\)</span> to the
+normal of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-what-each-equation-says">
+<div class="wrap docutils container">
+<p class="rubric">What Each Equation Says</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Law</p></th>
+<th class="head text-left"><p>Point form</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = \rho_v\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gauss for magnetism</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Faraday’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{E} = -\frac{\partial\mathbf{B}}{\partial t}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere–Maxwell law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J} + \frac{\partial\mathbf{D}}{\partial t}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L34-equations.svg"
+     alt="Four panels. Gauss's law: arrows of D point outward from a positive charge. Gauss's law for magnetism: closed loops of B around two wire cross sections, one carrying current out of the page and one into it. Faraday's law: a field B pointing out of the page and growing, with E circling it clockwise. Ampere–Maxwell law: a current or changing D out of the page, with H circling it counterclockwise"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The point forms state each law at a single point. Lessons 21 and 28 derived
+the two divergence equations, Lesson 33 derived the point form of Faraday’s
+law with Stokes’ theorem, and Lesson 33 derived the Ampere–Maxwell point form
+from the continuity equation and Gauss’s law. Each equation names a source,
+and the figure draws one panel per law. Gauss’s law says that electric flux
+begins and ends on charge. Gauss’s law for magnetism says that there is no
+magnetic charge, so magnetic flux has nowhere to begin or end. The two curl
+equations are where time enters, and they couple the fields: a magnetic field
+that changes with time produces an electric field that circulates around it,
+and an electric field that changes with time produces a magnetic field that
+circulates around it, just as a conduction current does. The minus sign in
+Faraday’s law is Lenz’s law from Lesson 33: in the third panel the growing
+flux points out of the page, and the clockwise <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> drives a current
+whose own flux points into the page. Taking the divergence of the
+Ampere–Maxwell law gives back Lesson 33’s continuity equation,
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = -\partial\rho_v/\partial t\)</span>, so the set conserves
+charge. Because each field’s change drives the other, the pair can sustain
+itself in a region with no charge and no current at all, which is the
+electromagnetic wave of Lessons 35 through 37.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-static-limit">
+<div class="wrap docutils container">
+<p class="rubric">The Static Limit</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>With <span class="math notranslate nohighlight">\(\partial/\partial t = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\mathbf{E} &amp;= 0 \\ \nabla\times\mathbf{H} &amp;= \mathbf{J} \\ \nabla\cdot\mathbf{J} &amp;= 0 \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>The fields decouple into Modules 2 and 3.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>When nothing changes with time, every time derivative in the set is zero. The
+curl of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> vanishes, which is the conservative field of Lesson 22,
+and the Ampere–Maxwell law reduces to Lesson 29’s Ampere’s law. The two
+Gauss’s laws keep their form. What remains is the table of static fields from
+the start of the lesson, in which the electric field depends only on charge
+and the magnetic field only on current. The static results also hold
+approximately when the fields change slowly enough. A circuit much smaller
+than a wavelength, the condition of Lesson 3’s electrical length, sees the
+same field everywhere at each instant, so we can solve it as if it were
+static at each moment. That <strong>quasi-static</strong> approximation is how we treat
+the loops and the transformer later in this lesson.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-material-relations">
+<div class="wrap docutils container">
+<p class="rubric">The Material Relations</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{D} = \epsilon\mathbf{E}, \quad \mathbf{B} = \mu\mathbf{H}, \quad \mathbf{J} = \sigma\mathbf{E}\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla\times\mathbf{H} = \sigma\mathbf{E} + \epsilon\frac{\partial\mathbf{E}}{\partial t}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Maxwell’s equations hold in any material. The material enters through three
+relations from earlier lessons: <span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span> from Lesson
+20, <span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span> from Lesson 28, and Ohm’s law in point form,
+<span class="math notranslate nohighlight">\(\mathbf{J} = \sigma\mathbf{E}\)</span>, from Lesson 27. In a uniform material with
+constant <span class="math notranslate nohighlight">\(\epsilon\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span>, and <span class="math notranslate nohighlight">\(\sigma\)</span>, the three relations let us write the
+set in <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> alone. The Ampere–Maxwell law then has a
+conduction term and a displacement term side by side. For a field that varies
+as <span class="math notranslate nohighlight">\(\cos\omega t\)</span>, the conduction term has amplitude <span class="math notranslate nohighlight">\(\sigma E\)</span> and the
+displacement term <span class="math notranslate nohighlight">\(\omega\epsilon E\)</span>, so their ratio is <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon)\)</span>,
+the ratio Lesson 33 computed for copper, seawater, and polyethylene to decide
+which current dominates.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-example-1-a-loop-in-a-ramping-field">
+<div class="wrap docutils container">
+<p class="rubric">Example 1: A Loop in a Ramping Field</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(a = 10\)</span> cm, <span class="math notranslate nohighlight">\(R = 1\ \text{k}\Omega\)</span>, <span class="math notranslate nohighlight">\(B_0 = 0.2\)</span> T, <span class="math notranslate nohighlight">\(t_0 = 3\)</span> s:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}B(t) = \begin{cases} 0 &amp; t &lt; 0 \\ B_0\ t/t_0 &amp; 0 \le t \le t_0 \\ B_0 &amp; t &gt; t_0 \end{cases}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L34-loop.svg"
+     alt="A circular wire loop of radius a in the xy plane with a resistor R in a small gap at the front, a uniform field B of t pointing up along z through the loop, and an arrow marking counterclockwise travel around the path C"
+     style="max-width: 400px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A wire loop of radius <span class="math notranslate nohighlight">\(a = 10\)</span> cm lies
+in the <span class="math notranslate nohighlight">\(xy\)</span> plane with a <span class="math notranslate nohighlight">\(1\ \text{k}\Omega\)</span> resistor in a small gap. A
+uniform magnetic flux density <span class="math notranslate nohighlight">\(\mathbf{B} = \hat{\mathbf{z}}\ B(t)\)</span> fills the
+region. It is zero before <span class="math notranslate nohighlight">\(t = 0\)</span>, rises linearly to <span class="math notranslate nohighlight">\(B_0 = 0.2\)</span> T over
+<span class="math notranslate nohighlight">\(t_0 = 3\)</span> s, and then holds steady. We want the voltage across the resistor
+and the current through it. We take the path <span class="math notranslate nohighlight">\(C\)</span> along the wire,
+counterclockwise as seen from <span class="math notranslate nohighlight">\(+z\)</span>, so by the right-hand rule the normal of
+the flat surface <span class="math notranslate nohighlight">\(S\)</span> inside the loop is <span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>. The loop is a
+fraction of a meter across and the field changes over seconds, so the
+quasi-static approximation holds, and the wire, a good conductor, carries
+essentially no electric field: the whole circulation of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> appears
+across the gap.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-example-1-the-induced-voltage">
+<div class="wrap docutils container">
+<p class="rubric">Example 1: The Induced Voltage</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint_C \mathbf{E}\cdot d\mathbf{l} &amp;= -\frac{d}{dt}\left[\pi a^2 B(t)\right] \\ &amp;= -\pi a^2\frac{B_0}{t_0} \\ &amp;= -\frac{\pi(0.1)^2(0.2)}{3} \\ &amp;= -2.09\ \text{mV} \end{aligned}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L34-ramp.svg"
+     alt="Two stacked plots against time in seconds: B rises linearly from 0 at t equals 0 to 0.2 tesla at t equals 3 and then holds; the magnitude of the loop voltage is a constant 2.09 millivolts between 0 and 3 seconds and zero otherwise"
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is uniform and along the normal, so the flux through <span class="math notranslate nohighlight">\(S\)</span> is the
+field times the area, <span class="math notranslate nohighlight">\(\Phi = \pi a^2 B(t)\)</span>. Faraday’s law gives the
+circulation as the negative rate of change of that flux. During the ramp the
+flux grows at the constant rate <span class="math notranslate nohighlight">\(\pi a^2 B_0/t_0\)</span>, so the circulation is a
+constant <span class="math notranslate nohighlight">\(-2.09\)</span> mV for <span class="math notranslate nohighlight">\(0 &lt; t &lt; t_0\)</span>; before the ramp and after it the flux does not change,
+and the circulation is zero. The minus sign means the electric field drives
+current clockwise as seen from <span class="math notranslate nohighlight">\(+z\)</span>, opposite to <span class="math notranslate nohighlight">\(C\)</span>. A clockwise current makes
+a magnetic field along <span class="math notranslate nohighlight">\(-\hat{\mathbf{z}}\)</span> inside the loop, which opposes the
+growing flux, as Lenz’s law requires. The resistor carries the full
+<span class="math notranslate nohighlight">\(2.09\)</span> mV, so Ohm’s law gives a current of
+<span class="math notranslate nohighlight">\(2.09\ \text{mV}/1\ \text{k}\Omega = 2.09\ \mu\)</span>A for the 3 s of the ramp. The
+voltage depends on how fast the flux changes, not on how large it is: at
+<span class="math notranslate nohighlight">\(t = 5\)</span> s the field is at its largest and the voltage is zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-example-2-a-sinusoidal-field">
+<div class="wrap docutils container">
+<p class="rubric">Example 2: A Sinusoidal Field</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} B(t) &amp;= B_0\sin\omega t \\ \oint_C \mathbf{E}\cdot d\mathbf{l} &amp;= -\pi a^2 B_0\ \omega\cos\omega t \\ &amp;= -(39.5\ \text{V})\cos\omega t \end{aligned}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L34-sine.svg"
+     alt="Two stacked plots against time in milliseconds over two periods: B is a sine wave of amplitude 0.2 tesla; the loop voltage is a negative cosine of amplitude about 40 volts, peaking a quarter period after B"
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Example 2 keeps the loop and the resistor and drives the field sinusoidally at <span class="math notranslate nohighlight">\(f = 1\)</span> kHz, with the same amplitude
+<span class="math notranslate nohighlight">\(B_0 = 0.2\)</span> T. The flux is <span class="math notranslate nohighlight">\(\pi a^2 B_0\sin\omega t\)</span>, with
+<span class="math notranslate nohighlight">\(\omega = 2\pi f = 6283\)</span> rad/s. Differentiating gives a voltage that follows
+<span class="math notranslate nohighlight">\(-\cos\omega t\)</span>, with amplitude
+<span class="math notranslate nohighlight">\(\pi a^2 B_0\omega = \pi(0.1)^2(0.2)(6283) = 39.5\)</span> V. The resistor current
+has amplitude <span class="math notranslate nohighlight">\(39.5\ \text{V}/1\ \text{k}\Omega = 39.5\)</span> mA. The voltage is
+largest when <span class="math notranslate nohighlight">\(B\)</span> passes through zero, where the flux changes fastest, and it
+lags <span class="math notranslate nohighlight">\(B\)</span> by a quarter period. Compared with Example 1, the same field
+amplitude produces about <span class="math notranslate nohighlight">\(19{,}000\)</span> times the voltage. The voltage follows the
+rate of change of <span class="math notranslate nohighlight">\(B\)</span>: its peak is <span class="math notranslate nohighlight">\(B_0\omega\)</span> here and <span class="math notranslate nohighlight">\(B_0/t_0\)</span> during the
+ramp, and their ratio is <span class="math notranslate nohighlight">\(\omega t_0 = 2\pi(1000)(3) = 18{,}850\)</span>. The induced
+voltage grows in proportion to frequency, which is why power transformers and
+the coupled coils of wireless chargers work with alternating current.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-checking-a-pair-of-fields-faraday-s-law">
+<div class="wrap docutils container">
+<p class="rubric">Checking a Pair of Fields: Faraday’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}\ E_0\cos(\omega t - \beta z)\)</span>, in a uniform lossless region with no charge or current:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\mathbf{E} &amp;= \hat{\mathbf{y}}\ \frac{\partial E_x}{\partial z} \\ &amp;= \hat{\mathbf{y}}\ \beta E_0\sin(\omega t - \beta z) \\ &amp;= -\mu\frac{\partial\mathbf{H}}{\partial t} \\ \mathbf{H} &amp;= \hat{\mathbf{y}}\ \frac{\beta E_0}{\mu\omega}\cos(\omega t - \beta z) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Maxwell’s equations also tell us whether a proposed field can exist, and if it
+can, what field must accompany it. We take an electric field along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span> that varies with <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(t\)</span> as <span class="math notranslate nohighlight">\(\cos(\omega t - \beta z)\)</span>,
+in a region with permittivity <span class="math notranslate nohighlight">\(\epsilon\)</span>, permeability <span class="math notranslate nohighlight">\(\mu\)</span>, and no charge or
+current. Because <span class="math notranslate nohighlight">\(E_x\)</span> depends only on <span class="math notranslate nohighlight">\(z\)</span>, the only surviving term of the
+Cartesian curl from Lesson 17 is the <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> component
+<span class="math notranslate nohighlight">\(\partial E_x/\partial z\)</span>. Faraday’s law sets that curl equal to
+<span class="math notranslate nohighlight">\(-\mu\ \partial\mathbf{H}/\partial t\)</span>. Integrating with respect to time, and
+dropping the constant of integration, which would be a static field
+unrelated to this one, gives <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> along <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>, in phase
+with <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and perpendicular to it. The two Gauss’s laws hold
+automatically: <span class="math notranslate nohighlight">\(D_x\)</span> does not depend on <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(B_y\)</span> does not depend on <span class="math notranslate nohighlight">\(y\)</span>,
+so both divergences are zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-checking-a-pair-of-fields-ampere-maxwell">
+<div class="wrap docutils container">
+<p class="rubric">Checking a Pair of Fields: Ampere–Maxwell</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\mathbf{H} &amp;= -\hat{\mathbf{x}}\ \frac{\partial H_y}{\partial z} \\ &amp;= -\hat{\mathbf{x}}\ \frac{\beta^2 E_0}{\mu\omega}\sin(\omega t - \beta z) \\ \epsilon\frac{\partial\mathbf{E}}{\partial t} &amp;= -\hat{\mathbf{x}}\ \epsilon\omega E_0\sin(\omega t - \beta z) \\ \beta &amp;= \omega\sqrt{\mu\epsilon} \\ \frac{E_0}{H_0} &amp;= \sqrt{\frac{\mu}{\epsilon}} = \eta \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The last equation is the test. With no conduction current, the Ampere–Maxwell
+law requires <span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \epsilon\ \partial\mathbf{E}/\partial t\)</span>.
+The curl of <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\ H_y(z, t)\)</span> has only the component
+<span class="math notranslate nohighlight">\(-\partial H_y/\partial z\)</span> along <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>. Both sides vary as
+<span class="math notranslate nohighlight">\(\sin(\omega t - \beta z)\)</span>, so they agree at every point and time only if
+their coefficients match, <span class="math notranslate nohighlight">\(\beta^2/(\mu\omega) = \epsilon\omega\)</span>. The pair of
+fields therefore satisfies all four of Maxwell’s equations only when
+<span class="math notranslate nohighlight">\(\beta = \omega\sqrt{\mu\epsilon}\)</span>, and the ratio of the amplitudes becomes
+<span class="math notranslate nohighlight">\(\mu\omega/\beta = \sqrt{\mu/\epsilon}\)</span>, the intrinsic impedance <span class="math notranslate nohighlight">\(\eta\)</span> that
+Lessons 6 and 30 quoted and Lesson 37 derives. In free space at 100 MHz, <span class="math notranslate nohighlight">\(\beta = 2.10\)</span> rad/m, a wavelength of
+<span class="math notranslate nohighlight">\(3.00\)</span> m, and a field of <span class="math notranslate nohighlight">\(E_0 = 1\)</span> V/m comes with <span class="math notranslate nohighlight">\(H_0 = 2.65\)</span> mA/m. This
+pair is a uniform plane wave, which Lessons 35 through 37 derive directly from
+Maxwell’s equations.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-ideal-transformer-voltage">
+<div class="wrap docutils container">
+<p class="rubric">The Ideal Transformer: Voltage</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} v_1 &amp;= N_1\frac{d\Phi}{dt} \\ v_2 &amp;= N_2\frac{d\Phi}{dt} \\ \frac{v_2}{v_1} &amp;= \frac{N_2}{N_1} \end{aligned}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L34-transformer.svg"
+     alt="A rectangular magnetic core with a winding of N1 turns on the left leg and N2 turns on the right leg, a dashed path for the core flux Phi circling through both legs, and terminal voltages v1 and v2 with currents i1 entering the left winding and i2 leaving the right"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>transformer</strong> is two windings on one closed core. Lesson 31 showed that a
+core with <span class="math notranslate nohighlight">\(\mu_r\)</span> in the thousands draws the magnetic field into itself, so
+nearly all of the flux <span class="math notranslate nohighlight">\(\Phi\)</span> stays in the core and passes through every turn
+of both windings. We model the ideal case, in which all of the flux stays in
+the core and the windings have no resistance. Each turn of winding 1 is a
+closed path around the core, and Faraday’s law gives a circulation of
+<span class="math notranslate nohighlight">\(d\Phi/dt\)</span> in magnitude around it. The <span class="math notranslate nohighlight">\(N_1\)</span> turns are in series, so their
+voltages add to <span class="math notranslate nohighlight">\(v_1 = N_1\ d\Phi/dt\)</span>, with the sign set by drawing the
+windings so that <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> are positive together. Winding 2 links the
+same flux, so <span class="math notranslate nohighlight">\(v_2 = N_2\ d\Phi/dt\)</span>. Dividing eliminates the flux. The voltage
+ratio is the turns ratio, and it holds at every instant, whatever the shape of
+the waveform, as long as the flux changes.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-ideal-transformer-current">
+<div class="wrap docutils container">
+<p class="rubric">The Ideal Transformer: Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H\ell_c &amp;= N_1 i_1 - N_2 i_2 \\ N_1 i_1 - N_2 i_2 &amp;= \frac{\Phi\ \ell_c}{\mu A} \to 0 \\ \frac{i_2}{i_1} &amp;= \frac{N_1}{N_2} \\ v_1 i_1 &amp;= v_2 i_2 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The currents come from Ampere’s law around the dashed path of length
+<span class="math notranslate nohighlight">\(\ell_c\)</span> through the core. At 60 Hz the wavelength is about 5000 km, so the
+displacement current in the core is negligible, and the quasi-static Ampere’s
+law of Lesson 29 applies. Winding 1 carries <span class="math notranslate nohighlight">\(i_1\)</span> through the surface bounded
+by the path <span class="math notranslate nohighlight">\(N_1\)</span> times, and winding 2 carries <span class="math notranslate nohighlight">\(i_2\)</span>, drawn leaving its
+positive terminal, <span class="math notranslate nohighlight">\(N_2\)</span> times in the opposite sense. If <span class="math notranslate nohighlight">\(H\)</span> is uniform along
+the path, the circulation is <span class="math notranslate nohighlight">\(H\ell_c\)</span>. With <span class="math notranslate nohighlight">\(B = \mu H\)</span> and <span class="math notranslate nohighlight">\(\Phi = BA\)</span> for
+a core of cross-sectional area <span class="math notranslate nohighlight">\(A\)</span>, the circulation is
+<span class="math notranslate nohighlight">\(\Phi\ell_c/(\mu A)\)</span>. A finite flux needs almost no net current when <span class="math notranslate nohighlight">\(\mu\)</span> is
+very large, so in the ideal transformer, with <span class="math notranslate nohighlight">\(\mu \to \infty\)</span>, the two terms balance. The current
+ratio is the inverse of the turns ratio, and multiplying the two ratios shows
+that the power into winding 1 equals the power out of winding 2: the ideal
+transformer stores and dissipates nothing.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-120-v-to-12-v-transformer">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A 120 V to 12 V Transformer</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(N_1 = 600\)</span>, <span class="math notranslate nohighlight">\(N_2 = 60\)</span>, <span class="math notranslate nohighlight">\(6\ \Omega\)</span> load, core area <span class="math notranslate nohighlight">\(6\ \text{cm}^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V_2 &amp;= 12\ \text{V}, \quad I_2 = 2\ \text{A} \\ I_1 &amp;= 0.2\ \text{A}, \quad P = 24\ \text{W} \\ \Phi_\text{pk} &amp;= \frac{V_\text{1,pk}}{N_1\omega} = \frac{169.7}{(600)(377)} \\ &amp;= 0.750\ \text{mWb} \\ B_\text{pk} &amp;= \Phi_\text{pk}/A = 1.25\ \text{T} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — sizing a power transformer</p>
+<p>A transformer steps a <span class="math notranslate nohighlight">\(120\)</span> V rms, <span class="math notranslate nohighlight">\(60\)</span> Hz line down to <span class="math notranslate nohighlight">\(12\)</span> V rms for a
+<span class="math notranslate nohighlight">\(6\ \Omega\)</span> load. The turns ratio is <span class="math notranslate nohighlight">\(120/12 = 10\)</span>, so with <span class="math notranslate nohighlight">\(N_1 = 600\)</span> the
+secondary needs <span class="math notranslate nohighlight">\(N_2 = 60\)</span> turns. The load draws <span class="math notranslate nohighlight">\(I_2 = 12/6 = 2\)</span> A, the
+primary draws <span class="math notranslate nohighlight">\(I_1 = 2\times60/600 = 0.2\)</span> A, and both sides carry
+<span class="math notranslate nohighlight">\(P = 24\)</span> W.</p>
+<p>The core must carry the flux that Faraday’s law requires. With
+<span class="math notranslate nohighlight">\(v_1 = V_\text{1,pk}\cos\omega t\)</span> and <span class="math notranslate nohighlight">\(v_1 = N_1\ d\Phi/dt\)</span>, integrating gives
+<span class="math notranslate nohighlight">\(\Phi = (V_\text{1,pk}/N_1\omega)\sin\omega t\)</span>, so the peak flux is
+<span class="math notranslate nohighlight">\(V_\text{1,pk}/(N_1\omega)\)</span>. The peak line voltage is
+<span class="math notranslate nohighlight">\(120\sqrt{2} = 169.7\)</span> V and <span class="math notranslate nohighlight">\(\omega = 2\pi(60) = 377\)</span> rad/s, so
+<span class="math notranslate nohighlight">\(\Phi_\text{pk} = 0.750\)</span> mWb. Through a core of area <span class="math notranslate nohighlight">\(6\ \text{cm}^2\)</span>, the
+peak flux density is <span class="math notranslate nohighlight">\(1.25\)</span> T. Silicon-steel cores <strong>saturate</strong> near <span class="math notranslate nohighlight">\(1.5\)</span>
+to <span class="math notranslate nohighlight">\(1.7\)</span> T: by then the field has lined up nearly all of the iron’s atomic
+magnetic moments (Lesson 31), so more <span class="math notranslate nohighlight">\(H\)</span> adds little <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> falls, and
+the ideal model fails. A <span class="math notranslate nohighlight">\(4\ \text{cm}^2\)</span>
+core would need <span class="math notranslate nohighlight">\(1.88\)</span> T, which is why the design uses the larger core or more
+primary turns. The flux does not depend on the load, because <span class="math notranslate nohighlight">\(v_1\)</span> alone sets
+it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law</p></td>
+<td class="text-left"><p>Charge is the source of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = \rho_v\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gauss’s law for magnetism</p></td>
+<td class="text-left"><p>No magnetic charge</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Faraday’s law</p></td>
+<td class="text-left"><p>A changing <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> drives a circulating <span class="math notranslate nohighlight">\(\mathbf{E}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{E} = -\partial\mathbf{B}/\partial t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere–Maxwell law</p></td>
+<td class="text-left"><p>Current and a changing <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> drive <span class="math notranslate nohighlight">\(\mathbf{H}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Continuity</p></td>
+<td class="text-left"><p>The set conserves charge</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = -\partial\rho_v/\partial t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Static limit</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\partial/\partial t = 0\)</span></p></td>
+<td class="text-left"><p>The laws of Modules 2 and 3</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Material relations</p></td>
+<td class="text-left"><p>Uniform material</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{J} = \sigma\mathbf{E}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Induced voltage</p></td>
+<td class="text-left"><p>Loop of fixed area <span class="math notranslate nohighlight">\(A\)</span> in uniform <span class="math notranslate nohighlight">\(B(t)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vert v\vert = A\ \vert dB/dt\vert\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Plane-wave pair</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\ E\)</span> and <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\ H\)</span> along <span class="math notranslate nohighlight">\(z\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\beta = \omega\sqrt{\mu\epsilon}\)</span>, <span class="math notranslate nohighlight">\(E/H = \eta\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ideal transformer</p></td>
+<td class="text-left"><p>Shared core flux</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(v_2/v_1 = N_2/N_1\)</span>, <span class="math notranslate nohighlight">\(i_2/i_1 = N_1/N_2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L34_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L34_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 35</strong>: Maxwell’s equations in phasor form, decoupled into a wave equation for <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> alone.</p></li>
+<li><p><strong>Lesson 36</strong>: its solutions, including waves in lossy material.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we collected Maxwell’s equations in integral and point form and saw
+that the set conserves charge. The field
+pair we checked was a wave traveling along <span class="math notranslate nohighlight">\(z\)</span> at
+<span class="math notranslate nohighlight">\(\omega/\beta = 1/\sqrt{\mu\epsilon}\)</span>, and we found it by guessing. Lesson 35
+removes the guess: in a region with no charge or current, it writes the
+equations in the phasor form of Lesson 2 and combines the two curl equations
+into one wave equation for <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, the field counterpart of the
+transmission-line wave equation of Lesson 4. Lesson 36 solves it.</p>
+<p>Before Lesson 35, read sections 9.1 and 9.2 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module04/L34-maxwells-equations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

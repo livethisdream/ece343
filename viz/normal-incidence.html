@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plane wave at normal incidence</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34;
+          --tot:#0067b9;   /* instantaneous total */
+          --env:#004a85;   /* envelope */
+          --fwd:#1d7a4d;   /* forward wave */
+          --ref:#b3213a;   /* reflected wave */
+          --node:#8a5a00;   /* node / min markers */
+          --med2:#eaf1f8; --pec:#d9dee4; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:38px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--on,var(--mid)); border-color:var(--on,var(--mid)); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .tgl input:checked ~ .t { color:var(--on,var(--navy)); }
+  /* Readouts as a row of instruments: equal-width cells on one grid, labels and
+     values on shared baselines, edges flush with the canvases above. */
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(148px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+        gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  /* block, not flex: a flex container drops the whitespace between an inline
+     MathJax symbol and the words that follow it, welding them together. */
+  .ro .k { display:block; text-align:center;
+           height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3);
+           white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+           text-align:center; min-width:8ch; color:var(--navy); }
+  .ro.good { background:rgba(63,125,52,0.12); border-color:rgba(63,125,52,0.30); }
+  .ro.good .v { color:var(--grn); }
+  .ro.warn { background:rgba(138,90,0,0.12);  border-color:rgba(138,90,0,0.30); }
+  .ro.warn .v { color:var(--amber); }
+  .ro.bad  { background:rgba(176,30,36,0.10); border-color:rgba(176,30,36,0.28); }
+  .ro.bad  .v { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Electric field of a plane wave at normal incidence on a boundary"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(\epsilon_{r1}\)</label>
+      <input type="range" id="er1" min="1" max="10" step="0.1" value="1">
+      <span class="val" id="er1-val">1.0</span>
+    </div>
+    <div class="ctl">
+      <label>\(\epsilon_{r2}\)</label>
+      <input type="range" id="er2" min="1" max="20" step="0.1" value="2">
+      <span class="val" id="er2-val">2.0</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="play"><span class="sw"></span><span class="t">Animate</span></label>
+    <label class="tgl" style="--on:var(--fwd)"><input type="checkbox" id="show-comp"><span class="sw"></span><span class="t">Incident + reflected</span></label>
+    <label class="tgl" style="--on:var(--red)"><input type="checkbox" id="pec"><span class="sw"></span><span class="t">Perfect conductor</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">\(\Gamma\)</span><span class="v" id="r-gam">—</span></div>
+    <div class="ro"><span class="k">\(\tau\)</span><span class="v" id="r-tau">—</span></div>
+    <div class="ro"><span class="k">SWR</span><span class="v" id="r-swr">—</span></div>
+    <div class="ro"><span class="k">reflected power</span><span class="v" id="r-refl">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const SANS='Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+function mixLabel(ctx,chunks,x,yc,h,color,align,bold){
+  const fpx=h-1, f=(bold?'700 ':'')+fpx+'px '+SANS;
+  let tot=0;
+  for(const c of chunks){ if(c.m) tot+=MJ.width(c.m,color,h); else { ctx.font=f; tot+=ctx.measureText(c.s).width; } }
+  let cx = align==='right'? x-tot : (align==='center'? x-tot/2 : x);
+  for(const c of chunks){
+    if(c.m){ MJ.draw(ctx,c.m,cx,yc,h,color,'left'); cx+=MJ.width(c.m,color,h); }
+    else { stext(ctx,c.s,cx,yc,fpx,color,'left',bold); ctx.font=f; cx+=ctx.measureText(c.s).width; }
+  }
+}
+
+// Position u = z/λ1, from the incident side (u < 0) to the second medium (u > 0).
+// Incident wave E0 = 1 along x. With μr = 1 in both media, η ∝ 1/√εr and
+//   Γ = (η2 − η1)/(η2 + η1) = (√εr1 − √εr2)/(√εr1 + √εr2),   τ = 1 + Γ.
+// In time (φ = ωt), with β1 z = 2πu and β2 z = 2πu·√(εr2/εr1):
+//   medium 1: e = cos(φ − 2πu) + Γ cos(φ + 2πu)
+//   medium 2: e = τ cos(φ − 2πu·√(εr2/εr1))
+// A perfect conductor in medium 2 forces Γ = −1 and τ = 0.
+const UMIN = -2.0, UMAX = 1.0;
+const AMP  = 2.2;
+
+const state = { er1: 1, er2: 2, pec: false, G: 0, tau: 1, ratio: 1, phi: 1.1, playing: false };
+function setCoef(){
+  if (state.pec) { state.G = -1; state.tau = 0; state.ratio = 1; return; }
+  const n1 = Math.sqrt(state.er1), n2 = Math.sqrt(state.er2);
+  state.G = (n1 - n2)/(n1 + n2);
+  state.tau = 1 + state.G;
+  state.ratio = n2/n1;
+}
+setCoef();
+
+const Einc = (u, phi) => Math.cos(phi - 2*Math.PI*u);
+const Eref = (u, phi) => state.G*Math.cos(phi + 2*Math.PI*u);
+const Etra = (u, phi) => state.tau*Math.cos(phi - 2*Math.PI*u*state.ratio);
+const E    = (u, phi) => (u <= 0) ? Einc(u,phi) + Eref(u,phi) : (state.pec ? 0 : Etra(u,phi));
+// Envelope (max over φ): medium 1, |1 + Γ e^{j4πu}|; medium 2, τ.
+const Env  = u => (u <= 0) ? Math.sqrt(Math.max(0, 1 + state.G*state.G + 2*state.G*Math.cos(4*Math.PI*u)))
+                           : (state.pec ? 0 : state.tau);
+
+const er1El = document.getElementById('er1'), er1Val = document.getElementById('er1-val');
+const er2El = document.getElementById('er2'), er2Val = document.getElementById('er2-val');
+const playBtn = document.getElementById('play');
+const compEl  = document.getElementById('show-comp');
+const pecEl   = document.getElementById('pec');
+
+function onInput() {
+  state.er1 = parseFloat(er1El.value); state.er2 = parseFloat(er2El.value);
+  state.pec = pecEl.checked;
+  er1Val.textContent = state.er1.toFixed(1);
+  er2Val.textContent = state.er2.toFixed(1);
+  er2El.disabled = state.pec;
+  setCoef(); draw();
+}
+er1El.addEventListener('input', onInput);
+er2El.addEventListener('input', onInput);
+pecEl.addEventListener('change', onInput);
+compEl.addEventListener('change', draw);
+playBtn.addEventListener('change', () => {
+  state.playing = playBtn.checked;
+  if (state.playing) { lastTs = null; requestAnimationFrame(tick); }
+});
+
+let lastTs = null;
+function tick(ts) {
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs) / 1000);
+  lastTs = ts;
+  state.phi = (state.phi + dt * 2.2) % (2*Math.PI);
+  draw();
+  requestAnimationFrame(tick);
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight;
+  if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W=360;
+let SCL=1;
+var __SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function SQ(h){ return (__SQ_MQ && __SQ_MQ.matches) ? Math.round(h * 0.62) : h; }
+function fit() {
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  const h = SQ(Math.max(280, Math.min(w * 0.40, 380)));
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function draw() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+
+  const mL = 52, mR = 18, mT = 24, mB = 42;
+  const pW = w-mL-mR, pH = h-mT-mB;
+  const y0 = mT + pH/2;
+  const xFor = u => mL + ((u-UMIN)/(UMAX-UMIN))*pW;
+  const yFor = v => y0 - (v/AMP)*(pH/2);
+  const xB = xFor(0);
+
+  // second medium (or conductor) shaded
+  ctx.fillStyle = state.pec ? cssVar('--pec') : cssVar('--med2');
+  ctx.fillRect(xB, mT, mL+pW-xB, pH);
+
+  // grid
+  ctx.strokeStyle = '#eef3f8'; ctx.lineWidth = 1;
+  for (let v=-2; v<=2; v+=0.5) { ctx.beginPath(); ctx.moveTo(mL,yFor(v)); ctx.lineTo(mL+pW,yFor(v)); ctx.stroke(); }
+  for (let u=UMIN; u<=UMAX+1e-9; u+=0.25) { ctx.beginPath(); ctx.moveTo(xFor(u),mT); ctx.lineTo(xFor(u),mT+pH); ctx.stroke(); }
+  ctx.strokeStyle = '#cddce9'; ctx.strokeRect(mL,mT,pW,pH);
+  ctx.strokeStyle = '#9fb6cc'; ctx.beginPath(); ctx.moveTo(mL,y0); ctx.lineTo(mL+pW,y0); ctx.stroke();
+  // boundary
+  ctx.strokeStyle = cssVar('--ink'); ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(xB,mT); ctx.lineTo(xB,mT+pH); ctx.stroke();
+
+  // envelope band and outline
+  const step = 0.004;
+  ctx.fillStyle = 'rgba(0,74,133,0.08)';
+  ctx.beginPath();
+  for (let u=UMIN; u<=UMAX+1e-9; u+=step) { const x=xFor(u), y=yFor(Env(u)); (u===UMIN)?ctx.moveTo(x,y):ctx.lineTo(x,y); }
+  for (let u=UMAX; u>=UMIN-1e-9; u-=step)  { ctx.lineTo(xFor(u), yFor(-Env(u))); }
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = cssVar('--env'); ctx.lineWidth = 1.75; ctx.setLineDash([6,3]);
+  for (const sgn of [1,-1]) {
+    ctx.beginPath();
+    for (let u=UMIN; u<=UMAX+1e-9; u+=step) { const x=xFor(u), y=yFor(sgn*Env(u)); (u===UMIN)?ctx.moveTo(x,y):ctx.lineTo(x,y); }
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // field minima in medium 1
+  const G = state.G;
+  if (Math.abs(G) > 0.005) {
+    ctx.fillStyle = cssVar('--node');
+    const u0 = (G < 0) ? 0 : -0.25;          // minimum at the boundary when Γ < 0
+    for (let u=u0; u>=UMIN-1e-9; u-=0.5) { ctx.beginPath(); ctx.arc(xFor(u), y0, 3, 0, 2*Math.PI); ctx.fill(); }
+  }
+
+  // optional incident and reflected waves in medium 1
+  if (compEl.checked) {
+    ctx.lineWidth = 1.5;
+    for (const [fn, col] of [[Einc, cssVar('--fwd')], [Eref, cssVar('--ref')]]) {
+      ctx.strokeStyle = col; ctx.globalAlpha = 0.6; ctx.beginPath();
+      const pEnd = Math.round(xB - mL);
+      for (let px=0; px<=pEnd; px++) { const u=UMIN+(px/pW)*(UMAX-UMIN); const y=yFor(fn(u,state.phi)); (px===0)?ctx.moveTo(mL+px,y):ctx.lineTo(mL+px,y); }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+  }
+
+  // instantaneous total field
+  ctx.strokeStyle = cssVar('--tot'); ctx.lineWidth = 2.75; ctx.beginPath();
+  for (let px=0; px<=pW; px++) { const u=UMIN+(px/pW)*(UMAX-UMIN); const y=yFor(E(u,state.phi)); (px===0)?ctx.moveTo(mL+px,y):ctx.lineTo(mL+px,y); }
+  ctx.stroke();
+
+  // labels
+  mixLabel(ctx,[{s:'medium 1'}],mL+6,mT+10,12,cssVar('--navy'),'left',true);
+  mixLabel(ctx,[{s: state.pec ? 'conductor' : 'medium 2'}],mL+pW-6,mT+10,12,cssVar('--navy'),'right',true);
+
+  ctx.fillStyle = '#5b6573'; ctx.font = '10px Inter, sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (let u=UMIN; u<=UMAX+1e-9; u+=0.5) ctx.fillText((u<0?'−':'')+Math.abs(u).toFixed(1), xFor(u), mT+pH+4);
+  mixLabel(ctx,[{s:'position '},{m:'z/\\lambda_1'}],mL+pW,h-10,13,'#3b4651','right',false);
+  ctx.save(); ctx.translate(14, mT+pH/2); ctx.rotate(-Math.PI/2);
+  mixLabel(ctx,[{m:'E_x'},{s:' (V/m)'}],0,0,13,'#3b4651','center',false);
+  ctx.restore();
+
+  updateReadout();
+}
+
+function updateReadout() {
+  const G = state.G, aG = Math.abs(G);
+  const swr = (aG >= 0.999) ? Infinity : (1+aG)/(1-aG);
+  const sgn = v => (v < 0 ? '−' : '') + Math.abs(v).toFixed(3);
+  document.getElementById('r-gam').textContent  = (aG < 0.0005) ? '0' : sgn(G);
+  document.getElementById('r-tau').textContent  = state.tau.toFixed(3);
+  document.getElementById('r-swr').textContent  = (swr===Infinity) ? '∞' : swr.toFixed(2);
+  document.getElementById('r-refl').textContent = `${(G*G*100).toFixed(1)} %`;
+}
+
+fit();
+
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

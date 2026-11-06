@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L18 - Coulomb’s Law &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l18-coulomb-s-law">
+<h1>L18 - Coulomb’s Law<a class="headerlink" href="#l18-coulomb-s-law" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Coulomb's Law</h1>
+<div class="title-rule"></div>
+<p>Today we find the force between charges, and the field that carries it.</p>
+<p>Lesson 18 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '5'">
+  <li>I can apply Coulomb's Law to use direct integration to calculate the electric field due to charge density in various geometries, including rectangular, cylindrical, and spherical coordinate systems.</li>
+</ol>
+<div class="depth docutils container">
+<p>Module 1 treated the electric field as a given and asked what a transmission
+line does with it. Module 2 asks where the field comes from. The answer starts
+with a single experimental law: <strong>Coulomb’s law</strong>, which gives the force
+between two point charges. Today we write it as a vector equation, add the
+forces from many charges by <strong>superposition</strong>, and divide out the test charge
+to define the <strong>electric field</strong> of a point charge. Then we let the charges
+merge into a continuous distribution, which turns the sum into an integral,
+and evaluate that integral for a line of charge. Lesson 19 applies the same
+method to rings, disks, sheets, and spheres.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 17: vectors.</strong> The vector from a source point <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span> to a field point <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{R} = \mathbf{r} - \mathbf{r}'\]</div>
+<div class="math notranslate nohighlight">
+\[R = |\mathbf{R}|, \qquad \hat{\mathbf{R}} = \frac{\mathbf{R}}{R}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L18-coulomb.svg"
+     alt="A source charge Q at position r prime, a field point at position r, and the vector R from the source to the field point"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 17 reviewed vectors and coordinate systems. One construction from it
+carries all of electrostatics. A charge sits at the <strong>source point</strong>, with
+position vector <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>, and we want the field at the <strong>field point</strong>,
+with position vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>. The vector that points from the source to
+the field point is the difference <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{r} - \mathbf{r}'\)</span>. Its
+magnitude <span class="math notranslate nohighlight">\(R\)</span> is the distance between the two points, and dividing
+<span class="math notranslate nohighlight">\(\mathbf{R}\)</span> by its magnitude gives the unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span>, which
+carries only the direction. Throughout the course a prime marks the source,
+and an unprimed coordinate marks the field point.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-coulomb-s-law">
+<div class="wrap docutils container">
+<p class="rubric">Coulomb’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Two point charges <span class="math notranslate nohighlight">\(Q_1\)</span> and <span class="math notranslate nohighlight">\(Q_2\)</span>, a distance <span class="math notranslate nohighlight">\(R\)</span> apart, push or pull on each other with a force of magnitude</p>
+<div class="math notranslate nohighlight">
+\[F = \frac{Q_1 Q_2}{4\pi\epsilon R^2}, \qquad \epsilon_0 = 8.854 \times 10^{-12}\ \text{F/m}\]</div>
+<ul class="simple">
+<li><p>Like charges repel; unlike charges attract.</p></li>
+<li><p>The force acts along the line between the charges.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Charles-Augustin de Coulomb measured the force between small charged spheres
+with a torsion balance in 1785 and found three things. The force is
+proportional to the product of the two charges. It falls off as the square of
+the distance between them. And it acts along the straight line that joins
+them, as a repulsion when the charges have the same sign and an attraction
+when they differ. The constant of proportionality is <span class="math notranslate nohighlight">\(1/4\pi\epsilon\)</span>, where
+<span class="math notranslate nohighlight">\(\epsilon\)</span> is the permittivity of the material around the charges, the same
+<span class="math notranslate nohighlight">\(\epsilon\)</span> that Lesson 2 introduced. In free space <span class="math notranslate nohighlight">\(\epsilon = \epsilon_0\)</span> and
+<span class="math notranslate nohighlight">\(1/4\pi\epsilon_0 = 8.988 \times 10^9\ \text{N·m}^2/\text{C}^2\)</span>. Coulomb’s law
+is an experimental fact: nothing in this course derives it. Everything in
+electrostatics derives from it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-vector-form">
+<div class="wrap docutils container">
+<p class="rubric">The Vector Form</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The force on <span class="math notranslate nohighlight">\(Q_2\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> from <span class="math notranslate nohighlight">\(Q_1\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span> points along <span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{F} &amp;= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\ \hat{\mathbf{R}} \\ &amp;= \frac{Q_1 Q_2}{4\pi\epsilon R^2}\ \frac{\mathbf{R}}{R} \\ &amp;= \frac{Q_1 Q_2\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A force has a direction, so we need Coulomb’s law as a vector equation. The
+force on <span class="math notranslate nohighlight">\(Q_2\)</span> acts along the line from <span class="math notranslate nohighlight">\(Q_1\)</span> to <span class="math notranslate nohighlight">\(Q_2\)</span>, which is the direction
+of the unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span>, so we multiply the magnitude by
+<span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span>. The signs take care of themselves: when <span class="math notranslate nohighlight">\(Q_1 Q_2 &gt; 0\)</span> the
+force points along <span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span>, away from <span class="math notranslate nohighlight">\(Q_1\)</span>, and when
+<span class="math notranslate nohighlight">\(Q_1 Q_2 &lt; 0\)</span> it points back toward <span class="math notranslate nohighlight">\(Q_1\)</span>. Then we replace
+<span class="math notranslate nohighlight">\(\hat{\mathbf{R}}\)</span> with <span class="math notranslate nohighlight">\(\mathbf{R}/R\)</span>, which puts a third power of <span class="math notranslate nohighlight">\(R\)</span> in the
+denominator, and write <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> as <span class="math notranslate nohighlight">\(\mathbf{r} - \mathbf{r}'\)</span>. The last
+form is the one to compute with. It needs only the two position vectors, and
+it gives every component of the force at once, with no angles to find.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-superposition">
+<div class="wrap docutils container">
+<p class="rubric">Superposition</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The force on <span class="math notranslate nohighlight">\(Q\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> from <span class="math notranslate nohighlight">\(N\)</span> charges <span class="math notranslate nohighlight">\(Q_n\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}_n\)</span> is the vector sum of the forces from each one alone:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F} = \sum_{n=1}^{N} \frac{Q\ Q_n\ (\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}_n|^3}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Coulomb’s law describes two charges. With more than two, experiment adds a
+second fact: each pair interacts as if the others were not there, and the
+total force on a charge is the vector sum of the forces from all the others.
+This is <strong>superposition</strong>, and it holds because the equations of
+electromagnetics are linear. We use it constantly. Every problem in this
+lesson and the next breaks a complicated arrangement of charge into pieces
+simple enough for Coulomb’s law, and adds the results.</p>
+<p>The sum is a vector sum. Each term has its own direction, and we add the
+components separately. Adding the magnitudes is the most common mistake in
+this lesson.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-force-on-one-charge">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The Force on One Charge</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L18-three-charges.svg"
+     alt="Charges q1 of minus 3 microcoulombs at (0, 3) meters and q2 of 1 microcoulomb at (0, minus 2) meters act on q3 of 2 microcoulombs at (4, 0) meters; the force from q1 pulls q3 up and to the left, the force from q2 pushes it up and to the right, and their sum points up and to the left"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}_3 = \mathbf{F}_{31} + \mathbf{F}_{32} = \left(-0.922\ \hat{\mathbf{x}} + 1.696\ \hat{\mathbf{y}}\right)\ \text{mN}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the force on <span class="math notranslate nohighlight">\(q_3\)</span></p>
+<p>Charges <span class="math notranslate nohighlight">\(q_1 = -3\ \mu\text{C}\)</span> at <span class="math notranslate nohighlight">\((0, 3)\)</span> m and <span class="math notranslate nohighlight">\(q_2 = 1\ \mu\text{C}\)</span> at
+<span class="math notranslate nohighlight">\((0, -2)\)</span> m sit in free space. Find the force on <span class="math notranslate nohighlight">\(q_3 = 2\ \mu\text{C}\)</span> at
+<span class="math notranslate nohighlight">\((4, 0)\)</span> m.</p>
+<p>From <span class="math notranslate nohighlight">\(q_1\)</span>, the vector to <span class="math notranslate nohighlight">\(q_3\)</span> is
+<span class="math notranslate nohighlight">\(\mathbf{R}_{31} = (4\hat{\mathbf{x}}) - (3\hat{\mathbf{y}}) = 4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}\)</span> m,
+with magnitude 5 m:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}_{31} = \frac{(2 \times 10^{-6})(-3 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(5)^3}\left(4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}\right) = \left(-1.726\ \hat{\mathbf{x}} + 1.294\ \hat{\mathbf{y}}\right)\ \text{mN}\]</div>
+<p>From <span class="math notranslate nohighlight">\(q_2\)</span>, <span class="math notranslate nohighlight">\(\mathbf{R}_{32} = 4\hat{\mathbf{x}} + 2\hat{\mathbf{y}}\)</span> m, with
+magnitude <span class="math notranslate nohighlight">\(\sqrt{20}\)</span> m:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}_{32} = \frac{(2 \times 10^{-6})(1 \times 10^{-6})}{4\pi(8.854 \times 10^{-12})(\sqrt{20})^3}\left(4\hat{\mathbf{x}} + 2\hat{\mathbf{y}}\right) = \left(0.804\ \hat{\mathbf{x}} + 0.402\ \hat{\mathbf{y}}\right)\ \text{mN}\]</div>
+<p>Adding the components gives
+<span class="math notranslate nohighlight">\(\mathbf{F}_3 = (-0.922\ \hat{\mathbf{x}} + 1.696\ \hat{\mathbf{y}})\)</span> mN, a
+force of 1.93 mN. The attraction toward <span class="math notranslate nohighlight">\(q_1\)</span> wins in <span class="math notranslate nohighlight">\(x\)</span>, and both forces
+push <span class="math notranslate nohighlight">\(q_3\)</span> up. The negative <span class="math notranslate nohighlight">\(q_1\)</span> pulls <span class="math notranslate nohighlight">\(q_3\)</span> toward it, along
+<span class="math notranslate nohighlight">\(-\mathbf{R}_{31}\)</span>, which the negative product of the charges supplies with no
+extra thought.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-electric-field">
+<div class="wrap docutils container">
+<p class="rubric">The Electric Field</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The <strong>electric field</strong> is the force per unit charge on a small test charge <span class="math notranslate nohighlight">\(q\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E} = \lim_{q \to 0} \frac{\mathbf{F}}{q}\]</div>
+<p>For a point charge <span class="math notranslate nohighlight">\(Q\)</span> at <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>, in V/m:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}(\mathbf{r}) = \frac{Q\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The force on <span class="math notranslate nohighlight">\(q_3\)</span> depended on <span class="math notranslate nohighlight">\(q_3\)</span> itself, which makes it a property of the
+pair. We want a property of the source alone: what the charges do to the space
+around them before anything is placed there. So we place a small <strong>test
+charge</strong> <span class="math notranslate nohighlight">\(q\)</span> at the field point and divide the force on it by <span class="math notranslate nohighlight">\(q\)</span>. The limit
+<span class="math notranslate nohighlight">\(q \to 0\)</span> keeps the test charge from pushing the source charges around while
+we measure. Dividing the vector form of Coulomb’s law by <span class="math notranslate nohighlight">\(q\)</span>, the test charge
+cancels, and what remains depends only on the source <span class="math notranslate nohighlight">\(Q\)</span> and the two
+positions. Its units are newtons per coulomb, which are the same as volts per
+meter, and we use V/m. Once we know <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, the force on any charge
+placed at <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> is <span class="math notranslate nohighlight">\(\mathbf{F} = q\mathbf{E}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-of-many-point-charges">
+<div class="wrap docutils container">
+<p class="rubric">The Field of Many Point Charges</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Superposition again: the field of <span class="math notranslate nohighlight">\(N\)</span> point charges is the sum of their separate fields.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}(\mathbf{r}) = \sum_{n=1}^{N} \frac{Q_n\ (\mathbf{r} - \mathbf{r}_n)}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}_n|^3}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The force from many charges was a sum, and the field is the force divided by
+the same test charge, so the field is the same sum with the test charge
+removed. In the worked example, the field at <span class="math notranslate nohighlight">\((4, 0)\)</span> m from <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>
+is <span class="math notranslate nohighlight">\(\mathbf{F}_3/q_3 = (-461\ \hat{\mathbf{x}} + 848\ \hat{\mathbf{y}})\)</span> V/m.
+That number belongs to the point <span class="math notranslate nohighlight">\((4, 0)\)</span> whether or not a charge sits there.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-superposition-live">
+<div class="wrap docutils container">
+<p class="rubric">Superposition, Live</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/field-superposition.html"
+        width="100%" height="519"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Three point charges in a plane, their field lines, and the field at a probe point, with each charge's share shown separately"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget places up to three point charges in a plane and draws the field
+lines they produce. Each line follows the direction of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, leaving
+positive charges and ending on negative ones, and each charge launches lines
+in proportion to its size. Drag a charge or the amber <strong>probe</strong> to move it;
+the readouts give the field at the probe. The <strong>Worked example</strong> start places
+<span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span> from the example, with the probe where <span class="math notranslate nohighlight">\(q_3\)</span> sat, and the
+readouts match <span class="math notranslate nohighlight">\(-0.461\)</span> and <span class="math notranslate nohighlight">\(0.848\)</span> kV/m. Turn on <strong>Each charge’s field</strong> to
+see the separate vectors that superposition adds. Then try the <strong>Dipole</strong>:
+move the probe along the <span class="math notranslate nohighlight">\(x\)</span> axis and watch the field stay parallel to the
+line joining the charges, which the next frame derives.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-of-a-dipole">
+<div class="wrap docutils container">
+<p class="rubric">The Field of a Dipole</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L18-dipole.svg"
+     alt="Charge plus q at (0, d/2) and minus q at (0, minus d/2); at a point on the x axis the fields of the two charges add to a field pointing in the minus y direction"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned} \mathbf{E} &amp;= \frac{q}{4\pi\epsilon}\left[\frac{x\hat{\mathbf{x}} - \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} - \frac{x\hat{\mathbf{x}} + \tfrac{d}{2}\hat{\mathbf{y}}}{\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}}\right] = -\hat{\mathbf{y}}\ \frac{q\ d}{4\pi\epsilon\left(x^2 + \tfrac{d^2}{4}\right)^{3/2}} \end{aligned}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>An <strong>electric dipole</strong> is a pair of equal and opposite charges, <span class="math notranslate nohighlight">\(+q\)</span> at
+<span class="math notranslate nohighlight">\((0, d/2)\)</span> and <span class="math notranslate nohighlight">\(-q\)</span> at <span class="math notranslate nohighlight">\((0, -d/2)\)</span>. We find its field at the point <span class="math notranslate nohighlight">\((x, 0)\)</span> on
+the line that bisects it, using the sum for point charges with two terms.</p>
+<p>For <span class="math notranslate nohighlight">\(+q\)</span>, the source is <span class="math notranslate nohighlight">\(\mathbf{r}' = \tfrac{d}{2}\hat{\mathbf{y}}\)</span>, so
+<span class="math notranslate nohighlight">\(\mathbf{r} - \mathbf{r}' = x\hat{\mathbf{x}} - \tfrac{d}{2}\hat{\mathbf{y}}\)</span>,
+with magnitude <span class="math notranslate nohighlight">\(\sqrt{x^2 + d^2/4}\)</span>. For <span class="math notranslate nohighlight">\(-q\)</span>, the source is
+<span class="math notranslate nohighlight">\(-\tfrac{d}{2}\hat{\mathbf{y}}\)</span>, so
+<span class="math notranslate nohighlight">\(\mathbf{r} - \mathbf{r}' = x\hat{\mathbf{x}} + \tfrac{d}{2}\hat{\mathbf{y}}\)</span>,
+with the same magnitude. The two terms share a denominator, so we subtract the
+numerators: the <span class="math notranslate nohighlight">\(x\hat{\mathbf{x}}\)</span> parts cancel, and the
+<span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> parts add to <span class="math notranslate nohighlight">\(-d\ \hat{\mathbf{y}}\)</span>. On the bisector, the
+field points from the positive charge toward the negative one, parallel to
+the dipole, and it has no <span class="math notranslate nohighlight">\(x\)</span> component at all. Symmetry predicted that:
+the <span class="math notranslate nohighlight">\(x\)</span> components of the two fields are equal and opposite.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-far-from-the-dipole">
+<div class="wrap docutils container">
+<p class="rubric">Far From the Dipole</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(x \gg d\)</span>, drop <span class="math notranslate nohighlight">\(d^2/4\)</span> beside <span class="math notranslate nohighlight">\(x^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E} \approx -\hat{\mathbf{y}}\ \frac{q\ d}{4\pi\epsilon\ x^3} = -\hat{\mathbf{y}}\ \frac{p}{4\pi\epsilon\ x^3}, \qquad p = q\ d\]</div>
+<ul class="simple">
+<li><p>A dipole’s field falls as <span class="math notranslate nohighlight">\(1/x^3\)</span>, not <span class="math notranslate nohighlight">\(1/x^2\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Far from the dipole, <span class="math notranslate nohighlight">\(x^2 + d^2/4 \approx x^2\)</span>, and the denominator becomes
+<span class="math notranslate nohighlight">\(x^3\)</span>. The product <span class="math notranslate nohighlight">\(p = qd\)</span> is the <strong>dipole moment</strong>, in coulomb-meters, and it
+is all the far field remembers about the pair: halving <span class="math notranslate nohighlight">\(d\)</span> and doubling <span class="math notranslate nohighlight">\(q\)</span>
+gives the same field. The field falls off one power of distance faster than a
+single charge’s, because from far away the two charges almost cancel. Their
+net charge is zero, and only their slight separation leaves a field at all.
+A water molecule is a dipole, and so is any
+neutral object that an applied field has pulled slightly apart. In the widget’s dipole, <span class="math notranslate nohighlight">\(q = 2\ \mu\text{C}\)</span>
+and <span class="math notranslate nohighlight">\(d = 2\)</span> m; at <span class="math notranslate nohighlight">\(x = 3\)</span> m the exact result gives 1.14 kV/m.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-charge-densities">
+<div class="wrap docutils container">
+<p class="rubric">Charge Densities</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Charge spread along</p></th>
+<th class="head text-left"><p>Density</p></th>
+<th class="head text-left"><p>Units</p></th>
+<th class="head text-left"><p>Charge in an element</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>a line</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho_\ell\)</span></p></td>
+<td class="text-left"><p>C/m</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(dQ = \rho_\ell\ d\ell\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>a surface</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho_s\)</span></p></td>
+<td class="text-left"><p>C/m²</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(dQ = \rho_s\ ds\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>a volume</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho_v\)</span></p></td>
+<td class="text-left"><p>C/m³</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(dQ = \rho_v\ dv\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Real charge is made of electrons and nuclei, far too many to sum one at a
+time. A wire, a plate, or a cloud of charge looks continuous at any scale we
+care about, and we describe it by a <strong>charge density</strong>: charge per unit
+length along a wire, per unit area on a surface, or per unit volume through a
+region. A small element of the distribution, of length <span class="math notranslate nohighlight">\(d\ell\)</span>, area <span class="math notranslate nohighlight">\(ds\)</span>, or
+volume <span class="math notranslate nohighlight">\(dv\)</span>, holds the charge <span class="math notranslate nohighlight">\(dQ\)</span> in the last column. Lesson 17’s
+differential elements supply <span class="math notranslate nohighlight">\(d\ell\)</span>, <span class="math notranslate nohighlight">\(ds\)</span>, and <span class="math notranslate nohighlight">\(dv\)</span> in whichever coordinate
+system fits the shape: <span class="math notranslate nohighlight">\(ds = \rho'\ d\rho'\ d\phi'\)</span> on a disk, for example, or
+<span class="math notranslate nohighlight">\(dv = r'^2 \sin\theta'\ dr'\ d\theta'\ d\phi'\)</span> in a sphere.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-from-a-sum-to-an-integral">
+<div class="wrap docutils container">
+<p class="rubric">From a Sum to an Integral</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Treat each element <span class="math notranslate nohighlight">\(dQ\)</span> as a point charge, and add them all:</p>
+<div class="math notranslate nohighlight">
+\[d\mathbf{E} = \frac{dQ\ (\mathbf{r} - \mathbf{r}')}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3} \quad\Longrightarrow\quad \mathbf{E}(\mathbf{r}) = \int \frac{(\mathbf{r} - \mathbf{r}')\ dQ}{4\pi\epsilon\ |\mathbf{r} - \mathbf{r}'|^3}\]</div>
+<ol class="arabic simple">
+<li><p>Draw the picture and choose coordinates.</p></li>
+<li><p>Write <span class="math notranslate nohighlight">\(dQ\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{r} - \mathbf{r}'\)</span>.</p></li>
+<li><p>Use symmetry, then integrate each component.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each element of a distribution is small enough to be a point charge, so it
+contributes the point-charge field <span class="math notranslate nohighlight">\(d\mathbf{E}\)</span>, with <span class="math notranslate nohighlight">\(dQ\)</span> in place of <span class="math notranslate nohighlight">\(Q\)</span>
+and the element’s position as the source point <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>. Superposition
+adds the contributions, and as the elements shrink, the sum becomes an
+integral over the distribution. That is the whole method, and every problem
+in this lesson and the next follows the same three steps. First, draw the
+charge and the field point and pick the coordinate system that matches the
+shape. Second, write <span class="math notranslate nohighlight">\(dQ\)</span> from the table of densities and write the vector
+<span class="math notranslate nohighlight">\(\mathbf{R}\)</span> from the element to the field point. Third, look for components
+that cancel by symmetry, and integrate the ones that do not, one scalar
+integral per component. The integration variables are always the primed
+source coordinates; the field point stays fixed.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-finite-line-charge-set-up">
+<div class="wrap docutils container">
+<p class="rubric">A Finite Line Charge: Set Up</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L18-line-charge.svg"
+     alt="A line of charge along the z axis from minus L/2 to L/2; an element dQ at height z prime and its mirror image at minus z prime both contribute fields at a point a distance rho from the line, and their z components cancel"
+     style="max-width: 400px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[dQ = \rho_\ell\ dz', \qquad \mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}, \qquad R = \sqrt{\rho^2 + z'^2}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A straight line of uniform charge density <span class="math notranslate nohighlight">\(\rho_\ell\)</span> runs along the <span class="math notranslate nohighlight">\(z\)</span> axis
+from <span class="math notranslate nohighlight">\(-L/2\)</span> to <span class="math notranslate nohighlight">\(L/2\)</span>. We want the field at a distance <span class="math notranslate nohighlight">\(\rho\)</span> from the line,
+in the plane <span class="math notranslate nohighlight">\(z = 0\)</span> that bisects it. The shape is a cylinder’s, so we use
+cylindrical coordinates. The element at height <span class="math notranslate nohighlight">\(z'\)</span> has length <span class="math notranslate nohighlight">\(dz'\)</span> and
+charge <span class="math notranslate nohighlight">\(dQ = \rho_\ell\ dz'\)</span>. The field point is
+<span class="math notranslate nohighlight">\(\mathbf{r} = \rho\ \hat{\boldsymbol{\rho}}\)</span> and the element is at
+<span class="math notranslate nohighlight">\(\mathbf{r}' = z'\ \hat{\mathbf{z}}\)</span>, so the vector from the element to the
+field point is <span class="math notranslate nohighlight">\(\mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}\)</span>.
+The figure shows the element at <span class="math notranslate nohighlight">\(z'\)</span> and its mirror image at <span class="math notranslate nohighlight">\(-z'\)</span>. Their
+fields have the same <span class="math notranslate nohighlight">\(\rho\)</span> component and opposite <span class="math notranslate nohighlight">\(z\)</span> components, which
+predicts the answer before we integrate: the field points straight out from
+the line.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-radial-component">
+<div class="wrap docutils container">
+<p class="rubric">The Radial Component</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Substitute <span class="math notranslate nohighlight">\(z' = \rho\tan\alpha\)</span>, <span class="math notranslate nohighlight">\(dz' = \rho\sec^2\alpha\ d\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_\rho &amp;= \frac{\rho_\ell\ \rho}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{dz'}{\left(\rho^2 + z'^2\right)^{3/2}} \\ &amp;= \frac{\rho_\ell\ \rho}{4\pi\epsilon}\left[\frac{\sin\alpha}{\rho^2}\right] = \frac{\rho_\ell\ \rho}{4\pi\epsilon}\left[\frac{z'}{\rho^2\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} \\ &amp;= \frac{\rho_\ell\ L}{4\pi\epsilon\ \rho\sqrt{\rho^2 + L^2/4}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> component of <span class="math notranslate nohighlight">\(d\mathbf{E}\)</span> is
+<span class="math notranslate nohighlight">\(\rho_\ell\ \rho\ dz'/4\pi\epsilon(\rho^2 + z'^2)^{3/2}\)</span>. The field point does
+not move during the integration, so <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> is a constant
+vector here and comes outside the integral along with <span class="math notranslate nohighlight">\(\rho\)</span>. The integral
+yields to the substitution <span class="math notranslate nohighlight">\(z' = \rho\tan\alpha\)</span>. Then
+<span class="math notranslate nohighlight">\(dz' = \rho\sec^2\alpha\ d\alpha\)</span> and
+<span class="math notranslate nohighlight">\(\rho^2 + z'^2 = \rho^2\sec^2\alpha\)</span>, so the integrand becomes
+<span class="math notranslate nohighlight">\(\rho\sec^2\alpha / \rho^3\sec^3\alpha = \cos\alpha/\rho^2\)</span>, whose integral
+is <span class="math notranslate nohighlight">\(\sin\alpha/\rho^2\)</span>. The triangle with legs <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(z'\)</span> gives
+<span class="math notranslate nohighlight">\(\sin\alpha = z'/\sqrt{\rho^2 + z'^2}\)</span>, which returns us to <span class="math notranslate nohighlight">\(z'\)</span>. The limits
+<span class="math notranslate nohighlight">\(\pm L/2\)</span> give equal and opposite values, so the bracket is twice the upper
+value, and one factor of <span class="math notranslate nohighlight">\(\rho\)</span> cancels.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-axial-component-and-the-result">
+<div class="wrap docutils container">
+<p class="rubric">The Axial Component and the Result</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[E_z = -\frac{\rho_\ell}{4\pi\epsilon}\int_{-L/2}^{L/2} \frac{z'\ dz'}{\left(\rho^2 + z'^2\right)^{3/2}} = \frac{\rho_\ell}{4\pi\epsilon}\left[\frac{1}{\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell\ L}{4\pi\epsilon\ \rho\sqrt{\rho^2 + L^2/4}}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span> component of <span class="math notranslate nohighlight">\(d\mathbf{E}\)</span> carries the
+<span class="math notranslate nohighlight">\(-z'\ \hat{\mathbf{z}}\)</span> part of <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>. Its integrand is odd in <span class="math notranslate nohighlight">\(z'\)</span>,
+and the substitution <span class="math notranslate nohighlight">\(u = \rho^2 + z'^2\)</span>, <span class="math notranslate nohighlight">\(du = 2z'\ dz'\)</span>, gives the
+antiderivative <span class="math notranslate nohighlight">\(-1/\sqrt{\rho^2 + z'^2}\)</span>. That function takes the same value
+at <span class="math notranslate nohighlight">\(z' = L/2\)</span> and at <span class="math notranslate nohighlight">\(z' = -L/2\)</span>, so the bracket is zero. The integral
+confirms what the mirror-image argument predicted: the field of a symmetric
+line, on its bisecting plane, points straight away from the line.</p>
+<p>Check the result far from the line. For <span class="math notranslate nohighlight">\(\rho \gg L\)</span>,
+<span class="math notranslate nohighlight">\(\sqrt{\rho^2 + L^2/4} \approx \rho\)</span>, and the field becomes
+<span class="math notranslate nohighlight">\(\rho_\ell L/4\pi\epsilon\rho^2\)</span>. The total charge is <span class="math notranslate nohighlight">\(Q = \rho_\ell L\)</span>, so
+this is the field of a point charge <span class="math notranslate nohighlight">\(Q\)</span>, as it must be from far away.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-infinite-line">
+<div class="wrap docutils container">
+<p class="rubric">The Infinite Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(L \gg \rho\)</span>, <span class="math notranslate nohighlight">\(\sqrt{\rho^2 + L^2/4} \approx L/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\ \rho}\]</div>
+<ul class="simple">
+<li><p>The field of a long line falls as <span class="math notranslate nohighlight">\(1/\rho\)</span>, not <span class="math notranslate nohighlight">\(1/\rho^2\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Close to a long line, or far from its ends, <span class="math notranslate nohighlight">\(\rho^2\)</span> is negligible beside
+<span class="math notranslate nohighlight">\(L^2/4\)</span>, and the square root becomes <span class="math notranslate nohighlight">\(L/2\)</span>. The length cancels, and the field
+no longer depends on it. This is the field of an <strong>infinite line charge</strong>, and
+it falls off only as <span class="math notranslate nohighlight">\(1/\rho\)</span>: moving away from a long line, you see more of
+it, which partly makes up for the distance. A real line counts as infinite
+when the field point is much closer to it than to either end. For example, a
+centered line 14 times longer than <span class="math notranslate nohighlight">\(\rho\)</span> gives a field within 1% of this
+result. The coaxial cable of Module 1 is the practical case, and Lesson 20
+finds this same field in one line, with Gauss’s law.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{r} - \mathbf{r}'\)</span></p></td>
+<td class="text-left"><p>Vector from the source point to the field point</p></td>
+<td class="text-left"><p>prime marks the source</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Coulomb’s law</p></td>
+<td class="text-left"><p>Force between two point charges</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{F} = \dfrac{Q_1 Q_2\ \mathbf{R}}{4\pi\epsilon R^3}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\epsilon_0\)</span></p></td>
+<td class="text-left"><p>Permittivity of free space</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(8.854 \times 10^{-12}\)</span> F/m; <span class="math notranslate nohighlight">\(1/4\pi\epsilon_0 = 8.988 \times 10^9\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Superposition</p></td>
+<td class="text-left"><p>Forces and fields from many charges add as vectors</p></td>
+<td class="text-left"><p>add components, not magnitudes</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Electric field</p></td>
+<td class="text-left"><p>Force per unit test charge, in V/m</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E} = \dfrac{Q\ \mathbf{R}}{4\pi\epsilon R^3}\)</span>; <span class="math notranslate nohighlight">\(\mathbf{F} = q\mathbf{E}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Dipole</p></td>
+<td class="text-left"><p>Charges <span class="math notranslate nohighlight">\(\pm q\)</span> a distance <span class="math notranslate nohighlight">\(d\)</span> apart; moment <span class="math notranslate nohighlight">\(p = qd\)</span></p></td>
+<td class="text-left"><p>far field <span class="math notranslate nohighlight">\(\propto p/r^3\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Charge densities</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho_\ell\)</span>, <span class="math notranslate nohighlight">\(\rho_s\)</span>, <span class="math notranslate nohighlight">\(\rho_v\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(dQ = \rho_\ell\ d\ell\)</span>, <span class="math notranslate nohighlight">\(\rho_s\ ds\)</span>, <span class="math notranslate nohighlight">\(\rho_v\ dv\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Direct integration</p></td>
+<td class="text-left"><p>Each <span class="math notranslate nohighlight">\(dQ\)</span> is a point charge; integrate</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E} = \displaystyle\int \frac{\mathbf{R}\ dQ}{4\pi\epsilon R^3}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Finite line, bisecting plane</p></td>
+<td class="text-left"><p>Length <span class="math notranslate nohighlight">\(L\)</span>, distance <span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\dfrac{\rho_\ell L}{4\pi\epsilon\rho\sqrt{\rho^2 + L^2/4}}\ \hat{\boldsymbol{\rho}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Infinite line</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(L \gg \rho\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\dfrac{\rho_\ell}{2\pi\epsilon\rho}\ \hat{\boldsymbol{\rho}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L18_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L18_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 19</strong>: the same three steps for a ring, a disk, an infinite sheet, and a sphere.</p></li>
+<li><p><strong>Lesson 20</strong>: Gauss’s law finds the most symmetric of these fields without an integral.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we started from one experimental law and built the field of any
+collection of charges: a sum for point charges, and an integral for a
+distribution. Lesson 19 applies the integral to the shapes that matter most:
+a ring, a disk, an infinite sheet of charge, and a sphere. Some of those
+integrals take real work, and for the most symmetric shapes, Lesson 20 shows
+a shortcut, Gauss’s law, that reaches the same answers with almost no
+integration.</p>
+<p>Before Lesson 19, review section 5.4 of Ellingson, <em>Electromagnetics</em>, Vol. 1,
+and review the differential elements of area and volume in cylindrical and
+spherical coordinates from Lesson 17.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module02/L18-coulombs-law"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

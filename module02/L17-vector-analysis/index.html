@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L17 - Vector and Coordinate System Review &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 2 overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l17-vector-and-coordinate-system-review">
+<h1>L17 - Vector and Coordinate System Review<a class="headerlink" href="#l17-vector-and-coordinate-system-review" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Vector and Coordinate System Review</h1>
+<div class="title-rule"></div>
+<p>Today we sharpen the vector calculus that every lesson in Module 2 uses.</p>
+<p>Lesson 17 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '4'">
+  <li>I can recognize and apply common vector calculus operations, such as: gradient, divergence, curl, and Laplacian in the three major coordinate systems.</li>
+  <li>I can calculate surface and volume integrals in rectangular, cylindrical, and spherical coordinate systems.</li>
+  <li>I can differentiate between Stokes' Theorem and the Divergence Theorem and apply them to various problems to simplify integrals.</li>
+</ol>
+<div class="depth docutils container">
+<p>Module 1 described a transmission line with two scalars, a voltage and a
+current, that varied along one coordinate, <span class="math notranslate nohighlight">\(z\)</span>. Module 2 turns to the fields
+themselves. An electric field has a magnitude and a direction at every point in
+space, so we need the tools of vector calculus to describe it, to add up its
+sources, and to read its behavior. This lesson reviews those tools and derives
+each one from a small piece of space, the same way Lesson 3 derived the
+telegrapher’s equations from a short section of line. Graded Review 1 is due
+today.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-fields-need-vector-calculus">
+<div class="wrap docutils container">
+<p class="rubric">Fields Need Vector Calculus</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>A field <span class="math notranslate nohighlight">\(\mathbf{E}(x,y,z)\)</span> assigns a vector to every point in space.</p></li>
+<li><p><strong>Lessons 18–19:</strong> add up charges with line, surface, and volume integrals.</p></li>
+<li><p><strong>Lessons 20–21:</strong> flux and divergence.</p></li>
+<li><p><strong>Lessons 22–23:</strong> gradient and Laplacian.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>vector field</strong> assigns a vector to every point in a region: the electric
+field <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, the magnetic field <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, the current density
+<span class="math notranslate nohighlight">\(\mathbf{J}\)</span>. A <strong>scalar field</strong> assigns a number to every point: the
+electric potential <span class="math notranslate nohighlight">\(V\)</span>, or the charge density <span class="math notranslate nohighlight">\(\rho_v\)</span>. Every tool in this
+lesson has a job later in the module. Coulomb’s law in Lessons 18 and 19 adds
+up the field of a charge spread along a line, over a surface, or through a
+volume, so we need the length, area, and volume elements of each coordinate
+system. Gauss’s law in Lessons 20 and 21 counts the field leaving a closed
+surface, which is the divergence. The potential in Lessons 22 and 23 gives the
+field through the gradient and obeys an equation built on the Laplacian. The
+curl and Stokes’ theorem wait for Ampère’s law in Module 3, but we derive them
+today alongside their partners.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-three-coordinate-systems">
+<div class="wrap docutils container">
+<p class="rubric">Three Coordinate Systems</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-coordinates.svg"
+     alt="One point P located three ways: by x, y, and z; by the distance rho from the z axis, the angle phi from the x axis, and the height z; and by the distance r from the origin, the angle theta from the z axis, and the angle phi"
+     style="max-width: 700px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{aligned} x &amp;= \rho\cos\phi, &amp; y &amp;= \rho\sin\phi, &amp; \rho &amp;= r\sin\theta, &amp; z &amp;= r\cos\theta \end{aligned}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We locate a point three ways, and we choose the one that matches the symmetry
+of the problem. <strong>Cartesian</strong> coordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span> suit flat sheets and
+boxes. <strong>Cylindrical</strong> coordinates <span class="math notranslate nohighlight">\((\rho, \phi, z)\)</span> suit a line charge or a
+coaxial cable: <span class="math notranslate nohighlight">\(\rho\)</span> is the distance from the <span class="math notranslate nohighlight">\(z\)</span> axis, <span class="math notranslate nohighlight">\(\phi\)</span> is the angle
+measured from the <span class="math notranslate nohighlight">\(x\)</span> axis in the <span class="math notranslate nohighlight">\(xy\)</span> plane, and <span class="math notranslate nohighlight">\(z\)</span> is the height.
+<strong>Spherical</strong> coordinates <span class="math notranslate nohighlight">\((r, \theta, \phi)\)</span> suit a point charge or a charged
+sphere: <span class="math notranslate nohighlight">\(r\)</span> is the distance from the origin, <span class="math notranslate nohighlight">\(\theta\)</span> is the angle down from
+the <span class="math notranslate nohighlight">\(+z\)</span> axis, running from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(\pi\)</span>, and <span class="math notranslate nohighlight">\(\phi\)</span> is the same angle as in
+cylindrical coordinates.</p>
+<p>The conversions follow from the right triangles in the figure. Dropping <span class="math notranslate nohighlight">\(P\)</span>
+onto the <span class="math notranslate nohighlight">\(xy\)</span> plane gives a point at distance <span class="math notranslate nohighlight">\(\rho\)</span> from the origin, with
+legs <span class="math notranslate nohighlight">\(x = \rho\cos\phi\)</span> and <span class="math notranslate nohighlight">\(y = \rho\sin\phi\)</span>. In the vertical plane through
+<span class="math notranslate nohighlight">\(P\)</span> and the <span class="math notranslate nohighlight">\(z\)</span> axis, the segment <span class="math notranslate nohighlight">\(r\)</span> makes angle <span class="math notranslate nohighlight">\(\theta\)</span> with the axis, so
+its vertical leg is <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span> and its horizontal leg is
+<span class="math notranslate nohighlight">\(\rho = r\sin\theta\)</span>. Going the other way, <span class="math notranslate nohighlight">\(\rho = \sqrt{x^2 + y^2}\)</span>,
+<span class="math notranslate nohighlight">\(\phi = \tan^{-1}(y/x)\)</span> in the correct quadrant, and <span class="math notranslate nohighlight">\(r = \sqrt{x^2 + y^2 + z^2}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-unit-vectors-that-turn">
+<div class="wrap docutils container">
+<p class="rubric">Unit Vectors That Turn</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-unit-vectors.svg"
+     alt="The unit vectors rho-hat and phi-hat drawn at two points at different angles phi; rho-hat points away from the origin and phi-hat points counterclockwise, so both change direction from one point to the other"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \hat{\boldsymbol{\rho}} &amp;= \hat{\mathbf{x}}\cos\phi + \hat{\mathbf{y}}\sin\phi \\ \hat{\boldsymbol{\phi}} &amp;= -\hat{\mathbf{x}}\sin\phi + \hat{\mathbf{y}}\cos\phi \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The Cartesian unit vectors <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>, <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span> point the same way everywhere. The cylindrical ones do not.
+At each point, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> points directly away from the <span class="math notranslate nohighlight">\(z\)</span>
+axis and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> points in the direction of increasing
+<span class="math notranslate nohighlight">\(\phi\)</span>, counterclockwise seen from above. The figure draws both at two points,
+and they have turned between them.</p>
+<p>To write them in Cartesian form, project each one onto the axes.
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> has length one and makes angle <span class="math notranslate nohighlight">\(\phi\)</span> with the <span class="math notranslate nohighlight">\(x\)</span>
+axis, so its <span class="math notranslate nohighlight">\(x\)</span> component is <span class="math notranslate nohighlight">\(\cos\phi\)</span> and its <span class="math notranslate nohighlight">\(y\)</span> component is <span class="math notranslate nohighlight">\(\sin\phi\)</span>.
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> is <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> rotated <span class="math notranslate nohighlight">\(90^\circ\)</span>
+counterclockwise, which takes <span class="math notranslate nohighlight">\((\cos\phi, \sin\phi)\)</span> to <span class="math notranslate nohighlight">\((-\sin\phi, \cos\phi)\)</span>.</p>
+<p>That dependence on <span class="math notranslate nohighlight">\(\phi\)</span> matters every time we integrate. A constant can come
+out of an integral, but <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span> is not constant when <span class="math notranslate nohighlight">\(\phi\)</span>
+varies. The safe method is to convert to Cartesian unit vectors first. For
+example, around a full circle,
+<span class="math notranslate nohighlight">\(\int_0^{2\pi} \hat{\boldsymbol{\rho}}\  d\phi = \hat{\mathbf{x}}\int_0^{2\pi}\cos\phi\  d\phi + \hat{\mathbf{y}}\int_0^{2\pi}\sin\phi\  d\phi = 0\)</span>,
+which is why the sideways pulls cancel for the ring of charge in Lesson 19.
+The spherical unit vectors <span class="math notranslate nohighlight">\(\hat{\mathbf{r}}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\theta}}\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> turn in the same way.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-metric-factors">
+<div class="wrap docutils container">
+<p class="rubric">Metric Factors</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Change one coordinate by <span class="math notranslate nohighlight">\(du\)</span>, and the point moves a distance <span class="math notranslate nohighlight">\(h\  du\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} d\mathbf{l} &amp;= \hat{\boldsymbol{\rho}}\  d\rho + \hat{\boldsymbol{\phi}}\  \rho\  d\phi + \hat{\mathbf{z}}\  dz \\ d\mathbf{l} &amp;= \hat{\mathbf{r}}\  dr + \hat{\boldsymbol{\theta}}\  r\  d\theta + \hat{\boldsymbol{\phi}}\  r\sin\theta\  d\phi \end{aligned}\end{split}\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>System</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(h_1\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(h_2\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(h_3\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Cartesian <span class="math notranslate nohighlight">\((x, y, z)\)</span></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Cylindrical <span class="math notranslate nohighlight">\((\rho, \phi, z)\)</span></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td class="text-left"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Spherical <span class="math notranslate nohighlight">\((r, \theta, \phi)\)</span></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(r\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(r\sin\theta\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>An angle is not a length, so a change in an angle moves a point by a distance
+that depends on where the point is. In cylindrical coordinates, changing
+<span class="math notranslate nohighlight">\(\rho\)</span> by <span class="math notranslate nohighlight">\(d\rho\)</span> moves the point a distance <span class="math notranslate nohighlight">\(d\rho\)</span>, and changing <span class="math notranslate nohighlight">\(z\)</span> by <span class="math notranslate nohighlight">\(dz\)</span>
+moves it <span class="math notranslate nohighlight">\(dz\)</span>. Changing <span class="math notranslate nohighlight">\(\phi\)</span> by <span class="math notranslate nohighlight">\(d\phi\)</span> moves it along a circle of radius
+<span class="math notranslate nohighlight">\(\rho\)</span>, and the arc of a circle is its radius times the angle, so the distance
+is <span class="math notranslate nohighlight">\(\rho\  d\phi\)</span>. In spherical coordinates, changing <span class="math notranslate nohighlight">\(r\)</span> moves the point
+<span class="math notranslate nohighlight">\(dr\)</span>. Changing <span class="math notranslate nohighlight">\(\theta\)</span> moves it along a circle of radius <span class="math notranslate nohighlight">\(r\)</span> centered at the
+origin, a distance <span class="math notranslate nohighlight">\(r\  d\theta\)</span>. Changing <span class="math notranslate nohighlight">\(\phi\)</span> moves it along a horizontal
+circle whose radius is the distance from the <span class="math notranslate nohighlight">\(z\)</span> axis, <span class="math notranslate nohighlight">\(r\sin\theta\)</span>, a
+distance <span class="math notranslate nohighlight">\(r\sin\theta\  d\phi\)</span>.</p>
+<p>The factor that turns a change in a coordinate into a distance is the
+<strong>metric factor</strong> <span class="math notranslate nohighlight">\(h\)</span>. With coordinates <span class="math notranslate nohighlight">\((u_1, u_2, u_3)\)</span> and unit vectors
+<span class="math notranslate nohighlight">\((\hat{\mathbf{u}}_1, \hat{\mathbf{u}}_2, \hat{\mathbf{u}}_3)\)</span>, every system
+has the same form,
+<span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\mathbf{u}}_1 h_1\  du_1 + \hat{\mathbf{u}}_2 h_2\  du_2 + \hat{\mathbf{u}}_3 h_3\  du_3\)</span>.
+The table holds the three sets of metric factors, and every formula in the rest
+of this lesson is written once in terms of them.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-area-and-volume-elements">
+<div class="wrap docutils container">
+<p class="rubric">Area and Volume Elements</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-elements.svg"
+     alt="A small cylindrical volume element with edges d rho, rho d phi, and d z, and a small spherical volume element with edges d r, r d theta, and r sine theta d phi"
+     style="max-width: 640px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[dv = h_1 h_2 h_3\  du_1\  du_2\  du_3: \qquad dv = \rho\  d\rho\  d\phi\  dz, \qquad dv = r^2\sin\theta\  dr\  d\theta\  d\phi\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each small element in the figure is nearly a box, and its edges are the three
+distances from the previous frame. Its volume is the product of the three edges,
+<span class="math notranslate nohighlight">\(dv = (h_1\  du_1)(h_2\  du_2)(h_3\  du_3)\)</span>. In cylindrical coordinates that is
+<span class="math notranslate nohighlight">\(d\rho \cdot \rho\  d\phi \cdot dz = \rho\  d\rho\  d\phi\  dz\)</span>; in spherical
+coordinates it is <span class="math notranslate nohighlight">\(dr \cdot r\  d\theta \cdot r\sin\theta\  d\phi = r^2\sin\theta\  dr\  d\theta\  d\phi\)</span>.</p>
+<p>A face of the element is a product of two edges, and its direction is the
+unit vector normal to it. On a cylinder of radius <span class="math notranslate nohighlight">\(\rho = a\)</span>, the surface
+element is <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\boldsymbol{\rho}}\  a\  d\phi\  dz\)</span>. On a flat
+end cap of a cylinder, <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{z}}\  \rho\  d\rho\  d\phi\)</span>.
+On a sphere of radius <span class="math notranslate nohighlight">\(r = a\)</span>, <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{r}}\  a^2\sin\theta\  d\theta\  d\phi\)</span>.
+Forgetting the <span class="math notranslate nohighlight">\(\rho\)</span> or the <span class="math notranslate nohighlight">\(r^2\sin\theta\)</span> is the most common mistake in this
+module; it gives an area or a volume with the wrong units.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-an-area-and-a-volume">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: an Area and a Volume</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} S_{\text{sphere}} &amp;= \int_0^{2\pi}\!\!\int_0^{\pi} a^2\sin\theta\  d\theta\  d\phi = a^2 \left[-\cos\theta\right]_0^{\pi} \left[\phi\right]_0^{2\pi} = 4\pi a^2 \\ V_{\text{cylinder}} &amp;= \int_0^{h}\!\!\int_0^{2\pi}\!\!\int_0^{a} \rho\  d\rho\  d\phi\  dz = \frac{a^2}{2} \cdot 2\pi \cdot h = \pi a^2 h \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — a sphere and a cylinder</p>
+<p><strong>The area of a sphere of radius <span class="math notranslate nohighlight">\(a\)</span>.</strong> On the sphere <span class="math notranslate nohighlight">\(r = a\)</span>, the area element
+is <span class="math notranslate nohighlight">\(a^2\sin\theta\  d\theta\  d\phi\)</span>. The sphere runs over
+<span class="math notranslate nohighlight">\(0 \le \theta \le \pi\)</span> and <span class="math notranslate nohighlight">\(0 \le \phi \le 2\pi\)</span>. The integrand separates into a
+function of <span class="math notranslate nohighlight">\(\theta\)</span> times a function of <span class="math notranslate nohighlight">\(\phi\)</span>, so the double integral is a
+product of two single integrals: <span class="math notranslate nohighlight">\(\int_0^{\pi}\sin\theta\  d\theta = [-\cos\theta]_0^{\pi} = 1 - (-1) = 2\)</span>,
+and <span class="math notranslate nohighlight">\(\int_0^{2\pi} d\phi = 2\pi\)</span>. The area is <span class="math notranslate nohighlight">\(a^2 \cdot 2 \cdot 2\pi = 4\pi a^2\)</span>.</p>
+<p><strong>The volume of a cylinder of radius <span class="math notranslate nohighlight">\(a\)</span> and height <span class="math notranslate nohighlight">\(h\)</span>.</strong> The volume element
+is <span class="math notranslate nohighlight">\(\rho\  d\rho\  d\phi\  dz\)</span>, over <span class="math notranslate nohighlight">\(0 \le \rho \le a\)</span>, <span class="math notranslate nohighlight">\(0 \le \phi \le 2\pi\)</span>,
+and <span class="math notranslate nohighlight">\(0 \le z \le h\)</span>. Again the integral separates:
+<span class="math notranslate nohighlight">\(\int_0^{a}\rho\  d\rho = a^2/2\)</span>, <span class="math notranslate nohighlight">\(\int_0^{2\pi} d\phi = 2\pi\)</span>, and
+<span class="math notranslate nohighlight">\(\int_0^{h} dz = h\)</span>. The volume is <span class="math notranslate nohighlight">\(\pi a^2 h\)</span>.</p>
+<p>Both answers are formulas you already know, which is the check that the
+elements are right. Leaving out the <span class="math notranslate nohighlight">\(\sin\theta\)</span> would give <span class="math notranslate nohighlight">\(2\pi^2 a^2\)</span>, and
+leaving out the <span class="math notranslate nohighlight">\(\rho\)</span> would give <span class="math notranslate nohighlight">\(2\pi a h\)</span>, which is not even a volume.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-gradient">
+<div class="wrap docutils container">
+<p class="rubric">The Gradient</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Chain rule, then <span class="math notranslate nohighlight">\(du_i = (\hat{\mathbf{u}}_i \cdot d\mathbf{l})/h_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} df &amp;= \frac{\partial f}{\partial u_1}du_1 + \frac{\partial f}{\partial u_2}du_2 + \frac{\partial f}{\partial u_3}du_3 = \nabla f \cdot d\mathbf{l} \\ \nabla f &amp;= \hat{\mathbf{u}}_1\frac{1}{h_1}\frac{\partial f}{\partial u_1} + \hat{\mathbf{u}}_2\frac{1}{h_2}\frac{\partial f}{\partial u_2} + \hat{\mathbf{u}}_3\frac{1}{h_3}\frac{\partial f}{\partial u_3} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>gradient</strong> answers a practical question: if we take a small step
+<span class="math notranslate nohighlight">\(d\mathbf{l}\)</span> from a point, how much does a scalar field <span class="math notranslate nohighlight">\(f\)</span> change? The chain
+rule gives the change as the sum of the change from each coordinate,
+<span class="math notranslate nohighlight">\(df = \sum_i (\partial f/\partial u_i)\  du_i\)</span>. To write that in terms of the
+step, notice that the step’s component along <span class="math notranslate nohighlight">\(\hat{\mathbf{u}}_i\)</span> is
+<span class="math notranslate nohighlight">\(\hat{\mathbf{u}}_i \cdot d\mathbf{l} = h_i\  du_i\)</span>, so
+<span class="math notranslate nohighlight">\(du_i = (\hat{\mathbf{u}}_i \cdot d\mathbf{l})/h_i\)</span>. Substituting,</p>
+<div class="math notranslate nohighlight">
+\[df = \left(\sum_i \hat{\mathbf{u}}_i \frac{1}{h_i}\frac{\partial f}{\partial u_i}\right) \cdot d\mathbf{l}.\]</div>
+<p>The vector in parentheses is the gradient, <span class="math notranslate nohighlight">\(\nabla f\)</span>, and the change in <span class="math notranslate nohighlight">\(f\)</span>
+along any step is <span class="math notranslate nohighlight">\(df = \nabla f \cdot d\mathbf{l}\)</span>. With the metric factors
+from the table:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla f &amp;= \hat{\mathbf{x}}\frac{\partial f}{\partial x} + \hat{\mathbf{y}}\frac{\partial f}{\partial y} + \hat{\mathbf{z}}\frac{\partial f}{\partial z} \\ \nabla f &amp;= \hat{\boldsymbol{\rho}}\frac{\partial f}{\partial \rho} + \hat{\boldsymbol{\phi}}\frac{1}{\rho}\frac{\partial f}{\partial \phi} + \hat{\mathbf{z}}\frac{\partial f}{\partial z} \\ \nabla f &amp;= \hat{\mathbf{r}}\frac{\partial f}{\partial r} + \hat{\boldsymbol{\theta}}\frac{1}{r}\frac{\partial f}{\partial \theta} + \hat{\boldsymbol{\phi}}\frac{1}{r\sin\theta}\frac{\partial f}{\partial \phi} \end{aligned}\end{split}\]</div>
+<p>The operator <span class="math notranslate nohighlight">\(\nabla\)</span>, read “del,” is the gradient with <span class="math notranslate nohighlight">\(f\)</span> removed. We use it
+with a dot for the divergence and with a cross for the curl, but those two are
+not simply <span class="math notranslate nohighlight">\(\nabla\)</span> dotted or crossed into a field outside Cartesian
+coordinates; each one has its own derivation below.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-what-the-gradient-means">
+<div class="wrap docutils container">
+<p class="rubric">What the Gradient Means</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-gradient.svg"
+     alt="Circular level curves of f equals x squared plus y squared, with gradient arrows pointing straight outward, perpendicular to the curves, and longer farther from the origin"
+     style="max-width: 360px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\nabla f\)</span> points the way <span class="math notranslate nohighlight">\(f\)</span> increases fastest.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|\nabla f|\)</span> is that fastest rate.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla f\)</span> is perpendicular to the level surfaces of <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>All three facts come from <span class="math notranslate nohighlight">\(df = \nabla f \cdot d\mathbf{l} = |\nabla f|\ |d\mathbf{l}|\cos\alpha\)</span>,
+where <span class="math notranslate nohighlight">\(\alpha\)</span> is the angle between the step and the gradient. For a step of
+fixed length, <span class="math notranslate nohighlight">\(df\)</span> is largest when <span class="math notranslate nohighlight">\(\alpha = 0\)</span>, so the gradient points in the
+direction of fastest increase, and the rate of increase in that direction is
+<span class="math notranslate nohighlight">\(|\nabla f|\)</span>. Along a <strong>level surface</strong>, where <span class="math notranslate nohighlight">\(f\)</span> is constant, <span class="math notranslate nohighlight">\(df = 0\)</span> for
+every step, so <span class="math notranslate nohighlight">\(\cos\alpha = 0\)</span>: the gradient is perpendicular to the level
+surface.</p>
+<p>The figure shows <span class="math notranslate nohighlight">\(f = x^2 + y^2\)</span>, whose level curves are circles. In Cartesian
+form, <span class="math notranslate nohighlight">\(\nabla f = \hat{\mathbf{x}}\  2x + \hat{\mathbf{y}}\  2y\)</span>. At the point
+<span class="math notranslate nohighlight">\((1, 1)\)</span> that is <span class="math notranslate nohighlight">\(2\hat{\mathbf{x}} + 2\hat{\mathbf{y}}\)</span>, with magnitude
+<span class="math notranslate nohighlight">\(2\sqrt{2} = 2.83\)</span>. The same function in cylindrical coordinates is
+<span class="math notranslate nohighlight">\(f = \rho^2\)</span>, and <span class="math notranslate nohighlight">\(\nabla f = \hat{\boldsymbol{\rho}}\  2\rho\)</span>: at <span class="math notranslate nohighlight">\((1, 1)\)</span>,
+<span class="math notranslate nohighlight">\(\rho = \sqrt{2}\)</span>, and the magnitude is again <span class="math notranslate nohighlight">\(2\sqrt{2}\)</span>, pointing straight
+outward. The gradient does not depend on the coordinate system, only its
+components do. In Lesson 22 the electric field is the negative gradient of the
+potential, <span class="math notranslate nohighlight">\(\mathbf{E} = -\nabla V\)</span>, so the field points downhill in potential
+and crosses every equipotential surface at a right angle.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-divergence-flux-out-of-a-small-box">
+<div class="wrap docutils container">
+<p class="rubric">Divergence: Flux Out of a Small Box</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-flux-box.svg"
+     alt="A small box with edges delta x, delta y, and delta z; the x component of a field enters the face at x and leaves the face at x plus delta x"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla \cdot \mathbf{F} &amp;\equiv \lim_{\Delta v \to 0}\frac{\oint_S \mathbf{F}\cdot d\mathbf{s}}{\Delta v} \\ \text{$x$ faces: } \left[F_x(x+\Delta x) - F_x(x)\right]\Delta y\ \Delta z &amp;\ \Rightarrow\  \frac{\partial F_x}{\partial x}\ \Delta x\ \Delta y\ \Delta z \\ \nabla \cdot \mathbf{F} &amp;= \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>flux</strong> of a field through a surface, <span class="math notranslate nohighlight">\(\int_S \mathbf{F}\cdot d\mathbf{s}\)</span>,
+adds up the component of the field normal to the surface over its area. For a
+closed surface, with <span class="math notranslate nohighlight">\(d\mathbf{s}\)</span> pointing outward, the flux is the net amount
+of field leaving. The <strong>divergence</strong> is that net outward flux per unit volume,
+for a volume that shrinks to a point. It measures how much a point acts as a
+source of the field.</p>
+<p>We compute it for the small box in the figure. The two faces normal to <span class="math notranslate nohighlight">\(x\)</span> each
+have area <span class="math notranslate nohighlight">\(\Delta y\ \Delta z\)</span>. On the face at <span class="math notranslate nohighlight">\(x + \Delta x\)</span> the outward
+normal is <span class="math notranslate nohighlight">\(+\hat{\mathbf{x}}\)</span>, so the flux out is <span class="math notranslate nohighlight">\(F_x(x + \Delta x)\ \Delta y\ \Delta z\)</span>.
+On the face at <span class="math notranslate nohighlight">\(x\)</span> the outward normal is <span class="math notranslate nohighlight">\(-\hat{\mathbf{x}}\)</span>, so the flux out
+is <span class="math notranslate nohighlight">\(-F_x(x)\ \Delta y\ \Delta z\)</span>. Their sum is the difference
+<span class="math notranslate nohighlight">\([F_x(x+\Delta x) - F_x(x)]\ \Delta y\ \Delta z\)</span>. Multiplying and dividing by
+<span class="math notranslate nohighlight">\(\Delta x\)</span> turns the difference into a difference quotient, and as
+<span class="math notranslate nohighlight">\(\Delta x \to 0\)</span> it becomes <span class="math notranslate nohighlight">\((\partial F_x/\partial x)\ \Delta x\ \Delta y\ \Delta z\)</span>,
+the same step that produced the telegrapher’s equations in Lesson 3. The other
+two pairs of faces give <span class="math notranslate nohighlight">\(\partial F_y/\partial y\)</span> and <span class="math notranslate nohighlight">\(\partial F_z/\partial z\)</span>
+times the same volume. Dividing the total by the volume
+<span class="math notranslate nohighlight">\(\Delta v = \Delta x\ \Delta y\ \Delta z\)</span> gives the divergence in Cartesian
+coordinates.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-divergence-in-any-coordinate-system">
+<div class="wrap docutils container">
+<p class="rubric">Divergence in Any Coordinate System</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Face area <span class="math notranslate nohighlight">\(h_2h_3\ \Delta u_2\ \Delta u_3\)</span> changes with <span class="math notranslate nohighlight">\(u_1\)</span>, so it goes inside the derivative:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{F} = \frac{1}{h_1h_2h_3}\left[\frac{\partial (h_2h_3F_1)}{\partial u_1} + \frac{\partial (h_1h_3F_2)}{\partial u_2} + \frac{\partial (h_1h_2F_3)}{\partial u_3}\right]\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>In curvilinear coordinates the box from the last frame has curved faces, and
+the area of a face changes from one side of the box to the other. The face
+normal to <span class="math notranslate nohighlight">\(\hat{\mathbf{u}}_1\)</span> has edges <span class="math notranslate nohighlight">\(h_2\ \Delta u_2\)</span> and <span class="math notranslate nohighlight">\(h_3\ \Delta u_3\)</span>,
+so its area is <span class="math notranslate nohighlight">\(h_2h_3\ \Delta u_2\ \Delta u_3\)</span>, and the flux through it is
+<span class="math notranslate nohighlight">\(F_1 h_2 h_3\ \Delta u_2\ \Delta u_3\)</span>. The net flux out of the pair of faces at
+<span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_1 + \Delta u_1\)</span> is the change in that whole product, which in the
+limit is <span class="math notranslate nohighlight">\(\left[\partial(h_2h_3F_1)/\partial u_1\right]\Delta u_1\ \Delta u_2\ \Delta u_3\)</span>.
+The metric factors stay inside the derivative because they change with <span class="math notranslate nohighlight">\(u_1\)</span>.
+Adding the other two pairs and dividing by the volume
+<span class="math notranslate nohighlight">\(h_1h_2h_3\ \Delta u_1\ \Delta u_2\ \Delta u_3\)</span> gives the general form above.
+With the metric factors from the table:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla \cdot \mathbf{F} &amp;= \frac{1}{\rho}\frac{\partial(\rho F_\rho)}{\partial \rho} + \frac{1}{\rho}\frac{\partial F_\phi}{\partial \phi} + \frac{\partial F_z}{\partial z} \\ \nabla \cdot \mathbf{F} &amp;= \frac{1}{r^2}\frac{\partial(r^2 F_r)}{\partial r} + \frac{1}{r\sin\theta}\frac{\partial(\sin\theta\  F_\theta)}{\partial \theta} + \frac{1}{r\sin\theta}\frac{\partial F_\phi}{\partial \phi} \end{aligned}\end{split}\]</div>
+<p>As an example, take the field <span class="math notranslate nohighlight">\(\mathbf{F} = \hat{\mathbf{r}}\  r\)</span>, which points
+straight outward and grows with distance. Only the first spherical term
+survives: <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{F} = (1/r^2)\ \partial(r^3)/\partial r = 3\)</span>.
+The field has the same positive divergence everywhere. In Lesson 21 the
+divergence of the electric flux density at a point equals the charge density
+there, <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{D} = \rho_v\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-divergence-theorem">
+<div class="wrap docutils container">
+<p class="rubric">The Divergence Theorem</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-tiling.svg"
+     alt="Left: two neighboring cells share a face, and the flux out of one through that face is the flux into the other. Right: four small loops tile a square; along each shared edge the two loops run in opposite directions, leaving only the outer boundary"
+     style="max-width: 640px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\sum_{\text{cells}} \left(\nabla \cdot \mathbf{F}\right)\Delta v = \sum_{\text{cells}} \oint \mathbf{F}\cdot d\mathbf{s} \quad\longrightarrow\quad \int_V \nabla \cdot \mathbf{F}\  dv = \oint_S \mathbf{F}\cdot d\mathbf{s}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The divergence describes one tiny box. The <strong>divergence theorem</strong> adds up the
+boxes. Divide a volume <span class="math notranslate nohighlight">\(V\)</span> into many small cells. For each cell, the definition
+of divergence says the flux out of its surface is <span class="math notranslate nohighlight">\((\nabla \cdot \mathbf{F})\ \Delta v\)</span>.
+Now add the flux out of every cell. A face shared by two neighboring cells, as
+on the left of the figure, appears twice in the sum: the flux leaving cell 1
+through it is exactly the flux entering cell 2, so the two terms cancel. Every
+interior face cancels this way. Only the faces on the outer surface <span class="math notranslate nohighlight">\(S\)</span> have no
+neighbor, so the sum of all the cell fluxes is the flux through <span class="math notranslate nohighlight">\(S\)</span>. As the
+cells shrink, the sum on the left becomes a volume integral.</p>
+<p>The theorem trades a surface integral for a volume integral, whichever is
+easier. For a check, use <span class="math notranslate nohighlight">\(\mathbf{F} = \hat{\mathbf{r}}\  r\)</span> on a sphere of
+radius <span class="math notranslate nohighlight">\(a\)</span>. The volume integral is <span class="math notranslate nohighlight">\(\int_V 3\  dv = 3 \cdot \tfrac{4}{3}\pi a^3 = 4\pi a^3\)</span>.
+On the surface, <span class="math notranslate nohighlight">\(\mathbf{F}\cdot d\mathbf{s} = a \cdot a^2\sin\theta\  d\theta\  d\phi\)</span>,
+and the surface integral is <span class="math notranslate nohighlight">\(a^3 \cdot 4\pi\)</span>. The two sides agree. Lesson 21
+uses exactly this theorem to turn the integral form of Gauss’s law into its
+point form.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-curl-circulation-around-a-small-loop">
+<div class="wrap docutils container">
+<p class="rubric">Curl: Circulation Around a Small Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-curl-loop.svg"
+     alt="A small rectangular loop in the xy plane traversed counterclockwise, with the x component of the field along the bottom and top edges and the y component along the right and left edges"
+     style="max-width: 400px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} (\nabla \times \mathbf{F})\cdot\hat{\mathbf{n}} &amp;\equiv \lim_{\Delta s \to 0}\frac{\oint_C \mathbf{F}\cdot d\mathbf{l}}{\Delta s} \\ \oint_C \mathbf{F}\cdot d\mathbf{l} &amp;= \left[F_y(x+\Delta x) - F_y(x)\right]\Delta y - \left[F_x(y+\Delta y) - F_x(y)\right]\Delta x \\ (\nabla \times \mathbf{F})_z &amp;= \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>circulation</strong> of a field around a closed path, <span class="math notranslate nohighlight">\(\oint_C \mathbf{F}\cdot d\mathbf{l}\)</span>,
+adds up the component of the field along the path. The <strong>curl</strong> is circulation
+per unit area, around a loop that shrinks to a point, and its component along
+the loop’s normal <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> measures how much the field swirls around
+that axis. The direction follows the right-hand rule: curl the fingers along
+the path, and the thumb points along <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>.</p>
+<p>The figure takes a small loop in the <span class="math notranslate nohighlight">\(xy\)</span> plane, traversed counterclockwise, so
+its normal is <span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>. Go around it one edge at a time. Along the
+bottom, at height <span class="math notranslate nohighlight">\(y\)</span>, the path runs in <span class="math notranslate nohighlight">\(+x\)</span> and contributes <span class="math notranslate nohighlight">\(F_x(y)\ \Delta x\)</span>.
+Up the right side, at <span class="math notranslate nohighlight">\(x + \Delta x\)</span>, it contributes <span class="math notranslate nohighlight">\(F_y(x+\Delta x)\ \Delta y\)</span>.
+Along the top, at <span class="math notranslate nohighlight">\(y + \Delta y\)</span>, the path runs in <span class="math notranslate nohighlight">\(-x\)</span> and contributes
+<span class="math notranslate nohighlight">\(-F_x(y+\Delta y)\ \Delta x\)</span>. Down the left side, at <span class="math notranslate nohighlight">\(x\)</span>, it contributes
+<span class="math notranslate nohighlight">\(-F_y(x)\ \Delta y\)</span>. Grouping the two <span class="math notranslate nohighlight">\(F_y\)</span> terms and the two <span class="math notranslate nohighlight">\(F_x\)</span> terms gives
+the second line. Each bracket is a difference, and in the limit the first
+becomes <span class="math notranslate nohighlight">\((\partial F_y/\partial x)\ \Delta x\ \Delta y\)</span> and the second
+<span class="math notranslate nohighlight">\((\partial F_x/\partial y)\ \Delta x\ \Delta y\)</span>. Dividing by the area
+<span class="math notranslate nohighlight">\(\Delta s = \Delta x\ \Delta y\)</span> gives the <span class="math notranslate nohighlight">\(z\)</span> component of the curl. Loops in
+the other two planes give the other two components.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-curl-in-any-coordinate-system">
+<div class="wrap docutils container">
+<p class="rubric">Curl in Any Coordinate System</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla \times \mathbf{F} = \frac{1}{h_1h_2h_3}\begin{vmatrix} h_1\hat{\mathbf{u}}_1 &amp; h_2\hat{\mathbf{u}}_2 &amp; h_3\hat{\mathbf{u}}_3 \\ \dfrac{\partial}{\partial u_1} &amp; \dfrac{\partial}{\partial u_2} &amp; \dfrac{\partial}{\partial u_3} \\ h_1F_1 &amp; h_2F_2 &amp; h_3F_3 \end{vmatrix}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-div-curl.svg"
+     alt="Left: a field pointing radially outward, with divergence and no curl. Right: a field circulating around the origin, with curl and no divergence"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>On a curvilinear loop the edges have lengths <span class="math notranslate nohighlight">\(h_1\ \Delta u_1\)</span> and
+<span class="math notranslate nohighlight">\(h_2\ \Delta u_2\)</span>, and both can change across the loop. Repeating the
+four-edge sum with those lengths, the contribution of the two edges along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{u}}_2\)</span> is the change in <span class="math notranslate nohighlight">\(h_2F_2\ \Delta u_2\)</span> from one side to
+the other, and likewise for <span class="math notranslate nohighlight">\(h_1F_1\)</span>. Dividing by the area
+<span class="math notranslate nohighlight">\(h_1h_2\ \Delta u_1\ \Delta u_2\)</span> gives the component along <span class="math notranslate nohighlight">\(\hat{\mathbf{u}}_3\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[(\nabla \times \mathbf{F})_3 = \frac{1}{h_1h_2}\left[\frac{\partial(h_2F_2)}{\partial u_1} - \frac{\partial(h_1F_1)}{\partial u_2}\right],\]</div>
+<p>and the other two components follow by cycling <span class="math notranslate nohighlight">\(1 \to 2 \to 3 \to 1\)</span>. The
+determinant above packs all three into one expression. In cylindrical
+coordinates, for example, the <span class="math notranslate nohighlight">\(z\)</span> component is
+<span class="math notranslate nohighlight">\((1/\rho)\left[\partial(\rho F_\phi)/\partial\rho - \partial F_\rho/\partial\phi\right]\)</span>.</p>
+<p>The figure contrasts the two derivatives. The field <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\ \rho\)</span>
+on the left spreads outward: its divergence is
+<span class="math notranslate nohighlight">\((1/\rho)\ \partial(\rho^2)/\partial\rho = 2\)</span> and its curl is zero. The field
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\ \rho\)</span> on the right circulates: its divergence is
+<span class="math notranslate nohighlight">\((1/\rho)\ \partial(\rho)/\partial\phi = 0\)</span> and its curl is
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\ (1/\rho)\ \partial(\rho^2)/\partial\rho = 2\hat{\mathbf{z}}\)</span>.
+Divergence detects sources; curl detects circulation.</p>
+<div class="tip admonition">
+<p class="admonition-title">Worked example — divergence and curl of one field</p>
+<p>Take <span class="math notranslate nohighlight">\(\mathbf{H} = \hat{\mathbf{x}}\left(3y + z^2/2\right) + \hat{\mathbf{y}}\ (2x - z) + \hat{\mathbf{z}}\  3xy\)</span>.</p>
+<p><strong>Divergence.</strong> Each component is differentiated by its own coordinate:
+<span class="math notranslate nohighlight">\(\partial(3y + z^2/2)/\partial x = 0\)</span>, <span class="math notranslate nohighlight">\(\partial(2x - z)/\partial y = 0\)</span>, and
+<span class="math notranslate nohighlight">\(\partial(3xy)/\partial z = 0\)</span>, so <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{H} = 0\)</span>.</p>
+<p><strong>Curl.</strong> With all <span class="math notranslate nohighlight">\(h = 1\)</span>, expanding the determinant gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} (\nabla\times\mathbf{H})_x &amp;= \frac{\partial H_z}{\partial y} - \frac{\partial H_y}{\partial z} = 3x - (-1) = 3x + 1 \\ (\nabla\times\mathbf{H})_y &amp;= \frac{\partial H_x}{\partial z} - \frac{\partial H_z}{\partial x} = z - 3y \\ (\nabla\times\mathbf{H})_z &amp;= \frac{\partial H_y}{\partial x} - \frac{\partial H_x}{\partial y} = 2 - 3 = -1 \end{aligned}\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \hat{\mathbf{x}}(3x + 1) + \hat{\mathbf{y}}(z - 3y) - \hat{\mathbf{z}}\)</span>.
+This field has no sources anywhere but circulates everywhere, which is how a
+magnetic field behaves in Module 3.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-stokes-theorem">
+<div class="wrap docutils container">
+<p class="rubric">Stokes’ Theorem</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\sum_{\text{loops}} \left(\nabla \times \mathbf{F}\right)\cdot\hat{\mathbf{n}}\ \Delta s = \sum_{\text{loops}} \oint \mathbf{F}\cdot d\mathbf{l} \quad\longrightarrow\quad \int_S \left(\nabla \times \mathbf{F}\right)\cdot d\mathbf{s} = \oint_C \mathbf{F}\cdot d\mathbf{l}\]</div>
+<ul class="simple">
+<li><p>Shared edges cancel; only the boundary <span class="math notranslate nohighlight">\(C\)</span> remains.</p></li>
+<li><p>Orientation: right-hand rule from <span class="math notranslate nohighlight">\(C\)</span> to <span class="math notranslate nohighlight">\(d\mathbf{s}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p><strong>Stokes’ theorem</strong> does for curl what the divergence theorem does for
+divergence. Tile a surface <span class="math notranslate nohighlight">\(S\)</span> with small loops, all traversed in the same
+sense, as on the right of the tiling figure two frames back. For each loop, the
+definition of curl says its circulation is <span class="math notranslate nohighlight">\((\nabla\times\mathbf{F})\cdot\hat{\mathbf{n}}\ \Delta s\)</span>.
+Now add the circulation of every loop. An edge shared by two neighboring loops
+is traversed once in each direction, so its two contributions cancel. Only the
+edges on the boundary <span class="math notranslate nohighlight">\(C\)</span> of the surface have no neighbor, and the sum of all
+the circulations is the circulation around <span class="math notranslate nohighlight">\(C\)</span>. As the loops shrink, the sum on
+the left becomes a surface integral.</p>
+<p>The two theorems are easy to confuse, so compare them. The <strong>divergence
+theorem</strong> relates a volume to the <strong>closed surface</strong> around it, and uses the
+divergence. <strong>Stokes’ theorem</strong> relates an open surface to the <strong>closed path</strong>
+around its edge, and uses the curl. The direction of <span class="math notranslate nohighlight">\(d\mathbf{s}\)</span> in Stokes’
+theorem is tied to the direction of travel around <span class="math notranslate nohighlight">\(C\)</span> by the right-hand rule.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-stokes-theorem">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Stokes’ Theorem</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L17-stokes-example.svg"
+     alt="A quarter disk of radius 2 in the first quadrant, bounded by path 1 along the x axis, path 2 along the arc, and path 3 down the y axis, traversed counterclockwise"
+     style="max-width: 300px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{E} = \hat{\boldsymbol{\rho}}\ \rho\sin\phi + \hat{\boldsymbol{\phi}}\ \rho^2: \qquad \oint_C \mathbf{E}\cdot d\mathbf{l} = 0 + 4\pi - 2 = \int_S (3\rho - \cos\phi)\ \rho\  d\rho\  d\phi\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — both sides of Stokes’ theorem</p>
+<p>Verify Stokes’ theorem for <span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\boldsymbol{\rho}}\ \rho\sin\phi + \hat{\boldsymbol{\phi}}\ \rho^2\)</span>
+on the quarter disk of radius 2 in the figure, traversed counterclockwise.</p>
+<p><strong>The line integral, one path at a time.</strong></p>
+<ul class="simple">
+<li><p><em>Path 1</em>, along <span class="math notranslate nohighlight">\(\phi = 0\)</span> from <span class="math notranslate nohighlight">\(\rho = 0\)</span> to 2: <span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\boldsymbol{\rho}}\  d\rho\)</span>, and <span class="math notranslate nohighlight">\(E_\rho = \rho\sin 0 = 0\)</span>. The integral is 0.</p></li>
+<li><p><em>Path 2</em>, along <span class="math notranslate nohighlight">\(\rho = 2\)</span> from <span class="math notranslate nohighlight">\(\phi = 0\)</span> to <span class="math notranslate nohighlight">\(\pi/2\)</span>: <span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\boldsymbol{\phi}}\  2\  d\phi\)</span>, and <span class="math notranslate nohighlight">\(E_\phi = 4\)</span>. The integral is <span class="math notranslate nohighlight">\(\int_0^{\pi/2} 8\  d\phi = 4\pi\)</span>.</p></li>
+<li><p><em>Path 3</em>, along <span class="math notranslate nohighlight">\(\phi = \pi/2\)</span> from <span class="math notranslate nohighlight">\(\rho = 2\)</span> back to 0: <span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\boldsymbol{\rho}}\  d\rho\)</span>, and <span class="math notranslate nohighlight">\(E_\rho = \rho\)</span>. The integral is <span class="math notranslate nohighlight">\(\int_2^0 \rho\  d\rho = -2\)</span>.</p></li>
+</ul>
+<p>The circulation is <span class="math notranslate nohighlight">\(4\pi - 2 = 10.57\)</span>.</p>
+<p><strong>The surface integral.</strong> Counterclockwise travel seen from above gives
+<span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{z}}\ \rho\  d\rho\  d\phi\)</span>, so we need the <span class="math notranslate nohighlight">\(z\)</span>
+component of the curl:</p>
+<div class="math notranslate nohighlight">
+\[(\nabla\times\mathbf{E})_z = \frac{1}{\rho}\left[\frac{\partial(\rho \cdot \rho^2)}{\partial \rho} - \frac{\partial(\rho\sin\phi)}{\partial \phi}\right] = \frac{1}{\rho}\left[3\rho^2 - \rho\cos\phi\right] = 3\rho - \cos\phi\]</div>
+<div class="math notranslate nohighlight">
+\[\int_0^{\pi/2}\!\!\int_0^{2}(3\rho - \cos\phi)\ \rho\  d\rho\  d\phi = \int_0^{\pi/2}\left(8 - 2\cos\phi\right)d\phi = 4\pi - 2\]</div>
+<p>The two sides agree. Here the line integral was the easier side; in Ampère’s
+law in Module 3, the theorem is used in the other direction.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-laplacian">
+<div class="wrap docutils container">
+<p class="rubric">The Laplacian</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla^2 f &amp;\equiv \nabla \cdot \nabla f = \frac{1}{h_1h_2h_3}\sum_i \frac{\partial}{\partial u_i}\left(\frac{h_1h_2h_3}{h_i^2}\frac{\partial f}{\partial u_i}\right) \\ \nabla^2 f &amp;= \frac{1}{\rho}\frac{\partial}{\partial \rho}\left(\rho\frac{\partial f}{\partial \rho}\right) + \frac{1}{\rho^2}\frac{\partial^2 f}{\partial \phi^2} + \frac{\partial^2 f}{\partial z^2} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>Laplacian</strong> of a scalar field is the divergence of its gradient. To
+derive it in any coordinate system, put the gradient’s components,
+<span class="math notranslate nohighlight">\(F_i = (1/h_i)\ \partial f/\partial u_i\)</span>, into the general divergence. The
+first term becomes <span class="math notranslate nohighlight">\(\partial(h_2h_3F_1)/\partial u_1 = \partial\left[(h_2h_3/h_1)\ \partial f/\partial u_1\right]/\partial u_1\)</span>,
+and <span class="math notranslate nohighlight">\(h_2h_3/h_1 = h_1h_2h_3/h_1^2\)</span>, which gives the sum above. With the metric
+factors from the table:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla^2 f &amp;= \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} + \frac{\partial^2 f}{\partial z^2} \\ \nabla^2 f &amp;= \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial f}{\partial r}\right) + \frac{1}{r^2\sin\theta}\frac{\partial}{\partial \theta}\left(\sin\theta\frac{\partial f}{\partial \theta}\right) + \frac{1}{r^2\sin^2\theta}\frac{\partial^2 f}{\partial \phi^2} \end{aligned}\end{split}\]</div>
+<p>The Laplacian measures how a function at a point compares with its average
+nearby: it is positive at the bottom of a bowl and negative at the top of a
+hill. For <span class="math notranslate nohighlight">\(f = x^2 + y^2\)</span>, the Cartesian form gives <span class="math notranslate nohighlight">\(2 + 2 = 4\)</span>, and the
+cylindrical form of <span class="math notranslate nohighlight">\(f = \rho^2\)</span> gives <span class="math notranslate nohighlight">\((1/\rho)\ \partial(2\rho^2)/\partial\rho = 4\)</span>,
+the same answer. For <span class="math notranslate nohighlight">\(f = 1/r\)</span> the spherical form gives
+<span class="math notranslate nohighlight">\((1/r^2)\ \partial(r^2 \cdot (-1/r^2))/\partial r = 0\)</span> everywhere except the
+origin. That function is the potential of a point charge, and in Lesson 23 the
+potential in any region without charge obeys <strong>Laplace’s equation</strong>,
+<span class="math notranslate nohighlight">\(\nabla^2 V = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Form to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Metric factors</p></td>
+<td class="text-left"><p>Turn a change in a coordinate into a distance</p></td>
+<td class="text-left"><p>cyl <span class="math notranslate nohighlight">\((1, \rho, 1)\)</span>; sph <span class="math notranslate nohighlight">\((1, r, r\sin\theta)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Volume element</p></td>
+<td class="text-left"><p>Product of the three edges</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\rho\  d\rho\  d\phi\  dz\)</span>; <span class="math notranslate nohighlight">\(r^2\sin\theta\  dr\  d\theta\  d\phi\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Unit vectors</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>, <span class="math notranslate nohighlight">\(\hat{\mathbf{r}}\)</span>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\theta}}\)</span> turn with position</p></td>
+<td class="text-left"><p>convert to Cartesian before integrating</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gradient</p></td>
+<td class="text-left"><p>Direction and rate of fastest increase</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(df = \nabla f \cdot d\mathbf{l}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Divergence</p></td>
+<td class="text-left"><p>Net outward flux per unit volume</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{F} = \lim \oint \mathbf{F}\cdot d\mathbf{s}/\Delta v\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Curl</p></td>
+<td class="text-left"><p>Circulation per unit area</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((\nabla\times\mathbf{F})\cdot\hat{\mathbf{n}} = \lim \oint \mathbf{F}\cdot d\mathbf{l}/\Delta s\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Divergence theorem</p></td>
+<td class="text-left"><p>Volume and its closed surface</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\int_V \nabla\cdot\mathbf{F}\  dv = \oint_S \mathbf{F}\cdot d\mathbf{s}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Stokes’ theorem</p></td>
+<td class="text-left"><p>Open surface and its boundary path</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\int_S (\nabla\times\mathbf{F})\cdot d\mathbf{s} = \oint_C \mathbf{F}\cdot d\mathbf{l}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Laplacian</p></td>
+<td class="text-left"><p>Divergence of the gradient</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla^2 f = \nabla\cdot\nabla f\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L17_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L17_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 18</strong>: Coulomb’s law gives the field of point charges.</p></li>
+<li><p><strong>Lesson 19</strong>: line, surface, and volume charge, integrated with today’s elements.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we built every tool Module 2 needs from a small piece of space: the
+elements of length, area, and volume, then the gradient, divergence, curl, and
+Laplacian, and the two theorems that connect a region to its boundary. Lesson
+18 starts the physics with Coulomb’s law, the force between two point charges,
+and the electric field it implies. Lesson 19 spreads the charge along a line,
+over a surface, and through a volume, and adds up the field with the integrals
+from today, watching for unit vectors that turn.</p>
+<p>Before Lesson 18, read sections 5.1 through 5.4 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module02/L17-vector-analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

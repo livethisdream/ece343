@@ -1,0 +1,239 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L38 practice set (Normal Incidence): deriving Gamma and tau from the
+% boundary conditions, air to glass, glass to air, and a perfect conductor.
+
+\fullwidth{\textbf{Learning Objective 9.5: } I can determine the reflection and
+transmission of UPW at a boundary for Transverse Electric (TE) and Transverse
+Magnetic (TM) waves, using boundary conditions.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). In every problem the boundary is the
+plane $z = 0$, medium 1 is $z < 0$, medium 2 is $z > 0$, the incident wave travels
+in $+z$ with $\widetilde{\mathbf{E}}_i = \hat{\mathbf{x}} E_0 e^{-j\beta_1 z}$, and
+every medium is nonmagnetic, $\mu = \mu_0$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Deriving the coefficients.} Two lossless media meet at $z = 0$,
+with intrinsic impedances $\eta_1$ and $\eta_2$.
+\begin{parts}
+
+	\part Write the electric and magnetic fields of the incident, reflected, and
+	transmitted waves in terms of $E_0$, $\Gamma$, and $\tau$.
+	\begin{solution}[1.6in]
+	\eq{
+		\widetilde{\mathbf{E}}_i &= \hat{\mathbf{x}} E_0 e^{-j\beta_1 z}, &
+		\widetilde{\mathbf{H}}_i &= \hat{\mathbf{y}} \dfrac{E_0}{\eta_1} e^{-j\beta_1 z} \\
+		\widetilde{\mathbf{E}}_r &= \hat{\mathbf{x}} \Gamma E_0 e^{+j\beta_1 z}, &
+		\widetilde{\mathbf{H}}_r &= -\hat{\mathbf{y}} \dfrac{\Gamma E_0}{\eta_1} e^{+j\beta_1 z} \\
+		\widetilde{\mathbf{E}}_t &= \hat{\mathbf{x}} \tau E_0 e^{-j\beta_2 z}, &
+		\widetilde{\mathbf{H}}_t &= \hat{\mathbf{y}} \dfrac{\tau E_0}{\eta_2} e^{-j\beta_2 z}
+	}
+	Each magnetic field is $\frac{1}{\eta}\hat{\mathbf{k}}\times\widetilde{\mathbf{E}}$.
+	The reflected wave has $\hat{\mathbf{k}} = -\hat{\mathbf{z}}$, and
+	$-\hat{\mathbf{z}}\times\hat{\mathbf{x}} = -\hat{\mathbf{y}}$.
+	\end{solution}
+
+	\part Apply the continuity of tangential $\mathbf{E}$ and tangential $\mathbf{H}$
+	at $z = 0$, and solve for $\Gamma$ and $\tau$.
+	\begin{solution}[1.8in]
+	\eq{
+		E_0 + \Gamma E_0 &= \tau E_0 \implies \tau = 1 + \Gamma \\
+		\dfrac{E_0}{\eta_1}\lp 1 - \Gamma\rp &= \dfrac{\tau E_0}{\eta_2}
+		\implies \eta_2\lp 1 - \Gamma\rp = \eta_1\lp 1 + \Gamma\rp \\
+		\Gamma &= \dfrac{\eta_2 - \eta_1}{\eta_2 + \eta_1}, \qquad
+		\tau = \dfrac{2\eta_2}{\eta_2 + \eta_1}
+	}
+	\end{solution}
+
+	\part Show that the reflected and transmitted fractions of the incident power,
+	$\vert\Gamma\vert^2$ and $\lp\eta_1/\eta_2\rp\vert\tau\vert^2$, add to one.
+	\begin{solution}[1.3in]
+	\eq{
+		\vert\Gamma\vert^2 + \dfrac{\eta_1}{\eta_2}\vert\tau\vert^2
+		= \dfrac{\lp\eta_2 - \eta_1\rp^2 + 4\eta_1\eta_2}{\lp\eta_2 + \eta_1\rp^2}
+		= \dfrac{\eta_2^2 + 2\eta_1\eta_2 + \eta_1^2}{\lp\eta_2 + \eta_1\rp^2} = 1
+	}
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Air to glass.} A 3 GHz plane wave with $E_0 = 10$ V/m travels in
+air and strikes glass with $\epsilon_r = 4$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\eta_2$, $\Gamma$, and $\tau$.
+		\begin{solution}[1.2in]
+		\eq{
+			\eta_2 &= \dfrac{376.7}{\sqrt{4}} = 188.4\ \ohms \\
+			\Gamma &= \dfrac{188.4 - 376.7}{188.4 + 376.7} = -\dfrac{1}{3}, \qquad \tau = \dfrac{2}{3}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$-0.333$}
+
+		\vspace{4pt}
+		$\tau$ = \ansbox[1.3in]{$0.667$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the amplitudes of the incident, reflected, and transmitted
+		magnetic fields, and show that tangential $\mathbf{H}$ is continuous.
+		\begin{solution}[1.4in]
+		\eq{
+			\dfrac{E_0}{\eta_1} &= \dfrac{10}{376.7} = 26.5\ \text{mA/m} \\
+			-\dfrac{\Gamma E_0}{\eta_1} &= +8.85\ \text{mA/m} \\
+			\dfrac{\tau E_0}{\eta_2} &= \dfrac{6.67}{188.4} = 35.4\ \text{mA/m}
+		}
+		All three point along $\hat{\mathbf{y}}$ at $z = 0$, and $26.5 + 8.85 = 35.4$ mA/m.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H_t$ = \ansbox[1.3in]{$35.4$ mA/m}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the SWR in the air, the largest and smallest field magnitudes,
+		and the distance from the boundary to the nearest maximum.
+		\begin{solution}[1.4in]
+		\eq{
+			\text{SWR} &= \dfrac{1 + 1/3}{1 - 1/3} = 2 \\
+			E_\text{max} &= 13.3\ \text{V/m}, \qquad E_\text{min} = 6.67\ \text{V/m}
+		}
+		$\Gamma < 0$ puts a minimum at the boundary. With $\lambda_1 = c/f = 10.0$ cm,
+		the nearest maximum is $\lambda_1/4 = 2.50$ cm into the air.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		SWR = \ansbox[1.3in]{$2.0$}
+
+		\vspace{4pt}
+		max at = \ansbox[1.3in]{$z = -2.50$ cm}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the incident power density and the percentages of the power
+		that reflect and transmit.
+		\begin{solution}[1.2in]
+		\eq{
+			S_i &= \dfrac{E_0^2}{2\eta_1} = \dfrac{100}{753.5} = 0.133\ \text{W/m}^2 \\
+			\vert\Gamma\vert^2 &= 11.1\%, \qquad \dfrac{\eta_1}{\eta_2}\vert\tau\vert^2 = 2\lp\dfrac{4}{9}\rp = 88.9\%
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		reflected = \ansbox[1.3in]{$11.1\%$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Glass to air.} The same boundary, now with the wave arriving from
+inside the glass: medium 1 has $\epsilon_r = 4$, and medium 2 is air.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma$ and $\tau$.
+		\begin{solution}[1in]
+		\eq{ \Gamma = \dfrac{376.7 - 188.4}{376.7 + 188.4} = +\dfrac{1}{3}, \qquad \tau = \dfrac{4}{3} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\tau$ = \ansbox[1.3in]{$1.33$}
+	\end{minipage}
+
+	\part The transmitted electric field is larger than the incident one. Explain why
+	that does not create power, and find the fraction of the power transmitted.
+	\begin{solution}[1.5in]
+	The transmitted wave travels in the medium with the larger impedance, so it
+	carries less power per unit of $\vert E\vert^2$:
+	\eq{ \dfrac{S_t}{S_i} = \dfrac{\eta_1}{\eta_2}\vert\tau\vert^2 = \dfrac{1}{2}\lp\dfrac{16}{9}\rp = 88.9\% }
+	The same 11.1\% reflects in both directions. The magnetic field shows the
+	difference: $\tau E_0/\eta_2$ is smaller than the incident $E_0/\eta_1$.
+	\end{solution}
+
+	\part Where is the field in the glass largest, and why does the answer differ
+	from Question 2?
+	\begin{solution}[1in]
+	$\Gamma > 0$, so the incident and reflected fields add in phase at the boundary,
+	and the maximum sits at $z = 0$. A higher impedance behind the boundary acts
+	like a load larger than $Z_0$ in Lesson 6.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A conducting wall.} A 10 GHz plane wave with $E_0 = 5$ V/m (real)
+travels in air and strikes a flat perfect conductor that fills $z > 0$.
+\begin{parts}
+
+	\part Use the boundary condition on tangential $\mathbf{E}$ to find $\Gamma$, and
+	write the total phasor fields in the air.
+	\begin{solution}[1.6in]
+	$\mathbf{E} = 0$ in the conductor, so $E_0\lp 1 + \Gamma\rp = 0$ and $\Gamma = -1$.
+	\eq{
+		\widetilde{\mathbf{E}}_1 &= \hat{\mathbf{x}} E_0\lp e^{-j\beta_1 z} - e^{+j\beta_1 z}\rp
+		= -\hat{\mathbf{x}}\ 2jE_0\sin\beta_1 z \\
+		\widetilde{\mathbf{H}}_1 &= \hat{\mathbf{y}}\dfrac{E_0}{\eta_1}\lp e^{-j\beta_1 z} + e^{+j\beta_1 z}\rp
+		= \hat{\mathbf{y}}\dfrac{2E_0}{\eta_1}\cos\beta_1 z
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the distance from the wall to the nearest maximum of $\vert\mathbf{E}\vert$,
+		and its value.
+		\begin{solution}[1in]
+		$\lambda_1 = c/f = 3.00$ cm. The maximum of $\vert\sin\beta_1 z\vert$ nearest the
+		wall is at $\lambda_1/4 = 0.750$ cm, where $\vert\mathbf{E}\vert = 2E_0 = 10$ V/m.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		distance = \ansbox[1.3in]{$0.750$ cm}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the surface current density on the wall.
+		\begin{solution}[1.2in]
+		With $\hat{\mathbf{n}} = -\hat{\mathbf{z}}$, from the conductor into the air, and
+		$\mathbf{H}_2 = 0$:
+		\eq{ \mathbf{J}_s = \hat{\mathbf{n}}\times\widetilde{\mathbf{H}}_1(0)
+		= -\hat{\mathbf{z}}\times\hat{\mathbf{y}}\dfrac{2E_0}{\eta_1} = \hat{\mathbf{x}}\ 26.5\ \text{mA/m} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\mathbf{J}_s$ = \ansbox[1.3in]{$\hat{\mathbf{x}}\ 26.5$ mA/m}
+	\end{minipage}
+
+	\part Write $\mathbf{E}(z,t)$ and $\mathbf{H}(z,t)$, and explain why no power flows
+	toward the wall on average.
+	\begin{solution}[1.4in]
+	\eq{
+		\mathbf{E}(z,t) &= \text{Re}\left[\widetilde{\mathbf{E}}_1 e^{j\omega t}\right]
+		= \hat{\mathbf{x}}\ 2E_0\sin\lp\beta_1 z\rp\sin\lp\omega t\rp \\
+		\mathbf{H}(z,t) &= \hat{\mathbf{y}}\ \dfrac{2E_0}{\eta_1}\cos\lp\beta_1 z\rp\cos\lp\omega t\rp
+	}
+	The two fields are a quarter period apart in time, so the Poynting vector
+	$\mathbf{E}\times\mathbf{H} \propto \sin\omega t\cos\omega t$ averages to zero.
+	The reflected wave carries back all the power the incident wave brings.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

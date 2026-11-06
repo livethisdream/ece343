@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The flux through a loop that moves through a magnetic field, and the EMF it induces</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; --fill:#e3edf6; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:640px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:58px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:60px; accent-color:var(--mid); }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A rectangular loop moving to the right through a region of uniform magnetic field out of the page, with the flux through the loop and the induced EMF plotted against the loop's position"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>front edge</label>
+      <input type="range" id="pos" min="-5" max="55" step="0.5" value="10">
+      <span class="val" id="p-val">10 cm</span>
+    </div>
+    <div class="ctl">
+      <label>speed \(v\)</label>
+      <input type="range" id="spd" min="0.5" max="5" step="0.1" value="2">
+      <span class="val" id="v-val">2.0 m/s</span>
+    </div>
+    <div class="ctl">
+      <label>field \(B\)</label>
+      <input type="range" id="bfield" min="0.1" max="1" step="0.05" value="0.5">
+      <span class="val" id="b-val">0.50 T</span>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">flux \(\Phi\)</span><span class="v" id="r-phi">—</span></div>
+    <div class="ro"><span class="k">EMF around \(C\)</span><span class="v" id="r-emf">—</span></div>
+    <div class="ro"><span class="k">induced current</span><span class="v" id="r-dir">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// A field region 0 ≤ x ≤ LB holds a uniform B out of the page. A loop of width
+// W and height HL moves to the right at speed v; s is the x position of its
+// leading (right) edge. With the path C taken counterclockwise, the normal of
+// the loop points out of the page, along B, so the flux is
+//   Φ = B HL · (overlap of [s − W, s] with [0, LB]),
+// and Faraday's law gives the EMF around C as −dΦ/dt = −B HL v · d(overlap)/ds.
+// A negative EMF drives the current clockwise.
+const LB = 0.30, W = 0.20, HL = 0.10;
+const state = { s: 0.10, v: 2, B: 0.5 };
+const pEl = document.getElementById('pos'), vEl = document.getElementById('spd'), bEl = document.getElementById('bfield');
+pEl.addEventListener('input', () => { state.s = parseFloat(pEl.value)/100; update(); });
+vEl.addEventListener('input', () => { state.v = parseFloat(vEl.value); update(); });
+bEl.addEventListener('input', () => { state.B = parseFloat(bEl.value); update(); });
+
+function overlap(s){ return Math.max(0, Math.min(s, LB) - Math.max(s - W, 0)); }
+function dOverlap(s){
+  if (overlap(s) <= 0) return 0;
+  return (s < LB ? 1 : 0) - (s - W > 0 ? 1 : 0);
+}
+const flux = s => state.B * HL * overlap(s);              // Wb
+const emf = s => -state.B * HL * state.v * dOverlap(s);   // V
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+// Laid out at DESIGN_W and scaled down as one piece below it; above it the
+// canvas grows in width only. Canvas text keeps at least 11.5 px on screen.
+const DESIGN_W = 520, H_LOG = 358;
+let SCL = 1;
+const fs = n => Math.max(n, 11.5 / SCL);
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  setSize(canvas, wCss, H_LOG * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function arrowHead(x, y, ang, size, color){
+  ctx.fillStyle = color; ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x - size*Math.cos(ang - 0.45), y - size*Math.sin(ang - 0.45));
+  ctx.lineTo(x - size*Math.cos(ang + 0.45), y - size*Math.sin(ang + 0.45));
+  ctx.closePath(); ctx.fill();
+}
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), hh = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,hh);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), red = cssVar('--red'), ink3 = cssVar('--ink3'),
+        fill = cssVar('--fill'), amber = cssVar('--amber'), ink = cssVar('--ink');
+  const xmin = -0.05, xmax = 0.55, left = 62, right = w - 16;
+  const X = x => left + (x - xmin)/(xmax - xmin)*(right - left);
+
+  // the scene: the field region and the loop, seen from the front
+  const top = 22, sceneH = 100, ym = top + sceneH/2, pxPerM = (right - left)/(xmax - xmin);
+  ctx.fillStyle = fill; ctx.fillRect(X(0), top, X(LB) - X(0), sceneH);
+  ctx.strokeStyle = '#b9d2e5'; ctx.lineWidth = 1; ctx.strokeRect(X(0), top, X(LB) - X(0), sceneH);
+  for (let i=0;i<6;i++) for (let j=0;j<3;j++){
+    const cx = X((i + 0.5)*LB/6), cy = top + (j + 0.5)*sceneH/3;
+    ctx.strokeStyle = mid; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2*Math.PI); ctx.stroke();
+    ctx.fillStyle = mid; ctx.beginPath(); ctx.arc(cx, cy, 1.6, 0, 2*Math.PI); ctx.fill();
+  }
+  stext(ctx, 'B out of the page', X(0), top - 8, fs(11), mid, 'left', true);
+
+  // the loop stays inside the field band, so its current arrows clear the label above
+  const s = state.s, lh = Math.min(HL*pxPerM*0.9, sceneH*0.78), x0 = X(s - W), x1 = X(s);
+  ctx.strokeStyle = ink; ctx.lineWidth = 3;
+  ctx.strokeRect(x0, ym - lh/2, x1 - x0, lh);
+  // the velocity arrow
+  ctx.strokeStyle = ink; ctx.lineWidth = 1.8;
+  ctx.beginPath(); ctx.moveTo(x1 + 6, ym); ctx.lineTo(x1 + 34, ym); ctx.stroke();
+  arrowHead(x1 + 38, ym, 0, 9, ink);
+  stext(ctx, 'v', x1 + 44, ym - 1, fs(13), ink, 'left', true);
+  // the induced current, drawn on the top and bottom sides
+  const e = emf(s);
+  if (Math.abs(e) > 1e-12){
+    const cw = e < 0;   // negative EMF around the counterclockwise path: clockwise current
+    ctx.strokeStyle = red; ctx.lineWidth = 2.2;
+    const xa = x0 + 0.3*(x1 - x0), xb = x0 + 0.7*(x1 - x0);
+    for (const [yy, dirRight] of [[ym - lh/2 - 7, cw], [ym + lh/2 + 7, !cw]]){
+      ctx.beginPath(); ctx.moveTo(xa, yy); ctx.lineTo(xb, yy); ctx.stroke();
+      if (dirRight) arrowHead(xb + 4, yy, 0, 9, red); else arrowHead(xa - 4, yy, Math.PI, 9, red);
+    }
+    stext(ctx, 'I', xa - 14, ym + lh/2 + 7, fs(12.5), red, 'right', true);
+  }
+
+  // two plots against the position of the leading edge
+  const plots = [
+    { y0: top + sceneH + 30, h: 72, f: flux, scale: 1e3, unit: 'mWb', name: 'Φ', color: navy, peak: state.B*HL*W*1e3 },
+    { y0: top + sceneH + 128, h: 72, f: emf, scale: 1e3, unit: 'mV', name: 'EMF', color: amber, peak: state.B*HL*state.v*1e3 }
+  ];
+  for (const P of plots){
+    const ytop = P.y0, ybot = P.y0 + P.h, signed = P.name === 'EMF';
+    const yz = signed ? (ytop + ybot)/2 : ybot;
+    const vmax = 1.2*P.peak;
+    const Y = v => yz - v/vmax*(signed ? P.h/2 : P.h);
+    ctx.strokeStyle = '#c7d2e0'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(left, ytop); ctx.lineTo(left, ybot); ctx.moveTo(left, yz); ctx.lineTo(right, yz); ctx.stroke();
+    stext(ctx, P.name + ' (' + P.unit + ')', left + 6, ytop - 4, fs(11), ink3, 'left', true);
+    stext(ctx, '0', left - 6, yz, fs(11), ink3, 'right', false);
+    // grid lines at plus and minus the peak value, labeled with it
+    for (const sg of (signed ? [1, -1] : [1])){
+      ctx.strokeStyle = '#e3edf6'; ctx.beginPath(); ctx.moveTo(left, Y(sg*P.peak)); ctx.lineTo(right, Y(sg*P.peak)); ctx.stroke();
+      stext(ctx, (sg*P.peak).toFixed(P.peak < 10 ? 1 : 0), left - 6, Y(sg*P.peak), fs(11), ink3, 'right', false);
+    }
+    ctx.strokeStyle = P.color; ctx.lineWidth = 2.2; ctx.beginPath();
+    const N = 600;
+    for (let i=0;i<=N;i++){
+      const x = xmin + (xmax - xmin)*i/N, px = X(x), py = Y(P.f(x)*P.scale);
+      if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+    ctx.fillStyle = P.color; ctx.beginPath(); ctx.arc(X(s), Y(P.f(s)*P.scale), 4.5, 0, 2*Math.PI); ctx.fill();
+  }
+  // the position marker through both plots
+  ctx.strokeStyle = ink3; ctx.setLineDash([3,3]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(X(s), top + sceneH + 24); ctx.lineTo(X(s), hh - 36); ctx.stroke(); ctx.setLineDash([]);
+  for (const [x, t] of [[0, '0'], [0.2, '20'], [0.3, '30'], [0.5, '50']])
+    stext(ctx, t, X(x), hh - 26, fs(11), ink3, 'center', false);
+  stext(ctx, 'position of the front edge (cm)', (left + right)/2, hh - 9, fs(11), ink3, 'center', true);
+}
+
+function fmt(v){ return (Math.abs(v) < 1e-12 ? 0 : v).toFixed(1); }
+function update(){
+  const s = state.s;
+  document.getElementById('p-val').textContent = (100*s).toFixed(1).replace(/\.0$/, '') + ' cm';
+  document.getElementById('v-val').textContent = state.v.toFixed(1) + ' m/s';
+  document.getElementById('b-val').textContent = state.B.toFixed(2) + ' T';
+  document.getElementById('r-phi').textContent = (1e3*flux(s)).toFixed(2) + ' mWb';
+  const e = emf(s);
+  document.getElementById('r-emf').textContent = fmt(1e3*e) + ' mV';
+  document.getElementById('r-dir').textContent = Math.abs(e) < 1e-12 ? 'none' : (e < 0 ? 'clockwise' : 'counterclockwise');
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

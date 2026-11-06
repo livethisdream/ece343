@@ -57,6 +57,15 @@ working rules apply here.
   A3144). The blank notebook is
   `book/extras/labs/ECE343_Lab_L32_Magnetostatics.ipynb`; the source and key
   are in `ece343-faculty/Labs/` (`build_l32_notebooks.py`, `lab-keys/`).
+- **Module 4 (L33-L40) was written with `write-lesson`** (Neil, 2026-11-05/06),
+  then reviewed once across the module; Neil picked every finding (A-D).
+  Settled: L38 derives Poynting's theorem and $\frac{1}{2}\mathrm{Re}[\widetilde{\mathbf{E}}\times\widetilde{\mathbf{H}}^*]$,
+  which L39-L40 cite; seawater is $\sigma = 4$ S/m everywhere (L2, L27,
+  L33, L36, L38); $\delta$ is the skin depth only (L36 derives it, closing
+  L27's quoted 6.61 μm), the loss tangent is $\tan\delta_c$, the polarization
+  phase difference is $\Delta\phi$, and the relaxation time is $\tau_r$; $\eta$ is the
+  intrinsic impedance, derived in L37; L36 is retitled "Plane-Wave
+  Solutions and Lossy Media". L34's Example 2 keeps $B_0 = 0.2$ T.
 - **L16's worked marker values stand** (Neil, 2026-10-29: "if the values
   work, it's fine").
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See

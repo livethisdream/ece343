@@ -1,0 +1,231 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L34 practice set (Maxwell's Equations): the voltage induced in a coil by a
+% sinusoidal field, checking a pair of fields against Maxwell's equations,
+% conservation of charge, and sizing an ideal transformer.
+
+\fullwidth{\textbf{Learning Objective 8.3: } I know the forms of Maxwell's
+equations for time-varying fields and use them to calculate electric and
+magnetic fields for a variety of physical systems.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{A pickup coil.} A square loop $20$ cm on a side lies in the
+$xy$ plane in a uniform field
+$\mathbf{B} = \hat{\mathbf{z}}\ 0.5\sin(120\pi t)$ mT.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the amplitude of the voltage induced around the loop.
+		\begin{solution}[1.2in]
+		The flux is $\Phi = AB = (0.2)^2(0.5\times10^{-3})\sin(120\pi t)$ Wb.
+		Faraday's law gives
+		\eq{
+			\oint_C \mathbf{E}\mycdot d\mathbf{l} &= -\dfrac{d\Phi}{dt} \\
+			&= -(0.04)(0.5\times10^{-3})(120\pi)\cos(120\pi t) \\
+			&= -(7.54\ \text{mV})\cos(120\pi t)
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		amplitude = \ansbox[1.3in]{$7.54$ mV}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part We replace the loop with a coil of $50$ turns of the same size. Find
+		the new amplitude.
+		\begin{solution}[0.8in]
+		Each turn links the same flux, and the turns are in series:
+		\eq{ 50\times7.54\ \text{mV} = 377\ \text{mV} }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		amplitude = \ansbox[1.3in]{$377$ mV}
+	\end{minipage}
+
+	\part Just after $t = 0$, $B$ is positive and increasing. Seen from $+z$,
+	which way does the induced current flow in the single loop? Explain with
+	Lenz's law.
+	\begin{solution}[1in]
+	The current flows clockwise. Just after $t = 0$ the cosine is positive, so the
+	counterclockwise circulation is negative. A clockwise
+	current makes a field along $-\hat{\mathbf{z}}$ inside the loop, which
+	opposes the growing flux along $+\hat{\mathbf{z}}$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Checking a pair of fields.} A lossless, source-free region has
+$\epsilon_r = 4$ and $\mu_r = 1$. A proposed electric field is
+$\mathbf{E} = \hat{\mathbf{y}}\ 10\cos(2\pi\times10^{9}\ t - \beta z)$ V/m.
+\begin{parts}
+
+	\part Use Faraday's law to find the magnetic field $\mathbf{H}$ that must
+	accompany $\mathbf{E}$, in terms of $\beta$.
+	\begin{solution}[1.6in]
+	$E_y$ depends only on $z$, so only the $\hat{\mathbf{x}}$ component of the
+	curl survives:
+	\eq{
+		\nabla\times\mathbf{E} &= -\hat{\mathbf{x}}\ \dfrac{\partial E_y}{\partial z}
+		= -\hat{\mathbf{x}}\ 10\beta\sin(\omega t - \beta z) = -\mu\dfrac{\partial\mathbf{H}}{\partial t} \\
+		\mathbf{H} &= -\hat{\mathbf{x}}\ \dfrac{10\beta}{\mu\omega}\cos(\omega t - \beta z)
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use the Ampere--Maxwell law to find the value of $\beta$ for which
+		the pair satisfies Maxwell's equations, and the wavelength.
+		\begin{solution}[1.6in]
+		\eq{
+			\nabla\times\mathbf{H} &= \hat{\mathbf{y}}\ \dfrac{\partial H_x}{\partial z}
+			= -\hat{\mathbf{y}}\ \dfrac{10\beta^2}{\mu\omega}\sin(\omega t - \beta z) \\
+			\epsilon\dfrac{\partial\mathbf{E}}{\partial t} &= -\hat{\mathbf{y}}\ 10\epsilon\omega\sin(\omega t - \beta z)
+		}
+		Matching gives $\beta = \omega\sqrt{\mu\epsilon} = \omega\sqrt{\epsilon_r}/c$:
+		\eq{
+			\beta &= \dfrac{(2\pi\times10^{9})(2)}{3\times10^{8}} = 41.9\ \text{rad/m} \\
+			\lambda &= \dfrac{2\pi}{\beta} = 15.0\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\beta$ = \ansbox[1.3in]{$41.9$ rad/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$15.0$ cm}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the amplitude of $\mathbf{H}$ and its direction.
+		\begin{solution}[1in]
+		\eq{
+			\eta &= \sqrt{\dfrac{\mu}{\epsilon}} = \dfrac{377}{\sqrt{4}} = 188\ \Omega \\
+			H_0 &= \dfrac{10}{188} = 53.1\ \text{mA/m}, \quad \text{along } -\hat{\mathbf{x}}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$H_0$ = \ansbox[1.3in]{$53.1$ mA/m}
+	\end{minipage}
+
+	\part Show that the pair also satisfies both of Gauss's laws.
+	\begin{solution}[0.8in]
+	$D_y$ depends only on $z$ and $t$, so $\nabla\mycdot\mathbf{D} = \partial D_y/\partial y = 0 = \rho_v$.
+	$B_x$ depends only on $z$ and $t$, so $\nabla\mycdot\mathbf{B} = \partial B_x/\partial x = 0$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Conservation of charge.} In a region, the current density is
+$\mathbf{J} = \hat{\mathbf{r}}\ kr$ A/m$^2$ with $k = 2$ A/m$^3$, in spherical
+coordinates.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the rate of change of the charge density, $\partial\rho_v/\partial t$.
+		\begin{solution}[1.2in]
+		The continuity equation, with the spherical divergence from Lesson 17:
+		\eq{
+			\dfrac{\partial\rho_v}{\partial t} = -\nabla\mycdot\mathbf{J}
+			= -\dfrac{1}{r^2}\dfrac{\partial}{\partial r}\left(r^2\ kr\right) = -3k = -6\ \text{C/(m}^3\text{s)}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\partial\rho_v/\partial t$ = \ansbox[1.3in]{$-6$ C/(m$^3$s)}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the current out of a sphere of radius $10$ cm, and show that it
+		equals the rate at which the charge inside decreases.
+		\begin{solution}[1.4in]
+		\eq{
+			\oint \mathbf{J}\mycdot d\mathbf{s} &= (kr)(4\pi r^2) = 4\pi k r^3 \\
+			&= 4\pi(2)(0.1)^3 = 25.1\ \text{mA} \\
+			-\dfrac{dQ}{dt} &= \dfrac{4}{3}\pi r^3 (3k) = 4\pi k r^3 = 25.1\ \text{mA}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		current = \ansbox[1.3in]{$25.1$ mA}
+	\end{minipage}
+
+	\part Explain why Ampere's law without the displacement current could not
+	describe this region.
+	\begin{solution}[1in]
+	The divergence of a curl is zero, so $\nabla\times\mathbf{H} = \mathbf{J}$
+	would force $\nabla\mycdot\mathbf{J} = 0$. Here $\nabla\mycdot\mathbf{J} = 6$
+	A/m$^3$, because charge is leaving the region. The displacement current
+	$\partial\mathbf{D}/\partial t$ supplies the term whose divergence is
+	$\partial\rho_v/\partial t$ and restores the balance.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{An ideal transformer.} A transformer runs from a $240$ V rms,
+$50$ Hz line with $N_1 = 960$ turns on the primary and supplies $24$ V rms to an
+$8\ \Omega$ load. The core has a cross-sectional area of $10\ \text{cm}^2$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the number of secondary turns and both currents.
+		\begin{solution}[1.2in]
+		\eq{
+			N_2 &= N_1\dfrac{V_2}{V_1} = 960\times\dfrac{24}{240} = 96 \\
+			I_2 &= \dfrac{24}{8} = 3\ \text{A}, \qquad I_1 = I_2\dfrac{N_2}{N_1} = 0.3\ \text{A}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$N_2$ = \ansbox[1.3in]{$96$}
+
+		\vspace{4pt}
+		$I_1$ = \ansbox[1.3in]{$0.3$ A}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the peak flux in the core and the peak flux density.
+		\begin{solution}[1.3in]
+		With $v_1 = N_1\ d\Phi/dt$ and $V_\text{1,pk} = 240\sqrt{2} = 339$ V:
+		\eq{
+			\Phi_\text{pk} &= \dfrac{V_\text{1,pk}}{N_1\omega} = \dfrac{339}{(960)(2\pi\times50)} = 1.13\ \text{mWb} \\
+			B_\text{pk} &= \dfrac{\Phi_\text{pk}}{A} = \dfrac{1.13\times10^{-3}}{10\times10^{-4}} = 1.13\ \text{T}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$B_\text{pk}$ = \ansbox[1.3in]{$1.13$ T}
+	\end{minipage}
+
+	\part A student proposes saving copper by using $N_1 = 240$ and $N_2 = 24$,
+	the same ratio. Explain what happens to the core.
+	\begin{solution}[1in]
+	The peak flux density scales as $1/N_1$, so it rises by a factor of $4$, to
+	$4.50$ T. That is far above the $1.5$ to $1.7$ T at which a silicon-steel
+	core saturates, so $\mu$ falls sharply, the magnetizing current grows sharply, and
+	the ideal model no longer holds.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

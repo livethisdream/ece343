@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflection at oblique incidence</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34;
+          --te:#b01e24;    /* TE curves and rays */
+          --tm:#0067b9;    /* TM curves and rays */
+          --inc:#004a85;   /* incident ray */
+          --tr:#1d7a4d;    /* transmitted ray */
+          --mark:#5b6573; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:38px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--on,var(--mid)); border-color:var(--on,var(--mid)); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .tgl input:checked ~ .t { color:var(--on,var(--navy)); }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(128px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+        gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  /* block, not flex: a flex container drops the whitespace between an inline
+     MathJax symbol and the words that follow it, welding them together. */
+  .ro .k { display:block; text-align:center;
+           height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3);
+           white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+           text-align:center; min-width:8ch; color:var(--navy); }
+  .ro.te .v { color:var(--te); }
+  .ro.tm .v { color:var(--tm); }
+  .ro.warn { background:rgba(138,90,0,0.12);  border-color:rgba(138,90,0,0.30); }
+  .ro.warn .v { color:var(--amber); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Ray diagram and the TE and TM reflection coefficients against the angle of incidence"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(\epsilon_{r1}\)</label>
+      <input type="range" id="e1" min="1" max="9" step="0.01" value="1">
+      <span class="val" id="e1-val">1.00</span>
+    </div>
+    <div class="ctl">
+      <label>\(\epsilon_{r2}\)</label>
+      <input type="range" id="e2" min="1" max="9" step="0.01" value="2.22">
+      <span class="val" id="e2-val">2.22</span>
+    </div>
+    <div class="ctl">
+      <label>\(\theta_i\)</label>
+      <input type="range" id="th" min="0" max="89.5" step="0.1" value="45">
+      <span class="val" id="th-val">45.0°</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="phase"><span class="sw"></span><span class="t">Show phase</span></label>
+    <label class="tgl" style="--on:var(--amber)"><input type="checkbox" id="swap"><span class="sw"></span><span class="t">Swap media</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro" id="ro-tt"><span class="k">\(\theta_t\)</span><span class="v" id="r-tt">—</span></div>
+    <div class="ro te"><span class="k">\(\Gamma_\text{TE}\)</span><span class="v" id="r-te">—</span></div>
+    <div class="ro tm"><span class="k">\(\Gamma_\text{TM}\)</span><span class="v" id="r-tm">—</span></div>
+    <div class="ro"><span class="k">Brewster \(\theta_B\)</span><span class="v" id="r-b">—</span></div>
+    <div class="ro"><span class="k">critical \(\theta_c\)</span><span class="v" id="r-c">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// ---- labels: MathJax for math, sans UI font for words/units ----
+const SANS='Inter, system-ui, -apple-system, sans-serif';
+/* Canvas text is drawn inside the SCL transform, so on a phone it shrinks with
+   the drawing. fs() holds it at 11 px or more on screen. */
+function fs(px){ return Math.max(px, 11/SCL); }
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+fs(px)+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// Complex arithmetic on [re, im] pairs.
+const C = {
+  add:(a,b)=>[a[0]+b[0],a[1]+b[1]], sub:(a,b)=>[a[0]-b[0],a[1]-b[1]],
+  mul:(a,b)=>[a[0]*b[0]-a[1]*b[1], a[0]*b[1]+a[1]*b[0]],
+  div:(a,b)=>{ const d=b[0]*b[0]+b[1]*b[1]; return [(a[0]*b[0]+a[1]*b[1])/d, (a[1]*b[0]-a[0]*b[1])/d]; },
+  sc:(a,s)=>[a[0]*s,a[1]*s], abs:a=>Math.hypot(a[0],a[1]), arg:a=>Math.atan2(a[1],a[0]),
+};
+
+// Nonmagnetic media: n = sqrt(eps_r), eta = eta0 / n. The lesson's conventions:
+//   Gamma_TE = (eta2 cos_i - eta1 cos_t) / (eta2 cos_i + eta1 cos_t)
+//   Gamma_TM = (eta2 cos_t - eta1 cos_i) / (eta2 cos_t + eta1 cos_i)
+// Past the critical angle, cos_t = -j sqrt(sin_t^2 - 1), which makes the
+// transmitted field decay away from the boundary.
+const ETA0 = 376.73;
+function coeffs(n1, n2, thDeg) {
+  const th = thDeg*Math.PI/180;
+  const st = n1*Math.sin(th)/n2;
+  const ci = [Math.cos(th), 0];
+  const ct = (st <= 1) ? [Math.sqrt(1 - st*st), 0] : [0, -Math.sqrt(st*st - 1)];
+  const e1 = ETA0/n1, e2 = ETA0/n2;
+  const te = C.div(C.sub(C.sc(ci,e2), C.sc(ct,e1)), C.add(C.sc(ci,e2), C.sc(ct,e1)));
+  const tm = C.div(C.sub(C.sc(ct,e2), C.sc(ci,e1)), C.add(C.sc(ct,e2), C.sc(ci,e1)));
+  return { te, tm, tir: st > 1, tt: (st <= 1) ? Math.asin(st)*180/Math.PI : null };
+}
+
+const state = { e1: 1, e2: 2.22, th: 45 };
+const media = () => {
+  const swap = document.getElementById('swap').checked;
+  const a = Math.sqrt(state.e1), b = Math.sqrt(state.e2);
+  return swap ? { n1: b, n2: a, eps1: state.e2, eps2: state.e1 } : { n1: a, n2: b, eps1: state.e1, eps2: state.e2 };
+};
+
+// ---- controls ----
+const el = id => document.getElementById(id);
+function onInput() {
+  state.e1 = parseFloat(el('e1').value); state.e2 = parseFloat(el('e2').value);
+  state.th = parseFloat(el('th').value);
+  el('e1-val').textContent = state.e1.toFixed(2);
+  el('e2-val').textContent = state.e2.toFixed(2);
+  el('th-val').textContent = state.th.toFixed(1) + '°';
+  draw();
+}
+for (const id of ['e1','e2','th']) el(id).addEventListener('input', onInput);
+for (const id of ['phase','swap']) el(id).addEventListener('change', draw);
+
+// ---- canvas ----
+const canvas = el('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight;
+  if(bh) cv.style.height=(hCss+bh)+'px';
+}
+/* Below DESIGN_W the whole composition scales down together rather than
+   reflowing, so nothing collides; fs() keeps the text readable. */
+const DESIGN_W=560;
+let SCL=1;
+var __SQ_MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function SQ(h){ return (__SQ_MQ && __SQ_MQ.matches) ? Math.round(h * 0.85) : h; }
+function fit() {
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  const h = SQ(Math.max(250, Math.min(w * 0.40, 300)));
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function drawRays(x0, y0, w, h, m, c) {
+  // panel background: medium 1 above, medium 2 below
+  const cy = y0 + h/2, cx = x0 + w/2;
+  ctx.fillStyle = '#f2f7fb'; ctx.fillRect(x0, y0, w, h/2);
+  ctx.fillStyle = '#d6e5f2'; ctx.fillRect(x0, cy, w, h/2);
+  ctx.strokeStyle = cssVar('--ink'); ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(x0, cy); ctx.lineTo(x0+w, cy); ctx.stroke();
+  ctx.strokeStyle = cssVar('--mark'); ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(cx, y0+6); ctx.lineTo(cx, y0+h-6); ctx.stroke(); ctx.setLineDash([]);
+  stext(ctx, 'n₁ = ' + m.n1.toFixed(2), x0+8, y0+14, 12, cssVar('--ink3'), 'left', true);
+  stext(ctx, 'n₂ = ' + m.n2.toFixed(2), x0+8, y0+h-14, 12, cssVar('--ink3'), 'left', true);
+
+  const L = Math.min(w, h) * 0.46;
+  const ti = state.th*Math.PI/180;
+  const line = (ax, ay, bx, by, col, lw, dash) => {
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); ctx.setLineDash([]);
+  };
+  const head = (x, y, ang, col) => {
+    ctx.fillStyle = col; ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x - 10*Math.cos(ang - 0.4), y - 10*Math.sin(ang - 0.4));
+    ctx.lineTo(x - 10*Math.cos(ang + 0.4), y - 10*Math.sin(ang + 0.4));
+    ctx.closePath(); ctx.fill();
+  };
+  // incident
+  const ix = cx - L*Math.sin(ti), iy = cy - L*Math.cos(ti);
+  line(ix, iy, cx, cy, cssVar('--inc'), 3);
+  head(cx - 0.45*L*Math.sin(ti), cy - 0.45*L*Math.cos(ti), Math.atan2(Math.cos(ti), Math.sin(ti)), cssVar('--inc'));
+  // reflected: TE and TM side by side, each as wide as its reflected power
+  const Rte = C.abs(c.te)**2, Rtm = C.abs(c.tm)**2;
+  const rx = cx + L*Math.sin(ti), ry = cy - L*Math.cos(ti);
+  const off = 3.2;                       // half the gap between the TE and TM strokes
+  const nx = Math.cos(ti), ny = Math.sin(ti);   // perpendicular to the reflected ray
+  line(cx - off*nx, cy - off*ny, rx - off*nx, ry - off*ny, cssVar('--te'), 0.8 + 6*Rte);
+  line(cx + off*nx, cy + off*ny, rx + off*nx, ry + off*ny, cssVar('--tm'), 0.8 + 6*Rtm);
+  // tag each reflected stroke at its far end: TE on the upper side, TM on the lower
+  stext(ctx, 'TE', rx - off*nx - 6*nx, ry - off*ny - 6*ny - 4, 11.5, cssVar('--te'), 'right', true);
+  stext(ctx, 'TM', rx + off*nx + 8*nx + 2, ry + off*ny + 8*ny + 2, 11.5, cssVar('--tm'), 'left', true);
+  // transmitted, or the evanescent field along the boundary past the critical angle
+  if (!c.tir) {
+    const tt = c.tt*Math.PI/180;
+    const tx = cx + L*Math.sin(tt), ty = cy + L*Math.cos(tt);
+    line(cx, cy, tx, ty, cssVar('--tr'), 3);
+    head(cx + 0.65*L*Math.sin(tt), cy + 0.65*L*Math.cos(tt), Math.atan2(Math.cos(tt), Math.sin(tt)), cssVar('--tr'));
+  } else {
+    ctx.fillStyle = 'rgba(29,122,77,0.16)';
+    ctx.fillRect(cx, cy, w/2 - 6, 14);
+    line(cx, cy + 7, x0 + w - 8, cy + 7, cssVar('--tr'), 1.5, [5,4]);
+    stext(ctx, 'evanescent', x0 + w - 8, cy + 24, 11.5, cssVar('--tr'), 'right', true);
+  }
+  // angle label
+  MJ.draw(ctx, '\\theta_i', cx - 0.30*L*Math.sin(ti/2) - 4, cy - 0.30*L*Math.cos(ti/2) - 10, fs(13), cssVar('--inc'), 'right');
+}
+
+function drawPlot(x0, y0, w, h, m) {
+  const showPhase = el('phase').checked;
+  // room for the tick labels and the rotated axis label, which fs() enlarges on a phone
+  const mL = SCL < 0.9 ? 82 : 58, mR = 10, mT = 14, mB = 34;
+  const pX = x0 + mL, pY = y0 + mT, pW = w - mL - mR, pH = h - mT - mB;
+  const xFor = t => pX + (t/90)*pW;
+  const yMin = showPhase ? -180 : 0, yMax = showPhase ? 180 : 1;
+  const yFor = v => pY + pH - (v - yMin)/(yMax - yMin)*pH;
+  // grid
+  ctx.strokeStyle = '#eef3f8'; ctx.lineWidth = 1;
+  for (let t = 0; t <= 90; t += 15) { ctx.beginPath(); ctx.moveTo(xFor(t), pY); ctx.lineTo(xFor(t), pY+pH); ctx.stroke(); }
+  const ticks = showPhase ? [-180,-90,0,90,180] : [0,0.25,0.5,0.75,1];
+  for (const v of ticks) { ctx.beginPath(); ctx.moveTo(pX, yFor(v)); ctx.lineTo(pX+pW, yFor(v)); ctx.stroke(); }
+  ctx.strokeStyle = '#cddce9'; ctx.strokeRect(pX, pY, pW, pH);
+  ctx.fillStyle = cssVar('--ink3'); ctx.font = fs(10)+'px '+SANS; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
+  for (const v of ticks) ctx.fillText(showPhase ? (v + '°').replace('-', '−') : v.toFixed(2), pX - 5, yFor(v));
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  for (let t = 30; t <= 90; t += 30) ctx.fillText(t + '°', xFor(t), pY + pH + 4);
+  stext(ctx, 'angle of incidence', pX + pW, y0 + h - 8, 11.5, '#3b4651', 'right', false);
+  // vertical axis label: the quantity changes with Show phase
+  ctx.save(); ctx.translate(x0 + 9, pY + pH/2); ctx.rotate(-Math.PI/2);
+  stext(ctx, showPhase ? 'phase of Γ' : '|Γ|', 0, 0, 12, '#3b4651', 'center', true);
+  ctx.restore();
+
+  // Brewster and critical angles
+  const thB = Math.atan(m.n2/m.n1)*180/Math.PI;
+  const thC = (m.n1 > m.n2) ? Math.asin(m.n2/m.n1)*180/Math.PI : null;
+  ctx.setLineDash([2,3]); ctx.lineWidth = 1.2; ctx.strokeStyle = cssVar('--tm');
+  ctx.beginPath(); ctx.moveTo(xFor(thB), pY); ctx.lineTo(xFor(thB), pY+pH); ctx.stroke();
+  if (thC !== null) {
+    ctx.strokeStyle = cssVar('--amber');
+    ctx.beginPath(); ctx.moveTo(xFor(thC), pY); ctx.lineTo(xFor(thC), pY+pH); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  MJ.draw(ctx, '\\theta_B', xFor(thB) + 3, pY + 10, fs(12), cssVar('--tm'), 'left');
+  if (thC !== null) MJ.draw(ctx, '\\theta_c', xFor(thC) + 3, pY + 26, fs(12), cssVar('--amber'), 'left');
+
+  // curves
+  for (const [key, col, dash] of [['te', cssVar('--te'), []], ['tm', cssVar('--tm'), [7,4]]]) {
+    ctx.strokeStyle = col; ctx.lineWidth = 2.4; ctx.setLineDash(dash);
+    ctx.beginPath();
+    let prev = null;
+    for (let i = 0; i <= 600; i++) {
+      const t = 89.99*i/600;
+      const g = coeffs(m.n1, m.n2, t)[key];
+      const v = showPhase ? C.arg(g)*180/Math.PI : C.abs(g);
+      const x = xFor(t), y = yFor(v);
+      // a phase jump (a wrap past 180 degrees, or the TM jump at the Brewster angle) is not part of the curve
+      if (i === 0 || (showPhase && prev !== null && Math.abs(v - prev) > 90)) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      prev = v;
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+  // curve labels at 70 degrees: TE above its curve, TM below its curve
+  for (const [key, col, dy] of [['te', cssVar('--te'), -10], ['tm', cssVar('--tm'), 12]]) {
+    const g = coeffs(m.n1, m.n2, 70)[key];
+    const v = showPhase ? C.arg(g)*180/Math.PI : C.abs(g);
+    stext(ctx, key.toUpperCase(), xFor(70), Math.min(pY + pH - 8, Math.max(pY + 8, yFor(v) + dy)), 12, col, 'center', true);
+  }
+  // the current angle
+  const c = coeffs(m.n1, m.n2, state.th);
+  ctx.strokeStyle = cssVar('--inc'); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(xFor(state.th), pY); ctx.lineTo(xFor(state.th), pY+pH); ctx.stroke();
+  for (const [key, col] of [['te', cssVar('--te')], ['tm', cssVar('--tm')]]) {
+    const g = c[key];
+    const v = showPhase ? C.arg(g)*180/Math.PI : C.abs(g);
+    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(xFor(state.th), yFor(v), 4.5, 0, 2*Math.PI); ctx.fill();
+  }
+  // key, below the plot on the left, clear of every curve
+  const ky = y0 + h - 9;
+  const k1 = showPhase ? '\\angle\\Gamma_\\text{TE}' : '\\vert\\Gamma_\\text{TE}\\vert';
+  const k2 = showPhase ? '\\angle\\Gamma_\\text{TM}' : '\\vert\\Gamma_\\text{TM}\\vert';
+  MJ.draw(ctx, k1, pX, ky, fs(13), cssVar('--te'), 'left');
+  MJ.draw(ctx, k2, pX + MJ.width(k1, cssVar('--te'), fs(13)) + 12, ky, fs(13), cssVar('--tm'), 'left');
+}
+
+function fmt(g) {
+  const a = C.abs(g), p = C.arg(g)*180/Math.PI;
+  if (a < 0.0005) return '0';
+  return a.toFixed(3) + ' ∠ ' + p.toFixed(0).replace('-', '−') + '°';
+}
+
+function draw() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const m = media();
+  const c = coeffs(m.n1, m.n2, state.th);
+  const rw = Math.round(w * 0.38);
+  drawRays(8, 8, rw - 8, h - 16, m, c);
+  drawPlot(rw + 6, 4, w - rw - 10, h - 8, m);
+
+  el('r-tt').textContent = c.tir ? 'total reflection' : c.tt.toFixed(1) + '°';
+  el('ro-tt').classList.toggle('warn', c.tir);
+  el('r-te').textContent = fmt(c.te);
+  el('r-tm').textContent = fmt(c.tm);
+  el('r-b').textContent = (Math.atan(m.n2/m.n1)*180/Math.PI).toFixed(1) + '°';
+  el('r-c').textContent = (m.n1 > m.n2) ? (Math.asin(m.n2/m.n1)*180/Math.PI).toFixed(1) + '°' : 'none';
+}
+
+fit();
+
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

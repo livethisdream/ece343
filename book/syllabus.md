@@ -359,7 +359,7 @@ marked Vol. 2. Dates will follow the Spring 2027 academic calendar.
 | L33 | [Faraday's Law and Displacement Current](module04/L33-displacement-current/index.md) | 8.3, 8.8, 8.9 | 8.1, 8.2 |
 | L34 | [Maxwell's Equations](module04/L34-maxwells-equations/index.md) | 8.3, 8.8, 8.9 | 8.3 |
 | L35 | [Maxwell's Equations in a Lossless, Source-Free Region I](module04/L35-source-free-maxwell-1/index.md) | 9.1–9.2 | 9.1 |
-| L36 | [Maxwell's Equations in a Lossless, Source-Free Region II](module04/L36-source-free-maxwell-2/index.md) | 9.1–9.2 | 9.1 |
+| L36 | [Plane-Wave Solutions and Lossy Media](module04/L36-source-free-maxwell-2/index.md) | 9.1–9.2 | 9.1 |
 | L37 | [Uniform Plane Waves and Polarization](module04/L37-plane-waves-polarization/index.md) | 9.4–9.6 | 9.2–9.4 |
 | L38 | [Normal Incidence](module04/L38-normal-incidence/index.md) | Vol. 2, 5.6–5.7 | 9.5 |
 | L39 | [Oblique Incidence I](module04/L39-oblique-incidence-1/index.md) | Vol. 2, 5.6–5.7 | 9.5 |

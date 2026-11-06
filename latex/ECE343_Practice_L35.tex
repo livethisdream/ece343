@@ -1,0 +1,178 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L35 practice set (Maxwell's Equations in a Lossless, Source-Free Region I):
+% vector phasors, the phasor Ampere–Maxwell law, decoupling the magnetic field,
+% the Helmholtz equation and its phase constant, and the line analogy.
+
+\fullwidth{\textbf{Learning Objective 9.1: } I understand the process of
+decoupling and finding solutions for Maxwell's equations for dynamic fields.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate).}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Vector phasors.} In a lossless, source-free region, the electric
+field is
+\eq{ \mathbf{E}(z,t) = \hat{\mathbf{x}}\ 5\cos\left(\omega t - \beta z + 30^\circ\right) + \hat{\mathbf{y}}\ 3\sin\left(\omega t - \beta z\right)\ \text{V/m} }
+\begin{parts}
+
+	\part Write the vector phasor $\widetilde{\mathbf{E}}(z)$.
+	\begin{solution}[1.2in]
+	Write the sine as a cosine, $\sin\theta = \cos\left(\theta - 90^\circ\right)$, so
+	each component is a cosine with its own amplitude and phase:
+	\eq{
+		\widetilde{\mathbf{E}}(z) &= \hat{\mathbf{x}}\ 5e^{j30^\circ}e^{-j\beta z} + \hat{\mathbf{y}}\ 3e^{-j90^\circ}e^{-j\beta z} \\
+		&= \left(\hat{\mathbf{x}}\ 5e^{j30^\circ} - j\ \hat{\mathbf{y}}\ 3\right)e^{-j\beta z}\ \text{V/m}
+	}
+	\end{solution}
+
+	\part Starting from $\nabla\times\mathbf{H} = \mathbf{J} + \partial\mathbf{D}/\partial t$
+	in the time domain, derive the phasor form of the Ampere–Maxwell law in this
+	region. State each assumption where you use it.
+	\begin{solution}[2.2in]
+	Substitute $\mathbf{H} = \text{Re}\left[\widetilde{\mathbf{H}}e^{j\omega t}\right]$
+	and $\mathbf{D} = \text{Re}\left[\widetilde{\mathbf{D}}e^{j\omega t}\right]$. The curl
+	acts on position, so it passes through the real part and $e^{j\omega t}$; the time
+	derivative acts only on $e^{j\omega t}$:
+	\eq{
+		\text{Re}\left[\left(\nabla\times\widetilde{\mathbf{H}}\right)e^{j\omega t}\right] &= \text{Re}\left[\left(\widetilde{\mathbf{J}} + j\omega\widetilde{\mathbf{D}}\right)e^{j\omega t}\right] \\
+		\nabla\times\widetilde{\mathbf{H}} &= \widetilde{\mathbf{J}} + j\omega\widetilde{\mathbf{D}}
+	}
+	The equation holds at every instant, so the complex vectors are equal. The region is lossless,
+	so $\sigma = 0$ and $\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}} = 0$ (no
+	impressed current either, since the region is source-free). A simple medium has
+	$\widetilde{\mathbf{D}} = \epsilon\widetilde{\mathbf{E}}$:
+	\eq{ \nabla\times\widetilde{\mathbf{H}} = j\omega\epsilon\widetilde{\mathbf{E}} }
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Decoupling the magnetic field.}
+\begin{parts}
+
+	\part Starting from the Ampere–Maxwell law, in phasor form, in a lossless,
+	source-free region, derive the Helmholtz equation for the magnetic field. Name
+	each of Maxwell's equations where you use it.
+	\begin{solution}[2.4in]
+	Take the curl of the Ampere–Maxwell law. The constant $j\omega\epsilon$ comes
+	outside the curl:
+	\eq{ \nabla\times\left(\nabla\times\widetilde{\mathbf{H}}\right) = j\omega\epsilon\ \nabla\times\widetilde{\mathbf{E}} }
+	Faraday's law gives $\nabla\times\widetilde{\mathbf{E}} = -j\omega\mu\widetilde{\mathbf{H}}$.
+	The identity $\nabla\times\nabla\times\mathbf{F} = \nabla\left(\nabla\cdot\mathbf{F}\right) - \nabla^2\mathbf{F}$
+	expands the left side, and Gauss's law for magnetism gives
+	$\nabla\cdot\widetilde{\mathbf{H}} = 0$:
+	\eq{
+		\nabla\left(\nabla\cdot\widetilde{\mathbf{H}}\right) - \nabla^2\widetilde{\mathbf{H}} &= j\omega\epsilon\left(-j\omega\mu\widetilde{\mathbf{H}}\right) = \omega^2\mu\epsilon\ \widetilde{\mathbf{H}} \\
+		\nabla^2\widetilde{\mathbf{H}} + \beta^2\widetilde{\mathbf{H}} &= 0, \qquad \beta = \omega\sqrt{\mu\epsilon}
+	}
+	Gauss's law for the electric field is the one equation this derivation does not
+	use; the derivation of the electric-field equation uses it instead.
+	\end{solution}
+
+	\part On a transmission line, which line quantities play the parts of $\mu$ and
+	$\epsilon$, and which plays the part of $\widetilde{\mathbf{H}}$?
+	\begin{solution}[0.9in]
+	The inductance per meter $L^{\prime}$ plays $\mu$, the capacitance per meter
+	$C^{\prime}$ plays $\epsilon$, and the current $\widetilde{I}$ plays
+	$\widetilde{\mathbf{H}}$, as the voltage $\widetilde{V}$ plays $\widetilde{\mathbf{E}}$.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The Helmholtz equation.} A lossless dielectric has $\epsilon_r = 4$
+and $\mu_r = 1$. The frequency is $300\ \mhz$.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\beta$, the wavelength, and the phase velocity.
+		\begin{solution}[1.3in]
+		\eq{
+			\beta &= \frac{\omega\sqrt{\epsilon_r}}{c} = \frac{2\pi\times3\times10^{8}\times2}{2.998\times10^{8}} = 12.57\ \text{rad/m} \\
+			\lambda &= \frac{2\pi}{\beta} = 0.500\ \m, \qquad v_p = \frac{c}{\sqrt{\epsilon_r}} = 1.50\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\beta$ = \ansbox[1.3in]{$12.57$ rad/m}
+
+		\vspace{4pt}
+		$\lambda$ = \ansbox[1.3in]{$0.500\ \m$}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$1.50\times10^{8}$ m/s}
+	\end{minipage}
+
+	\part Show that $\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ E_0e^{-j\beta z}$
+	satisfies both the Helmholtz equation and $\nabla\cdot\widetilde{\mathbf{E}} = 0$.
+	\begin{solution}[1.2in]
+	Only the $x$ component is nonzero, and it depends only on $z$:
+	\eq{
+		\nabla^2\widetilde{\mathbf{E}} &= \hat{\mathbf{x}}\ \frac{d^2}{dz^2}\left(E_0e^{-j\beta z}\right) = \hat{\mathbf{x}}\left(-j\beta\right)^2E_0e^{-j\beta z} = -\beta^2\widetilde{\mathbf{E}} \\
+		\nabla\cdot\widetilde{\mathbf{E}} &= \frac{\partial}{\partial x}\left(E_0e^{-j\beta z}\right) = 0
+	}
+	\end{solution}
+
+	\part The field $\widetilde{\mathbf{E}} = \hat{\mathbf{z}}\ E_0e^{-j\beta z}$
+	also satisfies the Helmholtz equation. Explain why it cannot exist in a
+	source-free region.
+	\begin{solution}[1in]
+	Its divergence is
+	$\partial\widetilde{E}_z/\partial z = -j\beta E_0e^{-j\beta z} \neq 0$, but
+	Gauss's law with $\widetilde{\rho}_v = 0$ requires $\nabla\cdot\widetilde{\mathbf{E}} = 0$.
+	A field that varies only along $z$ cannot point along $z$ in a source-free region.
+	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The speed of the wave and the line.}
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Use $\mu_0 = 4\pi\times10^{-7}$ H/m and $\epsilon_0 = 8.854\times10^{-12}$ F/m
+		to find the speed of a wave in free space.
+		\begin{solution}[0.9in]
+		\eq{
+			v_p &= \frac{1}{\sqrt{\mu_0\epsilon_0}} = \frac{1}{\sqrt{4\pi\times10^{-7}\times8.854\times10^{-12}}} \\
+			&= 2.998\times10^{8}\ \text{m/s}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$v_p$ = \ansbox[1.3in]{$2.998\times10^{8}$ m/s}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A coaxial line has $L^{\prime} = 250$ nH/m and $C^{\prime} = 100$ pF/m,
+		and its dielectric has $\mu_r = 1$. Using $L^{\prime}C^{\prime} = \mu\epsilon$ for
+		the coax (Lesson 30), find $\epsilon_r$ and the phase velocity.
+		\begin{solution}[1.2in]
+		\eq{
+			\epsilon_r &= \frac{L^{\prime}C^{\prime}}{\mu_0\epsilon_0} = \frac{250\times10^{-9}\times100\times10^{-12}}{1.113\times10^{-17}} = 2.25 \\
+			v_p &= \frac{1}{\sqrt{L^{\prime}C^{\prime}}} = 2.00\times10^{8}\ \text{m/s}
+		}
+		The dielectric is polyethylene.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\epsilon_r$ = \ansbox[1.3in]{$2.25$}
+
+		\vspace{4pt}
+		$v_p$ = \ansbox[1.3in]{$2.00\times10^{8}$ m/s}
+	\end{minipage}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

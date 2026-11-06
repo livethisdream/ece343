@@ -101,7 +101,7 @@ parts:
       - file: module04/L35-source-free-maxwell-1/index
         title: "L35 — Maxwell's Equations in a Lossless, Source-Free Region I"
       - file: module04/L36-source-free-maxwell-2/index
-        title: "L36 — Maxwell's Equations in a Lossless, Source-Free Region II"
+        title: "L36 — Plane-Wave Solutions and Lossy Media"
       - file: module04/L37-plane-waves-polarization/index
         title: "L37 — Uniform Plane Waves and Polarization"
       - file: module04/L38-normal-incidence/index

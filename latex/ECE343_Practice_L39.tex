@@ -1,0 +1,181 @@
+% !TEX root =./ECE343_Practice_main.tex
+%
+% L39 practice set (Oblique Incidence I): phase matching and Snell's law, the
+% TE coefficients derived and applied, and the normal and grazing limits.
+
+\fullwidth{\textbf{Learning Objective 9.5: } I can determine the reflection and
+transmission of UPW at a boundary for Transverse Electric (TE) and Transverse
+Magnetic (TM) waves, using boundary conditions.
+\\[4pt]\normalfont\small Show your work. Write a \textbf{Documentation} line at the
+end (\textbf{None} if you did not collaborate). In every problem the boundary is the
+plane $z = 0$, medium 1 is $z < 0$, the plane of incidence is the $xz$ plane, and
+both materials are lossless and nonmagnetic, so $\eta = \eta_0/n$ with
+$\eta_0 = 376.7\ \ohms$.}
+
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Phase matching.} A $10\ \ghz$ plane wave in air strikes a
+dielectric with $\epsilon_r = 4$ at $\theta_i = 60^\circ$.
+\begin{parts}
+
+	\part The tangential electric field at $z = 0$ must satisfy
+	\[ E_0 e^{-j\beta_1 x\sin\theta_i} + \Gamma_\text{TE}E_0 e^{-j\beta_1 x\sin\theta_r} = \tau_\text{TE}E_0 e^{-j\beta_2 x\sin\theta_t} \]
+	for every $x$. Explain why this requires the three exponents to be equal, and
+	derive the law of reflection and Snell's law from it.
+	\begin{solution}[1.8in]
+	The equation must hold at every point of the boundary. Exponentials in $x$ with
+	different rates move in and out of phase as $x$ changes, so a sum of them cannot
+	equal a third at every $x$ unless all three vary at the same rate. The incident
+	term is not zero, so
+	\eq{ \beta_1\sin\theta_i = \beta_1\sin\theta_r = \beta_2\sin\theta_t }
+	The first equality gives $\theta_r = \theta_i$. With $\beta = (\omega/c)n$ and
+	$n = \sqrt{\mu_r\epsilon_r}$, the second gives $n_1\sin\theta_i = n_2\sin\theta_t$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the transmitted angle.
+		\begin{solution}[1in]
+		$n_2 = \sqrt{4} = 2$, so
+		\eq{ \sin\theta_t = \dfrac{\sin 60^\circ}{2} = 0.433 \implies \theta_t = 25.7^\circ }
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_t$ = \ansbox[1.3in]{$25.7^\circ$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the wavelength in each medium, and the spacing along the boundary
+		between points where each wave has the same phase. Show that the two spacings agree.
+		\begin{solution}[1.3in]
+		\eq{
+			\lambda_1 &= \dfrac{c}{f} = 3.00\ \text{cm}, \qquad \lambda_2 = \dfrac{\lambda_1}{2} = 1.50\ \text{cm} \\
+			\dfrac{\lambda_1}{\sin\theta_i} &= \dfrac{3.00}{0.866} = 3.46\ \text{cm} \\
+			\dfrac{\lambda_2}{\sin\theta_t} &= \dfrac{1.50}{0.433} = 3.46\ \text{cm}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		spacing = \ansbox[1.3in]{$3.46$ cm}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The TE coefficients.} The wave of Question 1 is TE, with
+$\widetilde{\mathbf{E}}_i = \hat{\mathbf{y}}\ E_0\ e^{-j\beta_1\lp x\sin\theta_i + z\cos\theta_i\rp}$.
+\begin{parts}
+
+	\part Write the reflected and transmitted electric and magnetic fields, using
+	$\widetilde{\mathbf{H}} = \hat{\mathbf{k}}\times\widetilde{\mathbf{E}}/\eta$. Apply the
+	two tangential boundary conditions and derive $\Gamma_\text{TE}$ and $\tau_\text{TE}$.
+	\begin{solution}[3.6in]
+	\eq{
+		\widetilde{\mathbf{H}}_i &= \dfrac{E_0}{\eta_1}\lp-\hat{\mathbf{x}}\cos\theta_i + \hat{\mathbf{z}}\sin\theta_i\rp e^{-j\beta_1\lp x\sin\theta_i + z\cos\theta_i\rp} \\
+		\widetilde{\mathbf{E}}_r &= \hat{\mathbf{y}}\ \Gamma_\text{TE}E_0\ e^{-j\beta_1\lp x\sin\theta_i - z\cos\theta_i\rp} \\
+		\widetilde{\mathbf{H}}_r &= \dfrac{\Gamma_\text{TE}E_0}{\eta_1}\lp\hat{\mathbf{x}}\cos\theta_i + \hat{\mathbf{z}}\sin\theta_i\rp e^{-j\beta_1\lp x\sin\theta_i - z\cos\theta_i\rp} \\
+		\widetilde{\mathbf{E}}_t &= \hat{\mathbf{y}}\ \tau_\text{TE}E_0\ e^{-j\beta_2\lp x\sin\theta_t + z\cos\theta_t\rp} \\
+		\widetilde{\mathbf{H}}_t &= \dfrac{\tau_\text{TE}E_0}{\eta_2}\lp-\hat{\mathbf{x}}\cos\theta_t + \hat{\mathbf{z}}\sin\theta_t\rp e^{-j\beta_2\lp x\sin\theta_t + z\cos\theta_t\rp}
+	}
+	At $z = 0$, phase matching cancels the exponentials. Tangential $E_y$ and $H_x$:
+	\eq{
+		1 + \Gamma_\text{TE} &= \tau_\text{TE} \\
+		\dfrac{\cos\theta_i}{\eta_1}\lp 1 - \Gamma_\text{TE}\rp &= \dfrac{\cos\theta_t}{\eta_2}\tau_\text{TE} \\
+		\eta_2\cos\theta_i\lp 1 - \Gamma_\text{TE}\rp &= \eta_1\cos\theta_t\lp 1 + \Gamma_\text{TE}\rp \\
+		\Gamma_\text{TE} &= \dfrac{\eta_2\cos\theta_i - \eta_1\cos\theta_t}{\eta_2\cos\theta_i + \eta_1\cos\theta_t} \\
+		\tau_\text{TE} &= 1 + \Gamma_\text{TE} = \dfrac{2\eta_2\cos\theta_i}{\eta_2\cos\theta_i + \eta_1\cos\theta_t}
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Evaluate $\Gamma_\text{TE}$ and $\tau_\text{TE}$.
+		\begin{solution}[1.5in]
+		$\eta_2 = 376.7/2 = 188.4\ \ohms$.
+		\eq{
+			\Gamma_\text{TE} &= \dfrac{188.4\times0.500 - 376.7\times0.901}{188.4\times0.500 + 376.7\times0.901} \\
+			&= \dfrac{94.2 - 339.6}{94.2 + 339.6} = -0.566 \\
+			\tau_\text{TE} &= 1 + \Gamma_\text{TE} = 0.434
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma_\text{TE}$ = \ansbox[1.3in]{$-0.566$}
+
+		\vspace{4pt}
+		$\tau_\text{TE}$ = \ansbox[1.3in]{$0.434$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the fraction of the incident power that reflects. Use Lesson 39's
+		transmitted fraction,
+		$T = \vert\tau_\text{TE}\vert^2(\eta_1\cos\theta_t)/(\eta_2\cos\theta_i)$,
+		to check that the reflected and transmitted fractions add to one.
+		\begin{solution}[1.2in]
+		\eq{
+			\vert\Gamma_\text{TE}\vert^2 &= 0.320 \\
+			0.434^2\times 2\times\dfrac{0.901}{0.500} &= 0.680 = 1 - 0.320
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		reflected = \ansbox[1.3in]{$32.0\%$}
+	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Limits and a second boundary.}
+\begin{parts}
+
+	\part Show that $\Gamma_\text{TE}$ reduces to Lesson 38's normal-incidence
+	$\Gamma$ when $\theta_i = 0$, and find its limit as $\theta_i \to 90^\circ$.
+	\begin{solution}[1.2in]
+	At $\theta_i = 0$, Snell's law gives $\theta_t = 0$, both cosines are one, and
+	$\Gamma_\text{TE} = (\eta_2 - \eta_1)/(\eta_2 + \eta_1)$. As $\theta_i \to 90^\circ$,
+	$\cos\theta_i \to 0$ while $\cos\theta_t$ stays positive, so
+	$\Gamma_\text{TE} \to -\eta_1\cos\theta_t/(\eta_1\cos\theta_t) = -1$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part A TE wave in glass, $n_1 = 1.50$, meets water, $n_2 = 1.33$, at
+		$\theta_i = 20^\circ$. Find $\theta_t$, $\Gamma_\text{TE}$, and $\tau_\text{TE}$.
+		\begin{solution}[1.6in]
+		\eq{
+			\sin\theta_t &= \dfrac{1.50}{1.33}\sin 20^\circ = 0.386 \implies \theta_t = 22.7^\circ \\
+			\eta_1 &= 251.2\ \ohms, \qquad \eta_2 = 283.3\ \ohms \\
+			\Gamma_\text{TE} &= \dfrac{283.3\times0.940 - 251.2\times0.923}{283.3\times0.940 + 251.2\times0.923} = 0.069 \\
+			\tau_\text{TE} &= 1.069
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\theta_t$ = \ansbox[1.3in]{$22.7^\circ$}
+
+		\vspace{4pt}
+		$\Gamma_\text{TE}$ = \ansbox[1.3in]{$0.069$}
+	\end{minipage}
+
+	\part Explain how $\tau_\text{TE}$ can be greater than one without the
+	transmitted wave carrying more power than the incident wave.
+	\begin{solution}[1in]
+	$\tau_\text{TE}$ is a ratio of electric fields. Water has the larger intrinsic
+	impedance, and a field of a given amplitude carries less power in a material with
+	a larger $\eta$: the transmitted fraction is
+	$T = \vert\tau_\text{TE}\vert^2(\eta_1\cos\theta_t)/(\eta_2\cos\theta_i)
+	= 1.069^2\times(251.2/283.3)\times(0.923/0.940) = 0.995$. The reflected power is
+	$0.069^2 = 0.5\%$, and the transmitted wave carries the other $99.5\%$.
+	\end{solution}
+
+\end{parts}
+
+\vspace{1.5em}
+\noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
+
+\end{questions}

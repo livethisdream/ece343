@@ -199,14 +199,14 @@ LESSONS = [
     (3, 31, "L31-magnetic-boundary-conditions", "Magnetic Boundary Conditions", ["7.4"], "7.10–7.14", [], "Magnetic materials, and the field on both sides of a boundary.", ""),
     (3, 32, "L32-lab-magnetostatics", "Magnetostatics Lab", ["7.1", "7.2", "7.3", "7.4"], "Lab notebook", [], "A team lab: Biot-Savart in Python for a wire, a loop, a Helmholtz pair, and a solenoid, then a hand-wound coil measured with a linear Hall sensor.", "lab"),
 
-    (4, 33, "L33-displacement-current", "Faraday's Law and Displacement Current", ["8.1", "8.2"], "8.3, 8.8, 8.9", ["D08-1"], "Induction, the displacement current that completes Ampere's law, and relaxation time.", ""),
-    (4, 34, "L34-maxwells-equations", "Maxwell's Equations", ["8.3"], "8.3, 8.8, 8.9", ["D08-2"], "The full set of Maxwell's equations for time-varying fields.", ""),
-    (4, 35, "L35-source-free-maxwell-1", "Maxwell's Equations in a Lossless, Source-Free Region I", ["9.1"], "9.1–9.2", ["D09-1"], "Decoupling Maxwell's equations for time-varying fields.", ""),
-    (4, 36, "L36-source-free-maxwell-2", "Maxwell's Equations in a Lossless, Source-Free Region II", ["9.1"], "9.1–9.2", ["D09-1"], "The Helmholtz equation and its solutions, continued.", ""),
-    (4, 37, "L37-plane-waves-polarization", "Uniform Plane Waves and Polarization", ["9.2", "9.3", "9.4"], "9.4–9.6", ["D09-2", "D09-3"], "The uniform plane wave, the fields that make it up, and its polarization.", ""),
-    (4, 38, "L38-normal-incidence", "Normal Incidence", ["9.5"], "Vol. 2, 5.6–5.7", ["D09-4"], "A plane wave striking a boundary head-on: reflection and transmission.", ""),
-    (4, 39, "L39-oblique-incidence-1", "Oblique Incidence I", ["9.5"], "Vol. 2, 5.6–5.7", ["D09-4"], "A plane wave meeting a boundary at an angle.", ""),
-    (4, 40, "L40-oblique-incidence-2", "Oblique Incidence II", ["9.5"], "Vol. 2, 5.6–5.7", ["D09-4"], "Oblique incidence, continued: TE and TM waves.", ""),
+    (4, 33, "L33-displacement-current", "Faraday's Law and Displacement Current", ["8.1", "8.2"], "8.3, 8.8, 8.9", [], "Induction, the displacement current that completes Ampere's law, and relaxation time.", ""),
+    (4, 34, "L34-maxwells-equations", "Maxwell's Equations", ["8.3"], "8.3, 8.8, 8.9", [], "The full set of Maxwell's equations for time-varying fields.", ""),
+    (4, 35, "L35-source-free-maxwell-1", "Maxwell's Equations in a Lossless, Source-Free Region I", ["9.1"], "9.1–9.2", [], "Decoupling Maxwell's equations for time-varying fields.", ""),
+    (4, 36, "L36-source-free-maxwell-2", "Plane-Wave Solutions and Lossy Media", ["9.1"], "9.1–9.2", [], "The Helmholtz equation and its solutions, continued.", ""),
+    (4, 37, "L37-plane-waves-polarization", "Uniform Plane Waves and Polarization", ["9.2", "9.3", "9.4"], "9.4–9.6", [], "The uniform plane wave, the fields that make it up, and its polarization.", ""),
+    (4, 38, "L38-normal-incidence", "Normal Incidence", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave striking a boundary head-on: reflection and transmission.", ""),
+    (4, 39, "L39-oblique-incidence-1", "Oblique Incidence I", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave meeting a boundary at an angle.", ""),
+    (4, 40, "L40-oblique-incidence-2", "Oblique Incidence II", ["9.5"], "Vol. 2, 5.6–5.7", [], "Oblique incidence, continued: TE and TM waves.", ""),
     (4, 41, "L41-lab-incidence", "Incidence Lab", ["9.5"], "Lab packet", [], "Reflection and transmission at a boundary. Packet to be posted.", "lab"),
 ]
 

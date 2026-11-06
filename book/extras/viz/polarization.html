@@ -64,7 +64,7 @@
       <span class="val" id="ay-val">1.00</span>
     </div>
     <div class="ctl">
-      <label>\(\delta\)</label>
+      <label>\(\Delta\phi\)</label>
       <input type="range" id="dl" min="-180" max="180" step="5" value="-90">
       <span class="val" id="dl-val">−90°</span>
     </div>
@@ -100,11 +100,11 @@ function mixLabel(ctx,chunks,x,yc,h,color,align,bold){
 }
 
 // The field at the plane z = 0, with phi = omega t:
-//   E_x = Ex0 cos(phi),  E_y = Ey0 cos(phi + delta).
+//   E_x = Ex0 cos(phi),  E_y = Ey0 cos(phi + dphi), dphi = phase difference.
 // A wave along +z or along -z gives the same path at z = 0; only the direction
 // of travel, and so the handedness, differs. The rotation sense comes from the
-// z component of E x dE/dt = -omega Ex0 Ey0 sin(delta): positive (right-hand
-// for travel along +z) when sin(delta) < 0.
+// z component of E x dE/dt = -omega Ex0 Ey0 sin(dphi): positive (right-hand
+// for travel along +z) when sin(dphi) < 0.
 const state = { ax: 1, ay: 1, dl: -Math.PI/2, phi: 0, playing: false, rev: false };
 const Ex = p => state.ax*Math.cos(p);
 const Ey = p => state.ay*Math.cos(p + state.dl);

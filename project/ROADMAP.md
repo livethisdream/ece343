@@ -75,10 +75,16 @@ working rules apply here.
   PEC gives $-1$, and a quarter-wave layer ($n_c = \sqrt{2}$) nulls $\Gamma$ at
   1.01 GHz. Part B, 2D TE and TM with a split-field PML: power by the
   Poynting vector, Snell at $45^\circ$ (28.7° against 28.3°), $\vert\Gamma\vert$ at
-  five angles against Fresnel ($\vert\Gamma_\text{TM}\vert = 0.064$ at Brewster,
-  limited by the beam's angular spread), and total internal reflection at
-  $50^\circ$ ($1/\alpha = 0.31\lambda_0$ against $0.289\lambda_0$). The key runs in
-  under 3 minutes on a CPU. The blank notebook is
+  five angles against Fresnel ($\vert\Gamma_\text{TM}\vert = 0.043$ at Brewster,
+  against 0.039 from averaging the plane-wave value over the beam's angular
+  spread), and total internal reflection at $50^\circ$
+  ($1/\alpha = 0.31\lambda_0$ against $0.289\lambda_0$). A tangential field on
+  the boundary row takes the average of $\epsilon$ and a normal one (TM's
+  $E_z$) the average of $1/\epsilon$ (review fix, 2026-11-18; the first key put
+  plain $\epsilon_2$ on $E_z$ and read 0.064). Neil kept the $2.5\lambda_0$ beam
+  and the grid, and asked for the `fdtd-1d.html` widget (Courant and
+  $\epsilon_{r2}$ sliders). The key runs in about 3 minutes on a CPU. The blank
+  notebook is
   `book/extras/labs/ECE343_Lab_L41_Incidence.ipynb`; the source and key are in
   `ece343-faculty/Labs/` (`build_l41_notebooks.py`, `lab-keys/`).
 - **L16's worked marker values stand** (Neil, 2026-10-29: "if the values

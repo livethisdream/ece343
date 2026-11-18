@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A pulse on a one-dimensional FDTD grid</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34;
+          --tot:#0067b9; --probe:#8a5a00; --med2:#eaf1f8; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:38px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--on,var(--mid)); border-color:var(--on,var(--mid)); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .tgl input:checked ~ .t { color:var(--on,var(--navy)); }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(148px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+        gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center;
+           height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3);
+           white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1;
+           text-align:center; min-width:8ch; color:var(--navy); }
+  .ro.good { background:rgba(63,125,52,0.12); border-color:rgba(63,125,52,0.30); }
+  .ro.good .v { color:var(--grn); }
+  .ro.bad  { background:rgba(176,30,36,0.10); border-color:rgba(176,30,36,0.28); }
+  .ro.bad  .v { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A Gaussian pulse stepping across a one-dimensional grid from air into a dielectric"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>Courant \(S\)</label>
+      <input type="range" id="S" min="0.25" max="1.2" step="0.01" value="1">
+      <span class="val" id="S-val">1.00</span>
+    </div>
+    <div class="ctl">
+      <label>\(\epsilon_{r2}\)</label>
+      <input type="range" id="er2" min="1" max="9" step="0.1" value="4">
+      <span class="val" id="er2-val">4.0</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="play" checked><span class="sw"></span><span class="t">Animate</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">\(S\) in medium 2</span><span class="v" id="r-s2">—</span></div>
+    <div class="ro"><span class="k">\(\Gamma\), Lesson 38</span><span class="v" id="r-gt">—</span></div>
+    <div class="ro"><span class="k">\(\Gamma\), grid</span><span class="v" id="r-gm">—</span></div>
+    <div class="ro" id="ro-stab"><span class="k">grid</span><span class="v" id="r-stab">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// A 1D Yee grid in units where the air cell is Δz = 1 and c Δt = S.
+//   H[k+1/2] -= S (E[k+1] − E[k])
+//   E[k]     -= (S/εr[k]) (H[k+1/2] − H[k−1/2])
+// with a soft Gaussian source at KS, first-order Mur ends using each end's
+// own v, and the boundary node at KB given (1 + εr2)/2. A second run with air
+// everywhere gives the incident pulse alone; the probe's difference is the
+// reflected pulse, and its signed peak over the incident peak is Γ on the grid.
+// For S > 1 the shortest waves grow without bound; the run stops when the
+// field passes 1e3 and the readout reports it unstable.
+const NZ = 400, KS = 40, KP = 150, KB = 250;
+const TW = 9;                         // source width, in air-cell transit times
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+const state = { S: 1, er2: 4, frames: [], nFrames: 0, frame: 0, peak: 1, gm: NaN, unstable: false, playing: true };
+
+function run(er2const, S, record) {
+  const er = new Float64Array(NZ).fill(1);
+  for (let k = KB; k < NZ; k++) er[k] = er2const;
+  er[KB] = (1 + er2const) / 2;
+  const E = new Float64Array(NZ), H = new Float64Array(NZ - 1);
+  const sL = S, sR = S / Math.sqrt(er2const);
+  const mL = (sL - 1) / (sL + 1), mR = (sR - 1) / (sR + 1);
+  const t0 = 3 * TW / S;
+  const nsteps = Math.ceil((2 * (KB - KP) + (KP - KS) + 6 * TW + 60) / S);
+  const probe = new Float64Array(nsteps);
+  const frames = [];
+  let blew = false;
+  for (let n = 0; n < nsteps; n++) {
+    for (let k = 0; k < NZ - 1; k++) H[k] -= S * (E[k + 1] - E[k]);
+    const e1 = E[1], e0 = E[0], em2 = E[NZ - 2], em1 = E[NZ - 1];
+    for (let k = 1; k < NZ - 1; k++) E[k] -= (S / er[k]) * (H[k] - H[k - 1]);
+    E[KS] += Math.exp(-Math.pow((n - t0) * S / TW, 2));
+    E[0] = e1 + mL * (E[1] - e0);
+    E[NZ - 1] = em2 + mR * (E[NZ - 2] - em1);
+    probe[n] = E[KP];
+    if (record && n % Math.max(1, Math.round(1 / S)) === 0) frames.push(Float32Array.from(E));
+    let mx = 0;
+    for (let k = 0; k < NZ; k++) { const a = Math.abs(E[k]); if (a > mx) mx = a; }
+    if (!(mx < 1e3)) { blew = true; if (record) frames.push(Float32Array.from(E)); break; }
+  }
+  return { probe, frames, blew };
+}
+
+function recompute() {
+  const full = run(state.er2, state.S, true);
+  const ref = run(1, state.S, false);
+  state.frames = full.frames; state.nFrames = full.frames.length; state.frame = 0;
+  state.unstable = full.blew || ref.blew;
+  let ip = 0;
+  for (let n = 0; n < ref.probe.length; n++) ip = Math.max(ip, Math.abs(ref.probe[n]));
+  state.peak = ip > 0 ? ip : 1;
+  if (state.unstable) { state.gm = NaN; return; }
+  let best = 0, val = 0;
+  const m = Math.min(full.probe.length, ref.probe.length);
+  for (let n = 0; n < m; n++) {
+    const r = full.probe[n] - ref.probe[n];
+    if (Math.abs(r) > best) { best = Math.abs(r); val = r; }
+  }
+  state.gm = val / state.peak;
+}
+
+const SEl = document.getElementById('S'), SVal = document.getElementById('S-val');
+const erEl = document.getElementById('er2'), erVal = document.getElementById('er2-val');
+const playEl = document.getElementById('play');
+function onInput() {
+  state.S = parseFloat(SEl.value); state.er2 = parseFloat(erEl.value);
+  SVal.textContent = state.S.toFixed(2); erVal.textContent = state.er2.toFixed(1);
+  recompute(); updateReadout(); draw();
+}
+SEl.addEventListener('input', onInput);
+erEl.addEventListener('input', onInput);
+playEl.addEventListener('change', () => {
+  state.playing = playEl.checked;
+  if (state.playing) { lastTs = null; requestAnimationFrame(tick); }
+});
+
+let lastTs = null, acc = 0;
+function tick(ts) {
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  acc += Math.min(0.1, (ts - lastTs) / 1000) * 90;   // about 90 frames a second
+  lastTs = ts;
+  while (acc >= 1) {
+    acc -= 1;
+    state.frame += 1;
+    if (state.frame >= state.nFrames) state.frame = state.unstable ? state.nFrames - 1 : 0;
+  }
+  draw();
+  requestAnimationFrame(tick);
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight;
+  if(bh) cv.style.height=(hCss+bh)+'px';
+}
+const DESIGN_W = 360;
+let SCL = 1;
+const MQ = window.matchMedia ? window.matchMedia('(max-width:430px)') : null;
+function fit() {
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  let h = Math.max(240, Math.min(w * 0.40, 330));
+  if (MQ && MQ.matches) h = Math.round(h * 0.75);
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function draw() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const fs = px => px / Math.max(SCL, 0.75);           // labels keep their size on a phone
+  const mL = 40, mR = 12, mT = 26, mB = 34;
+  const pW = w-mL-mR, pH = h-mT-mB;
+  const y0 = mT + pH/2;
+  const xFor = k => mL + (k/(NZ-1))*pW;
+  const yFor = v => y0 - (v/1.25)*(pH/2);
+  ctx.fillStyle = cssVar('--med2'); ctx.fillRect(xFor(KB), mT, mL+pW-xFor(KB), pH);
+  ctx.strokeStyle = '#eef3f8'; ctx.lineWidth = 1;
+  for (const v of [-1,-0.5,0.5,1]) { ctx.beginPath(); ctx.moveTo(mL,yFor(v)); ctx.lineTo(mL+pW,yFor(v)); ctx.stroke(); }
+  ctx.strokeStyle = '#cddce9'; ctx.strokeRect(mL,mT,pW,pH);
+  ctx.strokeStyle = '#9fb6cc'; ctx.beginPath(); ctx.moveTo(mL,y0); ctx.lineTo(mL+pW,y0); ctx.stroke();
+  ctx.strokeStyle = cssVar('--ink'); ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(xFor(KB),mT); ctx.lineTo(xFor(KB),mT+pH); ctx.stroke();
+  ctx.strokeStyle = cssVar('--probe'); ctx.lineWidth = 1.2; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(xFor(KP),mT); ctx.lineTo(xFor(KP),mT+pH); ctx.stroke(); ctx.setLineDash([]);
+  stext(ctx,'probe',xFor(KP),mT+pH+fs(12),fs(11),cssVar('--probe'),'center',true);
+  stext(ctx,'source',xFor(KS),mT+pH+fs(12),fs(11),cssVar('--grn'),'center',true);
+  ctx.fillStyle = cssVar('--grn'); ctx.beginPath(); ctx.arc(xFor(KS), y0, 3, 0, 2*Math.PI); ctx.fill();
+  stext(ctx,'air',mL+6,mT+fs(10),fs(12),cssVar('--navy'),'left',true);
+  stext(ctx,'medium 2',mL+pW-6,mT+fs(10),fs(12),cssVar('--navy'),'right',true);
+
+  const E = state.frames[Math.min(state.frame, state.nFrames-1)];
+  if (E) {
+    ctx.save(); ctx.beginPath(); ctx.rect(mL, mT, pW, pH); ctx.clip();
+    ctx.strokeStyle = state.unstable ? cssVar('--red') : cssVar('--tot'); ctx.lineWidth = 2.4; ctx.beginPath();
+    for (let k = 0; k < NZ; k++) {
+      const v = Math.max(-3, Math.min(3, E[k] / state.peak));
+      const x = xFor(k), y = yFor(v);
+      (k===0)?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke(); ctx.restore();
+  }
+  if (state.unstable) stext(ctx,'S > 1: the shortest waves grow without bound',mL+pW/2,y0-pH*0.36,fs(12),cssVar('--red'),'center',true);
+  ctx.save(); ctx.translate(fs(12), mT+pH/2); ctx.rotate(-Math.PI/2);
+  stext(ctx,'Eₓ / incident peak',0,0,fs(11),'#3b4651','center',false);
+  ctx.restore();
+  stext(ctx,'position z (cells)',mL+pW,h-fs(9),fs(11),'#3b4651','right',false);
+}
+
+function updateReadout() {
+  const n2 = Math.sqrt(state.er2);
+  const gt = (1 - n2) / (1 + n2);
+  const sgn = v => (v < 0 ? '−' : '') + Math.abs(v).toFixed(3);
+  document.getElementById('r-s2').textContent = (state.S / n2).toFixed(2);
+  document.getElementById('r-gt').textContent = Math.abs(gt) < 0.0005 ? '0' : sgn(gt);
+  document.getElementById('r-gm').textContent = state.unstable ? '—' : (Math.abs(state.gm) < 0.0005 ? '0' : sgn(state.gm));
+  const ro = document.getElementById('ro-stab');
+  ro.classList.toggle('good', !state.unstable); ro.classList.toggle('bad', state.unstable);
+  document.getElementById('r-stab').textContent = state.unstable ? 'unstable' : 'stable';
+}
+
+recompute(); updateReadout(); fit();
+requestAnimationFrame(tick);
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

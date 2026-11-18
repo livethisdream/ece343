@@ -107,7 +107,7 @@ Faraday's law, displacement current, and the full set of Maxwell's equations, th
   <a class="mt-card mt-lesson" href="L41-lab-incidence/index.html">
     <span class="mt-kind">Lab · L41</span>
     <h4>Incidence Lab</h4>
-    <p>Reflection and transmission at a boundary. Packet to be posted. Objective 9.5.</p>
+    <p>A team lab in Python: FDTD simulations of a pulse at a dielectric and a beam at acrylic, measuring Γ, τ, Snell's law, the Brewster angle, and total internal reflection. Objective 9.5.</p>
   </a>
 </div>
 ::::

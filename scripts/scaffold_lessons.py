@@ -207,7 +207,7 @@ LESSONS = [
     (4, 38, "L38-normal-incidence", "Normal Incidence", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave striking a boundary head-on: reflection and transmission.", ""),
     (4, 39, "L39-oblique-incidence-1", "Oblique Incidence I", ["9.5"], "Vol. 2, 5.6–5.7", [], "A plane wave meeting a boundary at an angle.", ""),
     (4, 40, "L40-oblique-incidence-2", "Oblique Incidence II", ["9.5"], "Vol. 2, 5.6–5.7", [], "Oblique incidence, continued: TE and TM waves.", ""),
-    (4, 41, "L41-lab-incidence", "Incidence Lab", ["9.5"], "Lab packet", [], "Reflection and transmission at a boundary. Packet to be posted.", "lab"),
+    (4, 41, "L41-lab-incidence", "Incidence Lab", ["9.5"], "Lab notebook", [], "A team lab in Python: FDTD simulations of a pulse at a dielectric and a beam at acrylic, measuring Γ, τ, Snell's law, the Brewster angle, and total internal reflection.", "lab"),
 ]
 
 

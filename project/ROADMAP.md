@@ -66,6 +66,27 @@ working rules apply here.
   phase difference is $\Delta\phi$, and the relaxation time is $\tau_r$; $\eta$ is the
   intrinsic impedance, derived in L37; L36 is retitled "Plane-Wave
   Solutions and Lossy Media". L34's Example 2 keeps $B_0 = 0.2$ T.
+- **The L41 Incidence Lab is an FDTD simulation in Python** (Neil,
+  2026-11-18: no lasers, polarizers, or microwave kit; he wants the course to
+  end on a lab). A team lab like L26 and L32. Part A, 1D: the Yee updates
+  derived from Faraday and Ampere–Maxwell, the Courant condition from the
+  grid's dispersion relation, and a Mur boundary; a pulse at $\epsilon_r = 4$
+  gives $\Gamma = -0.331$ and $\vert\tau\vert = 0.667$ (theory $-1/3$, $2/3$), a
+  PEC gives $-1$, and a quarter-wave layer ($n_c = \sqrt{2}$) nulls $\Gamma$ at
+  1.01 GHz. Part B, 2D TE and TM with a split-field PML: power by the
+  Poynting vector, Snell at $45^\circ$ (28.7° against 28.3°), $\vert\Gamma\vert$ at
+  five angles against Fresnel ($\vert\Gamma_\text{TM}\vert = 0.043$ at Brewster,
+  against 0.039 from averaging the plane-wave value over the beam's angular
+  spread), and total internal reflection at $50^\circ$
+  ($1/\alpha = 0.31\lambda_0$ against $0.289\lambda_0$). A tangential field on
+  the boundary row takes the average of $\epsilon$ and a normal one (TM's
+  $E_z$) the average of $1/\epsilon$ (review fix, 2026-11-18; the first key put
+  plain $\epsilon_2$ on $E_z$ and read 0.064). Neil kept the $2.5\lambda_0$ beam
+  and the grid, and asked for the `fdtd-1d.html` widget (Courant and
+  $\epsilon_{r2}$ sliders). The key runs in about 3 minutes on a CPU. The blank
+  notebook is
+  `book/extras/labs/ECE343_Lab_L41_Incidence.ipynb`; the source and key are in
+  `ece343-faculty/Labs/` (`build_l41_notebooks.py`, `lab-keys/`).
 - **L16's worked marker values stand** (Neil, 2026-10-29: "if the values
   work, it's fine").
 - **Every derivation is shown in full** (Neil, 2026-10-19), unlike 444. See
@@ -81,7 +102,6 @@ working rules apply here.
 - Maj Ellis's full name, office, and email (Neil to provide). Maj Ellis is
   the course director; Neil has no office this term (Neil, 2026-10-17).
 - Spring 2027 meeting periods and calendar dates.
-- The lab packet for the Incidence (L41) lab.
 - **Buy linear Hall sensors for L32** (one SS49E or A1324 per station plus
   spares; Neil has the magnet wire).
 - **A possible FR4 capacitance part for L26** (Neil is considering it; he has

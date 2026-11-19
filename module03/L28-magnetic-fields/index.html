@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L28 - Magnetic Fields and Gauss’s Law for Magnetism &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l28-magnetic-fields-and-gauss-s-law-for-magnetism">
+<h1>L28 - Magnetic Fields and Gauss’s Law for Magnetism<a class="headerlink" href="#l28-magnetic-fields-and-gauss-s-law-for-magnetism" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Magnetic Fields and Gauss's Law for Magnetism</h1>
+<div class="title-rule"></div>
+<p>Today we find the magnetic field of a current, and show that its field lines always close.</p>
+<p>Lesson 28 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '7'">
+  <li>I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
+  <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
+</ol>
+<div class="depth docutils container">
+<p>Module 2 started from one experimental law, Coulomb’s law, and built the
+electric field of any arrangement of charge. Module 3 does the same for steady
+currents. Today we define the magnetic field by the force it exerts on a moving
+charge, write the <strong>Biot-Savart law</strong> for the field of a small piece of
+current, and integrate it for a straight wire of finite length and for a
+circular loop. Then we look at the lines of the result. Unlike electric field
+lines, magnetic field lines have no ends, and <strong>Gauss’s law for magnetism</strong>
+states that fact as an equation, in integral and point forms.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-magnetic-force-on-a-moving-charge">
+<div class="wrap docutils container">
+<p class="rubric">Magnetic Force on a Moving Charge</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-force.svg"
+     alt="A positive charge moving to the right through a uniform field B that points into the page; the force F on it points up, perpendicular to both v and B, and the dashed circle it follows"
+     style="max-width: 300px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<p>A charge <span class="math notranslate nohighlight">\(q\)</span> moving with velocity <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> through a magnetic field feels the force</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F} = q\ \mathbf{v}\times\mathbf{B}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{B} = \mu\mathbf{H}, \qquad \mu_0 = 4\pi \times 10^{-7}\ \text{H/m}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 18 defined the electric field by the force on a charge at rest. A charge
+that moves feels a second force, and we use that force to define the
+<strong>magnetic flux density</strong> <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>. The force is proportional to the charge
+and to its speed, and it points perpendicular to both the velocity and
+<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, which is what the cross product says. In the figure,
+<span class="math notranslate nohighlight">\(\mathbf{B}\)</span> points into the page and a positive charge moves to the right, so
+<span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\times(-\hat{\mathbf{z}}) = \hat{\mathbf{y}}\)</span> and the force
+points up. Because the force is always perpendicular to the velocity, it does
+no work on the charge: it turns the charge’s path without changing its speed,
+and in a uniform field the path is the dashed circle. The <strong>permeability</strong> <span class="math notranslate nohighlight">\(\mu\)</span> of the
+material relates the <strong>magnetic field intensity</strong> <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, in A/m, to
+<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, in teslas (T = Wb/m²),
+just as <span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span> related the two electric
+fields. In free space, and in nearly every material in this module except
+iron and its relatives, <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>. Lesson 31 treats magnetic materials. For
+scale, the Earth’s field at the surface is about <span class="math notranslate nohighlight">\(50\ \mu\)</span>T.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-electrostatics-and-magnetostatics">
+<div class="wrap docutils container">
+<p class="rubric">Electrostatics and Magnetostatics</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Electrostatics</p></th>
+<th class="head text-left"><p>Magnetostatics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Source</p></td>
+<td class="text-left"><p>charge <span class="math notranslate nohighlight">\(dQ\)</span></p></td>
+<td class="text-left"><p>current element <span class="math notranslate nohighlight">\(I\ d\mathbf{l}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Field</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E}\)</span> (V/m)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> (A/m)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Flux density</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Field of a source</p></td>
+<td class="text-left"><p>Coulomb’s law</p></td>
+<td class="text-left"><p>Biot-Savart law</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Net flux out of a closed surface</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(Q_\text{encl}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The two halves of statics run in parallel. In electrostatics the source is charge, and Coulomb’s law gives the
+field of each small piece of it. In magnetostatics the source is current, and
+the Biot-Savart law gives the field of each small piece of a current path.
+Each theory has a field and a flux density, linked by a material constant. The
+last row is where they differ. Lesson 20 showed that the flux of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>
+out of a closed surface equals the charge inside. The flux of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> out
+of any closed surface is zero, because no magnetic charge exists to put inside
+it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-biot-savart-law">
+<div class="wrap docutils container">
+<p class="rubric">The Biot-Savart Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-biot-savart.svg"
+     alt="A wire carrying current I upward; a short element I dl on the wire, the vector R from the element to a field point at angle theta from the wire, and the field dH at the field point pointing into the page"
+     style="max-width: 340px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[d\mathbf{H} = \frac{I\ d\mathbf{l}\times\hat{\mathbf{R}}}{4\pi R^2} = \frac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d\mathbf{H}\)</span> is perpendicular to both <span class="math notranslate nohighlight">\(d\mathbf{l}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>, with <span class="math notranslate nohighlight">\(\vert d\mathbf{H}\vert \propto \sin\theta/R^2\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>current element</strong> is a short length <span class="math notranslate nohighlight">\(d\mathbf{l}\)</span> of a current path,
+pointing along the current <span class="math notranslate nohighlight">\(I\)</span>. The <strong>Biot-Savart law</strong> gives the field
+<span class="math notranslate nohighlight">\(d\mathbf{H}\)</span> that the element produces at a field point. Like Coulomb’s law,
+it is an experimental result, and this course does not derive it. The vector
+<span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is the one from Lesson 18: it points from the source, the element,
+to the field point, and a prime marks source coordinates. The field falls off
+as <span class="math notranslate nohighlight">\(1/R^2\)</span>, as the electric field of a point charge does, but its direction
+comes from a cross product. With the right thumb along the current, the
+fingers curl in the direction of <span class="math notranslate nohighlight">\(d\mathbf{H}\)</span>. The magnitude of
+the cross product carries a factor <span class="math notranslate nohighlight">\(\sin\theta\)</span>, where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle
+between <span class="math notranslate nohighlight">\(d\mathbf{l}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>, so an element produces no field along
+its own line and the most field broadside to it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-current-elements">
+<div class="wrap docutils container">
+<p class="rubric">Current Elements</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Current flows in</p></th>
+<th class="head text-left"><p>Density</p></th>
+<th class="head text-left"><p>Units</p></th>
+<th class="head text-left"><p>Current element</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>a filament</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(I\)</span></p></td>
+<td class="text-left"><p>A</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(I\ d\mathbf{l}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>a surface</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span></p></td>
+<td class="text-left"><p>A/m</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}_s\ ds\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>a volume</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}\)</span></p></td>
+<td class="text-left"><p>A/m²</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}\ dv\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} = \oint\frac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 18 described spread-out charge by densities, and current works the same
+way. Current in a thin wire is a filament with current <span class="math notranslate nohighlight">\(I\)</span>. We describe current
+that flows in a thin sheet by the <strong>surface current density</strong> <span class="math notranslate nohighlight">\(\mathbf{J}_s\)</span>,
+the current per unit width measured across the flow, and current through a
+volume by the volume current density <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> of Lesson 27, the current per
+unit area. Each kind gives a current element, and any of the three can replace
+<span class="math notranslate nohighlight">\(I\ d\mathbf{l}\)</span> in the Biot-Savart law. The field of the whole current is the
+superposition of the fields of its elements, an integral over the current path.
+We write the integral around a closed path because a steady current has to
+flow in a closed circuit. When we compute the field of one straight segment,
+we are computing that segment’s share of the field, and the rest of the circuit
+adds its own.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-finite-wire-set-up">
+<div class="wrap docutils container">
+<p class="rubric">A Finite Wire: Set Up</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-finite-wire.svg"
+     alt="A straight wire on the z axis from minus L/2 to L/2 carrying current I upward; an element dz prime at height z prime and its mirror image at minus z prime, the vectors R from each to a field point at distance rho on the bisecting plane, and the field H there pointing into the page"
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[d\mathbf{l}\times\mathbf{R} = \hat{\mathbf{z}}\ dz'\times\left(\rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}\right) = \hat{\boldsymbol{\phi}}\ \rho\ dz'\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A straight wire on the <span class="math notranslate nohighlight">\(z\)</span> axis carries current <span class="math notranslate nohighlight">\(I\)</span> in the <span class="math notranslate nohighlight">\(+z\)</span> direction from
+<span class="math notranslate nohighlight">\(z = -L/2\)</span> to <span class="math notranslate nohighlight">\(z = L/2\)</span>. We want <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> at a distance <span class="math notranslate nohighlight">\(\rho\)</span> from the
+wire, in the plane <span class="math notranslate nohighlight">\(z = 0\)</span> that bisects it. This is the geometry of Lesson 18’s
+finite line charge, and we reuse its coordinates. The element at height <span class="math notranslate nohighlight">\(z'\)</span>
+is <span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\mathbf{z}}\ dz'\)</span>, and the vector from it to the field
+point is <span class="math notranslate nohighlight">\(\mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}\)</span>,
+with <span class="math notranslate nohighlight">\(R = \sqrt{\rho^2 + z'^2}\)</span>. In the cross product,
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\times\hat{\boldsymbol{\rho}} = \hat{\boldsymbol{\phi}}\)</span> and
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\times\hat{\mathbf{z}} = 0\)</span>. Every element therefore produces
+a field along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>, circling the wire. For the line
+charge, the <span class="math notranslate nohighlight">\(z\)</span> components of the fields from <span class="math notranslate nohighlight">\(z'\)</span> and <span class="math notranslate nohighlight">\(-z'\)</span> canceled in
+pairs. Here no element produces a <span class="math notranslate nohighlight">\(z\)</span> component at all, and the fields from
+<span class="math notranslate nohighlight">\(z'\)</span> and <span class="math notranslate nohighlight">\(-z'\)</span> both point into the page at the field point and add, as the
+figure shows.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-of-the-finite-wire">
+<div class="wrap docutils container">
+<p class="rubric">The Field of the Finite Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H} &amp;= \int_{-L/2}^{L/2}\frac{I\ \hat{\boldsymbol{\phi}}\ \rho\ dz'}{4\pi\left(\rho^2 + z'^2\right)^{3/2}} \\ &amp;= \hat{\boldsymbol{\phi}}\ \frac{I\rho}{4\pi}\left[\frac{z'}{\rho^2\sqrt{\rho^2 + z'^2}}\right]_{-L/2}^{L/2} \\ &amp;= \hat{\boldsymbol{\phi}}\ \frac{I L}{4\pi\rho\sqrt{\rho^2 + L^2/4}} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We substitute the cross product and <span class="math notranslate nohighlight">\(R^3 = (\rho^2 + z'^2)^{3/2}\)</span> into the
+Biot-Savart integral. The field point stays fixed while <span class="math notranslate nohighlight">\(z'\)</span> varies, so
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> come outside the integral. The integral
+that remains is the one Lesson 18 evaluated for the line charge. The
+substitution <span class="math notranslate nohighlight">\(z' = \rho\tan\alpha\)</span> gives <span class="math notranslate nohighlight">\(dz' = \rho\sec^2\alpha\ d\alpha\)</span> and
+<span class="math notranslate nohighlight">\(\rho^2 + z'^2 = \rho^2\sec^2\alpha\)</span>, so the integrand becomes
+<span class="math notranslate nohighlight">\(\cos\alpha/\rho^2\)</span>, whose antiderivative is <span class="math notranslate nohighlight">\(\sin\alpha/\rho^2\)</span>. The right
+triangle with legs <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(z'\)</span> gives
+<span class="math notranslate nohighlight">\(\sin\alpha = z'/\sqrt{\rho^2 + z'^2}\)</span>, which is the bracket. The two limits
+give equal and opposite values, so the bracket is twice its value at <span class="math notranslate nohighlight">\(L/2\)</span>,
+and one factor of <span class="math notranslate nohighlight">\(\rho\)</span> cancels. The result has the same form as the line
+charge’s field, with <span class="math notranslate nohighlight">\(I\)</span> in place of <span class="math notranslate nohighlight">\(\rho_\ell/\epsilon\)</span>, and a direction that
+circles the wire instead of pointing away from it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-infinite-wire">
+<div class="wrap docutils container">
+<p class="rubric">The Infinite Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(L \gg \rho\)</span>, <span class="math notranslate nohighlight">\(\sqrt{\rho^2 + L^2/4} \approx L/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} = \hat{\boldsymbol{\phi}}\ \frac{I}{2\pi\rho}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I = 1\)</span> A at <span class="math notranslate nohighlight">\(\rho = 1\)</span> cm gives <span class="math notranslate nohighlight">\(H = 15.9\)</span> A/m and <span class="math notranslate nohighlight">\(B = 20.0\ \mu\)</span>T.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Close to a long wire, <span class="math notranslate nohighlight">\(\rho^2\)</span> is negligible beside <span class="math notranslate nohighlight">\(L^2/4\)</span>, the square root
+becomes <span class="math notranslate nohighlight">\(L/2\)</span>, and the length cancels. The field of an <strong>infinite wire</strong>
+circles it, with field lines that are circles centered on the wire, and it
+falls off as <span class="math notranslate nohighlight">\(1/\rho\)</span>. The function of <span class="math notranslate nohighlight">\(L/\rho\)</span> is the same one as for the
+line charge, so the same rule applies: a centered wire 14 times longer than
+<span class="math notranslate nohighlight">\(\rho\)</span> gives a field within 1% of this result. A <span class="math notranslate nohighlight">\(1\)</span> A current makes <span class="math notranslate nohighlight">\(20.0\ \mu\)</span>T at <span class="math notranslate nohighlight">\(1\)</span> cm, comparable to the Earth’s
+field, so a compass held a centimeter from the wire turns noticeably. Lesson 29
+finds this same field without an integral, with Ampere’s law.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-field-of-a-wire-and-a-loop">
+<div class="wrap docutils container">
+<p class="rubric">The Field of a Wire and a Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/biot-savart.html"
+        width="100%" height="490"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="The magnetic field of a finite wire or a circular loop, seen in a plane through it, with a probe that reads the field"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget shows the plane that contains the current. With <strong>Finite wire</strong>
+selected, the field points into or out of the page, and each symbol’s size
+shows <span class="math notranslate nohighlight">\(\vert\mathbf{H}\vert\)</span> on a logarithmic scale. Drag the amber probe to
+read the field, and compare it with the long-wire formula <span class="math notranslate nohighlight">\(I/2\pi\rho\)</span> in the
+last readout. At the start, a <span class="math notranslate nohighlight">\(20\)</span> cm wire carrying <span class="math notranslate nohighlight">\(1\)</span> A gives <span class="math notranslate nohighlight">\(2.85\)</span> A/m at
+<span class="math notranslate nohighlight">\(\rho = 5\)</span> cm, 89% of the long-wire value. Lengthen the wire, or move the
+probe toward it, and the two readouts converge. With <strong>Circular loop</strong>
+selected, the loop crosses the page twice, and the lines are field lines of
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>. Every line passes through the loop and returns around the
+outside. With the probe on the axis, the last readout gives the on-axis result
+we derive next, and the two agree.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-loop-set-up">
+<div class="wrap docutils container">
+<p class="rubric">A Loop: Set Up</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-loop.svg"
+     alt="A circular loop of radius a in the xy plane carrying current I counterclockwise; an element dl at angle phi prime and the element opposite it, the vectors R from each to a point at height z on the axis, the two fields dH there, and their sum H along z"
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} d\mathbf{l}\times\mathbf{R} &amp;= a\ d\phi'\ \hat{\boldsymbol{\phi}}'\times\left(z\ \hat{\mathbf{z}} - a\ \hat{\boldsymbol{\rho}}'\right) \\ &amp;= a\ d\phi'\left(z\ \hat{\boldsymbol{\rho}}' + a\ \hat{\mathbf{z}}\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A circular loop of radius <span class="math notranslate nohighlight">\(a\)</span> lies in the plane <span class="math notranslate nohighlight">\(z = 0\)</span>, centered on the <span class="math notranslate nohighlight">\(z\)</span>
+axis, and carries current <span class="math notranslate nohighlight">\(I\)</span> counterclockwise seen from above. We want the
+field at height <span class="math notranslate nohighlight">\(z\)</span> on the axis. The element at angle <span class="math notranslate nohighlight">\(\phi'\)</span> is
+<span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\boldsymbol{\phi}}'\ a\ d\phi'\)</span>, using Lesson 17’s
+differential length along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>, and the primes on the
+unit vectors are a reminder that they belong to the element and turn as
+<span class="math notranslate nohighlight">\(\phi'\)</span> changes. The element sits at <span class="math notranslate nohighlight">\(a\ \hat{\boldsymbol{\rho}}'\)</span> and the
+field point at <span class="math notranslate nohighlight">\(z\ \hat{\mathbf{z}}\)</span>, so
+<span class="math notranslate nohighlight">\(\mathbf{R} = z\ \hat{\mathbf{z}} - a\ \hat{\boldsymbol{\rho}}'\)</span>, with
+<span class="math notranslate nohighlight">\(R = \sqrt{a^2 + z^2}\)</span> for every element. The cyclic order
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}, \hat{\boldsymbol{\phi}}, \hat{\mathbf{z}}\)</span> gives
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\times\hat{\mathbf{z}} = \hat{\boldsymbol{\rho}}\)</span> and
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\times\hat{\boldsymbol{\rho}} = -\hat{\mathbf{z}}\)</span>,
+which produce the two terms.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-on-the-axis">
+<div class="wrap docutils container">
+<p class="rubric">The Field on the Axis</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H} &amp;= \frac{I a}{4\pi\left(a^2 + z^2\right)^{3/2}}\int_0^{2\pi}\left(z\ \hat{\boldsymbol{\rho}}' + a\ \hat{\mathbf{z}}\right)d\phi' \\ &amp;= \frac{I a}{4\pi\left(a^2 + z^2\right)^{3/2}}\left(0 + 2\pi a\ \hat{\mathbf{z}}\right) \\ &amp;= \hat{\mathbf{z}}\ \frac{I a^2}{2\left(a^2 + z^2\right)^{3/2}} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>At the center, <span class="math notranslate nohighlight">\(z = 0\)</span>, the field is <span class="math notranslate nohighlight">\(H = I/2a\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Every element is the same distance from the field point, so <span class="math notranslate nohighlight">\(R^3\)</span> comes
+outside the integral with <span class="math notranslate nohighlight">\(I\)</span> and <span class="math notranslate nohighlight">\(a\)</span>. Two terms remain. The radial term
+contains <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\rho}}'\)</span>, which turns with <span class="math notranslate nohighlight">\(\phi'\)</span>, and Lesson 17
+showed that its integral around a full circle is zero. The figure shows why:
+the element opposite any element produces a field whose radial part is equal
+and opposite, so the radial parts cancel in pairs and the axial parts add. The
+axial term is constant, and its integral is <span class="math notranslate nohighlight">\(2\pi a\)</span>. For a loop of radius
+<span class="math notranslate nohighlight">\(a = 5\)</span> cm carrying <span class="math notranslate nohighlight">\(1\)</span> A, the field at the center is <span class="math notranslate nohighlight">\(10.0\)</span> A/m, or
+<span class="math notranslate nohighlight">\(12.6\ \mu\)</span>T. One radius above the center, at <span class="math notranslate nohighlight">\(z = a\)</span>, the factor
+<span class="math notranslate nohighlight">\((a^2/(a^2 + z^2))^{3/2}\)</span> is <span class="math notranslate nohighlight">\(2^{-3/2} = 0.354\)</span>, and the field drops to
+<span class="math notranslate nohighlight">\(3.54\)</span> A/m.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-far-from-the-loop">
+<div class="wrap docutils container">
+<p class="rubric">Far From the Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(z \gg a\)</span>, drop <span class="math notranslate nohighlight">\(a^2\)</span> beside <span class="math notranslate nohighlight">\(z^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} \approx \hat{\mathbf{z}}\ \frac{I a^2}{2 z^3} = \hat{\mathbf{z}}\ \frac{m}{2\pi z^3}, \qquad m = I\pi a^2\]</div>
+<ul class="simple">
+<li><p>A small loop is a <strong>magnetic dipole</strong>, and its field falls as <span class="math notranslate nohighlight">\(1/z^3\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Far from the loop, <span class="math notranslate nohighlight">\(a^2 + z^2 \approx z^2\)</span>, and the denominator becomes
+<span class="math notranslate nohighlight">\(2z^3\)</span>. Multiplying top and bottom by <span class="math notranslate nohighlight">\(\pi\)</span> collects the current and the area
+of the loop into the <strong>magnetic dipole moment</strong> <span class="math notranslate nohighlight">\(m = I\pi a^2\)</span>, in A·m². The
+far field depends only on <span class="math notranslate nohighlight">\(m\)</span>, so a loop with half the area and twice the
+current produces the same far field. The result has the same form as the
+on-axis field of the electric dipole in the Lesson 18 practice set,
+<span class="math notranslate nohighlight">\(p/2\pi\epsilon z^3\)</span>, and the same <span class="math notranslate nohighlight">\(1/z^3\)</span> falloff. For the <span class="math notranslate nohighlight">\(5\)</span> cm loop at
+<span class="math notranslate nohighlight">\(z = 50\)</span> cm, ten radii away, the exact result gives <span class="math notranslate nohighlight">\(9.85\)</span> mA/m and the
+dipole approximation gives <span class="math notranslate nohighlight">\(10.0\)</span> mA/m, a difference of 1.5%. A bar magnet,
+and the Earth itself, have this same dipole field far away.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-square-loop">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Square Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-square-loop.svg"
+     alt="A square loop of side s carrying current I counterclockwise, with one side highlighted; the distance s/2 from the center to that side, the distance s over root 2 to a corner, the dashed inscribed circle, and the field H at the center pointing out of the page"
+     style="max-width: 270px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<p>A square loop of side <span class="math notranslate nohighlight">\(s = 10\)</span> cm carries <span class="math notranslate nohighlight">\(I = 1\)</span> A. Each side is a finite wire with <span class="math notranslate nohighlight">\(L = s\)</span> and <span class="math notranslate nohighlight">\(\rho = s/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[H = 4\ \frac{I s}{4\pi\left(\frac{s}{2}\right)\sqrt{\frac{s^2}{4} + \frac{s^2}{4}}} = \frac{2\sqrt{2}\ I}{\pi s} = 9.00\ \text{A/m}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the field at the center of a square loop</p>
+<p>The center of the square lies on the bisecting plane of every side, a distance
+<span class="math notranslate nohighlight">\(s/2\)</span> from each, so the finite-wire result applies to each side with <span class="math notranslate nohighlight">\(L = s\)</span>
+and <span class="math notranslate nohighlight">\(\rho = s/2\)</span>. The square root is
+<span class="math notranslate nohighlight">\(\sqrt{s^2/4 + s^2/4} = s/\sqrt{2}\)</span>, so one side contributes</p>
+<div class="math notranslate nohighlight">
+\[H_\text{side} = \frac{I s}{4\pi\ (s/2)(s/\sqrt{2})} = \frac{\sqrt{2}\ I}{2\pi s} = 2.25\ \text{A/m}\]</div>
+<p>By the right-hand rule, every side produces a field in the same direction at
+the center: out of the page for a current that runs counterclockwise. The four
+contributions add to <span class="math notranslate nohighlight">\(2\sqrt{2}\ I/\pi s = 9.00\)</span> A/m, or <span class="math notranslate nohighlight">\(11.3\ \mu\)</span>T. A
+circular loop that fits inside the square, with <span class="math notranslate nohighlight">\(a = s/2 = 5\)</span> cm, gives
+<span class="math notranslate nohighlight">\(I/2a = 10.0\)</span> A/m. The square has more wire and encloses more area, but its
+field at the center is 10% smaller, because the wire near the corners is
+farther from the center, up to <span class="math notranslate nohighlight">\(s/\sqrt{2} = 7.07\)</span> cm, and those elements see
+the center at a smaller <span class="math notranslate nohighlight">\(\sin\theta\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-closed-magnetic-field-lines">
+<div class="wrap docutils container">
+<p class="rubric">Closed Magnetic Field Lines</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-field-lines.svg"
+     alt="Left, the field lines of an electric dipole, which start on the positive charge and end on the negative charge. Right, the field lines of a current loop in cross section, which pass through the loop and close around the outside"
+     style="max-width: 480px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Electric lines start and end on charge; magnetic lines close on themselves.</p></li>
+</ul>
+<p>Element on the <span class="math notranslate nohighlight">\(z\)</span> axis, <span class="math notranslate nohighlight">\(d\mathbf{H} \propto \hat{\mathbf{z}}\times\mathbf{R}/R^3 = (-y,\ x,\ 0)/R^3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\nabla\cdot d\mathbf{H} \propto \frac{\partial}{\partial x}\left(\frac{-y}{R^3}\right) + \frac{\partial}{\partial y}\left(\frac{x}{R^3}\right) = \frac{3xy}{R^5} - \frac{3xy}{R^5} = 0\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The figure draws the field lines of an electric dipole beside those of a small
+current loop. Far away, the two patterns match, since both are dipole fields.
+Near the sources they differ. Every electric field line starts on the positive
+charge and ends on the negative one. Every magnetic field line passes through
+the loop and returns around the outside, closing on itself, and none of them
+ends anywhere. The Biot-Savart law explains why, and we can show it for one
+element. Choose coordinates with the element at the origin, pointing along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span>. With <span class="math notranslate nohighlight">\(\mathbf{R} = (x, y, z)\)</span> and
+<span class="math notranslate nohighlight">\(R = \sqrt{x^2 + y^2 + z^2}\)</span>, the cross product is
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\times\mathbf{R} = (-y, x, 0)\)</span>, so <span class="math notranslate nohighlight">\(d\mathbf{H}\)</span> has no <span class="math notranslate nohighlight">\(z\)</span>
+component and circles the element’s own line. Its divergence has two terms. The
+quotient rule with <span class="math notranslate nohighlight">\(\partial R/\partial x = x/R\)</span> gives
+<span class="math notranslate nohighlight">\(\partial(-y/R^3)/\partial x = 3xy/R^5\)</span>, and with <span class="math notranslate nohighlight">\(\partial R/\partial y = y/R\)</span>
+it gives <span class="math notranslate nohighlight">\(\partial(x/R^3)/\partial y = -3xy/R^5\)</span>. The terms cancel at every
+point away from the element. We can place any element on the <span class="math notranslate nohighlight">\(z\)</span> axis this
+way, so the field of every element has zero divergence, and so does their sum,
+the field of any current. A field with zero divergence everywhere has no point
+where lines start or end. No experiment has found an isolated magnetic charge, a magnetic monopole, that
+could start or end a line. Cutting a bar magnet in half produces two smaller
+magnets, each with both poles.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-gauss-s-law-for-magnetism">
+<div class="wrap docutils container">
+<p class="rubric">Gauss’s Law for Magnetism</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L28-gauss-mag.svg"
+     alt="Left, closed field lines crossing a dashed closed surface S, entering on one side and leaving on the other. Right, a closed curve C with a flat cap S1 and a domed cap S2, both crossed by the same vertical field lines"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\oint_S \mathbf{B}\cdot d\mathbf{s} = 0\]</div>
+<ul class="simple">
+<li><p>Every field line that enters a closed surface also leaves it.</p></li>
+<li><p>Compare Lesson 20: <span class="math notranslate nohighlight">\(\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>magnetic flux</strong> through a surface is <span class="math notranslate nohighlight">\(\int \mathbf{B}\cdot d\mathbf{s}\)</span>,
+in webers, and it counts the field lines that cross the surface. Because
+magnetic field lines close on themselves, a line that enters a closed surface
+has to leave it somewhere, and the net flux out of the surface is zero. That is
+<strong>Gauss’s law for magnetism</strong>. Lesson 20’s Gauss’s law for <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> has the
+enclosed charge on the right side. Here the right side is zero for every
+closed surface, because there is no magnetic charge to enclose. In the left
+panel, each line that enters <span class="math notranslate nohighlight">\(S\)</span> leaves it again. One consequence matters in
+Module 4. Take two open surfaces that share the same boundary curve, the flat
+cap <span class="math notranslate nohighlight">\(S_1\)</span> and the dome <span class="math notranslate nohighlight">\(S_2\)</span> on the curve <span class="math notranslate nohighlight">\(C\)</span> in the right panel. Together they
+form a closed surface, so the flux that enters through one
+equals the flux that leaves through the other. The flux through a circuit
+therefore depends only on the circuit, not on which surface we draw across it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-point-form">
+<div class="wrap docutils container">
+<p class="rubric">The Point Form</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\oint_S \mathbf{B}\cdot d\mathbf{s} = \int_V \nabla\cdot\mathbf{B}\ dv = 0 \quad\Longrightarrow\quad \nabla\cdot\mathbf{B} = 0\]</div>
+<p>Check, infinite wire, <span class="math notranslate nohighlight">\(\mathbf{B} = \hat{\boldsymbol{\phi}}\ \mu I/2\pi\rho\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\nabla\cdot\mathbf{B} = \frac{1}{\rho}\frac{\partial\left(\rho B_\rho\right)}{\partial\rho} + \frac{1}{\rho}\frac{\partial B_\phi}{\partial\phi} + \frac{\partial B_z}{\partial z} = 0 + 0 + 0\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The divergence theorem of Lesson 17 turns the flux out of a closed surface into
+the volume integral of the divergence over the region inside it. The flux is
+zero for every closed surface, so the volume integral of <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B}\)</span>
+is zero over every volume, however small and wherever it sits. The only way an
+integral can vanish over every volume is for the integrand to be zero
+everywhere, which is the argument Lesson 21 used to reach
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = \rho_v\)</span>. The result, <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span>, is
+the <strong>point form</strong> of Gauss’s law for magnetism: at no point does the magnetic
+field have a source or a sink. In a uniform material <span class="math notranslate nohighlight">\(\mu\)</span> is constant, so
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{H} = 0\)</span> as well. The infinite wire’s field passes the check:
+it has only a <span class="math notranslate nohighlight">\(\phi\)</span> component, and that component depends only on <span class="math notranslate nohighlight">\(\rho\)</span>, so
+each of the three terms of the cylindrical divergence is zero.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Magnetic force</p></td>
+<td class="text-left"><p>Force on a charge moving through <span class="math notranslate nohighlight">\(\mathbf{B}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{F} = q\ \mathbf{v}\times\mathbf{B}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span></p></td>
+<td class="text-left"><p>Flux density (T), field intensity (A/m), permeability</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span>; <span class="math notranslate nohighlight">\(\mu_0 = 4\pi \times 10^{-7}\)</span> H/m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Biot-Savart law</p></td>
+<td class="text-left"><p>Field of a current element</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(d\mathbf{H} = \dfrac{I\ d\mathbf{l}\times\mathbf{R}}{4\pi R^3}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Current elements</p></td>
+<td class="text-left"><p>Filament, sheet, volume</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(I\ d\mathbf{l}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{J}_s\ ds\)</span>, <span class="math notranslate nohighlight">\(\mathbf{J}\ dv\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Finite wire, bisecting plane</p></td>
+<td class="text-left"><p>Length <span class="math notranslate nohighlight">\(L\)</span>, distance <span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\dfrac{I L}{4\pi\rho\sqrt{\rho^2 + L^2/4}}\ \hat{\boldsymbol{\phi}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Infinite wire</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(L \gg \rho\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\dfrac{I}{2\pi\rho}\ \hat{\boldsymbol{\phi}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Loop, on the axis</p></td>
+<td class="text-left"><p>Radius <span class="math notranslate nohighlight">\(a\)</span>, height <span class="math notranslate nohighlight">\(z\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\dfrac{I a^2}{2(a^2 + z^2)^{3/2}}\ \hat{\mathbf{z}}\)</span>; <span class="math notranslate nohighlight">\(I/2a\)</span> at the center</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Magnetic dipole</p></td>
+<td class="text-left"><p>Moment <span class="math notranslate nohighlight">\(m = I\pi a^2\)</span></p></td>
+<td class="text-left"><p>far field on the axis <span class="math notranslate nohighlight">\(m/2\pi z^3\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law for magnetism</p></td>
+<td class="text-left"><p>No magnetic charge; field lines close</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint \mathbf{B}\cdot d\mathbf{s} = 0\)</span>, <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L28_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L28_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 29</strong>: Ampere’s law finds the infinite wire’s field with no integral.</p></li>
+<li><p><strong>Lesson 30</strong>: Ampere’s law for the coax, the solenoid, and the toroid, and the coax’s <span class="math notranslate nohighlight">\(L'\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today the Biot-Savart law gave the field of a wire and a loop, one current
+element at a time. That method always works, but even a straight wire needs an
+integral along its length, and for the most symmetric currents there is a
+shortcut, as there was in Module 2. Lesson 29
+introduces Ampere’s law, the magnetic counterpart of Gauss’s law, which finds
+the infinite wire’s field without an integral. Lesson 30 applies it to the coaxial
+cable, the solenoid, and the toroid, and derives the inductance per unit
+length <span class="math notranslate nohighlight">\(L'\)</span> of the coax that Lesson 6 quoted.</p>
+<p>Before Lesson 29, read sections 7.4, 7.5, and 7.9 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L28-magnetic-fields"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

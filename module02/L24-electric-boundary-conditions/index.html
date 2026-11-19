@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L24 - Electric Boundary Conditions &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l24-electric-boundary-conditions">
+<h1>L24 - Electric Boundary Conditions<a class="headerlink" href="#l24-electric-boundary-conditions" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Electric Boundary Conditions</h1>
+<div class="title-rule"></div>
+<p>Today we find what the electric field must do where one material meets another.</p>
+<p>Lesson 24 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '5'; counter-reset: lo 3">
+  <li>I can apply the electric field boundary conditions to calculate electric fields on both sides of a material boundary.</li>
+</ol>
+<div class="depth docutils container">
+<p>Every field we have computed so far lived in one uniform material. Real
+devices are built from several: a capacitor holds a dielectric between two
+metal plates, a coaxial cable wraps polyethylene around copper, and a circuit
+board stacks fiberglass between copper planes. At each surface where two
+materials meet, the field changes abruptly, but not arbitrarily. Today we apply
+the two laws of electrostatics to a thin loop and a thin box that straddle the
+boundary, and they hand us two <strong>boundary conditions</strong>: one on the component of
+the field along the boundary, and one on the component across it. With those
+two conditions we can find the field on one side from the field on the other,
+predict how field lines bend at a dielectric, and find the charge on the
+surface of a conductor from the field next to it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The two laws of electrostatics, in integral form:</p>
+<div class="math notranslate nohighlight">
+\[\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{enc}, \qquad \oint_C \mathbf{E}\cdot d\mathbf{l} = 0, \qquad \mathbf{D} = \epsilon\mathbf{E}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 20 introduced <strong>Gauss’s law</strong>: the flux of the electric flux density
+<span class="math notranslate nohighlight">\(\mathbf{D}\)</span> out of any closed surface <span class="math notranslate nohighlight">\(S\)</span> equals the free charge enclosed by
+it. Lesson 22 showed that the static electric field is the gradient of a
+potential, <span class="math notranslate nohighlight">\(\mathbf{E} = -\nabla V\)</span>, so its integral around any closed path <span class="math notranslate nohighlight">\(C\)</span>
+is zero: walking around a loop and returning to the start, the potential
+returns to where it began. This is Kirchhoff’s voltage law in field form.
+Inside a material, the two fields are tied together by the permittivity,
+<span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span>. Today we apply both integral laws to
+surfaces and paths so small that they see only the boundary, and nothing else.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-tangential-field-a-thin-loop">
+<div class="wrap docutils container">
+<p class="rubric">The Tangential Field: A Thin Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L24-loop.svg"
+     alt="A rectangular loop a, b, c, d of width W and height h straddles the boundary between region 1 with permittivity epsilon 1 above and region 2 with permittivity epsilon 2 below; the field E1 above the boundary and E2 below it point in different directions"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Shrink the height: <span class="math notranslate nohighlight">\(h \to 0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Two materials with permittivities <span class="math notranslate nohighlight">\(\epsilon_1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_2\)</span> meet at a flat
+boundary. We define a unit normal <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> that points from region 2
+into region 1, and a unit tangent <span class="math notranslate nohighlight">\(\hat{\mathbf{t}}\)</span> along the boundary. Any
+field splits into a <strong>tangential</strong> component along <span class="math notranslate nohighlight">\(\hat{\mathbf{t}}\)</span> and a
+<strong>normal</strong> component along <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>: in region 1 these are <span class="math notranslate nohighlight">\(E_{t1}\)</span>
+and <span class="math notranslate nohighlight">\(E_{n1}\)</span>, and in region 2, <span class="math notranslate nohighlight">\(E_{t2}\)</span> and <span class="math notranslate nohighlight">\(E_{n2}\)</span>.</p>
+<p>To relate the tangential components, we take the rectangular path
+<span class="math notranslate nohighlight">\(a \to b \to c \to d \to a\)</span>, with its long sides of length <span class="math notranslate nohighlight">\(W\)</span> parallel to the
+boundary, one in each region, and its short sides of height <span class="math notranslate nohighlight">\(h\)</span> crossing it.
+We make <span class="math notranslate nohighlight">\(W\)</span> small enough that the field is uniform along each long side, and
+then shrink <span class="math notranslate nohighlight">\(h\)</span> toward zero, so that the long sides sit just above and just
+below the boundary.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-evaluating-the-loop">
+<div class="wrap docutils container">
+<p class="rubric">Evaluating the Loop</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint \mathbf{E}\cdot d\mathbf{l} &amp;= \int_a^b + \int_b^c + \int_c^d + \int_d^a = 0 \\ \int_a^b \mathbf{E}_1\cdot\hat{\mathbf{t}}\ dl &amp;= E_{t1} W \\ \int_c^d \mathbf{E}_2\cdot\left(-\hat{\mathbf{t}}\right) dl &amp;= -E_{t2} W \\ \int_b^c,\ \int_d^a &amp;\to 0 \quad \text{as } h \to 0 \\ E_{t1} W - E_{t2} W &amp;= 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We split the closed path into its four sides. Along side <span class="math notranslate nohighlight">\(ab\)</span> the path runs in
+the <span class="math notranslate nohighlight">\(+\hat{\mathbf{t}}\)</span> direction through region 1, so <span class="math notranslate nohighlight">\(d\mathbf{l} =
+\hat{\mathbf{t}}\ dl\)</span>, and the dot product picks out the tangential component
+<span class="math notranslate nohighlight">\(E_{t1}\)</span>, which is constant along the short side; the integral is <span class="math notranslate nohighlight">\(E_{t1}\)</span>
+times the length <span class="math notranslate nohighlight">\(W\)</span>. Along side <span class="math notranslate nohighlight">\(cd\)</span> the path runs back in the
+<span class="math notranslate nohighlight">\(-\hat{\mathbf{t}}\)</span> direction through region 2, which gives <span class="math notranslate nohighlight">\(-E_{t2} W\)</span>. The
+two short sides each have length <span class="math notranslate nohighlight">\(h\)</span>, and the field on them is finite, so their
+integrals are at most the field times <span class="math notranslate nohighlight">\(h\)</span> and vanish as <span class="math notranslate nohighlight">\(h \to 0\)</span>. What is
+left must still sum to zero, because the loop law holds for every closed path.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-tangential-condition">
+<div class="wrap docutils container">
+<p class="rubric">The Tangential Condition</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[E_{t1} = E_{t2} \qquad\Longleftrightarrow\qquad \hat{\mathbf{n}}\times\left(\mathbf{E}_1 - \mathbf{E}_2\right) = 0\]</div>
+<ul class="simple">
+<li><p>Tangential <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is continuous across any boundary.</p></li>
+<li><p>Tangential <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is not: <span class="math notranslate nohighlight">\(\frac{D_{t1}}{\epsilon_1} = \frac{D_{t2}}{\epsilon_2}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Dividing the last line by <span class="math notranslate nohighlight">\(W\)</span> gives the <strong>tangential boundary condition</strong>: the
+component of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> along the boundary is the same on both sides. The
+cross product with the normal is the same statement written for any
+orientation, since <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\times\mathbf{E}\)</span> keeps only the
+tangential part of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>. Nothing in the derivation depended on the
+materials or on any charge sitting on the boundary, so the condition holds at
+every boundary in electrostatics. The flux density does not share it. Because
+<span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span> on each side, the tangential components of
+<span class="math notranslate nohighlight">\(\mathbf{D}\)</span> differ by the ratio of the permittivities.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-normal-field-a-thin-pillbox">
+<div class="wrap docutils container">
+<p class="rubric">The Normal Field: A Thin Pillbox</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L24-pillbox.svg"
+     alt="A short cylinder with flat faces of area delta A, one in each region, straddles the boundary, which carries surface charge rho s; the outward normal of the top face is n hat and of the bottom face is minus n hat"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Shrink the height: <span class="math notranslate nohighlight">\(h \to 0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To relate the normal components, we apply Gauss’s law to a closed surface
+that straddles the boundary: a short cylinder, or <strong>pillbox</strong>, whose two flat
+faces of area <span class="math notranslate nohighlight">\(\Delta A\)</span> lie parallel to the boundary, one in each region.
+The boundary may carry a <strong>surface charge density</strong> <span class="math notranslate nohighlight">\(\rho_s\)</span>, in C/m². We make
+<span class="math notranslate nohighlight">\(\Delta A\)</span> small enough that <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is uniform over each face and
+<span class="math notranslate nohighlight">\(\rho_s\)</span> is uniform over the patch of boundary inside the box, and then shrink
+the height <span class="math notranslate nohighlight">\(h\)</span> toward zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-evaluating-the-pillbox">
+<div class="wrap docutils container">
+<p class="rubric">Evaluating the Pillbox</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint \mathbf{D}\cdot d\mathbf{s} &amp;= \int_\text{top} + \int_\text{bottom} + \int_\text{side} = Q_\text{enc} \\ \int_\text{top} \mathbf{D}_1\cdot\hat{\mathbf{n}}\ ds &amp;= D_{n1}\ \Delta A \\ \int_\text{bottom} \mathbf{D}_2\cdot\left(-\hat{\mathbf{n}}\right) ds &amp;= -D_{n2}\ \Delta A \\ \int_\text{side} &amp;\to 0 \quad \text{as } h \to 0 \\ Q_\text{enc} &amp;= \rho_s\ \Delta A \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The closed surface has three parts. On the top face, in region 1, the outward
+normal is <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>, so <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{n}}\ ds\)</span> and the
+flux is the normal component <span class="math notranslate nohighlight">\(D_{n1}\)</span> times the area. On the bottom face, in
+region 2, the outward normal points the other way, <span class="math notranslate nohighlight">\(-\hat{\mathbf{n}}\)</span>, so the
+flux is <span class="math notranslate nohighlight">\(-D_{n2}\ \Delta A\)</span>. The curved side has area <span class="math notranslate nohighlight">\(2\pi r h\)</span> for a pillbox
+of radius <span class="math notranslate nohighlight">\(r\)</span>, which vanishes as <span class="math notranslate nohighlight">\(h \to 0\)</span>, and so does its flux. The charge
+inside is the surface charge on the enclosed patch, <span class="math notranslate nohighlight">\(\rho_s\ \Delta A\)</span>. Any
+volume charge density <span class="math notranslate nohighlight">\(\rho_v\)</span> near the boundary contributes
+<span class="math notranslate nohighlight">\(\rho_v\ \Delta A\ h\)</span>, which also vanishes as <span class="math notranslate nohighlight">\(h \to 0\)</span>; only a true surface
+charge survives the limit.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-normal-condition">
+<div class="wrap docutils container">
+<p class="rubric">The Normal Condition</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[D_{n1} - D_{n2} = \rho_s \qquad\Longleftrightarrow\qquad \hat{\mathbf{n}}\cdot\left(\mathbf{D}_1 - \mathbf{D}_2\right) = \rho_s\]</div>
+<ul class="simple">
+<li><p>Between two dielectrics, <span class="math notranslate nohighlight">\(\rho_s = 0\)</span>, so <span class="math notranslate nohighlight">\(D_{n1} = D_{n2}\)</span>.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\epsilon_1 E_{n1} = \epsilon_2 E_{n2}\)</span>: normal <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> jumps.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Collecting the terms and dividing by <span class="math notranslate nohighlight">\(\Delta A\)</span> gives the <strong>normal boundary
+condition</strong>: the normal component of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> jumps by the surface charge
+density. The sign matters: <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> points from region 2 into
+region 1, and the jump is region 1 minus region 2. At a boundary between two
+ordinary dielectrics there is no free charge to sit on the surface, so
+<span class="math notranslate nohighlight">\(\rho_s = 0\)</span> and the normal component of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is continuous. Writing
+<span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span> on each side shows that the normal
+component of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is then discontinuous: it is smaller in the material
+with the larger permittivity, by the ratio <span class="math notranslate nohighlight">\(\epsilon_1/\epsilon_2\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-both-conditions">
+<div class="wrap docutils container">
+<p class="rubric">Both Conditions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Tangential</p></th>
+<th class="head text-left"><p>Normal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E_{t1} = E_{t2}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\epsilon_1 E_{n1} - \epsilon_2 E_{n2} = \rho_s\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{D}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{D_{t1}}{\epsilon_1} = \frac{D_{t2}}{\epsilon_2}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(D_{n1} - D_{n2} = \rho_s\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The table collects the two conditions and their versions for the other field.
+Each row says the same thing twice, once for each field, because
+<span class="math notranslate nohighlight">\(\mathbf{D} = \epsilon\mathbf{E}\)</span>. The tangential condition came from the loop
+law and the normal condition from Gauss’s law, so between them they carry all
+of electrostatics to the boundary. Given the field on one side, they fix both
+components of the field on the other side, which is all there is: a field
+has a tangential part and a normal part, and we now know how each crosses.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-how-the-field-bends">
+<div class="wrap docutils container">
+<p class="rubric">How the Field Bends</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Measure each angle from the normal, with <span class="math notranslate nohighlight">\(\rho_s = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \tan\theta_1 &amp;= \frac{E_{t1}}{E_{n1}}, \qquad \tan\theta_2 = \frac{E_{t2}}{E_{n2}} \\ \frac{\tan\theta_1}{\tan\theta_2} &amp;= \frac{E_{t1}}{E_{t2}} \cdot \frac{E_{n2}}{E_{n1}} = 1 \cdot \frac{\epsilon_1}{\epsilon_2} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>The field leans further from the normal in the larger <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A field line that crosses the boundary changes direction. Let <span class="math notranslate nohighlight">\(\theta_1\)</span> and
+<span class="math notranslate nohighlight">\(\theta_2\)</span> be the angles between the field and the normal on each side, so the
+tangent of each angle is the tangential component over the normal component.
+Dividing one by the other separates the two conditions. The tangential
+components cancel, because they are equal. The normal components leave the
+ratio <span class="math notranslate nohighlight">\(E_{n2}/E_{n1}\)</span>, which the normal condition sets to
+<span class="math notranslate nohighlight">\(\epsilon_1/\epsilon_2\)</span> when there is no surface charge. So the tangents of
+the angles stand in the ratio of the permittivities. In the material with the
+larger permittivity the normal component is smaller while the tangential
+component is unchanged, so the field there tilts toward the boundary.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-the-field-at-a-dielectric-boundary">
+<div class="wrap docutils container">
+<p class="rubric">The Field at a Dielectric Boundary</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/dielectric-boundary.html"
+        width="100%" height="489"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="Electric field lines bending at the boundary between two dielectrics, with permittivities and the angle in region 1 set by sliders"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget draws the field crossing from region 1, above, into region 2,
+below, with no surface charge on the boundary. Set the two relative
+permittivities and the angle <span class="math notranslate nohighlight">\(\theta_1\)</span> from the normal; the bold arrows are
+<span class="math notranslate nohighlight">\(\mathbf{E}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{E}_2\)</span> at one point, drawn to scale, and the dashed
+lines are their tangential and normal components. Start at the default,
+free space over <span class="math notranslate nohighlight">\(\epsilon_r = 4\)</span>: the tangential components match, the normal
+component shrinks by four, and the field in region 2 leans out to <span class="math notranslate nohighlight">\(66.6^\circ\)</span>.
+Turn on <strong>Show D</strong> and the normal components match instead. Set the two
+permittivities equal and the field passes straight through. Then put the
+larger permittivity on top and watch the field bend toward the normal as it
+enters region 2.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-free-space-and-a-dielectric">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Free Space and a Dielectric</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Region 1, <span class="math notranslate nohighlight">\(y &lt; 0\)</span>: free space. Region 2, <span class="math notranslate nohighlight">\(y &gt; 0\)</span>: <span class="math notranslate nohighlight">\(\epsilon_r = 2\)</span>, with <span class="math notranslate nohighlight">\(\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 + \hat{\mathbf{z}}5\)</span> V/m.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_{1x} &amp;= 3, \quad E_{1z} = 5 \\ \epsilon_0 E_{1y} &amp;= 2\epsilon_0 \times 4 \ \Rightarrow\  E_{1y} = 8 \\ \mathbf{E}_1 &amp;= \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5\ \text{V/m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the field on the other side of a boundary</p>
+<p>The plane <span class="math notranslate nohighlight">\(y = 0\)</span> separates free space, region 1 at <span class="math notranslate nohighlight">\(y &lt; 0\)</span>, from a dielectric
+with <span class="math notranslate nohighlight">\(\epsilon_r = 2\)</span>, region 2 at <span class="math notranslate nohighlight">\(y &gt; 0\)</span>. In the dielectric, next to the
+boundary, <span class="math notranslate nohighlight">\(\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 +
+\hat{\mathbf{z}}5\)</span> V/m. There is no free charge on the boundary. Find
+<span class="math notranslate nohighlight">\(\mathbf{E}_1\)</span> and the angle each field makes with the normal.</p>
+<p>The normal to the boundary is along <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>, so the <span class="math notranslate nohighlight">\(y\)</span> component of
+each field is its normal component, and the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> components together are
+its tangential component. The tangential condition copies the tangential
+components across: <span class="math notranslate nohighlight">\(E_{1x} = 3\)</span> and <span class="math notranslate nohighlight">\(E_{1z} = 5\)</span> V/m. The normal condition with
+<span class="math notranslate nohighlight">\(\rho_s = 0\)</span> equates the normal components of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_0 E_{1y} = 2\epsilon_0 E_{2y} = 2\epsilon_0 \times 4 \quad\Rightarrow\quad E_{1y} = 8\ \text{V/m}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\mathbf{E}_1 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5\)</span> V/m.
+The tangential component has magnitude <span class="math notranslate nohighlight">\(\sqrt{3^2 + 5^2} = \sqrt{34} = 5.83\)</span>
+V/m on both sides, so the angles from the normal are</p>
+<div class="math notranslate nohighlight">
+\[\theta_1 = \tan^{-1}\frac{5.83}{8} = 36.1^\circ, \qquad \theta_2 = \tan^{-1}\frac{5.83}{4} = 55.5^\circ\]</div>
+<p>As a check, <span class="math notranslate nohighlight">\(\tan 36.1^\circ / \tan 55.5^\circ = 0.729/1.458 = 0.500 =
+\epsilon_1/\epsilon_2\)</span>. The field leans further from the normal in the
+dielectric, the region with the larger permittivity.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-conductors">
+<div class="wrap docutils container">
+<p class="rubric">Conductors</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L24-conductor.svg"
+     alt="A conductor below a dielectric; positive surface charge sits on the conductor's surface, the field inside the conductor is zero, and the field outside points straight away from the surface"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>In electrostatics, <span class="math notranslate nohighlight">\(\mathbf{E} = 0\)</span> inside a conductor.</p></li>
+<li><p>Its charge sits on the surface: <span class="math notranslate nohighlight">\(\rho_v = \nabla\cdot\mathbf{D} = 0\)</span> inside.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A conductor is full of charges free to move. If any electric field existed
+inside it, that field would push those charges, and they would keep moving
+until their own field cancelled it. The static state, the one electrostatics
+describes, is reached when the field inside is zero everywhere. Then
+<span class="math notranslate nohighlight">\(\mathbf{D} = 0\)</span> inside too, and the differential form of Gauss’s law from
+Lesson 21 says the volume charge density there is <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = 0\)</span>.
+Any charge a conductor carries must therefore sit on its surface, as the
+surface charge density <span class="math notranslate nohighlight">\(\rho_s\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-at-a-conductor-s-surface">
+<div class="wrap docutils container">
+<p class="rubric">The Field at a Conductor’s Surface</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Region 2 is the conductor, so <span class="math notranslate nohighlight">\(\mathbf{E}_2 = \mathbf{D}_2 = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_{t1} &amp;= E_{t2} = 0 \\ D_{n1} &amp;= \rho_s \\ \mathbf{E}_1 &amp;= \hat{\mathbf{n}}\ \frac{\rho_s}{\epsilon_1} \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>The field leaves a conductor along the normal.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We apply both boundary conditions with the conductor as region 2. The
+tangential condition says the tangential field just outside equals the
+tangential field inside, which is zero. The normal condition, with
+<span class="math notranslate nohighlight">\(\mathbf{D}_2 = 0\)</span>, says the normal flux density just outside equals the
+surface charge density. So the field next to a conductor points straight away
+from the surface, and its strength gives the charge underneath it, or the
+reverse. Positive charge sends the field outward; negative charge, inward. A
+field of <span class="math notranslate nohighlight">\(100\ \text{kV/m}\)</span> next to a conductor in air means the surface
+carries <span class="math notranslate nohighlight">\(\rho_s = \epsilon_0 E = 8.854 \times 10^{-12} \times 10^5 =
+0.885\ \mu\text{C/m}^2\)</span>. This one result is how Lesson 25 finds the field
+inside a capacitor.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Number to remember</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span></p></td>
+<td class="text-left"><p>Unit normal, from region 2 into region 1</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Tangential condition</p></td>
+<td class="text-left"><p>From <span class="math notranslate nohighlight">\(\oint \mathbf{E}\cdot d\mathbf{l} = 0\)</span> on a thin loop</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E_{t1} = E_{t2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Normal condition</p></td>
+<td class="text-left"><p>From Gauss’s law on a thin pillbox</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(D_{n1} - D_{n2} = \rho_s\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Two dielectrics</p></td>
+<td class="text-left"><p>No free surface charge</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\epsilon_1 E_{n1} = \epsilon_2 E_{n2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Bending</p></td>
+<td class="text-left"><p>Angle from the normal</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\tan\theta_1}{\tan\theta_2} = \frac{\epsilon_1}{\epsilon_2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Conductor</p></td>
+<td class="text-left"><p>No field inside; charge on the surface</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{n}}\ \rho_s/\epsilon\)</span> outside</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L24_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L24_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 25</strong>: capacitance. The conductor condition gives the field from the charge, and the field gives the voltage.</p></li>
+<li><p>We derive the coaxial <span class="math notranslate nohighlight">\(C'\)</span> that Lesson 6 quoted.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today’s two conditions finish the toolkit of electrostatics: Coulomb’s law and
+Gauss’s law find the field from charges, the potential turns the field into
+voltage, and the boundary conditions carry the field across materials and up
+to conductors. Lesson 25 puts the pieces together to find the <strong>capacitance</strong>
+of a pair of conductors from their geometry and the material between them. It
+works the parallel-plate capacitor, then the coaxial line, which gives the
+per-unit-length capacitance <span class="math notranslate nohighlight">\(C'\)</span> that Lesson 6 used without derivation, and
+finally a capacitor with two dielectric layers, where the normal condition
+decides which layer breaks down first.</p>
+<p>Before Lesson 25, read sections 5.23 and 5.24 of Ellingson, <em>Electromagnetics</em>,
+Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module02/L24-electric-boundary-conditions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

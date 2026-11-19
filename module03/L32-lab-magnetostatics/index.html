@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L32 - Magnetostatics Lab &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l32-magnetostatics-lab">
+<h1>L32 - Magnetostatics Lab<a class="headerlink" href="#l32-magnetostatics-lab" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Magnetostatics Lab</h1>
+<div class="title-rule"></div>
+<p>Today you compute the magnetic fields of Module 3 in Python, then wind a coil and measure its field.</p>
+<p>Lesson 32 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '7'">
+  <li>I can apply the Biot-Savart law to simple magnetostatic systems to find the magnetic field at an observation point.</li>
+  <li>I can articulate the meaning of both the integral form and point form of Gauss's Law for magnetism.</li>
+  <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
+  <li>I can apply the magnetic field boundary conditions to calculate magnetic fields on both sides of a material boundary.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lessons 28 through 30 found magnetic fields with pencil and paper, one
+symmetric geometry at a time. In Part A of this lab you hand the Biot-Savart
+law to a computer, build the fields of a wire, a loop, a pair of loops, and a
+solenoid by adding up short pieces of current, and check each against the
+result you derived. You also test Gauss’s law for magnetism and Ampere’s law on
+a grid. In Part B you wind a coil, measure the field on its axis with a Hall
+sensor, and compare the measurement with Part A. You work in a team of two or
+three and turn in one notebook.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Lesson</p></th>
+<th class="head text-left"><p>Result the lab checks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>28</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> of a finite wire and on a loop’s axis</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>28</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint \mathbf{B}\cdot d\mathbf{s} = 0\)</span>, <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>29</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span>; <span class="math notranslate nohighlight">\(H = I/(2\pi\rho)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>30</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H = nI\)</span> inside a long solenoid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each part of the lab reproduces a result from Module 3. Lesson 28 integrated
+the Biot-Savart law along a finite wire and around a loop, and showed that
+magnetic field lines close, so the flux of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> out of any closed
+surface is zero. Lesson 29 derived Ampere’s law and the field of an infinite
+wire, which the finite wire approaches when it is long. Lesson 30 used Ampere’s
+law for the long solenoid and added up loops for a finite one.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-biot-savart-law-as-a-sum">
+<div class="wrap docutils container">
+<p class="rubric">The Biot-Savart Law as a Sum</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\mathbf{H} \approx \sum_{k=1}^{M} \frac{I\ \Delta\mathbf{l}_k\times\mathbf{R}_k}{4\pi R_k^3}\]</div>
+<ul class="simple">
+<li><p>Each piece’s current sits at its center.</p></li>
+<li><p>More pieces, smaller error, as long as each piece is short compared with <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The notebook replaces Lesson 28’s integral with a sum. It splits a wire into
+<span class="math notranslate nohighlight">\(M\)</span> straight pieces, treats each piece’s current element <span class="math notranslate nohighlight">\(I\ \Delta\mathbf{l}_k\)</span>
+as if it sat at the piece’s center, and adds the contributions, with
+<span class="math notranslate nohighlight">\(\mathbf{R}_k\)</span> the vector from that center to the field point. As <span class="math notranslate nohighlight">\(M\)</span> grows the
+sum approaches the integral. The approximation is good only when a piece is
+short compared with its distance to the field point, so a point close to the
+wire needs more pieces; you measure how many in Part A1. NumPy evaluates each
+piece’s contribution at every field point at once, so the only loop is over
+the pieces.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-pre-lab-predictions">
+<div class="wrap docutils container">
+<p class="rubric">Pre-Lab: Predictions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Flat coil: <span class="math notranslate nohighlight">\(N = 100\)</span>, <span class="math notranslate nohighlight">\(a = 2.0\ \text{cm}\)</span>, <span class="math notranslate nohighlight">\(I = 1.0\ \text{A}\)</span></p>
+<div class="math notranslate nohighlight">
+\[B(z) = \frac{\mu_0 N I a^2}{2\left(a^2 + z^2\right)^{3/2}}\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(z\)</span> (cm)</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-center"><p>2</p></th>
+<th class="head text-center"><p>4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(B\)</span> (mT)</p></td>
+<td class="text-center"><p>3.14</p></td>
+<td class="text-center"><p>1.11</p></td>
+<td class="text-center"><p>0.281</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Work the predictions before the lab period. The coil’s 100 turns sit close
+together, so on its axis they act like a single loop carrying <span class="math notranslate nohighlight">\(NI\)</span>.
+Lesson 28’s on-axis field, multiplied by <span class="math notranslate nohighlight">\(N\)</span> and by <span class="math notranslate nohighlight">\(\mu_0\)</span> to give <span class="math notranslate nohighlight">\(B\)</span>, is the
+formula above. At the center,</p>
+<div class="math notranslate nohighlight">
+\[B(0) = \frac{\mu_0 N I}{2a} = \frac{(4\pi\times10^{-7})(100)(1.0)}{2(0.020)} = 3.14\ \text{mT},\]</div>
+<p>and at <span class="math notranslate nohighlight">\(z = a\)</span> the factor <span class="math notranslate nohighlight">\((a^2 + z^2)^{3/2}\)</span> grows by <span class="math notranslate nohighlight">\(2^{3/2}\)</span>, so the field
+falls to 35% of its center value. The notebook also asks for the sensor’s
+output and the coil’s resistance; both are on later frames.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-helmholtz-pair">
+<div class="wrap docutils container">
+<p class="rubric">A Helmholtz Pair</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Two loops at <span class="math notranslate nohighlight">\(z = \pm a/2\)</span>, each carrying <span class="math notranslate nohighlight">\(I\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H_z(0) &amp;= 2\ \frac{I a^2}{2\left(a^2 + a^2/4\right)^{3/2}} \\ &amp;= \frac{I a^2}{\left(5/4\right)^{3/2} a^3} \\ &amp;= \left(\frac{4}{5}\right)^{3/2}\frac{I}{a} = 0.716\ \frac{I}{a} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Two identical loops on one axis, a distance <span class="math notranslate nohighlight">\(d\)</span> apart, both carrying <span class="math notranslate nohighlight">\(I\)</span> the
+same way, make a field that is unusually uniform near the middle when <span class="math notranslate nohighlight">\(d = a\)</span>.
+That arrangement is a <strong>Helmholtz pair</strong>, and laboratories use it to calibrate
+magnetic sensors. The center field is the sum of two of Lesson 28’s on-axis
+fields, each evaluated at <span class="math notranslate nohighlight">\(z = a/2\)</span>: the <span class="math notranslate nohighlight">\(a^2\)</span> in the numerator and the
+<span class="math notranslate nohighlight">\(a^3\)</span> that comes out of the denominator leave <span class="math notranslate nohighlight">\((4/5)^{3/2} I/a\)</span>. For
+<span class="math notranslate nohighlight">\(a = 2\ \text{cm}\)</span> and <span class="math notranslate nohighlight">\(I = 1\ \text{A}\)</span> that is <span class="math notranslate nohighlight">\(35.8\ \text{A/m}\)</span>. In Part A3
+you plot the axial field for spacings of <span class="math notranslate nohighlight">\(a/2\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, and <span class="math notranslate nohighlight">\(2a\)</span>: the close pair
+peaks at the center, the far pair dips there, and at <span class="math notranslate nohighlight">\(d = a\)</span> the field stays
+within 1% of its center value for <span class="math notranslate nohighlight">\(\vert z\vert &lt; 0.62\ \text{cm}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-gauss-s-law-for-magnetism-on-a-grid">
+<div class="wrap docutils container">
+<p class="rubric">Gauss’s Law for Magnetism on a Grid</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Two long wires along <span class="math notranslate nohighlight">\(z\)</span>: <span class="math notranslate nohighlight">\(\partial/\partial z = 0\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[\nabla\cdot\mathbf{B} = \frac{\partial B_x}{\partial x} + \frac{\partial B_y}{\partial y}\]</div>
+<p>Around any square: flux of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is 0; <span class="math notranslate nohighlight">\(\oint \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span>.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Part A5 puts two long wires on a grid in the <span class="math notranslate nohighlight">\(x\)</span>–<span class="math notranslate nohighlight">\(y\)</span> plane, <span class="math notranslate nohighlight">\(3\ \text{A}\)</span> out
+of the page and <span class="math notranslate nohighlight">\(2\ \text{A}\)</span> into it, each with Lesson 29’s field. A long
+wire’s field is the same in every plane of constant <span class="math notranslate nohighlight">\(z\)</span>, so the derivative
+along <span class="math notranslate nohighlight">\(z\)</span> is zero and the two terms on the grid are the whole divergence. The
+notebook shows that they cancel to the size of the grid’s error. It then
+integrates around squares in the plane. The circulation of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> counts
+the current inside, with its sign: <span class="math notranslate nohighlight">\(3\ \text{A}\)</span>, <span class="math notranslate nohighlight">\(-2\ \text{A}\)</span>, <span class="math notranslate nohighlight">\(1\ \text{A}\)</span>,
+or <span class="math notranslate nohighlight">\(0\)</span>. The flux of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> out through every square is zero, even with a
+wire inside, because every field line that leaves the square comes back in.
+That is the difference from Lesson 26, where the flux of <span class="math notranslate nohighlight">\(\epsilon_0\mathbf{E}\)</span>
+counted the charge inside.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-loop-s-cross-section">
+<div class="wrap docutils container">
+<p class="rubric">The Loop’s Cross Section</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>In the <span class="math notranslate nohighlight">\(x\)</span>–<span class="math notranslate nohighlight">\(z\)</span> plane through the loop’s axis, a grid misses <span class="math notranslate nohighlight">\(\partial H_y/\partial y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\nabla\cdot\mathbf{H} = \frac{\partial H_\rho}{\partial\rho} + \frac{H_\rho}{\rho} + \frac{\partial H_z}{\partial z}\]</div>
+<p>The missing term is <span class="math notranslate nohighlight">\(H_x/x\)</span>.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The same test on the loop’s field fails at first. The loop’s field changes in
+all three directions, and a grid in one plane cannot take the derivative across
+the plane. Lesson 17’s divergence in cylindrical coordinates shows what is
+missing. The field is symmetric about the axis, so it has no <span class="math notranslate nohighlight">\(\phi\)</span> component
+and no <span class="math notranslate nohighlight">\(\phi\)</span> dependence, and the divergence is
+<span class="math notranslate nohighlight">\(\frac{1}{\rho}\frac{\partial(\rho H_\rho)}{\partial\rho} + \frac{\partial H_z}{\partial z}\)</span>.
+Expanding the product gives the three terms above. In the <span class="math notranslate nohighlight">\(x\)</span>–<span class="math notranslate nohighlight">\(z\)</span> plane,
+<span class="math notranslate nohighlight">\(\rho = \vert x\vert\)</span> and <span class="math notranslate nohighlight">\(H_\rho\)</span> is <span class="math notranslate nohighlight">\(H_x\)</span> with the sign of <span class="math notranslate nohighlight">\(x\)</span>, so the grid’s
+two terms supply <span class="math notranslate nohighlight">\(\partial H_\rho/\partial\rho\)</span> and <span class="math notranslate nohighlight">\(\partial H_z/\partial z\)</span>
+and leave out <span class="math notranslate nohighlight">\(H_x/x\)</span>. Adding it makes the divergence vanish. This is the trap
+of Lesson 26 again: a grid in one plane gives the whole divergence only when
+the field does not change across the plane.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-how-a-hall-sensor-measures-b">
+<div class="wrap docutils container">
+<p class="rubric">How a Hall Sensor Measures B</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} q E_H &amp;= q u B \\ V_H = E_H w &amp;= u B w \\ I = n q u\ w t \ \Rightarrow\ V_H &amp;= \frac{I B}{n q t} \end{aligned}\end{split}\]</div>
+<p>Sensor output: <span class="math notranslate nohighlight">\(V = V_q + S B\)</span></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A Hall sensor is a thin slab of semiconductor, of width <span class="math notranslate nohighlight">\(w\)</span> and thickness <span class="math notranslate nohighlight">\(t\)</span>,
+carrying a bias current <span class="math notranslate nohighlight">\(I\)</span>. Its carriers, of charge <span class="math notranslate nohighlight">\(q\)</span> and density <span class="math notranslate nohighlight">\(n\)</span>, drift
+at velocity <span class="math notranslate nohighlight">\(u\)</span>, and a field <span class="math notranslate nohighlight">\(B\)</span> across the slab pushes them sideways with
+Lesson 28’s force <span class="math notranslate nohighlight">\(q\mathbf{u}\times\mathbf{B}\)</span>. They pile up on one edge until
+the electric field <span class="math notranslate nohighlight">\(E_H\)</span> of the piled-up charge pushes back just as hard, which
+gives the first line. Across the width that field makes the Hall voltage
+<span class="math notranslate nohighlight">\(V_H = uBw\)</span>. Lesson 27’s <span class="math notranslate nohighlight">\(J = \rho_v u = nqu\)</span>, times the slab’s cross section
+<span class="math notranslate nohighlight">\(wt\)</span>, gives the bias current, and solving it for <span class="math notranslate nohighlight">\(u\)</span> gives the last line: the
+Hall voltage is proportional to <span class="math notranslate nohighlight">\(B\)</span>. The chip amplifies it and adds an offset,
+so its output is <span class="math notranslate nohighlight">\(V_q + SB\)</span>, with <span class="math notranslate nohighlight">\(V_q \approx 2.5\ \text{V}\)</span> and a sensitivity
+<span class="math notranslate nohighlight">\(S\)</span> of about <span class="math notranslate nohighlight">\(14\ \text{mV/mT}\)</span> for the SS49E or <span class="math notranslate nohighlight">\(50\ \text{mV/mT}\)</span> for the
+A1324. It responds only to the component of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> through its face.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-coil-you-wind">
+<div class="wrap docutils container">
+<p class="rubric">The Coil You Wind</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L32-setup.svg"
+     alt="Side view of a coil of N turns wound on the end of a tube of radius a, with a Hall sensor on the coil's axis a distance z away, sliding along a ruler marked in centimeters, and the axial field B sub z"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[B_z = \frac{V_\text{on} - V_\text{off}}{S}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each team winds 100 turns of 26 AWG magnet wire on a tube about 4 cm across,
+in a band about 1 cm wide, and slides the sensor along the coil’s axis on a
+ruler. At each position you read the sensor with the coil off, then on. The
+offset <span class="math notranslate nohighlight">\(V_q\)</span> and Earth’s field, about <span class="math notranslate nohighlight">\(0.05\ \text{mT}\)</span>, are the same in both
+readings, so the difference is the coil’s field alone. At the center the coil’s
+<span class="math notranslate nohighlight">\(3.14\ \text{mT}\)</span> raises an SS49E’s output by <span class="math notranslate nohighlight">\(14 \times 3.14 = 44\ \text{mV}\)</span>;
+at <span class="math notranslate nohighlight">\(z = 4\ \text{cm}\)</span> the rise is <span class="math notranslate nohighlight">\(3.9\ \text{mV}\)</span>, still well above a
+millivolt meter’s <span class="math notranslate nohighlight">\(0.1\ \text{mV}\)</span> step. Part A’s Biot-Savart sum, with your
+coil’s measured radius, gives the curve to compare against.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-heat-and-safety">
+<div class="wrap docutils container">
+<p class="rubric">Heat and Safety</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\ell = N\ 2\pi a = 12.6\ \text{m}, \qquad R = (12.6)(0.134) = 1.68\ \Omega\]</div>
+<div class="math notranslate nohighlight">
+\[P = I^2 R = 1.7\ \text{W at } 1.0\ \text{A}\]</div>
+<ul class="simple">
+<li><p>Current on only while you read.</p></li>
+<li><p>Sand the enamel off each end.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The wire’s length is the number of turns times the circumference, and 26 AWG
+copper has <span class="math notranslate nohighlight">\(0.134\ \Omega\)</span> per meter, so the coil is about <span class="math notranslate nohighlight">\(1.7\ \Omega\)</span> and
+needs about <span class="math notranslate nohighlight">\(1.7\ \text{V}\)</span> for <span class="math notranslate nohighlight">\(1.0\ \text{A}\)</span>. It dissipates <span class="math notranslate nohighlight">\(1.7\ \text{W}\)</span>
+in a small bundle of wire and warms within a few minutes. Set the supply’s
+current limit to <span class="math notranslate nohighlight">\(1.0\ \text{A}\)</span> before you connect the coil, turn the current
+on only while you take a reading, and turn the supply off if the coil is too
+warm to hold. Magnet wire carries a coat of enamel that does not conduct, so sand
+the last centimeter of each end to bare copper before you connect it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-measurement-and-prediction-differ">
+<div class="wrap docutils container">
+<p class="rubric">Where Measurement and Prediction Differ</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p>The Hall element sits about a millimeter or two behind the sensor’s face.</p></li>
+<li><p>100 turns make a band, so the effective radius exceeds the tube’s.</p></li>
+<li><p>The notebook fits both from your data.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Two dimensions are hard to know to better than a couple of millimeters. The
+sensing element is inside the package, so the true <span class="math notranslate nohighlight">\(z\)</span> is larger than the
+ruler says, which lowers the readings most at 1 to 2 cm from the coil, where
+the field changes fastest. The turns stack in layers on the tube, so their mean
+radius is larger than the tube’s, which lowers the field at the center and
+raises it far away. The notebook tries a range of sensor offsets and coil radii
+and reports the pair that fits your data best; you judge whether the pair is
+physically reasonable for your sensor and coil.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-teams-and-the-report">
+<div class="wrap docutils container">
+<p class="rubric">Teams and the Report</p>
+<p>Work in a team of two or three, and submit one report per team.</p>
+<ul class="simple">
+<li><p>Open the notebook in Colab (link below), choose <strong>File</strong>, then <strong>Save a copy
+in Drive</strong>, and share the copy with your teammates. Or download it and run
+it locally with Python 3, NumPy, and Matplotlib.</p></li>
+<li><p>Run the cells in order. A cell marked <code class="docutils literal notranslate"><span class="pre">TODO</span></code> is yours to finish; the rest are
+given. Answer every <strong>Answer</strong> cell.</p></li>
+<li><p>Before you submit, choose <strong>Runtime</strong>, then <strong>Run all</strong>, so every output is
+current. Put every member’s name and a Documentation line in the first
+cell.</p></li>
+<li><p>Export to PDF and upload it to Gradescope as one team submission, adding
+every member.</p></li>
+<li><p>For Part B: about 13 m of 26 AWG magnet wire, a tube about 4 cm in diameter,
+sandpaper, tape, the bench DC supply, two digital multimeters, a linear Hall
+sensor (SS49E or A1324) with a 5 V supply, and a ruler. For the optional
+solenoid, about 25 m more wire.</p></li>
+</ul>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-lab-notebook">
+<div class="wrap docutils container">
+<p class="rubric">Lab Notebook</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="https://colab.research.google.com/github/livethisdream/ece343/blob/main/book/extras/labs/ECE343_Lab_L32_Magnetostatics.ipynb" target="_blank" rel="noopener">Open the Magnetostatics Lab notebook in Google Colab</a></p></li>
+<li><p><a class="doc-link" href="../../labs/ECE343_Lab_L32_Magnetostatics.ipynb" download>Download the notebook (.ipynb)</a></p></li>
+</ul>
+<div class="depth docutils container">
+<p>The notebook is the lab packet and the turn-in document. It holds the
+instructions, the code you finish, the data you record, and the questions you
+answer. Colab runs it in the browser with nothing to install; a local copy
+needs Python 3 with NumPy and Matplotlib. Work the pre-lab predictions before
+the period.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 33</strong>: a changing magnetic flux drives a voltage around a loop: Faraday’s law.</p></li>
+<li><p><strong>Module 4</strong>: the static laws become Maxwell’s equations.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Everything in Module 3 held still: steady currents and the fields they make.
+Lesson 33 lets the field change in time. A changing flux through the coil you
+wound today would drive a voltage around it, which is Faraday’s law, and a
+changing electric field acts as a current in Ampere’s law. With those two
+changes, the four static laws of Modules 2 and 3 become Maxwell’s equations,
+and the fields can travel as a wave.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L32-lab-magnetostatics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

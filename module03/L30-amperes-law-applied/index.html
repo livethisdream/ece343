@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L30 - Ampere’s Law Applied &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l30-ampere-s-law-applied">
+<h1>L30 - Ampere’s Law Applied<a class="headerlink" href="#l30-ampere-s-law-applied" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Ampere's Law Applied</h1>
+<div class="title-rule"></div>
+<p>Today we find the field inside a coax, a solenoid, and a toroid, and derive the inductance per meter of a coaxial line.</p>
+<p>Lesson 30 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '7'; counter-reset: lo 2">
+  <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 29 derived Ampere’s law and used it on a line current and a round wire.
+Today we apply the same method to four current distributions that engineers
+build on purpose: the <strong>coaxial line</strong>, a <strong>sheet of current</strong>, the
+<strong>solenoid</strong>, and the <strong>toroid</strong>. Each has enough symmetry for Ampere’s law to
+give the field in a few lines. We then integrate the coaxial field to find the
+cable’s inductance per meter, <span class="math notranslate nohighlight">\(L'\)</span>. Lesson 6 quoted <span class="math notranslate nohighlight">\(L'\)</span> for RG-58 without
+derivation, and Lesson 25 derived the capacitance per meter, <span class="math notranslate nohighlight">\(C'\)</span>; with both
+in hand, we finish the derivation of the characteristic impedance
+<span class="math notranslate nohighlight">\(Z_0 = 51.7\ \Omega\)</span>. The lesson closes with the four laws of static fields
+side by side.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 29: Ampere’s law</strong></p>
+<div class="math notranslate nohighlight">
+\[\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\]</div>
+<ol class="arabic simple">
+<li><p>Symmetry fixes the direction of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>.</p></li>
+<li><p>Choose a path where <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is tangent and constant, or perpendicular.</p></li>
+<li><p>Evaluate both sides and solve for <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 29 showed that the circulation of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> around any closed path
+equals the current through it, with the direction of travel and the positive
+direction of current tied together by the right-hand rule. The law gives the
+field only when symmetry tells us the direction of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> and lets us
+pick an <strong>Amperian path</strong> on which <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is either tangent with a
+constant magnitude or perpendicular. For a line current that path was a
+circle, and the result was <span class="math notranslate nohighlight">\(H = I/(2\pi\rho)\)</span>. Every case today follows the
+same three steps; only the symmetry and the path change.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-coaxial-line">
+<div class="wrap docutils container">
+<p class="rubric">The Coaxial Line</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-coax.svg"
+     alt="Cross section of a coaxial line with current out of the page in the inner conductor and into the page in the shield, dashed Amperian circles inside the inner conductor, between the conductors, and outside the shield, and a plot of H against radius: rising linearly inside a, falling as one over rho between a and b, and zero beyond b"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}H_\phi = \begin{cases} \dfrac{I\rho}{2\pi a^2}, &amp; \rho &lt; a \\ \dfrac{I}{2\pi\rho}, &amp; a &lt; \rho &lt; b \\ 0, &amp; \rho &gt; b \end{cases}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A coaxial line carries a current <span class="math notranslate nohighlight">\(I\)</span> along <span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span> in its inner
+conductor, of radius <span class="math notranslate nohighlight">\(a\)</span>, and the same current back along <span class="math notranslate nohighlight">\(-\hat{\mathbf{z}}\)</span>
+in its shield, of radius <span class="math notranslate nohighlight">\(b\)</span>. We treat the shield as a thin tube. The line has
+the symmetry of the line current in Lesson 29, so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> points along
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> and depends only on <span class="math notranslate nohighlight">\(\rho\)</span>, and the Amperian path is a
+circle of radius <span class="math notranslate nohighlight">\(\rho\)</span>: <span class="math notranslate nohighlight">\(2\pi\rho\ H_\phi = I_\text{encl}\)</span>. Only the current
+enclosed changes from one region to the next.</p>
+<ul class="simple">
+<li><p><strong>Inside the inner conductor</strong>, <span class="math notranslate nohighlight">\(\rho &lt; a\)</span>: at DC the current is uniform, and
+the circle encloses <span class="math notranslate nohighlight">\(I\rho^2/a^2\)</span>, exactly as for the round wire of
+Lesson 29.</p></li>
+<li><p><strong>Between the conductors</strong>, <span class="math notranslate nohighlight">\(a &lt; \rho &lt; b\)</span>: the circle encloses <span class="math notranslate nohighlight">\(I\)</span>, and the
+field is that of a line current.</p></li>
+<li><p><strong>Outside the shield</strong>, <span class="math notranslate nohighlight">\(\rho &gt; b\)</span>: the circle encloses <span class="math notranslate nohighlight">\(I - I = 0\)</span>, and the
+field is zero.</p></li>
+</ul>
+<p>The magnetic field, like the electric field of Lesson 20, is nonzero only
+inside the cable. At high frequency the current crowds into a thin layer at
+the outer surface of the inner conductor, the skin effect that Lesson 27
+defined, with a skin depth of <span class="math notranslate nohighlight">\(6.6\ \mu\)</span>m in copper at 100 MHz. The field
+inside the inner conductor then disappears, while the field between the
+conductors stays the same because the circle still encloses <span class="math notranslate nohighlight">\(I\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-field-in-rg-58">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The Field in RG-58</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(I = 1\)</span> A, <span class="math notranslate nohighlight">\(a = 0.405\)</span> mm, <span class="math notranslate nohighlight">\(b = 1.475\)</span> mm:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H(a) &amp;= \frac{1}{2\pi \times 0.405\times10^{-3}} = 393\ \text{A/m} \\ H(b) &amp;= H(a)\ \frac{a}{b} = 108\ \text{A/m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the magnetic field inside RG-58</p>
+<p>RG-58 from Lesson 6 has <span class="math notranslate nohighlight">\(a = 0.405\)</span> mm and <span class="math notranslate nohighlight">\(b = 1.475\)</span> mm. With <span class="math notranslate nohighlight">\(I = 1\)</span> A in
+the inner conductor and back in the shield, the field between the conductors
+is</p>
+<div class="math notranslate nohighlight">
+\[H(\rho) = \frac{I}{2\pi\rho}\]</div>
+<p>At the surface of the inner conductor,</p>
+<div class="math notranslate nohighlight">
+\[H(a) = \frac{1}{2\pi \times 0.405\times10^{-3}} = 393\ \text{A/m}, \qquad B(a) = \mu_0 H(a) = 4.94\times10^{-4}\ \text{T}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(H \propto 1/\rho\)</span>, the field at the shield is smaller by the ratio of the
+radii:</p>
+<div class="math notranslate nohighlight">
+\[H(b) = 393 \times \frac{0.405}{1.475} = 108\ \text{A/m}\]</div>
+<p>Outside the shield the field is zero, so a coax carrying 1 A does not deflect
+a compass held against its jacket, while a single wire carrying 1 A gives
+<span class="math notranslate nohighlight">\(20\ \mu\text{T}\)</span> at 1 cm, from Lesson 29’s example scaled by a tenth.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-an-infinite-sheet-of-current">
+<div class="wrap docutils container">
+<p class="rubric">An Infinite Sheet of Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-sheet.svg"
+     alt="Edge view of a sheet of current coming out of the page, with H pointing one way above the sheet and the opposite way below it, and a rectangular Amperian path of width w crossing the sheet"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= \underbrace{\vert\mathbf{H}\vert\ w}_\text{top} + \underbrace{\vert\mathbf{H}\vert\ w}_\text{bottom} + \underbrace{0}_\text{sides} = J_s w \\ \mathbf{H} &amp;= \mp\hat{\mathbf{y}}\ \frac{J_s}{2} \quad (z \gtrless 0) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>An infinite sheet in the plane <span class="math notranslate nohighlight">\(z = 0\)</span> carries the surface current density of
+Lesson 28, <span class="math notranslate nohighlight">\(\mathbf{J}_s = \hat{\mathbf{x}}\ J_s\)</span>, in amperes per meter of
+width. In the figure, <span class="math notranslate nohighlight">\(x\)</span> points out of the page, <span class="math notranslate nohighlight">\(y\)</span> to the right, and <span class="math notranslate nohighlight">\(z\)</span>
+up. Each strip of the sheet is a line current along <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span>, so by
+the Biot-Savart law <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> has no <span class="math notranslate nohighlight">\(x\)</span> component, and the strip at the
+origin gives <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\times\hat{\mathbf{z}} = -\hat{\mathbf{y}}\)</span>
+at a point above it. Two strips at <span class="math notranslate nohighlight">\(\pm y\)</span> give <span class="math notranslate nohighlight">\(z\)</span> components
+that cancel, so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> has no <span class="math notranslate nohighlight">\(z\)</span> component either. Sliding the sheet in
+<span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span> leaves it unchanged, so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> depends at most on <span class="math notranslate nohighlight">\(z\)</span>, and
+reflecting the picture through the sheet shows that <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> has the same
+magnitude on both sides and opposite directions.</p>
+<p>The matching path is a rectangle of width <span class="math notranslate nohighlight">\(w\)</span> that crosses the sheet,
+traversed counterclockwise as drawn, so that by the right-hand rule its normal
+points out of the page, along the current. The top runs along
+<span class="math notranslate nohighlight">\(-\hat{\mathbf{y}}\)</span>, the same direction as <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> above the sheet, and
+the bottom runs along <span class="math notranslate nohighlight">\(+\hat{\mathbf{y}}\)</span>, the same direction as <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>
+below it, so each contributes <span class="math notranslate nohighlight">\(\vert\mathbf{H}\vert\ w\)</span>; along the sides,
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is perpendicular and contributes nothing. The rectangle encloses a width <span class="math notranslate nohighlight">\(w\)</span> of the sheet, or a
+current <span class="math notranslate nohighlight">\(J_s w\)</span>. The width cancels, and so does the height of the rectangle:
+the field of an infinite sheet of current is the same at every distance from
+it, <span class="math notranslate nohighlight">\(J_s/2\)</span>, just as the electric field of a sheet of charge in Lesson 20 was
+<span class="math notranslate nohighlight">\(\rho_s/(2\epsilon)\)</span>, pointing along <span class="math notranslate nohighlight">\(-\hat{\mathbf{y}}\)</span> above the sheet and
+<span class="math notranslate nohighlight">\(+\hat{\mathbf{y}}\)</span> below it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-long-solenoid">
+<div class="wrap docutils container">
+<p class="rubric">The Long Solenoid</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-solenoid.svg"
+     alt="Side section of a long solenoid with turns coming out of the page along the top and going in along the bottom, H pointing along the axis inside, and a rectangular Amperian path with one long side inside the coil and one outside"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= H_z \ell' + 0 + 0 + 0 = n\ell' I \\ \mathbf{H} &amp;= \hat{\mathbf{z}}\ nI = \hat{\mathbf{z}}\ \frac{NI}{\ell} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>solenoid</strong> is a wire wound in a helix of radius <span class="math notranslate nohighlight">\(a\)</span>, with <span class="math notranslate nohighlight">\(N\)</span> turns over a
+length <span class="math notranslate nohighlight">\(\ell\)</span>, or <span class="math notranslate nohighlight">\(n = N/\ell\)</span> turns per meter, carrying a current <span class="math notranslate nohighlight">\(I\)</span>. For a
+coil much longer than its radius, the turns form a cylinder of current, and
+away from the ends <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> does not depend on <span class="math notranslate nohighlight">\(z\)</span>. It has no radial part:
+a closed cylinder on the axis has the same flux through its two end caps, so
+by Gauss’s law for magnetism (Lesson 28) the flux through its side, and with
+it <span class="math notranslate nohighlight">\(H_\rho\)</span>, is zero. The helix also carries a net current <span class="math notranslate nohighlight">\(I\)</span> along the axis,
+one wire’s worth, which adds a small <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> field that we
+neglect next to <span class="math notranslate nohighlight">\(nI\)</span>. So <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> points along the axis. Next we show that
+the field outside is zero. The lower faint rectangle in the figure has both
+long sides outside the coil and encloses no current, so the field along its
+two long sides must be equal, wherever they sit. The field far from the coil is
+zero, so the field everywhere outside is zero. The faint rectangle inside the
+coil encloses no current either, so the field inside is the same at every
+radius.</p>
+<p>Now we take a rectangle with one long side of length <span class="math notranslate nohighlight">\(\ell'\)</span> inside the coil
+and one outside, as in the figure. The inside side contributes <span class="math notranslate nohighlight">\(H_z\ell'\)</span>, the
+outside side contributes nothing because the field there is zero, and the
+short sides are perpendicular to the field inside and lie in zero field
+outside. The rectangle encloses <span class="math notranslate nohighlight">\(n\ell'\)</span> turns, each carrying <span class="math notranslate nohighlight">\(I\)</span>. The length
+<span class="math notranslate nohighlight">\(\ell'\)</span> cancels, and the field inside is <span class="math notranslate nohighlight">\(nI\)</span>. The right-hand rule sets its
+direction: curl the fingers with the current in the turns, and the thumb
+points along <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-solenoid-of-finite-length">
+<div class="wrap docutils container">
+<p class="rubric">A Solenoid of Finite Length</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-finite-solenoid.svg"
+     alt="Side section of a solenoid from minus l over 2 to l over 2, with a shaded slice of thickness dz prime at z prime holding n dz prime turns, a field point z on the axis, and the distance u equals z minus z prime between them"
+     style="max-width: 460px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H_z(z) &amp;= \int_{-\ell/2}^{\ell/2} \frac{nI a^2\ dz'}{2\left[a^2 + (z - z')^2\right]^{3/2}} \\ &amp;= \frac{nI}{2}\left[\frac{z + \ell/2}{\sqrt{(z + \ell/2)^2 + a^2}} - \frac{z - \ell/2}{\sqrt{(z - \ell/2)^2 + a^2}}\right] \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Ampere’s law gave the field of an infinitely long solenoid. A real coil has
+ends, and to see how long it must be for <span class="math notranslate nohighlight">\(nI\)</span> to hold, we add up loops.
+Lesson 28 found the field on the axis of a single loop of radius <span class="math notranslate nohighlight">\(a\)</span> carrying
+<span class="math notranslate nohighlight">\(I\)</span>, at a distance <span class="math notranslate nohighlight">\(u\)</span> from its plane: <span class="math notranslate nohighlight">\(H = Ia^2/[2(a^2 + u^2)^{3/2}]\)</span>. A slice
+of the solenoid of thickness <span class="math notranslate nohighlight">\(dz'\)</span> at position <span class="math notranslate nohighlight">\(z'\)</span> holds <span class="math notranslate nohighlight">\(n\ dz'\)</span> turns, and
+its distance from the field point is <span class="math notranslate nohighlight">\(u = z - z'\)</span>, as in the figure. Summing
+the loop field over every slice gives the first line. Substituting <span class="math notranslate nohighlight">\(u\)</span>, so that
+<span class="math notranslate nohighlight">\(dz' = -du\)</span>, the integral is a standard form,</p>
+<div class="math notranslate nohighlight">
+\[\int \frac{a^2\ du}{(a^2 + u^2)^{3/2}} = \frac{u}{\sqrt{a^2 + u^2}}\]</div>
+<p>which differentiating the right side confirms. Evaluating between the limits
+<span class="math notranslate nohighlight">\(u = z + \ell/2\)</span> and <span class="math notranslate nohighlight">\(u = z - \ell/2\)</span> gives the second line. At the center,
+<span class="math notranslate nohighlight">\(z = 0\)</span>, the result is <span class="math notranslate nohighlight">\(nI\ \ell/\sqrt{\ell^2 + 4a^2}\)</span>, which goes to <span class="math notranslate nohighlight">\(nI\)</span> as
+<span class="math notranslate nohighlight">\(\ell/a\)</span> grows. At either end, <span class="math notranslate nohighlight">\(z = \pm\ell/2\)</span>, it goes to <span class="math notranslate nohighlight">\(nI/2\)</span>: half the
+turns lie on one side of the end, and none on the other.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-explore-how-long-is-long">
+<div class="wrap docutils container">
+<p class="rubric">Explore: How Long Is Long?</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/solenoid.html"
+        width="100%" height="456"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="A solenoid seen from the side and the magnetic field on its axis against position, as the length of the coil changes"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget plots the finite-solenoid formula along the axis, in units of the
+long-solenoid value <span class="math notranslate nohighlight">\(nI\)</span>, with the coil drawn above the plot on the same
+horizontal scale. The dashed line marks <span class="math notranslate nohighlight">\(nI\)</span>. Start at <span class="math notranslate nohighlight">\(\ell/a = 4\)</span>: the
+center reaches 0.894 of <span class="math notranslate nohighlight">\(nI\)</span>, and the end, marked by the second dot, reaches
+0.485. Lengthen the coil, and the plateau widens and rises toward <span class="math notranslate nohighlight">\(nI\)</span>; at
+<span class="math notranslate nohighlight">\(\ell/a = 10\)</span> the center is 0.981, 2% below <span class="math notranslate nohighlight">\(nI\)</span>. Once <span class="math notranslate nohighlight">\(\ell/a\)</span> is above about
+4, the end stays near one half; at <span class="math notranslate nohighlight">\(\ell/a = 1\)</span> it is 0.354. Shorten the coil to <span class="math notranslate nohighlight">\(\ell/a = 1\)</span>, and the center falls to
+0.447: a short, wide coil is closer to a single loop than to a solenoid, and
+Ampere’s law no longer gives its field.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-a-laboratory-solenoid">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: A Laboratory Solenoid</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(N = 500\)</span>, <span class="math notranslate nohighlight">\(\ell = 10\)</span> cm, <span class="math notranslate nohighlight">\(a = 1\)</span> cm, <span class="math notranslate nohighlight">\(I = 2\)</span> A:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} nI &amp;= \frac{500}{0.10} \times 2 = 10{,}000\ \text{A/m}, \qquad \mu_0 nI = 12.6\ \text{mT} \\ B(0) &amp;= 12.6\ \text{mT} \times \frac{0.10}{\sqrt{0.10^2 + 4\times0.01^2}} = 12.3\ \text{mT} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — a laboratory solenoid</p>
+<p>A coil of <span class="math notranslate nohighlight">\(N = 500\)</span> turns is wound over <span class="math notranslate nohighlight">\(\ell = 10\)</span> cm on a form of radius
+<span class="math notranslate nohighlight">\(a = 1\)</span> cm and carries <span class="math notranslate nohighlight">\(I = 2\)</span> A. The turns per meter are
+<span class="math notranslate nohighlight">\(n = 500/0.10 = 5000\ \text{m}^{-1}\)</span>, so the long-solenoid field is</p>
+<div class="math notranslate nohighlight">
+\[H = nI = 5000 \times 2 = 10{,}000\ \text{A/m}, \qquad B = \mu_0 H = 4\pi\times10^{-7} \times 10^4 = 12.6\ \text{mT}\]</div>
+<p>The coil is ten radii long, so the center field is smaller by the factor from
+the finite-solenoid formula:</p>
+<div class="math notranslate nohighlight">
+\[B(0) = 12.6 \times \frac{0.10}{\sqrt{0.10^2 + 4 \times 0.01^2}} = 12.6 \times 0.981 = 12.3\ \text{mT}\]</div>
+<p>At either end, the field is <span class="math notranslate nohighlight">\(6.25\)</span> mT, about half of <span class="math notranslate nohighlight">\(\mu_0 nI\)</span>. Both
+numbers are hundreds of times the Earth’s field of about <span class="math notranslate nohighlight">\(50\ \mu\text{T}\)</span>,
+which is why a small coil can align a compass, or a phone’s magnetometer, at
+several centimeters.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-toroid">
+<div class="wrap docutils container">
+<p class="rubric">The Toroid</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-toroid.svg"
+     alt="Top view of a toroid with N turns, current out of the page along the inner edge and into the page along the outer edge, and a dashed circular Amperian path of radius rho inside the core with H along it"
+     style="max-width: 300px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \text{inside the core:}&amp; \quad 2\pi\rho\ H_\phi = NI \ \Rightarrow\  \mathbf{H} = \hat{\boldsymbol{\phi}}\ \frac{NI}{2\pi\rho} \\ \text{outside the core:}&amp; \quad 2\pi\rho\ H_\phi = 0 \ \Rightarrow\  \mathbf{H} = 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A <strong>toroid</strong> is a solenoid bent into a ring: <span class="math notranslate nohighlight">\(N\)</span> turns wound around a
+donut-shaped core. Rotating the toroid about its axis leaves it unchanged,
+so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> depends only on <span class="math notranslate nohighlight">\(\rho\)</span> and, by the same argument as for the
+line current, points along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>. The Amperian path is a
+circle of radius <span class="math notranslate nohighlight">\(\rho\)</span> inside the core. Each turn crosses the flat disk inside
+that circle once, along the inner edge of the core, so the circle encloses a
+current <span class="math notranslate nohighlight">\(NI\)</span>. The two dotted circles in the figure enclose no net current: the
+one in the hole encloses no turns, and the one outside the whole toroid
+encloses each turn twice, once going up and once coming down. The field exists only inside the
+core.</p>
+<p>The field inside falls off as <span class="math notranslate nohighlight">\(1/\rho\)</span> across the core. For <span class="math notranslate nohighlight">\(N = 200\)</span> turns
+carrying <span class="math notranslate nohighlight">\(0.5\)</span> A, at <span class="math notranslate nohighlight">\(\rho = 2\)</span> cm, it is <span class="math notranslate nohighlight">\(200 \times 0.5/(2\pi \times 0.02) = 796\)</span>
+A/m, or <span class="math notranslate nohighlight">\(1.00\)</span> mT in air. Because a toroid keeps its field inside the core,
+transformers and inductors on toroidal cores neither leak flux into nearby
+circuits nor pick it up from them.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-inductance-per-meter-of-a-coax">
+<div class="wrap docutils container">
+<p class="rubric">Inductance Per Meter of a Coax</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L30-coax-flux.svg"
+     alt="A long section of a coaxial line with current one way in the inner conductor and back in the shield, and a rectangle of length l between the conductors that the magnetic flux crosses"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \Phi &amp;= \int_S \mathbf{B}\cdot d\mathbf{s} = \int_0^{\ell}\!\!\int_a^b \frac{\mu I}{2\pi\rho}\ d\rho\ dz = \frac{\mu I \ell}{2\pi}\ln\frac{b}{a} \\ L' &amp;= \frac{\Phi}{I\ell} = \frac{\mu}{2\pi}\ln\frac{b}{a} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>inductance</strong> of a circuit is the magnetic flux through the circuit per
+unit of current, <span class="math notranslate nohighlight">\(L = \Phi/I\)</span>, in henries. Lesson 33’s Faraday’s law turns a
+changing flux into the voltage <span class="math notranslate nohighlight">\(d\Phi/dt = L\ dI/dt\)</span> around the circuit, the
+same form as the <span class="math notranslate nohighlight">\(L'\ \partial i/\partial t\)</span> term in Lesson 3’s telegrapher’s
+equations, which is why the flux per amp is the line’s inductance. For a coax, the circuit is the
+current path out along the inner conductor and back along the shield, and the
+flux that links it crosses the flat strip between the two conductors, shown
+in the figure for a length <span class="math notranslate nohighlight">\(\ell\)</span>, with the flux symbols denser where <span class="math notranslate nohighlight">\(B\)</span> is
+larger, near the inner conductor. Between the conductors
+<span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span> points along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>, normal to
+the strip, with <span class="math notranslate nohighlight">\(B = \mu I/(2\pi\rho)\)</span>. The area element of the strip is
+<span class="math notranslate nohighlight">\(d\rho\ dz\)</span>, so the flux is a double integral: the <span class="math notranslate nohighlight">\(z\)</span> integral gives <span class="math notranslate nohighlight">\(\ell\)</span>
+and the <span class="math notranslate nohighlight">\(\rho\)</span> integral gives <span class="math notranslate nohighlight">\(\ln(b/a)\)</span>. Dividing by <span class="math notranslate nohighlight">\(I\)</span> and by <span class="math notranslate nohighlight">\(\ell\)</span> gives
+the inductance per meter. This is the <span class="math notranslate nohighlight">\(L'\)</span> that Lesson 6 quoted.</p>
+<p>We left out the flux inside the inner conductor, which adds an <strong>internal
+inductance</strong> at DC. There <span class="math notranslate nohighlight">\(H = I\rho/(2\pi a^2)\)</span>, from the coax frame, and the
+flux through a strip of width <span class="math notranslate nohighlight">\(d\rho\)</span> circles only the fraction <span class="math notranslate nohighlight">\(\rho^2/a^2\)</span>
+of the current, so it counts with that weight:</p>
+<div class="math notranslate nohighlight">
+\[L'_\text{int} = \frac{1}{I}\int_0^a \frac{\mu I\rho}{2\pi a^2}\ \frac{\rho^2}{a^2}\ d\rho = \frac{\mu}{2\pi a^4}\ \frac{a^4}{4} = \frac{\mu}{8\pi} = 50\ \text{nH/m}\]</div>
+<p>That is 19% of the 259 nH/m below, and it does not depend on the radius. At
+the frequencies where we use a coax as a transmission line, the skin effect of
+Lesson 27 confines the current to the conductor surfaces, the field inside the
+inner conductor vanishes, and <span class="math notranslate nohighlight">\(L'\)</span> above is the whole inductance.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-rg-58-line-constants">
+<div class="wrap docutils container">
+<p class="rubric">RG-58 Line Constants</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} L' &amp;= \frac{4\pi\times10^{-7}}{2\pi}\ln\frac{1.475}{0.405} = 2\times10^{-7} \times 1.293 = 259\ \text{nH/m} \\ Z_0 &amp;= \sqrt{\frac{L'}{C'}} = \sqrt{\frac{259\times10^{-9}}{96.8\times10^{-12}}} = 51.7\ \Omega \\ v_p &amp;= \frac{1}{\sqrt{L'C'}} = 2.00\times10^{8}\ \text{m/s} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>RG-58 has <span class="math notranslate nohighlight">\(a = 0.405\)</span> mm, <span class="math notranslate nohighlight">\(b = 1.475\)</span> mm, and a polyethylene dielectric with
+<span class="math notranslate nohighlight">\(\mu_r = 1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span>. The ratio of the radii is 3.642, and its
+logarithm is 1.293, the same number Lesson 25 used. That gives
+<span class="math notranslate nohighlight">\(L' = 259\)</span> nH/m, matching Lesson 6. Lesson 25 derived the capacitance per
+meter, <span class="math notranslate nohighlight">\(C' = 2\pi\epsilon/\ln(b/a) = 96.8\)</span> pF/m, from Gauss’s law. The
+telegrapher’s equations of Lessons 3 through 5 combine the two into the
+characteristic impedance and the phase velocity, and both values now follow
+from the cable’s dimensions and materials alone.</p>
+<p>The product of the two formulas is</p>
+<div class="math notranslate nohighlight">
+\[L'C' = \frac{\mu}{2\pi}\ln\frac{b}{a} \cdot \frac{2\pi\epsilon}{\ln(b/a)} = \mu\epsilon\]</div>
+<p>so the geometry cancels from the phase velocity, <span class="math notranslate nohighlight">\(v_p = 1/\sqrt{\mu\epsilon} = c/\sqrt{\epsilon_r}\)</span>,
+which depends only on the dielectric. The ratio keeps the geometry:</p>
+<div class="math notranslate nohighlight">
+\[Z_0 = \sqrt{\frac{L'}{C'}} = \sqrt{\frac{\mu\ln(b/a)/(2\pi)}{2\pi\epsilon/\ln(b/a)}} = \frac{1}{2\pi}\sqrt{\frac{\mu}{\epsilon}}\ \ln\frac{b}{a} = \frac{\eta}{2\pi}\ln\frac{b}{a}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\eta = \sqrt{\mu/\epsilon}\)</span> is the wave impedance of the dielectric that
+Lesson 6 quoted, <span class="math notranslate nohighlight">\(377/\sqrt{2.25} = 251\ \Omega\)</span> for polyethylene, and
+<span class="math notranslate nohighlight">\(251 \times 1.293/(2\pi) = 51.7\ \Omega\)</span> again. A cable’s impedance is set by
+the ratio of its radii and its dielectric.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-laws-of-static-fields">
+<div class="wrap docutils container">
+<p class="rubric">The Laws of Static Fields</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Law</p></th>
+<th class="head text-left"><p>Integral form</p></th>
+<th class="head text-left"><p>Point form</p></th>
+<th class="head text-center"><p>Lesson</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Gauss’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = \rho_v\)</span></p></td>
+<td class="text-center"><p>20–21</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gauss’s law for magnetism</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{B}\cdot d\mathbf{s} = 0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{B} = 0\)</span></p></td>
+<td class="text-center"><p>28</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Faraday’s law, static</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{E}\cdot d\mathbf{l} = 0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{E} = 0\)</span></p></td>
+<td class="text-center"><p>22</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere’s law</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span></p></td>
+<td class="text-center"><p>29</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>With Ampere’s law in place, we have all four of Maxwell’s equations for fields
+that do not change with time. Two describe the electric field and two the
+magnetic field, and each comes in an integral form, used with symmetry to find
+a field, and a point form, used to find the sources from a known field. In
+statics the two halves never mix: charges make the electric field, currents
+make the magnetic field, and neither field appears in the other’s equations.
+Module 4 lets the fields change with time. Faraday’s law gains a term in
+<span class="math notranslate nohighlight">\(\partial\mathbf{B}/\partial t\)</span>, Ampere’s law gains one in
+<span class="math notranslate nohighlight">\(\partial\mathbf{D}/\partial t\)</span>, and the two fields, each sustaining the other,
+propagate together as an electromagnetic wave.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Coaxial line</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> between the conductors only</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{I}{2\pi\rho}\)</span> for <span class="math notranslate nohighlight">\(a &lt; \rho &lt; b\)</span>; zero outside</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Current sheet</p></td>
+<td class="text-left"><p>Surface current density <span class="math notranslate nohighlight">\(J_s\)</span> in A/m (Lesson 28)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H = J_s/2\)</span>, at every distance</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Long solenoid</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(n = N/\ell\)</span> turns per meter</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H = nI\)</span> inside; zero outside</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Finite solenoid</p></td>
+<td class="text-left"><p>Center of a coil of length <span class="math notranslate nohighlight">\(\ell\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(nI\ \ell/\sqrt{\ell^2 + 4a^2}\)</span>; ends near <span class="math notranslate nohighlight">\(nI/2\)</span> once <span class="math notranslate nohighlight">\(\ell/a &gt; 4\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Toroid</p></td>
+<td class="text-left"><p>Field confined to the core</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H = \frac{NI}{2\pi\rho}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Inductance</p></td>
+<td class="text-left"><p>Flux per unit current</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(L = \Phi/I\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Coax <span class="math notranslate nohighlight">\(L'\)</span></p></td>
+<td class="text-left"><p>Flux between the conductors</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\mu}{2\pi}\ln\frac{b}{a}\)</span>; RG-58: <span class="math notranslate nohighlight">\(259\)</span> nH/m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Internal <span class="math notranslate nohighlight">\(L'\)</span></p></td>
+<td class="text-left"><p>Flux inside the inner conductor, DC only</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mu/(8\pi) = 50\)</span> nH/m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>RG-58 <span class="math notranslate nohighlight">\(Z_0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sqrt{L'/C'} = (\eta/2\pi)\ln(b/a)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(51.7\ \Omega\)</span>, <span class="math notranslate nohighlight">\(v_p = 2.00\times10^8\)</span> m/s</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L30_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L30_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 31</strong>: magnetic materials, and the field on both sides of a boundary.</p></li>
+<li><p><strong>Lesson 32</strong>: the Magnetostatics Lab.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today Ampere’s law gave the fields of the coax, the current sheet, the
+solenoid, and the toroid, and the coaxial field gave the inductance per meter
+that finishes the derivation of <span class="math notranslate nohighlight">\(Z_0\)</span> begun in Lesson 6. Every case so far has
+had one material throughout. Lesson 31 introduces magnetic materials, with
+<span class="math notranslate nohighlight">\(\mu_r\)</span> much larger than 1, and derives the conditions that <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> and
+<span class="math notranslate nohighlight">\(\mathbf{B}\)</span> satisfy where two materials meet, the magnetic counterpart of
+Lesson 24. Lesson 32 is the Magnetostatics Lab.</p>
+<p>Before Lesson 31, read sections 7.10 through 7.14 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L30-amperes-law-applied"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

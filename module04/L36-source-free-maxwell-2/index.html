@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L36 - Plane-Wave Solutions and Lossy Media &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l36-plane-wave-solutions-and-lossy-media">
+<h1>L36 - Plane-Wave Solutions and Lossy Media<a class="headerlink" href="#l36-plane-wave-solutions-and-lossy-media" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Plane-Wave Solutions and Lossy Media</h1>
+<div class="title-rule"></div>
+<p>Today we solve the Helmholtz equation, then add conductivity and find how fast a wave decays.</p>
+<p>Lesson 36 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '9'">
+  <li>I understand the process of decoupling and finding solutions for Maxwell's equations for dynamic fields.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 35 decoupled Maxwell’s equations in a lossless, source-free region into
+the Helmholtz equation for each field. Today we solve it for a field that
+varies along one direction only, and the solution is the same pair of
+traveling waves Lesson 4 found on the transmission line. Then we put the
+conductivity <span class="math notranslate nohighlight">\(\sigma\)</span> back. Conduction current makes the permittivity complex,
+the phase constant becomes a complex <strong>propagation constant</strong>
+<span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span>, and the wave decays as it travels. We derive
+<span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> exactly, simplify them for a low-loss dielectric and for a
+good conductor, and derive the <strong>skin depth</strong> that Lesson 27 quoted.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 35:</strong> in a lossless, source-free region, each field obeys the Helmholtz equation:</p>
+<div class="math notranslate nohighlight">
+\[\nabla^2\widetilde{\mathbf{E}} + \beta^2\widetilde{\mathbf{E}} = 0, \qquad \beta = \omega\sqrt{\mu\epsilon}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 35 wrote Maxwell’s equations with phasors, removed the sources and the
+conductivity, and took the curl of Faraday’s law to eliminate
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{H}}\)</span>. The result is the Helmholtz equation above, and the
+magnetic field obeys the same equation with the same <span class="math notranslate nohighlight">\(\beta\)</span>. The vector
+Laplacian acts on each Cartesian component separately, so the Helmholtz
+equation is three scalar equations of the same form, one for each of
+<span class="math notranslate nohighlight">\(\widetilde{E}_x\)</span>, <span class="math notranslate nohighlight">\(\widetilde{E}_y\)</span>, and <span class="math notranslate nohighlight">\(\widetilde{E}_z\)</span>. Today we solve
+one of them.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-field-that-varies-only-along-z">
+<div class="wrap docutils container">
+<p class="rubric">A Field That Varies Only Along z</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Assume <span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ \widetilde{E}_x(z)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\cdot\widetilde{\mathbf{E}} &amp;= \frac{\partial\widetilde{E}_x}{\partial x} = 0 \\ \nabla^2\widetilde{\mathbf{E}} &amp;= \hat{\mathbf{x}}\ \frac{d^2\widetilde{E}_x}{dz^2} \\ \frac{d^2\widetilde{E}_x}{dz^2} + \beta^2\widetilde{E}_x &amp;= 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We look for the simplest field the equation allows. We let the electric field
+point along <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span> and depend only on <span class="math notranslate nohighlight">\(z\)</span>, so it is the same at
+every point of each plane <span class="math notranslate nohighlight">\(z = \)</span> constant. First we check that this field is
+allowed: its divergence is <span class="math notranslate nohighlight">\(\partial\widetilde{E}_x/\partial x\)</span>, which is zero
+because <span class="math notranslate nohighlight">\(\widetilde{E}_x\)</span> does not depend on <span class="math notranslate nohighlight">\(x\)</span>, so it satisfies
+<span class="math notranslate nohighlight">\(\nabla\cdot\widetilde{\mathbf{E}} = 0\)</span>. The Laplacian of <span class="math notranslate nohighlight">\(\widetilde{E}_x\)</span>
+then has only its <span class="math notranslate nohighlight">\(z\)</span> term, and because <span class="math notranslate nohighlight">\(\widetilde{E}_x\)</span> depends on <span class="math notranslate nohighlight">\(z\)</span>
+alone, that term is an ordinary second derivative. The vector equation
+reduces to one ordinary differential equation, the same one Lesson 4 solved
+for the voltage on a lossless line.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-general-solution">
+<div class="wrap docutils container">
+<p class="rubric">The General Solution</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Assume <span class="math notranslate nohighlight">\(\widetilde{E}_x = A e^{sz}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} s^2 + \beta^2 &amp;= 0 \quad\Longrightarrow\quad s = \pm j\beta \\ \widetilde{E}_x(z) &amp;= E_0^+ e^{-j\beta z} + E_0^- e^{+j\beta z} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We solve it as Lesson 4 did. A trial solution <span class="math notranslate nohighlight">\(A e^{sz}\)</span> has second
+derivative <span class="math notranslate nohighlight">\(s^2 A e^{sz}\)</span>; substituting and dividing out <span class="math notranslate nohighlight">\(A e^{sz}\)</span>, which is
+never zero, leaves the characteristic equation <span class="math notranslate nohighlight">\(s^2 + \beta^2 = 0\)</span>. Its roots
+are <span class="math notranslate nohighlight">\(s = \pm j\beta\)</span>. The equation is linear and second order, so the general
+solution is the sum of the two exponentials, each with its own complex
+constant. We name the constants <span class="math notranslate nohighlight">\(E_0^+\)</span> and <span class="math notranslate nohighlight">\(E_0^-\)</span> by the direction each
+wave travels, which the next frame shows. A source somewhere outside the
+region sets <span class="math notranslate nohighlight">\(E_0^+\)</span>, and a boundary that reflects part of the wave sets
+<span class="math notranslate nohighlight">\(E_0^-\)</span>, the subject of Lesson 38.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-phase-velocity-and-wavelength">
+<div class="wrap docutils container">
+<p class="rubric">Phase Velocity and Wavelength</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_x(z,t) &amp;= \left\vert E_0^+\right\vert\cos\left(\omega t - \beta z + \phi^+\right) \\ &amp;+ \left\vert E_0^-\right\vert\cos\left(\omega t + \beta z + \phi^-\right) \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[v_p = \frac{\omega}{\beta} = \frac{1}{\sqrt{\mu\epsilon}}, \qquad \lambda = \frac{2\pi}{\beta}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We return to the time domain by multiplying by <span class="math notranslate nohighlight">\(e^{j\omega t}\)</span> and taking the
+real part, with <span class="math notranslate nohighlight">\(E_0^\pm = \left\vert E_0^\pm\right\vert e^{j\phi^\pm}\)</span>. As in
+Lesson 4, a point of constant phase on the first term moves toward <span class="math notranslate nohighlight">\(+z\)</span> at the
+<strong>phase velocity</strong> <span class="math notranslate nohighlight">\(\omega/\beta\)</span>, and the second term moves toward <span class="math notranslate nohighlight">\(-z\)</span> at the
+same speed. Substituting <span class="math notranslate nohighlight">\(\beta = \omega\sqrt{\mu\epsilon}\)</span> gives
+<span class="math notranslate nohighlight">\(v_p = 1/\sqrt{\mu\epsilon}\)</span>, the speed Lesson 35 read from the wave equation.
+At a fixed instant, the field repeats every <span class="math notranslate nohighlight">\(2\pi/\beta\)</span> in <span class="math notranslate nohighlight">\(z\)</span>, which is the
+<strong>wavelength</strong>. Because the field is the same everywhere on each plane of
+constant <span class="math notranslate nohighlight">\(z\)</span>, each term is a <strong>uniform plane wave</strong>. Lesson 37 finds its
+magnetic field and its polarization.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-adding-conductivity">
+<div class="wrap docutils container">
+<p class="rubric">Adding Conductivity</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\widetilde{\mathbf{H}} &amp;= \sigma\widetilde{\mathbf{E}} + j\omega\epsilon\widetilde{\mathbf{E}} \\ &amp;= j\omega\left(\epsilon - j\frac{\sigma}{\omega}\right)\widetilde{\mathbf{E}} = j\omega\epsilon_c\widetilde{\mathbf{E}} \\ \epsilon_c &amp;= \epsilon - j\frac{\sigma}{\omega} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Now we let the region conduct. It still contains no free charge, because
+Lesson 33 showed that charge placed inside a conductor decays in the
+relaxation time <span class="math notranslate nohighlight">\(\tau_r = \epsilon/\sigma\)</span>, so
+<span class="math notranslate nohighlight">\(\nabla\cdot\widetilde{\mathbf{E}} = 0\)</span> still holds. The electric field now
+drives a conduction current <span class="math notranslate nohighlight">\(\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}}\)</span>,
+Lesson 27’s point form of Ohm’s law, and the Ampere–Maxwell law gains that
+term. Both terms on the right are proportional to <span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}}\)</span>, so
+we factor out <span class="math notranslate nohighlight">\(j\omega\)</span> and collect the rest into a <strong>complex permittivity</strong>
+<span class="math notranslate nohighlight">\(\epsilon_c\)</span>. The Ampere–Maxwell law then has exactly its lossless form with
+<span class="math notranslate nohighlight">\(\epsilon_c\)</span> in place of <span class="math notranslate nohighlight">\(\epsilon\)</span>, and every step of Lesson 35 still applies.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-loss-tangent">
+<div class="wrap docutils container">
+<p class="rubric">The Loss Tangent</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\epsilon_c = \epsilon\left(1 - j\frac{\sigma}{\omega\epsilon}\right), \qquad \tan\delta_c = \frac{\sigma}{\omega\epsilon}\]</div>
+<ul class="simple">
+<li><p>Polyethylene, any frequency: <span class="math notranslate nohighlight">\(\tan\delta_c = 2\times10^{-4}\)</span>.</p></li>
+<li><p>Copper at 100 MHz: <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon_0) = 1.0\times10^{10}\)</span> (Lesson 33).</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Factoring <span class="math notranslate nohighlight">\(\epsilon\)</span> out of the complex permittivity leaves the ratio
+<span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon)\)</span>, the magnitude of the conduction current density
+<span class="math notranslate nohighlight">\(\sigma E\)</span> divided by the magnitude of the displacement current density
+<span class="math notranslate nohighlight">\(\omega\epsilon E\)</span>. It is the <strong>loss tangent</strong> that Lesson 5 used for
+polyethylene, the tangent of the angle by which <span class="math notranslate nohighlight">\(\epsilon_c\)</span> lies below the
+real axis. Lesson 5 wrote that angle <span class="math notranslate nohighlight">\(\delta\)</span>; from here on we write it
+<span class="math notranslate nohighlight">\(\delta_c\)</span>, for the angle of <span class="math notranslate nohighlight">\(\epsilon_c\)</span>, so that <span class="math notranslate nohighlight">\(\delta\)</span> alone means the
+skin depth later in this lesson. Datasheets usually give a dielectric’s loss as
+<span class="math notranslate nohighlight">\(\tan\delta_c\)</span>, and Lesson 27 turned that into the equivalent conductivity
+<span class="math notranslate nohighlight">\(\sigma = \omega\epsilon\tan\delta_c\)</span>, <span class="math notranslate nohighlight">\(2.5\ \mu\)</span>S/m for polyethylene at
+100 MHz. Lesson 33 compared the two currents in copper and found conduction
+current larger by ten orders of magnitude.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-propagation-constant">
+<div class="wrap docutils container">
+<p class="rubric">The Propagation Constant</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla^2\widetilde{\mathbf{E}} + \omega^2\mu\epsilon_c\ \widetilde{\mathbf{E}} &amp;= 0 \\ \nabla^2\widetilde{\mathbf{E}} - \gamma^2\widetilde{\mathbf{E}} &amp;= 0 \\ \gamma^2 &amp;= j\omega\mu\left(\sigma + j\omega\epsilon\right) \end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>Line: <span class="math notranslate nohighlight">\(\gamma^2 = \left(R' + j\omega L'\right)\left(G' + j\omega C'\right)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Repeating Lesson 35’s decoupling with <span class="math notranslate nohighlight">\(\epsilon_c\)</span> in place of <span class="math notranslate nohighlight">\(\epsilon\)</span>
+gives the Helmholtz equation with <span class="math notranslate nohighlight">\(\omega^2\mu\epsilon_c\)</span> in place of
+<span class="math notranslate nohighlight">\(\beta^2\)</span>. That constant is now complex, so we write it as <span class="math notranslate nohighlight">\(-\gamma^2\)</span>, with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma^2 &amp;= -\omega^2\mu\epsilon_c = j\omega\mu\ j\omega\epsilon_c \\ &amp;= j\omega\mu\left(\sigma + j\omega\epsilon\right) \end{aligned}\end{split}\]</div>
+<p>This is the same form as the line’s <span class="math notranslate nohighlight">\(\gamma^2\)</span> in Lesson 4: <span class="math notranslate nohighlight">\(j\omega\mu\)</span> plays
+the series impedance with no series resistance, and <span class="math notranslate nohighlight">\(\sigma + j\omega\epsilon\)</span>
+plays the shunt admittance, with <span class="math notranslate nohighlight">\(\sigma\)</span> in the place of <span class="math notranslate nohighlight">\(G'\)</span>. Lesson 27
+found the same correspondence for the coax, <span class="math notranslate nohighlight">\(G'/C' = \sigma/\epsilon\)</span>. We take
+the root <span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span> with <span class="math notranslate nohighlight">\(\alpha \ge 0\)</span> and <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>. With
+<span class="math notranslate nohighlight">\(\sigma = 0\)</span>, <span class="math notranslate nohighlight">\(\gamma = j\omega\sqrt{\mu\epsilon}\)</span>, the lossless result.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-wave-in-a-lossy-medium">
+<div class="wrap docutils container">
+<p class="rubric">A Wave in a Lossy Medium</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L36-decaying-wave.svg"
+     alt="A snapshot of the electric field against depth z for a wave traveling in plus z in a lossy medium: a cosine inside a dashed envelope, the magnitude of E zero plus times e to the minus alpha z, that falls to 1 over e of its starting value at one skin depth delta"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[E_x(z,t) = \left\vert E_0^+\right\vert e^{-\alpha z}\cos\left(\omega t - \beta z + \phi^+\right)\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The general solution has the form of Lesson 4’s lossy line,
+<span class="math notranslate nohighlight">\(\widetilde{E}_x = E_0^+ e^{-\gamma z} + E_0^- e^{+\gamma z}\)</span>, by the same
+characteristic equation with <span class="math notranslate nohighlight">\(s = \pm\gamma\)</span>. Splitting <span class="math notranslate nohighlight">\(e^{-\gamma z}\)</span> into
+<span class="math notranslate nohighlight">\(e^{-\alpha z}e^{-j\beta z}\)</span> and returning to the time domain, the forward
+wave is a cosine that travels toward <span class="math notranslate nohighlight">\(+z\)</span> at <span class="math notranslate nohighlight">\(\omega/\beta\)</span> inside an envelope
+that shrinks as <span class="math notranslate nohighlight">\(e^{-\alpha z}\)</span>. The figure is a snapshot at <span class="math notranslate nohighlight">\(t = 0\)</span>. The
+attenuation constant <span class="math notranslate nohighlight">\(\alpha\)</span> sets how fast the envelope falls, and the
+distance <span class="math notranslate nohighlight">\(1/\alpha\)</span>, where it reaches <span class="math notranslate nohighlight">\(1/e\)</span> of its starting value, is the
+skin depth <span class="math notranslate nohighlight">\(\delta\)</span>. In this example the wave completes two cycles in that
+distance. In a good conductor the wave completes less than one-sixth of a
+cycle in that distance, as the Skin Depth frame shows.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-solving-for-and">
+<div class="wrap docutils container">
+<p class="rubric">Solving for α and β</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>With <span class="math notranslate nohighlight">\(p = \sigma/(\omega\epsilon)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \left(\alpha + j\beta\right)^2 &amp;= \alpha^2 - \beta^2 + j2\alpha\beta \\ &amp;= -\omega^2\mu\epsilon + j\omega\mu\sigma \\ \alpha &amp;= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + p^2} - 1\right]^{1/2} \\ \beta &amp;= \omega\sqrt{\frac{\mu\epsilon}{2}}\left[\sqrt{1 + p^2} + 1\right]^{1/2} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We expand <span class="math notranslate nohighlight">\(\gamma^2\)</span> two ways and match the real and imaginary parts:
+<span class="math notranslate nohighlight">\(\alpha^2 - \beta^2 = -\omega^2\mu\epsilon\)</span> and <span class="math notranslate nohighlight">\(2\alpha\beta = \omega\mu\sigma\)</span>.
+The second gives <span class="math notranslate nohighlight">\(\beta = \omega\mu\sigma/2\alpha\)</span>. Substituting it into the
+first and multiplying by <span class="math notranslate nohighlight">\(\alpha^2\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\left(\alpha^2\right)^2 + \omega^2\mu\epsilon\ \alpha^2 - \frac{\omega^2\mu^2\sigma^2}{4} = 0\]</div>
+<p>which is a quadratic in <span class="math notranslate nohighlight">\(\alpha^2\)</span>. Writing <span class="math notranslate nohighlight">\(p = \sigma/(\omega\epsilon)\)</span>
+for the loss tangent, its roots are</p>
+<div class="math notranslate nohighlight">
+\[\alpha^2 = \frac{\omega^2\mu\epsilon}{2}\left[-1 \pm \sqrt{1 + p^2}\right]\]</div>
+<p>and <span class="math notranslate nohighlight">\(\alpha^2\)</span> must be positive, so we keep the plus sign. Then
+<span class="math notranslate nohighlight">\(\beta^2 = \alpha^2 + \omega^2\mu\epsilon\)</span> adds <span class="math notranslate nohighlight">\(2\)</span> inside the bracket,
+turning <span class="math notranslate nohighlight">\(-1\)</span> into <span class="math notranslate nohighlight">\(+1\)</span>. Both depend on the material only through <span class="math notranslate nohighlight">\(\mu\)</span>,
+<span class="math notranslate nohighlight">\(\epsilon\)</span>, and the loss tangent <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-two-limits">
+<div class="wrap docutils container">
+<p class="rubric">Two Limits</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L36-regimes.svg"
+     alt="Log-log plot of alpha and beta, each divided by omega root mu epsilon, against sigma over omega epsilon from 0.0001 to 100000. Beta is flat at one below a ratio of one and rises above it; alpha rises in proportion to the ratio below one, along the dashed low-loss limit, and far above one alpha and beta merge on the dashed good-conductor limit. Markers show polyethylene at 0.0002, seawater at 1 gigahertz at 0.89, and seawater at 10 kilohertz at 89,000; an arrow at the right edge points toward copper at 100 megahertz"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The figure plots the exact <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, each divided by its lossless
+value <span class="math notranslate nohighlight">\(\omega\sqrt{\mu\epsilon}\)</span>, against the loss tangent. Below a ratio of
+about <span class="math notranslate nohighlight">\(0.1\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> stays at its lossless value and <span class="math notranslate nohighlight">\(\alpha\)</span> grows in
+proportion to <span class="math notranslate nohighlight">\(\sigma\)</span>: the material is a <strong>low-loss dielectric</strong>. Far above a
+ratio of one, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> approach each other and grow as the square
+root of <span class="math notranslate nohighlight">\(\sigma\)</span>: the material is a <strong>good conductor</strong>. At a ratio of <span class="math notranslate nohighlight">\(10\)</span> they
+still differ by 10%, and at <span class="math notranslate nohighlight">\(100\)</span> by 1%. Near a ratio of one, only the exact
+formulas apply. The dashed lines are the two approximations the next frames
+derive. The markers place three materials on the same axis: polyethylene at
+any frequency, seawater at 1 GHz near a ratio of one, and seawater at 10 kHz
+far into the conductor regime. Copper at 100 MHz, with a ratio of
+<span class="math notranslate nohighlight">\(10^{10}\)</span>, lies far off the right edge.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-low-loss-limit">
+<div class="wrap docutils container">
+<p class="rubric">The Low-Loss Limit</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon) \ll 1\)</span>, use <span class="math notranslate nohighlight">\(\sqrt{1 + x} \approx 1 + x/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma &amp;= j\omega\sqrt{\mu\epsilon}\sqrt{1 - j\frac{\sigma}{\omega\epsilon}} \\ &amp;\approx j\omega\sqrt{\mu\epsilon}\left(1 - j\frac{\sigma}{2\omega\epsilon}\right) \\ \alpha &amp;\approx \frac{\sigma}{2}\sqrt{\frac{\mu}{\epsilon}}, \qquad \beta \approx \omega\sqrt{\mu\epsilon} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We factor the lossless <span class="math notranslate nohighlight">\(j\omega\sqrt{\mu\epsilon}\)</span> out of <span class="math notranslate nohighlight">\(\gamma\)</span>, which
+leaves <span class="math notranslate nohighlight">\(\sqrt{1 - j\sigma/(\omega\epsilon)}\)</span>. When the loss tangent is small,
+the first two terms of the binomial expansion are enough. Multiplying out the
+second term,</p>
+<div class="math notranslate nohighlight">
+\[j\omega\sqrt{\mu\epsilon}\left(-j\frac{\sigma}{2\omega\epsilon}\right) = \frac{\sigma}{2}\frac{\sqrt{\mu\epsilon}}{\epsilon} = \frac{\sigma}{2}\sqrt{\frac{\mu}{\epsilon}}\]</div>
+<p>is real, so it is <span class="math notranslate nohighlight">\(\alpha\)</span>, and the imaginary part keeps its lossless value. To first
+order, a little loss makes the wave decay but does not change its speed. The
+factor <span class="math notranslate nohighlight">\(\sqrt{\mu/\epsilon}\)</span> has units of ohms; Lesson 37 derives it as the
+<strong>intrinsic impedance</strong> <span class="math notranslate nohighlight">\(\eta\)</span> of the medium. The result has the form of Lesson 5’s dielectric
+term on a low-loss line, <span class="math notranslate nohighlight">\(G'Z_0/2\)</span>, with <span class="math notranslate nohighlight">\(\sigma\)</span> for <span class="math notranslate nohighlight">\(G'\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> for
+<span class="math notranslate nohighlight">\(Z_0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-loss-in-polyethylene">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Loss in Polyethylene</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(\epsilon_r = 2.25\)</span>, <span class="math notranslate nohighlight">\(\tan\delta_c = 2\times10^{-4}\)</span>, <span class="math notranslate nohighlight">\(f = 100\)</span> MHz:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \sigma &amp;= \omega\epsilon\tan\delta_c = 2.50\times10^{-6}\ \text{S/m} \\ \sqrt{\mu_0/\epsilon} &amp;= 251\ \Omega \\ \alpha &amp;= \frac{2.50\times10^{-6}\times251}{2} \\ &amp;= 3.14\times10^{-4}\ \text{Np/m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the dielectric loss of RG-58</p>
+<p>The polyethylene in RG-58 has <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon) = \tan\delta_c = 2\times10^{-4}\)</span>,
+so the low-loss limit applies. Its equivalent conductivity at 100 MHz is
+<span class="math notranslate nohighlight">\(\sigma = 2\pi\times10^8\times2.25\times8.854\times10^{-12}\times2\times10^{-4} = 2.50\times10^{-6}\)</span> S/m,
+and <span class="math notranslate nohighlight">\(\sqrt{\mu_0/2.25\epsilon_0} = 376.7/1.5 = 251\ \Omega\)</span>. The attenuation
+constant is <span class="math notranslate nohighlight">\(3.14\times10^{-4}\)</span> Np/m, or
+<span class="math notranslate nohighlight">\(8.686\times3.14\times10^{-4}\times1000 = 2.73\)</span> dB per kilometer. Lesson 5
+found the dielectric term of RG-58’s attenuation from the line’s own
+constants, with <span class="math notranslate nohighlight">\(G' = \omega C'\tan\delta_c = 1.217\times10^{-5}\)</span> S/m (Lesson 5
+rounds it to <span class="math notranslate nohighlight">\(1.22\times10^{-5}\)</span>): <span class="math notranslate nohighlight">\(G'Z_0/2 = 1.217\times10^{-5}\times51.7/2 = 3.14\times10^{-4}\)</span> Np/m,
+the same number, because the line’s dielectric loss is the loss of the wave
+traveling through its polyethylene. The exact formula gives
+<span class="math notranslate nohighlight">\(3.14\times10^{-4}\)</span> Np/m and <span class="math notranslate nohighlight">\(\beta = 3.144\)</span> rad/m, the lossless value of
+Lesson 35, to four figures.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-good-conductor-limit">
+<div class="wrap docutils container">
+<p class="rubric">The Good-Conductor Limit</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon) \gg 1\)</span>, drop <span class="math notranslate nohighlight">\(j\omega\epsilon\)</span> beside <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma &amp;\approx \sqrt{j\omega\mu\sigma} = \sqrt{\omega\mu\sigma}\ e^{j\pi/4} \\ &amp;= \sqrt{\omega\mu\sigma}\ \frac{1 + j}{\sqrt{2}} \\ \alpha &amp;= \beta \approx \sqrt{\frac{\omega\mu\sigma}{2}} = \sqrt{\pi f\mu\sigma} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>In a good conductor the conduction current is much larger than the
+displacement current, so <span class="math notranslate nohighlight">\(\sigma + j\omega\epsilon \approx \sigma\)</span> and
+<span class="math notranslate nohighlight">\(\gamma^2 \approx j\omega\mu\sigma\)</span>. The square root of <span class="math notranslate nohighlight">\(j\)</span> is <span class="math notranslate nohighlight">\(e^{j\pi/4}\)</span>,
+because <span class="math notranslate nohighlight">\(j = e^{j\pi/2}\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[e^{j\pi/4} = \cos 45^\circ + j\sin 45^\circ = \frac{1 + j}{\sqrt{2}}\]</div>
+<p>The real and imaginary parts of <span class="math notranslate nohighlight">\(\gamma\)</span> are therefore equal, and with
+<span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span>, each is <span class="math notranslate nohighlight">\(\sqrt{\pi f\mu\sigma}\)</span>. The phase constant is no
+longer <span class="math notranslate nohighlight">\(\omega\sqrt{\mu\epsilon}\)</span>: it depends on <span class="math notranslate nohighlight">\(\sigma\)</span> and grows only as
+<span class="math notranslate nohighlight">\(\sqrt{f}\)</span>, so the phase velocity <span class="math notranslate nohighlight">\(\omega/\beta\)</span> changes with frequency inside
+a conductor.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-skin-depth">
+<div class="wrap docutils container">
+<p class="rubric">Skin Depth</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\delta = \frac{1}{\alpha} = \frac{1}{\sqrt{\pi f\mu\sigma}}\]</div>
+<ul class="simple">
+<li><p>Copper at 100 MHz: <span class="math notranslate nohighlight">\(\delta = 6.61\ \mu\)</span>m.</p></li>
+<li><p>Copper at 60 Hz: <span class="math notranslate nohighlight">\(\delta = 8.53\)</span> mm.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>skin depth</strong> is the distance over which the field amplitude falls by
+<span class="math notranslate nohighlight">\(1/e\)</span>. In a good conductor <span class="math notranslate nohighlight">\(\alpha = \beta\)</span>, so one skin depth is also
+<span class="math notranslate nohighlight">\(1/\beta = \lambda/2\pi\)</span>: the field decays to <span class="math notranslate nohighlight">\(1/e\)</span> in less than a sixth of a
+wavelength and is effectively gone after a few skin depths. For copper,
+<span class="math notranslate nohighlight">\(\sigma = 5.8\times10^7\)</span> S/m and <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>, so at 100 MHz</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \delta &amp;= \frac{1}{\sqrt{\pi\times10^8\times4\pi\times10^{-7}\times5.8\times10^7}} \\ &amp;= 6.61\ \mu\text{m} \end{aligned}\end{split}\]</div>
+<p>This derives the skin depth that Lesson 27 quoted. The current density
+<span class="math notranslate nohighlight">\(\widetilde{\mathbf{J}} = \sigma\widetilde{\mathbf{E}}\)</span> decays with the field,
+so the current flows in a layer about <span class="math notranslate nohighlight">\(\delta\)</span> thick, which is why Lesson 27
+computed the resistance of RG-58’s center conductor from an area of
+<span class="math notranslate nohighlight">\(2\pi a\delta\)</span>. At 60 Hz the skin depth in copper is <span class="math notranslate nohighlight">\(8.53\)</span> mm, which is why
+large power conductors gain little from copper deeper than about a centimeter.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-which-limit-applies">
+<div class="wrap docutils container">
+<p class="rubric">Which Limit Applies</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Material</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(f\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon)\)</span></p></th>
+<th class="head text-left"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Polyethylene</p></td>
+<td class="text-left"><p>any</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(2\times10^{-4}\)</span></p></td>
+<td class="text-left"><p>low-loss</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Seawater</p></td>
+<td class="text-left"><p>10 kHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(8.9\times10^{4}\)</span></p></td>
+<td class="text-left"><p>conductor, <span class="math notranslate nohighlight">\(\delta = 2.52\)</span> m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Seawater</p></td>
+<td class="text-left"><p>1 GHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.89\)</span></p></td>
+<td class="text-left"><p>neither, <span class="math notranslate nohighlight">\(\delta = 1.29\)</span> cm</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Copper</p></td>
+<td class="text-left"><p>100 MHz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.04\times10^{10}\)</span></p></td>
+<td class="text-left"><p>conductor, <span class="math notranslate nohighlight">\(\delta = 6.61\ \mu\)</span>m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The same material can fall in either limit, because the ratio depends on
+frequency. Seawater, with <span class="math notranslate nohighlight">\(\sigma = 4\)</span> S/m and <span class="math notranslate nohighlight">\(\epsilon_r = 81\)</span>, is a good
+conductor at 10 kHz, where its skin depth is <span class="math notranslate nohighlight">\(2.52\)</span> m. That depth is why
+communication with a submerged submarine uses very low frequencies: a signal at
+higher frequency cannot reach a useful depth. At 1 GHz the ratio is <span class="math notranslate nohighlight">\(0.89\)</span>, so
+neither approximation holds, and the exact formula gives
+<span class="math notranslate nohighlight">\(\alpha = 77.4\)</span> Np/m, a skin depth of <span class="math notranslate nohighlight">\(1.29\)</span> cm. The good-conductor formula
+would give <span class="math notranslate nohighlight">\(0.80\)</span> cm there, wrong by a factor of <span class="math notranslate nohighlight">\(1.6\)</span>. Before using either
+limit, compute <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1D Helmholtz</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\widetilde{\mathbf{E}} = \hat{\mathbf{x}}\ \widetilde{E}_x(z)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\widetilde{E}_x = E_0^+e^{-j\beta z} + E_0^-e^{+j\beta z}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Phase velocity, wavelength</p></td>
+<td class="text-left"><p>Lossless medium</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(v_p = 1/\sqrt{\mu\epsilon}\)</span>, <span class="math notranslate nohighlight">\(\lambda = 2\pi/\beta\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Complex permittivity</p></td>
+<td class="text-left"><p>Conduction current folded into <span class="math notranslate nohighlight">\(\epsilon\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\epsilon_c = \epsilon - j\sigma/\omega\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Loss tangent</p></td>
+<td class="text-left"><p>Conduction over displacement current</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\tan\delta_c = \sigma/(\omega\epsilon)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Propagation constant</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma = \alpha + j\beta\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma^2 = j\omega\mu(\sigma + j\omega\epsilon)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Low-loss limit</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon) \ll 1\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\alpha \approx (\sigma/2)\sqrt{\mu/\epsilon}\)</span>, <span class="math notranslate nohighlight">\(\beta \approx \omega\sqrt{\mu\epsilon}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Good-conductor limit</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon) \gg 1\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\alpha = \beta \approx \sqrt{\pi f\mu\sigma}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Skin depth</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1/\alpha\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\delta = 1/\sqrt{\pi f\mu\sigma}\)</span>; copper at 100 MHz, <span class="math notranslate nohighlight">\(6.61\ \mu\)</span>m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L36_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L36_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 37</strong>: the magnetic field of a uniform plane wave and the intrinsic impedance <span class="math notranslate nohighlight">\(\eta\)</span>.</p></li>
+<li><p><strong>Lesson 37</strong>: polarization, the direction the electric field traces in time.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we solved the Helmholtz equation for a field that varies only along <span class="math notranslate nohighlight">\(z\)</span>
+and found a pair of traveling waves. Adding conductivity made the propagation
+constant complex, and the two limits of the exact result cover dielectrics and
+conductors, including the skin depth of a conductor. Lesson 37 uses Faraday’s
+law to find the magnetic field that travels with each wave, which defines the
+<strong>intrinsic impedance</strong> <span class="math notranslate nohighlight">\(\eta\)</span>, the field’s counterpart of <span class="math notranslate nohighlight">\(Z_0\)</span>. It then lets
+the electric field have both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components and asks what direction
+the field points as time goes on, which is the wave’s <strong>polarization</strong>.</p>
+<p>Before Lesson 37, read sections 9.4 through 9.6 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module04/L36-source-free-maxwell-2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

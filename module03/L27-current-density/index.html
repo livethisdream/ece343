@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L27 - Current Density, Conductivity, and Resistance &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l27-current-density-conductivity-and-resistance">
+<h1>L27 - Current Density, Conductivity, and Resistance<a class="headerlink" href="#l27-current-density-conductivity-and-resistance" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Current Density, Conductivity, and Resistance</h1>
+<div class="title-rule"></div>
+<p>Today we describe current at a point and derive the resistance of a conductor from it.</p>
+<p>Lesson 27 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '6'">
+  <li>I can calculate the total current through a surface area given a current distribution.</li>
+  <li>I can use Ohm's Law for electromagnetics to calculate the relationship between a current distribution and an electric field.</li>
+  <li>I can articulate and identify what makes a material a good conductor and how conductivity relates to resistance.</li>
+</ol>
+<div class="depth docutils container">
+<p>Module 2 held every charge still. Module 3 lets charge move at a steady rate,
+and steady currents produce the magnetic field that the rest of the module
+studies. Before we reach the magnetic field, we need a way to describe current
+at a point inside a conductor, not only as a number on an ammeter. That
+description is the <strong>current density</strong>, and integrating it over a surface
+gives the current through that surface. Next we find what makes charge move
+in a material: an electric field, related to the current density by Ohm’s law
+in point form, with the material’s <strong>conductivity</strong> as the constant of
+proportionality. The conductivity separates good conductors from insulators,
+and integrating the point form over a wire recovers the resistance of circuit
+theory. The same method applied to a coaxial cable gives the conductance
+<span class="math notranslate nohighlight">\(G'\)</span> that Lesson 3 put in the lumped-element model.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-from-static-charge-to-steady-current">
+<div class="wrap docutils container">
+<p class="rubric">From Static Charge to Steady Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 24</strong>: inside a conductor in electrostatics, <span class="math notranslate nohighlight">\(\mathbf{E} = 0\)</span>.</p>
+<ul class="simple">
+<li><p>Connect a battery: it holds a field inside the wire.</p></li>
+<li><p>The field pushes the free charge, and a current flows.</p></li>
+<li><p><strong>Steady</strong>: the current does not change with time.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 24 showed that the free charge in a conductor rearranges itself until
+the field inside is zero, and then nothing moves. A battery prevents that
+equilibrium. It keeps one end of a wire at a higher potential than the other,
+so a field persists inside the metal and keeps pushing the free charge along
+it. The charge flows as a current, and as long as the battery holds its
+voltage, the current stays constant. A <strong>steady current</strong> is the subject of
+this module: charge moves, but the amount of charge at every point stays the
+same, so the field it produces does not change with time either. Module 4
+lifts that restriction.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-charge-crossing-a-small-area">
+<div class="wrap docutils container">
+<p class="rubric">Charge Crossing a Small Area</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-charge-tube.svg"
+     alt="Side view of a small area delta S seen edge-on, with unit normal n-hat pointing right; positive charges move with velocity u tilted upward from the normal; the charges inside a slanted tube of slant length u delta t behind the area, drawn in red, all cross it in the time delta t; the height of the tube measured along n-hat is u dot n-hat delta t"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Every charge in the slanted tube crosses <span class="math notranslate nohighlight">\(\Delta S\)</span> within the time <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>To describe current at a point, we picture a small flat area <span class="math notranslate nohighlight">\(\Delta S\)</span>, with
+unit normal <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span>, inside a region where charge of volume
+density <span class="math notranslate nohighlight">\(\rho_v\)</span> moves with velocity <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>. The figure shows the area
+edge-on. In a short time <span class="math notranslate nohighlight">\(\Delta t\)</span>, each charge travels a distance
+<span class="math notranslate nohighlight">\(u\ \Delta t\)</span> along <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>. The charges that cross <span class="math notranslate nohighlight">\(\Delta S\)</span> in that
+time are exactly the ones that start inside the tube behind it: its end is
+<span class="math notranslate nohighlight">\(\Delta S\)</span>, and its sides run parallel to <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> for the slant length
+<span class="math notranslate nohighlight">\(u\ \Delta t\)</span>. Charges farther back do not reach the area in time, and
+charges already past it have crossed. Counting the charge in the tube gives
+the charge that crosses the area, and dividing by <span class="math notranslate nohighlight">\(\Delta t\)</span> gives the current.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-current-density">
+<div class="wrap docutils container">
+<p class="rubric">Current Density</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-charge-tube.svg"
+     alt="The slanted tube of charge behind the area delta S, with its height along the normal marked u dot n-hat delta t"
+     style="max-width: 340px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \Delta Q &amp;= \rho_v\ \left(\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t\right)\ \Delta S \\ \Delta I = \frac{\Delta Q}{\Delta t} &amp;= \left(\rho_v\ \mathbf{u}\right)\cdot\hat{\mathbf{n}}\ \Delta S \\ \mathbf{J} &amp;= \rho_v\ \mathbf{u} \quad \text{(A/m}^2\text{)} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The slanted tube of the previous frame has the same volume as a straight
+tube with the same end <span class="math notranslate nohighlight">\(\Delta S\)</span> and the same height, measured along the
+normal. The tilt shortens that height: the slant length is <span class="math notranslate nohighlight">\(u\ \Delta t\)</span>, and
+its component along <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> is <span class="math notranslate nohighlight">\(\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t\)</span>,
+so the volume is <span class="math notranslate nohighlight">\(\left(\mathbf{u}\cdot\hat{\mathbf{n}}\ \Delta t\right)\Delta S\)</span>.
+The charge in the tube is the volume density times that volume. Dividing by
+<span class="math notranslate nohighlight">\(\Delta t\)</span> gives the current through <span class="math notranslate nohighlight">\(\Delta S\)</span>, and the factor
+<span class="math notranslate nohighlight">\(\rho_v\mathbf{u}\)</span> that multiplies <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\ \Delta S\)</span> is the
+<strong>current density</strong> <span class="math notranslate nohighlight">\(\mathbf{J}\)</span>, in amperes per square meter. It is a vector:
+it points along the motion of positive charge, and its magnitude is the
+current per unit area through a surface perpendicular to it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-current-through-a-surface">
+<div class="wrap docutils container">
+<p class="rubric">Current Through a Surface</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Add the currents through every small piece <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{n}}\ ds\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[I = \int_S \mathbf{J}\cdot d\mathbf{s}\]</div>
+<ul class="simple">
+<li><p>The direction of <span class="math notranslate nohighlight">\(d\mathbf{s}\)</span> sets the sign of <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A large surface is a collection of small pieces, and the current through it is
+the sum of the currents through the pieces. Each piece contributes
+<span class="math notranslate nohighlight">\(\mathbf{J}\cdot\hat{\mathbf{n}}\ ds\)</span>, and in the limit of small pieces the sum
+becomes the surface integral of the current density. This is the same flux
+integral that Lesson 20 used for <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> in Gauss’s law, now applied to
+<span class="math notranslate nohighlight">\(\mathbf{J}\)</span>: the current through a surface is the flux of the current density
+through it. We choose the direction of <span class="math notranslate nohighlight">\(d\mathbf{s}\)</span> when we set up the
+problem, and a negative <span class="math notranslate nohighlight">\(I\)</span> means the current flows opposite to the direction
+we chose.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-current-in-a-wire">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Current in a Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} I = \int_0^{2\pi}\int_0^a J_z\ \rho\ d\rho\ d\phi &amp;= 2\pi\int_0^a J_z\ \rho\ d\rho \\ J_z = 8\ \text{A/m}^2,\ a = 3\ \text{mm}: \quad I &amp;= \pi a^2 J_z = 226\ \mu\text{A} \\ J_z = J_0\ \rho/a: \quad I &amp;= \tfrac{2}{3}\pi a^2 J_0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — uniform and nonuniform current in a round wire</p>
+<p>A wire of radius <span class="math notranslate nohighlight">\(a\)</span> lies along the <span class="math notranslate nohighlight">\(z\)</span> axis, and we want the current through
+its cross section, with <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\mathbf{z}}\ \rho\ d\rho\ d\phi\)</span> in
+cylindrical coordinates from Lesson 17. The current density points along
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span>, so <span class="math notranslate nohighlight">\(\mathbf{J}\cdot d\mathbf{s} = J_z\ \rho\ d\rho\ d\phi\)</span>.
+When <span class="math notranslate nohighlight">\(J_z\)</span> does not depend on <span class="math notranslate nohighlight">\(\phi\)</span>, the <span class="math notranslate nohighlight">\(\phi\)</span> integral gives <span class="math notranslate nohighlight">\(2\pi\)</span>.</p>
+<p>For the uniform case from the Spring 2025 slides, <span class="math notranslate nohighlight">\(J_z = 8\ \text{A/m}^2\)</span> and
+<span class="math notranslate nohighlight">\(a = 3\)</span> mm:</p>
+<div class="math notranslate nohighlight">
+\[I = 2\pi J_z \int_0^a \rho\ d\rho = 2\pi J_z \frac{a^2}{2} = \pi a^2 J_z = \pi \times \left(3 \times 10^{-3}\right)^2 \times 8 = 2.26 \times 10^{-4}\ \text{A} = 226\ \mu\text{A}\]</div>
+<p>Now suppose the current crowds toward the surface, as Lessons 3 and 5
+described for high frequencies, with <span class="math notranslate nohighlight">\(J_z = J_0\ \rho/a\)</span>. The integral is</p>
+<div class="math notranslate nohighlight">
+\[I = \frac{2\pi J_0}{a}\int_0^a \rho^2\ d\rho = \frac{2\pi J_0}{a}\frac{a^3}{3} = \frac{2}{3}\pi a^2 J_0\]</div>
+<p>With <span class="math notranslate nohighlight">\(J_0 = 2\ \text{A/mm}^2 = 2 \times 10^6\ \text{A/m}^2\)</span> and <span class="math notranslate nohighlight">\(a = 1\)</span> mm, the
+current is <span class="math notranslate nohighlight">\(4.19\)</span> A, two thirds of the <span class="math notranslate nohighlight">\(6.28\)</span> A that the same peak density
+would carry if it filled the wire uniformly, so for a nonuniform <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> we
+integrate rather than multiply by the area.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-continuity-of-steady-current">
+<div class="wrap docutils container">
+<p class="rubric">Continuity of Steady Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For a closed surface <span class="math notranslate nohighlight">\(S\)</span> around a volume <span class="math notranslate nohighlight">\(V\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint_S \mathbf{J}\cdot d\mathbf{s} &amp;= -\frac{dQ_\text{encl}}{dt} = 0 \quad \text{(steady)} \\ \int_V \nabla\cdot\mathbf{J}\ dv &amp;= 0 \quad \text{for every } V \\ \nabla\cdot\mathbf{J} &amp;= 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>No process creates or destroys charge, so the net current flowing out through a closed surface
+equals the rate at which the charge inside decreases. For a steady current,
+charge cannot pile up anywhere, because a growing pile would change the field
+with time; the enclosed charge is constant, and the net current out of every
+closed surface is zero. This is Kirchhoff’s current law from Lesson 3, applied
+to any closed surface instead of a circuit node. The divergence theorem from
+Lesson 17 turns the surface integral into a volume integral of
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J}\)</span>, and an integral that is zero over every volume
+requires the integrand to be zero at every point. Lesson 29 needs this point
+form, and Lesson 33 removes the steady assumption.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-why-current-follows-the-field">
+<div class="wrap docutils container">
+<p class="rubric">Why Current Follows the Field</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-drift.svg"
+     alt="A free electron in a lattice of ions: its path is a zigzag of short curved segments, each bending away from the direction of E between collisions with ions, so the electron drifts slowly opposite to E"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{u} &amp;= -\frac{e\tau}{m}\mathbf{E} = -\mu_e\mathbf{E} \\ \mathbf{J} = \rho_v\ \mathbf{u} &amp;= \left(-ne\right)\left(-\mu_e\mathbf{E}\right) = \sigma\mathbf{E}, \qquad \sigma = ne\mu_e = \frac{ne^2\tau}{m} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>In a metal, each atom releases about one electron that moves freely through
+the crystal. A field pushes each free electron, of mass <span class="math notranslate nohighlight">\(m\)</span>, with the force
+<span class="math notranslate nohighlight">\(-e\mathbf{E}\)</span>, so between collisions its velocity changes at the rate
+<span class="math notranslate nohighlight">\(-e\mathbf{E}/m\)</span>. Each collision with the vibrating lattice scatters the
+electron in a random direction, which erases its directed motion. With an
+average time <span class="math notranslate nohighlight">\(\tau\)</span> between collisions, the directed velocity the field adds
+averages to <span class="math notranslate nohighlight">\(-e\tau\mathbf{E}/m\)</span>, while the random parts average to zero. The
+result is a <strong>drift velocity</strong> proportional to the field and opposite to it,
+<span class="math notranslate nohighlight">\(\mathbf{u} = -\mu_e\mathbf{E}\)</span>, where the <strong>mobility</strong>
+<span class="math notranslate nohighlight">\(\mu_e = e\tau/m\)</span>, in <span class="math notranslate nohighlight">\(\text{m}^2/(\text{V}\cdot\text{s})\)</span>, measures how
+easily the electrons move. The charge density of the free electrons is
+<span class="math notranslate nohighlight">\(\rho_v = -ne\)</span>. The two minus
+signs cancel, so the current density points along <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and is
+proportional to it. This is <strong>Ohm’s law in point form</strong>, and the constant of
+proportionality is the <strong>conductivity</strong> <span class="math notranslate nohighlight">\(\sigma\)</span>, in siemens per meter.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-drift-in-copper">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: Drift in Copper</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(1\)</span> A in a copper wire of cross section <span class="math notranslate nohighlight">\(1\ \text{mm}^2\)</span>; <span class="math notranslate nohighlight">\(n = 8.5 \times 10^{28}\ \text{m}^{-3}\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quantity</p></th>
+<th class="head text-left"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(J = I/A\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1.0 \times 10^6\ \text{A/m}^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(E = J/\sigma\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(17.2\ \text{mV/m}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(u = J/(ne)\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.073\ \text{mm/s}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the field and the drift speed in a wire</p>
+<p>A current of <span class="math notranslate nohighlight">\(1\)</span> A flows uniformly through a copper wire of cross section
+<span class="math notranslate nohighlight">\(A = 1\ \text{mm}^2 = 10^{-6}\ \text{m}^2\)</span>. The current density is
+<span class="math notranslate nohighlight">\(J = I/A = 10^6\ \text{A/m}^2\)</span>. Copper has <span class="math notranslate nohighlight">\(\sigma = 5.8 \times 10^7\)</span> S/m, so
+the field that drives this current is</p>
+<div class="math notranslate nohighlight">
+\[E = \frac{J}{\sigma} = \frac{10^6}{5.8 \times 10^7} = 0.0172\ \text{V/m} = 17.2\ \text{mV/m}\]</div>
+<p>A meter of this wire drops only <span class="math notranslate nohighlight">\(17.2\)</span> mV at <span class="math notranslate nohighlight">\(1\)</span> A, which is why we treat
+copper wiring as an ideal conductor in circuits. Copper has
+<span class="math notranslate nohighlight">\(n = 8.5 \times 10^{28}\)</span> free electrons per cubic meter, so the drift speed is</p>
+<div class="math notranslate nohighlight">
+\[u = \frac{J}{ne} = \frac{10^6}{8.5 \times 10^{28} \times 1.602 \times 10^{-19}} = 7.3 \times 10^{-5}\ \text{m/s}\]</div>
+<p>The electrons drift at <span class="math notranslate nohighlight">\(0.073\)</span> mm/s, about a quarter of a meter per hour. A
+signal still crosses a meter of cable in nanoseconds, because the signal is
+the wave of Lesson 4 traveling along the line, not the motion of any one
+electron. The same numbers give copper’s mobility,
+<span class="math notranslate nohighlight">\(\mu_e = \sigma/(ne) = 4.3 \times 10^{-3}\ \text{m}^2/(\text{V}\cdot\text{s})\)</span>,
+and from <span class="math notranslate nohighlight">\(\mu_e = e\tau/m\)</span> the average time between collisions is
+<span class="math notranslate nohighlight">\(\tau = m\mu_e/e = 2.4 \times 10^{-14}\)</span> s.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-conductivity-of-common-materials">
+<div class="wrap docutils container">
+<p class="rubric">Conductivity of Common Materials</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-conductivity.svg"
+     alt="Horizontal bar chart of conductivity on a logarithmic axis: copper 5.8 times 10 to the 7, gold 4.4 times 10 to the 7, aluminum 3.7 times 10 to the 7, iron 1.0 times 10 to the 7, and carbon 1.3 times 10 to the 5 lie above the good-conductor line at 10 to the 5 siemens per meter; seawater 4, tap water 10 to the minus 2, silicon 4.4 times 10 to the minus 4, dry soil 10 to the minus 4, and distilled water 6 times 10 to the minus 6 lie below it"
+     style="max-width: 640px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>A <strong>good conductor</strong> has <span class="math notranslate nohighlight">\(\sigma &gt; 10^5\)</span> S/m; a good insulator, <span class="math notranslate nohighlight">\(\sigma &lt; 10^{-10}\)</span> S/m.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Conductivity spans more orders of magnitude than almost any other material
+property. The metals sit near <span class="math notranslate nohighlight">\(10^7\)</span> S/m, with copper the best of the common
+ones and aluminum close behind. Carbon conducts well enough to make
+resistors. Seawater conducts because its dissolved salt supplies ions that
+carry charge, and tap water conducts less because it carries less salt;
+distilled water, with almost no ions, conducts very little. Pure silicon
+sits below seawater. Good insulators such as glass and polyethylene fall
+below <span class="math notranslate nohighlight">\(10^{-10}\)</span> S/m, left of the dashed insulator line, and free space, with
+no charge to move, has <span class="math notranslate nohighlight">\(\sigma = 0\)</span>. The two thresholds are conventions, the
+ones Ellingson’s Chapter 6 uses, not physical boundaries. Lesson 33 compares
+the conduction current <span class="math notranslate nohighlight">\(\sigma E\)</span> with the displacement current
+<span class="math notranslate nohighlight">\(\omega\epsilon E\)</span>, and the comparison gives the thresholds a meaning: for
+copper at 100 MHz, <span class="math notranslate nohighlight">\(\sigma/(\omega\epsilon_0) = 5.8 \times 10^7/(5.6 \times 10^{-3}) = 1.0 \times 10^{10}\)</span>,
+so the conduction current dominates completely. The red marker is the RG-58
+dielectric at 100 MHz, which the last frames of this lesson compute.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-what-makes-a-good-conductor">
+<div class="wrap docutils container">
+<p class="rubric">What Makes a Good Conductor</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\sigma = e\left(n\mu_n + p\mu_p\right)\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-left"><p>Carriers (<span class="math notranslate nohighlight">\(\text{m}^{-3}\)</span>)</p></th>
+<th class="head text-left"><p>Mobility (<span class="math notranslate nohighlight">\(\text{m}^2/\text{V}\cdot\text{s}\)</span>)</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\sigma\)</span> (S/m)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Copper</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(n = 8.5 \times 10^{28}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.0043\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(5.8 \times 10^7\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Silicon</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(n = p = 1.5 \times 10^{16}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.14 + 0.045\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(4.4 \times 10^{-4}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A semiconductor carries current with two kinds of carrier: free electrons, of
+density <span class="math notranslate nohighlight">\(n\)</span> and mobility <span class="math notranslate nohighlight">\(\mu_n\)</span>, and holes, the vacancies an electron leaves
+behind, which move as positive charges with density <span class="math notranslate nohighlight">\(p\)</span> and mobility <span class="math notranslate nohighlight">\(\mu_p\)</span>.
+Each kind adds its own term to the conductivity. Pure silicon at room
+temperature has <span class="math notranslate nohighlight">\(1.5 \times 10^{16}\)</span> of each per cubic meter, so
+<span class="math notranslate nohighlight">\(\sigma = 1.602 \times 10^{-19} \times 1.5 \times 10^{16} \times (0.14 + 0.045) = 4.4 \times 10^{-4}\)</span>
+S/m. Silicon’s electrons are about 30 times more mobile than copper’s, yet
+copper conducts <span class="math notranslate nohighlight">\(10^{11}\)</span> times better, because it has more than <span class="math notranslate nohighlight">\(10^{12}\)</span>
+times as many carriers. The number of free carriers decides whether
+a material is a good conductor; the mobility adjusts the result within each
+class.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-resistance-of-a-wire">
+<div class="wrap docutils container">
+<p class="rubric">Resistance of a Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-wire.svg"
+     alt="A straight wire of radius a and length l along the z axis, held at plus V on the left end and zero on the right; the uniform field E and current density J equal sigma E point along the axis from the high end to the low end"
+     style="max-width: 600px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Uniform wire, steady current: <span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{z}}\ E\)</span> is the same everywhere inside.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A wire of length <span class="math notranslate nohighlight">\(\ell\)</span> and radius <span class="math notranslate nohighlight">\(a\)</span>, with conductivity <span class="math notranslate nohighlight">\(\sigma\)</span>, has its end
+at <span class="math notranslate nohighlight">\(z = 0\)</span> held at voltage <span class="math notranslate nohighlight">\(V\)</span> and its end at <span class="math notranslate nohighlight">\(z = \ell\)</span> at zero. The current
+density is <span class="math notranslate nohighlight">\(\sigma\mathbf{E}\)</span> and points along the wire. With a steady
+current, the same current crosses every cross section, because
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span> allows no charge to collect between them; every
+cross section has the same area, so <span class="math notranslate nohighlight">\(\mathbf{J}\)</span>, and with it <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>,
+has the same magnitude all along the wire. At DC the current density is also
+uniform across each cross section. No current crosses the side surface of the
+wire, and a uniform axial field meets that condition and satisfies the
+Laplace equation of Lesson 23 inside the metal, so by the uniqueness result
+of Lesson 23 it is the field. The field is therefore a constant
+<span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\ E\)</span> throughout the metal, and we can find the voltage and the
+current from it.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-deriving-the-resistance">
+<div class="wrap docutils container">
+<p class="rubric">Deriving the Resistance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} V &amp;= -\int_{\ell}^{0} E\ dz = E\ell \\ I &amp;= \int_S \sigma E\ \hat{\mathbf{z}}\cdot\hat{\mathbf{z}}\ ds = \sigma E A \\ R &amp;= \frac{V}{I} = \frac{E\ell}{\sigma E A} = \frac{\ell}{\sigma A} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The voltage of the <span class="math notranslate nohighlight">\(z = 0\)</span> end relative to the <span class="math notranslate nohighlight">\(z = \ell\)</span> end is the line
+integral from Lesson 22, <span class="math notranslate nohighlight">\(V_{21} = -\int_{P_1}^{P_2}\mathbf{E}\cdot d\mathbf{l}\)</span>,
+taken from the low end at <span class="math notranslate nohighlight">\(z = \ell\)</span> to the high end at <span class="math notranslate nohighlight">\(z = 0\)</span> with
+<span class="math notranslate nohighlight">\(d\mathbf{l} = \hat{\mathbf{z}}\ dz\)</span>. Reversing the limits cancels the minus
+sign, and the voltage is the field times the length. The current is the flux
+of <span class="math notranslate nohighlight">\(\mathbf{J} = \sigma E\ \hat{\mathbf{z}}\)</span> through the cross section of area
+<span class="math notranslate nohighlight">\(A = \pi a^2\)</span>, and since <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is uniform, the integral is <span class="math notranslate nohighlight">\(\sigma E A\)</span>.
+The ratio of voltage to current is the resistance. The field cancels, which
+confirms that the resistance depends only on the material and the geometry: it
+grows with length and falls with conductivity and cross-sectional area.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-rg-58-center-conductor">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The RG-58 Center Conductor</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(a = 0.405\)</span> mm, copper:</p>
+<div class="math notranslate nohighlight">
+\[R' = \frac{R}{\ell} = \frac{1}{\sigma\pi a^2} = \frac{1}{5.8 \times 10^7 \times \pi \times \left(0.405 \times 10^{-3}\right)^2} = 33.5\ \text{m}\Omega/\text{m}\]</div>
+<ul class="simple">
+<li><p>At 100 MHz the center conductor carries its current in a skin depth <span class="math notranslate nohighlight">\(\delta = 6.6\ \mu\)</span>m: <span class="math notranslate nohighlight">\(R' = 1.03\ \Omega\)</span>/m, <span class="math notranslate nohighlight">\(31\)</span> times larger.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The center conductor of RG-58 has radius <span class="math notranslate nohighlight">\(a = 0.405\)</span> mm, so its cross section
+is <span class="math notranslate nohighlight">\(A = 5.15 \times 10^{-7}\ \text{m}^2\)</span>, and a meter of it has a DC resistance
+of <span class="math notranslate nohighlight">\(33.5\)</span> m<span class="math notranslate nohighlight">\(\Omega\)</span>. At high frequency the current crowds toward the surface
+of each conductor, as Lessons 3 and 5 described. This is the <strong>skin effect</strong>:
+the current density falls off with depth below the surface, and most of the
+current flows within a <strong>skin depth</strong></p>
+<div class="math notranslate nohighlight">
+\[\delta = \frac{1}{\sqrt{\pi f\mu\sigma}} = \frac{1}{\sqrt{\pi \times 10^8 \times 4\pi \times 10^{-7} \times 5.8 \times 10^7}} = 6.6\ \mu\text{m}\]</div>
+<p>for copper at 100 MHz. This lesson quotes <span class="math notranslate nohighlight">\(\delta\)</span>: it comes from the wave
+inside a conductor, which Lesson 36 derives from the time-varying fields of
+Module 4. Treating the current as a layer of thickness <span class="math notranslate nohighlight">\(\delta\)</span> around the
+circumference, the area is <span class="math notranslate nohighlight">\(2\pi a\delta\)</span> in place of <span class="math notranslate nohighlight">\(\pi a^2\)</span>, and
+<span class="math notranslate nohighlight">\(\ell/(\sigma A)\)</span> gives <span class="math notranslate nohighlight">\(R' = 1/(\sigma\ 2\pi a\delta) = 1.03\ \Omega\)</span>/m,
+<span class="math notranslate nohighlight">\(31\)</span> times the DC value. The shield, of inner radius <span class="math notranslate nohighlight">\(b = 1.475\)</span> mm, adds
+<span class="math notranslate nohighlight">\(1/(\sigma\ 2\pi b\delta) = 0.28\ \Omega\)</span>/m, and the sum, <span class="math notranslate nohighlight">\(1.31\ \Omega\)</span>/m,
+is the <span class="math notranslate nohighlight">\(R'\)</span> that <a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html"><span class="doc std std-doc">Lesson 5</span></a>
+used from the equation sheet.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-leakage-through-a-coax-dielectric">
+<div class="wrap docutils container">
+<p class="rubric">Leakage Through a Coax Dielectric</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L27-coax-leak.svg"
+     alt="Cross section of a coaxial line whose dielectric has conductivity sigma and permittivity epsilon; the inner conductor of radius a is at voltage V and the shield of radius b at zero; the leakage current density J points radially outward, and a dashed circle of radius rho marks a cylinder that the current crosses"
+     style="max-width: 360px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>Voltage <span class="math notranslate nohighlight">\(V\)</span> on the inner conductor, <span class="math notranslate nohighlight">\(0\)</span> on the shield; the dielectric has a small <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+<li><p>The same current crosses every cylinder of radius <span class="math notranslate nohighlight">\(\rho\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>No real insulator has <span class="math notranslate nohighlight">\(\sigma = 0\)</span>. When the dielectric of a coaxial line
+conducts slightly, the voltage between the conductors drives a small current
+straight through the dielectric, from the inner conductor of radius <span class="math notranslate nohighlight">\(a\)</span> to the
+shield of radius <span class="math notranslate nohighlight">\(b\)</span>. By symmetry the leakage current flows radially. This is
+the shunt conductance <span class="math notranslate nohighlight">\(G'\)</span> that Lesson 3 placed between the conductors in the
+lumped-element model, and we find it with the same steps as the resistance of
+the wire: find <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, integrate it for the voltage, take the flux of
+<span class="math notranslate nohighlight">\(\sigma\mathbf{E}\)</span> for the current, and divide. The current now spreads over
+cylinders of growing area instead of flowing through a fixed cross section.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-deriving-the-leakage-conductance">
+<div class="wrap docutils container">
+<p class="rubric">Deriving the Leakage Conductance</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Charge <span class="math notranslate nohighlight">\(\rho_\ell\)</span> per meter on the inner conductor, length <span class="math notranslate nohighlight">\(\ell\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{E} &amp;= \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\rho}, \qquad V = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{b}{a} \\ I &amp;= \int_0^{\ell}\int_0^{2\pi} \sigma\frac{\rho_\ell}{2\pi\epsilon\rho}\ \rho\ d\phi\ dz = \frac{\sigma\rho_\ell\ \ell}{\epsilon} \\ G &amp;= \frac{I}{V} = \frac{2\pi\sigma\ell}{\ln(b/a)}, \qquad G' = \frac{G}{\ell} = \frac{2\pi\sigma}{\ln(b/a)} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The field and the voltage come directly from Lesson 25: a line charge density
+<span class="math notranslate nohighlight">\(\rho_\ell\)</span> on the inner conductor gives a radial field that falls as <span class="math notranslate nohighlight">\(1/\rho\)</span>,
+and its line integral from the shield to the inner conductor gives a voltage
+proportional to <span class="math notranslate nohighlight">\(\ln(b/a)\)</span>. With a steady leakage current and a uniform
+<span class="math notranslate nohighlight">\(\sigma\)</span>, <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span> means <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{E} = 0\)</span> in the
+dielectric, so the field obeys the same Laplace equation as in Lesson 23 and
+keeps the same form. The current crosses a cylinder of radius <span class="math notranslate nohighlight">\(\rho\)</span> and
+length <span class="math notranslate nohighlight">\(\ell\)</span> with <span class="math notranslate nohighlight">\(d\mathbf{s} = \hat{\boldsymbol{\rho}}\ \rho\ d\phi\ dz\)</span>.
+The factor <span class="math notranslate nohighlight">\(\rho\)</span> in the area cancels the <span class="math notranslate nohighlight">\(1/\rho\)</span> in the field, so the same
+current crosses every such cylinder, as <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span> requires.
+The conductance is the current over the voltage, and the line charge density
+cancels. The conductance grows with length, because each meter of cable is
+another leakage path in parallel, so the transmission-line quantity is <span class="math notranslate nohighlight">\(G'\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-g-and-c">
+<div class="wrap docutils container">
+<p class="rubric">G′ and C′</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{G'}{C'} = \frac{2\pi\sigma/\ln(b/a)}{2\pi\epsilon/\ln(b/a)} = \frac{\sigma}{\epsilon}\]</div>
+<ul class="simple">
+<li><p>RG-58 at 100 MHz: <span class="math notranslate nohighlight">\(G' = 1.22 \times 10^{-5}\)</span> S/m in <a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html"><span class="doc std std-doc">Lesson 5</span></a> gives <span class="math notranslate nohighlight">\(\sigma = 2.5\ \mu\)</span>S/m.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 25 derived <span class="math notranslate nohighlight">\(C' = 2\pi\epsilon/\ln(b/a)\)</span> for the same geometry. The
+logarithm, which carries all of the geometry, appears in both results, so
+their ratio depends only on the dielectric: <span class="math notranslate nohighlight">\(G'/C' = \sigma/\epsilon\)</span>. Once we
+know the capacitance per meter of a line, we know its conductance per meter
+for any dielectric conductivity, without a second derivation. For RG-58,
+<span class="math notranslate nohighlight">\(\epsilon = 2.25\epsilon_0\)</span> and <span class="math notranslate nohighlight">\(C' = 96.8\)</span> pF/m, so the <span class="math notranslate nohighlight">\(G'\)</span> that Lesson 5
+used at 100 MHz corresponds to</p>
+<div class="math notranslate nohighlight">
+\[\sigma = \frac{\epsilon\ G'}{C'} = \frac{2.25 \times 8.854 \times 10^{-12} \times 1.22 \times 10^{-5}}{96.8 \times 10^{-12}} = 2.5 \times 10^{-6}\ \text{S/m}\]</div>
+<p>That effective conductivity comes from the polyethylene’s loss at 100 MHz, not
+from a current at DC. Lesson 5 wrote the same loss as
+<span class="math notranslate nohighlight">\(G' = \omega C'\tan\delta\)</span>, and the ratio <span class="math notranslate nohighlight">\(G'/C' = \sigma/\epsilon\)</span> turns it
+into an effective conductivity directly:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_\text{eff} = \omega\epsilon\tan\delta = 2\pi \times 10^8 \times 2.25 \times 8.854 \times 10^{-12} \times 2 \times 10^{-4} = 2.5 \times 10^{-6}\ \text{S/m}\]</div>
+<p>the same value. It lies thirteen orders of magnitude below the conductivity
+of the copper around it, which is why the dielectric term in Lesson 5’s
+attenuation was so small.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J}\)</span></p></td>
+<td class="text-left"><p>Current per unit area, along the motion of positive charge</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J} = \rho_v\mathbf{u}\)</span>, in A/m²</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Current through <span class="math notranslate nohighlight">\(S\)</span></p></td>
+<td class="text-left"><p>Flux of <span class="math notranslate nohighlight">\(\mathbf{J}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(I = \int_S \mathbf{J}\cdot d\mathbf{s}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Steady current</p></td>
+<td class="text-left"><p>No charge piles up</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint \mathbf{J}\cdot d\mathbf{s} = 0\)</span>, <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ohm’s law, point form</p></td>
+<td class="text-left"><p>Drift of free carriers in a field</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbf{J} = \sigma\mathbf{E}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\sigma\)</span></p></td>
+<td class="text-left"><p>Carrier density times charge times mobility</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sigma = e(n\mu_n + p\mu_p)\)</span>; copper <span class="math notranslate nohighlight">\(5.8 \times 10^7\)</span> S/m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Good conductor</p></td>
+<td class="text-left"><p>Many free carriers</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\sigma &gt; 10^5\)</span> S/m</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Skin depth</p></td>
+<td class="text-left"><p>Depth of the current at high frequency (quoted)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\delta = 1/\sqrt{\pi f\mu\sigma}\)</span>; copper at 100 MHz, <span class="math notranslate nohighlight">\(6.6\ \mu\)</span>m</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Wire</p></td>
+<td class="text-left"><p>Uniform <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{J}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(R = \ell/(\sigma A)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Coax leakage</p></td>
+<td class="text-left"><p>Radial <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> through the dielectric</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(G' = \frac{2\pi\sigma}{\ln(b/a)}\)</span>, <span class="math notranslate nohighlight">\(G'/C' = \sigma/\epsilon\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L27_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L27_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 28</strong>: a steady current produces a magnetic field, by the Biot-Savart law.</p></li>
+<li><p><strong>Lesson 29</strong>: Ampere’s law, which needs <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span>.</p></li>
+<li><p><strong>Lesson 30</strong>: the coaxial <span class="math notranslate nohighlight">\(L'\)</span>, and with it <span class="math notranslate nohighlight">\(Z_0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today we described current at a point and connected it to the field that
+drives it. A steady current does more than carry charge: it produces a
+magnetic field around it, and Lesson 28 finds that field from the current by
+the Biot-Savart law, the magnetic counterpart of Coulomb’s law. Lesson 29
+derives Ampere’s law, whose point form is consistent only because a steady
+current has <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span>. Lesson 30 applies Ampere’s law to
+the coaxial line and derives <span class="math notranslate nohighlight">\(L'\)</span>, the last of the four line constants.</p>
+<p>Before Lesson 28, read sections 7.1 through 7.3 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L27-current-density"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

@@ -102,25 +102,44 @@ circle the real part of $\Gamma$ equals $\vert\Gamma\vert^2$. We substitute
 that into Lesson 10's expression for $x$, expand
 $\left(1 - \Gamma_r\right)^2 + \Gamma_i^2 = 1 - 2\Gamma_r + \vert\Gamma\vert^2$,
 and replace $\Gamma_r$ again. Solving the circle for $\Gamma_i$ finishes the
-chain. The VSWR circle crosses $r = 1$ twice, at $\pm x$, and the angle of the
-upper crossing is $\cos^{-1}\vert\Gamma\vert$, which sets how far to rotate.
+chain. The VSWR circle crosses $r = 1$ twice, at $\pm x$. The angle $\phi$ of
+the upper crossing follows from its real part:
+$\cos\phi = \Gamma_r/\vert\Gamma\vert = \vert\Gamma\vert^2/\vert\Gamma\vert = \vert\Gamma\vert$,
+so the crossings sit at $\pm\cos^{-1}\vert\Gamma\vert$, which sets how far to
+rotate.
 ::::
 
 ::::{frame} The Series-Element Procedure
 :::{present}
 1. Plot $z_L$ and its VSWR circle.
-2. Rotate toward the generator to $r = 1$: $z = 1 \pm jx$.
-3. Read $d$ on the WTG scale.
-4. Add a series $\mp jx$.
-5. Convert $xZ_0$ to C or L at $f$.
+2. Mark both $r = 1$ crossings: $z = 1 \pm jx$.
+3. Choose one by the design constraint.
+4. $d$ = WTG of crossing − WTG of load.
+5. Add series $\mp jx$; convert $xZ_0$ to C or L.
 :::
 
-The procedure follows the two moves. The rotation sets the line length $d$
-between the load and the element, measured on the WTG scale as in Lesson 11.
-The element cancels the reactance at that point, and its value comes from
-$\omega L = xZ_0$ for an inductor or $1/(\omega C) = xZ_0$ for a capacitor.
-Both crossings of the $r = 1$ circle work, and the first one reached gives the
-shorter line.
+The procedure follows the two moves, and it has a choice in the middle. The
+VSWR circle crosses the $r = 1$ circle twice, and both crossings are valid
+designs. We choose between them by the **design constraint**. If the line
+between the load and the element must be as short as possible, we take the
+crossing we reach first turning toward the generator. If the element must be
+an inductor, or a capacitor, we take the crossing whose reactance that element
+cancels. When Lesson 13 replaces the element with a stub, the constraint is
+often the shortest stub, which can be the other crossing.
+
+Which crossing comes first depends on where the load sits. The upper crossing,
+$1 + jx$, reads $(180^\circ - \phi)/720^\circ$ wavelengths on the WTG scale and
+the lower crossing, $1 - jx$, reads $(180^\circ + \phi)/720^\circ$, with
+$\phi = \cos^{-1}\vert\Gamma\vert$. The line length $d$ is the crossing's WTG
+reading minus the load's. When the difference is negative, the turn has passed
+the left edge, where the scale starts over, and we add $0.5\lambda$. A load at
+$26.6^\circ$ with $\vert\Gamma\vert = 0.447$ reads $0.213\lambda$, and its
+crossings read $0.162\lambda$ and $0.338\lambda$. The lower crossing is
+$0.338 - 0.213 = 0.125\lambda$ away and the upper one is
+$0.162 - 0.213 + 0.5 = 0.449\lambda$ away, so for this load the shortest line
+ends at $1 - jx$. The element cancels the reactance at the chosen point, and
+its value comes from $\omega L = xZ_0$ for an inductor or
+$1/(\omega C) = xZ_0$ for a capacitor.
 ::::
 
 ::::{frame} Worked Example: Series Capacitor
@@ -134,11 +153,13 @@ shorter line.
 :class: tip
 The load $Z_L = 33.9 + j17.9\ \Omega$ terminates a $50\ \Omega$ line, so
 $z_L = 0.678 + j0.358$ and $\Gamma_L = 0.281\angle 119.9^\circ$, which reads
-$0.083\lambda$ on the WTG scale. The $r = 1$ circle needs
-$x = 2(0.281)/\sqrt{1 - 0.281^2} = 0.585$, and its upper crossing is at
-$\cos^{-1}0.281 = 73.7^\circ$. Turning clockwise from $119.9^\circ$ to
-$73.7^\circ$ is $46.2^\circ$, so $d = 46.2^\circ/720^\circ = 0.0642\lambda$,
-and the input is $z = 1 + j0.585$. A series capacitor of $-j0.585$, or
+$0.0834\lambda$ on the WTG scale. The $r = 1$ circle needs
+$x = 2(0.281)/\sqrt{1 - 0.281^2} = 0.585$, and its crossings are at
+$\pm\cos^{-1}0.281 = \pm 73.7^\circ$, which read $0.1476\lambda$ and
+$0.3524\lambda$ on the WTG scale. We want the shortest line, and turning
+clockwise from the load reaches the upper crossing first:
+$d = 0.1476\lambda - 0.0834\lambda = 0.0642\lambda$, a turn of $46.2^\circ$.
+The input there is $z = 1 + j0.585$. A series capacitor of $-j0.585$, or
 $-j29.2\ \Omega$, finishes the match:
 
 $$C = \frac{1}{\omega\left(29.2\right)} = \frac{1}{2\pi\left(10^9\right)\left(29.2\right)} = 5.44\ \text{pF}$$
@@ -150,20 +171,21 @@ the capacitor goes $12.8\ \text{mm}$ from the load.
 
 ::::{frame} The Second Solution
 :::{present}
-Keep turning to the lower crossing, $z = 1 - j0.585$:
+The lower crossing, $z = 1 - j0.585$:
 
-- $d = 0.0642\lambda + \dfrac{2\left(73.7^\circ\right)}{720^\circ}\lambda = 0.2689\lambda$
+- $d = 0.3524\lambda - 0.0834\lambda = 0.2689\lambda$
 - Series inductor: $L = \dfrac{0.585\left(50\right)}{2\pi\left(10^9\right)} = 4.65\ \text{nH}$
 :::
 
-The VSWR circle crosses $r = 1$ a second time, below the real axis. Getting
-there takes another $2 \times 73.7^\circ$ of rotation, so the line is
-$0.2689\lambda$ long, and the input there is $1 - j0.585$. The reactance to
-cancel is now positive, so the element is an inductor. The first solution uses
-less line, which means less loss and a wider bandwidth, because a shorter line
-changes its electrical length less as the frequency moves. The second
-solution may still be the better choice when an inductor is easier to build
-than a capacitor, or when the element must sit farther from the load.
+The other crossing of $r = 1$ is below the real axis, at $0.3524\lambda$ on the
+WTG scale. The difference of the two readings gives a line $0.2689\lambda$
+long, which is $2 \times 73.7^\circ$ of rotation past the first solution, and
+the input there is $1 - j0.585$. The reactance to cancel is now negative, so
+the element is an inductor. The first solution uses less line, which means
+less loss and a wider bandwidth, because a shorter line changes its electrical
+length less as the frequency moves. When the constraint is the element and not
+the line, the second solution is the design: an inductor may be easier to
+build than a capacitor, or the element may have to sit farther from the load.
 ::::
 
 ::::{frame} Shunt-Element Matching
@@ -176,14 +198,16 @@ Start from $y_L$ at $-\Gamma_L$; rotate to the $g = 1$ circle; cancel $b$.
 
 A shunt element adds admittance, so we work with $y$ throughout. The load
 admittance is the point opposite the load, $-\Gamma_L$, at
-$0.281\angle -60.1^\circ$, which reads $0.333\lambda$ on the WTG scale. The
+$0.281\angle -60.1^\circ$, which reads $0.3334\lambda$ on the WTG scale. The
 rotation is the same clockwise turn, because admittance moves along the line
 exactly as impedance does, and the $g = 1$ circle is the same circle as
-$r = 1$. The upper crossing is at $73.7^\circ$; turning clockwise from
-$-60.1^\circ$ reaches the lower crossing at $-73.7^\circ$ first, after
-$0.0189\lambda$. There $y = 1 - j0.585$, and a shunt capacitor with
-$\omega C = 0.585/50$ cancels it. The upper crossing comes $0.2953\lambda$
-later and needs a shunt inductor with $1/(\omega L) = 0.585/50$.
+$r = 1$, so its crossings still read $0.1476\lambda$ and $0.3524\lambda$.
+Turning clockwise from $0.3334\lambda$ reaches the lower crossing first, after
+$0.3524\lambda - 0.3334\lambda = 0.0189\lambda$. There $y = 1 - j0.585$, and a
+shunt capacitor with $\omega C = 0.585/50$ cancels it. The upper crossing is
+$0.1476\lambda - 0.3334\lambda + 0.5\lambda = 0.3142\lambda$ from the load and
+needs a shunt inductor with $1/(\omega L) = 0.585/50$. As with the series
+element, the constraint decides between them.
 ::::
 
 ::::{frame} Matching on the Explorer
@@ -202,9 +226,10 @@ later and needs a shunt inductor with $1/(\omega L) = 0.585/50$.
 The explorer opens on the worked example with the line set to $0.0642\lambda$.
 The input sits on the highlighted $r = 1$ circle, and the readout gives
 $z_{in} \approx 1 + j0.585$, the reactance the series capacitor must cancel.
-Drag $d$ to $0.2689\lambda$ for the second series solution. Turn on the
-admittance readout and drag $d$ to $0.0189\lambda$ and $0.3142\lambda$ to find
-the two shunt solutions, where the amber point lands on the same circle.
+Drag $d$ to $0.269\lambda$ for the second series solution. Turn on Admittance
+to show the amber $y_{in}$ point, and drag $d$ to $0.019\lambda$ and
+$0.314\lambda$ to find the two shunt solutions, where the amber point lands on
+the same circle.
 ::::
 
 ::::{frame} Summary
@@ -217,7 +242,7 @@ the two shunt solutions, where the amber point lands on the same circle.
 | Target circle | $r = 1$ for series, $g = 1$ for shunt | the only circle through the center |
 | Reactance there | $x = \pm\frac{2\vert\Gamma\vert}{\sqrt{1 - \vert\Gamma\vert^2}}$ | crossing at $\cos^{-1}\vert\Gamma\vert$ |
 | Element values | From $x Z_0$ or $b/Z_0$ | $\omega L = xZ_0$, $\frac{1}{\omega C} = xZ_0$ |
-| Two solutions | Two crossings of the VSWR circle | shorter line, wider bandwidth |
+| Two solutions | Two crossings of the VSWR circle | choose by the design constraint; $d$ = WTG of crossing − WTG of load |
 ::::
 
 ::::{frame} Practice
@@ -235,7 +260,7 @@ the two shunt solutions, where the amber point lands on the same circle.
 A 5.44 pF capacitor at 1 GHz is hard to buy with the right value and harder to
 mount without adding inductance of its own. At microwave frequencies we build
 the reactance from the line itself: a short length of line ending in a short
-or an open circuit has a purely reactive input impedance. Lesson 13 derives
-that reactance and uses the shunt procedure from today to design a single-stub
-tuner.
+or an open circuit has a purely reactive input impedance, as Lesson 7 showed.
+Lesson 13 places that stub on the chart and uses the shunt procedure from today
+to design a single-stub tuner.
 ::::

@@ -143,7 +143,7 @@ A quarter wavelength is half a turn, so it carries $\Gamma_L$ to the point
 diametrically opposite, $-\Gamma_L$. Substituting $-\Gamma_L$ into the mapping
 flips the fraction, so the normalized input impedance is the reciprocal of the
 normalized load. Undoing the normalization gives
-$Z_{in} = Z_0^2/Z_L$, the quarter-wave transformer of Lesson 8. The right
+$Z_{in} = Z_0^2/Z_L$, the quarter-wave line of Lesson 7. The right
 panel of the worked example figure shows it: half a turn from
 $z_L = 1.5 + j1.2$ lands on $1/z_L = 0.407 - j0.325$.
 ::::
@@ -170,8 +170,11 @@ reflection.
 
 ::::{frame} Voltage Maxima and Minima on the Chart
 :::{present}
-- $\vert V\vert$ max where $\Gamma(d)$ is real and positive: right real axis, $z = \text{VSWR}$.
-- $\vert V\vert$ min where it is real and negative: left real axis, $z = 1/\text{VSWR}$.
+- $\vert V\vert$ max: $\Gamma(d) = +\vert\Gamma\vert$, right real axis, $z = \text{VSWR}$.
+- $\vert V\vert$ min: $\Gamma(d) = -\vert\Gamma\vert$, left real axis:
+
+$$z = \frac{1 - \vert\Gamma\vert}{1 + \vert\Gamma\vert} = \frac{1}{\text{VSWR}}$$
+
 - Example: $d_{\max} = 0.058\lambda$, $d_{\min} = 0.308\lambda$.
 :::
 
@@ -179,12 +182,23 @@ Lesson 6 wrote the voltage magnitude as
 $\vert V\vert = \vert V_0^+\vert \vert 1 + \Gamma(d)\vert$. It is largest when
 $\Gamma(d)$ points along the positive real axis, so the two terms add, and
 smallest when $\Gamma(d)$ points the other way. On the chart, those are the
-two crossings of the VSWR circle with the real axis: the maximum at
-$r = \text{VSWR}$ on the right and the minimum at $r = 1/\text{VSWR}$ on the
-left, a quarter wavelength apart. For our load, the first maximum is the
-clockwise turn of $41.7^\circ$, which is $0.058\lambda$; on the WTG scale the
-right axis reads $0.25\lambda$, and $0.25 - 0.192 = 0.058$. The first minimum
-is $0.25\lambda$ farther, where the impedance is $0.362$, or $18.1\ \Omega$.
+two crossings of the VSWR circle with the real axis, a quarter wavelength
+apart. Lesson 10 showed that the right crossing, $\Gamma = \vert\Gamma\vert$,
+reads $r = \text{VSWR}$. At the left crossing $\Gamma = -\vert\Gamma\vert$, and
+the mapping gives $z = (1 - \vert\Gamma\vert)/(1 + \vert\Gamma\vert)$, the
+reciprocal, so the minimum reads $r = 1/\text{VSWR}$.
+
+To find the distances, we use the WTG scale, where the right axis reads
+$0.25\lambda$ and the left axis reads $0$, which is also $0.5\lambda$. We turn
+clockwise from the load and take whichever crossing we reach first. A load in
+the upper half of the chart, such as ours, reaches the maximum first:
+$d_{\max} = 0.25\lambda - 0.192\lambda = 0.058\lambda$, the clockwise turn of
+$41.7^\circ$. The first minimum is $0.25\lambda$ farther, where the impedance
+is $0.362$, or $18.1\ \Omega$. A load in the lower half reads more than
+$0.25\lambda$ on the WTG scale, so it reaches the minimum first, at
+$d_{\min} = 0.5\lambda$ minus its reading, and its first maximum is
+$0.25\lambda$ beyond that. Whenever a sum of scale readings passes
+$0.5\lambda$, we subtract $0.5\lambda$, because the scale starts over there.
 ::::
 
 ::::{frame} Rotating on the Explorer
@@ -202,8 +216,11 @@ is $0.25\lambda$ farther, where the impedance is $0.362$, or $18.1\ \Omega$.
 
 The explorer opens on today's example, with the load moved $0.1\lambda$ toward
 the generator. The green arc is the rotation, and the readout gives
-$z_{in} = 1.90 - j1.15$. Drag $d$ to $0.25\lambda$ and the input lands on the
-amber point at $-\Gamma_L$, which is the load admittance. Drag it to
+$z_{in} = 1.90 - j1.15$. The amber point is the input admittance $y_{in}$,
+which always sits opposite the green input point, so it moves as we drag $d$.
+Drag $d$ to $0.25\lambda$: the green point reaches $-\Gamma_L$ and $z_{in}$
+reads $0.407 - j0.325$, the load admittance $y_L$, while the amber point has
+moved onto the load and $y_{in}$ reads $1.50 + j1.20$. Drag $d$ to
 $0.5\lambda$ and the input returns to the load. Change the load and confirm
 that a matched load, $R_L = 50\ \Omega$ and $X_L = 0$, never moves.
 ::::

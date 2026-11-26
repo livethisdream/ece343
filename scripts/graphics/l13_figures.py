@@ -3,6 +3,9 @@
 
     L13-stub-tuner.svg   the circuit: a line of length d from the load, then a
                          shunt stub of length l, shorted or open at its end
+    L13-stub-starts.svg  where a short and an open sit on the chart read as
+                         impedance and read as admittance, with the
+                         wavelengths-toward-generator reading of each start
     L13-stub-match.svg   left: y_L = 1.153 - j0.609 (read at -Gamma) rotated
                          0.0189 wavelength to 1 - j0.585, then the stub's
                          +j0.585 moves it to the center; right: the stub
@@ -34,11 +37,15 @@ def stub_tuner():
     ax.text(0.3, (yt + yb) / 2, "to source", fontsize=12, va="center", ha="right", color=GRAY)
     # stub at x = 3.6, hanging down
     xs = 3.6
-    for x in (xs, xs + 0.6):
-        ax.plot([x, x], [yb, -1.6], color=AMBER, lw=4.0, solid_capstyle="butt")
+    # one stub conductor joins the lower line; the other passes over it (the
+    # white gap) and joins the upper line, so the stub sits across the line
+    ax.plot([xs, xs], [yb, -1.6], color=AMBER, lw=4.0, solid_capstyle="butt")
+    ax.plot([xs + 0.6, xs + 0.6], [yb - 0.22, yb + 0.22], color="white", lw=9.0, solid_capstyle="butt")
+    ax.plot([xs + 0.6, xs + 0.6], [yt, -1.6], color=AMBER, lw=4.0, solid_capstyle="butt")
+    for x, y in ((xs, yb), (xs + 0.6, yt)):
+        ax.plot(x, y, "o", color=INK, ms=7, zorder=5)
     ax.plot([xs - 0.1, xs + 0.7], [-1.6, -1.6], color=INK, lw=3.0)
     ax.text(xs + 0.85, -1.6, "short or open", fontsize=12, va="center", color=GRAY)
-    ax.plot([xs + 0.6, xs + 0.6], [yt, yb], color=AMBER, lw=1.2, ls=":")
     # dimensions
     ax.annotate("", xy=(8.0, 2.55), xytext=(xs + 0.3, 2.55), arrowprops=dict(arrowstyle="<|-|>", color=GRAY, lw=1.2))
     ax.text((8.0 + xs + 0.3) / 2, 2.7, "d", fontsize=15, style="italic", ha="center", color=GRAY)
@@ -57,7 +64,7 @@ def stub_match():
     path_const_r(a, 1, -0.585, 0.0, AMBER)
     dot(a, gy, NAVY, "load", dx=0.06, dy=-0.02)
     dot(a, gi, GREEN, "1 − j0.585", dx=-0.04, dy=-0.13, ha="right")
-    dot(a, 0j, AMBER, "match", dx=-0.04, dy=0.1, ha="right")
+    dot(a, 0j, AMBER, "match", dx=-0.05, dy=-0.1, ha="right")
     a.set_title("the load, read as admittance", fontsize=12.5, color=INK)
 
     chart(b)
@@ -78,6 +85,35 @@ def stub_match():
     save(fig, "L13-stub-match.svg")
 
 
+def stub_starts():
+    """Where a short and an open sit, on each reading of the chart."""
+    fig, (a, b) = plt.subplots(1, 2, figsize=(9.6, 4.9))
+    for ax in (a, b):
+        chart(ax)
+        ax.set_xlim(-1.3, 1.3); ax.set_ylim(-1.2, 1.2)
+    dot(a, -1 + 0j, RED, "short, z = 0", dx=0.06, dy=-0.1)
+    dot(a, 1 + 0j, GREEN, "open, z = \u221e", dx=-0.06, dy=-0.1, ha="right")
+    a.set_title("read as impedance", fontsize=12.5, color=INK)
+    dot(b, 1 + 0j, RED, "short, y = \u221e", dx=-0.06, dy=-0.1, ha="right")
+    dot(b, -1 + 0j, GREEN, "open, y = 0", dx=0.06, dy=-0.1)
+    # wavelengths-toward-generator readings of the two starting points, and
+    # the clockwise sense of a longer stub
+    b.text(1.06, 0.0, "0.25\u03bb", color=RED, fontsize=11, ha="left", va="center")
+    b.text(-1.06, 0.0, "0", color=GREEN, fontsize=11, ha="right", va="center")
+    for start, color in ((0.0, RED), (np.pi, GREEN)):
+        th = start - np.linspace(0.08, 0.7, 60)
+        b.plot(1.07 * np.cos(th), 1.07 * np.sin(th), color=color, lw=2.2)
+        b.add_patch(FancyArrowPatch((1.07 * np.cos(th[-6]), 1.07 * np.sin(th[-6])),
+                                    (1.07 * np.cos(th[-1]), 1.07 * np.sin(th[-1])),
+                                    arrowstyle="-|>", mutation_scale=13, color=color, lw=0))
+    b.text(0, 1.06, "b > 0", color=GRAY, fontsize=11, ha="center", va="bottom")
+    b.text(0, -1.06, "b < 0", color=GRAY, fontsize=11, ha="center", va="top")
+    b.set_title("read as admittance", fontsize=12.5, color=INK)
+    fig.subplots_adjust(wspace=0.1)
+    save(fig, "L13-stub-starts.svg")
+
+
 if __name__ == "__main__":
     stub_tuner()
+    stub_starts()
     stub_match()

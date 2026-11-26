@@ -205,7 +205,41 @@ positive, equal to $\vert\Gamma\vert$. Substituting that into the inverse
 mapping gives exactly the formula for VSWR. So the VSWR can be read directly:
 it is the resistance value where the load's circle crosses the right half of
 the real axis. For our load the circle crosses at $r = 2.77$, so the VSWR is
-2.77, which matches $(1 + 0.469)/(1 - 0.469)$.
+2.77, which matches $(1 + 0.469)/(1 - 0.469)$. At the other crossing, on the
+left half of the real axis, $\Gamma = -\vert\Gamma\vert$, and the same mapping
+gives $z = (1 - \vert\Gamma\vert)/(1 + \vert\Gamma\vert) = 1/\text{VSWR}$. For
+our load that crossing reads $r = 0.36$.
+::::
+
+::::{frame} Reading the Paper Chart
+:::{present}
+<img src="../../viz/img/L10-paper-chart.svg"
+     alt="A Smith chart drawn with the scales of the printed chart. Resistance values are printed along the real axis and reactance values where each arc meets the rim. Three scales ring the chart: the angle of the reflection coefficient in degrees innermost, wavelengths toward load in the middle, and wavelengths toward generator outermost. A ray from the center through the load z = 1.5 + j1.2 reaches the angle scale at 41.7 degrees. A ruler under the chart converts distance from the center into the magnitude of the reflection coefficient and the VSWR"
+     style="max-width: 400px; width: 100%; display: block; margin: 0 auto;">
+:::
+
+The <a href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">printed chart</a> carries the same grid
+with more circles and several scales, and the figure shows where each one is.
+The chart prints the value of each resistance circle where the circle crosses
+the real axis, and the value of each reactance arc where the arc meets the
+rim, positive in the upper half and negative in the lower half. To plot
+$z_L = 1.5 + j1.2$, we find the 1.5 circle on the axis and follow it up to the
+1.2 arc.
+
+Three scales ring the chart. The innermost is the **angle of the reflection
+coefficient** in degrees, from $0^\circ$ at the right edge to $\pm 180^\circ$ at
+the left. We read $\theta_\Gamma$ by drawing a ray from the center through the
+point and out to that scale; our load reads $41.7^\circ$. The two outer scales
+count **wavelengths toward the generator** and **wavelengths toward the load**
+from the left edge, and Lesson 11 uses them to move along the line.
+
+The magnitude $\vert\Gamma\vert$ is the distance from the center to the point
+divided by the radius of the rim. We can measure both with a ruler and divide,
+or use the **radially scaled parameters**, the ruler under the chart: we set a
+compass to the distance from the center to the point, move it to that ruler
+with one leg on the mark labeled center, and read $\vert\Gamma\vert$ on the
+reflection coefficient scale and the VSWR on the standing wave ratio scale. For
+our load they read 0.47 and 2.77.
 ::::
 
 ::::{frame} The Smith Chart Explorer
@@ -228,7 +262,7 @@ fixed and sweep $X_L$: the point slides along one constant-resistance circle.
 Hold $X_L$ fixed and sweep $R_L$: it slides along a constant-reactance arc. Set
 $X_L = 0$ and sweep $R_L$ from 0 to 250 Ω to trace the real axis from the short
 toward the open, and confirm that $R_L = 50\ \Omega$ lands on the center. Lesson
-11 uses the $d$ slider.
+11 uses the $d$ slider, the $y_{in}$ readout, and the Admittance switch.
 ::::
 
 ::::{frame} Summary
@@ -242,7 +276,8 @@ toward the open, and confirm that $R_L = 50\ \Omega$ lands on the center. Lesson
 | Constant-$r$ circle | Center $\left(\frac{r}{1 + r}, 0\right)$ | radius $\frac{1}{1 + r}$ |
 | Constant-$x$ arc | Center $\left(1, \frac{1}{x}\right)$ | radius $\frac{1}{\vert x\vert}$ |
 | Landmarks | Short, match, open | left edge, center, right edge |
-| VSWR circle | Constant $\vert\Gamma\vert$, centered on the chart | crosses the right real axis at $r = \text{VSWR}$ |
+| VSWR circle | Constant $\vert\Gamma\vert$, centered on the chart | crosses the real axis at $r = \text{VSWR}$ and $r = 1/\text{VSWR}$ |
+| Paper chart | $r$ on the real axis, $x$ at the rim | angle of $\Gamma$ on the inner rim scale; $\vert\Gamma\vert$ and VSWR on the ruler below |
 ::::
 
 ::::{frame} Practice

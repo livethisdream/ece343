@@ -268,7 +268,8 @@ field. Most materials, including copper, air, and the dielectrics in cables,
 have $\mu_r \approx 1$; ferromagnetic materials such as iron have $\mu_r$ in the
 thousands, which is why transformer cores are made of them. The two free-space
 constants together set the speed of light:
-$c = 1/\sqrt{\mu_0\epsilon_0} = 3.00 \times 10^8$ m/s.
+$c = 1/\sqrt{\mu_0\epsilon_0} = 3.00 \times 10^8$ m/s. We quote this result
+here; Lesson 35 derives it from Maxwell's equations.
 ::::
 
 ::::{frame} Current Density and Conductivity

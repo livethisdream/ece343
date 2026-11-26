@@ -108,8 +108,9 @@ the signal by a phase of $\Delta\phi = 2\pi\ell/\lambda$, or $360^\circ$ for
 every wavelength.
 
 The figure shows the voltage along two lines at the same instant. On a line
-$\lambda/20$ long, the phase delay is $18^\circ$, and the voltage at the load
-is within 5% of the voltage at the source. On a line $1.5\lambda$ long, the
+$\lambda/20$ long, the phase delay is $18^\circ$. At the instant shown, with the
+source at its peak, the voltage at the load is within 5% of the voltage at the
+source, because $\cos 18^\circ = 0.95$. On a line $1.5\lambda$ long, the
 voltage completes one and a half cycles between the two ends, and the source
 and load are $180^\circ$ out of phase.
 ::::
@@ -302,11 +303,14 @@ A 2 m length carries $518\ \text{nH}$ and $194\ \text{pF}$ in total.
 
 The numbers above are the inductance and capacitance per meter of RG-58, a
 common $50\ \Omega$ coaxial cable with a polyethylene dielectric. Lesson 6
-derives both from the cable's dimensions. A 2 m length holds a total of
+computes both from the cable's dimensions, with formulas that Lessons 25 and 30
+derive. A 2 m length holds a total of
 $L'\ell = 259 \times 2 = 518\ \text{nH}$ and $C'\ell = 96.8 \times 2 = 194\ \text{pF}$.
 At 1 kHz those values are negligible: the inductor's reactance is
 $3.3\ \text{m}\Omega$, and the capacitor's is $820\ \text{k}\Omega$. At
-100 MHz they are not. The lumped model does not lump them into one inductor and
+100 MHz they are not: the inductor's reactance is $325\ \Omega$ and the
+capacitor's is $8.2\ \Omega$, both comparable to the $50\ \Omega$ circuit
+around them. The lumped model does not lump them into one inductor and
 one capacitor, though; it spreads them evenly along the length, and that
 distribution produces a traveling wave instead of a resonant circuit.
 ::::

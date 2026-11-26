@@ -44,7 +44,7 @@ course end to end.
 $$\begin{aligned} Z_\text{in} &= Z_0\ \frac{Z_L + jZ_0 \tan\beta d}{Z_0 + jZ_L \tan\beta d} \\ \Gamma(d) &= \Gamma\ e^{-j2\beta d} \\ P &= P_\text{inc}\left(1 - \vert\Gamma\vert^2\right) \end{aligned}$$
 :::
 
-Lesson 7 derived the input impedance of a line of length $d$ terminated in
+Lesson 7 derived the input impedance of a line of length $\ell$ terminated in
 $Z_L$; we now write the length as $d$, the distance from the load toward the
 source, because we will be choosing it. Lesson 6 showed that the reflection
 coefficient at that point is the load's $\Gamma$ rotated by $-2\beta d$, the
@@ -97,9 +97,10 @@ reflection coefficient, which is the move the rest of this lesson depends on.
 :::
 
 As we move away from the load, $\vert\Gamma\vert$ stays fixed and the phase of
-$\Gamma$ rotates. The impedance changes with it, and the Lesson 7 widget showed
-that the normalized resistance passes through $r = 1$ twice in every half
-wavelength. At either of those points the impedance is $z = 1 + jx$: the
+$\Gamma$ rotates. The impedance changes with it. For any load with
+$0 < \vert\Gamma\vert < 1$, the normalized resistance passes through $r = 1$
+twice in every half wavelength; the next two frames show why, and the green
+dots in the Lesson 7 widget mark the two points. At either of those points the impedance is $z = 1 + jx$: the
 resistance is already matched, and only a reactance is left. A capacitor or
 inductor in series with reactance $-jx$ cancels it, and the source sees
 $z = 1$. The design has two unknowns, the distance $d$ and the reactance $x$,
@@ -126,7 +127,7 @@ valid, and each one belongs to a different matching point.
 :::{present}
 $$\begin{aligned} \theta_d &= \angle\frac{jx}{2 + jx} = \pm\left(90^\circ - \tan^{-1}\frac{\vert x\vert}{2}\right) \\ \theta_\Gamma - 2\beta d &= \theta_d \\ d &= \frac{\theta_\Gamma - \theta_d}{720^\circ}\ \lambda \end{aligned}$$
 
-Add $360^\circ$ to $\theta_\Gamma - \theta_d$ if it is negative.
+Reduce $\theta_\Gamma - \theta_d$ to between $0^\circ$ and $360^\circ$.
 :::
 
 The phase of the reflection coefficient at the matching point, $\theta_d$, is
@@ -137,8 +138,9 @@ phase $\theta_\Gamma$ by $-2\beta d$, so we set the rotated phase equal to
 $\theta_d$ and solve for $d$. Since $\beta = 2\pi/\lambda$, the rotation
 $2\beta d$ is $720^\circ$ for every wavelength of $d$, so $d$ is the needed
 rotation divided by $720^\circ$, in wavelengths. A rotation of $360^\circ$
-returns $\Gamma$ to where it started, so adding $360^\circ$ keeps $d$
-positive without changing the answer.
+returns $\Gamma$ to where it started, so we add or subtract $360^\circ$ until
+the rotation lies between $0^\circ$ and $360^\circ$. That gives the shortest
+positive $d$ under any convention for the range of the angles.
 ::::
 
 ::::{frame} Worked Example: The Load

@@ -134,8 +134,11 @@ $\beta > 0$, and the solution below carries both signs anyway. The units of
 $\gamma$ are inverse meters, since $\gamma z$ must be dimensionless. We mark
 the real part in **nepers** per meter and the imaginary part in **radians** per
 meter to keep track of what each one does: the solution will show that $\alpha$
-sets how fast the wave decays and $\beta$ sets how fast its phase changes.
-Lesson 5 computes both for a real cable.
+sets how fast the wave decays and $\beta$ sets how fast its phase changes. The
+**neper** measures decay: a wave that travels a distance $z$ has its amplitude
+multiplied by $e^{-\alpha z}$, and $\alpha z$ is the loss in nepers. In
+decibels, a loss of one neper is $20\log_{10} e = 8.686$ dB. Lesson 5 computes
+$\alpha$ and $\beta$ for a real cable.
 ::::
 
 ::::{frame} The Current Obeys the Same Equation

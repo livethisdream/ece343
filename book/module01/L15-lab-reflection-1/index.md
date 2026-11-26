@@ -153,9 +153,10 @@ At 5 MHz, for example,
 $$X = \frac{1}{2\pi \times 5 \times 10^6 \times 470 \times 10^{-12}} = 67.7\ \Omega, \qquad \phi = \tan^{-1}\frac{50}{67.7} = 36.4^\circ$$
 
 so $\Gamma = 1\angle -72.9^\circ$. Work the other six the same way. Over the
-band you will measure, the capacitor covers only the upper quarter of the
-Smith chart's outer circle; its reactance would equal $50\ \Omega$ at 6.8 MHz,
-just above the top of the sweep.
+band you will measure, the capacitor covers only the lower right quarter of
+the Smith chart's outer circle, clockwise from the open at the right edge. It
+would reach the bottom of the chart, $\Gamma = 1\angle -90^\circ$, where its
+reactance equals $50\ \Omega$ at 6.8 MHz, just above the top of the sweep.
 ::::
 
 ::::{frame} Pre-Lab: The Complex Load
@@ -221,14 +222,18 @@ resistor, and a 470 pF capacitor.
 
 Pause the sweep before each change, then restart it to measure. Read values
 from the markers at the top of the screen; move a marker by dragging it with a
-stylus or with **Markers**, **Select Marker**, and the side buttons.
+stylus or with **Markers**, **Select Marker**, and the side buttons. Record
+every impedance as $Z = R + jX$. If your marker shows a resistance and an
+equivalent capacitance or inductance instead, convert it at the marker
+frequency $f$ with $X = -\frac{1}{2\pi f C}$ or $X = 2\pi f L$.
 
 1. **Open.** Leave the clips apart. Record the magnitude and phase of $S_{11}$,
    and where the trace sits on the Smith chart.
 2. **Short.** Clip the leads together and record the same quantities.
 3. **Capacitor.** Clip the 470 pF capacitor across the leads. At each frequency
-   in the packet's table, record the measured impedance, and compare the trace
-   on the Smith chart with your predicted points.
+   in the packet's table, record the measured impedance in the
+   **Measured $Z_C$** column beside your prediction, and compare the trace on
+   the Smith chart with your predicted points.
 4. **Matched load.** Clip the $50\ \Omega$ resistor across the leads. Record
    $\vert S_{11}\vert$ in dB and the resistance the marker reports.
 5. **Two mismatches.** Clip the $1\ \text{k}\Omega$ resistor across the
@@ -246,12 +251,15 @@ your prediction.
 
 - <a class="doc-link" href="../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
 - <a class="doc-link" href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">Blank Smith chart (PDF)</a>
+- <a class="doc-link" href="https://nanorfe.com/nanovna-manuals.html" target="_blank" rel="noopener">NanoVNA user's guides (nanorfe.com)</a>
 
 :::{depth}
 The packet is the turn-in document for both lab periods, and each team of two
 or three submits one combined report on Gradescope, with every member's name on
 it. It holds the predictions table for the capacitor, a blank Smith chart for
 plotting it, and the questions for each measurement. Bring your predictions to the lab already worked.
+Read the NanoVNA user's guide before the lab as well; it maps the menus the
+procedure uses.
 :::
 ::::
 

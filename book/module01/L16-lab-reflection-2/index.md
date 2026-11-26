@@ -89,7 +89,7 @@ wave over the incident wave, $S_{11}$, and the transmitted wave over the
 incident wave, $S_{21}$. Port 2 is a matched receiver, so it absorbs the
 transmitted wave, and nothing bounces back into the DUT. $S_{21}$ is the
 transmission coefficient for the whole device, the two-port counterpart of the
-$T = 1 + \Gamma$ of Lesson 6.
+$\tau = 1 + \Gamma$ of Lesson 6. The lab packet writes that coefficient as $T$.
 ::::
 
 ::::{frame} What a Lossless Filter Must Do
@@ -159,7 +159,11 @@ The marker reports $Z = R + jX$ at frequency $f$, with $\omega = 2\pi f$.
 | $X > 0$ | an inductor, $X = \omega L$ | $L = \frac{X}{\omega}$ |
 :::
 
-The Smith chart marker reads the impedance the DUT presents at port 1. The sign
+The Smith chart marker reads the impedance the DUT presents at port 1, and we
+record it as $R + jX$. If your marker shows a resistance and an equivalent
+capacitance or inductance instead, that value is already the $C$ or $L$ this
+frame computes, and $X = -1/(\omega C)$ or $X = \omega L$ recovers the
+reactance. The sign
 of the reactance tells you which kind of element the DUT looks like at that
 frequency: negative in the lower half of the chart, capacitive; positive in the
 upper half, inductive. To get the equivalent element value, we set the measured
@@ -198,7 +202,7 @@ calibration from Lesson 15 no longer applies.
    instructor gives the starting range; widen it if you cannot see both the
    passband and the stopband.
 3. Choose **Cal**, then **Reset**.
-4. Connect the SMA cable to channel 0 and, at its free end, attach the SMA open,
+4. Connect an SMA cable to channel 0 in place of the adapter and, at its free end, attach the SMA open,
    short, and load standards in turn, tapping **Open**, **Short**, and **Load**.
 5. Optionally, connect the channel 0 and channel 1 cables with the SMA coupler
    and tap **Thru**.

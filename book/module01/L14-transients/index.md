@@ -40,7 +40,7 @@ theory.
 
 ::::{frame} Where We Were
 :::{present}
-**Lesson 5**: on a lossless line, every wave carries current $\frac{V}{Z_0}$ and travels at
+**Lesson 5**: on a lossless line, a forward wave carries current $+\frac{V}{Z_0}$, a backward wave $-\frac{V}{Z_0}$, and both travel at
 
 $$v_p = \frac{1}{\sqrt{L'C'}}$$
 
@@ -50,7 +50,8 @@ $$\Gamma_L = \frac{Z_L - Z_0}{Z_L + Z_0}$$
 :::
 
 Lesson 5 showed that in a single traveling wave the ratio of voltage to current
-is $Z_0$, and that on a lossless line the phase velocity does not depend on
+is $Z_0$, with a minus sign on the current of a wave traveling in the $-z$
+direction, and that on a lossless line the phase velocity does not depend on
 frequency. Lesson 6 derived the reflection coefficient from the boundary
 condition at a load. Both results came from sinusoidal phasors. Today the
 source is a step, so the first task is to confirm that the same two results
@@ -74,7 +75,10 @@ out a factor of one, where $f'$ is the derivative of $f$ with respect to its
 argument. Substituting $v_p = 1/\sqrt{L'C'}$ and $Z_0 = \sqrt{L'/C'}$, the two
 sides are equal. The second equation checks the same way. So on a lossless
 line a step travels at $v_p$ without changing shape, and its current is its
-voltage over $Z_0$.
+voltage over $Z_0$. A backward wave, $f(t + z/v_p)$, passes the same check with
+$i = -f/Z_0$: the $z$ derivative changes sign, so the current must as well. The
+equations are also linear, so the responses to several steps add, and we can
+follow each wave separately and sum them.
 ::::
 
 ::::{frame} Closing the Switch
@@ -263,7 +267,7 @@ the final value.
 
 The widget runs the worked example. The top panel shows the voltage along the
 line at the time on the slider, and the bottom panel traces the voltage at the
-source and at the load up to that time. Press play and watch the 6.67 V step
+source and at the load up to that time. The animation starts when the page loads; the **Animate** toggle pauses it. Watch the 6.67 V step
 cross the line in one delay $T$, then watch each reflection add or subtract a
 smaller step. Now set $R_L = 50\ \Omega$: the load is matched, nothing
 reflects, and the line settles at $T$. Set $R_s = 50\ \Omega$ with any load:
@@ -296,7 +300,7 @@ In every case the final value is the DC divider.
 
 | Symbol / idea | What it is | Number to remember |
 | :-- | :-- | :-- |
-| Waveform on a lossless line | Any shape travels unchanged at $v_p$, with current $\frac{V}{Z_0}$ | $f\left(t - \frac{z}{v_p}\right)$ |
+| Waveform on a lossless line | Any shape travels unchanged at $v_p$, with current $\pm\frac{V}{Z_0}$ | $f\left(t - \frac{z}{v_p}\right)$ |
 | Turn-on | The source sees only $Z_0$ | $V_1^+ = V_s\frac{Z_0}{Z_s + Z_0}$ |
 | $T$ | One-way delay | $\frac{\ell}{v_p}$ |
 | $\Gamma_L$, $\Gamma_s$ | Reflection at the load and at the source | $\frac{Z_L - Z_0}{Z_L + Z_0}$, $\frac{Z_s - Z_0}{Z_s + Z_0}$ |
@@ -326,6 +330,7 @@ on one screen. Lesson 15 calibrates the instrument and measures loads whose
 reflection coefficients you can predict; Lesson 16 uses it to identify a device
 you cannot see.
 
-Before Lesson 15, read the whole lab packet and the NanoVNA user's guide, and
-work the predictions the packet asks for.
+Before Lesson 15, read the whole lab packet and the
+[NanoVNA user's guide](https://nanorfe.com/nanovna-manuals.html), and work the
+predictions the packet asks for.
 ::::

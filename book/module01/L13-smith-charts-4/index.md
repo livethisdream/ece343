@@ -30,9 +30,12 @@ At microwave frequencies a lumped element is a poor reactance: a few picofarads
 is hard to buy at the right value, and the leads of any part add inductance of
 their own. A short piece of transmission line ending in a short or an open
 circuit has a purely reactive input impedance that we set by cutting it to
-length. That piece is a **stub**. Today we derive the stub's reactance, place
-it on the Smith chart, and design a **single-stub tuner**: a line of length $d$
-from the load, then a stub of length $\ell$ in shunt.
+length. That piece is a **stub**. Lesson 7 derived its reactance, and Lesson 9
+used one to match this lesson's load with algebra. Today we read the same
+design off the Smith chart: we find where a short and an open sit on the
+chart, read a stub's length as a rotation from that point, and design a
+**single-stub tuner**, a line of length $d$ from the load, then a stub of
+length $\ell$ in shunt.
 :::
 ::::
 
@@ -59,7 +62,7 @@ $$\begin{aligned} z_{sc} &= \frac{z_L + j\tan\beta\ell}{1 + jz_L\tan\beta\ell}\b
 
 A stub is a line with a known load, so Lesson 11's input impedance formula
 applies directly. A short circuit is $z_L = 0$, which leaves only
-$j\tan\beta\ell$. The result is purely imaginary for every length, so the stub
+$j\tan\beta\ell$, the normalized form of Lesson 7's $jZ_0\tan\beta\ell$. The result is purely imaginary for every length, so the stub
 is a pure reactance, as a lossless line ending in a lossless load must be. Its
 reciprocal gives the susceptance a shorted stub adds in shunt. As $\ell$ runs
 from zero to $\lambda/4$, the stub's reactance runs from zero to $+j\infty$: a
@@ -81,20 +84,49 @@ positive susceptance and looks like a capacitor. Every value of $b$, positive
 or negative, comes from a stub of each type shorter than $\lambda/2$.
 ::::
 
-::::{frame} Stubs on the Chart
+::::{frame} Shorts and Opens on the Chart
 :::{present}
-- Stub admittance lies on the outer circle, $g = 0$.
-- Shorted stub starts at $y = \infty$: right edge.
-- Open stub starts at $y = 0$: left edge.
-- Lengthen the stub: turn clockwise to the $b$ needed.
+<img src="../../viz/img/L13-stub-starts.svg"
+     alt="Two Smith charts. Left, read as impedance: the short, z = 0, is at the left end of the real axis and the open, z infinite, is at the right end. Right, read as admittance: the two swap, with the open, y = 0, at the left end where the wavelengths toward generator scale reads 0, and the short, y infinite, at the right end where the scale reads 0.25 wavelength; arrows show both turning clockwise as the stub gets longer"
+     style="max-width: 680px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
+- Impedance: short at the left end, open at the right end.
+- Admittance: they swap. Short, $y = \infty$, right end; open, $y = 0$, left end.
+:::
+
+A stub's load is a short or an open, so we first locate both. Lesson 10 put
+the short circuit, $z = 0$, at the left end of the real axis, where
+$\Gamma = -1$, and the open circuit, $z \to \infty$, at the right end, where
+$\Gamma = +1$. A shunt stub adds admittance, and Lesson 11 reads admittance at
+$-\Gamma$, the point opposite through the center. On the admittance reading
+the two ends trade places: a short has $y = \infty$ and sits at the right end,
+and an open has $y = 0$ and sits at the left end. Both have
+$\vert\Gamma\vert = 1$, so a stub's VSWR circle is the outer circle, where
+$g = 0$, and every point a stub can reach is a pure susceptance on the rim.
+The upper half of the rim is positive susceptance and the lower half is
+negative.
+::::
+
+::::{frame} Stub Length on the Chart
+:::{present}
+- Longer stub: turn clockwise around the rim, toward the generator.
+- $\ell$ = WTG of the target $jb$ − WTG of the start.
+- Open stub starts at $0$; shorted stub starts at $0.25\lambda$.
+- Negative result: add $0.5\lambda$.
 :::
 
 A stub is a line, so the chart finds its length the same way it finds any
-length: rotate toward the generator from the load. The stub's load is a short
-or an open with $\vert\Gamma\vert = 1$, so its VSWR circle is the outer circle,
-where $g = 0$. On the admittance reading, a short is $y = \infty$ at the right
-edge and an open is $y = 0$ at the left edge. We turn clockwise from the
-proper edge to the susceptance we need and read the turn on the WTG scale.
+length: we rotate toward the generator from the stub's load to the
+susceptance we need, and the rotation is the length. On the admittance
+reading, the wavelengths toward generator scale reads $0$ at the left end,
+where the open stub starts, and $0.25\lambda$ at the right end, where the
+shorted stub starts. We find the target susceptance $jb$ on the rim and read
+its WTG value. For an open stub that reading is the length. For a shorted stub
+we subtract $0.25\lambda$, and add $0.5\lambda$ when the result is negative,
+because the scale starts over at the left end. The two answers for one
+susceptance always differ by $0.25\lambda$: a quarter wavelength of line turns
+a short into an open.
 ::::
 
 ::::{frame} The Single-Stub Procedure
@@ -102,7 +134,7 @@ proper edge to the susceptance we need and read the turn on the WTG scale.
 1. Plot $y_L$ at $-\Gamma_L$; draw its VSWR circle.
 2. Rotate toward the generator to $g = 1$: $y = 1 \pm jb$; read $d$.
 3. Need a stub of $\mp jb$.
-4. Rotate from the short or open edge to $\mp jb$; read $\ell$.
+4. Rotate around the rim from the short or the open to $\mp jb$; read $\ell$.
 :::
 
 The procedure is Lesson 12's shunt procedure with the capacitor or inductor
@@ -127,8 +159,11 @@ reaches $y = 1 - j0.585$. The stub must add $+j0.585$:
 
 $$\begin{aligned} \text{short: } -\cot\beta\ell &= 0.585, & \beta\ell &= 180^\circ - 59.7^\circ = 120.3^\circ, & \ell &= 0.334\lambda \\ \text{open: } \tan\beta\ell &= 0.585, & \beta\ell &= 30.3^\circ, & \ell &= 0.0842\lambda \end{aligned}$$
 
-On the chart, the $+j0.585$ point on the outer circle reads $0.334\lambda$
-clockwise from the short and $0.084\lambda$ from the open. At 1 GHz on a cable
+On the chart, the $+j0.585$ point on the rim reads $0.084\lambda$ on the WTG
+scale. The open stub starts at $0$, so $\ell = 0.084\lambda$. The shorted stub
+starts at $0.25\lambda$, so
+$\ell = 0.084\lambda - 0.25\lambda + 0.5\lambda = 0.334\lambda$. Both agree
+with the algebra. At 1 GHz on a cable
 with $v_p = 2\times10^{8}\ \text{m/s}$, $\lambda = 20\ \text{cm}$: $d = 3.78$ mm,
 and the stub is $16.8$ mm open or $66.8$ mm shorted.
 :::
@@ -165,6 +200,9 @@ The VSWR circle crosses $g = 1$ twice, so the tuner has a second design. The
 second crossing needs a longer line from the load and a stub of negative
 susceptance, which is inductive. A shorted stub less than $\lambda/4$ long
 supplies it, so the second design pairs a long $d$ with a short shorted stub.
+On the chart, $-j0.585$ reads $0.416\lambda$ on the WTG scale: the open stub
+is $0.416\lambda$ long, and the shorted stub is
+$0.416\lambda - 0.25\lambda = 0.166\lambda$.
 Its total length of line is larger than the first design's open-stub version,
 so it gives the narrower bandwidth of the two. It does have the shortest
 shorted stub, $0.166\lambda$, which can suit a coaxial tuner.
@@ -199,7 +237,8 @@ see the point the stub cancels.
 | :-- | :-- | :-- |
 | Shorted stub | Line ending in a short | $z = j\tan\beta\ell$, $y = -j\cot\beta\ell$ |
 | Open stub | Line ending in an open | $z = -j\cot\beta\ell$, $y = j\tan\beta\ell$ |
-| Stub on the chart | Outer circle, $g = 0$ | short at the right edge, open at the left (as $y$) |
+| Short and open | Ends of the real axis | as $z$: short left, open right; as $y$: short right, open left |
+| Stub length | Clockwise turn on the rim to $jb$ | WTG of $jb$, minus $0$ (open) or $0.25\lambda$ (short); add $0.5\lambda$ if negative |
 | Single-stub tuner | Line $d$, then shunt stub $\ell$ | $d$ to $g = 1$; stub cancels $b$ |
 | Two solutions | Two crossings of $g = 1$ | the shorter total line has the wider band |
 | Short or open | Built as the medium allows | coax shorted, microstrip open |

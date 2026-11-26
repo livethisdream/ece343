@@ -151,8 +151,8 @@ the length of the line. Because $Z_L$ can be complex, so can $\Gamma$. We write
 it as a magnitude and a phase, $\Gamma = \vert\Gamma\vert e^{j\theta_\Gamma}$,
 where $\vert\Gamma\vert$ says how much of the wave comes back and
 $\theta_\Gamma$ says how far the reflected wave is shifted in phase. A passive
-load cannot return more power than it receives, so $\vert\Gamma\vert$ never
-exceeds one.
+load has no source of its own, so the wave it returns cannot be larger than the
+wave that arrives, and $\vert\Gamma\vert$ never exceeds one.
 ::::
 
 ::::{frame} Special Loads
@@ -223,10 +223,13 @@ circuit, $\tau = 2$, and the voltage at the open end doubles.
 :::{present}
 Substitute $V_0^- = \Gamma V_0^+$ into the wave solution:
 
-$$\begin{aligned} \widetilde{V}(z) &= V_0^+ \left(e^{-j\beta z} + \Gamma e^{+j\beta z}\right) \\ \left\vert\widetilde{V}(z)\right\vert &= \left\vert V_0^+\right\vert\ \left\vert 1 + \Gamma e^{j2\beta z} \right\vert \end{aligned}$$
+$$\begin{aligned} \widetilde{V}(z) &= V_0^+ \left(e^{-j\beta z} + \Gamma e^{+j\beta z}\right) \\ \widetilde{I}(z) &= \frac{V_0^+}{Z_0} \left(e^{-j\beta z} - \Gamma e^{+j\beta z}\right) \\ \left\vert\widetilde{V}(z)\right\vert &= \left\vert V_0^+\right\vert\ \left\vert 1 + \Gamma e^{j2\beta z} \right\vert \end{aligned}$$
 :::
 
-With $\Gamma$ known, one amplitude describes the whole line. Factoring
+With $\Gamma$ known, one amplitude describes the whole line. The current
+follows from Lesson 5: each wave's current is its voltage divided by $Z_0$, and
+the reflected wave's current carries a minus sign because that wave travels in
+the $-z$ direction. Lesson 7 uses the voltage and the current together. Factoring
 $e^{-j\beta z}$ out of the sum, whose magnitude is one, leaves the magnitude of
 the voltage at any point. The term $\Gamma e^{j2\beta z}$ is the
 **reflection coefficient at position $z$**: the ratio of the reflected wave to
@@ -314,7 +317,7 @@ along the line.
 
 ::::{frame} Where the Maximum Falls
 :::{present}
-The first voltage maximum toward the source is where $2\beta d = \theta_\Gamma$:
+With $d = -z$ the distance from the load, the first voltage maximum is where $2\beta d = \theta_\Gamma$:
 
 $$d_\text{max} = \frac{\theta_\Gamma}{4\pi}\lambda$$
 
@@ -346,9 +349,11 @@ Reflected fraction: $\vert\Gamma\vert^2$. Delivered fraction: $1 - \vert\Gamma\v
 | 3.0 | 0.50 | 25.0% |
 :::
 
-Power goes as voltage squared, so the fraction of the incident power that
-reflects is $\vert\Gamma\vert^2$, and the fraction the load absorbs is
-$1 - \vert\Gamma\vert^2$. The $125\ \Omega$ load reflects
+Each wave carries power in proportion to the square of its voltage amplitude,
+and the reflected amplitude is $\vert\Gamma\vert$ times the incident one. The
+fraction of the incident power that reflects is therefore $\vert\Gamma\vert^2$,
+and the fraction the load absorbs is $1 - \vert\Gamma\vert^2$. Lesson 7 derives
+both fractions from the voltage and current on the line. The $125\ \Omega$ load reflects
 $0.429^2 = 18.4\%$ of the incident power and absorbs the other 81.6%. The table
 gives a sense of scale. A VSWR of 1.5 reflects only 4% of the power, and most
 equipment specifications treat 2:1 as the edge of acceptable. Beyond that, the

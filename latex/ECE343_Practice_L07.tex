@@ -1,7 +1,8 @@
 % !TEX root =./ECE343_Practice_main.tex
 %
 % L7 practice set (Terminated Transmission Lines): the input impedance
-% derivation, the special cases, stubs, the quarter-wave transformer, and power.
+% derivation, the special cases, stubs, the quarter-wave transformer, power, and
+% the voltage and current at a point on a line driven by a source.
 
 \fullwidth{\textbf{Learning Objectives 3.3 and 3.4: } I can use the transmission
 line equation to calculate the voltage/current at an arbitrary point on a
@@ -44,7 +45,7 @@ on a line terminated in $\myz{L}$ are
 	\begin{solution}[1.2in]
 	\eq{
 		\myz{L} = 0: \quad \myz{in} &= \myz{0}\,\dfrac{j\myz{0}\tan\beta d}{\myz{0}} = j\myz{0}\tan\beta d \\
-		\myz{L} \to \infty: \quad \myz{in} &= \myz{0}\,\dfrac{\myz{L}}{j\myz{L}\tan\beta d} = -j\myz{0}\cot\beta d
+		\myz{L} \to \infty: \quad \myz{in} &= \myz{0}\,\dfrac{\myz{L}}{j\myz{L}\tan\beta d} = -j\myz{0}\cot{\beta d}
 	}
 	For the open line we divide the numerator and denominator by $\myz{L}$ before
 	taking the limit.
@@ -141,7 +142,7 @@ travel at $2\times10^{8}$ m/s.
 		\begin{solution}[1.3in]
 		\eq{
 			\dfrac{1}{\omega C} &= \dfrac{1}{2\pi \times 2\times10^{9} \times 10^{-12}} = 79.6\ \ohms \\
-			\cot\beta\ell &= \dfrac{79.6}{50} = 1.592 \quad\Rightarrow\quad \beta\ell = 32.1^\circ \\
+			\cot{\beta\ell} &= \dfrac{79.6}{50} = 1.592 \quad\Rightarrow\quad \beta\ell = 32.1^\circ \\
 			\ell &= \dfrac{32.1^\circ}{360^\circ}\lambda = 0.089\lambda = 0.89\ \text{cm}
 		}
 		\end{solution}
@@ -254,6 +255,87 @@ $100\ \ohms$ load.
 		\raggedleft \vspace{12pt}
 		$P_L$ = \ansbox[1.3in]{$0.889\ \text{W}$}
 	\end{minipage}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Voltage and current on the line.} A source with
+$V_g = 12\ \text{V}$ and internal impedance $\myz{g} = 50\ \ohms$ drives a
+$50\ \ohms$ line that is $3\lambda/8$ long and ends in a $100\ \ohms$ resistor.
+\begin{parts}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $\Gamma$ and the input impedance of the line.
+		\begin{solution}[1.5in]
+		$\beta\ell = 135^\circ$, so $\tan\beta\ell = -1$:
+		\eq{
+			\Gamma &= \dfrac{100 - 50}{100 + 50} = \dfrac{1}{3} \\
+			\myz{in} &= 50\,\dfrac{100 - j50}{50 - j100} = 50\,\dfrac{(100 - j50)(50 + j100)}{12{,}500} = 40 + j30\ \ohms
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\Gamma$ = \ansbox[1.3in]{$1/3$}
+
+		\vspace{4pt}
+		$\myz{in}$ = \ansbox[1.3in]{$40 + j30\ \ohms$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the voltage at the input of the line, $\tilde{V}(-\ell)$,
+		and then $V_0^+$.
+		\begin{solution}[2.1in]
+		\eq{
+			\tilde{V}(-\ell) &= 12\,\dfrac{40 + j30}{90 + j30} = 12\,\dfrac{(40 + j30)(90 - j30)}{9000} = 6 + j2\ \text{V} \\
+			V_0^+ &= \dfrac{6 + j2}{e^{j135^\circ} + \frac{1}{3}e^{-j135^\circ}}
+			= \dfrac{6\lp 1 + \frac{j}{3}\rp}{e^{j135^\circ}\lp 1 + \frac{1}{3}e^{-j270^\circ}\rp} \\
+			&= 6\angle{-135^\circ}\ \text{V}
+		}
+		since $e^{-j270^\circ} = j$.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\tilde{V}(-\ell)$ = \ansbox[1.3in]{$6 + j2\ \text{V}$}
+
+		\vspace{4pt}
+		$V_0^+$ = \ansbox[1.3in]{$6\angle{-135^\circ}\ \text{V}$}
+	\end{minipage}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find the voltage and the current at the point $\lambda/8$ from
+		the load, $z = -\lambda/8$.
+		\begin{solution}[2.1in]
+		At $z = -\lambda/8$, $e^{-j\beta z} = e^{j45^\circ}$ and
+		$e^{j\beta z} = e^{-j45^\circ}$:
+		\eq{
+			\tilde{V} &= 6e^{-j135^\circ}\lp e^{j45^\circ} + \tfrac{1}{3}e^{-j45^\circ}\rp
+			= 6\lp -j - \tfrac{1}{3}\rp = -2 - j6\ \text{V} \\
+			\tilde{I} &= \dfrac{6e^{-j135^\circ}}{50}\lp e^{j45^\circ} - \tfrac{1}{3}e^{-j45^\circ}\rp
+			= 0.12\lp -j + \tfrac{1}{3}\rp = 0.04 - j0.12\ \text{A}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$\tilde{V}$ = \ansbox[1.3in]{$-2 - j6\ \text{V}$}
+
+		\vspace{4pt}
+		$\tilde{I}$ = \ansbox[1.3in]{$0.04 - j0.12\ \text{A}$}
+	\end{minipage}
+
+	\part Compute $\frac{1}{2}\text{Re}\lb\tilde{V}\tilde{I}^*\rb$ at that point
+	and compare it with
+	$\frac{\vert V_0^+\vert^2}{2\myz{0}}\lp 1 - \vert\Gamma\vert^2\rp$.
+	\begin{solution}[1.2in]
+	\eq{
+		\tfrac{1}{2}\text{Re}\lb(-2 - j6)(0.04 + j0.12)\rb &= \tfrac{1}{2}\lp -0.08 + 0.72\rp = 0.32\ \text{W} \\
+		\dfrac{36}{100}\lp 1 - \tfrac{1}{9}\rp &= 0.32\ \text{W}
+	}
+	The two agree: the same power passes every point on a lossless line.
+	\end{solution}
 
 \end{parts}
 

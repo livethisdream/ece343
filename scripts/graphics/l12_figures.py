@@ -22,15 +22,15 @@ from l10_smith_base import (chart, gamma, gamma_circle, dot, rotate_arc, path_co
 def element_moves():
     fig, (a, b) = plt.subplots(1, 2, figsize=(9.6, 4.8))
     chart(a); r_circle(a, 0.5, BLUE, lw=1.6)
-    path_const_r(a, 0.5, 0.05, 0.9, RED)
-    path_const_r(a, 0.5, -0.05, -0.9, AMBER)
+    path_const_r(a, 0.5, 0.22, 0.9, RED)
+    path_const_r(a, 0.5, -0.22, -0.9, AMBER)
     p = gamma(0.5 + 0.5j); a.text(p.real - 0.05, p.imag + 0.08, "series L", color=RED, fontsize=12, ha="right")
     p = gamma(0.5 - 0.5j); a.text(p.real - 0.05, p.imag - 0.08, "series C", color=AMBER, fontsize=12, ha="right")
     a.set_title("impedance z: constant r", fontsize=12.5, color=INK)
 
     chart(b); r_circle(b, 0.5, BLUE, lw=1.6)
-    path_const_r(b, 0.5, 0.05, 0.9, RED)
-    path_const_r(b, 0.5, -0.05, -0.9, AMBER)
+    path_const_r(b, 0.5, 0.22, 0.9, RED)
+    path_const_r(b, 0.5, -0.22, -0.9, AMBER)
     p = gamma(0.5 + 0.5j); b.text(p.real - 0.05, p.imag + 0.08, "shunt C", color=RED, fontsize=12, ha="right")
     p = gamma(0.5 - 0.5j); b.text(p.real - 0.05, p.imag - 0.08, "shunt L", color=AMBER, fontsize=12, ha="right")
     b.set_title("admittance y: constant g", fontsize=12.5, color=INK)
@@ -48,7 +48,7 @@ def series_match():
     gi = rotate_arc(ax, g, 0.0642)
     path_const_r(ax, 1, 0.585, 0.0, AMBER)
     dot(ax, g, NAVY, "load", dx=-0.06, dy=0.06, ha="right")
-    dot(ax, gi, GREEN, "1 + j0.585", dx=0.05, dy=0.07)
+    dot(ax, gi, GREEN, "1 + j0.585", dx=0.09, dy=0.09)
     dot(ax, 0j, AMBER, "match", dx=-0.04, dy=-0.1, ha="right")
     save(fig, "L12-series-match.svg")
 

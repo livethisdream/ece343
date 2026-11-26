@@ -207,10 +207,22 @@ $20\log_{10} e = 8.686$, so one neper is $8.686$ dB.
 
 :::{admonition} Worked example — how much RG-58 loses
 :class: tip
-At 100 MHz the copper conductors of RG-58 have $R' = 1.31\ \Omega$/m, from the
-coaxial-line formula on the equation sheet, which accounts for the current
-crowding toward the conductor surfaces. The polyethylene dielectric has
-$G' = 1.22 \times 10^{-5}$ S/m. First we check the low-loss conditions:
+We model RG-58 with a solid copper center conductor of radius $a = 0.405$ mm,
+a copper shield of inner radius $b = 1.475$ mm, and a polyethylene dielectric
+with loss tangent $\tan\delta = 2 \times 10^{-4}$. Copper has
+$\sigma = 5.8 \times 10^7$ S/m. At high frequency the current crowds toward
+the conductor surfaces, and the coaxial-line formula on the equation sheet
+gives the series resistance from the surface resistance $R_s$. At 100 MHz,
+
+$$\begin{aligned} R_s &= \sqrt{\frac{\pi f \mu_0}{\sigma}} = \sqrt{\frac{\pi \times 10^8 \times 4\pi \times 10^{-7}}{5.8 \times 10^7}} = 2.61\ \text{m}\Omega \\ R' &= \frac{R_s}{2\pi}\left(\frac{1}{a} + \frac{1}{b}\right) = \frac{2.61 \times 10^{-3}}{2\pi}\left(2469 + 678\right) = 1.31\ \Omega/\text{m} \end{aligned}$$
+
+The dielectric's shunt conductance follows from its loss tangent and the
+$C' = 96.8$ pF/m of the lossless model:
+
+$$G' = \omega C' \tan\delta = 2\pi \times 10^8 \times 96.8 \times 10^{-12} \times 2 \times 10^{-4} = 1.22 \times 10^{-5}\ \text{S/m}$$
+
+We quote both formulas here; Lesson 27 derives them from the current in the
+conductors and in the dielectric. First we check the low-loss conditions:
 $R'/\omega L' = 1.31/163 = 0.008$ and $G'/\omega C' = 0.0002$, both far below
 one. The two contributions to the attenuation are
 

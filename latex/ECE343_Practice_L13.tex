@@ -32,7 +32,7 @@ are lossless with $\myz{0} = 50\ \ohms$ and $v_p = 2\times10^{8}\ \text{m/s}$.}
 	\begin{minipage}[t]{0.58\linewidth}
 		\part Find the input impedance of an open stub $\lambda/8$ long.
 		\begin{solution}[1in]
-		\eq{ z_{oc} &= -j\cot\beta\ell = -j\cot 45^\circ = -j1 \\ \myz{oc} &= -j50\ \ohms }
+		\eq{ z_{oc} &= -j\cot{\beta\ell} = -j\cot{45^\circ} = -j1 \\ \myz{oc} &= -j50\ \ohms }
 		It acts like a capacitor.
 		\end{solution}
 	\end{minipage}\hfill%
@@ -46,9 +46,12 @@ are lossless with $\myz{0} = 50\ \ohms$ and $v_p = 2\times10^{8}\ \text{m/s}$.}
 		normalized susceptance of $+j1$ in shunt.
 		\begin{solution}[1.3in]
 		\eq{
-			\text{short: } -\cot\beta\ell &= 1, & \beta\ell &= 135^\circ, & \ell &= 0.375\lambda \\
+			\text{short: } -\cot{\beta\ell} &= 1, & \beta\ell &= 135^\circ, & \ell &= 0.375\lambda \\
 			\text{open: } \tan\beta\ell &= 1, & \beta\ell &= 45^\circ, & \ell &= 0.125\lambda
 		}
+		On the chart, $+j1$ on the rim reads $0.125\lambda$ on the WTG scale. The
+		open stub starts at $0$; the shorted stub starts at $0.25\lambda$, so
+		$\ell = 0.125\lambda - 0.25\lambda + 0.5\lambda = 0.375\lambda$.
 		\end{solution}
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
@@ -63,9 +66,11 @@ are lossless with $\myz{0} = 50\ \ohms$ and $v_p = 2\times10^{8}\ \text{m/s}$.}
 		\part Repeat part (c) for a susceptance of $-j1$.
 		\begin{solution}[1.1in]
 		\eq{
-			\text{short: } \cot\beta\ell &= 1, & \ell &= 0.125\lambda \\
+			\text{short: } \cot{\beta\ell} &= 1, & \ell &= 0.125\lambda \\
 			\text{open: } \tan\beta\ell &= -1, & \ell &= 0.375\lambda
 		}
+		On the chart, $-j1$ reads $0.375\lambda$: open $0.375\lambda$, shorted
+		$0.375\lambda - 0.25\lambda = 0.125\lambda$.
 		\end{solution}
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}

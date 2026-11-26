@@ -33,7 +33,9 @@ line. Today we compute that ratio at the source end: the **input impedance**
 of a line of length $\ell$ terminated in $Z_L$. The result is the **transmission
 line equation**, and it explains why a length of line can turn a short circuit
 into an inductor, an open circuit into a capacitor, or a $100\ \Omega$ load into
-$50\ \Omega$. We finish with the power that reaches the load, which justifies the
+$50\ \Omega$. With $Z_\text{in}$ in hand we connect a source, find the amplitude
+of the incident wave, and compute the voltage and current at any point on the
+line. We finish with the power that reaches the load, which justifies the
 $\vert\Gamma\vert^2$ rule from Lesson 6.
 :::
 ::::
@@ -99,7 +101,10 @@ the numerator, $Z_L$ multiplies $e^{+j\beta\ell} + e^{-j\beta\ell} = 2\cos\beta\
 and $Z_0$ multiplies $e^{+j\beta\ell} - e^{-j\beta\ell} = 2j\sin\beta\ell$, by
 Euler's identity; the denominator works the same way with the roles of $Z_L$
 and $Z_0$ exchanged. Finally we divide every term by $2\cos\beta\ell$. The
-result is the **transmission line equation** for a lossless line.
+result is the **transmission line equation** for a lossless line. (Lessons 2
+through 4 used the plural, the transmission line equations, for the
+telegrapher's equations. From here on, the singular means this formula for
+$Z_\text{in}$.)
 ::::
 
 ::::{frame} Worked Example: 150 Ω Through λ/8
@@ -148,6 +153,71 @@ reactance passes through zero and where it runs off to infinity. The green
 dots mark where the input resistance equals $Z_0$; Lesson 8 uses them.
 ::::
 
+::::{frame} The Source and the Line
+:::{present}
+<img src="../../viz/img/L07-source-circuit.svg"
+     alt="Left: a generator Vg with internal impedance Zg connects at z = minus ell to a line of characteristic impedance Z0 that ends in a load ZL at z = 0. Right: the same generator and Zg with the line and load replaced by the single impedance Zin"
+     style="max-width: 760px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
+$$\widetilde{V}(-\ell) = V_g\ \frac{Z_\text{in}}{Z_g + Z_\text{in}}$$
+:::
+
+So far $V_0^+$ has been an unknown amplitude. The source sets it. A real source
+is a generator voltage $V_g$ in series with an internal impedance $Z_g$,
+connected to the line at $z = -\ell$. At those terminals the line and the load
+are equivalent to $Z_\text{in}$, so the circuit on the right is an ordinary
+voltage divider, and it gives the total voltage at the input of the line. That
+voltage is the sum of the incident and reflected waves at $z = -\ell$, not the
+incident wave alone.
+::::
+
+::::{frame} Voltage and Current at Any Point
+:::{present}
+$$\begin{aligned} \widetilde{V}(-\ell) &= V_0^+ \left(e^{+j\beta\ell} + \Gamma e^{-j\beta\ell}\right) = V_g\ \frac{Z_\text{in}}{Z_g + Z_\text{in}} \\ V_0^+ &= V_g\ \frac{Z_\text{in}}{Z_g + Z_\text{in}} \cdot \frac{1}{e^{+j\beta\ell} + \Gamma e^{-j\beta\ell}} \\ \widetilde{V}(z) &= V_0^+ \left(e^{-j\beta z} + \Gamma e^{+j\beta z}\right) \\ \widetilde{I}(z) &= \frac{V_0^+}{Z_0} \left(e^{-j\beta z} - \Gamma e^{+j\beta z}\right) \end{aligned}$$
+:::
+
+The wave solution and the voltage divider describe the same voltage at
+$z = -\ell$, so we set them equal and solve for $V_0^+$. With $V_0^+$ known,
+the two expressions from Lesson 6 give the voltage and the current at any point
+on the line: substitute the value of $z$, which is negative everywhere between
+the source and the load. The procedure has four steps. Find $\Gamma$ from the
+load, find $Z_\text{in}$ from the transmission line equation, find $V_0^+$ from
+the divider, and evaluate $\widetilde{V}(z)$ and $\widetilde{I}(z)$ where we
+need them.
+::::
+
+::::{frame} Worked Example: Voltage and Current at the Load
+:::{present}
+$V_g = 10\ \text{V}$, $Z_g = 50\ \Omega$, and the $150\ \Omega$ load through $\lambda/8$ of $50\ \Omega$ line:
+
+$$\begin{aligned} \widetilde{V}(-\ell) &= 10\ \frac{30 - j40}{80 - j40} = 5 - j2.5\ \text{V} \\ V_0^+ &= \frac{5 - j2.5}{e^{+j45^\circ} + 0.5 e^{-j45^\circ}} = 5\angle -45^\circ\ \text{V} \\ \widetilde{V}(0) &= V_0^+ (1 + 0.5) = 7.5\angle -45^\circ\ \text{V} \\ \widetilde{I}(0) &= \frac{V_0^+}{50} (1 - 0.5) = 50\angle -45^\circ\ \text{mA} \end{aligned}$$
+:::
+
+:::{admonition} Worked example — a 10 V source and the 150 Ω load
+:class: tip
+A source with $V_g = 10\ \text{V}$ and $Z_g = 50\ \Omega$ drives the line of the
+earlier example, so $\Gamma = 0.5$, $\beta\ell = 45^\circ$, and
+$Z_\text{in} = 30 - j40\ \Omega$. The voltage divider gives the input voltage:
+
+$$\widetilde{V}(-\ell) = 10\ \frac{30 - j40}{80 - j40} = 10\ \frac{(30 - j40)(80 + j40)}{80^2 + 40^2} = 10\ \frac{4000 - j2000}{8000} = 5 - j2.5\ \text{V}$$
+
+To divide by $e^{+j45^\circ} + 0.5 e^{-j45^\circ}$ we factor out $e^{+j45^\circ}$,
+which leaves $1 + 0.5 e^{-j90^\circ} = 1 - j0.5$:
+
+$$V_0^+ = \frac{5 - j2.5}{e^{+j45^\circ}\left(1 - j0.5\right)} = \frac{5\left(1 - j0.5\right)}{e^{+j45^\circ}\left(1 - j0.5\right)} = 5\angle -45^\circ\ \text{V}$$
+
+At the load, $z = 0$ and both exponentials equal one, so
+$\widetilde{V}(0) = 7.5\angle -45^\circ\ \text{V}$ and
+$\widetilde{I}(0) = 50\angle -45^\circ\ \text{mA}$. Their ratio is
+$7.5/0.05 = 150\ \Omega$, the load impedance, as it must be. The load absorbs
+$\frac{1}{2}(7.5)(0.05) = 0.188\ \text{W}$. The incident amplitude is
+$V_g/2$ here because $Z_g = Z_0$: a source matched to the line launches half of
+$V_g$ onto it and absorbs the reflected wave when it returns. The $-45^\circ$ is
+the phase delay of $\lambda/8$ of line.
+:::
+::::
+
 ::::{frame} Shorted and Open Lines
 :::{present}
 $$\begin{aligned} Z_L = 0: \quad Z_\text{in} &= Z_0\ \frac{0 + jZ_0 \tan\beta\ell}{Z_0 + 0} = jZ_0 \tan\beta\ell \\ Z_L \to \infty: \quad Z_\text{in} &= Z_0\ \frac{1 + j\frac{Z_0}{Z_L} \tan\beta\ell}{\frac{Z_0}{Z_L} + j\tan\beta\ell} \to \frac{Z_0}{j\tan\beta\ell} = -jZ_0 \cot\beta\ell \end{aligned}$$
@@ -160,7 +230,11 @@ results are purely imaginary: a line terminated in a short or an open dissipates
 nothing, so it can only store energy, and its input impedance is a pure
 reactance. Which reactance depends on the length. A shorted line shorter than
 $\lambda/4$ has positive reactance, like an inductor; an open line shorter than
-$\lambda/4$ has negative reactance, like a capacitor.
+$\lambda/4$ has negative reactance, like a capacitor. The tangent and the
+cotangent change sign every quarter wavelength, so the sign of the reactance
+flips each time the line grows by $\lambda/4$: a shorted line between
+$\lambda/4$ and $\lambda/2$ long is capacitive, and an open line of that length
+is inductive.
 ::::
 
 ::::{frame} Stubs as Reactances
@@ -259,7 +333,9 @@ net power is the same at every point, which is what conservation of energy
 requires on a lossless line: none is lost along the way, so whatever passes the
 source end must arrive at the load. This is the derivation behind the rule
 Lesson 6 used, that a load absorbs $1 - \vert\Gamma\vert^2$ of the incident
-power.
+power. In the worked example, $\vert V_0^+\vert = 5\ \text{V}$ and
+$\Gamma = 0.5$, so $P = \frac{25}{100}\left(1 - 0.25\right) = 0.188\ \text{W}$,
+the same power we found from the load voltage and current.
 ::::
 
 ::::{frame} Summary
@@ -268,6 +344,7 @@ power.
 | Symbol / idea | What it is | Number to remember |
 | :-- | :-- | :-- |
 | $Z_\text{in}$ | Total voltage over total current at the source end | $Z_0\frac{Z_L + jZ_0\tan\beta\ell}{Z_0 + jZ_L\tan\beta\ell}$ |
+| $V_0^+$ from the source | Voltage divider at $z = -\ell$, then divide out the two waves | $V_g\frac{Z_\text{in}}{Z_g + Z_\text{in}}\cdot\frac{1}{e^{j\beta\ell} + \Gamma e^{-j\beta\ell}}$ |
 | Shorted line | Pure reactance, inductive below $\lambda/4$ | $jZ_0\tan\beta\ell$ |
 | Open line | Pure reactance, capacitive below $\lambda/4$ | $-jZ_0\cot\beta\ell$ |
 | Half-wave line | Transparent | $Z_\text{in} = Z_L$ |

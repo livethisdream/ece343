@@ -39,7 +39,7 @@ method to rings, disks, sheets, and spheres.
 
 ::::{frame} Where We Were
 :::{present}
-**Lesson 17: vectors.** The vector from a source point $\mathbf{r}'$ to a field point $\mathbf{r}$:
+**Lesson 17: the separation vector** from a source point $\mathbf{r}'$ to a field point $\mathbf{r}$:
 
 $$\mathbf{R} = \mathbf{r} - \mathbf{r}'$$
 
@@ -51,22 +51,23 @@ $$R = |\mathbf{R}|, \qquad \hat{\mathbf{R}} = \frac{\mathbf{R}}{R}$$
      style="max-width: 460px; width: 100%; display: block; margin: 0 auto;">
 :::
 
-Lesson 17 reviewed vectors and coordinate systems. One construction from it
-carries all of electrostatics. A charge sits at the **source point**, with
-position vector $\mathbf{r}'$, and we want the field at the **field point**,
-with position vector $\mathbf{r}$. The vector that points from the source to
-the field point is the difference $\mathbf{R} = \mathbf{r} - \mathbf{r}'$. Its
-magnitude $R$ is the distance between the two points, and dividing
-$\mathbf{R}$ by its magnitude gives the unit vector $\hat{\mathbf{R}}$, which
-carries only the direction. Throughout the course a prime marks the source,
-and an unprimed coordinate marks the field point.
+Lesson 17 defined the separation vector, and we write all of electrostatics
+in terms of it. Recall the construction. A charge sits at the **source
+point**, with position vector $\mathbf{r}'$, and we want the field at the
+**field point**, with position vector $\mathbf{r}$. The vector that points
+from the source to the field point is the difference
+$\mathbf{R} = \mathbf{r} - \mathbf{r}'$. Its magnitude $R$ is the distance
+between the two points, and dividing $\mathbf{R}$ by its magnitude gives the
+unit vector $\hat{\mathbf{R}}$, which carries only the direction. Throughout
+the course a prime marks the source, and an unprimed coordinate marks the
+field point.
 ::::
 
 ::::{frame} Coulomb's Law
 :::{present}
 Two point charges $Q_1$ and $Q_2$, a distance $R$ apart, push or pull on each other with a force of magnitude
 
-$$F = \frac{Q_1 Q_2}{4\pi\epsilon R^2}, \qquad \epsilon_0 = 8.854 \times 10^{-12}\ \text{F/m}$$
+$$F = \frac{\vert Q_1 Q_2\vert}{4\pi\epsilon R^2}, \qquad \epsilon_0 = 8.854 \times 10^{-12}\ \text{F/m}$$
 
 - Like charges repel; unlike charges attract.
 - The force acts along the line between the charges.
@@ -285,6 +286,13 @@ volume $dv$, holds the charge $dQ$ in the last column. Lesson 17's
 differential elements supply $d\ell$, $ds$, and $dv$ in whichever coordinate
 system fits the shape: $ds = \rho'\ d\rho'\ d\phi'$ on a disk, for example, or
 $dv = r'^2 \sin\theta'\ dr'\ d\theta'\ d\phi'$ in a sphere.
+
+The letter $\rho$ now has three jobs, and the subscript or the prime tells
+them apart. With a subscript, $\rho_\ell$, $\rho_s$, and $\rho_v$ are charge
+densities. With no subscript, $\rho$ is the cylindrical coordinate of the
+field point, its distance from the $z$ axis, and $\rho'$ is the same
+coordinate of a source point. A product such as $\rho_\ell\ \rho$ is a line
+density times a distance.
 ::::
 
 ::::{frame} From a Sum to an Integral
@@ -315,7 +323,7 @@ source coordinates; the field point stays fixed.
 ::::{frame} A Finite Line Charge: Set Up
 :::{present}
 <img src="../../viz/img/L18-line-charge.svg"
-     alt="A line of charge along the z axis from minus L/2 to L/2; an element dQ at height z prime and its mirror image at minus z prime both contribute fields at a point a distance rho from the line, and their z components cancel"
+     alt="A line of charge along the z axis from minus L/2 to L/2; an element dQ at height z prime and its mirror image at minus z prime both contribute fields at a point a distance rho from the line, and their z components cancel; the angle alpha at the field point lies between the rho axis and the vector R from the element"
      style="max-width: 400px; width: 100%; display: block; margin: 0 auto;">
 
 $$dQ = \rho_\ell\ dz', \qquad \mathbf{R} = \rho\ \hat{\boldsymbol{\rho}} - z'\ \hat{\mathbf{z}}, \qquad R = \sqrt{\rho^2 + z'^2}$$
@@ -346,7 +354,9 @@ The $\hat{\boldsymbol{\rho}}$ component of $d\mathbf{E}$ is
 $\rho_\ell\ \rho\ dz'/4\pi\epsilon(\rho^2 + z'^2)^{3/2}$. The field point does
 not move during the integration, so $\hat{\boldsymbol{\rho}}$ is a constant
 vector here and comes outside the integral along with $\rho$. The integral
-yields to the substitution $z' = \rho\tan\alpha$. Then
+yields to the substitution $z' = \rho\tan\alpha$, where $\alpha$ is the angle
+at the field point between the $\rho$ axis and $\mathbf{R}$, marked in the
+set-up figure. Then
 $dz' = \rho\sec^2\alpha\ d\alpha$ and
 $\rho^2 + z'^2 = \rho^2\sec^2\alpha$, so the integrand becomes
 $\rho\sec^2\alpha / \rho^3\sec^3\alpha = \cos\alpha/\rho^2$, whose integral
@@ -392,7 +402,7 @@ no longer depends on it. This is the field of an **infinite line charge**, and
 it falls off only as $1/\rho$: moving away from a long line, you see more of
 it, which partly makes up for the distance. A real line counts as infinite
 when the field point is much closer to it than to either end. For example, a
-centered line 14 times longer than $\rho$ gives a field within 1% of this
+centered line 20 times longer than $\rho$ gives a field 0.5% below this
 result. The coaxial cable of Module 1 is the practical case, and Lesson 20
 finds this same field in one line, with Gauss's law.
 ::::

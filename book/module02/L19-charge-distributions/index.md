@@ -28,8 +28,10 @@ Lesson 19 · Module 2: Electrostatics · Maj Ellis · Dr. Neil Rogers
 Lesson 18 built the field of any charge distribution as an integral of
 Coulomb's law, and evaluated it for a straight line of charge. Today we apply
 the same three steps to the other shapes the course returns to: a ring of
-charge, a disk, an infinite sheet, a spherical shell, and a solid sphere.
-Each one takes its own coordinate system, and each shows a different way that
+charge, a disk, an infinite sheet, a flat strip, a spherical shell, and a
+solid sphere. The ring and the disk take cylindrical coordinates, the strip
+takes rectangular coordinates, and the spheres take spherical coordinates.
+Each shows a different way that
 symmetry cancels part of the integral before we evaluate it. The results are
 worth remembering, and so is their shape, because Lesson 20 reaches several
 of them again by a much shorter road.
@@ -184,13 +186,14 @@ you see a larger area of it, and that exactly balances the inverse-square law.
 A real sheet counts as infinite when the field point is much closer to it than
 to its edges. Two such sheets with opposite charges make a parallel-plate
 capacitor: their fields cancel outside and add to $\rho_s/\epsilon$ between
-the plates, a result Lesson 25 uses.
+the plates. Lesson 25 reaches the same $\rho_s/\epsilon$ from the boundary
+condition at a conductor.
 ::::
 
 ::::{frame} Near and Far From the Disk
 :::{present}
 <img src="../../viz/img/L19-disk-field.svg"
-     alt="The field on the axis of a disk, divided by the sheet field, against height over radius: it starts at 1 at the surface, matching the infinite sheet, and falls to match a point charge with the same total charge for heights above about two radii"
+     alt="The field on the axis of a disk, divided by the sheet field, against height over radius: it starts at 1 at the surface, matching the infinite sheet, and falls toward the field of a point charge with the same total charge, which it matches within 5 percent beyond four radii"
      style="max-width: 560px; width: 100%; display: block; margin: 0 auto;">
 
 $$h \gg a: \quad \frac{h}{\sqrt{a^2 + h^2}} \approx 1 - \frac{a^2}{2h^2} \quad\Longrightarrow\quad E_z \approx \frac{\pi a^2\rho_s}{4\pi\epsilon h^2}$$
@@ -203,9 +206,58 @@ result, write $h/\sqrt{a^2 + h^2} = (1 + a^2/h^2)^{-1/2}$ and expand with the
 binomial approximation $(1 + x)^{-1/2} \approx 1 - x/2$ for small $x$. The
 field becomes $(\rho_s/2\epsilon)(a^2/2h^2) = \rho_s a^2/4\epsilon h^2$, and
 multiplying top and bottom by $\pi$ shows the total charge
-$Q = \pi a^2\rho_s$ over $4\pi\epsilon h^2$: the field of a point charge. One
-result covers the whole range, and its two limits are the two simplest
-fields we know.
+$Q = \pi a^2\rho_s$ over $4\pi\epsilon h^2$: the field of a point charge. The
+approach is gradual. The disk's field is 16% below the point charge's at
+$h = 2a$, 8% below at $h = 3a$, and 4.5% below at $h = 4a$. One result covers
+the whole range, and its two limits are the two simplest fields we know.
+::::
+
+::::{frame} A Strip of Charge: Set Up
+:::{present}
+<img src="../../viz/img/L19-strip.svg"
+     alt="A flat strip of width w in the xy plane, running without end along y and carrying surface charge; an element dQ at x prime, y prime and the vector R from it to a field point at height h on the z axis, where the field points along z"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;">
+
+$$dQ = \rho_s\ dx'\ dy', \qquad \mathbf{R} = -x'\ \hat{\mathbf{x}} - y'\ \hat{\mathbf{y}} + h\ \hat{\mathbf{z}}, \qquad R = \sqrt{x'^2 + y'^2 + h^2}$$
+:::
+
+A flat shape with straight edges calls for rectangular coordinates. A strip of
+width $w$ lies in the $xy$ plane, centered on the $y$ axis, so it covers
+$-w/2 \le x' \le w/2$ and runs without end along $y$. It carries a uniform
+surface charge $\rho_s$, and we want the field at height $h$ on the $z$ axis.
+The trace of a circuit board is a strip like this one. The area element is
+$ds = dx'\ dy'$, with no metric factor, so $dQ = \rho_s\ dx'\ dy'$. The
+element sits at $\mathbf{r}' = x'\ \hat{\mathbf{x}} + y'\ \hat{\mathbf{y}}$
+and the field point at $\mathbf{r} = h\ \hat{\mathbf{z}}$, which gives
+$\mathbf{R}$. The Cartesian unit vectors are constant, so nothing needs
+converting. For every element at $(x', y')$ there is one at $(-x', -y')$, and
+the $x$ and $y$ components of their fields cancel. Only $E_z$ remains.
+::::
+
+::::{frame} Integrating Across the Strip
+:::{present}
+$$\begin{aligned} E_z &= \frac{\rho_s\ h}{4\pi\epsilon}\int_{-w/2}^{w/2}\!\int_{-\infty}^{\infty}\frac{dy'\ dx'}{\left(x'^2 + y'^2 + h^2\right)^{3/2}} \\ &= \frac{\rho_s\ h}{4\pi\epsilon}\int_{-w/2}^{w/2}\frac{2\ dx'}{x'^2 + h^2} \\ &= \frac{\rho_s}{2\pi\epsilon}\left[\tan^{-1}\frac{x'}{h}\right]_{-w/2}^{w/2} \\ \mathbf{E} &= \hat{\mathbf{z}}\ \frac{\rho_s}{\pi\epsilon}\tan^{-1}\frac{w}{2h} \end{aligned}$$
+:::
+
+The $z$ component of $\mathbf{R}$ is $h$, so the integrand is
+$\rho_s\ h/4\pi\epsilon R^3$. We integrate over $y'$ first, holding $x'$
+fixed. With $b^2 = x'^2 + h^2$, the inner integral is the one Lesson 18 solved
+for the line charge, with antiderivative $y'/b^2\sqrt{b^2 + y'^2}$. As
+$y' \to \pm\infty$ that tends to $\pm 1/b^2$, so the inner integral is
+$2/(x'^2 + h^2)$. That step has a physical reading: the charge at one value of
+$x'$ is an infinite line charge of density $\rho_s\ dx'$, a distance $b$ from
+the field point. For the $x'$ integral, the antiderivative of
+$1/(x'^2 + h^2)$ is $(1/h)\tan^{-1}(x'/h)$, and the $1/h$ cancels the $h$ in
+front. The two limits give equal and opposite values, so the bracket is
+$2\tan^{-1}(w/2h)$.
+
+The result has both limits we expect. For a wide strip, $w \gg h$, the inverse
+tangent approaches $\pi/2$, and the field becomes $\rho_s/2\epsilon$, the
+infinite sheet. For a narrow strip, $w \ll h$, $\tan^{-1}(w/2h) \approx w/2h$,
+and the field becomes $\rho_s w/2\pi\epsilon h$, the field of an infinite line
+with $\rho_\ell = \rho_s w$. Between them, a strip twice as wide as the height,
+$w = 2h$, has $\tan^{-1}1 = \pi/4$ and gives $\rho_s/4\epsilon$, half the
+sheet field.
 ::::
 
 ::::{frame} A Spherical Shell: Set Up
@@ -226,8 +278,9 @@ The element at polar angle $\theta'$ is a distance $R$ from the field point,
 and the triangle formed by the center, the element, and the field point has
 sides $a$ and $r$ with the angle $\theta'$ between them, so the law of
 cosines gives $R^2$. The vector itself is
-$\mathbf{R} = r\ \hat{\mathbf{z}} - a\ \hat{\mathbf{r}}'$, whose $z$
-component is $r - a\cos\theta'$.
+$\mathbf{R} = r\ \hat{\mathbf{z}} - a\ \hat{\mathbf{r}}'$. From Lesson 17,
+the $z$ component of the unit vector $\hat{\mathbf{r}}'$ is $\cos\theta'$, so
+the $z$ component of $\mathbf{R}$ is $r - a\cos\theta'$.
 ::::
 
 ::::{frame} Only the z Component Survives
@@ -301,8 +354,10 @@ $\hat{\mathbf{r}}$: exactly the field of a point charge $Q$ at the center.
 Inside, the bracket is zero, and so is the field, everywhere inside, not just
 at the center. A field point inside is closer to the near side of the shell,
 but the far side holds more charge, and the inverse-square law makes the two
-balance exactly. Both results hold only for a uniform shell, and the second is
-why a closed metal enclosure shields what is inside it from static fields.
+balance exactly. Both results hold only for a uniform shell. A closed metal
+enclosure also has no static field inside it, but for a different reason: the
+charge on a conductor moves until the field inside is zero, as Lesson 24
+shows.
 ::::
 
 ::::{frame} A Solid Sphere, Shell by Shell
@@ -350,6 +405,7 @@ explains that jump.
 | Quarter ring, $0 \le \phi' \le \pi/2$ | height $h$ on the axis | $\dfrac{\rho_\ell a}{4\pi\epsilon(a^2 + h^2)^{3/2}}\left(-a\hat{\mathbf{x}} - a\hat{\mathbf{y}} + \tfrac{\pi h}{2}\hat{\mathbf{z}}\right)$ |
 | Disk, radius $a$, $\rho_s$ | height $h > 0$ on the axis | $\hat{\mathbf{z}}\ \dfrac{\rho_s}{2\epsilon}\left(1 - \dfrac{h}{\sqrt{a^2 + h^2}}\right)$ |
 | Infinite sheet, $\rho_s$ | either side | $\pm\hat{\mathbf{z}}\ \dfrac{\rho_s}{2\epsilon}$, independent of distance |
+| Strip, width $w$, long in $y$, $\rho_s$ | height $h > 0$ above its center line | $\hat{\mathbf{z}}\ \dfrac{\rho_s}{\pi\epsilon}\tan^{-1}\dfrac{w}{2h}$ |
 | Spherical shell, radius $a$, $\rho_s$ | $r > a$; $r < a$ | $\hat{\mathbf{r}}\ \dfrac{Q}{4\pi\epsilon r^2}$; zero |
 | Solid sphere, radius $a$, $\rho_v$ | $r > a$; $r < a$ | $\hat{\mathbf{r}}\ \dfrac{\rho_v a^3}{3\epsilon r^2}$; $\hat{\mathbf{r}}\ \dfrac{\rho_v r}{3\epsilon}$ |
 | Method | — | $\hat{\boldsymbol{\rho}}'$ changes with $\phi'$: write it as $\hat{\mathbf{x}}\cos\phi' + \hat{\mathbf{y}}\sin\phi'$ before integrating |

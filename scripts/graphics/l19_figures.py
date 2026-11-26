@@ -6,6 +6,8 @@
     L19-disk.svg          a disk of surface charge cut into rings of width dρ′
     L19-disk-field.svg    the disk's field on its axis, against the infinite
                           sheet and the point charge it approaches
+    L19-strip.svg         a flat strip of surface charge, long in y, with an
+                          element dQ at (x′, y′): the rectangular case
     L19-shell.svg         a spherical shell in cross section: the ring at θ′,
                           and the triangle the law of cosines solves
     L19-sphere-field.svg  the field of a uniformly charged shell and of a
@@ -124,6 +126,39 @@ def disk():
 
 
 # ---------------------------------------------------------------------------
+def strip():
+    """A flat strip of width w, long in y, with one element dQ at (x′, y′)."""
+    fig, ax = frame((6.9, 4.7), (-3.5, 4.4), (-1.7, 3.1))
+    w2, Ly, h = 1.9, 2.3, 2.1
+    corners = [P(w2, -Ly, 0), P(w2, Ly, 0), P(-w2, Ly, 0), P(-w2, -Ly, 0)]
+    ax.add_patch(Polygon(corners, closed=True, fc=FILL, ec="none"))
+    for sx in (w2, -w2):                               # the two long edges
+        ax.plot(*zip(P(sx, -Ly, 0), P(sx, Ly, 0)), color=RED, lw=1.8)
+    for sy in (-Ly, Ly):                               # open ends: the strip goes on
+        ax.plot(*zip(P(w2, sy, 0), P(-w2, sy, 0)), color=RED, lw=1.0, ls=":")
+    axes3d(ax, L=2.9, zmax=2.9)
+    # the line of elements at x′, and one element on it
+    xp, yp = 1.1, 1.3
+    ax.plot(*zip(P(xp, -Ly, 0), P(xp, Ly, 0)), color="#e7a9ac", lw=3.0)
+    e1 = P(xp, yp, 0); Pz = P(0, 0, h)
+    ax.add_patch(Circle(e1, 0.09, fc=AMBER, ec="none", zorder=5))
+    lab(ax, *(e1 + np.array([0.2, 0.14])), "dQ", size=14, color=AMBER, ha="left")
+    arrow(ax, e1, Pz, color=AMBER, lw=1.8)
+    vec(ax, *(0.5 * (e1 + Pz) + np.array([0.25, 0.08])), "R", color=AMBER, ha="left")
+    # the width, marked beyond the far end
+    off = np.array([0.75, 0.0])
+    a, b = P(w2, Ly, 0) + off, P(-w2, Ly, 0) + off
+    ax.annotate("", xy=a, xytext=b, arrowprops=dict(arrowstyle="<|-|>", color=GRAY, lw=1.0))
+    lab(ax, *(0.5 * (a + b) + np.array([0.2, -0.05])), "w", size=14, color=GRAY, ha="left")
+    point(ax, *Pz)
+    lab(ax, -0.15, h / 2 + 0.2, "h", size=14, color=GRAY, ha="right")
+    arrow(ax, Pz, Pz + np.array([0, 0.7]), color=GREEN, lw=2.6, ms=18)
+    vec(ax, *(Pz + np.array([-0.15, 0.5])), "E", color=GREEN, ha="right")
+    lab(ax, *P(-1.0, -1.5, 0), "ρ", "s", color=RED)
+    save(fig, "L19-strip.svg")
+
+
+# ---------------------------------------------------------------------------
 def style(ax):
     ax.grid(True, color="#e3edf6", lw=1.0)
     for sname in ("top", "right"):
@@ -205,5 +240,6 @@ if __name__ == "__main__":
     ring()
     disk()
     disk_field()
+    strip()
     shell()
     sphere_field()

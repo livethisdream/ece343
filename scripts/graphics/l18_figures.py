@@ -203,6 +203,12 @@ def line_charge():
     arrow(ax, src, P, color=AMBER, lw=1.8)
     arrow(ax, img, P, color=AMBER, lw=1.2, ls="--")
     vec(ax, 1.65, 1.05, "R", color=AMBER)
+    # the substitution angle α at the field point, between the ρ axis and R
+    a0 = np.degrees(np.arctan2(zp, -P[0]))
+    tt = np.radians(np.linspace(a0, 180, 30))
+    ax.plot(P[0] + 0.95 * np.cos(tt), P[1] + 0.95 * np.sin(tt), color=INK, lw=1.0)
+    am = np.radians((a0 + 180) / 2)
+    lab(ax, P[0] + 1.22 * np.cos(am), P[1] + 1.22 * np.sin(am), "α", size=13, color=INK)
     # dE from each element, and their sum along ρ
     u1 = (P - src) / np.linalg.norm(P - src); u2 = (P - img) / np.linalg.norm(P - img)
     L = 1.05

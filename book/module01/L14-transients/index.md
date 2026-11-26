@@ -331,6 +331,6 @@ reflection coefficients you can predict; Lesson 16 uses it to identify a device
 you cannot see.
 
 Before Lesson 15, read the whole lab packet and the
-[NanoVNA user's guide](https://nanorfe.com/nanovna-manuals.html), and work the
+[NanoVNA user's guide](https://nanorfe.com/nanovna-v2-user-manual.html), and work the
 predictions the packet asks for.
 ::::

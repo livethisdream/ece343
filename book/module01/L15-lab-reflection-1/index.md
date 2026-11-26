@@ -251,7 +251,7 @@ your prediction.
 
 - <a class="doc-link" href="../../labs/ECE343_Lab_L15_L16_Reflection_blank.pdf" target="_blank" rel="noopener">Reflection and Transmission Coefficient Lab packet (PDF)</a>
 - <a class="doc-link" href="../../handouts/SmithChart_blank.pdf" target="_blank" rel="noopener">Blank Smith chart (PDF)</a>
-- <a class="doc-link" href="https://nanorfe.com/nanovna-manuals.html" target="_blank" rel="noopener">NanoVNA user's guides (nanorfe.com)</a>
+- <a class="doc-link" href="https://nanorfe.com/nanovna-v2-user-manual.html" target="_blank" rel="noopener">NanoVNA V2 user's guide (nanorfe.com)</a>
 
 :::{depth}
 The packet is the turn-in document for both lab periods, and each team of two

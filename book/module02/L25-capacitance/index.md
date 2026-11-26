@@ -32,8 +32,10 @@ the voltage, the **capacitance**, depends only on their shape and on the
 material between them. We find it with a four-step method that uses every
 tool of Module 2: the boundary condition at a conductor or Gauss's law for the
 field, and the line integral of the field for the voltage. We apply it to
-the parallel-plate capacitor and to the coaxial line, which finally derives
-the per-unit-length capacitance $C'$ that Lesson 6 quoted for RG-58. Then a
+the parallel-plate capacitor and to the coaxial line. Lesson 23 found the
+ratio $\rho_\ell/V_0$ for the coaxial line by solving Laplace's equation; today
+Gauss's law gives the same ratio directly, and we name it: the per-unit-length
+capacitance $C'$ that Lesson 6 quoted for RG-58. Then a
 capacitor with two dielectric layers puts the dielectric boundary condition to
 work and shows why a thin air gap can break down before the rest of the
 insulator.
@@ -46,9 +48,9 @@ insulator.
 
 $$\mathbf{E} = \hat{\mathbf{n}}\ \frac{\rho_s}{\epsilon}$$
 
-**Lesson 22**: the voltage of point $P_2$ relative to point $P_1$ is
+**Lesson 22**: the potential at point $B$ relative to point $A$ is
 
-$$V_{21} = -\int_{P_1}^{P_2} \mathbf{E}\cdot d\mathbf{l}$$
+$$V_B - V_A = -\int_A^B \mathbf{E}\cdot d\mathbf{l}$$
 :::
 
 Lesson 24 found that the field next to a conductor points along the outward
@@ -57,7 +59,7 @@ divided by the permittivity. Lesson 22 defined the potential difference
 between two points as the work per unit charge to move a test charge from the
 first to the second against the field, which is the negative of the line
 integral of $\mathbf{E}$ along any path between them. A field pointing from
-$P_2$ toward $P_1$ makes $V_{21}$ positive: the field runs from high potential
+$B$ toward $A$ makes $V_B - V_A$ positive: the field runs from high potential
 to low. Today we combine the two to turn a charge on a pair of conductors
 into a voltage between them.
 ::::
@@ -112,12 +114,23 @@ in the ratio, leaving only geometry and permittivity.
 
 Two flat plates of area $A$ face each other a distance $d$ apart, with a
 dielectric of permittivity $\epsilon$ between them. We put the positive plate
-at $z = d$ and the negative plate at $z = 0$. Each charge spreads uniformly
-over the inner face of its plate, so the surface charge densities are
-$+\rho_s$ and $-\rho_s$, with $\rho_s = Q/A$. Near the edges, the field bulges
+at $z = d$ and the negative plate at $z = 0$, with surface charge densities
+$+\rho_s$ and $-\rho_s$, where $\rho_s = Q/A$. Near the edges, the field bulges
 outward, an effect called **fringing**. When the plates are much wider than
-they are apart, the fringing region is a small fraction of the whole, and we
-treat the field between the plates as uniform.
+they are apart, the fringing region is a small fraction of the whole, and each
+plate looks like the infinite sheet of Lesson 20, whose field is
+$\rho_s/2\epsilon$ and points away from positive charge on both sides. We add
+the fields of the two sheets:
+
+$$\begin{aligned} z > d: \quad \mathbf{E} &= \hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} - \hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} = 0 \\ 0 < z < d: \quad \mathbf{E} &= -\hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} - \hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} = -\hat{\mathbf{z}}\ \frac{\rho_s}{\epsilon} \\ z < 0: \quad \mathbf{E} &= -\hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} + \hat{\mathbf{z}}\ \frac{\rho_s}{2\epsilon} = 0 \end{aligned}$$
+
+In each line the first term is the field of the positive sheet and the second
+is the field of the negative sheet. The two fields add between the plates and
+cancel outside them. One sheet alone gives $\rho_s/2\epsilon$; the pair gives
+$\rho_s/\epsilon$ in the gap, uniform because neither sheet's field depends on
+distance. The field outside the plates is zero, so by the conductor condition
+of Lesson 24 the outer faces carry no charge: all of the charge sits on the
+inner faces.
 ::::
 
 ::::{frame} The Field Between the Plates
@@ -134,9 +147,11 @@ component of $\mathbf{D}$ along that normal equals the surface charge density
 $+\rho_s$, which makes $\mathbf{D} = -\hat{\mathbf{z}}\ \rho_s$: the field
 points from the positive plate toward the negative one, as it should. The same
 condition at the bottom plate, where the outward normal is $+\hat{\mathbf{z}}$
-and the charge density is $-\rho_s$, gives the same $\mathbf{D}$, which
-confirms the field is uniform across the gap. Dividing by $\epsilon$ gives
-$\mathbf{E}$.
+and the charge density is $-\rho_s$, gives the same $\mathbf{D}$, a
+consistency check. Ignoring the fringing is what makes the field uniform
+across the gap, as the sum of the two sheets showed, and Lesson 23 reached the
+same conclusion from a potential that is linear in $z$. Dividing by $\epsilon$
+gives $\mathbf{E}$, the same $\rho_s/\epsilon$ as the two sheets.
 ::::
 
 ::::{frame} Voltage and Capacitance
@@ -247,7 +262,9 @@ $$C' = \frac{2\pi \times 2.25 \times 8.854 \times 10^{-12}}{\ln(1.475/0.405)} = 
 :::
 
 Lesson 6 used this result for $C'$ without deriving it, and Lesson 3 used the
-RG-58 numbers in the lumped-element model. Now the derivation is complete.
+RG-58 numbers in the lumped-element model. Lesson 23 reached the same ratio,
+$\rho_\ell/V_0 = 2\pi\epsilon/\ln(b/a)$, from Laplace's equation; today it
+comes from Gauss's law, and the two derivations agree.
 With the RG-58 dimensions and solid polyethylene, the numerator is
 $2\pi \times 2.25 \times 8.854 \times 10^{-12} = 1.252 \times 10^{-10}$ F/m and
 the logarithm is $\ln 3.642 = 1.293$, so $C' = 96.8$ pF/m, the value Lesson 6
@@ -310,7 +327,8 @@ $1$ mm of glass, $\epsilon_r = 5$, with a $0.1$ mm air gap; $A = 0.01\ \text{m}^
 :::{admonition} Worked example — the air gap that breaks down
 :class: tip
 A capacitor uses a $1\ \text{mm}$ glass sheet, $\epsilon_r = 5$, between plates
-of area $A = 0.01\ \text{m}^2$, charged to $1\ \text{kV}$. With the plates
+of area $A = 0.01\ \text{m}^2$. A supply holds the plates at $1\ \text{kV}$
+throughout, so the voltage stays the same and the charge changes. With the plates
 pressed flat against the glass,
 
 $$C = \frac{5\epsilon_0 A}{d} = \frac{5 \times 8.854 \times 10^{-12} \times 0.01}{10^{-3}} = 443\ \text{pF}, \qquad E = \frac{1000}{10^{-3}} = 1.0\ \text{MV/m}$$
@@ -327,7 +345,7 @@ $$E_1 = \frac{D}{\epsilon_0} = 3.3\ \text{MV/m}, \qquad E_2 = \frac{D}{5\epsilon
 
 As a check, $3.33 \times 10^6 \times 10^{-4} + 0.667 \times 10^6 \times 10^{-3} =
 333 + 667 = 1000$ V. Air breaks down near $3\ \text{MV/m}$, so the thin gap
-arcs while the glass, at a third of its old field, is barely stressed. This is
+arcs while the glass, at two-thirds of its old field, is barely stressed. This is
 why high-voltage insulation is cast or potted with no voids: an air bubble in
 a good insulator carries the highest field in the part.
 :::

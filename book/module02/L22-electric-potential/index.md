@@ -149,6 +149,18 @@ flux is zero for every surface, so the curl itself is zero. Around a circuit,
 the loop integral is the sum of the voltage drops, and setting it to zero is
 Kirchhoff's voltage law, which Lesson 3 used on the lumped-element model.
 Module 4 shows that a changing magnetic field breaks this rule.
+
+The argument also runs the other way. Suppose a field is the negative
+gradient of some scalar $V$. Lesson 17 defined the gradient by
+$dV = \nabla V\cdot d\mathbf{l}$, so the line integral of $\nabla V$ adds up the
+changes in $V$ along the path, and around a closed loop the path ends where it
+began:
+
+$$\oint_C \nabla V\cdot d\mathbf{l} = \oint_C dV = V_A - V_A = 0$$
+
+Every gradient has a zero loop integral and, by Stokes' theorem, zero curl. A
+field with a nonzero loop integral or a nonzero curl therefore cannot be
+written as $-\nabla V$, and it has no potential.
 ::::
 
 ::::{frame} Potential of a Point Charge
@@ -187,9 +199,9 @@ Each element $dQ$ contributes the potential of a point charge,
 $dQ/(4\pi\epsilon R)$, where $R$ is the distance from the element to the
 field point. The sum becomes an integral over the line, surface, or volume
 that holds the charge, with $dQ$ written in terms of the line, surface, or
-volume charge density. Lesson 19 found the field of the same distributions,
-which took a separate integral for each component of $\mathbf{E}$ and careful
-bookkeeping of unit vectors. The potential takes one scalar integral.
+volume charge density. Lessons 18 and 19 found the field of the same
+distributions, which took a separate integral for each component of
+$\mathbf{E}$ and careful bookkeeping of unit vectors. The potential takes one scalar integral.
 ::::
 
 ::::{frame} Example: A Finite Line of Charge
@@ -251,13 +263,22 @@ With $s = \sqrt{a^2 + \rho^2}$, so $ds/d\rho = \rho/s$:
 $$\begin{aligned} \frac{\partial}{\partial\rho}\left[\ln(a + s) - \ln\rho\right] &= \frac{\rho}{s\ (a + s)} - \frac{1}{\rho} = -\frac{a}{\rho\ s} \\ \mathbf{E} = -\hat{\boldsymbol{\rho}}\ \frac{\partial V}{\partial\rho} &= \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell}{2\pi\epsilon\rho}\ \frac{a}{\sqrt{a^2 + \rho^2}} \end{aligned}$$
 :::
 
-In the plane $z = 0$, symmetry makes the field point straight away from the
-line, so only the $\rho$ derivative of the potential survives. Write the
+The gradient needs to know how $V$ changes near the point in every direction.
+Our $V(\rho)$ holds only on the plane $z = 0$, so it can give
+$\partial V/\partial\rho$ but not $\partial V/\partial z$. Symmetry supplies
+the missing piece: the line looks the same from above and below that plane, so
+$E_z = 0$ there, and the field points straight away from the line. Off the
+plane we would need $V(\rho, z)$. Write the
 logarithm of the ratio as a difference of logarithms and differentiate each.
 The first needs the chain rule through $s$. Putting the two terms over the
 common denominator $\rho\ s\ (a + s)$ gives a numerator of
 $\rho^2 - s(a + s) = \rho^2 - as - a^2 - \rho^2 = -a(a + s)$, and the factor
-$a + s$ cancels. The negative gradient then gives the field. For a line much
+$a + s$ cancels. The negative gradient then gives the field. Lesson 18
+integrated Coulomb's law for a line of length $L$ and found
+
+$$\mathbf{E} = \hat{\boldsymbol{\rho}}\ \frac{\rho_\ell\ L}{4\pi\epsilon\ \rho\sqrt{\rho^2 + L^2/4}}$$
+
+and with $L = 2a$ that is exactly today's result. For a line much
 longer than the distance to it, $a \gg \rho$, the last factor goes to one and
 the result is $\rho_\ell/(2\pi\epsilon\rho)$, the Gauss's-law field of the
 infinite line from Lesson 20.
@@ -267,7 +288,7 @@ infinite line from Lesson 20.
 :::{present}
 As $a \to \infty$, $V \to \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{2a}{\rho} \to \infty$. Reference $V = 0$ at $\rho_0$ instead:
 
-$$V(\rho) = -\int_{\rho_0}^{\rho}\frac{\rho_\ell}{2\pi\epsilon\rho'}\ d\rho' = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{\rho_0}{\rho}$$
+$$V(\rho) = -\int_{\rho_0}^{\rho}\frac{\rho_\ell}{2\pi\epsilon u}\ du = \frac{\rho_\ell}{2\pi\epsilon}\ln\frac{\rho_0}{\rho}$$
 :::
 
 For a long line, $\sqrt{a^2 + \rho^2} \approx a$, and the potential grows
@@ -275,7 +296,8 @@ without bound as the line gets longer: an infinite line holds infinite charge,
 and bringing a test charge in from infinity would cost infinite work. The
 field stays finite, because the gradient of $\ln(2a)$ is zero. The fix is to
 put the reference somewhere finite. We pick a radius $\rho_0$ where $V = 0$
-and integrate the Gauss's-law field from there. Changing $\rho_0$ adds a
+and integrate the Gauss's-law field from there, writing the variable of
+integration as $u$ to keep it apart from the limit $\rho$. Changing $\rho_0$ adds a
 constant to $V$ everywhere and leaves the field unchanged, because only
 differences in potential matter. Lesson 23 meets this logarithm again in the
 coaxial line, where the outer conductor supplies the reference.

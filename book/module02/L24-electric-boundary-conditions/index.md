@@ -48,7 +48,10 @@ $$\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{enc}, \qquad \oint_C \mathbf{E}\
 
 Lesson 20 introduced **Gauss's law**: the flux of the electric flux density
 $\mathbf{D}$ out of any closed surface $S$ equals the free charge enclosed by
-it. Lesson 22 showed that the static electric field is the gradient of a
+it. **Free charge** is charge that we place on a material or that moves
+through a conductor; the bound charge of a dielectric's own molecules is
+already counted in its permittivity $\epsilon$, so it never appears in
+$Q_\text{enc}$ or, today, in $\rho_s$. Lesson 22 showed that the static electric field is the gradient of a
 potential, $\mathbf{E} = -\nabla V$, so its integral around any closed path $C$
 is zero: walking around a loop and returning to the start, the potential
 returns to where it began. This is Kirchhoff's voltage law in field form.
@@ -89,7 +92,7 @@ $$\begin{aligned} \oint \mathbf{E}\cdot d\mathbf{l} &= \int_a^b + \int_b^c + \in
 We split the closed path into its four sides. Along side $ab$ the path runs in
 the $+\hat{\mathbf{t}}$ direction through region 1, so $d\mathbf{l} =
 \hat{\mathbf{t}}\ dl$, and the dot product picks out the tangential component
-$E_{t1}$, which is constant along the short side; the integral is $E_{t1}$
+$E_{t1}$, which is constant along the long side $ab$; the integral is $E_{t1}$
 times the length $W$. Along side $cd$ the path runs back in the
 $-\hat{\mathbf{t}}$ direction through region 2, which gives $-E_{t2} W$. The
 two short sides each have length $h$, and the field on them is finite, so their
@@ -236,20 +239,21 @@ enters region 2.
 
 ::::{frame} Worked Example: Free Space and a Dielectric
 :::{present}
-Region 1, $y < 0$: free space. Region 2, $y > 0$: $\epsilon_r = 2$, with $\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 + \hat{\mathbf{z}}5$ V/m.
+Region 1, $y > 0$: free space. Region 2, $y < 0$: $\epsilon_r = 2$, with $\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 + \hat{\mathbf{z}}5$ V/m.
 
 $$\begin{aligned} E_{1x} &= 3, \quad E_{1z} = 5 \\ \epsilon_0 E_{1y} &= 2\epsilon_0 \times 4 \ \Rightarrow\  E_{1y} = 8 \\ \mathbf{E}_1 &= \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5\ \text{V/m} \end{aligned}$$
 :::
 
 :::{admonition} Worked example — the field on the other side of a boundary
 :class: tip
-The plane $y = 0$ separates free space, region 1 at $y < 0$, from a dielectric
-with $\epsilon_r = 2$, region 2 at $y > 0$. In the dielectric, next to the
+The plane $y = 0$ separates free space, region 1 at $y > 0$, from a dielectric
+with $\epsilon_r = 2$, region 2 at $y < 0$. In the dielectric, next to the
 boundary, $\mathbf{E}_2 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}4 +
 \hat{\mathbf{z}}5$ V/m. There is no free charge on the boundary. Find
 $\mathbf{E}_1$ and the angle each field makes with the normal.
 
-The normal to the boundary is along $\hat{\mathbf{y}}$, so the $y$ component of
+Region 1 is on top, as in the figures, so the normal from region 2 into
+region 1 is $\hat{\mathbf{n}} = \hat{\mathbf{y}}$, and the $y$ component of
 each field is its normal component, and the $x$ and $z$ components together are
 its tangential component. The tangential condition copies the tangential
 components across: $E_{1x} = 3$ and $E_{1z} = 5$ V/m. The normal condition with
@@ -261,10 +265,13 @@ so $\mathbf{E}_1 = \hat{\mathbf{x}}3 + \hat{\mathbf{y}}8 + \hat{\mathbf{z}}5$ V/
 The tangential component has magnitude $\sqrt{3^2 + 5^2} = \sqrt{34} = 5.83$
 V/m on both sides, so the angles from the normal are
 
-$$\theta_1 = \tan^{-1}\frac{5.83}{8} = 36.1^\circ, \qquad \theta_2 = \tan^{-1}\frac{5.83}{4} = 55.5^\circ$$
+$$\theta_1 = \tan^{-1}\frac{5.83}{8} = 36.1^\circ, \qquad \theta_2 = \tan^{-1}\frac{5.83}{4} = 55.6^\circ$$
 
-As a check, $\tan 36.1^\circ / \tan 55.5^\circ = 0.729/1.458 = 0.500 =
-\epsilon_1/\epsilon_2$. The field leans further from the normal in the
+As a check,
+
+$$\frac{\tan\theta_1}{\tan\theta_2} = \frac{5.83/8}{5.83/4} = \frac{0.729}{1.458} = 0.500 = \frac{\epsilon_1}{\epsilon_2}$$
+
+The field leans further from the normal in the
 dielectric, the region with the larger permittivity.
 :::
 ::::

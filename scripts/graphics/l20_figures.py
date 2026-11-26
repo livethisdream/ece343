@@ -165,7 +165,7 @@ def cylinder():
     t = np.linspace(0, np.pi, 60)
     ax.plot(R * np.cos(t), -H + e * np.sin(t), color=NAVY, lw=1.0, ls="--")
     ax.plot([0, 0], [-1.95, 1.95], color=RED, lw=3)
-    lab(ax, -0.18, 1.85, "ρ", "l", color=RED, ha="right")
+    lab(ax, -0.18, 1.85, "ρ", "ℓ", color=RED, ha="right")
     for y in (-0.8, 0.0, 0.8):
         arrow(ax, R, y, R + 0.65, y, color=BLUE, lw=1.4)
         arrow(ax, -R, y, -R - 0.65, y, color=BLUE, lw=1.4)
@@ -218,8 +218,19 @@ def coax():
         ax.plot([0, rr * np.cos(ang)], [0, rr * np.sin(ang)], color=INK, lw=1.0)
     lab(ax, 0.30, -0.36, "a", size=13)
     lab(ax, -0.5, 0.62, "b", size=13)
-    lab(ax, 0.0, 0.62, "+ρ", "l", size=12, color=RED)
-    lab(ax, 1.25, -1.62, "−ρ", "l", size=12, color=RED, ha="left")
+    # The charge sits on the two facing surfaces: mark them, and run a leader
+    # from each label to the surface it names.
+    for ang in np.radians(np.arange(15, 360, 60)):
+        ax.text((a - 0.07) * np.cos(ang), (a - 0.07) * np.sin(ang), "+", fontsize=8,
+                color=RED, ha="center", va="center")
+    for ang in np.radians(np.arange(0, 360, 30)):
+        ax.text((b + 0.055) * np.cos(ang), (b + 0.055) * np.sin(ang), "−", fontsize=8,
+                color=RED, ha="center", va="center")
+    for ang, rr, (tx, ty), base in ((np.radians(60), a, (1.05, 1.82), "+ρ"),
+                                    (np.radians(-52), b, (1.22, -1.86), "−ρ")):
+        ax.plot([rr * np.cos(ang), tx - 0.04], [rr * np.sin(ang), ty - 0.12 * np.sign(ty)],
+                color=RED, lw=0.9)
+        lab(ax, tx, ty, base, "ℓ", size=12, color=RED, ha="left")
 
     rho = np.linspace(0.0, 2.0, 600)
     E = np.where((rho > a) & (rho < b), a / np.maximum(rho, 1e-9), 0.0)

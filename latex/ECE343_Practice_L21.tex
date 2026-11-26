@@ -109,9 +109,12 @@ density is $\mathbf{D} = \rhohat\,\rho^{3}/4\ \text{nC/m}^2$, with $\rho$ in met
 	the charge.
 	\begin{solution}[1.4in]
 	\eq{ \nabla\mycdot\mathbf{D} = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp r^{2}\cdot\dfrac{Q}{4\pi r^{2}}\rp = \dfrac{1}{r^{2}}\dfrac{\partial}{\partial r}\lp\dfrac{Q}{4\pi}\rp = 0 }
-	There is no charge anywhere except at the origin, where the formula fails.
-	All of the charge sits at that one point, and any sphere around it encloses
-	it, so the flux through the sphere is $Q$.
+	There is no charge anywhere except at the origin, where $\mathbf{D}$ is
+	infinite and the formula fails. The divergence theorem needs $\mathbf{D}$
+	finite and differentiable throughout the volume, so it does not apply to a
+	sphere that contains the origin, and zero divergence for $r > 0$ does not
+	mean zero flux. All of the charge sits at that one point, any sphere around
+	it encloses it, and the flux through the sphere is $Q$.
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}
@@ -135,6 +138,57 @@ density is $\mathbf{D} = \rhohat\,\rho^{3}/4\ \text{nC/m}^2$, with $\rho$ in met
 	}
 	The two counts agree, as the divergence theorem requires.
 	\end{solution}
+
+\end{parts}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{The field from the charge.} A ball of radius $a = 5\ \text{cm}$
+in free space carries a uniform charge density $\rho_v = 2\ \mu\text{C/m}^3$. By
+symmetry $\mathbf{D} = \rhat\,D_r(r)$.
+\begin{parts}
+
+	\part Inside the ball, the point form reads
+	$\dfrac{1}{r^{2}}\dfrac{d}{dr}\lp r^{2} D_r\rp = \rho_v$. Integrate it, and use
+	the fact that $D_r$ is finite at $r = 0$ to fix the constant.
+	\begin{solution}[1.5in]
+	\eq{
+		\dfrac{d}{dr}\lp r^{2} D_r\rp &= \rho_v r^{2}
+		\quad\Longrightarrow\quad r^{2} D_r = \dfrac{\rho_v r^{3}}{3} + C \\
+		D_r &= \dfrac{\rho_v r}{3} + \dfrac{C}{r^{2}}
+	}
+	$D_r$ is finite at $r = 0$ only if $C = 0$, so $D_r = \rho_v r/3$.
+	\end{solution}
+
+	\part Outside the ball $\rho_v = 0$. Integrate the point form again, and
+	match $D_r$ at $r = a$.
+	\begin{solution}[1.5in]
+	\eq{
+		\dfrac{d}{dr}\lp r^{2} D_r\rp &= 0 \quad\Longrightarrow\quad r^{2} D_r = C_2 \\
+		a^{2}\cdot\dfrac{\rho_v a}{3} &= C_2 \quad\Longrightarrow\quad D_r = \dfrac{\rho_v a^{3}}{3r^{2}}
+	}
+	The charge density is finite, so $D_r$ cannot jump at $r = a$.
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part Find $E$ at $r = 2.5\ \text{cm}$ and at $r = 10\ \text{cm}$, and
+		compare with Question 2 of the Lesson 20 practice set, which found the
+		same field from the integral form.
+		\begin{solution}[1.3in]
+		\eq{
+			E(2.5\ \text{cm}) &= \dfrac{2\times 10^{-6}\times 0.025}{3\times 8.854\times 10^{-12}} = 1.88\ \text{kV/m} \\
+			E(10\ \text{cm}) &= \dfrac{2\times 10^{-6}\times 0.05^{3}}{3\times 8.854\times 10^{-12}\times 0.1^{2}} = 0.941\ \text{kV/m}
+		}
+		Both match Lesson 20.
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E(2.5\ \text{cm})$ = \ansbox[1.3in]{$1.88\ \text{kV/m}$}
+
+		\vspace{4pt}
+		$E(10\ \text{cm})$ = \ansbox[1.3in]{$0.941\ \text{kV/m}$}
+	\end{minipage}
 
 \end{parts}
 

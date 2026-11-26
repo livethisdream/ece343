@@ -122,8 +122,8 @@ free space carries a uniform charge density $\rho_v = 2\ \mu\text{C/m}^3$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question \textbf{A coaxial line.} A coaxial line has an inner conductor of radius
 $a = 1\ \text{mm}$, a shield of radius $b = 3.5\ \text{mm}$, and a PTFE dielectric
-with $\epsilon_r = 2.1$. The inner conductor carries $\rho_l = 2\ \text{nC/m}$ and
-the shield carries $-\rho_l$.
+with $\epsilon_r = 2.1$. The inner conductor carries $\rho_\ell = 2\ \text{nC/m}$ and
+the shield carries $-\rho_\ell$.
 \begin{parts}
 
 	\part Derive $\mathbf{E}$ in each of the three regions $\rho < a$,
@@ -133,9 +133,9 @@ the shield carries $-\rho_l$.
 	radius $\rho$ and length $L$, the top and bottom contribute nothing, so
 	\eq{ \oint_S \mathbf{D}\mycdot d\mathbf{s} = \int_0^L\!\!\int_0^{2\pi} D_\rho\, \rho\, d\phi\, dz = 2\pi\rho L D_\rho = Q_\text{encl} }
 	For $\rho < a$, the charge sits on the conductor's surface: $Q_\text{encl} = 0$,
-	so $\mathbf{E} = 0$. For $a < \rho < b$, $Q_\text{encl} = \rho_l L$:
-	\eq{ \mathbf{E} = \rhohat\, \dfrac{\rho_l}{2\pi\epsilon_r\epsilon_0\rho} }
-	For $\rho > b$, $Q_\text{encl} = \rho_l L - \rho_l L = 0$, so $\mathbf{E} = 0$.
+	so $\mathbf{E} = 0$. For $a < \rho < b$, $Q_\text{encl} = \rho_\ell L$:
+	\eq{ \mathbf{E} = \rhohat\, \dfrac{\rho_\ell}{2\pi\epsilon_r\epsilon_0\rho} }
+	For $\rho > b$, $Q_\text{encl} = \rho_\ell L - \rho_\ell L = 0$, so $\mathbf{E} = 0$.
 	\end{solution}
 
 	\begin{minipage}[t]{0.58\linewidth}
@@ -157,12 +157,12 @@ the shield carries $-\rho_l$.
 
 	\begin{minipage}[t]{0.58\linewidth}
 		\part For safety the field anywhere in the dielectric must stay below
-		$20\ \text{MV/m}$. Find the largest $\rho_l$ the line can carry, and say
+		$20\ \text{MV/m}$. Find the largest $\rho_\ell$ the line can carry, and say
 		where the limit is reached first.
 		\begin{solution}[1.1in]
 		The field is largest at $\rho = a$:
 		\eq{
-			\rho_{l,\text{max}} &= 2\pi\epsilon_r\epsilon_0 a E_\text{max} \\
+			\rho_{\ell,\text{max}} &= 2\pi\epsilon_r\epsilon_0 a E_\text{max} \\
 			&= 2\pi\times2.1\times8.854\ee{-12}\times10^{-3}\times2\ee{7} \\
 			&= 2.34\ \mu\text{C/m}
 		}
@@ -170,7 +170,7 @@ the shield carries $-\rho_l$.
 	\end{minipage}\hfill%
 	\begin{minipage}[t]{0.37\linewidth}
 		\raggedleft \vspace{12pt}
-		$\rho_{l,\text{max}}$ = \ansbox[1.3in]{$2.34\ \mu$C/m}
+		$\rho_{\ell,\text{max}}$ = \ansbox[1.3in]{$2.34\ \mu$C/m}
 	\end{minipage}
 
 \end{parts}

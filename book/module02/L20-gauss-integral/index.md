@@ -39,7 +39,7 @@ single point.
 
 ::::{frame} Where We Were
 :::{present}
-**Lesson 18: a point charge** at the origin:
+**Lesson 18:** a point charge at the origin. **Lesson 2:** $\mathbf{D} = \epsilon\mathbf{E}$.
 
 $$\mathbf{E} = \hat{\mathbf{r}}\frac{Q}{4\pi\epsilon r^2}, \qquad \mathbf{D} = \epsilon\mathbf{E} = \hat{\mathbf{r}}\frac{Q}{4\pi r^2}$$
 
@@ -88,7 +88,7 @@ $$\begin{aligned} d\Psi = \mathbf{D} \cdot d\mathbf{s} &= \frac{Q}{4\pi}\  \frac
 
 We start from the flux density of a single point charge $Q$ and ask how much
 flux passes through one small patch $d\mathbf{s}$ of an arbitrary surface.
-Substituting $\mathbf{D}$ from Lesson 18 gives the first line. The ratio
+Substituting $\mathbf{D}$ from the last frame gives the first line. The ratio
 $\hat{\mathbf{r}} \cdot d\mathbf{s}/r^2$ is the **solid angle** $d\Omega$ the
 patch subtends at the charge: the dot product keeps only the part of the patch
 that faces the charge, and dividing by $r^2$ shrinks it onto a sphere of unit
@@ -139,11 +139,14 @@ shows a slice through the plane of the charges. The outline is blue where
 $\mathbf{D}$ leaves the surface and red where it enters, and it is thicker
 where $\mathbf{D}\cdot\hat{\mathbf{n}}$ is larger. The middle readout is the
 surface integral, computed numerically over the whole three-dimensional
-surface; it is not looked up from the charge. Grow the sphere, and the area
-rises while the flux holds at 2.00 nC. Switch to a cube, and the flux density
-varies along every face, but the total does not change. Slide the surface until
-it also encloses the $-1$ nC charge, and the flux drops to 1.00 nC; slide it
-past the $+2$ nC charge, and red and blue cancel to zero.
+surface; it is not looked up from the charge. The sphere starts centered on the
+$+2$ nC charge. Raise the size to 1.60 m, and the area rises while the flux
+holds at 2.00 nC. Switch to a cube, and the flux density varies along every
+face, but the total does not change. Now slide the center to $x = 0.50$ m: the
+surface encloses both charges, and the flux drops to 1.00 nC. Slide it on to
+$x = 2.00$ m, and the $+2$ nC charge is left outside, so the flux is $-1.00$ nC
+and the outline is mostly red. Last, shrink the size to 0.30 m. The surface now
+encloses neither charge, and red and blue cancel to 0.00 nC.
 ::::
 
 ::::{frame} Using Gauss's Law
@@ -194,10 +197,10 @@ dividing recovers Coulomb's law from Lesson 18 in three lines.
      style="max-width: 250px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\begin{aligned} \mathbf{D} &= \hat{\boldsymbol{\rho}}\  D_\rho(\rho) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_\text{side} + \underbrace{\int_\text{top} + \int_\text{bottom}}_{0} = \int_0^L\!\!\int_0^{2\pi} D_\rho\  \rho\  d\phi\  dz \\ 2\pi\rho L\  D_\rho &= \rho_l L \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\frac{\rho_l}{2\pi\epsilon\rho} \end{aligned}$$
+$$\begin{aligned} \mathbf{D} &= \hat{\boldsymbol{\rho}}\  D_\rho(\rho) \\ \oint_S \mathbf{D} \cdot d\mathbf{s} &= \int_\text{side} + \underbrace{\int_\text{top} + \int_\text{bottom}}_{0} = \int_0^L\!\!\int_0^{2\pi} D_\rho\  \rho\  d\phi\  dz \\ 2\pi\rho L\  D_\rho &= \rho_\ell L \\ \mathbf{E} &= \hat{\boldsymbol{\rho}}\frac{\rho_\ell}{2\pi\epsilon\rho} \end{aligned}$$
 :::
 
-An infinite line of charge with $\rho_l$ coulombs per meter lies on the $z$
+An infinite line of charge with $\rho_\ell$ coulombs per meter lies on the $z$
 axis. Moving along $z$ or rotating about the axis leaves the line unchanged, so
 $\mathbf{D}$ cannot depend on $z$ or $\phi$. Turning the picture upside down
 also leaves it unchanged, so $\mathbf{D}$ has no $z$ component, and it points
@@ -206,8 +209,8 @@ cylinder of radius $\rho$ and length $L$. On the curved side, $\mathbf{D}$ is
 normal and constant, and the area element is $\rho\ d\phi\ dz$. On the flat
 top and bottom, the normal is $\pm\hat{\mathbf{z}}$ and $\mathbf{D}$ is tangent,
 so they contribute nothing. The side's area is $2\pi\rho L$, and the cylinder
-encloses a length $L$ of line, or a charge $\rho_l L$. The length cancels, and
-the field falls off as $1/\rho$, more slowly than a point charge's. Lesson 19
+encloses a length $L$ of line, or a charge $\rho_\ell L$. The length cancels, and
+the field falls off as $1/\rho$, more slowly than a point charge's. Lesson 18
 reached the same result by integrating Coulomb's law along the whole line.
 ::::
 
@@ -241,23 +244,26 @@ an infinite sheet is the same at every distance from it.
      style="max-width: 620px; width: 100%; display: block; margin: 0 auto;">
 :::
 :::{present}
-$$\mathbf{E} = \begin{cases} 0, & \rho < a \\ \hat{\boldsymbol{\rho}}\  \dfrac{\rho_l}{2\pi\epsilon\rho}, & a < \rho < b \\ 0, & \rho > b \end{cases}$$
+$$\mathbf{E} = \begin{cases} 0, & \rho < a \\ \hat{\boldsymbol{\rho}}\  \dfrac{\rho_\ell}{2\pi\epsilon\rho}, & a < \rho < b \\ 0, & \rho > b \end{cases}$$
 :::
 
-A coaxial line carries $+\rho_l$ per meter on the surface of its inner
-conductor, radius $a$, and $-\rho_l$ on the inside of its shield, radius $b$.
-The line has the same cylindrical symmetry as the line charge, so we use the
+A coaxial line carries $+\rho_\ell$ per meter on its inner conductor, radius
+$a$, and $-\rho_\ell$ on its shield, radius $b$. We take one fact as given
+today: the charge on a conductor sits on its surface, with none in the metal.
+Here that means the outer surface of the inner conductor and the inner surface
+of the shield. Lesson 24 derives it from the zero field inside a conductor. The
+line has the same cylindrical symmetry as the line charge, so we use the
 same closed cylinder of radius $\rho$ and length $L$, and only its side
 contributes: $2\pi\rho L\ D_\rho = Q_\text{encl}$. All that changes from one
 region to the next is the charge enclosed.
 
-- **Inside the inner conductor**, $\rho < a$: the charge sits on the
-  conductor's surface, so the cylinder encloses none, and the field is zero.
-- **Between the conductors**, $a < \rho < b$: the cylinder encloses $\rho_l L$,
+- **Inside the inner conductor**, $\rho < a$: the charge is all on the surface
+  at $\rho = a$, so the cylinder encloses none, and the field is zero.
+- **Between the conductors**, $a < \rho < b$: the cylinder encloses $\rho_\ell L$,
   exactly as for the line charge, and the field falls as $1/\rho$ in the
   dielectric.
 - **Outside the shield**, $\rho > b$: the cylinder encloses
-  $\rho_l L - \rho_l L = 0$, and the field is zero.
+  $\rho_\ell L - \rho_\ell L = 0$, and the field is zero.
 
 The field lives only in the dielectric between the conductors. That is why a
 coaxial cable neither radiates nor picks up interference from its
@@ -267,7 +273,7 @@ cable's capacitance $C'$.
 
 ::::{frame} Worked Example: The Field in RG-58
 :::{present}
-$\rho_l = 1\ \text{nC/m}$, $a = 0.405$ mm, $b = 1.475$ mm, $\epsilon_r = 2.25$:
+$\rho_\ell = 1\ \text{nC/m}$, $a = 0.405$ mm, $b = 1.475$ mm, $\epsilon_r = 2.25$:
 
 $$\begin{aligned} E(a) &= \frac{10^{-9}}{2\pi \times 2.25 \times 8.854\times10^{-12} \times 0.405\times10^{-3}} = 19.7\ \text{kV/m} \\ E(b) &= E(a)\ \frac{a}{b} = 5.42\ \text{kV/m} \end{aligned}$$
 :::
@@ -276,10 +282,10 @@ $$\begin{aligned} E(a) &= \frac{10^{-9}}{2\pi \times 2.25 \times 8.854\times10^{
 :class: tip
 RG-58 from Lesson 6 has an inner conductor of radius $a = 0.405$ mm, a shield
 of radius $b = 1.475$ mm, and a polyethylene dielectric with
-$\epsilon_r = 2.25$. Suppose the inner conductor carries $\rho_l = 1$ nC per
+$\epsilon_r = 2.25$. Suppose the inner conductor carries $\rho_\ell = 1$ nC per
 meter. Between the conductors,
 
-$$E(\rho) = \frac{\rho_l}{2\pi\epsilon_r\epsilon_0\ \rho}$$
+$$E(\rho) = \frac{\rho_\ell}{2\pi\epsilon_r\epsilon_0\ \rho}$$
 
 At the surface of the inner conductor, $\rho = a$:
 
@@ -322,7 +328,7 @@ and gives $\rho_v \pi a^2 L$.
 Inside the charge, the enclosed charge grows as $\rho^2$ while the area grows
 as $\rho$, so the field grows in proportion to $\rho$ and is zero on the axis.
 Outside, the enclosed charge stops growing at $\rho_v\pi a^2 L$, and the field
-is that of a line charge with $\rho_l = \rho_v\pi a^2$. The two expressions
+is that of a line charge with $\rho_\ell = \rho_v\pi a^2$. The two expressions
 agree at $\rho = a$, so the field is continuous at the edge of the charge.
 ::::
 
@@ -357,9 +363,9 @@ large plate, it approaches that of a line or a sheet.
 | Gauss's law | Net flux out of a closed surface equals the charge inside | $\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}$ |
 | Why it holds | Point-charge flux is $Q/4\pi$ per steradian | $4\pi$ sr inside, 0 outside |
 | Point charge | Sphere | $E = \frac{Q}{4\pi\epsilon r^2}$ |
-| Line charge | Closed cylinder; top and bottom give zero | $E = \frac{\rho_l}{2\pi\epsilon\rho}$ |
+| Line charge | Closed cylinder; top and bottom give zero | $E = \frac{\rho_\ell}{2\pi\epsilon\rho}$ |
 | Sheet | Pillbox; the sides give zero | $E = \frac{\rho_s}{2\epsilon}$, at every distance |
-| Coaxial line | Field only between the conductors | $\frac{\rho_l}{2\pi\epsilon\rho}$ for $a < \rho < b$ |
+| Coaxial line | Field only between the conductors | $\frac{\rho_\ell}{2\pi\epsilon\rho}$ for $a < \rho < b$ |
 | Cylinder of $\rho_v$ | Grows inside, line-charge field outside | $\frac{\rho_v\rho}{2\epsilon}$, then $\frac{\rho_v a^2}{2\epsilon\rho}$ |
 ::::
 

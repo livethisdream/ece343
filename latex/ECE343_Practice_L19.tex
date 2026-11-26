@@ -158,6 +158,70 @@ uniform density $\rho_v$; the region $r < b$ is empty.
 
 \end{parts}
 
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Above the edge of a strip.} A flat strip in the $xy$ plane
+covers $0 \le x^{\prime} \le w$ and runs without end along $y$. It carries a
+uniform surface charge $\rho_s$. The field point is at height $h$ on the $z$
+axis, directly above one edge of the strip.
+\begin{parts}
+
+	\part Write $dQ$ and $\vec{R}$ in rectangular coordinates. Which component
+	of $\vec{E}$ cancels by symmetry, and which two remain?
+	\begin{solution}[1.3in]
+	$dQ = \rho_s\,dx^{\prime}\,dy^{\prime}$ and
+	$\vec{R} = -x^{\prime}\hat{\mathbf{x}} - y^{\prime}\hat{\mathbf{y}} + h\hat{\mathbf{z}}$,
+	with $R = \sqrt{x^{\prime 2} + y^{\prime 2} + h^2}$. The elements at
+	$y^{\prime}$ and $-y^{\prime}$ cancel each other's $y$ component. All of the
+	charge lies at $x^{\prime} > 0$, so the $x$ component does not cancel:
+	$E_x$ and $E_z$ remain.
+	\end{solution}
+
+	\part Derive $E_z$ and $E_x$. The lesson's inner integral is
+	$\int_{-\infty}^{\infty} dy^{\prime}/\lp b^2 + y^{\prime 2}\rp^{3/2} = 2/b^2$.
+	\begin{solution}[2.6in]
+	With $b^2 = x^{\prime 2} + h^2$, the $y^{\prime}$ integral gives
+	$2/\lp x^{\prime 2} + h^2\rp$ in both components:
+	\eq{
+		E_z &= \dfrac{\rho_s h}{4\pi\epsilon}\int_0^w \dfrac{2\,dx^{\prime}}{x^{\prime 2} + h^2}
+		= \dfrac{\rho_s}{2\pi\epsilon}\left[\tan^{-1}\dfrac{x^{\prime}}{h}\right]_0^w
+		= \dfrac{\rho_s}{2\pi\epsilon}\tan^{-1}\dfrac{w}{h} \\
+		E_x &= -\dfrac{\rho_s}{4\pi\epsilon}\int_0^w \dfrac{2x^{\prime}\,dx^{\prime}}{x^{\prime 2} + h^2}
+		= -\dfrac{\rho_s}{4\pi\epsilon}\Big[\ln\lp x^{\prime 2} + h^2\rp\Big]_0^w
+		= -\dfrac{\rho_s}{4\pi\epsilon}\ln\lp 1 + \dfrac{w^2}{h^2}\rp
+	}
+	\end{solution}
+
+	\begin{minipage}[t]{0.58\linewidth}
+		\part With $\rho_s = 1\ \mu$C/m$^2$ and $w = h = 2$ mm in free space,
+		find both components.
+		\begin{solution}[1.4in]
+		$\tan^{-1}1 = \pi/4$ and $\ln 2 = 0.693$:
+		\eq{
+			E_z &= \dfrac{\rho_s}{8\epsilon_0} = \dfrac{1\ee{-6}}{8(8.854\ee{-12})} = 14.1\ \text{kV/m} \\
+			E_x &= -(8.988\ee{9})(1\ee{-6})(0.693) = -6.23\ \text{kV/m}
+		}
+		\end{solution}
+	\end{minipage}\hfill%
+	\begin{minipage}[t]{0.37\linewidth}
+		\raggedleft \vspace{12pt}
+		$E_z$ = \ansbox[1.1in]{$14.1$ kV/m}
+
+		\vspace{4pt}
+		$E_x$ = \ansbox[1.1in]{$-6.23$ kV/m}
+	\end{minipage}
+
+	\part Check $E_z$: what does it become as $w \to \infty$, and why is that
+	the right answer?
+	\begin{solution}[1in]
+	$\tan^{-1}(w/h) \to \pi/2$, so $E_z \to \rho_s/4\epsilon$, half the field of
+	an infinite sheet. The strip has become half of a sheet, the half with
+	$x^{\prime} > 0$, and by symmetry each half of a full sheet supplies half
+	of its $z$ component.
+	\end{solution}
+
+\end{parts}
+
 \vspace{1.5em}
 \noindent\textbf{Documentation:} \rule[-2pt]{0.6\linewidth}{0.4pt}
 

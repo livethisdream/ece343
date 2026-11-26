@@ -166,8 +166,12 @@ conductor's surface, and Gauss's law collects it: the flux of
 $\epsilon\mathbf{E}$ out through any contour around the inner conductor is the
 charge per meter, $\rho_\ell$. Dividing by the $1\ \text{V}$ between the
 conductors gives $C'$, which you compare with Lesson 25's formula for
-polyethylene, $\epsilon_r = 2.25$. The two will not agree exactly, and the
-notebook asks you to find out why by changing the grid.
+polyethylene, $\epsilon_r = 2.25$. You then run the boundary condition the
+other way: from $\rho_\ell$ you find the surface charge density
+$\rho_s = \epsilon E_n$ on the inner conductor and the field just outside
+it, and compare that field with Lesson 23's at $\rho = a$. The two values of
+$C'$ will not agree exactly, and the notebook asks you to find out why by
+changing the grid.
 ::::
 
 ::::{frame} Checking a Computation
@@ -202,7 +206,8 @@ line; when the line is a small fraction of a wavelength, $\cot\beta\ell
 $C'\ell$. At 2 MHz a 2 m cable is $0.02\lambda$ long, close enough that the
 error is under 1%. You read the reactance of two open-ended cables of
 different length, and the difference removes the adapter's few picofarads,
-which add equally to both.
+which add equally to both. If Part C is not assigned, leave its two readings
+at zero in the notebook; the cell prints a note and computes nothing.
 ::::
 
 ::::{frame} Teams and the Report

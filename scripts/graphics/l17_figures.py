@@ -4,9 +4,12 @@
     L17-coordinates.svg    one point P located in Cartesian, cylindrical, and
                            spherical coordinates
     L17-unit-vectors.svg   rho-hat and phi-hat at two points: they turn with phi
+    L17-position-vectors.svg  the source point r′, the field point r, and
+                           the separation vector R = r − r′
     L17-elements.svg       the cylindrical and spherical volume elements, with
                            the length of each edge
-    L17-gradient.svg       level curves of f = x^2 + y^2 and the gradient
+    L17-gradient.svg       level curves of f = x^2 + y^2 and the gradient, with
+                           the point (1, 1) the text evaluates
     L17-flux-box.svg       a small box, with F_x entering one face and leaving
                            the opposite face
     L17-tiling.svg         neighbor cells: the shared face (divergence) and the
@@ -192,36 +195,37 @@ def elements():
     blank(ax, (-1.6, 3.4), (-1.0, 3.3))
     axes3(ax, 2.6)
     ax.set_title("cylindrical", fontsize=13, color=NAVY)
-    r0, dr, p0, dp, z0, dz = 1.2, 0.9, np.radians(12), np.radians(48), 0.8, 1.0
+    r0, dr, p0, dp, z0, dz = 1.2, 0.9, np.radians(68), np.radians(40), 0.8, 1.0
     t = np.linspace(p0, p0 + dp, 30)
 
     def cyl(r, a, z):
         return (r * np.cos(a), r * np.sin(a), z)
 
+    # The phi = p0 end face, the outer face, and the top all face the viewer.
     faces = []
-    top_outer = [P(*cyl(r0 + dr, a, z0 + dz)) for a in t]
-    top_inner = [P(*cyl(r0, a, z0 + dz)) for a in t[::-1]]
-    faces.append(top_outer + top_inner)
-    side_outer = [P(*cyl(r0 + dr, a, z0)) for a in t] + [P(*cyl(r0 + dr, a, z0 + dz)) for a in t[::-1]]
-    faces.append(side_outer)
     end = [P(*cyl(r0, p0, z0)), P(*cyl(r0 + dr, p0, z0)),
            P(*cyl(r0 + dr, p0, z0 + dz)), P(*cyl(r0, p0, z0 + dz))]
     faces.append(end)
+    side_outer = [P(*cyl(r0 + dr, a, z0)) for a in t] + [P(*cyl(r0 + dr, a, z0 + dz)) for a in t[::-1]]
+    faces.append(side_outer)
+    top_outer = [P(*cyl(r0 + dr, a, z0 + dz)) for a in t]
+    top_inner = [P(*cyl(r0, a, z0 + dz)) for a in t[::-1]]
+    faces.append(top_outer + top_inner)
     for f in faces:
         ax.add_patch(Polygon(f, closed=True, fc=FILL, ec=NAVY, lw=1.3, alpha=0.95))
     curve(ax, [(0, 0, 0), cyl(r0, p0, 0)], color=GRAY, lw=0.9, ls="--")
     curve(ax, [cyl(r0, p0, 0), cyl(r0, p0, z0)], color=GRAY, lw=0.9, ls="--")
-    # edge labels
-    a = P(*cyl(r0 + dr / 2, p0, z0)); txt(ax, a + (-0.12, -0.12), "dρ", color=AMBER, ha="right")
-    a = P(*cyl(r0 + dr, p0 + dp / 2, z0)); txt(ax, a + (0.05, -0.28), "ρ dφ", color=AMBER)
-    a = P(*cyl(r0 + dr, p0 + dp, z0 + dz / 2)); txt(ax, a + (0.2, 0), "dz", color=AMBER, ha="left")
+    # edge labels, each beside the edge it names
+    a = P(*cyl(r0 + dr / 2, p0, z0)); txt(ax, a + (-0.1, -0.24), "dρ", color=AMBER, ha="center")
+    a = P(*cyl(r0 + dr, p0 + dp / 2, z0)); txt(ax, a + (0.12, -0.26), "ρ dφ", color=AMBER)
+    a = P(*cyl(r0 + dr, p0 + dp, z0 + dz / 2)); txt(ax, a + (0.16, 0), "dz", color=AMBER, ha="left")
 
     # spherical: r in [r0, r0+dr], theta in [t0, t0+dt], phi in [p0, p0+dp]
     ax = axs[1]
     blank(ax, (-1.6, 3.4), (-1.0, 3.3))
     axes3(ax, 2.6)
     ax.set_title("spherical", fontsize=13, color=NAVY)
-    R0, dR, t0, dt, q0, dq = 1.5, 0.8, np.radians(35), np.radians(30), np.radians(12), np.radians(48)
+    R0, dR, t0, dt, q0, dq = 1.5, 0.8, np.radians(35), np.radians(30), np.radians(68), np.radians(40)
 
     def sph(r, th, ph):
         return (r * np.sin(th) * np.cos(ph), r * np.sin(th) * np.sin(ph), r * np.cos(th))
@@ -230,23 +234,59 @@ def elements():
     qq = np.linspace(q0, q0 + dq, 30)
     outer = ([P(*sph(R0 + dR, t0, q)) for q in qq] + [P(*sph(R0 + dR, th, q0 + dq)) for th in tt]
              + [P(*sph(R0 + dR, t0 + dt, q)) for q in qq[::-1]] + [P(*sph(R0 + dR, th, q0)) for th in tt[::-1]])
+    # The phi = q0 end face shows the dr and r dθ edges; it faces the viewer.
     endq = ([P(*sph(r, t0, q0)) for r in (R0, R0 + dR)] + [P(*sph(R0 + dR, th, q0)) for th in tt]
             + [P(*sph(r, t0 + dt, q0)) for r in (R0 + dR, R0)] + [P(*sph(R0, th, q0)) for th in tt[::-1]])
-    topt = ([P(*sph(R0, t0, q)) for q in qq] + [P(*sph(R0 + dR, t0, q)) for q in qq[::-1]])
-    for f in (topt, endq, outer):
+    for f in (endq, outer):
         ax.add_patch(Polygon(f, closed=True, fc=FILL, ec=NAVY, lw=1.3, alpha=0.95))
-    curve(ax, [(0, 0, 0), sph(R0, t0, q0)], color=GRAY, lw=0.9, ls="--")
-    a = P(*sph(R0 + dR / 2, t0 + dt, q0)); txt(ax, a + (-0.1, -0.22), "dr", color=AMBER, ha="right")
-    a = P(*sph(R0 + dR, t0 + dt / 2, q0 + dq)); txt(ax, a + (0.18, 0), "r dθ", color=AMBER, ha="left")
-    a = P(*sph(R0 + dR, t0, q0 + dq / 2)); txt(ax, a + (0.05, 0.28), "r sinθ dφ", color=AMBER)
+    curve(ax, [(0, 0, 0), sph(R0, t0 + dt, q0)], color=GRAY, lw=0.9, ls="--")
+    a = P(*sph(R0 + dR / 2, t0 + dt, q0)); txt(ax, a + (-0.02, -0.26), "dr", color=AMBER, ha="center")
+    a = P(*sph(R0 + dR, t0 + dt / 2, q0 + dq)); txt(ax, a + (0.16, 0), "r dθ", color=AMBER, ha="left")
+    a = P(*sph(R0 + dR, t0, q0 + dq / 2)); txt(ax, a + (0.1, 0.26), "r sinθ dφ", color=AMBER)
     save(fig, "L17-elements.svg")
+
+
+def position_vectors():
+    """The source point r′, the field point r, and the separation R = r − r′."""
+    fig, ax = plt.subplots(figsize=(6.0, 3.7))
+    blank(ax, (-0.6, 6.2), (-0.5, 3.5))
+    arrow(ax, (-0.4, 0), (6.0, 0), color=GRAY, lw=1.1, ms=10)
+    arrow(ax, (0, -0.4), (0, 3.4), color=GRAY, lw=1.1, ms=10)
+    txt(ax, (6.0, -0.25), "x", color=GRAY)
+    txt(ax, (-0.22, 3.35), "y", color=GRAY)
+    txt(ax, (-0.15, -0.2), "O", color=GRAY, size=12, italic=False)
+    src, obs = np.array([1.4, 2.4]), np.array([5.0, 1.0])
+    arrow(ax, (0, 0), src, color=GRAY, lw=1.6)
+    arrow(ax, (0, 0), obs, color=GRAY, lw=1.6)
+    arrow(ax, src, obs, color=AMBER, lw=2.4, ms=17)
+    ax.plot(*src, "o", color=NAVY, ms=7, zorder=5)
+    ax.plot(*obs, "o", color=INK, ms=6, zorder=5)
+
+    def bold(pt, s, color, ha="center"):
+        ax.text(pt[0], pt[1], s, color=color, fontsize=15, ha=ha, va="center", fontweight="bold")
+
+    bold((0.4, 1.45), "r′", GRAY)
+    bold((2.7, 0.22), "r", GRAY)
+    bold((3.5, 2.15), "R = r − r′", AMBER, ha="left")
+    txt(ax, (1.4, 2.8), "source point", color=NAVY, size=11.5, italic=False)
+    txt(ax, (5.15, 0.7), "field point", color=INK, size=11.5, ha="left", italic=False)
+    save(fig, "L17-position-vectors.svg")
 
 
 def gradient():
     fig, ax = plt.subplots(figsize=(4.8, 4.6))
-    blank(ax, (-2.3, 2.3), (-2.3, 2.3))
+    blank(ax, (-2.5, 2.6), (-2.5, 2.6))
+    arrow(ax, (-2.4, 0), (2.5, 0), color=GRAY, lw=1.0, ms=10)
+    arrow(ax, (0, -2.4), (0, 2.5), color=GRAY, lw=1.0, ms=10)
+    txt(ax, (2.5, -0.2), "x", color=GRAY)
+    txt(ax, (-0.2, 2.5), "y", color=GRAY)
+    for k in (1, 2):
+        ax.plot([k, k], [-0.06, 0.06], color=GRAY, lw=1.0)
+        ax.plot([-0.06, 0.06], [k, k], color=GRAY, lw=1.0)
+        txt(ax, (k, -0.22), str(k), color=GRAY, size=10.5, italic=False)
+        txt(ax, (-0.2, k), str(k), color=GRAY, size=10.5, italic=False)
     t = np.linspace(0, 2 * np.pi, 200)
-    for c in (0.5, 1, 2, 3, 4):
+    for c in (1, 2, 3, 4):                      # f = x^2 + y^2 in equal steps
         r = np.sqrt(c)
         ax.plot(r * np.cos(t), r * np.sin(t), color=GRAY, lw=1.0)
     g = np.linspace(-1.6, 1.6, 5)
@@ -255,6 +295,11 @@ def gradient():
             if abs(x) < 1e-9 and abs(y) < 1e-9:
                 continue
             arrow(ax, (x, y), (x + 0.16 * x, y + 0.16 * y), color=NAVY, lw=1.5, ms=10)
+    # the point the text evaluates, with its gradient 2x + 2y at the same scale
+    arrow(ax, (1, 1), (1.32, 1.32), color=AMBER, lw=2.4, ms=13)
+    ax.plot([1], [1], "o", color=AMBER, ms=6, zorder=5)
+    ax.text(1.14, 0.74, "(1, 1)", color=AMBER, fontsize=11.5, ha="left", va="center",
+            bbox=dict(fc="white", ec="none", pad=1.2))
     save(fig, "L17-gradient.svg")
 
 
@@ -352,7 +397,7 @@ def curl_loop():
         m = (p + q) / 2 + off
         ha = "left" if off[0] > 0 else "right" if off[0] < 0 else "center"
         stxt(ax, m, "F", lbl[0], lbl[1], color=AMBER, size=13, ha=ha)
-    txt(ax, (x0 + a / 2, y0 + b / 2), "ΔS = Δx Δy", color=GRAY, size=12, italic=False)
+    txt(ax, (x0 + a / 2, y0 + b / 2), "Δs = Δx Δy", color=GRAY, size=12, italic=False)
     save(fig, "L17-curl-loop.svg")
 
 
@@ -386,10 +431,11 @@ def stokes_example():
     arrow(ax, (2 * np.cos(m - 0.1), 2 * np.sin(m - 0.1)), (2 * np.cos(m + 0.1), 2 * np.sin(m + 0.1)),
           color=NAVY, lw=2.2)
     arrow(ax, (0, 1.25), (0, 0.8), color=NAVY, lw=2.2)
-    txt(ax, (1.0, -0.25), "1", color=AMBER, italic=False)
+    txt(ax, (1.0, 0.2), "1", color=AMBER, italic=False)
     txt(ax, (2.25 * np.cos(m), 2.25 * np.sin(m)), "2", color=AMBER, italic=False)
     txt(ax, (-0.22, 1.0), "3", color=AMBER, italic=False)
-    txt(ax, (2.0, -0.25), "2", color=GRAY, size=11, italic=False)
+    ax.plot([2, 2], [-0.07, 0.07], color=GRAY, lw=1.0)
+    txt(ax, (2.0, -0.25), "ρ = 2", color=GRAY, size=11)
     txt(ax, (0.75, 0.7), "S", color=NAVY)
     save(fig, "L17-stokes-example.svg")
 
@@ -397,6 +443,7 @@ def stokes_example():
 if __name__ == "__main__":
     coordinates()
     unit_vectors()
+    position_vectors()
     elements()
     gradient()
     flux_box()

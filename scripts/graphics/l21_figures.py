@@ -85,8 +85,8 @@ def box():
     arrow(ax, w + dx / 2, cyr, w + dx / 2 + 1.9, cyr, color=BLUE, lw=2.6)
     lab(ax, -1.75, cyl + 0.32, "D", "x", color=BLUE, ha="left", italic=False)
     ax.text(-1.32, cyl + 0.34, "(x)", fontsize=14, color=BLUE, ha="left")
-    lab(ax, w + dx / 2 + 0.25, cyr + 0.32, "D", "x", color=BLUE, ha="left", italic=False)
-    ax.text(w + dx / 2 + 0.68, cyr + 0.34, "(x + Δx)", fontsize=14, color=BLUE, ha="left")
+    lab(ax, w + dx + 0.15, cyr + 0.32, "D", "x", color=BLUE, ha="left", italic=False)
+    ax.text(w + dx + 0.58, cyr + 0.34, "(x + Δx)", fontsize=14, color=BLUE, ha="left")
     ax.annotate("", xy=(w, -0.3), xytext=(0, -0.3), arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.0))
     ax.text(w / 2, -0.62, "Δx", fontsize=14, color=GRAY, ha="center", fontstyle="italic")
     ax.annotate("", xy=(-0.3, h), xytext=(-0.3, 0), arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.0))
@@ -102,9 +102,9 @@ def sources():
     titles = ["charge inside: ∇·D > 0", "no charge: ∇·D = 0", "no charge: ∇·D = 0"]
     for ax, title in zip(axs, titles):
         ax.set_aspect("equal"); ax.axis("off")
-        ax.set_xlim(-1.6, 1.6); ax.set_ylim(-1.75, 1.6)
+        ax.set_xlim(-1.6, 1.6); ax.set_ylim(-2.15, 1.6)
         ax.add_patch(Circle((0, 0), 0.75, fc="none", ec=NAVY, lw=1.2, ls="--"))
-        ax.text(0, -1.7, title, ha="center", fontsize=12, color=GRAY)
+        ax.text(0, -2.05, title, ha="center", fontsize=12, color=GRAY)
 
     # (1) inside a uniform volume charge: D grows in proportion to r
     ax = axs[0]

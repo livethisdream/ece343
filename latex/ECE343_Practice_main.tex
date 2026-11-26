@@ -5,6 +5,13 @@
 \input{myShortcuts}
 \input{exam_config}
 \input{ece343_fonts}   % Barlow body text (needs lualatex)
+% The house \xhat, \yhat, \zhat, \rhat put the hat inside \mathbf, and in
+% the bold math font the accent collapses onto the letter (r-hat reads as an
+% up arrow). Hat outside the bold letter instead.
+\renewcommand{\xhat}{\ensuremath{\hat{\mathbf{x}}}}
+\renewcommand{\yhat}{\ensuremath{\hat{\mathbf{y}}}}
+\renewcommand{\zhat}{\ensuremath{\hat{\mathbf{z}}}}
+\renewcommand{\rhat}{\ensuremath{\hat{\mathbf{r}}}}
 
 \newif\ifkey
 \newif\ifA

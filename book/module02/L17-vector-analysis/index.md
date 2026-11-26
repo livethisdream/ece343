@@ -86,7 +86,8 @@ legs $x = \rho\cos\phi$ and $y = \rho\sin\phi$. In the vertical plane through
 $P$ and the $z$ axis, the segment $r$ makes angle $\theta$ with the axis, so
 its vertical leg is $z = r\cos\theta$ and its horizontal leg is
 $\rho = r\sin\theta$. Going the other way, $\rho = \sqrt{x^2 + y^2}$,
-$\phi = \tan^{-1}(y/x)$ in the correct quadrant, and $r = \sqrt{x^2 + y^2 + z^2}$.
+$\phi = \tan^{-1}(y/x)$ in the correct quadrant, $r = \sqrt{x^2 + y^2 + z^2}$,
+and $\theta = \cos^{-1}(z/r)$.
 ::::
 
 ::::{frame} Unit Vectors That Turn
@@ -118,8 +119,58 @@ varies. The safe method is to convert to Cartesian unit vectors first. For
 example, around a full circle,
 $\int_0^{2\pi} \hat{\boldsymbol{\rho}}\  d\phi = \hat{\mathbf{x}}\int_0^{2\pi}\cos\phi\  d\phi + \hat{\mathbf{y}}\int_0^{2\pi}\sin\phi\  d\phi = 0$,
 which is why the sideways pulls cancel for the ring of charge in Lesson 19.
-The spherical unit vectors $\hat{\mathbf{r}}$, $\hat{\boldsymbol{\theta}}$, and
-$\hat{\boldsymbol{\phi}}$ turn in the same way.
+
+The spherical unit vectors turn with both angles, and we project them the same
+way. $\hat{\mathbf{r}}$ points directly away from the origin, so it is the
+position of the point divided by its distance $r$, and the conversions from the
+previous frame give its components. $\hat{\boldsymbol{\theta}}$ points in the
+direction of increasing $\theta$, down and away from the $+z$ axis; it is
+$\hat{\mathbf{r}}$ with $\theta$ advanced by $90^\circ$, which takes
+$\sin\theta$ to $\cos\theta$ and $\cos\theta$ to $-\sin\theta$.
+$\hat{\boldsymbol{\phi}}$ is the same vector as in cylindrical coordinates.
+
+$$\begin{aligned} \hat{\mathbf{r}} &= \frac{\hat{\mathbf{x}}\ x + \hat{\mathbf{y}}\ y + \hat{\mathbf{z}}\ z}{r} = \hat{\mathbf{x}}\sin\theta\cos\phi + \hat{\mathbf{y}}\sin\theta\sin\phi + \hat{\mathbf{z}}\cos\theta \\ \hat{\boldsymbol{\theta}} &= \hat{\mathbf{x}}\cos\theta\cos\phi + \hat{\mathbf{y}}\cos\theta\sin\phi - \hat{\mathbf{z}}\sin\theta \\ \hat{\boldsymbol{\phi}} &= -\hat{\mathbf{x}}\sin\phi + \hat{\mathbf{y}}\cos\phi \end{aligned}$$
+
+The $z$ component of $\hat{\mathbf{r}}$ is $\cos\theta$, which Lesson 19 needs
+for the field of a charged sphere.
+::::
+
+::::{frame} Position Vectors
+:::{present}
+<img src="../../viz/img/L17-position-vectors.svg"
+     alt="A source point with position vector r prime and a field point with position vector r, both drawn from the origin, and the vector R from the source point to the field point"
+     style="max-width: 440px; width: 100%; display: block; margin: 0 auto;">
+:::
+:::{present}
+$$\begin{aligned} \mathbf{R} &= \mathbf{r} - \mathbf{r}' \\ R &= \vert\mathbf{R}\vert = \sqrt{(x - x')^2 + (y - y')^2 + (z - z')^2} \\ \hat{\mathbf{R}} &= \frac{\mathbf{R}}{R} \end{aligned}$$
+:::
+
+A **position vector** runs from the origin to a point. In Cartesian
+coordinates the point $(x, y, z)$ has position vector
+$\mathbf{r} = \hat{\mathbf{x}}\ x + \hat{\mathbf{y}}\ y + \hat{\mathbf{z}}\ z$.
+Every field problem in this course has two points. The **field point** is where
+we want the field, and its position vector is $\mathbf{r}$. The **source
+point** is where a charge or a current sits, and we mark its position vector
+and its coordinates with a prime: $\mathbf{r}'$, at $(x', y', z')$. The prime
+is a label, not a derivative.
+
+The **separation vector** $\mathbf{R} = \mathbf{r} - \mathbf{r}'$ points from
+the source point to the field point, as the figure shows: going from the
+origin along $\mathbf{r}'$ and then along $\mathbf{R}$ arrives at
+$\mathbf{r}$. Its length $R$ is the distance between the two points, and
+dividing $\mathbf{R}$ by $R$ gives the unit vector $\hat{\mathbf{R}}$, which
+keeps only the direction. For a source at $(0, 3, 0)$ m and a field point at
+$(4, 0, 0)$ m, $\mathbf{R} = 4\hat{\mathbf{x}} - 3\hat{\mathbf{y}}$ m,
+$R = 5$ m, and $\hat{\mathbf{R}} = 0.8\hat{\mathbf{x}} - 0.6\hat{\mathbf{y}}$.
+
+We subtract position vectors in Cartesian components. In cylindrical
+coordinates a position vector is
+$\mathbf{r} = \hat{\boldsymbol{\rho}}\ \rho + \hat{\mathbf{z}}\ z$, and in
+spherical coordinates it is $\mathbf{r} = \hat{\mathbf{r}}\ r$, but the
+$\hat{\boldsymbol{\rho}}$ at the source point and the
+$\hat{\boldsymbol{\rho}}$ at the field point are different vectors, so we
+convert each to Cartesian form before taking the difference. Lesson 18 writes
+Coulomb's law in terms of $\mathbf{R}$.
 ::::
 
 ::::{frame} Metric Factors
@@ -217,8 +268,9 @@ The **gradient** answers a practical question: if we take a small step
 $d\mathbf{l}$ from a point, how much does a scalar field $f$ change? The chain
 rule gives the change as the sum of the change from each coordinate,
 $df = \sum_i (\partial f/\partial u_i)\  du_i$. To write that in terms of the
-step, notice that the step's component along $\hat{\mathbf{u}}_i$ is
-$\hat{\mathbf{u}}_i \cdot d\mathbf{l} = h_i\  du_i$, so
+step, notice that the three unit vectors of each system are perpendicular to
+one another, so dotting $\hat{\mathbf{u}}_i$ into $d\mathbf{l}$ keeps only its
+own term: $\hat{\mathbf{u}}_i \cdot d\mathbf{l} = h_i\  du_i$, so
 $du_i = (\hat{\mathbf{u}}_i \cdot d\mathbf{l})/h_i$. Substituting,
 
 $$df = \left(\sum_i \hat{\mathbf{u}}_i \frac{1}{h_i}\frac{\partial f}{\partial u_i}\right) \cdot d\mathbf{l}.$$
@@ -408,9 +460,14 @@ $h_1h_2\ \Delta u_1\ \Delta u_2$ gives the component along $\hat{\mathbf{u}}_3$,
 $$(\nabla \times \mathbf{F})_3 = \frac{1}{h_1h_2}\left[\frac{\partial(h_2F_2)}{\partial u_1} - \frac{\partial(h_1F_1)}{\partial u_2}\right],$$
 
 and the other two components follow by cycling $1 \to 2 \to 3 \to 1$. The
-determinant above packs all three into one expression. In cylindrical
-coordinates, for example, the $z$ component is
-$(1/\rho)\left[\partial(\rho F_\phi)/\partial\rho - \partial F_\rho/\partial\phi\right]$.
+determinant above packs all three into one expression. With the metric factors
+from the table, the curl in cylindrical coordinates is
+
+$$\nabla \times \mathbf{F} = \hat{\boldsymbol{\rho}}\left[\frac{1}{\rho}\frac{\partial F_z}{\partial \phi} - \frac{\partial F_\phi}{\partial z}\right] + \hat{\boldsymbol{\phi}}\left[\frac{\partial F_\rho}{\partial z} - \frac{\partial F_z}{\partial \rho}\right] + \hat{\mathbf{z}}\ \frac{1}{\rho}\left[\frac{\partial(\rho F_\phi)}{\partial \rho} - \frac{\partial F_\rho}{\partial \phi}\right]$$
+
+and in spherical coordinates it is
+
+$$\begin{aligned} \nabla \times \mathbf{F} = {} & \hat{\mathbf{r}}\ \frac{1}{r\sin\theta}\left[\frac{\partial(\sin\theta\  F_\phi)}{\partial \theta} - \frac{\partial F_\theta}{\partial \phi}\right] + \hat{\boldsymbol{\theta}}\ \frac{1}{r}\left[\frac{1}{\sin\theta}\frac{\partial F_r}{\partial \phi} - \frac{\partial(r F_\phi)}{\partial r}\right] \\ & + \hat{\boldsymbol{\phi}}\ \frac{1}{r}\left[\frac{\partial(r F_\theta)}{\partial r} - \frac{\partial F_r}{\partial \theta}\right] \end{aligned}$$
 
 The figure contrasts the two derivatives. The field $\hat{\boldsymbol{\rho}}\ \rho$
 on the left spreads outward: its divergence is
@@ -532,6 +589,7 @@ $\nabla^2 V = 0$.
 | Metric factors | Turn a change in a coordinate into a distance | cyl $(1, \rho, 1)$; sph $(1, r, r\sin\theta)$ |
 | Volume element | Product of the three edges | $\rho\  d\rho\  d\phi\  dz$; $r^2\sin\theta\  dr\  d\theta\  d\phi$ |
 | Unit vectors | $\hat{\boldsymbol{\rho}}$, $\hat{\boldsymbol{\phi}}$, $\hat{\mathbf{r}}$, $\hat{\boldsymbol{\theta}}$ turn with position | convert to Cartesian before integrating |
+| Separation vector | From the source point $\mathbf{r}'$ to the field point $\mathbf{r}$ | $\mathbf{R} = \mathbf{r} - \mathbf{r}'$, $\hat{\mathbf{R}} = \mathbf{R}/R$ |
 | Gradient | Direction and rate of fastest increase | $df = \nabla f \cdot d\mathbf{l}$ |
 | Divergence | Net outward flux per unit volume | $\nabla\cdot\mathbf{F} = \lim \oint \mathbf{F}\cdot d\mathbf{s}/\Delta v$ |
 | Curl | Circulation per unit area | $(\nabla\times\mathbf{F})\cdot\hat{\mathbf{n}} = \lim \oint \mathbf{F}\cdot d\mathbf{l}/\Delta s$ |

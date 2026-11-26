@@ -86,7 +86,7 @@ def parallel_plate():
     lab(a1, 3.55, -0.08, "V = 0", size=13, ha="left", italic=False)
     lab(a1, -0.12, 2.08, "z = d", size=12, ha="right", italic=False, color=GRAY)
     lab(a1, -0.12, -0.08, "z = 0", size=12, ha="right", italic=False, color=GRAY)
-    lab(a1, 1.7, 2.45, "E", size=15, color=NAVY)
+    lab(a1, 2.03, 1.25, "E", size=15, color=NAVY)
 
     z = np.linspace(0, 1, 50)
     a2.plot(z, z, color=NAVY, lw=2.6)
@@ -151,7 +151,11 @@ def relaxation():
     ax.set_xlim(-0.12, 1.3); ax.set_ylim(-0.12, 1.14)
     cs = ax.contour(X, Y, V, levels=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
                     colors=AMBER, linewidths=1.2)
-    ax.clabel(cs, fmt=lambda v: f"{v:.2g}", fontsize=10, inline=True)
+    # Label each contour where it crosses the centerline. Left to itself,
+    # clabel puts 0.7 in the top corner, where the contours crowd together.
+    mid = V[:, n // 2]
+    spots = [(0.5, float(np.interp(lv, mid, x))) for lv in cs.levels]
+    ax.clabel(cs, fmt=lambda v: f"{v:.2g}", fontsize=10, inline=True, manual=spots)
     ax.plot([0, 0, 1, 1], [1, 0, 0, 1], color=INK, lw=2.4)
     ax.plot([0.02, 0.98], [1.02, 1.02], color=RED, lw=3.0)
     lab(ax, 0.46, 1.09, "V = V", "0", size=12, italic=False, color=RED)

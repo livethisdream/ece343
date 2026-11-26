@@ -111,7 +111,8 @@ box, only the faces on the outer surface $S$ survive, and their total is the
 flux out of $S$. Each box contributes its divergence times its volume, so the
 same sum is the volume integral of $\nabla \cdot \mathbf{D}$. The theorem
 converts a surface integral into a volume integral, and that is the step we
-need.
+need. The theorem assumes that $\mathbf{D}$ is finite and differentiable at
+every point of $V$, so that every small box has a divergence to contribute.
 ::::
 
 ::::{frame} Gauss's Law at a Point
@@ -124,9 +125,10 @@ with the enclosed charge written as a volume integral. The divergence theorem
 replaces the flux on the left with the volume integral of
 $\nabla \cdot \mathbf{D}$, so both sides are integrals over the same volume.
 Moving them to one side gives the third line. It holds for **every** volume,
-however small and wherever it sits. If the integrand were positive at some
-point, we could draw a volume small enough to contain only the region around
-that point, and its integral would be positive, not zero. So the integrand must
+however small and wherever it sits. Suppose the integrand were positive at some
+point where it is continuous. Then it would stay positive throughout a small
+region around that point, and the integral over that region would be positive,
+not zero. The same argument rules out a negative value. So the integrand must
 be zero everywhere, which is the fourth line: the **differential form of
 Gauss's law**. In a material with constant permittivity, it reads
 $\nabla \cdot \mathbf{E} = \rho_v/\epsilon$.
@@ -184,9 +186,16 @@ The field of a point charge is the middle panel. It has only a radial
 component, so the spherical form has a single term. Multiplying $D_r$ by $r^2$
 cancels the $1/r^2$, and the derivative of a constant is zero. The divergence
 vanishes at every point except the origin, where the formula divides by zero.
-That is consistent with Gauss's law: the charge density is zero everywhere
-except at the one point where the charge sits, and the integral form from
-Lesson 20 still gives a flux of $Q$ through any sphere around it.
+
+This looks like a contradiction. A sphere around the charge carries a flux of
+$Q$, yet the divergence theorem seems to say the flux is the volume integral of
+zero. It is not a contradiction, because the theorem does not apply to that
+sphere. The theorem needs $\mathbf{D}$ to be finite and differentiable
+throughout the volume, and $\mathbf{D}$ is infinite at $r = 0$. All of the
+charge sits at the one point where our formula for the divergence fails, and all
+of the flux $Q$ comes from that point. For a volume that leaves the origin out,
+the theorem holds, and the flux through its surface is zero, as Lesson 20 found
+for a charge outside the surface.
 ::::
 
 ::::{frame} Worked Example: Charge From a Field
@@ -258,6 +267,37 @@ agreement is the divergence theorem at work, and either count is a check on
 the other.
 ::::
 
+::::{frame} Worked Example: The Field From the Charge
+:::{present}
+A slab of uniform charge $\rho_v$ fills $-d < x < d$:
+
+$$\begin{aligned} \frac{dD_x}{dx} &= \rho_v \ \Rightarrow\  D_x = \rho_v x + C \\ D_x(-x) = -D_x(x) &\ \Rightarrow\  C = 0 \\ \vert x\vert < d:& \quad D_x = \rho_v x \\ x > d:& \quad \frac{dD_x}{dx} = 0 \ \Rightarrow\  D_x = \rho_v d \end{aligned}$$
+:::
+
+The point form also runs from the charge to the field. We integrate it, and a
+symmetry or a boundary condition fixes the constant of integration. Take a slab
+of uniform charge density $\rho_v$ that fills the region $-d < x < d$ and
+extends without limit in $y$ and $z$. Sliding the slab in $y$ or $z$ leaves it
+unchanged, so $\mathbf{D} = \hat{\mathbf{x}}\ D_x(x)$, and the Cartesian
+divergence has one term.
+
+Inside the slab, $dD_x/dx = \rho_v$, and integrating once gives
+$D_x = \rho_v x + C$. Reflecting the slab through the plane $x = 0$ leaves it
+unchanged, so the field on one side mirrors the field on the other:
+$D_x(-x) = -D_x(x)$. At $x = 0$ that requires $D_x = 0$, so $C = 0$ and
+$D_x = \rho_v x$. The field grows linearly from zero at the center.
+
+Outside, $\rho_v = 0$, so $dD_x/dx = 0$ and $D_x$ is a constant. The charge
+density is finite everywhere, so the derivative of $D_x$ is finite and $D_x$
+cannot jump at the edge. Matching at $x = d$ gives $D_x = \rho_v d$ for
+$x > d$, and by the mirror symmetry $D_x = -\rho_v d$ for $x < -d$.
+
+We check this against Lesson 20. From outside, the slab holds a charge
+$\rho_s = 2d\ \rho_v$ on each square meter of its face, and Lesson 20's infinite
+sheet gives $D = \rho_s/2 = \rho_v d$ on each side, pointing away from it. The
+two forms agree. Divide by $\epsilon$ for $\mathbf{E}$.
+::::
+
 ::::{frame} Maxwell's First Equation
 :::{present}
 $$\nabla \cdot \mathbf{D} = \rho_v$$
@@ -283,15 +323,18 @@ with the electric potential of Lesson 22 to get Laplace's equation.
 | :-- | :-- | :-- |
 | Equation | $\oint_S \mathbf{D} \cdot d\mathbf{s} = Q_\text{encl}$ | $\nabla \cdot \mathbf{D} = \rho_v$ |
 | Relates | flux on a surface to charge inside | field near a point to charge there |
-| Use it to | find $\mathbf{D}$ from symmetric charge | find $\rho_v$ from a known $\mathbf{D}$ |
+| Use it to | find $\mathbf{D}$ from symmetric charge | find $\rho_v$ from $\mathbf{D}$, or integrate for $\mathbf{D}$ |
 :::
 
 The two forms are the same law, connected by the divergence theorem, and each
 answers a different question. The integral form finds the field when we know
-the charge and the charge is symmetric, as in Lesson 20. The point form goes
-the other way: given any field, it gives the charge density at every point by
-differentiation, with no symmetry needed. Integration and differentiation run
-in opposite directions, and so do the two forms of Gauss's law.
+the charge and the charge is symmetric, as in Lesson 20. The point form most
+often goes the other way: given any field, it gives the charge density at every
+point by differentiation, with no symmetry needed. It can also find the field
+from the charge, as the slab showed. Then it is a differential equation for
+$\mathbf{D}$, and we need a symmetry or a boundary condition to fix the constant
+of integration. Lesson 23 solves a boundary-value problem of that kind for the
+potential.
 ::::
 
 ::::{frame} Summary
@@ -305,6 +348,7 @@ in opposite directions, and so do the two forms of Gauss's law.
 | Point form of Gauss's law | Divergence of $\mathbf{D}$ equals the charge density | $\nabla \cdot \mathbf{D} = \rho_v$ |
 | Charge-free region | No divergence, however the field looks | $\nabla \cdot \mathbf{D} = 0$ |
 | Point charge, $r > 0$ | Field spreads, but its divergence is zero | $\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{Q}{4\pi r^2}\right) = 0$ |
+| Field from charge | Integrate the point form; symmetry fixes the constant | slab: $D_x = \rho_v x$ inside, $\pm\rho_v d$ outside |
 ::::
 
 ::::{frame} Practice

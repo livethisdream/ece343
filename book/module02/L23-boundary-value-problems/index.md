@@ -135,8 +135,16 @@ $$\begin{aligned} \nabla^2 W = 0 \ \text{inside}, \qquad & W = 0 \ \text{on the 
 Suppose two different potentials both satisfy Laplace's equation and both
 take the given values on the conductors. Their difference $W$ also satisfies
 Laplace's equation, because the Laplacian of a difference is the difference of
-the Laplacians, and $W$ is zero on every boundary. The product rule for the
-divergence gives the second line, and the last term vanishes because
+the Laplacians, and $W$ is zero on every boundary. The second line needs the
+product rule for the divergence of a scalar $f$ times a vector $\mathbf{F}$.
+We expand the divergence in rectangular coordinates and apply the ordinary
+product rule to each term:
+
+$$\begin{aligned} \nabla\cdot\left(f\mathbf{F}\right) &= \frac{\partial\left(f F_x\right)}{\partial x} + \frac{\partial\left(f F_y\right)}{\partial y} + \frac{\partial\left(f F_z\right)}{\partial z} \\ &= \left(\frac{\partial f}{\partial x}F_x + \frac{\partial f}{\partial y}F_y + \frac{\partial f}{\partial z}F_z\right) + f\left(\frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}\right) \\ &= \nabla f\cdot\mathbf{F} + f\ \nabla\cdot\mathbf{F} \end{aligned}$$
+
+Setting $f = W$ and $\mathbf{F} = \nabla W$ gives
+$\nabla W\cdot\nabla W + W\ \nabla\cdot\nabla W$, which is
+$\vert\nabla W\vert^2 + W\nabla^2 W$, and the last term vanishes because
 $\nabla^2 W = 0$. Integrate over the region and apply the divergence theorem
 from Lesson 17: the volume integral equals a surface integral over the
 boundary, where $W = 0$, so both are zero. An integral of a square that is
@@ -296,7 +304,9 @@ computer. The first derivative halfway between grid points is a difference
 quotient, as in Lesson 3: $\left[V(x + h) - V(x)\right]/h$ on one side and
 $\left[V(x) - V(x - h)\right]/h$ on the other. The second derivative is the
 difference of those two, divided by $h$ again, which gives the first line. Do
-the same in $y$, add, and set the sum to zero. Solving for $V(x, y)$ says the
+the same in $y$, add, and set the sum to zero. We take a structure that is
+long in $z$, so $V$ does not depend on $z$ and the Laplacian has only these two
+terms; with a $z$ dependence the average would run over six neighbors. Solving for $V(x, y)$ says the
 potential at each point is the **average** of its four neighbors: east, west,
 north, and south. So a charge-free region can have no peak and no valley in
 its potential; the largest and smallest values sit on the boundaries.
@@ -316,10 +326,12 @@ three walls grounded and an insulated lid held at $V_0$. A short Python loop
 sets every interior grid point to the average of its neighbors, sweeps the
 grid again and again until nothing changes, and draws the contours, labeled
 as fractions of $V_0$. The result needs no formula, and uniqueness guarantees
-it is the answer. One check is easy: put $V_0$ on all four sides instead of
-one, and the potential is $V_0$ everywhere inside. That case is the sum of
-four copies of this one, rotated, so each copy contributes $V_0/4$ at the
-center, and the computed contours pass through $0.25$ there. Commercial field
+it is the answer. One check is easy. Laplace's equation is linear: the
+Laplacian of a sum is the sum of the Laplacians, so the sum of two solutions is
+a solution, and its boundary values are the sums of theirs. Put $V_0$ on all
+four sides instead of one, and the potential is $V_0$ everywhere inside. That
+case is the sum of four copies of this one, rotated, so each copy contributes
+$V_0/4$ at the center, and the computed contours pass through $0.25$ there. Commercial field
 solvers work on the same principle, with finer grids and smarter sweeps.
 ::::
 

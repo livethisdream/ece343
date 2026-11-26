@@ -208,7 +208,27 @@ $b = 2\ \text{cm}$, with air between them.
 \question \textbf{Solving by averaging.} A long square trough is divided by a grid
 into four interior points, two upper ($T$) and two lower ($B$). The top wall is
 at $100$ V and the other three walls are grounded. Each interior point is the
-average of its four neighbors.
+average of its four neighbors: the points or walls directly above, below, left,
+and right of it.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+	\draw[thick] (0,0) rectangle (3,3);
+	\draw[gray, thin] (1,0) -- (1,3) (2,0) -- (2,3) (0,1) -- (3,1) (0,2) -- (3,2);
+	\foreach \x in {1,2} {
+		\fill (\x,2) circle (2pt);
+		\fill (\x,1) circle (2pt);
+	}
+	\node[above right] at (1,2) {$T$};
+	\node[above right] at (2,2) {$T$};
+	\node[above right] at (1,1) {$B$};
+	\node[above right] at (2,1) {$B$};
+	\node[above] at (1.5,3) {$100$ V};
+	\node[below] at (1.5,0) {$0$ V};
+	\node[left] at (0,1.5) {$0$ V};
+	\node[right] at (3,1.5) {$0$ V};
+\end{tikzpicture}
+\end{center}
 \begin{parts}
 
 	\begin{minipage}[t]{0.58\linewidth}

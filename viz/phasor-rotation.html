@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A phasor and the sinusoid it represents</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr auto; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:44px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:80px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A rotating phasor in the complex plane and the sinusoid traced by its real part"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(A\)</label>
+      <input type="range" id="amp" min="0.2" max="1" step="0.01" value="0.8">
+      <span class="val" id="a-val">0.80</span>
+    </div>
+    <div class="ctl">
+      <label>\(\phi\)</label>
+      <input type="range" id="phase" min="-180" max="180" step="1" value="30">
+      <span class="val" id="p-val">30°</span>
+    </div>
+    <label class="tgl"><input type="checkbox" id="play" checked><span class="sw"></span><span class="t">Animate</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">phasor \(\widetilde{V}\)</span><span class="v" id="r-polar">—</span></div>
+    <div class="ro"><span class="k">rectangular</span><span class="v" id="r-rect">—</span></div>
+    <div class="ro"><span class="k">\(\omega t\) now</span><span class="v" id="r-wt">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// v(t) = A cos(ωt + φ) = Re[Ṽ e^{jωt}], Ṽ = A e^{jφ}. The left panel draws the
+// rotating complex number Ṽ e^{jωt}, whose angle is ωt + φ; its projection on
+// the real axis is v(t). The right panel plots v against ωt, with the present
+// instant marked, so the same height appears in both panels.
+const state = { A: 0.8, phiDeg: 30, wt: 0, playing: true };
+const aEl = document.getElementById('amp'), pEl = document.getElementById('phase');
+const playEl = document.getElementById('play');
+aEl.addEventListener('input', () => { state.A = parseFloat(aEl.value); update(); });
+pEl.addEventListener('input', () => { state.phiDeg = parseFloat(pEl.value); update(); });
+playEl.addEventListener('change', () => { state.playing = playEl.checked; if (state.playing) { lastTs = null; requestAnimationFrame(tick); } });
+
+let lastTs = null;
+function tick(ts){
+  if (!state.playing) return;
+  if (lastTs === null) lastTs = ts;
+  const dt = Math.min(0.05, (ts - lastTs)/1000); lastTs = ts;
+  state.wt = (state.wt + dt * 2*Math.PI*0.25) % (4*Math.PI);
+  update();
+  requestAnimationFrame(tick);
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+// The two panels always sit side by side; below DESIGN_W the whole drawing
+// scales down together rather than stacking.
+const DESIGN_W = 560;
+let SCL = 1;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  const w = wCss / SCL;
+  const h = Math.max(240, Math.min(w * 0.36, 290));
+  setSize(canvas, wCss, h * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function arrow(x0,y0,x1,y1,color,width){
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = width;
+  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+  const a = Math.atan2(y1-y0, x1-x0), L = 9;
+  ctx.beginPath(); ctx.moveTo(x1,y1);
+  ctx.lineTo(x1 - L*Math.cos(a-0.4), y1 - L*Math.sin(a-0.4));
+  ctx.lineTo(x1 - L*Math.cos(a+0.4), y1 - L*Math.sin(a+0.4));
+  ctx.closePath(); ctx.fill();
+}
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), amber = cssVar('--amber'), ink3 = cssVar('--ink3');
+  const phi = state.phiDeg*Math.PI/180, ang = state.wt + phi, A = state.A;
+
+  // ---- left: complex plane ----
+  const R = Math.min(h*0.38, w*0.17);
+  const cx = R + 34, cy = h/2;
+  ctx.strokeStyle = '#e3edf6'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2*Math.PI); ctx.stroke();
+  ctx.strokeStyle = '#c7d2e0';
+  ctx.beginPath(); ctx.moveTo(cx - R - 14, cy); ctx.lineTo(cx + R + 14, cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, cy - R - 14); ctx.lineTo(cx, cy + R + 14); ctx.stroke();
+  stext(ctx, 'Re', cx + R + 16, cy - 9, 11, ink3, 'right', true);
+  stext(ctx, 'Im', cx + 6, cy - R - 10, 11, ink3, 'left', true);
+  // the phasor itself at t = 0, faint
+  arrow(cx, cy, cx + R*A*Math.cos(phi), cy - R*A*Math.sin(phi), '#b9d2e5', 1.6);
+  // the rotating phasor and its projection
+  const px = cx + R*A*Math.cos(ang), py = cy - R*A*Math.sin(ang);
+  ctx.setLineDash([4,3]); ctx.strokeStyle = amber; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, cy); ctx.stroke(); ctx.setLineDash([]);
+  arrow(cx, cy, px, py, navy, 2.6);
+  ctx.fillStyle = amber; ctx.beginPath(); ctx.arc(px, cy, 4, 0, 2*Math.PI); ctx.fill();
+
+  // ---- right: v versus ωt ----
+  const x0 = cx + R + 50, x1 = w - 16, yT = 22, yB = h - 30;
+  const ym = (yT + yB)/2, half = (yB - yT)/2;
+  const xFor = t => x0 + t/(4*Math.PI)*(x1 - x0);
+  const yFor = v => ym - v*half;
+  ctx.strokeStyle = '#eef3f8';
+  for (let k=0; k<=4; k++){ ctx.beginPath(); ctx.moveTo(xFor(k*Math.PI), yT); ctx.lineTo(xFor(k*Math.PI), yB); ctx.stroke(); }
+  ctx.strokeStyle = '#c7d2e0'; ctx.beginPath(); ctx.moveTo(x0, ym); ctx.lineTo(x1, ym); ctx.stroke();
+  ctx.strokeStyle = mid; ctx.lineWidth = 2.4; ctx.beginPath();
+  for (let i=0; i<=400; i++){ const t = i/400*4*Math.PI, y = yFor(A*Math.cos(t + phi)); (i===0)?ctx.moveTo(xFor(t),y):ctx.lineTo(xFor(t),y); }
+  ctx.stroke();
+  // The amber dot marks the same value in both panels: the projection on the
+  // real axis at left, and the height of the trace at the present ωt at right.
+  const yNow = yFor(A*Math.cos(ang));
+  ctx.setLineDash([3,3]); ctx.strokeStyle = amber; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(xFor(state.wt), yT); ctx.lineTo(xFor(state.wt), yB); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = amber; ctx.beginPath(); ctx.arc(xFor(state.wt), yNow, 4.5, 0, 2*Math.PI); ctx.fill();
+  const labs = ['0', 'π', '2π', '3π', '4π'];
+  for (let k=0; k<=4; k++) stext(ctx, labs[k], xFor(k*Math.PI), yB + 12, 10.5, ink3, 'center', false);
+  stext(ctx, 'v(t) = A cos(ωt + φ)', x0 + 4, 11, 11.5, navy, 'left', true);
+  stext(ctx, 'ωt', x1, h - 8, 11, ink3, 'right', false);
+}
+
+function update(){
+  document.getElementById('a-val').textContent = state.A.toFixed(2);
+  document.getElementById('p-val').textContent = state.phiDeg.toFixed(0) + '°';
+  const phi = state.phiDeg*Math.PI/180;
+  document.getElementById('r-polar').textContent = state.A.toFixed(2) + ' ∠ ' + state.phiDeg.toFixed(0) + '°';
+  const re = state.A*Math.cos(phi), im = state.A*Math.sin(phi);
+  document.getElementById('r-rect').textContent = re.toFixed(2) + (im < 0 ? ' − j' : ' + j') + Math.abs(im).toFixed(2);
+  document.getElementById('r-wt').textContent = (state.wt*180/Math.PI).toFixed(0) + '°';
+  draw();
+}
+
+update();
+fit();
+requestAnimationFrame(tick);
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

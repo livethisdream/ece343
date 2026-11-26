@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="586.203788pt" height="284.657711pt" viewBox="0 0 586.203788 284.657711" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-29T04:50:18.176536</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 284.657711 
+L 586.203788 284.657711 
+L 586.203788 0 
+L 0 0 
+L 0 284.657711 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 27.685702 240.67359 
+L 563.365702 240.67359 
+L 563.365702 41.08959 
+L 27.685702 41.08959 
+L 27.685702 240.67359 
+z
+" style="fill: none"/>
+   </g>
+   <g id="axes_2">
+    <g id="patch_3">
+     <path d="M 27.685702 41.08959 
+L 563.365702 41.08959 
+L 563.365702 41.08959 
+L 27.685702 41.08959 
+L 27.685702 41.08959 
+z
+" style="fill: none"/>
+    </g>
+    <g id="matplotlib.axis_1">
+     <g id="xtick_1">
+      <g id="line2d_1">
+       <defs>
+        <path id="mf4cec785e9" d="M 0 0 
+L 0 -3.5 
+" style="stroke: #5b6573; stroke-width: 0.8"/>
+       </defs>
+       <g>
+        <use xlink:href="#mf4cec785e9" x="80.436656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_1">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="80.436656" y="31.556875" transform="rotate(-0 80.436656 31.556875)">1000 km</text>
+      </g>
+     </g>
+     <g id="xtick_2">
+      <g id="line2d_2">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="151.860656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_2">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="151.860656" y="31.556875" transform="rotate(-0 151.860656 31.556875)">10 km</text>
+      </g>
+     </g>
+     <g id="xtick_3">
+      <g id="line2d_3">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="223.284656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_3">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="223.284656" y="31.556875" transform="rotate(-0 223.284656 31.556875)">100 m</text>
+      </g>
+     </g>
+     <g id="xtick_4">
+      <g id="line2d_4">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="294.708656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_4">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="294.708656" y="31.556875" transform="rotate(-0 294.708656 31.556875)">1 m</text>
+      </g>
+     </g>
+     <g id="xtick_5">
+      <g id="line2d_5">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="366.132656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_5">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="366.132656" y="31.556875" transform="rotate(-0 366.132656 31.556875)">1 cm</text>
+      </g>
+     </g>
+     <g id="xtick_6">
+      <g id="line2d_6">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="437.556656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_6">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="437.556656" y="31.556875" transform="rotate(-0 437.556656 31.556875)">100 µm</text>
+      </g>
+     </g>
+     <g id="xtick_7">
+      <g id="line2d_7">
+       <g>
+        <use xlink:href="#mf4cec785e9" x="508.980656" y="41.08959" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+       </g>
+      </g>
+      <g id="text_7">
+       <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="508.980656" y="31.556875" transform="rotate(-0 508.980656 31.556875)">1 µm</text>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="295.525702" y="17.385" transform="rotate(-0 295.525702 17.385)">wavelength</text>
+     </g>
+    </g>
+    <g id="matplotlib.axis_2"/>
+    <g id="patch_4">
+     <path d="M 563.365702 41.08959 
+L 27.685702 41.08959 
+" style="fill: none; stroke: #c7d2e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+    </g>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <defs>
+       <path id="ma968b979d6" d="M 0 0 
+L 0 3.5 
+" style="stroke: #5b6573; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma968b979d6" x="63.397702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="63.397702" y="257.845465" transform="rotate(-0 63.397702 257.845465)">100 Hz</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#ma968b979d6" x="134.821702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="134.821702" y="257.845465" transform="rotate(-0 134.821702 257.845465)">10 kHz</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#ma968b979d6" x="206.245702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="206.245702" y="257.845465" transform="rotate(-0 206.245702 257.845465)">1 MHz</text>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#ma968b979d6" x="277.669702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="277.669702" y="257.845465" transform="rotate(-0 277.669702 257.845465)">100 MHz</text>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#ma968b979d6" x="349.093702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="349.093702" y="257.845465" transform="rotate(-0 349.093702 257.845465)">10 GHz</text>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#ma968b979d6" x="420.517702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="420.517702" y="257.845465" transform="rotate(-0 420.517702 257.845465)">1 THz</text>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#ma968b979d6" x="491.941702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="491.941702" y="257.845465" transform="rotate(-0 491.941702 257.845465)">100 THz</text>
+     </g>
+    </g>
+    <g id="xtick_15">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#ma968b979d6" x="563.365702" y="240.67359" style="fill: #5b6573; stroke: #5b6573; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="563.365702" y="257.845465" transform="rotate(-0 563.365702 257.845465)">10 PHz</text>
+     </g>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="295.525702" y="276.00318" transform="rotate(-0 295.525702 276.00318)">frequency</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4"/>
+   <g id="line2d_16">
+    <path d="M 27.685702 164.64159 
+L 563.365702 164.64159 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #004a85; stroke-width: 2.4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_17">
+    <path d="M 55.475039 164.64159 
+L 55.475039 134.70399 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 206.245702 164.64159 
+L 206.245702 194.57919 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 277.669702 164.64159 
+L 277.669702 134.70399 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 320.43112 164.64159 
+L 320.43112 194.57919 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 349.093702 164.64159 
+L 349.093702 87.18399 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_22">
+    <path d="M 516.903318 164.64159 
+L 516.903318 194.57919 
+" clip-path="url(#pfd53d941c6)" style="fill: none; stroke: #8a5a00; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 27.685702 240.67359 
+L 563.365702 240.67359 
+" style="fill: none; stroke: #c7d2e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_23">
+    <defs>
+     <path id="m2289fd4117" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #8a5a00"/>
+    </defs>
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="55.475039" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(28.72793 107.992515)">power grid</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(5.76 124.021729)">60 Hz, λ = 5000 km</text>
+   </g>
+   <g id="line2d_24">
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="206.245702" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(183.845428 212.100396)">AM radio</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(162.364725 227.063204)">1 MHz, λ = 300 m</text>
+   </g>
+   <g id="line2d_25">
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="277.669702" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(255.792788 109.058921)">FM radio</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(233.788725 124.021729)">100 MHz, λ = 3 m</text>
+   </g>
+   <g id="line2d_26">
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="320.43112" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(303.450651 212.026568)">GPS L1</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(268.110769 227.065665)">1.575 GHz, λ = 19 cm</text>
+   </g>
+   <g id="line2d_27">
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="349.093702" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(316.205733 61.413414)">X-band radar</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(306.351319 76.501729)">10 GHz, λ = 3 cm</text>
+   </g>
+   <g id="line2d_28">
+    <g clip-path="url(#pfd53d941c6)">
+     <use xlink:href="#m2289fd4117" x="516.903318" y="164.64159" style="fill: #8a5a00; stroke: #8a5a00"/>
+    </g>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(489.03074 211.03399)">visible light</text>
+    <text style="font-size: 10.5px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: #15202b" transform="translate(463.579725 227.063204)">500 THz, λ = 600 nm</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pfd53d941c6">
+   <rect x="27.685702" y="41.08959" width="535.68" height="199.584"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The electric field of point charges, by superposition</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px;
+           touch-action:none; cursor:grab; }
+  canvas.dragging { cursor:grabbing; }
+  .controls { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  @media (max-width:620px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:54px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .ctl select { flex:1 1 auto; min-width:0; font:inherit; font-size:12.5px; color:var(--ink); padding:3px 4px;
+                border:1px solid var(--edge2); border-radius:4px; background:#fff; }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="Three point charges in a plane, the electric field lines they produce, and a probe point where the field is measured. Drag a charge or the probe to move it."></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>\(q_1\)</label>
+      <input type="range" id="q1" min="-5" max="5" step="0.5" value="-3">
+      <span class="val" id="q1-val">−3 μC</span>
+    </div>
+    <div class="ctl">
+      <label>\(q_2\)</label>
+      <input type="range" id="q2" min="-5" max="5" step="0.5" value="1">
+      <span class="val" id="q2-val">1 μC</span>
+    </div>
+    <div class="ctl">
+      <label>\(q_3\)</label>
+      <input type="range" id="q3" min="-5" max="5" step="0.5" value="0">
+      <span class="val" id="q3-val">0 μC</span>
+    </div>
+    <div class="ctl">
+      <label for="preset">Start</label>
+      <select id="preset">
+        <option value="example">Worked example</option>
+        <option value="dipole">Dipole</option>
+        <option value="pair">Two equal charges</option>
+        <option value="three">Three charges</option>
+      </select>
+    </div>
+    <label class="tgl"><input type="checkbox" id="lines" checked><span class="sw"></span><span class="t">Field lines</span></label>
+    <label class="tgl"><input type="checkbox" id="parts"><span class="sw"></span><span class="t">Each charge's field</span></label>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">probe at</span><span class="v" id="r-pos">—</span></div>
+    <div class="ro"><span class="k">\(E_x\)</span><span class="v" id="r-ex">—</span></div>
+    <div class="ro"><span class="k">\(E_y\)</span><span class="v" id="r-ey">—</span></div>
+    <div class="ro"><span class="k">\(|\mathbf{E}|\)</span><span class="v" id="r-mag">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// Point charges in the z = 0 plane, positions in meters, charges in μC. The
+// field at r is the sum over charges of k q_n (r − r_n) / |r − r_n|³, with
+// k = 1/(4π ε0). Every charge, and the probe, snaps to a 0.5 m grid while it is
+// dragged, so a reader can place them exactly where a worked problem puts them.
+const K = 8.988e9, UC = 1e-6, SNAP = 0.5;
+const PRESETS = {
+  example: { q: [-3, 1, 0], pos: [[0,3],[0,-2],[-3,-1]], probe: [4,0] },
+  dipole:  { q: [ 2,-2, 0], pos: [[0,1],[0,-1],[-3,-1]], probe: [3,0] },
+  pair:    { q: [ 2, 2, 0], pos: [[0,1.5],[0,-1.5],[-3,-1]], probe: [2,0] },
+  three:   { q: [ 3,-2,-2], pos: [[-1,0],[2,2],[2,-2]], probe: [-3,-2] },
+};
+const state = { q: [-3, 1, 0], pos: [[0,3],[0,-2],[-3,-1]], probe: [4,0], lines: true, parts: false };
+
+const qEls = [1,2,3].map(i => document.getElementById('q'+i));
+qEls.forEach((el, i) => el.addEventListener('input', () => { state.q[i] = parseFloat(el.value); update(); }));
+document.getElementById('preset').addEventListener('change', e => applyPreset(e.target.value));
+document.getElementById('lines').addEventListener('change', e => { state.lines = e.target.checked; draw(); });
+document.getElementById('parts').addEventListener('change', e => { state.parts = e.target.checked; draw(); });
+
+function applyPreset(name){
+  const p = PRESETS[name];
+  state.q = p.q.slice(); state.pos = p.pos.map(v => v.slice()); state.probe = p.probe.slice();
+  qEls.forEach((el, i) => { el.value = state.q[i]; });
+  update();
+}
+
+// Field at (x, y) in V/m, optionally from one charge only.
+function field(x, y, only){
+  let ex = 0, ey = 0;
+  for (let n = 0; n < 3; n++){
+    if (only !== undefined && n !== only) continue;
+    const q = state.q[n]; if (!q) continue;
+    const dx = x - state.pos[n][0], dy = y - state.pos[n][1];
+    const r2 = dx*dx + dy*dy; if (r2 < 1e-9) continue;
+    const s = K*q*UC / (r2*Math.sqrt(r2));
+    ex += s*dx; ey += s*dy;
+  }
+  return [ex, ey];
+}
+
+// ---- canvas geometry: y spans −4.5 to 4.5 m; x spans whatever the width allows, centered on x = 1 m ----
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+let W = 0, H = 0, PX = 1, XC = 1, YC = 0;
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  W = cvWidth(canvas);
+  H = Math.round(Math.max(230, Math.min(W*0.62, 330)));
+  setSize(canvas, W, H, dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  PX = H / 9;                         // pixels per meter
+  draw();
+}
+window.addEventListener('resize', fit);
+const sx = x => W/2 + (x - XC)*PX;
+const sy = y => H/2 - (y - YC)*PX;
+const wx = px => XC + (px - W/2)/PX;
+const wy = py => YC - (py - H/2)/PX;
+
+function arrow(x0,y0,x1,y1,color,width,head){
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = width;
+  ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+  const a = Math.atan2(y1-y0, x1-x0), L = head || 8;
+  ctx.beginPath(); ctx.moveTo(x1,y1);
+  ctx.lineTo(x1 - L*Math.cos(a-0.4), y1 - L*Math.sin(a-0.4));
+  ctx.lineTo(x1 - L*Math.cos(a+0.4), y1 - L*Math.sin(a+0.4));
+  ctx.closePath(); ctx.fill();
+}
+
+// Trace one field line from (x, y), following E (dir = +1) or −E (dir = −1),
+// until it reaches a charge of the other sign or leaves the view. Reports
+// which, so a line traced backward from a negative charge can be dropped
+// when a positive charge's line already covers it.
+function trace(x, y, dir){
+  const pts = [[x, y]], ds = 0.035, xmin = wx(-20), xmax = wx(W+20), ymin = wy(H+20), ymax = wy(-20);
+  for (let i = 0; i < 1600; i++){
+    // midpoint (RK2) step along the unit field direction
+    let [ex, ey] = field(x, y); let m = Math.hypot(ex, ey); if (m === 0) break;
+    const xm = x + 0.5*ds*dir*ex/m, ym = y + 0.5*ds*dir*ey/m;
+    [ex, ey] = field(xm, ym); m = Math.hypot(ex, ey); if (m === 0) break;
+    x += ds*dir*ex/m; y += ds*dir*ey/m;
+    pts.push([x, y]);
+    if (x < xmin || x > xmax || y < ymin || y > ymax) break;
+    let hit = false;
+    for (let n = 0; n < 3; n++){
+      if (!state.q[n] || Math.sign(state.q[n]) === dir) continue;
+      if (Math.hypot(x - state.pos[n][0], y - state.pos[n][1]) < 0.12) { hit = true; break; }
+    }
+    if (hit) return { pts, hit: true };
+  }
+  return { pts, hit: false };
+}
+
+function draw(){
+  if (!W) return;
+  ctx.clearRect(0,0,W,H);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), amber = cssVar('--amber'), red = cssVar('--red'), ink3 = cssVar('--ink3');
+
+  // grid, 1 m
+  ctx.strokeStyle = '#eef3f8'; ctx.lineWidth = 1;
+  for (let gx = Math.ceil(wx(0)); gx <= wx(W); gx++){ ctx.beginPath(); ctx.moveTo(sx(gx),0); ctx.lineTo(sx(gx),H); ctx.stroke(); }
+  for (let gy = Math.ceil(wy(H)); gy <= wy(0); gy++){ ctx.beginPath(); ctx.moveTo(0,sy(gy)); ctx.lineTo(W,sy(gy)); ctx.stroke(); }
+  ctx.strokeStyle = '#c7d2e0';
+  ctx.beginPath(); ctx.moveTo(0,sy(0)); ctx.lineTo(W,sy(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(sx(0),0); ctx.lineTo(sx(0),H); ctx.stroke();
+  stext(ctx, 'x (m)', W-8, sy(0)-10, 11, ink3, 'right', false);
+  stext(ctx, 'y (m)', sx(0)+6, 11, 11, ink3, 'left', false);
+  for (let gx = Math.ceil(wx(30)); gx <= wx(W-20); gx++) if (gx && gx % 2 === 0) stext(ctx, String(gx), sx(gx), sy(0)+11, 10, ink3, 'center', false);
+  for (let gy = Math.ceil(wy(H-14)); gy <= wy(14); gy++) if (gy && gy % 2 === 0) stext(ctx, String(gy), sx(0)-5, sy(gy), 10, ink3, 'right', false);
+
+  // field lines: one bundle per charge, in proportion to |q|. Lines leave the
+  // positive charges along E. Lines are also traced backward from each negative
+  // charge, and kept only when they come in from outside the view rather than
+  // from a positive charge, so the flux of a net charge reaches infinity.
+  const active = [0,1,2].filter(n => state.q[n]);
+  if (state.lines && active.length){
+    ctx.strokeStyle = '#7fa3c4'; ctx.lineWidth = 1.2;
+    for (const n of active){
+      const dir = state.q[n] > 0 ? 1 : -1;
+      const count = Math.max(4, Math.round(4*Math.abs(state.q[n])));
+      for (let k = 0; k < count; k++){
+        const a = 2*Math.PI*(k + 0.5)/count;
+        const t = trace(state.pos[n][0] + 0.13*Math.cos(a), state.pos[n][1] + 0.13*Math.sin(a), dir);
+        if (dir < 0 && t.hit) continue;
+        const pts = t.pts;
+        ctx.beginPath();
+        pts.forEach((p, i) => i ? ctx.lineTo(sx(p[0]), sy(p[1])) : ctx.moveTo(sx(p[0]), sy(p[1])));
+        ctx.stroke();
+        // one arrowhead a short way along each line, pointing along E
+        const j = Math.min(pts.length - 1, 28);
+        if (j > 2){
+          const [x0, y0] = pts[j-2], [x1, y1] = pts[j];
+          const a2 = dir > 0 ? Math.atan2(sy(y1)-sy(y0), sx(x1)-sx(x0)) : Math.atan2(sy(y0)-sy(y1), sx(x0)-sx(x1));
+          const hx = sx(pts[j-1][0]), hy = sy(pts[j-1][1]);
+          ctx.fillStyle = '#7fa3c4'; ctx.beginPath();
+          ctx.moveTo(hx + 4*Math.cos(a2), hy + 4*Math.sin(a2));
+          ctx.lineTo(hx - 4*Math.cos(a2 - 0.5), hy - 4*Math.sin(a2 - 0.5));
+          ctx.lineTo(hx - 4*Math.cos(a2 + 0.5), hy - 4*Math.sin(a2 + 0.5));
+          ctx.closePath(); ctx.fill();
+        }
+      }
+    }
+  }
+
+  // the field at the probe: the total, and optionally each charge's share
+  const [px, py] = state.probe;
+  const [ex, ey] = field(px, py), em = Math.hypot(ex, ey);
+  const parts = active.map(n => [n, field(px, py, n)]);
+  const big = Math.max(em, ...parts.map(([, e]) => Math.hypot(e[0], e[1])), 1e-12);
+  const LEN = 70;                     // pixels for the largest vector shown
+  const ppx = sx(px), ppy = sy(py);
+  if (state.parts){
+    for (const [n, e] of parts){
+      const s = LEN/big;
+      ctx.setLineDash([4,3]);
+      arrow(ppx, ppy, ppx + e[0]*s, ppy - e[1]*s, state.q[n] > 0 ? red : mid, 1.5, 7);
+      ctx.setLineDash([]);
+      stext(ctx, 'E' + '₁₂₃'[n], ppx + e[0]*s*1.12, ppy - e[1]*s*1.12, 11, state.q[n] > 0 ? red : mid, 'center', true);
+    }
+  }
+  if (em > 0) arrow(ppx, ppy, ppx + ex*LEN/big, ppy - ey*LEN/big, amber, 2.6, 9);
+  ctx.fillStyle = '#fff'; ctx.strokeStyle = amber; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(ppx, ppy, 6, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+  // the label sits on the side of the probe away from the total field
+  const ux = em > 0 ? ex/em : 0, uy = em > 0 ? ey/em : 1;
+  stext(ctx, 'probe', ppx - ux*26, ppy + uy*20, 11, amber, 'center', true);
+
+  // the charges
+  for (let n = 0; n < 3; n++){
+    const q = state.q[n], cx = sx(state.pos[n][0]), cy = sy(state.pos[n][1]);
+    const r = 8 + 1.6*Math.abs(q);
+    if (!q){
+      ctx.setLineDash([3,3]); ctx.strokeStyle = '#b9c6d3'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.arc(cx, cy, 8, 0, 2*Math.PI); ctx.stroke(); ctx.setLineDash([]);
+      stext(ctx, 'q' + '₁₂₃'[n], cx, cy, 10, '#9aa8b6', 'center', true);
+      continue;
+    }
+    ctx.fillStyle = q > 0 ? red : navy;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2*Math.PI); ctx.fill();
+    stext(ctx, q > 0 ? '+' : '−', cx, cy + 0.5, 14, '#fff', 'center', true);
+    stext(ctx, 'q' + '₁₂₃'[n], cx + r + 4, cy - r + 2, 11.5, q > 0 ? red : navy, 'left', true);
+  }
+}
+
+// ---- dragging: grab the nearest charge or the probe, snap to the 0.5 m grid ----
+let drag = null;
+function hit(mx, my){
+  let best = null, bd = 22;
+  const cands = [['probe', state.probe]].concat([0,1,2].map(n => [n, state.pos[n]]));
+  for (const [id, p] of cands){
+    const d = Math.hypot(mx - sx(p[0]), my - sy(p[1]));
+    if (d < bd){ bd = d; best = id; }
+  }
+  return best;
+}
+function local(e){ const b = canvas.getBoundingClientRect(); return [e.clientX - b.left - canvas.clientLeft, e.clientY - b.top - canvas.clientTop]; }
+canvas.addEventListener('pointerdown', e => {
+  const [mx, my] = local(e); drag = hit(mx, my);
+  if (drag !== null){ canvas.setPointerCapture(e.pointerId); canvas.classList.add('dragging'); }
+});
+canvas.addEventListener('pointermove', e => {
+  if (drag === null) return;
+  const [mx, my] = local(e);
+  const x = Math.round(wx(mx)/SNAP)*SNAP, y = Math.round(wy(my)/SNAP)*SNAP;
+  const p = drag === 'probe' ? state.probe : state.pos[drag];
+  if (p[0] !== x || p[1] !== y){ p[0] = x; p[1] = y; update(); }
+});
+const endDrag = () => { drag = null; canvas.classList.remove('dragging'); };
+canvas.addEventListener('pointerup', endDrag);
+canvas.addEventListener('pointercancel', endDrag);
+
+// kV/m to three significant figures, with a true minus sign
+function kv(v){
+  const k = v/1000, a = Math.abs(k);
+  let s = a === 0 ? '0' : a >= 100 ? a.toFixed(0) : a >= 10 ? a.toFixed(1) : a >= 1 ? a.toFixed(2) : a.toFixed(3);
+  return (k < 0 && s !== '0.000' ? '−' : '') + s + ' kV/m';
+}
+const fmtQ = q => (q < 0 ? '−' : '') + Math.abs(q) + ' μC';
+const fmtP = v => (v < 0 ? '−' : '') + Math.abs(v);
+
+function update(){
+  qEls.forEach((el, i) => { document.getElementById('q'+(i+1)+'-val').textContent = fmtQ(state.q[i]); });
+  const [ex, ey] = field(state.probe[0], state.probe[1]);
+  document.getElementById('r-pos').textContent = '(' + fmtP(state.probe[0]) + ', ' + fmtP(state.probe[1]) + ') m';
+  document.getElementById('r-ex').textContent = kv(ex);
+  document.getElementById('r-ey').textContent = kv(ey);
+  document.getElementById('r-mag').textContent = kv(Math.hypot(ex, ey));
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

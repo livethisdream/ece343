@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The flux through a closed surface around two point charges</title>
+<script src="mjlabel.js"></script>
+<style>
+  :root { --navy:#004a85; --mid:#0067b9; --edge:#cddce9; --edge2:#b9d2e5; --bg:#f5f9fc;
+          --ink:#15202b; --ink3:#5b6573;
+          --amber:#8a5a00; --red:#b01e24; --grn:#3f7d34; --fill:#e3edf6; }
+  html,body { margin:0; padding:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var(--ink); background:#fff; }
+  .app { display:flex; flex-direction:column; gap:10px; padding:14px; }
+  canvas { display:block; box-sizing:border-box; width:100%; height:auto; background:#fff; border:1px solid var(--edge); border-radius:6px; }
+  .controls { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; align-items:center;
+              padding:9px 12px; background:var(--bg); border:1px solid var(--edge); border-radius:6px; }
+  .toggles { display:flex; gap:22px; flex-wrap:wrap; }
+  @media (max-width:560px) { .controls { grid-template-columns:1fr; } }
+  .ctl { display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
+  .ctl label { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .ctl .val { color:var(--navy); font-size:12.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; min-width:52px; text-align:right; }
+  .ctl input[type=range]{ flex:1 1 auto; min-width:70px; accent-color:var(--mid); }
+  .tgl { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; min-width:0; }
+  .tgl input { position:absolute; opacity:0; pointer-events:none; }
+  .tgl .sw { position:relative; flex:none; width:34px; height:19px; border-radius:999px;
+             background:#dfe8f1; border:1px solid var(--edge2); transition:background .15s, border-color .15s; }
+  .tgl .sw::after { content:''; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+                    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.22); transition:transform .15s; }
+  .tgl input:checked + .sw { background:var(--mid); border-color:var(--mid); }
+  .tgl input:checked + .sw::after { transform:translateX(15px); }
+  .tgl input:focus-visible + .sw { outline:2px solid var(--navy); outline-offset:2px; }
+  .tgl .t { font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink3); font-weight:700; white-space:nowrap; }
+  .readouts { display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
+  .ro { display:flex; flex-direction:column; align-items:center; gap:4px; padding:7px 8px 8px; min-width:0;
+        border:1px solid var(--edge2); border-radius:6px; background:#eef4fa; }
+  .ro .k { display:block; text-align:center; height:15px; line-height:15px; font-size:10.5px; font-weight:700;
+           text-transform:uppercase; letter-spacing:0.045em; color:var(--ink3); white-space:nowrap; overflow:hidden; }
+  .ro .k mjx-container { font-size:inherit !important; }
+  .ro .v { height:19px; line-height:19px; font-size:14.5px; font-weight:700; white-space:nowrap;
+           font-variant-numeric:tabular-nums; text-align:center; min-width:8ch; color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="app">
+  <canvas id="plot" aria-label="A slice through a closed Gaussian surface near two point charges, with the outward flux density marked along the surface"></canvas>
+
+  <div class="controls">
+    <div class="ctl">
+      <label>size</label>
+      <input type="range" id="size" min="0.3" max="1.6" step="0.01" value="1.0">
+      <span class="val" id="s-val">1.00 m</span>
+    </div>
+    <div class="ctl">
+      <label>center \(x\)</label>
+      <input type="range" id="cx" min="-2.4" max="2.4" step="0.01" value="-0.5">
+      <span class="val" id="x-val">−0.50 m</span>
+    </div>
+    <div class="toggles">
+      <label class="tgl"><input type="checkbox" id="cube"><span class="sw"></span><span class="t">Cube</span></label>
+      <label class="tgl"><input type="checkbox" id="q2" checked><span class="sw"></span><span class="t">Second charge</span></label>
+    </div>
+  </div>
+
+  <div class="readouts">
+    <div class="ro"><span class="k">\(Q_\text{encl}\)</span><span class="v" id="r-q">—</span></div>
+    <div class="ro"><span class="k">\(\oint_S \mathbf{D}\cdot d\mathbf{s}\)</span><span class="v" id="r-flux">—</span></div>
+    <div class="ro"><span class="k">area of \(S\)</span><span class="v" id="r-area">—</span></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SANS = 'Inter, system-ui, -apple-system, sans-serif';
+function stext(ctx,str,x,y,px,color,align,bold){ ctx.fillStyle=color; ctx.font=(bold?'700 ':'')+px+'px '+SANS; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(str,x,y); }
+
+// Two point charges sit in the plane z = 0. The Gaussian surface is a sphere
+// (radius = size) or a cube (half-side = size) centered at (cx, 0, 0). The
+// flux readout is the surface integral of D = q r̂ / (4π r²), summed over
+// both charges and evaluated numerically over the full 3D surface: a midpoint
+// rule in (θ, φ) on the sphere, and on a grid over each cube face. It is not
+// looked up from Q_encl; that it lands on Q_encl is the point. The canvas shows
+// the slice z = 0, with the surface outline drawn blue where D points out of
+// it and red where D points in, its width growing with |D·n̂|.
+const CHARGES = [ { x:-0.5, y:0.0, q: 2 }, { x:1.6, y:0.35, q:-1 } ];   // q in nC, position in m
+const state = { size: 1.0, cx: -0.5, cube: false, q2: true };
+const sEl = document.getElementById('size'), xEl = document.getElementById('cx');
+const cubeEl = document.getElementById('cube'), q2El = document.getElementById('q2');
+sEl.addEventListener('input', () => { state.size = parseFloat(sEl.value); update(); });
+xEl.addEventListener('input', () => { state.cx = parseFloat(xEl.value); update(); });
+cubeEl.addEventListener('change', () => { state.cube = cubeEl.checked; update(); });
+q2El.addEventListener('change', () => { state.q2 = q2El.checked; update(); });
+
+function active(){ return state.q2 ? CHARGES : CHARGES.slice(0,1); }
+
+// D at (x, y, z) in nC/m², from the active charges.
+function Dat(x,y,z){
+  let dx=0, dy=0, dz=0;
+  for (const c of active()){
+    const rx=x-c.x, ry=y-c.y, rz=z, r2=rx*rx+ry*ry+rz*rz, r=Math.sqrt(r2), k=c.q/(4*Math.PI*r2*r);
+    dx+=k*rx; dy+=k*ry; dz+=k*rz;
+  }
+  return [dx,dy,dz];
+}
+
+// Signed distance from a charge to the surface (negative inside).
+function sdist(c){
+  const x=c.x-state.cx, y=c.y, s=state.size;
+  if (!state.cube) return Math.hypot(x,y) - s;
+  return Math.max(Math.abs(x), Math.abs(y)) - s;   // charges lie at z = 0, inside the z range
+}
+
+function fluxSphere(){
+  const R=state.size, cx=state.cx, Nt=90, Np=180, dt=Math.PI/Nt, dp=2*Math.PI/Np;
+  let tot=0;
+  for (let i=0;i<Nt;i++){
+    const t=(i+0.5)*dt, st=Math.sin(t), ct=Math.cos(t), w=R*R*st*dt*dp;
+    for (let j=0;j<Np;j++){
+      const p=(j+0.5)*dp, nx=st*Math.cos(p), ny=st*Math.sin(p), nz=ct;
+      const D=Dat(cx+R*nx, R*ny, R*nz);
+      tot+=(D[0]*nx+D[1]*ny+D[2]*nz)*w;
+    }
+  }
+  return tot;
+}
+
+function fluxCube(){
+  const s=state.size, cx=state.cx, N=60, h=2*s/N, dA=h*h;
+  let tot=0;
+  for (let ax=0; ax<3; ax++){
+    for (const sg of [1,-1]){
+      for (let i=0;i<N;i++){
+        const a=-s+(i+0.5)*h;
+        for (let j=0;j<N;j++){
+          const b=-s+(j+0.5)*h, p=[0,0,0];
+          p[ax]=sg*s; p[(ax+1)%3]=a; p[(ax+2)%3]=b;
+          const D=Dat(cx+p[0], p[1], p[2]);
+          tot+=sg*D[ax]*dA;
+        }
+      }
+    }
+  }
+  return tot;
+}
+
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+function cvWidth(cv){ return Math.max(240, cv.clientWidth || Math.floor(cv.getBoundingClientRect().width)); }
+function setSize(cv,wCss,hCss,dpr){
+  cv.width=Math.round(wCss*dpr); cv.height=Math.round(hCss*dpr);
+  cv.style.height=hCss+'px';
+  const bh=cv.offsetHeight-cv.clientHeight; if(bh) cv.style.height=(hCss+bh)+'px';
+}
+// The drawing is laid out at DESIGN_W and scales down as one piece below it.
+// Above it, the canvas grows in width only, and the view shows at least
+// x in [−XHALF, XHALF] and y in [−YHALF, YHALF], in meters.
+const DESIGN_W = 520, H_LOG = 290, XHALF = 3.2, YHALF = 1.75;
+let SCL = 1;
+function fit(){
+  const dpr = window.devicePixelRatio || 1;
+  const wCss = cvWidth(canvas);
+  SCL = Math.min(1, wCss / DESIGN_W);
+  setSize(canvas, wCss, H_LOG * SCL, dpr);
+  ctx.setTransform(dpr*SCL,0,0,dpr*SCL,0,0);
+  draw();
+}
+window.addEventListener('resize', fit);
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.width/(dpr*SCL), h = canvas.height/(dpr*SCL);
+  ctx.clearRect(0,0,w,h);
+  const navy = cssVar('--navy'), mid = cssVar('--mid'), red = cssVar('--red'), ink3 = cssVar('--ink3'), fill = cssVar('--fill');
+  const k = Math.min(w / (2*XHALF), (h - 30) / (2*YHALF));
+  const X = x => w/2 + x*k, Y = y => h/2 + 10 - y*k;
+  const xv = (w/2)/k, yv = (h/2)/k;
+
+  // faint D arrows on a grid
+  ctx.strokeStyle = '#a9c2da'; ctx.fillStyle = '#a9c2da'; ctx.lineWidth = 1;
+  const step = 0.42;
+  for (let gx=-Math.floor(xv/step)*step; gx<=xv; gx+=step){
+    for (let gy=-Math.floor(yv/step)*step; gy<=yv; gy+=step){
+      if (active().some(c => Math.hypot(gx-c.x, gy-c.y) < 0.22)) continue;
+      const D = Dat(gx, gy, 0), m = Math.hypot(D[0], D[1]);
+      if (m < 1e-6) continue;
+      const L = Math.min(0.32, 0.5*Math.sqrt(m)) * k, ux = D[0]/m, uy = D[1]/m;
+      const x0 = X(gx) - ux*L/2, y0 = Y(gy) + uy*L/2, x1 = X(gx) + ux*L/2, y1 = Y(gy) - uy*L/2;
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+      const a = Math.atan2(y1-y0, x1-x0);
+      ctx.beginPath(); ctx.moveTo(x1,y1);
+      ctx.lineTo(x1-5*Math.cos(a-0.45), y1-5*Math.sin(a-0.45));
+      ctx.lineTo(x1-5*Math.cos(a+0.45), y1-5*Math.sin(a+0.45)); ctx.closePath(); ctx.fill();
+    }
+  }
+
+  // the slice of the surface: fill, then the outline colored by D·n̂, drawn
+  // as short segments, each colored at its midpoint
+  const s = state.size, cx = state.cx, segs = [];
+  const NS = 320;
+  if (!state.cube){
+    for (let i=0;i<NS;i++){
+      const t0 = 2*Math.PI*i/NS, t1 = 2*Math.PI*(i+1)/NS, tm = (t0+t1)/2;
+      segs.push({ x0: cx+s*Math.cos(t0), y0: s*Math.sin(t0), x1: cx+s*Math.cos(t1), y1: s*Math.sin(t1),
+                  xm: cx+s*Math.cos(tm), ym: s*Math.sin(tm), nx: Math.cos(tm), ny: Math.sin(tm) });
+    }
+  } else {
+    // corners counterclockwise, and the outward normal of the side that leaves each one
+    const C = [ [cx+s,-s], [cx+s,s], [cx-s,s], [cx-s,-s] ], Nn = [ [1,0], [0,1], [-1,0], [0,-1] ];
+    const M = NS/4;
+    for (let k=0;k<4;k++){
+      const A = C[k], B = C[(k+1)%4];
+      for (let j=0;j<M;j++){
+        const f0 = j/M, f1 = (j+1)/M, fm = (j+0.5)/M;
+        segs.push({ x0: A[0]+(B[0]-A[0])*f0, y0: A[1]+(B[1]-A[1])*f0, x1: A[0]+(B[0]-A[0])*f1, y1: A[1]+(B[1]-A[1])*f1,
+                    xm: A[0]+(B[0]-A[0])*fm, ym: A[1]+(B[1]-A[1])*fm, nx: Nn[k][0], ny: Nn[k][1] });
+      }
+    }
+  }
+  ctx.fillStyle = fill; ctx.globalAlpha = 0.7; ctx.beginPath();
+  if (!state.cube) ctx.arc(X(cx), Y(0), s*k, 0, 2*Math.PI);
+  else ctx.rect(X(cx-s), Y(s), 2*s*k, 2*s*k);
+  ctx.fill(); ctx.globalAlpha = 1;
+  const DREF = 0.5;
+  ctx.lineCap = 'round';
+  for (const g of segs){
+    const D = Dat(g.xm, g.ym, 0), dn = D[0]*g.nx + D[1]*g.ny;
+    ctx.strokeStyle = dn >= 0 ? mid : red;
+    ctx.lineWidth = 1.2 + 5*Math.sqrt(Math.min(1, Math.abs(dn)/DREF));
+    ctx.beginPath(); ctx.moveTo(X(g.x0), Y(g.y0)); ctx.lineTo(X(g.x1), Y(g.y1)); ctx.stroke();
+  }
+  ctx.lineCap = 'butt';
+
+  // charges
+  for (const c of active()){
+    ctx.fillStyle = c.q > 0 ? red : navy;
+    ctx.beginPath(); ctx.arc(X(c.x), Y(c.y), 6, 0, 2*Math.PI); ctx.fill();
+    stext(ctx, (c.q > 0 ? '+' : '−') + Math.abs(c.q) + ' nC', X(c.x) + 9, Y(c.y) - 12, 11.5, c.q > 0 ? red : navy, 'left', true);
+  }
+
+  stext(ctx, 'slice through z = 0', 10, 12, 11, ink3, 'left', true);
+  stext(ctx, 'out', w - 74, 12, 11, mid, 'right', true);
+  stext(ctx, 'in', w - 12, 12, 11, red, 'right', true);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = mid; ctx.beginPath(); ctx.moveTo(w-68, 12); ctx.lineTo(w-50, 12); ctx.stroke();
+  ctx.strokeStyle = red; ctx.beginPath(); ctx.moveTo(w-44, 12); ctx.lineTo(w-26, 12); ctx.stroke();
+}
+
+const fmtQ = v => (Math.abs(v) < 0.005 ? '0.00' : (v < 0 ? '−' : '') + Math.abs(v).toFixed(2)) + ' nC';
+function update(){
+  document.getElementById('s-val').textContent = state.size.toFixed(2) + ' m';
+  document.getElementById('x-val').textContent = (state.cx < 0 ? '−' : '') + Math.abs(state.cx).toFixed(2) + ' m';
+  let qenc = 0, onS = false;
+  for (const c of active()){
+    const d = sdist(c);
+    if (Math.abs(d) < 0.04) onS = true;
+    if (d < 0) qenc += c.q;
+  }
+  document.getElementById('r-q').textContent = onS ? 'on the surface' : fmtQ(qenc);
+  document.getElementById('r-flux').textContent = onS ? '—' : fmtQ(state.cube ? fluxCube() : fluxSphere());
+  const area = state.cube ? 24*state.size*state.size : 4*Math.PI*state.size*state.size;
+  document.getElementById('r-area').textContent = area.toFixed(2) + ' m²';
+  draw();
+}
+
+update();
+fit();
+MJ.setRedraw(()=>draw());
+MJ.onReady(()=>{ MJ.typeset(document.body).then(()=>draw()); draw(); });
+</script>
+</body>
+</html>

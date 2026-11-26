@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L29 - Ampere’s Law &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module04/L41-lab-incidence/index.html">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l29-ampere-s-law">
+<h1>L29 - Ampere’s Law<a class="headerlink" href="#l29-ampere-s-law" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Ampere's Law</h1>
+<div class="title-rule"></div>
+<p>Today we find the magnetic field of a symmetric current without integrating the Biot-Savart law.</p>
+<p>Lesson 29 · Module 3: Magnetostatics · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '7'; counter-reset: lo 2">
+  <li>I can use Ampere's Law to calculate the magnetic field at an observation point for simple magnetostatic systems.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lesson 28 found the magnetic field of a current by adding up the Biot-Savart
+law over every piece of the current. Like Coulomb’s law in Module 2, that
+method always works, but even a straight wire requires an integral along its
+length.
+Today we derive <strong>Ampere’s law</strong>, which relates the magnetic field around any
+closed path to the current passing through it. It plays the part for magnetic
+fields that Gauss’s law played for electric fields in Lesson 20: when the
+current has enough symmetry, the law gives the field in a few lines. We use it
+for a line current and a round wire, then shrink the path to a point to get the
+law’s <strong>point form</strong>, <span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span>. Lesson 30 applies
+the law to the coaxial line, the solenoid, and the toroid.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><strong>Lesson 28:</strong> the Biot-Savart law gives the field of a long straight current <span class="math notranslate nohighlight">\(I\)</span> on the <span class="math notranslate nohighlight">\(z\)</span> axis:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H} = \hat{\boldsymbol{\phi}}\ \frac{I}{2\pi\rho}, \qquad \mathbf{B} = \mu\mathbf{H}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lesson 28 integrated the Biot-Savart law along a straight wire carrying a
+steady current <span class="math notranslate nohighlight">\(I\)</span> along <span class="math notranslate nohighlight">\(+\hat{\mathbf{z}}\)</span>. Far from the ends, the
+<strong>magnetic field intensity</strong> <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> circles the wire in the
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> direction, counterclockwise when the current comes
+toward us, and its magnitude falls off as <span class="math notranslate nohighlight">\(1/\rho\)</span>. The
+<strong>magnetic flux density</strong> is <span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span>, with
+<span class="math notranslate nohighlight">\(\mu = \mu_r\mu_0\)</span> from Lesson 2. We write Ampere’s law in terms of
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> because, for currents surrounded by one uniform material,
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> depends only on the current and not on <span class="math notranslate nohighlight">\(\mu\)</span>, just as
+<span class="math notranslate nohighlight">\(\mathbf{D}\)</span> depended only on the charge in Gauss’s law. Lesson 31 shows how a
+boundary between materials changes <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>. Today we start from this field and ask what happens when we add
+up <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> along a closed path around the wire.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-circulation">
+<div class="wrap docutils container">
+<p class="rubric">Circulation</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>The <strong>circulation</strong> of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> around a closed path <span class="math notranslate nohighlight">\(C\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\oint_C \mathbf{H}\cdot d\mathbf{l}\]</div>
+<ul class="simple">
+<li><p>Its units are amperes.</p></li>
+<li><p>The right-hand rule ties the direction around <span class="math notranslate nohighlight">\(C\)</span> to the surface it bounds.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The <strong>circulation</strong> of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> adds up the component of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>
+along a closed path <span class="math notranslate nohighlight">\(C\)</span>. We break the path into short steps <span class="math notranslate nohighlight">\(d\mathbf{l}\)</span>,
+each pointing in the direction of travel, and add <span class="math notranslate nohighlight">\(\mathbf{H}\cdot d\mathbf{l}\)</span>
+over every step. A field that runs along the path contributes <span class="math notranslate nohighlight">\(H\ dl\)</span>, and a
+field perpendicular to it contributes nothing. Since <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is in A/m
+and <span class="math notranslate nohighlight">\(dl\)</span> in meters, circulation has units of amperes. The circle on the
+integral sign marks a closed path, the same notation Lesson 22 used for
+<span class="math notranslate nohighlight">\(\oint_C \mathbf{E}\cdot d\mathbf{l} = 0\)</span>. The path is the edge of a surface,
+and the <strong>right-hand rule</strong> links the two: curl the fingers of the right hand
+in the direction of travel, and the thumb gives the positive normal of the
+surface. Lesson 17 used the same convention for Stokes’ theorem. It is the
+rule of Lesson 28 seen from the other side: with the right thumb along a
+current through the surface, the fingers curl the way <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> circles it,
+so a current along the normal gives a positive circulation.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-circulation-around-a-line-current">
+<div class="wrap docutils container">
+<p class="rubric">The Circulation Around a Line Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H}\cdot d\mathbf{l} &amp;= \frac{I}{2\pi\rho}\ \rho\ d\phi = \frac{I}{2\pi}\ d\phi \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= \frac{I}{2\pi}\oint_C d\phi = \begin{cases} I &amp; \text{in} \\ 0 &amp; \text{out} \end{cases} \end{aligned}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L29-circulation.svg"
+     alt="A line current inside a lumpy closed path, with a near step and a far step that sweep the same angle d phi and a shorter H arrow at the far step; and a line current outside the path, where the angle is swept forward on one side and back on the other"
+     style="max-width: 620px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We take any closed path <span class="math notranslate nohighlight">\(C\)</span> in a plane perpendicular to the wire and work out
+one step <span class="math notranslate nohighlight">\(d\mathbf{l}\)</span>. Only the part of the step along
+<span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span> survives the dot product, and from Lesson 17 that
+part is <span class="math notranslate nohighlight">\(\rho\ d\phi\)</span>, where <span class="math notranslate nohighlight">\(d\phi\)</span> is the angle the step sweeps as seen from
+the wire. The <span class="math notranslate nohighlight">\(\rho\)</span> in the step cancels the <span class="math notranslate nohighlight">\(1/\rho\)</span> in the field, so each
+step contributes <span class="math notranslate nohighlight">\(I/2\pi\)</span> times its angle, however far from the wire it lies
+and however the path tilts there. The left panel of the figure shows a near
+step and a far step that sweep the same angle <span class="math notranslate nohighlight">\(d\phi\)</span>. The far step sees a
+weaker field, drawn as a shorter arrow, but it is longer, and the two effects
+cancel exactly because the field falls off as <span class="math notranslate nohighlight">\(1/\rho\)</span>.</p>
+<p>Now we go all the way around; “in” and “out” in the equation mean the wire is
+inside or outside <span class="math notranslate nohighlight">\(C\)</span>. If the wire is <strong>inside</strong> <span class="math notranslate nohighlight">\(C\)</span>, the angle as seen
+from the wire grows steadily by <span class="math notranslate nohighlight">\(2\pi\)</span>, and the circulation is exactly <span class="math notranslate nohighlight">\(I\)</span>. If
+the wire is <strong>outside</strong>, as on the right of the figure, the angle grows along
+one side of the path and shrinks by the same amount along the other, so the
+total angle is zero, and so is the circulation. This is the same argument
+Lesson 20 made with solid angle, one dimension lower.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-ampere-s-law">
+<div class="wrap docutils container">
+<p class="rubric">Ampere’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl} = \int_S \mathbf{J}\cdot d\mathbf{s}\]</div>
+<p><span class="math notranslate nohighlight">\(S\)</span> is any surface whose edge is <span class="math notranslate nohighlight">\(C\)</span>, with its normal set by the right-hand rule.</p>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L29-two-caps.svg"
+     alt="A closed path C drawn as an ellipse, a flat surface S1 inside it and a dome S2 above it, each with a normal pointing up, and one current I passing up through both"
+     style="max-width: 320px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A collection of straight currents is a sum, and the circulation of the sum is
+the sum of the circulations. Currents that pass through the path contribute
+their current, and currents outside it contribute nothing. A current that
+passes through in the direction of the thumb counts as positive, and one in
+the opposite direction counts as negative. The result is <strong>Ampere’s law</strong>: the
+circulation of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> around any closed path equals the current
+enclosed, <span class="math notranslate nohighlight">\(I_\text{encl}\)</span>. When the current is spread out with a density
+<span class="math notranslate nohighlight">\(\mathbf{J}\)</span> in A/m², the current enclosed is the flux of <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> through
+a surface <span class="math notranslate nohighlight">\(S\)</span> bounded by the path. Nothing about the shape or size of the path
+appears in the result.</p>
+<p>Any surface with <span class="math notranslate nohighlight">\(C\)</span> as its edge gives the same enclosed current, as the
+figure shows for a flat surface <span class="math notranslate nohighlight">\(S_1\)</span> and a dome <span class="math notranslate nohighlight">\(S_2\)</span>. Together the two
+surfaces close a volume. Lesson 27 showed that a steady current has
+<span class="math notranslate nohighlight">\(\oint \mathbf{J}\cdot d\mathbf{s} = 0\)</span> over every closed surface, so the
+current that enters the volume through one surface leaves through the other,
+and the flux of <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is the same through both.</p>
+<p>So far the derivation covers straight currents only. The loops of Lesson 28,
+the solenoid and toroid of Lesson 30, and the boundary loop of Lesson 31 are
+not straight, so the last two derivation frames of this lesson prove the law
+for any steady current, starting from the Biot-Savart law. Module 4 adds a
+second term for currents that change with time.</p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-explore-path-independence">
+<div class="wrap docutils container">
+<p class="rubric">Explore: Path Independence</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/ampere-loop.html"
+        width="100%" height="475"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="A closed path near two straight currents perpendicular to the page, with the enclosed current and the computed circulation"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget places a <span class="math notranslate nohighlight">\(3\)</span> A current coming out of the page and a <span class="math notranslate nohighlight">\(2\)</span> A current
+going into it near a closed path traversed counterclockwise. The outline is
+blue where <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> runs along the direction of travel and red where it
+runs against it, and it is thicker where the component along the path is
+larger. The middle readout is the line integral, computed numerically in 2000
+steps around the path. Grow the circle,
+and its length rises while the circulation holds at 3.00 A. Switch to the
+lumpy path, and <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> varies along every part of it, but the total does
+not change. Slide the path until it also encloses the <span class="math notranslate nohighlight">\(2\)</span> A current, and the
+circulation drops to 1.00 A; slide it off both currents, and blue and red
+cancel to zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-using-ampere-s-law">
+<div class="wrap docutils container">
+<p class="rubric">Using Ampere’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ol class="arabic simple">
+<li><p>Use <strong>symmetry</strong> to find the direction of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> and what it depends on.</p></li>
+<li><p>Choose an <strong>Amperian path</strong> on which <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is tangent and constant, or perpendicular.</p></li>
+<li><p>Evaluate <span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l}\)</span> and <span class="math notranslate nohighlight">\(I_\text{encl}\)</span>.</p></li>
+<li><p>Solve for <span class="math notranslate nohighlight">\(H\)</span>; then <span class="math notranslate nohighlight">\(\mathbf{B} = \mu\mathbf{H}\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Ampere’s law holds for every closed path, but it gives the field only when we
+can pull <span class="math notranslate nohighlight">\(H\)</span> out of the integral. That requires a path built to match the
+symmetry of the current. On each piece of a good <strong>Amperian path</strong>, either
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> runs along the path with the same magnitude everywhere on that
+piece, so the integral is <span class="math notranslate nohighlight">\(H\)</span> times the length, or <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is
+perpendicular to the path, so that piece contributes nothing. The path is an
+imaginary curve we draw through the point where we want the field. The method
+is the one Lesson 20 used for Gauss’s law, with a path in place of a closed
+surface and current in place of charge.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-infinite-line-current">
+<div class="wrap docutils container">
+<p class="rubric">Infinite Line Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L29-line-current.svg"
+     alt="A circular Amperian path of radius rho around a line current coming out of the page, with H tangent to the circle"
+     style="max-width: 280px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H} &amp;= \hat{\boldsymbol{\phi}}\ H_\phi(\rho), \qquad d\mathbf{l} = \hat{\boldsymbol{\phi}}\ \rho\ d\phi \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= \int_0^{2\pi} H_\phi\ \rho\ d\phi = 2\pi\rho\ H_\phi = I \\ \mathbf{H} &amp;= \hat{\boldsymbol{\phi}}\ \frac{I}{2\pi\rho} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We test the method on the case Lesson 28 already solved. An infinite straight
+current on the <span class="math notranslate nohighlight">\(z\)</span> axis looks the same when we slide it along <span class="math notranslate nohighlight">\(z\)</span> or rotate it
+about the axis, so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> can depend only on <span class="math notranslate nohighlight">\(\rho\)</span>. Each current element
+points along <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span>, and the Biot-Savart law makes its field
+perpendicular to the element, so <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> has no <span class="math notranslate nohighlight">\(z\)</span> component. It has no
+<span class="math notranslate nohighlight">\(\rho\)</span> component either: Gauss’s law for magnetism from Lesson 28 says the net
+flux of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> out of a closed cylinder around the wire is zero, and a
+radial <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> would give a flux of <span class="math notranslate nohighlight">\(2\pi\rho L\ \mu H_\rho\)</span> through the
+side. That leaves <span class="math notranslate nohighlight">\(\mathbf{H} = \hat{\boldsymbol{\phi}}\ H_\phi(\rho)\)</span>.</p>
+<p>The matching path is a circle of radius <span class="math notranslate nohighlight">\(\rho\)</span> centered on the wire. On it,
+<span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is tangent and constant, and the step from Lesson 17 is
+<span class="math notranslate nohighlight">\(\rho\ d\phi\)</span> along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span>. The circulation is <span class="math notranslate nohighlight">\(H_\phi\)</span> times
+the circumference <span class="math notranslate nohighlight">\(2\pi\rho\)</span>, and the circle encloses the whole current <span class="math notranslate nohighlight">\(I\)</span>.
+Dividing recovers the Biot-Savart result of Lesson 28 without an integral
+along the wire.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-worked-example-the-field-near-a-wire">
+<div class="wrap docutils container">
+<p class="rubric">Worked Example: The Field Near a Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><span class="math notranslate nohighlight">\(I = 10\)</span> A, <span class="math notranslate nohighlight">\(\rho = 1\)</span> cm, in air:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H &amp;= \frac{10}{2\pi \times 0.01} = 159\ \text{A/m} \\ B &amp;= \mu_0 H = 4\pi\times10^{-7} \times 159 = 200\ \mu\text{T} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<div class="tip admonition">
+<p class="admonition-title">Worked example — the field 1 cm from a wire</p>
+<p>A long straight wire carries a steady <span class="math notranslate nohighlight">\(10\)</span> A. At <span class="math notranslate nohighlight">\(\rho = 1\)</span> cm from its axis,
+in air,</p>
+<div class="math notranslate nohighlight">
+\[H = \frac{I}{2\pi\rho} = \frac{10}{2\pi \times 0.01} = 159\ \text{A/m}\]</div>
+<p>and the flux density is</p>
+<div class="math notranslate nohighlight">
+\[B = \mu_0 H = 4\pi\times10^{-7} \times 159 = 2.00\times10^{-4}\ \text{T} = 200\ \mu\text{T}\]</div>
+<p>The Earth’s field at the surface is about <span class="math notranslate nohighlight">\(50\ \mu\text{T}\)</span>, so this wire
+produces four times the Earth’s field at 1 cm, and a compass held there points
+around the wire rather than north. The field falls as <span class="math notranslate nohighlight">\(1/\rho\)</span>, so it matches
+the Earth’s field at 4 cm and is a tenth of it at 40 cm. That is why a compass
+near a wire carrying a few amperes misreads by a large angle.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-a-round-wire-with-uniform-current">
+<div class="wrap docutils container">
+<p class="rubric">A Round Wire with Uniform Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \rho &lt; a:&amp; \quad 2\pi\rho\ H_\phi = J\pi\rho^2 = I\frac{\rho^2}{a^2} \ \Rightarrow\  H_\phi = \frac{I\rho}{2\pi a^2} \\ \rho &gt; a:&amp; \quad 2\pi\rho\ H_\phi = I \ \Rightarrow\  H_\phi = \frac{I}{2\pi\rho} \end{aligned}\end{split}\]</div>
+</div>
+<div class="present docutils container">
+<p><img src="../../viz/img/L29-solid-wire.svg"
+     alt="H against radius for a round wire carrying a uniform current: rising linearly inside radius a and falling as one over rho outside"
+     style="max-width: 480px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A real wire has a radius <span class="math notranslate nohighlight">\(a\)</span>, and at DC the current <span class="math notranslate nohighlight">\(I\)</span> spreads uniformly over
+its cross section with density <span class="math notranslate nohighlight">\(J = I/(\pi a^2)\)</span> along <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span>. The
+symmetry is the same as the line current’s, so the path is the same circle
+and the left side is again <span class="math notranslate nohighlight">\(2\pi\rho\ H_\phi\)</span>. All that changes is the current
+enclosed. For a circle inside the wire, <span class="math notranslate nohighlight">\(\rho &lt; a\)</span>, the enclosed current is the
+flux of <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> through the disk of radius <span class="math notranslate nohighlight">\(\rho\)</span>, using <span class="math notranslate nohighlight">\(\rho'\)</span> for the
+integration variable:</p>
+<div class="math notranslate nohighlight">
+\[I_\text{encl} = \int_0^{2\pi}\!\!\int_0^{\rho} J\ \rho'\ d\rho'\ d\phi = J \cdot \frac{\rho^2}{2} \cdot 2\pi = J\pi\rho^2 = I\frac{\rho^2}{a^2}\]</div>
+<p>For a circle outside the wire, the radial integral stops at <span class="math notranslate nohighlight">\(a\)</span> and the circle
+encloses all of <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Inside the wire, the enclosed current grows as <span class="math notranslate nohighlight">\(\rho^2\)</span> while the
+circumference grows as <span class="math notranslate nohighlight">\(\rho\)</span>, so the field grows in proportion to <span class="math notranslate nohighlight">\(\rho\)</span> and
+is zero on the axis. Outside, the field is that of a line current. The two
+expressions agree at <span class="math notranslate nohighlight">\(\rho = a\)</span>, where the field is largest, <span class="math notranslate nohighlight">\(I/(2\pi a)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-point-form-of-ampere-s-law">
+<div class="wrap docutils container">
+<p class="rubric">The Point Form of Ampere’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= \int_S \left(\nabla\times\mathbf{H}\right)\cdot d\mathbf{s} \qquad \text{(Stokes, Lesson 17)} \\ \int_S \left(\nabla\times\mathbf{H}\right)\cdot d\mathbf{s} &amp;= \int_S \mathbf{J}\cdot d\mathbf{s} \quad \text{for every } S \\ \nabla\times\mathbf{H} &amp;= \mathbf{J} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The integral form relates the field on a path to the current through a whole
+surface. To get a statement about a single point, we use <strong>Stokes’ theorem</strong>
+from Lesson 17, which turns the circulation around <span class="math notranslate nohighlight">\(C\)</span> into the flux of the
+curl through any surface <span class="math notranslate nohighlight">\(S\)</span> bounded by <span class="math notranslate nohighlight">\(C\)</span>. Ampere’s law says the same
+circulation equals the flux of <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> through the same surface, so the
+two surface integrals are equal. That is true for every surface, however
+small, and wherever we put it. If <span class="math notranslate nohighlight">\(\nabla\times\mathbf{H}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{J}\)</span>
+differed at some point, a small surface around that point would make the two
+integrals differ, so the integrands must be equal everywhere. The result is
+the <strong>point form</strong> of Ampere’s law: the curl of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> at a point equals
+the current density at that point. Where there is no current,
+<span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = 0\)</span>, even if <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> itself is large.</p>
+<p>The point form agrees with Lesson 27. The divergence of any curl is zero:
+in Cartesian components, <span class="math notranslate nohighlight">\(\nabla\cdot\left(\nabla\times\mathbf{H}\right)\)</span>
+is a sum of mixed second derivatives such as
+<span class="math notranslate nohighlight">\(\partial^2 H_z/\partial x\ \partial y - \partial^2 H_z/\partial y\ \partial x\)</span>,
+which cancel in pairs. Taking the divergence of both sides of
+<span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span> therefore gives
+<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{J} = 0\)</span>, the condition Lesson 27 found for a steady
+current. A current that piled charge up somewhere would contradict Ampere’s
+law in this form; Module 4 repairs the law for that case.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-checking-the-point-form-on-the-wire">
+<div class="wrap docutils container">
+<p class="rubric">Checking the Point Form on the Wire</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>For <span class="math notranslate nohighlight">\(\mathbf{H} = \hat{\boldsymbol{\phi}}\ H_\phi(\rho)\)</span>, only one term of the curl survives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \left(\nabla\times\mathbf{H}\right)_z &amp;= \frac{1}{\rho}\frac{d}{d\rho}\left(\rho H_\phi\right) \\ \rho &lt; a:\quad &amp;= \frac{1}{\rho}\frac{d}{d\rho}\left(\frac{I\rho^2}{2\pi a^2}\right) = \frac{I}{\pi a^2} = J \\ \rho &gt; a:\quad &amp;= \frac{1}{\rho}\frac{d}{d\rho}\left(\frac{I}{2\pi}\right) = 0 \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We check the point form against the round wire. Lesson 17 gives the curl in
+cylindrical coordinates. With only a <span class="math notranslate nohighlight">\(\phi\)</span> component that depends only on
+<span class="math notranslate nohighlight">\(\rho\)</span>, every derivative with respect to <span class="math notranslate nohighlight">\(\phi\)</span> or <span class="math notranslate nohighlight">\(z\)</span> is zero, and the
+<span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> components of the curl vanish. The <span class="math notranslate nohighlight">\(z\)</span> component is
+<span class="math notranslate nohighlight">\((1/\rho)\ d(\rho H_\phi)/d\rho\)</span>. Inside the wire, <span class="math notranslate nohighlight">\(\rho H_\phi\)</span> grows as
+<span class="math notranslate nohighlight">\(\rho^2\)</span>, and the curl is the current density <span class="math notranslate nohighlight">\(I/(\pi a^2)\)</span>, exactly as the
+point form requires. Outside, <span class="math notranslate nohighlight">\(\rho H_\phi = I/2\pi\)</span> is a constant, and the
+curl is zero, as it must be where there is no current. Curved field lines do
+not by themselves mean a nonzero curl: the curl measures the circulation around
+a small loop at the point, and outside the wire that circulation is zero.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-field-as-the-curl-of-a-vector-potential">
+<div class="wrap docutils container">
+<p class="rubric">The Field as the Curl of a Vector Potential</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mathbf{H}(\mathbf{r}) &amp;= \int \frac{\mathbf{J}(\mathbf{r}')\times\mathbf{R}}{4\pi R^3}\ dv' \\ \frac{\mathbf{R}}{R^3} &amp;= -\nabla\frac{1}{R} \\ \mathbf{J}\times\frac{\mathbf{R}}{R^3} &amp;= \nabla\frac{1}{R}\times\mathbf{J} = \nabla\times\frac{\mathbf{J}}{R} \\ \mathbf{H} &amp;= \nabla\times\mathbf{A} \\ \mathbf{A}(\mathbf{r}) &amp;= \int\frac{\mathbf{J}(\mathbf{r}')}{4\pi R}\ dv' \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Now we prove Ampere’s law for any steady current, starting from the
+Biot-Savart law of Lesson 28 for a volume element, <span class="math notranslate nohighlight">\(\mathbf{J}\ dv'\)</span> in place
+of <span class="math notranslate nohighlight">\(I\ d\mathbf{l}\)</span>. The vector <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{r} - \mathbf{r}'\)</span> runs
+from the source point <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span> to the field point <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>, and
+<span class="math notranslate nohighlight">\(\nabla\)</span> acts on the field point only. Lesson 22 used the identity on the second
+line: the gradient of <span class="math notranslate nohighlight">\(1/R\)</span> is <span class="math notranslate nohighlight">\(-\mathbf{R}/R^3\)</span>, which is how the field of a
+point charge came from its potential. Swapping the order of a cross product
+changes its sign, which gives the first step of the third line. For the
+second step, <span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{r}')\)</span> does not depend on <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>, so it
+acts as a constant vector, and the curl of a scalar <span class="math notranslate nohighlight">\(f\)</span> times a constant
+vector <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is <span class="math notranslate nohighlight">\(\nabla f\times\mathbf{c}\)</span>. The <span class="math notranslate nohighlight">\(x\)</span> component shows it:
+<span class="math notranslate nohighlight">\(\partial(f c_z)/\partial y - \partial(f c_y)/\partial z = c_z\ \partial f/\partial y - c_y\ \partial f/\partial z\)</span>,
+which is <span class="math notranslate nohighlight">\(\left(\nabla f\times\mathbf{c}\right)_x\)</span>. The curl acts on
+<span class="math notranslate nohighlight">\(\mathbf{r}\)</span> and the integral runs over <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>, so the curl comes
+outside the integral. The field is the curl of the <strong>vector potential</strong>
+<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. We use <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> only as a step in this proof; each of its
+components has the same form as the potential <span class="math notranslate nohighlight">\(V\)</span> of Lesson 22.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-ampere-s-law-for-any-steady-current">
+<div class="wrap docutils container">
+<p class="rubric">Ampere’s Law for Any Steady Current</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \nabla\times\mathbf{H} &amp;= \nabla\times\left(\nabla\times\mathbf{A}\right) \\ &amp;= \nabla\left(\nabla\cdot\mathbf{A}\right) - \nabla^2\mathbf{A} \\ \nabla^2\mathbf{A} &amp;= -\mathbf{J} \quad \text{(Lesson 23)} \\ \nabla\cdot\mathbf{A} &amp;= 0 \quad \text{(Lesson 27)} \\ \nabla\times\mathbf{H} &amp;= \mathbf{J} \\ \oint_C \mathbf{H}\cdot d\mathbf{l} &amp;= I_\text{encl} \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>We take the curl of <span class="math notranslate nohighlight">\(\mathbf{H} = \nabla\times\mathbf{A}\)</span> and expand the curl
+of a curl. Writing out the <span class="math notranslate nohighlight">\(x\)</span> component,</p>
+<div class="math notranslate nohighlight">
+\[\left(\nabla\times\nabla\times\mathbf{A}\right)_x = \frac{\partial}{\partial y}\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) - \frac{\partial}{\partial z}\left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right) = \frac{\partial}{\partial x}\left(\nabla\cdot\mathbf{A}\right) - \nabla^2 A_x\]</div>
+<p>after adding and subtracting <span class="math notranslate nohighlight">\(\partial^2 A_x/\partial x^2\)</span>; the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>
+components follow the same pattern. Two facts finish the proof.</p>
+<p><strong>The Laplacian term.</strong> The component
+<span class="math notranslate nohighlight">\(A_x = \int J_x\ dv'/(4\pi R)\)</span> has exactly the form of Lesson 22’s potential
+<span class="math notranslate nohighlight">\(V = \int \rho_v\ dv'/(4\pi\epsilon R)\)</span>, with <span class="math notranslate nohighlight">\(J_x\)</span> in place of
+<span class="math notranslate nohighlight">\(\rho_v/\epsilon\)</span>. That <span class="math notranslate nohighlight">\(V\)</span> produces the electric field of the charges, which
+obeys Gauss’s law, so it satisfies Lesson 23’s Poisson equation,
+<span class="math notranslate nohighlight">\(\nabla^2 V = -\rho_v/\epsilon\)</span>. The mathematics is the same whatever the
+integrand stands for, so <span class="math notranslate nohighlight">\(\nabla^2 A_x = -J_x\)</span>, and likewise for <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>:
+<span class="math notranslate nohighlight">\(-\nabla^2\mathbf{A} = \mathbf{J}\)</span>.</p>
+<p><strong>The divergence term.</strong> Because <span class="math notranslate nohighlight">\(\mathbf{R} = \mathbf{r} - \mathbf{r}'\)</span>, the
+gradient of <span class="math notranslate nohighlight">\(1/R\)</span> with respect to the field point is minus its gradient with
+respect to the source point, <span class="math notranslate nohighlight">\(\nabla(1/R) = -\nabla'(1/R)\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\nabla\cdot\mathbf{A} = \int \frac{\mathbf{J}\cdot\nabla(1/R)}{4\pi}\ dv' = -\int \frac{\mathbf{J}\cdot\nabla'(1/R)}{4\pi}\ dv' = -\int \frac{1}{4\pi}\left[\nabla'\cdot\frac{\mathbf{J}}{R} - \frac{\nabla'\cdot\mathbf{J}}{R}\right]dv'\]</div>
+<p>using the product rule for the divergence of a scalar times a vector. A steady
+current has <span class="math notranslate nohighlight">\(\nabla'\cdot\mathbf{J} = 0\)</span>, the result of Lesson 27, so the
+second term vanishes. The divergence theorem of Lesson 17 turns the first
+term into the flux of <span class="math notranslate nohighlight">\(\mathbf{J}/R\)</span> through a surface that encloses all of
+the current, and <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is zero on that surface, so the flux is zero.
+Therefore <span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{A} = 0\)</span>.</p>
+<p>With both terms in hand, <span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span> at every point,
+for any steady current. Stokes’ theorem, run in the direction opposite to the
+earlier point-form frame, then gives the integral form for every closed path.
+This is where the steady-current condition of Lesson 27 enters: without
+<span class="math notranslate nohighlight">\(\nabla'\cdot\mathbf{J} = 0\)</span>, the divergence term would survive and Ampere’s
+law would fail.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-gauss-s-law-and-ampere-s-law">
+<div class="wrap docutils container">
+<p class="rubric">Gauss’s Law and Ampere’s Law</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Feature</p></th>
+<th class="head text-left"><p>Gauss’s law (Lessons 20–21)</p></th>
+<th class="head text-left"><p>Ampere’s law (today)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Integral form</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_S \mathbf{D}\cdot d\mathbf{s} = Q_\text{encl}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Encloses</p></td>
+<td class="text-left"><p>a volume</p></td>
+<td class="text-left"><p>a surface</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Point form</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{D} = \rho_v\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The two laws are built the same way. Gauss’s law adds up the flux of
+<span class="math notranslate nohighlight">\(\mathbf{D}\)</span> over a closed surface and counts the charge in the volume inside
+it; Ampere’s law adds up the circulation of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> around a closed path
+and counts the current through the surface it bounds. Each turns into a point
+form through one of the two theorems of Lesson 17: the divergence theorem for
+Gauss’s law and Stokes’ theorem for Ampere’s law. The point forms differ in
+which derivative carries the source. Divergence measures field leaving a point, so
+charge appears in the divergence of <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>; curl measures circulation
+around a point, so current appears in the curl of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-summary">
+<div class="wrap docutils container">
+<p class="rubric">Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol / idea</p></th>
+<th class="head text-left"><p>What it is</p></th>
+<th class="head text-left"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Circulation</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l}\)</span>, direction set by the right-hand rule</p></td>
+<td class="text-left"><p>amperes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ampere’s law</p></td>
+<td class="text-left"><p>Circulation around a closed path equals the current through it</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\oint_C \mathbf{H}\cdot d\mathbf{l} = I_\text{encl}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Why it holds</p></td>
+<td class="text-left"><p>A line current gives <span class="math notranslate nohighlight">\(I/2\pi\)</span> per radian swept</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(2\pi\)</span> inside, 0 outside</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Line current</p></td>
+<td class="text-left"><p>Circle; <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> along <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\phi}}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(H = \frac{I}{2\pi\rho}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Round wire, radius <span class="math notranslate nohighlight">\(a\)</span></p></td>
+<td class="text-left"><p>Grows inside, line-current field outside</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{I\rho}{2\pi a^2}\)</span>, then <span class="math notranslate nohighlight">\(\frac{I}{2\pi\rho}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Point form</p></td>
+<td class="text-left"><p>From Stokes’ theorem</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Any steady current</p></td>
+<td class="text-left"><p>Curl of the Biot-Savart field, with <span class="math notranslate nohighlight">\(\nabla'\cdot\mathbf{J} = 0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\nabla\times\mathbf{H} = \mathbf{J}\)</span> for every path</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>10 A at 1 cm</p></td>
+<td class="text-left"><p>In air</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(159\)</span> A/m, <span class="math notranslate nohighlight">\(200\ \mu\)</span>T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-practice">
+<div class="wrap docutils container">
+<p class="rubric">Practice</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="../../practice/ECE343_L29_Practice_blank.pdf" target="_blank" rel="noopener">Problem set (PDF)</a></p></li>
+<li><p><a class="doc-link doc-key" href="../../practice/ECE343_L29_Practice_SOLUTIONS.pdf" target="_blank" rel="noopener">Solutions (PDF)</a></p></li>
+</ul>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 30</strong>: Ampere’s law for the coax, the current sheet, the solenoid, and the toroid.</p></li>
+<li><p><strong>Lesson 30</strong>: the coax field gives the inductance per meter, <span class="math notranslate nohighlight">\(L'\)</span>, and completes <span class="math notranslate nohighlight">\(Z_0\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Today Ampere’s law came out of the field of a line current and the geometry of
+the angle a path sweeps around it, and then out of the Biot-Savart law for any
+steady current. Symmetry turned it into a quick way to find the field. Lesson 30 uses the same method on the shapes that matter in
+practice: the coaxial line, a sheet of current, the solenoid, and the toroid.
+It then integrates the coaxial field to find the inductance per meter, <span class="math notranslate nohighlight">\(L'\)</span>,
+that Lesson 6 quoted for RG-58. With the capacitance per meter <span class="math notranslate nohighlight">\(C'\)</span> from
+Lesson 25, that completes the derivation of the characteristic impedance
+<span class="math notranslate nohighlight">\(Z_0 = 51.7\ \Omega\)</span>.</p>
+<p>Before Lesson 30, read sections 7.6 through 7.8 of Ellingson,
+<em>Electromagnetics</em>, Vol. 1, and review the curl in cylindrical coordinates from
+Lesson 17.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module03/L29-amperes-law"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>

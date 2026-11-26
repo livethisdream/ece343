@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="387.547826pt" height="243.135704pt" viewBox="0 0 387.547826 243.135704" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-05T06:22:07.838482</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 243.135704 
+L 387.547826 243.135704 
+L 387.547826 0 
+L 0 0 
+L 0 243.135704 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 144.128824 202.996176 
+L 246.803478 131.102609 
+L 246.803478 58.789565 
+L 144.128824 130.683132 
+z
+" clip-path="url(#p29277d1775)" style="fill: #e3edf6; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #5b6573; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 246.803478 94.946087 
+Q 270.907826 94.946087 292.999713 94.946087 
+" clip-path="url(#p29277d1775)" style="fill: none; stroke: #004a85; stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 288.599713 92.746087 
+L 292.999713 94.946087 
+L 288.599713 97.146087 
+z
+" clip-path="url(#p29277d1775)" style="fill: #004a85; stroke: #004a85; stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 299.833043 44.326957 
+Q 318.590913 31.192555 335.333935 19.468965 
+" clip-path="url(#p29277d1775)" style="fill: none; stroke: #8a5a00; stroke-width: 2.2; stroke-linecap: round"/>
+    <path d="M 329.583046 20.321767 
+L 335.333935 19.468965 
+L 332.565643 24.581358 
+z
+" clip-path="url(#p29277d1775)" style="fill: #8a5a00; stroke: #8a5a00; stroke-width: 2.2; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 246.803478 131.102609 
+L 246.803478 58.789565 
+" clip-path="url(#p29277d1775)" style="fill: none; stroke: #004a85; stroke-width: 3.2"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 246.803478 131.102609 
+L 246.803478 219.869219 
+" clip-path="url(#p29277d1775)" style="fill: none; stroke-dasharray: 0.8,1.32; stroke-dashoffset: 0; stroke: #5b6573; stroke-width: 0.8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-style: italic; font-size: 14px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #004a85" x="249.213913" y="49.41973" transform="rotate(-0 249.213913 49.41973)">ΔS</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 15px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #004a85" x="304.653913" y="100.40263" transform="rotate(-0 304.653913 100.40263)">n̂</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="343.83705" y="120.326453" transform="rotate(-0 343.83705 120.326453)">+</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="354.71658" y="191.925804" transform="rotate(-0 354.71658 191.925804)">+</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="233.788078" y="142.753203" transform="rotate(-0 233.788078 142.753203)">+</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="297.563774" y="176.342985" transform="rotate(-0 297.563774 176.342985)">+</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="320.423935" y="114.902118" transform="rotate(-0 320.423935 114.902118)">+</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="330.44858" y="126.010278" transform="rotate(-0 330.44858 126.010278)">+</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="357.309398" y="143.877658" transform="rotate(-0 357.309398 143.877658)">+</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="352.319948" y="50.854783" transform="rotate(-0 352.319948 50.854783)">+</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="92.936246" y="104.106251" transform="rotate(-0 92.936246 104.106251)">+</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="265.753365" y="48.563344" transform="rotate(-0 265.753365 48.563344)">+</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="197.895741" y="123.271601" transform="rotate(-0 197.895741 123.271601)">+</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="149.401392" y="168.152835" transform="rotate(-0 149.401392 168.152835)">+</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="205.835324" y="98.730904" transform="rotate(-0 205.835324 98.730904)">+</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="342.542475" y="108.569584" transform="rotate(-0 342.542475 108.569584)">+</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="122.486126" y="50.730324" transform="rotate(-0 122.486126 50.730324)">+</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="195.882173" y="92.971252" transform="rotate(-0 195.882173 92.971252)">+</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="190.739879" y="169.282334" transform="rotate(-0 190.739879 169.282334)">+</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="261.717026" y="77.19919" transform="rotate(-0 261.717026 77.19919)">+</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="97.229339" y="128.877221" transform="rotate(-0 97.229339 128.877221)">+</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="153.295116" y="176.974668" transform="rotate(-0 153.295116 176.974668)">+</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="107.248526" y="45.286219" transform="rotate(-0 107.248526 45.286219)">+</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="324.550449" y="141.787675" transform="rotate(-0 324.550449 141.787675)">+</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="277.098693" y="198.390328" transform="rotate(-0 277.098693 198.390328)">+</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="334.658473" y="116.028196" transform="rotate(-0 334.658473 116.028196)">+</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="303.584695" y="159.476401" transform="rotate(-0 303.584695 159.476401)">+</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #b01e24" x="157.985799" y="147.48382" transform="rotate(-0 157.985799 147.48382)">+</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="353.469544" y="133.942684" transform="rotate(-0 353.469544 133.942684)">+</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="330.77001" y="139.672304" transform="rotate(-0 330.77001 139.672304)">+</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="135.443023" y="71.142239" transform="rotate(-0 135.443023 71.142239)">+</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="69.916461" y="140.141592" transform="rotate(-0 69.916461 140.141592)">+</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="321.996989" y="52.748165" transform="rotate(-0 321.996989 52.748165)">+</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="111.223205" y="192.277716" transform="rotate(-0 111.223205 192.277716)">+</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="292.917361" y="101.956324" transform="rotate(-0 292.917361 101.956324)">+</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="112.54384" y="121.230296" transform="rotate(-0 112.54384 121.230296)">+</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="58.097477" y="88.931929" transform="rotate(-0 58.097477 88.931929)">+</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 12px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573; opacity: 0.5" x="207.355898" y="88.173419" transform="rotate(-0 207.355898 88.173419)">+</text>
+   </g>
+   <g id="text_39">
+    <text style="font-weight: 700; font-size: 15px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #8a5a00" x="311.885217" y="21.822456" transform="rotate(-0 311.885217 21.822456)">u</text>
+   </g>
+   <g id="patch_5">
+    <path d="M 244.157296 54.857399 
+Q 195.465407 88.951826 146.773518 123.046254 
+" style="fill: none; stroke: #8a5a00; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 238.406406 55.710201 
+L 244.157296 54.857399 
+L 241.389004 59.969791 
+" style="fill: none; stroke: #8a5a00; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 152.524407 122.193452 
+L 146.773518 123.046254 
+L 149.54181 117.933861 
+" style="fill: none; stroke: #8a5a00; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_40">
+    <text style="font-style: italic; font-size: 13px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #8a5a00" x="178.593108" y="77.771439" transform="rotate(-0 178.593108 77.771439)">u Δt</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 243.57141 217.458784 
+Q 195.465062 217.458784 147.358715 217.458784 
+" style="fill: none; stroke: #5b6573; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 238.37141 214.858784 
+L 243.57141 217.458784 
+L 238.37141 220.058784 
+" style="fill: none; stroke: #5b6573; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 152.558715 220.058784 
+L 147.358715 217.458784 
+L 152.558715 214.858784 
+" style="fill: none; stroke: #5b6573; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_41">
+    <text style="font-style: italic; font-size: 13px; font-family:'Source Sans Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; fill: #5b6573" x="195.466151" y="234.239962" transform="rotate(-0 195.466151 234.239962)">u·n̂ Δt</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p29277d1775">
+   <rect x="5.76" y="5.76" width="376.027826" height="221.76"/>
+  </clipPath>
+ </defs>
+</svg>

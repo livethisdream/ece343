@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en" data-mode="read">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L41 - Incidence Lab &mdash; ECE 343 — Intro to Electromagnetics</title>
+<meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<link rel="icon" href="../../_static/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap"><link rel="stylesheet" href="../../_static/custom.css?v=547f7a9cff">
+<link rel="stylesheet" href="../../_static/shell.css?v=a2173af70d">
+<link rel="stylesheet" href="../../_static/frames.css?v=7278b0ffdc">
+<script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+<script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</head>
+<body>
+
+<div class="rail"><span id="railfill"></span></div>
+
+<div class="laser" id="laser" aria-hidden="true"></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="index" id="index" role="dialog" aria-label="Jump to a frame or another lesson">
+  <button class="index-close" id="btnIndexClose" type="button" aria-label="Close">&times;</button>
+  <div class="wrap">
+    <div class="index-cols">
+      <div class="index-here">
+        <h2>This lesson</h2>
+        <ol id="indexlist"></ol>
+      </div>
+      <div class="index-toc">
+        <h2>Course</h2>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../materials.html">Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 1 — Foundations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/index.html">Module 1 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L01-course-intro/index.html">L1 — Course Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L02-fields/index.html">L2 — Fields, Parameters, and Field Quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L03-lumped-element-model/index.html">L3 — The Lumped-Element Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L04-wave-equation/index.html">L4 — The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L05-characteristic-impedance/index.html">L5 — Characteristic Impedance and Wave Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L06-reflection-vswr/index.html">L6 — Coaxial Lines, Reflection Coefficient, and VSWR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L07-terminated-lines/index.html">L7 — Terminated Transmission Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L08-impedance-matching-1/index.html">L8 — Impedance Matching I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L09-impedance-matching-2/index.html">L9 — Impedance Matching II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L10-smith-charts-1/index.html">L10 — Smith Charts I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L11-smith-charts-2/index.html">L11 — Smith Charts II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L12-smith-charts-3/index.html">L12 — Smith Charts III</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L13-smith-charts-4/index.html">L13 — Smith Charts IV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L14-transients/index.html">L14 — Transients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L15-lab-reflection-1/index.html">L15 — Reflection and Transmission Coefficient Lab I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module01/L16-lab-reflection-2/index.html">L16 — Reflection and Transmission Coefficient Lab II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 2 — Electrostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/index.html">Module 2 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L17-vector-analysis/index.html">L17 — Vector and Coordinate System Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L18-coulombs-law/index.html">L18 — Coulomb's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L19-charge-distributions/index.html">L19 — Surface and Volume Charge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L20-gauss-integral/index.html">L20 — Gauss's Law (Integral Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L21-gauss-differential/index.html">L21 — Gauss's Law (Differential Form)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L22-electric-potential/index.html">L22 — Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L23-boundary-value-problems/index.html">L23 — Boundary Value Problems and Electric Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L24-electric-boundary-conditions/index.html">L24 — Electric Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L25-capacitance/index.html">L25 — Boundary Conditions and Capacitance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module02/L26-lab-electrostatics/index.html">L26 — Electrostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 3 — Magnetostatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/index.html">Module 3 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L27-current-density/index.html">L27 — Current Density, Conductivity, and Resistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L28-magnetic-fields/index.html">L28 — Magnetic Fields and Gauss's Law for Magnetism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L29-amperes-law/index.html">L29 — Ampere's Law</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L30-amperes-law-applied/index.html">L30 — Ampere's Law Applied</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L31-magnetic-boundary-conditions/index.html">L31 — Magnetic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module03/L32-lab-magnetostatics/index.html">L32 — Magnetostatics Lab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Module 4 — Dynamic Fields</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Module 4 overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L33-displacement-current/index.html">L33 — Faraday's Law and Displacement Current</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L34-maxwells-equations/index.html">L34 — Maxwell's Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L35-source-free-maxwell-1/index.html">L35 — Maxwell's Equations in a Lossless, Source-Free Region I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L36-source-free-maxwell-2/index.html">L36 — Plane-Wave Solutions and Lossy Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L37-plane-waves-polarization/index.html">L37 — Uniform Plane Waves and Polarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L38-normal-incidence/index.html">L38 — Normal Incidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L39-oblique-incidence-1/index.html">L39 — Oblique Incidence I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../L40-oblique-incidence-2/index.html">L40 — Oblique Incidence II</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">L41 — Incidence Lab</a></li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div><div class="hud">
+<div class="hud-group">
+  <button id="btnSite" class="site" type="button"
+          aria-expanded="false" aria-controls="sitepop"
+          title="Elsewhere on this site">ECE 343</button>
+</div>
+<div class="pop" id="sitepop" role="group" aria-label="Site" hidden>
+  <a href="https://livethisdream.github.io/">Home</a>
+  <a href="../../intro.html" aria-current="page">ECE 343</a>
+  <a href="https://livethisdream.github.io/ece444/intro.html">ECE 444</a>
+  <a href="https://livethisdream.github.io/ece448/intro.html">ECE 448</a>
+  <a href="https://livethisdream.github.io/projects">Projects</a>
+  <button class="pop-help" type="button" data-help>Help<kbd>?</kbd></button>
+</div>
+
+  <div class="hud-group hud-mid"><button id="btnMode" type="button" aria-expanded="false" aria-controls="modepop"
+            title="How the lesson is laid out (P)">read</button>
+    <button id="btnTools" type="button" aria-expanded="false" aria-controls="toolspop"
+            title="Presenter tools">tools</button>
+  </div>
+
+  <div class="hud-group"><button id="btnIndex" class="counter" type="button" aria-pressed="false"
+            title="Contents (G) · double-tap for the top"><b id="cur">1</b>/<span id="tot">0</span></button>
+  </div><div class="pop" id="modepop" role="group" aria-label="View mode" hidden>
+    <button id="btnPresent" class="choice" type="button" aria-pressed="false">
+      present<span class="pop-note">one frame at a time</span></button>
+    <button id="btnRead" class="choice" type="button" aria-pressed="true">
+      read<span class="pop-note">the whole lesson, continuous</span></button>
+  </div><div class="pop" id="toolspop" role="group" aria-label="Presenter tools" hidden>
+    <button id="btnLaser" type="button" aria-pressed="false">laser<kbd>L</kbd></button>
+    <button id="btnSpot" type="button" aria-pressed="false">spotlight<kbd>S</kbd></button>
+    <button id="btnFull" type="button">fullscreen<kbd>F</kbd></button>
+    <button id="btnHelp" type="button" data-help>help<kbd>?</kbd></button>
+  </div>
+</div>
+<div class="help" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="help-card">
+    <button class="help-close" id="btnHelpClose" type="button" aria-label="Close help">&times;</button>
+    <h2 id="helpTitle">Getting around</h2>
+    <p class="help-lead">Everything is in the bar at the bottom of the screen.</p>
+    <dl class="help-list">
+      <dt><span class="help-chip">ECE 343</span></dt>
+      <dd>The other course sites, the home page, and this help.</dd>
+      <dt><span class="help-chip">read</span></dt>
+      <dd><b>Read</b> shows the whole lesson as one page. <b>Present</b> shows one frame at a time, for class.<span class="help-keys"> <kbd>P</kbd> switches.</span></dd>
+      <dt><span class="help-chip">tools</span></dt>
+      <dd>Laser pointer<span class="help-keys"> <kbd>L</kbd></span>, spotlight<span class="help-keys"> <kbd>S</kbd></span>, and fullscreen<span class="help-keys"> <kbd>F</kbd></span>.</dd>
+      <dt><span class="help-chip">3/9</span></dt>
+      <dd>Where you are in the lesson. Tap it for every frame here and every lesson in the course<span class="help-keys"> <kbd>G</kbd></span>. Double-tap to go back to the top.</dd>
+    </dl>
+    <h3 class="help-keys">Presenting</h3>
+    <p class="help-keys"><kbd>&rarr;</kbd> or <kbd>Space</kbd> next frame, <kbd>&larr;</kbd> back, <kbd>D</kbd> this frame&rsquo;s detail, <kbd>Esc</kbd> close a panel.</p>
+    <h3>Printing</h3>
+    <p>Print from present mode for the slides, one frame a page. Print from read mode for the whole lesson.</p>
+    <p class="help-foot"><span class="help-keys">Press <kbd>?</kbd> to open this again.</span><span class="help-touch">Open this again from the ECE 343 menu.</span></p>
+  </div>
+</div>
+
+<div class="help-hint" id="helpHint" hidden>
+  <button id="btnHintOpen" type="button" data-help>New here? How the bar works</button>
+  <button id="btnHintClose" class="help-hint-close" type="button" aria-label="Dismiss">&times;</button>
+</div><main class="deck bd-article" id="deck" tabindex="-1">
+<section class="tex2jax_ignore mathjax_ignore" id="l41-incidence-lab">
+<h1>L41 - Incidence Lab<a class="headerlink" href="#l41-incidence-lab" title="Permalink to this heading">#</a></h1>
+<div class="frame title-frame docutils container" id="frame-1">
+<div class="wrap docutils container">
+<div class="course-mark">ECE 343 · Spring 2027</div>
+<h1 class="frame-title">Incidence Lab</h1>
+<div class="title-rule"></div>
+<p>Today you solve Maxwell’s curl equations on a grid and measure reflection and refraction at a boundary.</p>
+<p>Lesson 41 · Module 4: Dynamic Fields · Maj Ellis · Dr. Neil Rogers</p>
+</div>
+</div>
+<div class="frame docutils container" id="frame-learning-objectives">
+<div class="wrap docutils container">
+<p class="rubric">Learning Objectives</p>
+<ol class="lo-list" style="--module: '9'; counter-reset: lo 4">
+  <li>I can determine the reflection and transmission of UPW at a boundary for Transverse Electric (TE) and Transverse Magnetic (TM) waves, using boundary conditions.</li>
+</ol>
+<div class="depth docutils container">
+<p>Lessons 38 through 40 found the reflected and transmitted uniform plane waves
+(UPW) at a boundary by matching the tangential fields on it. This lab finds
+them a second way: it steps Faraday’s law and the Ampere–Maxwell law forward
+in time on a grid, and the reflected and transmitted waves come out of the
+computation without any boundary condition imposed. The method is the
+<strong>finite-difference time-domain (FDTD)</strong> method, which engineers use to design
+antennas, radomes, and optical coatings. In Part A a pulse travels along one
+axis into a dielectric, and you measure <span class="math notranslate nohighlight">\(\Gamma\)</span> and <span class="math notranslate nohighlight">\(\tau\)</span> and design a
+quarter-wave anti-reflection layer. In Part B a beam strikes acrylic at an
+angle, and you measure Snell’s law, the Brewster angle, and total internal
+reflection. The lab is a Python notebook, run in Google Colab or on your own
+machine, and you work in a team of two or three.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-we-were">
+<div class="wrap docutils container">
+<p class="rubric">Where We Were</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Lesson</p></th>
+<th class="head text-left"><p>Result the lab checks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>33, 34</p></td>
+<td class="text-left"><p>The curl equations the grid steps forward</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>38</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span>, <span class="math notranslate nohighlight">\(\tau = 1 + \Gamma\)</span>, and Poynting’s theorem</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>39</p></td>
+<td class="text-left"><p>Snell’s law and <span class="math notranslate nohighlight">\(\Gamma_\text{TE}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>40</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma_\text{TM}\)</span>, the Brewster angle, and total internal reflection</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Each part of the lab reproduces a result from Module 4. Lesson 33 derived the
+two curl equations, which are all the grid needs, and Lesson 34 collected them
+with the rest of Maxwell’s equations. Lesson 38 matched the tangential fields at
+a boundary to get</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1}, \qquad \tau = 1 + \Gamma,\]</div>
+<p>and derived Poynting’s theorem, which the lab uses to measure power. Lessons
+39 and 40 extended the matching to a wave at an angle: phase matching gave
+Snell’s law, and the two polarizations gave <span class="math notranslate nohighlight">\(\Gamma_\text{TE}\)</span>,
+<span class="math notranslate nohighlight">\(\Gamma_\text{TM}\)</span>, the Brewster angle, and the critical angle.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-from-the-curl-equations-to-an-update">
+<div class="wrap docutils container">
+<p class="rubric">From the Curl Equations to an Update</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \frac{\partial H_y}{\partial t} &amp;= -\frac{1}{\mu}\frac{\partial E_x}{\partial z} \\ \frac{\partial E_x}{\partial t} &amp;= -\frac{1}{\epsilon}\frac{\partial H_y}{\partial z} \end{aligned}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_x\big|^{n+1}_{k} = E_x\big|^{n}_{k} &amp;- \frac{\Delta t}{\epsilon\Delta z}\left(H_y\big|^{n+1/2}_{k+1/2}\right. \\ &amp;\left. - H_y\big|^{n+1/2}_{k-1/2}\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A plane wave along <span class="math notranslate nohighlight">\(z\)</span> with <span class="math notranslate nohighlight">\(\mathbf{E} = \hat{\mathbf{x}}E_x\)</span> and
+<span class="math notranslate nohighlight">\(\mathbf{H} = \hat{\mathbf{y}}H_y\)</span> depends only on <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(t\)</span>. The <span class="math notranslate nohighlight">\(y\)</span>
+component of Faraday’s law and the <span class="math notranslate nohighlight">\(x\)</span> component of the Ampere–Maxwell law,
+both from Lesson 33, in a source-free and lossless medium, are the first two
+equations. The grid replaces each derivative with a centered difference. For
+the second equation, the time derivative at step <span class="math notranslate nohighlight">\(n + \tfrac{1}{2}\)</span> and the
+space derivative at node <span class="math notranslate nohighlight">\(k\)</span> become</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\frac{E_x\big|^{n+1}_{k} - E_x\big|^{n}_{k}}{\Delta t} \\ &amp;= -\frac{1}{\epsilon}\ \frac{H_y\big|^{n+1/2}_{k+1/2} - H_y\big|^{n+1/2}_{k-1/2}}{\Delta z}, \end{aligned}\end{split}\]</div>
+<p>and solving for the newest value gives the update on the slide. Faraday’s law
+gives the matching update for <span class="math notranslate nohighlight">\(H_y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} H_y\big|^{n+1/2}_{k+1/2} = H_y\big|^{n-1/2}_{k+1/2} &amp;- \frac{\Delta t}{\mu\Delta z}\left(E_x\big|^{n}_{k+1}\right. \\ &amp;\left. - E_x\big|^{n}_{k}\right). \end{aligned}\end{split}\]</div>
+<p>The code applies the two updates in turn, once per time step, at every node at
+once. Where a material boundary falls on an <span class="math notranslate nohighlight">\(E_x\)</span> node, the cell around it,
+from <span class="math notranslate nohighlight">\(k\Delta z - \Delta z/2\)</span> to <span class="math notranslate nohighlight">\(k\Delta z + \Delta z/2\)</span>, is half in each
+medium. <span class="math notranslate nohighlight">\(E_x\)</span> is tangential, so it is continuous (Lesson 24) and takes one
+value across the cell, and integrating the Ampere–Maxwell law over the cell
+gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\left(\epsilon_1\frac{\Delta z}{2} + \epsilon_2\frac{\Delta z}{2}\right)\frac{\partial E_x}{\partial t} \\ &amp;= -\left(H_y\big|_{k+1/2} - H_y\big|_{k-1/2}\right): \end{aligned}\end{split}\]</div>
+<p>that node takes the average permittivity <span class="math notranslate nohighlight">\((\epsilon_1 + \epsilon_2)/2\)</span>. A field
+<em>normal</em> to the boundary needs a different average, because its <span class="math notranslate nohighlight">\(D\)</span>, not its
+<span class="math notranslate nohighlight">\(E\)</span>, is continuous; Part B meets that case.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-yee-grid">
+<div class="wrap docutils container">
+<p class="rubric">The Yee Grid</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L41-yee.svg"
+     alt="Electric field nodes at whole cells and whole time steps, magnetic field nodes halfway between in space and in time, with two stencils: a new electric field value at node k comes from the old one below it and the two magnetic field values beside it, and a new magnetic field value at k plus one half comes from the old one below it and the two electric field values beside it"
+     style="max-width: 520px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>The grid stores <span class="math notranslate nohighlight">\(E_x\)</span> at whole cells and whole steps.</p></li>
+<li><p>It stores <span class="math notranslate nohighlight">\(H_y\)</span> halfway between, in space and in time.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The centered differences need each field halfway between the samples of the
+other. The grid therefore stores <span class="math notranslate nohighlight">\(E_x\)</span> at <span class="math notranslate nohighlight">\(z = k\Delta z\)</span> and <span class="math notranslate nohighlight">\(t = n\Delta t\)</span>,
+and <span class="math notranslate nohighlight">\(H_y\)</span> at <span class="math notranslate nohighlight">\(z = (k + \tfrac{1}{2})\Delta z\)</span> and <span class="math notranslate nohighlight">\(t = (n + \tfrac{1}{2})\Delta t\)</span>.
+This staggered arrangement is the <strong>Yee grid</strong>. The navy arrows show the
+<span class="math notranslate nohighlight">\(E_x\)</span> update: the new <span class="math notranslate nohighlight">\(E_x\)</span> at node <span class="math notranslate nohighlight">\(k\)</span> comes from the old <span class="math notranslate nohighlight">\(E_x\)</span> there and the
+two <span class="math notranslate nohighlight">\(H_y\)</span> values on either side, half a step earlier. The amber arrows show the
+<span class="math notranslate nohighlight">\(H_y\)</span> update at <span class="math notranslate nohighlight">\(k + \tfrac{1}{2}\)</span>, from the old <span class="math notranslate nohighlight">\(H_y\)</span> and the two <span class="math notranslate nohighlight">\(E_x\)</span> values
+on either side. Each update uses only its neighbors, so a computer can sweep it
+across millions of cells.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-time-step">
+<div class="wrap docutils container">
+<p class="rubric">The Time Step</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>Substitute <span class="math notranslate nohighlight">\(E, H \propto e^{j(\omega n\Delta t - \beta k\Delta z)}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sin\frac{\omega\Delta t}{2} = S\sin\frac{\beta\Delta z}{2}\]</div>
+<div class="math notranslate nohighlight">
+\[S = \frac{v_p\Delta t}{\Delta z}\]</div>
+<ul class="simple">
+<li><p>The grid is stable only for <span class="math notranslate nohighlight">\(S \le 1\)</span>.</p></li>
+<li><p>At <span class="math notranslate nohighlight">\(S = 1\)</span>, <span class="math notranslate nohighlight">\(\omega = v_p\beta\)</span> exactly.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A time step that is too long makes the computed fields grow without bound. To
+find the limit, we substitute <span class="math notranslate nohighlight">\(E_x = E_0e^{j(\omega n\Delta t - \beta k\Delta z)}\)</span>
+and <span class="math notranslate nohighlight">\(H_y = H_0e^{j(\omega n\Delta t - \beta k\Delta z)}\)</span> into the two updates.
+A centered time difference of <span class="math notranslate nohighlight">\(e^{j\omega n\Delta t}\)</span> is
+<span class="math notranslate nohighlight">\((2j/\Delta t)\sin(\omega\Delta t/2)\)</span> times the wave at the half step, and a
+centered space difference of <span class="math notranslate nohighlight">\(e^{-j\beta k\Delta z}\)</span> is
+<span class="math notranslate nohighlight">\(-(2j/\Delta z)\sin(\beta\Delta z/2)\)</span> times the wave at the half node. The two
+updates become</p>
+<div class="math notranslate nohighlight">
+\[\epsilon\ \frac{2}{\Delta t}\sin\frac{\omega\Delta t}{2}\ E_0 = \frac{2}{\Delta z}\sin\frac{\beta\Delta z}{2}\ H_0,\]</div>
+<div class="math notranslate nohighlight">
+\[\mu\ \frac{2}{\Delta t}\sin\frac{\omega\Delta t}{2}\ H_0 = \frac{2}{\Delta z}\sin\frac{\beta\Delta z}{2}\ E_0.\]</div>
+<p>Multiplying the two equations eliminates <span class="math notranslate nohighlight">\(E_0H_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mu\epsilon\left(\frac{2}{\Delta t}\right)^2\sin^2\frac{\omega\Delta t}{2} &amp;= \left(\frac{2}{\Delta z}\right)^2 \\ &amp;\times \sin^2\frac{\beta\Delta z}{2}, \end{aligned}\end{split}\]</div>
+<p>and with <span class="math notranslate nohighlight">\(v_p = 1/\sqrt{\mu\epsilon}\)</span> its square root is the slide’s <strong>grid
+dispersion relation</strong>. The shortest wave on the grid has <span class="math notranslate nohighlight">\(\beta\Delta z = \pi\)</span>,
+so its sine is 1, and for <span class="math notranslate nohighlight">\(S &gt; 1\)</span> it would need <span class="math notranslate nohighlight">\(\sin(\omega\Delta t/2) &gt; 1\)</span>:
+<span class="math notranslate nohighlight">\(\omega\)</span> becomes complex, and that wave grows without bound. The <strong>Courant
+condition</strong> <span class="math notranslate nohighlight">\(S \le 1\)</span> prevents it. At <span class="math notranslate nohighlight">\(S = 1\)</span> the two sines are equal,
+<span class="math notranslate nohighlight">\(\omega = v_p\beta\)</span>, and the grid carries every wave at exactly <span class="math notranslate nohighlight">\(v_p\)</span>. The
+notebook runs air at <span class="math notranslate nohighlight">\(S = 1\)</span>, so the dielectric of <span class="math notranslate nohighlight">\(\epsilon_r = 4\)</span> runs at
+<span class="math notranslate nohighlight">\(S = 1/2\)</span>, where the grid’s waves travel slightly slower than <span class="math notranslate nohighlight">\(v_p\)</span>. The
+figure solves the dispersion relation for the grid’s phase velocity: with 40
+cells per wavelength the dielectric’s waves are 0.1% slow, and the error grows
+quickly below about 15 cells per wavelength.</p>
+<p><img src="../../viz/img/L41-dispersion.svg"
+     alt="Grid phase velocity as a fraction of the true phase velocity against cells per wavelength on a log axis, for one dimension at S equals 1 (exactly 1), one dimension at S equals one half, and two dimensions at S equals 0.336 along an axis and along the diagonal; all approach 1 as the cells per wavelength grow, with dots at the notebook's Part A dielectric, 40 cells, and Part B acrylic, 16 cells"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+</div>
+<div class="frame viz-frame cut docutils container" id="frame-explore-the-courant-limit">
+<div class="wrap docutils container">
+<p class="rubric">Explore: The Courant Limit</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<iframe src="../../viz/fdtd-1d.html"
+        width="100%" height="489"
+        style="border: 1px solid #cddce9; border-radius: 6px;"
+        loading="lazy"
+        title="A Gaussian pulse stepping across a one-dimensional FDTD grid from air into a dielectric, with sliders for the Courant number and the dielectric's relative permittivity"
+        data-autosize>
+</iframe>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The widget runs the two updates of this lesson on 400 cells: air on the left,
+a dielectric of <span class="math notranslate nohighlight">\(\epsilon_{r2}\)</span> on the right, a Gaussian pulse launched at the
+source, and Mur ends. It runs a second grid with air everywhere, and the
+difference at the probe is the reflected pulse; its signed peak over the
+incident peak is the grid’s <span class="math notranslate nohighlight">\(\Gamma\)</span>, shown beside Lesson 38’s. Move <span class="math notranslate nohighlight">\(S\)</span> below
+1 and the pulse still splits correctly, but it spreads as the grid’s dispersion
+grows. Push <span class="math notranslate nohighlight">\(S\)</span> just past 1 and the field near the source grows without bound
+within a few dozen steps, which is the Courant condition at work. The readout
+also gives <span class="math notranslate nohighlight">\(S\)</span> in the dielectric, <span class="math notranslate nohighlight">\(S/\sqrt{\epsilon_{r2}}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-an-edge-that-absorbs">
+<div class="wrap docutils container">
+<p class="rubric">An Edge That Absorbs</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p>At the left end the wave leaves toward <span class="math notranslate nohighlight">\(-z\)</span>, <span class="math notranslate nohighlight">\(E_x = f(t + z/v_p)\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial E_x}{\partial z} - \frac{1}{v_p}\frac{\partial E_x}{\partial t} = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_x\big|^{n+1}_{0} = E_x\big|^{n}_{1} &amp;+ \frac{v_p\Delta t - \Delta z}{v_p\Delta t + \Delta z} \\ &amp;\times \left(E_x\big|^{n+1}_{1} - E_x\big|^{n}_{0}\right) \end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The grid has to end, and a wave that reaches the end must leave without
+reflecting, as if the medium continued. At the left end every wave travels
+toward <span class="math notranslate nohighlight">\(-z\)</span>, so it has the form <span class="math notranslate nohighlight">\(f(t + z/v_p)\)</span>, and differentiating shows that
+it obeys the one-way equation on the slide. We write that equation with
+centered differences at <span class="math notranslate nohighlight">\(z = \Delta z/2\)</span> and <span class="math notranslate nohighlight">\(t = (n + \tfrac{1}{2})\Delta t\)</span>,
+averaging the two nodes and the two time steps, at the point the figure marks:</p>
+<p><img src="../../viz/img/L41-mur.svg"
+     alt="Four nodes, the end node 0 and its neighbor node 1 at time steps n and n plus 1, with dashed lines to a cross midway between them, the point where we write the one-way equation"
+     style="max-width: 300px; width: 100%; display: block; margin: 0 auto;"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;\frac{E_x\big|^{n+1}_{1} + E_x\big|^{n}_{1} - E_x\big|^{n+1}_{0} - E_x\big|^{n}_{0}}{2\Delta z} \\ &amp;= \frac{E_x\big|^{n+1}_{0} + E_x\big|^{n+1}_{1} - E_x\big|^{n}_{0} - E_x\big|^{n}_{1}}{2v_p\Delta t}. \end{aligned}\end{split}\]</div>
+<p>Multiplying by <span class="math notranslate nohighlight">\(2v_p\Delta t\Delta z\)</span> and collecting the newest end value on
+the left gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} &amp;(v_p\Delta t + \Delta z)\ E_x\big|^{n+1}_{0} \\ &amp;= (v_p\Delta t + \Delta z)\ E_x\big|^{n}_{1} \\ &amp;+ (v_p\Delta t - \Delta z)\left(E_x\big|^{n+1}_{1} - E_x\big|^{n}_{0}\right), \end{aligned}\end{split}\]</div>
+<p>and dividing by <span class="math notranslate nohighlight">\(v_p\Delta t + \Delta z\)</span> gives the slide’s <strong>Mur boundary</strong>.
+The right end is its mirror image. At <span class="math notranslate nohighlight">\(S = 1\)</span> the coefficient is zero and the
+end node copies its neighbor’s previous value, which is exact for a wave that
+moves one cell per step.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-pre-lab-part-a-predictions">
+<div class="wrap docutils container">
+<p class="rubric">Pre-Lab: Part A Predictions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L41-line.svg"
+     alt="A strip of grid cells: a source and a probe in air on the left, the boundary, the dielectric of relative permittivity 4 on the right with a second probe, an optional layer just before the boundary, Mur ends, and arrows for the incident, reflected, and transmitted pulses"
+     style="max-width: 430px; width: 100%; display: block; margin: 0 auto;"></p>
+<p>Air meets <span class="math notranslate nohighlight">\(\epsilon_r = 4\)</span>, so <span class="math notranslate nohighlight">\(\eta_2 = \eta_1/2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = -\tfrac{1}{3}, \qquad \tau = \tfrac{2}{3}\]</div>
+<div class="math notranslate nohighlight">
+\[\vert\Gamma\vert^2 + \frac{\eta_1}{\eta_2}\vert\tau\vert^2 = 1\]</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Work these before the lab period. The pulse starts at the source, passes the
+probe, and splits at the boundary; the reflected pulse returns past the probe,
+and the transmitted pulse passes the second probe. Lesson 38’s coefficient with
+<span class="math notranslate nohighlight">\(\eta_2 = \eta_1/2\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\Gamma = \frac{\tfrac{1}{2} - 1}{\tfrac{1}{2} + 1} = -\frac{1}{3}, \qquad \tau = 1 + \Gamma = \frac{2}{3},\]</div>
+<p>and the power check is <span class="math notranslate nohighlight">\(\tfrac{1}{9} + 2\cdot\tfrac{4}{9} = 1\)</span>. A layer between
+the air and the dielectric acts as Lesson 7’s section of transmission line: a
+quarter wavelength thick inside itself, it turns the dielectric’s <span class="math notranslate nohighlight">\(\eta_2\)</span> into
+<span class="math notranslate nohighlight">\(\eta_c^2/\eta_2\)</span>, which equals <span class="math notranslate nohighlight">\(\eta_1\)</span> when <span class="math notranslate nohighlight">\(\eta_c = \sqrt{\eta_1\eta_2}\)</span>, so
+<span class="math notranslate nohighlight">\(n_c = \sqrt{n_1 n_2} = \sqrt{2}\)</span>. At <span class="math notranslate nohighlight">\(1\ \text{GHz}\)</span> its thickness is</p>
+<div class="math notranslate nohighlight">
+\[d = \frac{\lambda_0}{4n_c} = \frac{0.30\ \text{m}}{4\sqrt{2}} = 53.0\ \text{mm}.\]</div>
+<p>Lesson 7’s line theory gives the layer’s reflection at every frequency, plotted
+below: a null at 1 GHz and <span class="math notranslate nohighlight">\(\vert\Gamma\vert &lt; 0.1\)</span> from about 0.82 to
+1.18 GHz. The notebook measures the same curve on the grid.</p>
+<p><img src="../../viz/img/L41-arcoat.svg"
+     alt="The magnitude of Gamma against frequency from 0.3 to 2.2 gigahertz for the quarter-wave layer: zero at 1 gigahertz, below 0.1 in a shaded band around it, and rising to one third at 2 gigahertz, where a dotted line marks the reflection with no layer"
+     style="max-width: 540px; width: 100%; display: block; margin: 0 auto;"></p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-two-dimensions-two-polarizations">
+<div class="wrap docutils container">
+<p class="rubric">Two Dimensions, Two Polarizations</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L41-yee2d.svg"
+     alt="One cell of the two-dimensional TE grid with x to the right and z down: E y at the grid nodes, H x halfway between nodes along z, H z halfway between nodes along x, with the grid spacing Delta marked"
+     style="max-width: 340px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>The plane of incidence is <span class="math notranslate nohighlight">\(xz\)</span>, and <span class="math notranslate nohighlight">\(\partial/\partial y = 0\)</span>.</p></li>
+<li><p>TE steps <span class="math notranslate nohighlight">\(E_y\)</span>, <span class="math notranslate nohighlight">\(H_x\)</span>, <span class="math notranslate nohighlight">\(H_z\)</span>; TM steps <span class="math notranslate nohighlight">\(H_y\)</span>, <span class="math notranslate nohighlight">\(E_x\)</span>, <span class="math notranslate nohighlight">\(E_z\)</span>.</p></li>
+<li><p>The grid is stable only for <span class="math notranslate nohighlight">\(S \le 1/\sqrt{2}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Part B keeps Lesson 39’s geometry: the boundary in the plane <span class="math notranslate nohighlight">\(z = 0\)</span>, medium 1
+at <span class="math notranslate nohighlight">\(z &lt; 0\)</span>, and the plane of incidence in the <span class="math notranslate nohighlight">\(xz\)</span> plane. Nothing changes along
+<span class="math notranslate nohighlight">\(y\)</span>, so every <span class="math notranslate nohighlight">\(\partial/\partial y\)</span> is zero, and the six components of the curl
+equations split into two independent sets. The TE set holds <span class="math notranslate nohighlight">\(E_y\)</span>, the field
+perpendicular to the plane of incidence, with <span class="math notranslate nohighlight">\(H_x\)</span> and <span class="math notranslate nohighlight">\(H_z\)</span>; the TM set holds
+<span class="math notranslate nohighlight">\(H_y\)</span> with <span class="math notranslate nohighlight">\(E_x\)</span> and <span class="math notranslate nohighlight">\(E_z\)</span>. The figure places the TE set on a square grid of
+spacing <span class="math notranslate nohighlight">\(\Delta\)</span>: <span class="math notranslate nohighlight">\(E_y\)</span> at the nodes <span class="math notranslate nohighlight">\((i, k)\)</span>, <span class="math notranslate nohighlight">\(H_x\)</span> at <span class="math notranslate nohighlight">\((i, k + \tfrac{1}{2})\)</span>,
+and <span class="math notranslate nohighlight">\(H_z\)</span> at <span class="math notranslate nohighlight">\((i + \tfrac{1}{2}, k)\)</span>. For example, the <span class="math notranslate nohighlight">\(y\)</span> component of the
+Ampere–Maxwell law is</p>
+<div class="math notranslate nohighlight">
+\[\epsilon\ \frac{\partial E_y}{\partial t} = \frac{\partial H_x}{\partial z} - \frac{\partial H_z}{\partial x},\]</div>
+<p>and its centered differences give the <span class="math notranslate nohighlight">\(E_y\)</span> update</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} E_y\big|^{n+1}_{i,k} &amp;= E_y\big|^{n}_{i,k} \\ &amp;+ \frac{\Delta t}{\epsilon\Delta}\left(H_x\big|^{n+1/2}_{i,k+1/2} - H_x\big|^{n+1/2}_{i,k-1/2}\right) \\ &amp;- \frac{\Delta t}{\epsilon\Delta}\left(H_z\big|^{n+1/2}_{i+1/2,k} - H_z\big|^{n+1/2}_{i-1/2,k}\right); \end{aligned}\end{split}\]</div>
+<p>the notebook writes all three TE updates and the TM set. On the boundary row,
+TE’s <span class="math notranslate nohighlight">\(E_y\)</span> is tangential and takes the average of <span class="math notranslate nohighlight">\(\epsilon\)</span>, as in Part A.
+TM’s <span class="math notranslate nohighlight">\(E_z\)</span> there is normal to the boundary, and <span class="math notranslate nohighlight">\(D_z = \epsilon E_z\)</span> is the
+continuous quantity (Lesson 24), so the average of <span class="math notranslate nohighlight">\(E_z\)</span> along the cell’s side
+is</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\Delta}\int E_z\ dz = D_z\ \frac{1}{2}\left(\frac{1}{\epsilon_1} + \frac{1}{\epsilon_2}\right):\]</div>
+<p>a normal field takes the average of <span class="math notranslate nohighlight">\(1/\epsilon\)</span>.</p>
+<p>To find the time step we substitute a plane wave with amplitudes <span class="math notranslate nohighlight">\(E_0\)</span>, <span class="math notranslate nohighlight">\(X_0\)</span>,
+and <span class="math notranslate nohighlight">\(Z_0\)</span> for <span class="math notranslate nohighlight">\(E_y\)</span>, <span class="math notranslate nohighlight">\(H_x\)</span>, and <span class="math notranslate nohighlight">\(H_z\)</span>. With
+<span class="math notranslate nohighlight">\(\Omega = (2/\Delta t)\sin(\omega\Delta t/2)\)</span> and
+<span class="math notranslate nohighlight">\(K_x = (2/\Delta)\sin(\beta_x\Delta/2)\)</span>, and <span class="math notranslate nohighlight">\(K_z\)</span> likewise, the three updates
+become</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \mu\Omega X_0 &amp;= -K_zE_0, \\ \mu\Omega Z_0 &amp;= K_xE_0, \\ \epsilon\Omega E_0 &amp;= -K_zX_0 + K_xZ_0. \end{aligned}\end{split}\]</div>
+<p>Substituting the first two into the third gives <span class="math notranslate nohighlight">\(\mu\epsilon\Omega^2 = K_x^2 + K_z^2\)</span>, or</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \sin^2\frac{\omega\Delta t}{2} = S^2\Big[&amp;\sin^2\frac{\beta_x\Delta}{2} \\ &amp;+ \sin^2\frac{\beta_z\Delta}{2}\Big]. \end{aligned}\end{split}\]</div>
+<p>Both sines can reach 1 at once, which needs <span class="math notranslate nohighlight">\(2S^2 \le 1\)</span>: the limit tightens to
+<span class="math notranslate nohighlight">\(S \le 1/\sqrt{2}\)</span>. The notebook uses <span class="math notranslate nohighlight">\(S = 1/2\)</span> in air, which is
+<span class="math notranslate nohighlight">\(0.5/1.49 = 0.336\)</span> in the acrylic, at 24 cells per free-space wavelength.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-the-simulation">
+<div class="wrap docutils container">
+<p class="rubric">The Simulation</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<picture>
+<source media="(max-width: 600px)" srcset="../../viz/img/L41-setup-phone.svg">
+<img src="../../viz/img/L41-setup.svg"
+     alt="A rectangle lined by an absorbing layer; a green source line near the top, with a Gaussian taper sketched on it, launches a beam at the angle theta i toward the boundary between medium 1 above and medium 2 below, and a faint arrow shows the beam it also launches upward into the absorbing layer; a reflected beam and a transmitted beam at theta t leave the boundary; two dashed lines, one above and one below the boundary, mark where the notebook measures power"
+     style="max-width: 880px; width: 100%; display: block; margin: 0 auto;">
+</picture>
+<p>The source is <span class="math notranslate nohighlight">\(g(x)\sin\left(\omega t - \beta_1 x\sin\theta_i\right)\)</span>.</p>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A line of cells parallel to the boundary drives the field. Its Gaussian taper
+<span class="math notranslate nohighlight">\(g(x)\)</span> makes a beam rather than an infinite plane wave, and its phase advances
+along <span class="math notranslate nohighlight">\(x\)</span> at Lesson 39’s rate <span class="math notranslate nohighlight">\(\beta_1\sin\theta_i\)</span>, which is Lesson 39’s
+phase-matching condition applied to aim the beam at <span class="math notranslate nohighlight">\(\theta_i\)</span>. The source line
+also launches a beam upward, away from the boundary, which the absorbing layer
+removes. A <strong>perfectly matched layer (PML)</strong>, 24 cells thick, lines the edges.
+Inside it each field obeys</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial U}{\partial t} + rU = s,\]</div>
+<p>with <span class="math notranslate nohighlight">\(s\)</span> the curl term and a loss rate <span class="math notranslate nohighlight">\(r\)</span> that grows toward the outer edge.
+Multiplying by <span class="math notranslate nohighlight">\(e^{rt}\)</span> makes the left side one derivative, and integrating over
+one step with <span class="math notranslate nohighlight">\(s\)</span> held constant gives the update:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dt}\left(Ue^{rt}\right) = se^{rt},\]</div>
+<div class="math notranslate nohighlight">
+\[U^{n+1} = e^{-r\Delta t}U^n + \frac{1 - e^{-r\Delta t}}{r}\ s.\]</div>
+<p>The code splits each field into a part driven by the <span class="math notranslate nohighlight">\(x\)</span> derivatives, which
+decays at the rate <span class="math notranslate nohighlight">\(r_x\)</span>, and a part driven by the <span class="math notranslate nohighlight">\(z\)</span> derivatives, at the rate
+<span class="math notranslate nohighlight">\(r_z\)</span>. In the top and bottom layers only the part driven by <span class="math notranslate nohighlight">\(\partial/\partial z\)</span>
+decays, so the layer leaves the wave’s variation along <span class="math notranslate nohighlight">\(x\)</span>, its phase matching
+along the layer, as it was, and the layer stays matched to a wave at any angle. Berenger
+showed that when <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> decay at the same rate, such a
+layer reflects nothing at any angle in the continuous limit; that proof is
+beyond this course, and on the notebook’s grid the layer reflects well under 1%.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-measuring-power">
+<div class="wrap docutils container">
+<p class="rubric">Measuring Power</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<picture>
+<source media="(max-width: 600px)" srcset="../../viz/img/L41-separation-phone.svg">
+<img src="../../viz/img/L41-separation.svg"
+     alt="Three maps of the electric field from a TE run at 45 degrees onto acrylic: the full run, with incident and reflected beams overlapping above the boundary and the transmitted beam below; the reference run with air everywhere, showing the incident beam alone; and their difference above the boundary, drawn on a color scale four times finer, which is the reflected beam alone; dashed lines above and below the boundary mark the two lines where the notebook measures power"
+     style="max-width: 880px; width: 100%; display: block; margin: 0 auto;">
+</picture>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>A beam has no single amplitude to compare: its field varies across its width,
+and the transmitted beam has a different cross-section and a different <span class="math notranslate nohighlight">\(\eta\)</span>.
+Power, by Lesson 38’s Poynting theorem, crosses the boundary without loss, so
+the notebook measures power. Once the field has settled into a steady state, it
+extracts each field’s phasor and integrates the time-average Poynting vector
+along the two dashed lines,</p>
+<div class="math notranslate nohighlight">
+\[P = \int \frac{1}{2}\text{Re}\left[\widetilde{\mathbf{E}}\times\widetilde{\mathbf{H}}^*\right]\cdot\hat{\mathbf{z}}\ dx,\]</div>
+<p>which catches the whole beam whatever its shape.
+Above the boundary the total field is the incident field plus the reflected
+field, as the left map shows. A reference run with medium 1 everywhere (center)
+gives the incident field alone, and subtracting it leaves the reflected beam
+(right). The reflected power gives <span class="math notranslate nohighlight">\(R = \vert\Gamma\vert^2\)</span>, the power below the
+boundary gives the transmitted fraction <span class="math notranslate nohighlight">\(T\)</span>, each measured on its own, and
+every run checks that <span class="math notranslate nohighlight">\(R + T = 1\)</span>, which also tests the absorbing layer.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-pre-lab-part-b-predictions">
+<div class="wrap docutils container">
+<p class="rubric">Pre-Lab: Part B Predictions</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quantity</p></th>
+<th class="head text-left"><p>Air onto acrylic, <span class="math notranslate nohighlight">\(n = 1.49\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\vert\Gamma\vert\)</span> at <span class="math notranslate nohighlight">\(0^\circ\)</span></p></td>
+<td class="text-left"><p>0.197</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\theta_t\)</span> at <span class="math notranslate nohighlight">\(45^\circ\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(28.3^\circ\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Brewster angle</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(56.1^\circ\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Critical angle, acrylic to air</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(42.2^\circ\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(1/\alpha\)</span> at <span class="math notranslate nohighlight">\(50^\circ\)</span>, acrylic to air</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(0.289\lambda_0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Work these before the lab period, from Lessons 38 through 40. At normal
+incidence, <span class="math notranslate nohighlight">\(\vert\Gamma\vert = (1.49 - 1)/(1.49 + 1) = 0.197\)</span>. Snell’s law at
+<span class="math notranslate nohighlight">\(45^\circ\)</span> gives <span class="math notranslate nohighlight">\(\sin\theta_t = \sin 45^\circ/1.49 = 0.4746\)</span>, so
+<span class="math notranslate nohighlight">\(\theta_t = 28.3^\circ\)</span>. The Brewster angle is <span class="math notranslate nohighlight">\(\arctan 1.49 = 56.1^\circ\)</span>,
+where the TM reflection vanishes, as Lesson 40’s figure shows:</p>
+<p><img src="../../viz/img/L40-brewster.svg"
+     alt="Lesson 40's figure: at the Brewster angle the reflected and transmitted rays are perpendicular, and the reflected ray carries only the TE polarization"
+     style="max-width: 420px; width: 100%; display: block; margin: 0 auto;"></p>
+<p>The critical angle from acrylic is <span class="math notranslate nohighlight">\(\arcsin(1/1.49) = 42.2^\circ\)</span>. Beyond it,
+at <span class="math notranslate nohighlight">\(50^\circ\)</span>, Lesson 40’s decay constant, with medium 2 air (<span class="math notranslate nohighlight">\(n_2 = 1\)</span> and
+<span class="math notranslate nohighlight">\(\beta_2 = \beta_0\)</span>), is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \alpha &amp;= \beta_2q, \\ q &amp;= \sqrt{\left(\frac{n_1}{n_2}\right)^2\sin^2\theta_i - 1} \\ &amp;= \sqrt{1.49^2\sin^2 50^\circ - 1} = 0.550, \end{aligned}\end{split}\]</div>
+<p>so the evanescent field’s decay length is</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\alpha} = \frac{\lambda_0}{2\pi\times 0.550} = 0.289\lambda_0.\]</div>
+<p>The notebook also asks for <span class="math notranslate nohighlight">\(\vert\Gamma_\text{TE}\vert\)</span> and
+<span class="math notranslate nohighlight">\(\vert\Gamma_\text{TM}\vert\)</span> at <span class="math notranslate nohighlight">\(30^\circ\)</span>, <span class="math notranslate nohighlight">\(45^\circ\)</span>, and <span class="math notranslate nohighlight">\(65^\circ\)</span>, from
+Lessons 39 and 40.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-why-a-beam-is-not-a-plane-wave">
+<div class="wrap docutils container">
+<p class="rubric">Why a Beam Is Not a Plane Wave</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<p><img src="../../viz/img/L41-beam-brewster.svg"
+     alt="The TM reflection magnitude against angle from 30 to 75 degrees: the plane-wave curve falls to zero at the Brewster angle of 56.1 degrees, the curve averaged over a beam 2.5 wavelengths wide bottoms out near 0.04, and the notebook's FDTD points follow the beam curve"
+     style="max-width: 560px; width: 100%; display: block; margin: 0 auto;"></p>
+<ul class="simple">
+<li><p>A beam holds plane waves over a spread of angles.</p></li>
+<li><p>Each angle in the spread reflects by its own <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>Lessons 39 and 40 describe one plane wave at one angle. The notebook’s beam has
+a <span class="math notranslate nohighlight">\(1/e\)</span> field half-width of <span class="math notranslate nohighlight">\(w = 2.5\lambda_0\)</span>, and a beam of finite width is a
+sum of plane waves over a spread of about <span class="math notranslate nohighlight">\(\lambda/(\pi w)\)</span> radians to each
+side, with <span class="math notranslate nohighlight">\(\lambda\)</span> the wavelength in medium 1. In air that is
+<span class="math notranslate nohighlight">\(1/(2.5\pi) = 0.127\)</span> rad, or <span class="math notranslate nohighlight">\(7.3^\circ\)</span>; in the acrylic it is
+<span class="math notranslate nohighlight">\(1/(1.49\cdot 2.5\pi) = 0.085\)</span> rad, or <span class="math notranslate nohighlight">\(4.9^\circ\)</span>. Only the wave at exactly
+<span class="math notranslate nohighlight">\(56.1^\circ\)</span> has <span class="math notranslate nohighlight">\(\Gamma_\text{TM} = 0\)</span>; its neighbors reflect a little, and
+their powers add. Averaging the plane-wave <span class="math notranslate nohighlight">\(\vert\Gamma_\text{TM}\vert^2\)</span> over
+the beam’s spread gives the dashed curve, whose minimum is about 0.04, and the
+grid measures 0.043 at the Brewster angle, against about 0.38 for TE. The same
+spread makes the evanescent field of Part B3 decay about 9% more slowly than
+the single-angle prediction, <span class="math notranslate nohighlight">\(0.31\lambda_0\)</span> against <span class="math notranslate nohighlight">\(0.289\lambda_0\)</span>, because
+the angles nearer the critical angle decay more slowly. A wider beam narrows the
+spread, but it needs a larger grid and a longer run.</p>
+</div>
+</div>
+</div>
+<div class="frame read-only docutils container" id="frame-teams-and-the-report">
+<div class="wrap docutils container">
+<p class="rubric">Teams and the Report</p>
+<p>Work in a team of two or three, and submit one report per team.</p>
+<ul class="simple">
+<li><p>Open the notebook in Colab (link below), choose <strong>File</strong>, then <strong>Save a copy
+in Drive</strong>, and share the copy with your teammates. Or download it and run
+it locally with Python 3, NumPy, and Matplotlib.</p></li>
+<li><p>Run the cells in order. A cell marked <code class="docutils literal notranslate"><span class="pre">TODO</span></code> is yours to finish; the rest are
+given. Answer every <strong>Answer</strong> cell. Part A runs in seconds; Part B’s
+simulations take about three minutes in all.</p></li>
+<li><p>Before you submit, choose <strong>Runtime</strong>, then <strong>Run all</strong>, so every output is
+current. Put every member’s name and a Documentation line in the first
+cell.</p></li>
+<li><p>Export to PDF and upload it to Gradescope as one team submission, adding
+every member.</p></li>
+<li><p>You do not check out any equipment; the lab needs only a laptop.</p></li>
+</ul>
+</div>
+</div>
+<div class="frame read-only doc-links docutils container" id="frame-lab-notebook">
+<div class="wrap docutils container">
+<p class="rubric">Lab Notebook</p>
+<ul class="simple">
+<li><p><a class="doc-link" href="https://colab.research.google.com/github/livethisdream/ece343/blob/main/book/extras/labs/ECE343_Lab_L41_Incidence.ipynb" target="_blank" rel="noopener">Open the Incidence Lab notebook in Google Colab</a></p></li>
+<li><p><a class="doc-link" href="../../labs/ECE343_Lab_L41_Incidence.ipynb" download>Download the notebook (.ipynb)</a></p></li>
+</ul>
+<div class="depth docutils container">
+<p>The notebook is the lab packet and the turn-in document. It holds the
+derivations, the code you finish, and the questions you answer. Colab runs it
+in the browser with nothing to install; a local copy needs Python 3 with NumPy
+and Matplotlib. Work the pre-lab predictions before the period.</p>
+</div>
+</div>
+</div>
+<div class="frame cut docutils container" id="frame-where-this-is-going">
+<div class="wrap docutils container">
+<p class="rubric">Where This Is Going</p>
+<div class="stage docutils container">
+<div class="present docutils container">
+<ul class="simple">
+<li><p><strong>Lesson 41</strong>: this lab ends the course’s lessons.</p></li>
+<li><p><strong>Final exam</strong>: all four modules, from transmission lines to plane waves.</p></li>
+</ul>
+</div>
+</div>
+<div class="depth depth-cut docutils container">
+<p>The course began with a voltage wave on a transmission line and its reflection
+from a load, and it ends with a plane wave and its reflection from a boundary.
+Lesson 38 showed that the two are the same problem: <span class="math notranslate nohighlight">\(\Gamma\)</span> in Lesson 6 and
+<span class="math notranslate nohighlight">\(\Gamma\)</span> in Lesson 38 are the same ratio of impedances, and the quarter-wave
+layer of Part A is Lesson 7’s quarter-wave line. Review the four modules for
+the final exam with that shared <span class="math notranslate nohighlight">\(\Gamma\)</span> in mind: transmission lines,
+electrostatics, magnetostatics, and dynamic fields.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./module04/L41-lab-incidence"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+</main>
+
+<script src="../../_static/shell.js?v=e7edef7cf2"></script>
+<script src="../../_static/frames.js?v=523fffe7d1"></script><script src="../../_static/viz-autosize.js?v=4fe0c4e159"></script>
+</body>
+</html>
